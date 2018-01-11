@@ -1,1 +1,1 @@
-# whatfits
+# WhatFits Web Application
