@@ -115,6 +115,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\SchoolContext.cs" />
+    <Compile Include="Models\SchoolDBInitializer.cs" />
     <Compile Include="Models\Standard.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
