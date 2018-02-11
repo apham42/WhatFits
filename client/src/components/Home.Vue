@@ -47,28 +47,43 @@
 </template>
 
 <script>
-// import { required, minLength } from 'vuelidate/lib/validators'
+import axios from 'axios'
 
 export default {
-  name: 'Home',
-  data: {
-      
-  },
-  methods: {
-    checkCredentials () {
-      alert('HEllo')
+//   name: 'Home',
+//   methods: {
+//     checkCredentials () {
+//       alert('HEllo')
+//       }
+//   }
+  data () {
+    return {
+      posts: [],
+      errors: []
     }
+  },
+
+  created () {
+    alert('get')
+    axios.get('http://localhost/newtest')
+      .then(response => {
+        this.posts = response.data
+      })
+      .catch(e => {
+        alert('error')
+        this.errors.push(e)
+      })
   }
 }
 
 </script>
 
 <style>
-.form.h2{
-    float: left;
-    clear: right;
+.form.h2 {
+  float: left;
+  clear: right;
 }
-.form.input{
-    float: right;
+.form.input {
+  float: right;
 }
 </style>
