@@ -10,13 +10,13 @@ namespace server.App_Start
     {
         static void Main(string[] args)
         {
-            using (var ctx = new SchoolContext())
+            using (var ctx = new WhatfitsContext())
             {
-                Student stud = new Student()
+                User user = new User()
                 {
-                    StudentName = "New Student"
+                    UserName = "New Student"
                 };
-                ctx.Students.Add(stud);
+                ctx.User.Add(user);
                 ctx.SaveChanges();
             }
         }

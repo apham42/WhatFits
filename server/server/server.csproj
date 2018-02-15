@@ -109,17 +109,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802040612163_CreateStudent.cs" />
-    <Compile Include="Migrations\201802040612163_CreateStudent.Designer.cs">
-      <DependentUpon>201802040612163_CreateStudent.cs</DependentUpon>
+    <Compile Include="Contexts\WhatfitsContext.cs" />
+    <Compile Include="Data\WhatfitsDbInitializer.cs" />
+    <Compile Include="Migrations\201802152119414_InitialCreate.cs" />
+    <Compile Include="Migrations\201802152119414_InitialCreate.Designer.cs">
+      <DependentUpon>201802152119414_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Contexts\SchoolContext.cs" />
-    <Compile Include="Models\SchoolDBInitializer.cs" />
     <Compile Include="Models\SecurityAnswers.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />
-    <Compile Include="Models\Standard.cs" />
-    <Compile Include="Models\Student.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -138,8 +136,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802040612163_CreateStudent.resx">
-      <DependentUpon>201802040612163_CreateStudent.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802152119414_InitialCreate.resx">
+      <DependentUpon>201802152119414_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

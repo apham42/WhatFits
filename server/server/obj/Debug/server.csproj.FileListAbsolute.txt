@@ -69,8 +69,8 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Webpages.D
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Webpages.Razor.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Helpers.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Mvc.xml
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.CreateStudent.resources
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.GenerateResource.Cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.InitialCreate.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.GenerateResource.Cache

@@ -6,9 +6,9 @@ using System.Web;
 
 namespace server.Models
 {
-    public class SchoolDBInitializer : DropCreateDatabaseAlways<SchoolContext>
+    public class WhatfitsDBInitializer : DropCreateDatabaseAlways<WhatfitsContext>
     {
-        protected override void Seed(SchoolContext context)
+        protected override void Seed(WhatfitsContext context)
         {
             IList<User> defaultUser = new List<User>();
             defaultUser.Add(new User() { UserID = 0001,UserName = "Tom123", Password= "asdf"});
