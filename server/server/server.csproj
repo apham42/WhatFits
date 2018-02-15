@@ -119,6 +119,18 @@
     <Compile Include="Migrations\201802152230010_NewTables.Designer.cs">
       <DependentUpon>201802152230010_NewTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802152319007_newUsers.cs" />
+    <Compile Include="Migrations\201802152319007_newUsers.Designer.cs">
+      <DependentUpon>201802152319007_newUsers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802152322198_newUsers2.cs" />
+    <Compile Include="Migrations\201802152322198_newUsers2.Designer.cs">
+      <DependentUpon>201802152322198_newUsers2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802152345258_SecurityQandA.cs" />
+    <Compile Include="Migrations\201802152345258_SecurityQandA.Designer.cs">
+      <DependentUpon>201802152345258_SecurityQandA.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cardio.cs" />
     <Compile Include="Models\Chat.cs" />
@@ -130,6 +142,7 @@
     <Compile Include="Models\SecurityAnswers.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserPermission.cs" />
     <Compile Include="Models\WeightLifting.cs" />
     <Compile Include="Models\WorkoutLogs.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -154,6 +167,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802152230010_NewTables.resx">
       <DependentUpon>201802152230010_NewTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802152319007_newUsers.resx">
+      <DependentUpon>201802152319007_newUsers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802152322198_newUsers2.resx">
+      <DependentUpon>201802152322198_newUsers2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802152345258_SecurityQandA.resx">
+      <DependentUpon>201802152345258_SecurityQandA.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

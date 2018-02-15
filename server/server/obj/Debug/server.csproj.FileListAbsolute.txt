@@ -75,3 +75,7 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.G
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.newUsers.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.newUsers2.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csprojResolveAssemblyReference.cache
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.SecurityQandA.resources

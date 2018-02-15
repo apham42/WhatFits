@@ -24,6 +24,7 @@ namespace server.Models
         public string Address { get; set; }
         // The Following line is being debated by team
         // public User[] Followers { get; set; }
-        //public ICollection<User> Followers { get; set; }
+        // There are many Answers for one user
+        public ICollection<SecurityAnswers> Answers { get; set; }
     }
 }

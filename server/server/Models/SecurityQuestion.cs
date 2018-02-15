@@ -13,8 +13,8 @@ namespace server.Models
         {
 
         }
-        [ForeignKey("User")]
-        public int UserID { get; set; }
-        public string[] Questions { get; set; }
+        [Key]
+        public string Questions { get; set; }
+        
     }
 }

@@ -12,11 +12,12 @@ namespace server.Models
             Database.SetInitializer(new WhatfitsDBInitializer());
         }
         // NOTE: Sprint 1 Data Tables Below
-        public DbSet<User> User { get; set; }
-        public DbSet<Permissions> Permissions { get; set; }
-//        public DbSet<SecurityAnswers> SecurityAnswers { get; set; }
-  //      public DbSet<SecurityQuestions> SecurityQuestions { get; set; }
-    //    public DbSet<Review> Review { get; set; }
+        public DbSet<User> Users { get; set; }
+        //public DbSet<Permissions> Permissions { get; set; }
+        //public DbSet<UserPermission> UserPermission { get; set; }
+        public DbSet<SecurityAnswers> SecurityAnswers { get; set; }
+        public DbSet<SecurityQuestions> SecurityQuestions { get; set; }
+        //public DbSet<Review> Review { get; set; }
         // NOTE: Sprint 2 Tables Below
         /*
         public DbSet<WorkoutLogs> WorkoutLogs { get; set; }
