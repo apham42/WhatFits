@@ -13,7 +13,8 @@ namespace server.Models
 
         }
         [Key]
-        public int Id { get; set; }
+        public int UserID { get; set; }
+        [Required]
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -22,7 +23,7 @@ namespace server.Models
         public string Gender { get; set; }
         public string Address { get; set; }
         // The Following line is being debated by team
-       // public User[] Followers { get; set; }
-       public ICollection<User> Followers { get; set; }
+        // public User[] Followers { get; set; }
+        //public ICollection<User> Followers { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace server.Models
         }
         public DbSet<Student> Students { get; set; }
         public DbSet<Standard> Standards { get; set; }
+        public DbSet<User> User { get; set; }
 
     }
 }

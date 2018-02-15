@@ -10,13 +10,13 @@ namespace server.Models
     {
         protected override void Seed(SchoolContext context)
         {
-            IList<Standard> defaultStandards = new List<Standard>();
-            defaultStandards.Add(new Standard() { StanadardName = "Tom", StandardId = 00 });
-            defaultStandards.Add(new Standard() { StanadardName = "Alex", StandardId = 01 });
-            defaultStandards.Add(new Standard() { StanadardName = "Wick", StandardId = 02 });
-            defaultStandards.Add(new Standard() { StanadardName = "Johnson", StandardId = 03});
-            foreach (Standard std in defaultStandards)
-                context.Standards.Add(std);
+            IList<User> defaultUser = new List<User>();
+            defaultUser.Add(new User() { UserID = 0001,UserName = "Tom123", Password= "asdf"});
+            defaultUser.Add(new User() { UserID = 0002, UserName = "Emily123",Password = "asdf" });
+            defaultUser.Add(new User() { UserID = 0003, UserName = "John123", Password = "asdf" });
+            defaultUser.Add(new User() { UserID = 0005, UserName = "Max123", Password = "asdf" });
+            foreach (User usr in defaultUser)
+                context.User.Add(usr);
             base.Seed(context);
         }
     }
