@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+}
+
+<h2>Chat</h2>
+<form id="chatform" action="">
+    <input id="inputbox"/>
+</form>
+<div id="message"/>
+
+@section scripts {
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var username = prompt('Please enter a username:');
+        var loc = window.location, new_uri;
+        if (loc.protocol == "https:") {
+            new_uri = "wss:";
+        }
+        else {
+            new_uri = "ws:";
+        }
+        new_uri += "//" + loc.hostname;
+        //var uri = 'ws://' + window.location.hostname + '/api/Chat.cshtml';
+        websocket = new WebSocket(new_uri + '/server/WSHandler.ashx');
+        websocket.onopen = function () {
+            $('#message').prepend('<div>Connected.</div>');
+            $('#chatform').submit(function (event) {
+                websocket.send($('#inputbox').val());
+                $('#inputbox').val('');
+                event.preventDefault();
+            });
+        };
+        websocket.onerror = function (event) {
+            $('#message').prepend('<div>ERROR</div>');
+        };
+        websocket.onmessage = function (event) {
+            $('#message').prepend('<div>' + event.data + '</div>');
+        };
+    });
+</script>
+    }
