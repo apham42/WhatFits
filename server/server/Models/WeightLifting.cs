@@ -7,14 +7,19 @@ using System.Web;
 
 namespace server.Models
 {
-    public class SecurityQuestions
+    public class WeightLifting
     {
-        public SecurityQuestions()
+        public WeightLifting()
         {
 
         }
         [ForeignKey("User")]
         public int UserID { get; set; }
-        public string[] Questions { get; set; }
+        [Key]
+        public int WorkoutID { get; set; }
+        public string LiftingType { get; set; }
+        public int sets { get; set; }
+        public int reps { get; set; }
+        // NOTE: Should we have a separate table for reps and sets
     }
 }

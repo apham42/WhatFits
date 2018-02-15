@@ -7,14 +7,21 @@ using System.Web;
 
 namespace server.Models
 {
-    public class SecurityQuestions
+    public class Review
     {
-        public SecurityQuestions()
+        public Review()
         {
 
         }
         [ForeignKey("User")]
         public int UserID { get; set; }
-        public string[] Questions { get; set; }
+        public int Reviewee { get; set; }
+        [Key]
+        public int ReviewID {get;set;}
+        public int Rating { get; set; }
+        public string ReviewMessage { get; set; }
+        public string DateTime { get; set; }
+
+
     }
 }

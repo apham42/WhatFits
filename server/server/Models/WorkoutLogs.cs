@@ -7,14 +7,18 @@ using System.Web;
 
 namespace server.Models
 {
-    public class SecurityQuestions
+    public class WorkoutLogs
     {
-        public SecurityQuestions()
+        public WorkoutLogs()
         {
 
         }
         [ForeignKey("User")]
         public int UserID { get; set; }
-        public string[] Questions { get; set; }
+        [Key]
+        public int WorkoutID { get; set; }
+        public string WorkoutType { get; set; }
+        public string Date_Time { get; set; }
+        // Note: Better to use Time object?
     }
 }
