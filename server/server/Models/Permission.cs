@@ -6,14 +6,15 @@ using System.Web;
 
 namespace server.Models
 {
-    public partial class Permissions
+    public partial class Permission
     {
-        public Permissions()
+        public Permission()
         {
 
         }
-        public string Permission { get; set; }
-       [ForeignKey("UserPermission")]
+        [ForeignKey("UserPermission")]
         public int PermissionID { get; set; }
+        public UserPermission UserPermission { get; set; }
+        public string PermissionGiven { get; set; }
     }
 }

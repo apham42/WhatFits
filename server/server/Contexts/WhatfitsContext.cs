@@ -13,22 +13,25 @@ namespace server.Models
         }
         // NOTE: Sprint 1 Data Tables Below
         public DbSet<User> Users { get; set; }
-        //public DbSet<Permissions> Permissions { get; set; }
-        //public DbSet<UserPermission> UserPermission { get; set; }
-        public DbSet<SecurityAnswers> SecurityAnswers { get; set; }
-        public DbSet<SecurityQuestions> SecurityQuestions { get; set; }
+        //public DbSet<Permission> Permissions { get; set; }
+        public DbSet<UserPermission> UserPermissions { get; set; }
+        public DbSet<SecurityAnswer> SecurityAnswers { get; set; }
+        public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
         //public DbSet<Review> Review { get; set; }
-        // NOTE: Sprint 2 Tables Below
-        /*
-        public DbSet<WorkoutLogs> WorkoutLogs { get; set; }
+        public DbSet<WorkoutLog> WorkoutLogs { get; set; }
         public DbSet<WeightLifting> WeightLifting { get; set; }
-        public DbSet<Cardio> Cardio { get; set; }
-        public DbSet<Events> Events { get; set; }
+        //public DbSet<Cardio> Cardio { get; set; }  
+        // Do i not need this?
+        // NOTE: Sprint 2 Tables Below
+        
+        public DbSet<Event> Events { get; set; }
+        /*
         public DbSet<Chat> Chat { get; set; }
         public DbSet<Message> Message { get; set; }
-        public DbSet<Following> Following { get; set; }
         */
+        public DbSet<Following> Following { get; set; }
         
+
 
     }
 }

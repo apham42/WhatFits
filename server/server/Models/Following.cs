@@ -15,6 +15,7 @@ namespace server.Models
         }
         [ForeignKey("User")]
         public int UserID { get; set; }
+        public User User { get; set; }
         [Key]
         public int FollowingID { get; set; }
         public string FollowingEmail { get; set; }

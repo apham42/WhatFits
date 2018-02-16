@@ -13,13 +13,13 @@ namespace server.Models
         {
 
         }
-        [ForeignKey("User")]
-        public int UserID { get; set; }
-        [Key]
+        [ForeignKey("WorkoutLog")]
         public int WorkoutID { get; set; }
+        public WorkoutLog WorkoutLog { get; set; }
+        [Key]
+        public int WeightLiftingID { get; set; }
         public string LiftingType { get; set; }
         public int sets { get; set; }
         public int reps { get; set; }
-        // NOTE: Should we have a separate table for reps and sets
     }
 }

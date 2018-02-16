@@ -7,18 +7,21 @@ using System.Web;
 
 namespace server.Models
 {
-    public class WorkoutLogs
+    public class WorkoutLog
     {
-        public WorkoutLogs()
+        public WorkoutLog()
         {
 
         }
         [ForeignKey("User")]
         public int UserID { get; set; }
+        public User User { get; set; }
         [Key]
         public int WorkoutID { get; set; }
         public string WorkoutType { get; set; }
         public string Date_Time { get; set; }
-        // Note: Better to use Time object?
+        public ICollection<WeightLifting> WeightLifting { get; set; }
+        public ICollection<Cardio> Cardio { get; set; }
+
     }
 }

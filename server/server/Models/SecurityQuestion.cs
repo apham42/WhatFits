@@ -7,9 +7,9 @@ using System.Web;
 
 namespace server.Models
 {
-    public class SecurityQuestions
+    public class SecurityQuestion
     {
-        public SecurityQuestions()
+        public SecurityQuestion()
         {
 
         }

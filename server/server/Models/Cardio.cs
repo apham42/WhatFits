@@ -12,10 +12,9 @@ namespace server.Models
         {
 
         }
-        [ForeignKey("User")]
-        public int UserID { get; set; }
-        [ForeignKey("WorkoutLogs")]
+        [ForeignKey("WorkoutLog")]
         public int WorkoutID { get; set; }
+        public WorkoutLog WorkoutLog { get; set; }
         [Key]
         public int CardioID { get; set; }
         public string CardioType { get; set; }

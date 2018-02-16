@@ -7,14 +7,15 @@ using System.Web;
 
 namespace server.Models
 {
-    public class Events
+    public class Event
     {
-        public Events()
+        public Event()
         {
 
         }
         [ForeignKey("User")]
         public int UserID { get; set; }
+        public User User { get; set; }
         [Key]
         public int EventID { get; set; }
         // Public Event

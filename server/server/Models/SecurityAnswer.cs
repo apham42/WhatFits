@@ -7,9 +7,9 @@ using System.Web;
 
 namespace server.Models
 {
-    public class SecurityAnswers
+    public class SecurityAnswer
     {
-        public SecurityAnswers()
+        public SecurityAnswer()
         {
 
         }
@@ -21,6 +21,6 @@ namespace server.Models
         public User User { get; set; }
         [ForeignKey("SecurityQuestion")]
         public string Question { get; set; }
-        public SecurityQuestions SecurityQuestion { get; set; }
+        public SecurityQuestion SecurityQuestion { get; set; }
     }
 }

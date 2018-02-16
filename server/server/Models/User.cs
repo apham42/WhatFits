@@ -20,11 +20,17 @@ namespace server.Models
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string Gender { get; set; }
+        //public string Gender { get; set; }
         public string Address { get; set; }
-        // The Following line is being debated by team
-        // public User[] Followers { get; set; }
-        // There are many Answers for one user
-        public ICollection<SecurityAnswers> Answers { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zipcode { get; set; }
+        public ICollection<SecurityAnswer> Answers { get; set; }
+        public ICollection<WorkoutLog> WorkoutLogs { get; set; }
+        public ICollection<UserPermission> UserPermission { get; set; }
+        //public ICollection<Following> Followings { get; set; }
+        public ICollection<Event> Event { get; set; }
+        public ICollection<Following> Following { get; set; }
+
     }
 }
