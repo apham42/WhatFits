@@ -14,7 +14,10 @@ namespace server.Models
 
         }
         [ForeignKey("User")]
+        // The reviews of that person
         public int UserID { get; set; }
+        public User User { get; set; }
+        // This stores the ID of the person reviewing the user
         public int Reviewee { get; set; }
         [Key]
         public int ReviewID {get;set;}

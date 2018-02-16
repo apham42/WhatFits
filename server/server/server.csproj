@@ -147,6 +147,10 @@
     <Compile Include="Migrations\201802160247254_following.Designer.cs">
       <DependentUpon>201802160247254_following.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802160301118_reviews.cs" />
+    <Compile Include="Migrations\201802160301118_reviews.Designer.cs">
+      <DependentUpon>201802160301118_reviews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cardio.cs" />
     <Compile Include="Models\Chat.cs" />
@@ -205,6 +209,15 @@
     <EmbeddedResource Include="Migrations\201802160247254_following.resx">
       <DependentUpon>201802160247254_following.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802160301118_reviews.resx">
+      <DependentUpon>201802160301118_reviews.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WhatFits.Models\WhatFits.Models.csproj">
+      <Project>{c5b34735-758a-4ded-bb26-005df2306766}</Project>
+      <Name>WhatFits.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

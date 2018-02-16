@@ -83,3 +83,4 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migratio
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.userpermissions.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations._event.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.following.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.reviews.resources
