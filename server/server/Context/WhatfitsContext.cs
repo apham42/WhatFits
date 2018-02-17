@@ -22,7 +22,7 @@ namespace server.Context
         public DbSet<Event> Events { get; set; }
         //public DbSet<Permission> Permissions { get; set; }
         //public DbSet<UserPermission> UserPermissions { get; set; }
-        //public DbSet<SecurityAnswer> SecurityAnswers { get; set; }
+        //public DbSet<SecurityAnswer> Securit yAnswers { get; set; }
         //public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
         //public DbSet<Review> Review { get; set; }
         //public DbSet<WorkoutLog> WorkoutLogs { get; set; }
