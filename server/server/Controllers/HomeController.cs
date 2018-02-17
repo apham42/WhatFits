@@ -12,11 +12,5 @@ namespace server.Controllers
         {
             return View();
         }
-
-        [AllowCrossSite]
-        public ActionResult Chat()
-        {
-            return View();
-        }
     }
 }
