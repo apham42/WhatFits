@@ -13,15 +13,15 @@ namespace server.Models
         {
 
         }
-        [ForeignKey("User")]
+        // Foreign Key
         public int UserID { get; set; }
         public User User { get; set; }
-        [Key]
+        // Primary Key
         public int WorkoutID { get; set; }
         public string WorkoutType { get; set; }
         public string Date_Time { get; set; }
-        public ICollection<WeightLifting> WeightLifting { get; set; }
-        public ICollection<Cardio> Cardio { get; set; }
-
+        // Workout log can have many Weightlifting Logs and Cardio Logs
+        //public ICollection<WeightLifting> WeightLifting { get; set; }
+        //public ICollection<Cardio> Cardio { get; set; }
     }
 }

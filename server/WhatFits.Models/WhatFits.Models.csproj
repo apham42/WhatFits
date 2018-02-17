@@ -47,7 +47,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Location.cs" />

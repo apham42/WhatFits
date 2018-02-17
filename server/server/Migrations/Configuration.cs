@@ -4,7 +4,7 @@ namespace server.Migrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using Whatfits.Models;
+    //using Whatfits.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<server.Context.WhatfitsContext>
     {

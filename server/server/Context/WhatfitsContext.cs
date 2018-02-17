@@ -4,16 +4,16 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using server.Models;
-using Whatfits.Models;
+//using Whatfits.Models;
+
 namespace server.Context
 {
     public class WhatfitsContext : DbContext
     {
         public WhatfitsContext() : base("WhatfitsDb")
         {
-        }
 
-        // NOTE: Sprint 1 Data Tables Below
+        }
         public DbSet<User> Users { get; set; }
         public DbSet<Credential> Credentials { get; set; }
         public DbSet<Location> Locations { get; set; }
@@ -27,11 +27,8 @@ namespace server.Context
         //public DbSet<Review> Review { get; set; }
         //public DbSet<WorkoutLog> WorkoutLogs { get; set; }
         //public DbSet<WeightLifting> WeightLifting { get; set; }
+        //public DbSet<Following> Following { get; set; }
         // Note: Do i not need this?
         //public DbSet<Cardio> Cardio { get; set; }  
-        //public DbSet<Following> Following { get; set; }
-
-
-
     }
 }
