@@ -6,8 +6,6 @@ namespace server.Migrations
     using System.Linq;
     using Whatfits.Models;
 
-
-
     internal sealed class Configuration : DbMigrationsConfiguration<server.Context.WhatfitsContext>
     {
         public Configuration()
@@ -166,7 +164,7 @@ namespace server.Migrations
                 }
                 );
 
-            context.Locations.AddOrUpdate(x => x.Address,
+            context.Locations.AddOrUpdate(x => x.LocationID,
                 new Models.Location()
                 {
                     UserID = 0001,
@@ -256,6 +254,37 @@ namespace server.Migrations
                     City = "Los Angeles",
                     State = "California",
                     Zipcode = "90061"
+                }
+                );
+            context.Events.AddOrUpdate(x => x.EventID,
+                new Models.Event() {
+                    EventID = 0000,
+                    UserID = 0001,
+                    Title = "Nature Walk Tonight",
+                    Description = "A brisk walk through as a group tonight.",
+                    DateTime = "Saturday, March 22, 2018 @ 8:30pm",
+                    Location = "Jefferson Park",
+                    CreatedAt = "2018-02-17T18:02:16"
+                },
+                new Models.Event()
+                {
+                    EventID = 0001,
+                    UserID = 0002,
+                    Title = "Gold's Gym Basketball Challenge",
+                    Description = "Groups will be made by 11am. Come and compete.",
+                    DateTime = "Friday, Feburary 12, 2018 @ 11:00am",
+                    Location = "Gold's Gym",
+                    CreatedAt = "2018-03-16T04:02:16"
+                },
+                new Models.Event()
+                {
+                    EventID = 0002,
+                    UserID = 0003,
+                    Title = "Relaxing Yoga",
+                    Description = "This is a description",
+                    DateTime = "Friday, Feburary 12, 2018 @ 11:00am",
+                    Location = "This is a location",
+                    CreatedAt = "2018-02-19T23:02:16"
                 }
                 );
         }

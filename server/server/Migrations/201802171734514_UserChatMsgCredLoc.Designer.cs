@@ -7,13 +7,13 @@ namespace server.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class LocUpdate : IMigrationMetadata
+    public sealed partial class UserChatMsgCredLoc : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(LocUpdate));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UserChatMsgCredLoc));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802171704172_LocUpdate"; }
+            get { return "201802171734514_UserChatMsgCredLoc"; }
         }
         
         string IMigrationMetadata.Source

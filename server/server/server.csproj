@@ -110,20 +110,17 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Context\WhatfitsContext.cs" />
-    <Compile Include="Migrations\201802170352481_UserCredLoc.cs" />
-    <Compile Include="Migrations\201802170352481_UserCredLoc.Designer.cs">
-      <DependentUpon>201802170352481_UserCredLoc.cs</DependentUpon>
+    <Compile Include="Migrations\201802171734514_UserChatMsgCredLoc.cs" />
+    <Compile Include="Migrations\201802171734514_UserChatMsgCredLoc.Designer.cs">
+      <DependentUpon>201802171734514_UserChatMsgCredLoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802171704172_LocUpdate.cs" />
-    <Compile Include="Migrations\201802171704172_LocUpdate.Designer.cs">
-      <DependentUpon>201802171704172_LocUpdate.cs</DependentUpon>
+    <Compile Include="Migrations\201802171808109_Event.cs" />
+    <Compile Include="Migrations\201802171808109_Event.Designer.cs">
+      <DependentUpon>201802171808109_Event.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cardio.cs" />
-    <Compile Include="Models\Chat.cs" />
-    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Following.cs" />
-    <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Permission.cs" />
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SecurityAnswer.cs" />
@@ -155,11 +152,11 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802170352481_UserCredLoc.resx">
-      <DependentUpon>201802170352481_UserCredLoc.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802171734514_UserChatMsgCredLoc.resx">
+      <DependentUpon>201802171734514_UserChatMsgCredLoc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802171704172_LocUpdate.resx">
-      <DependentUpon>201802171704172_LocUpdate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802171808109_Event.resx">
+      <DependentUpon>201802171808109_Event.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

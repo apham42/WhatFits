@@ -7,13 +7,13 @@ namespace server.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class UserCredLoc : IMigrationMetadata
+    public sealed partial class Event : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(UserCredLoc));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Event));
         
         string IMigrationMetadata.Id
         {
-            get { return "201802170352481_UserCredLoc"; }
+            get { return "201802171808109_Event"; }
         }
         
         string IMigrationMetadata.Source

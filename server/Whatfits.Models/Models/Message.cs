@@ -13,11 +13,17 @@ namespace server.Models
         {
 
         }
-        [ForeignKey("Chat")]
-        public int ChatID { get; set; }
-        [Key]
+        // Primary Key
         public int MessageID { get; set; }
+        // Foreign Key
+        public int UserID { get; set; }
+        // Navigation Property of User
+        public User User { get; set; }
+        // Foreign Key
+        public int ChatroomID { get; set; }
+        // Navigation Property of ChatID
+        public Chatroom Chatroom { get; set; }
         public string MessageContent { get; set; }
-        public string DateTime { get; set; }
+        public string CreatedAt { get; set; }
     }
 }
