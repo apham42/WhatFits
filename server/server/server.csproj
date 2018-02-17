@@ -109,47 +109,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Contexts\WhatfitsContext.cs" />
-    <Compile Include="Data\WhatfitsDbInitializer.cs" />
-    <Compile Include="Migrations\201802152119414_InitialCreate.cs" />
-    <Compile Include="Migrations\201802152119414_InitialCreate.Designer.cs">
-      <DependentUpon>201802152119414_InitialCreate.cs</DependentUpon>
+    <Compile Include="Context\WhatfitsContext.cs" />
+    <Compile Include="Migrations\201802170352481_UserCredLoc.cs" />
+    <Compile Include="Migrations\201802170352481_UserCredLoc.Designer.cs">
+      <DependentUpon>201802170352481_UserCredLoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201802152230010_NewTables.cs" />
-    <Compile Include="Migrations\201802152230010_NewTables.Designer.cs">
-      <DependentUpon>201802152230010_NewTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802152319007_newUsers.cs" />
-    <Compile Include="Migrations\201802152319007_newUsers.Designer.cs">
-      <DependentUpon>201802152319007_newUsers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802152322198_newUsers2.cs" />
-    <Compile Include="Migrations\201802152322198_newUsers2.Designer.cs">
-      <DependentUpon>201802152322198_newUsers2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802152345258_SecurityQandA.cs" />
-    <Compile Include="Migrations\201802152345258_SecurityQandA.Designer.cs">
-      <DependentUpon>201802152345258_SecurityQandA.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802160135094_Workouts.cs" />
-    <Compile Include="Migrations\201802160135094_Workouts.Designer.cs">
-      <DependentUpon>201802160135094_Workouts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802160234249_userpermissions.cs" />
-    <Compile Include="Migrations\201802160234249_userpermissions.Designer.cs">
-      <DependentUpon>201802160234249_userpermissions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802160243244_event.cs" />
-    <Compile Include="Migrations\201802160243244_event.Designer.cs">
-      <DependentUpon>201802160243244_event.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802160247254_following.cs" />
-    <Compile Include="Migrations\201802160247254_following.Designer.cs">
-      <DependentUpon>201802160247254_following.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802160301118_reviews.cs" />
-    <Compile Include="Migrations\201802160301118_reviews.Designer.cs">
-      <DependentUpon>201802160301118_reviews.cs</DependentUpon>
+    <Compile Include="Migrations\201802171704172_LocUpdate.cs" />
+    <Compile Include="Migrations\201802171704172_LocUpdate.Designer.cs">
+      <DependentUpon>201802171704172_LocUpdate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Cardio.cs" />
@@ -161,7 +128,6 @@
     <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SecurityAnswer.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserPermission.cs" />
     <Compile Include="Models\WeightLifting.cs" />
     <Compile Include="Models\WorkoutLog.cs" />
@@ -180,44 +146,21 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802152119414_InitialCreate.resx">
-      <DependentUpon>201802152119414_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802152230010_NewTables.resx">
-      <DependentUpon>201802152230010_NewTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802152319007_newUsers.resx">
-      <DependentUpon>201802152319007_newUsers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802152322198_newUsers2.resx">
-      <DependentUpon>201802152322198_newUsers2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802152345258_SecurityQandA.resx">
-      <DependentUpon>201802152345258_SecurityQandA.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802160135094_Workouts.resx">
-      <DependentUpon>201802160135094_Workouts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802160234249_userpermissions.resx">
-      <DependentUpon>201802160234249_userpermissions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802160243244_event.resx">
-      <DependentUpon>201802160243244_event.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802160247254_following.resx">
-      <DependentUpon>201802160247254_following.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802160301118_reviews.resx">
-      <DependentUpon>201802160301118_reviews.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\WhatFits.Models\WhatFits.Models.csproj">
-      <Project>{c5b34735-758a-4ded-bb26-005df2306766}</Project>
-      <Name>WhatFits.Models</Name>
+    <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">
+      <Project>{7ccda19c-9b92-4029-a6ca-529599acdeb4}</Project>
+      <Name>Whatfits.Models</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802170352481_UserCredLoc.resx">
+      <DependentUpon>201802170352481_UserCredLoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802171704172_LocUpdate.resx">
+      <DependentUpon>201802171704172_LocUpdate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

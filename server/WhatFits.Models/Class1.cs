@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
-namespace WhatFits.Models
+namespace Whatfits.Models
 {
-    class Class1
+    public class Class1
     {
     }
 }
