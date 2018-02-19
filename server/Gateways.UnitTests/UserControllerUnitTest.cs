@@ -1,10 +1,8 @@
 ﻿using System.Web.Mvc;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using server.Controllers;
-using server.Models;
 using Xunit;
-//using Whatfits.Models;
+using Whatfits.Models;
 namespace Gateways.UnitTests
 {  
     public class UserControllerUnitTest

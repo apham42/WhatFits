@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using server.Models;
-//using Whatfits.Model;
+using Whatfits.Models;
 namespace server.Context
 {
     public class UserGateway : IDataGateways<User>

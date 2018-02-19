@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
-namespace server.Models
+namespace Whatfits.Models
 {
     public partial class Permission
     {
