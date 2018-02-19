@@ -106,6 +106,9 @@
   <ItemGroup>
     <Compile Include="App_Start\Program.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Context\IDataGateways.cs" />
+    <Compile Include="Context\UserGateway.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -119,15 +122,6 @@
       <DependentUpon>201802171808109_Event.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Cardio.cs" />
-    <Compile Include="Models\Following.cs" />
-    <Compile Include="Models\Permission.cs" />
-    <Compile Include="Models\Review.cs" />
-    <Compile Include="Models\SecurityAnswer.cs" />
-    <Compile Include="Models\SecurityQuestion.cs" />
-    <Compile Include="Models\UserPermission.cs" />
-    <Compile Include="Models\WeightLifting.cs" />
-    <Compile Include="Models\WorkoutLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -142,8 +136,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controllers\" />
     <Folder Include="Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">

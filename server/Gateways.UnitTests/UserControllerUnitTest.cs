@@ -1,37 +1,37 @@
-﻿using System;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Web.Mvc;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using server.Controllers;
+using server.Models;
+using Xunit;
+//using Whatfits.Models;
 namespace Gateways.UnitTests
-{
-    
-    public class User
-    {
-        public int UserID;
-        public string Email;
-        public string FirstName;
-        public string LastName;
-        public string Gender;
-    }
-    
-    [TestClass]
+{  
     public class UserControllerUnitTest
     {
-        [TestMethod]
-        public void TestCreate()
+        int Add(int x, int y)
         {
-            //   Assert.AreEqual("HomeController","HomeController");
+            return x + y;
+        }
+        [Fact]
+        public void PassingTest()
+        {
+            Assert.Equal(4, Add(2,2));
+        }
+        
+        [Fact]
+        public void TestCreateUser()
+        {
             UserController controllerUnderTest = new UserController();
             User usr = new User();
-            usr.UserID = 777;
-            usr.Email = "asdf@live.com";
-            usr.FirstName = "TestUser";
-            usr.LastName = "TestUserLastName";
-            usr.Gender = "Male";
-            string output = JsonConvert.SerializeObject(usr);
-            var result = controllerUnderTest.Create() as ViewResult;
-            Assert.AreEqual("fooview",result.ViewName);
+            usr.UserID = 16;
+            usr.Email = "jjjj";
+            usr.FirstName = "dfsadfa";
+            usr.LastName = "dfasd";
+            usr.Gender = "Sdfsdf";
+            var result = controllerUnderTest.Create(usr);
+            
+            Assert.Equal(result,controllerUnderTest.Details(16));
         }
     }
 }

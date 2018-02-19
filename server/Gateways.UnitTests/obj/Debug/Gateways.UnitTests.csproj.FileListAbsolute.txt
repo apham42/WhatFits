@@ -24,7 +24,6 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\Sys
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\System.Web.WebPages.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xunit.abstractions.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xunit.assert.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xunit.core.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xunit.execution.desktop.xml
@@ -42,3 +41,10 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\Wha
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\EntityFramework.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\obj\Debug\Gateways.UnitTests.dll.config
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\obj\Debug\Gateways.UnitTests.csprojResolveAssemblyReference.cache
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xunit.runner.visualstudio.testadapter.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xunit.runner.reporters.net452.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xunit.runner.utility.net452.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\EntityFramework.SqlServer.xml

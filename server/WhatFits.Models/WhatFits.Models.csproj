@@ -54,6 +54,15 @@
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TodoModels\Cardio.cs" />
+    <Compile Include="TodoModels\Following.cs" />
+    <Compile Include="TodoModels\Permission.cs" />
+    <Compile Include="TodoModels\Review.cs" />
+    <Compile Include="TodoModels\SecurityAnswer.cs" />
+    <Compile Include="TodoModels\SecurityQuestion.cs" />
+    <Compile Include="TodoModels\UserPermission.cs" />
+    <Compile Include="TodoModels\WeightLifting.cs" />
+    <Compile Include="TodoModels\WorkoutLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

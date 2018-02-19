@@ -52,7 +52,7 @@ namespace server.Controllers
             if (ModelState.IsValid)
             {
                 usergateway.Insert(user);
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
             }
 
             return View(user);
