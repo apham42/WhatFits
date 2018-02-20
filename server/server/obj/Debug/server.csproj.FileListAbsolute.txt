@@ -60,6 +60,12 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Razor.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Webpages.Deployment.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Webpages.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Webpages.Razor.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Gateways.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Models.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Gateways.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Gateways.dll.config
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Models.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Models.dll.config
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\EntityFramework.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\EntityFramework.SqlServer.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
@@ -69,13 +75,7 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Webpages.D
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Webpages.Razor.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Helpers.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.Web.Mvc.xml
+C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csprojResolveAssemblyReference.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.pdb
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csprojResolveAssemblyReference.cache
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Models.dll
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Models.pdb
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.Models.dll.config
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.UserChatMsgCredLoc.resources
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.GenerateResource.Cache
-C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.Migrations.Event.resources

@@ -35,6 +35,10 @@ namespace Whatfits.Gateways
         {
             return db.Users.Find(id);
         }
+        public int SelectByUserName (string userName)
+        {
+            return db.Users.Find(userName);
+        }
         public void Update(User user)
         {
             db.Entry(user).State = EntityState.Modified;

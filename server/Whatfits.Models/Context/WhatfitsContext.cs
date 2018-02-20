@@ -29,7 +29,6 @@ namespace Whatfits.Models.Context
             modelBuilder.Entity<Credential>()
                 .HasKey(a => a.UserID);
         }
-        public DbSet<PersonalKey> PersonalKeys { get; set; }
         //public DbSet<Permission> Permissions { get; set; }
         //public DbSet<UserPermission> UserPermissions { get; set; }
         //public DbSet<SecurityAnswer> Securit yAnswers { get; set; }

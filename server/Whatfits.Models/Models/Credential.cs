@@ -14,12 +14,11 @@ namespace Whatfits.Models
         {
 
         }
-        //[Key,ForeignKey("User")]
         public int UserID { get; set; }
         // Body
         public string UserName { get; set; }
         public string Password { get; set; }
-        
+        public string Salt { get; set; }
         // Navigation Property
         public virtual User User { get; set; }
         

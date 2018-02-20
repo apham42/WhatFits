@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using server.Controllers;
 using Xunit;
 using Whatfits.Models;
+using Whatfits.Gateways;
 namespace Gateways.UnitTests
 {  
     public class UserControllerUnitTest
@@ -22,7 +23,7 @@ namespace Gateways.UnitTests
         {
             UserController controllerUnderTest = new UserController();
             User usr = new User();
-            usr.UserID = 16;
+            usr.ID = 16;
             usr.Email = "jjjj";
             usr.FirstName = "dfsadfa";
             usr.LastName = "dfasd";

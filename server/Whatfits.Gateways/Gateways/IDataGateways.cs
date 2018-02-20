@@ -9,6 +9,7 @@ namespace Whatfits.Gateways
     {
         IEnumerable<T> SelectAll();
         T SelectByID(int? id);
+        T SelectByUserName(string userName);
         void Insert(T obj);
         void Update(T obj);
         T Delete(int? id);
