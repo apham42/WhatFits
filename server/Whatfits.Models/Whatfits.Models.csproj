@@ -60,6 +60,10 @@
     <Compile Include="Migrations\201802202211395_claims2.Designer.cs">
       <DependentUpon>201802202211395_claims2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802202254296_Security.cs" />
+    <Compile Include="Migrations\201802202254296_Security.Designer.cs">
+      <DependentUpon>201802202254296_Security.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Claim.cs" />
@@ -68,14 +72,15 @@
     <Compile Include="Models\Credential.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\PersonalKey.cs" />
+    <Compile Include="Models\Recovery.cs" />
+    <Compile Include="Models\SecurityAnswer.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TodoModels\Cardio.cs" />
     <Compile Include="TodoModels\Following.cs" />
     <Compile Include="TodoModels\Permission.cs" />
     <Compile Include="TodoModels\Review.cs" />
-    <Compile Include="TodoModels\SecurityAnswer.cs" />
-    <Compile Include="TodoModels\SecurityQuestion.cs" />
+    <Compile Include="Models\SecurityQuestion.cs" />
     <Compile Include="TodoModels\UserPermission.cs" />
     <Compile Include="TodoModels\WeightLifting.cs" />
     <Compile Include="TodoModels\WorkoutLog.cs" />
@@ -93,6 +98,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802202211395_claims2.resx">
       <DependentUpon>201802202211395_claims2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802202254296_Security.resx">
+      <DependentUpon>201802202254296_Security.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

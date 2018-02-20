@@ -21,22 +21,8 @@ namespace Whatfits.Models.Context
         public DbSet<Event> Events { get; set; }
         public DbSet<PersonalKey> PersonalKeys { get; set; }
         public DbSet<Claim> Claims { get; set; }
-        /*
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<User>()
-                .HasOptional(s => s.Credential)
-                .WithRequired(a => a.User);
-
-            modelBuilder.Entity<Credential>()
-                .HasKey(a => a.UserID);
-        }
-        */
-
-        //public DbSet<Permission> Permissions { get; set; }
-        //public DbSet<UserPermission> UserPermissions { get; set; }
-        //public DbSet<SecurityAnswer> Securit yAnswers { get; set; }
-        //public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
+        public DbSet<SecurityAnswer> SecurityAnswers { get; set; }
+        public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
         //public DbSet<Review> Review { get; set; }
         //public DbSet<WorkoutLog> WorkoutLogs { get; set; }
         //public DbSet<WeightLifting> WeightLifting { get; set; }

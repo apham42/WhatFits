@@ -13,3 +13,4 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfi
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csprojResolveAssemblyReference.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.claims.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.claims2.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.Security.resources
