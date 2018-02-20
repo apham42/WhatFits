@@ -20,7 +20,7 @@ namespace Whatfits.Models
         public string Gender { get; set; }
         // User can have One:
         public  virtual Credential Credential { get; set; }
-        public virtual PersonalKey PersonalKey { get; set; }
+        //public virtual PersonalKey PersonalKey { get; set; }
         // Users can have many:
         public ICollection<Message> Messages { get; set; }
         public ICollection<Event> Event { get; set; }
