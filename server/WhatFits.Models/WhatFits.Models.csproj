@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\WhatfitsContext.cs" />
+    <Compile Include="Migrations\201802200713080_Init.cs" />
+    <Compile Include="Migrations\201802200713080_Init.Designer.cs">
+      <DependentUpon>201802200713080_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Location.cs" />
@@ -67,6 +73,11 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201802200713080_Init.resx">
+      <DependentUpon>201802200713080_Init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
