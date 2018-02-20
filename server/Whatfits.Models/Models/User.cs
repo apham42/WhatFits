@@ -13,11 +13,14 @@ namespace Whatfits.Models
         {
 
         }
-        public int UserID { get; set; }
+        public int ID { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
+        // User can have One:
+        public  virtual Credential Credential { get; set; }
+        public virtual PersonalKey PersonalKey { get; set; }
         // Users can have many:
         public ICollection<Message> Messages { get; set; }
         public ICollection<Event> Event { get; set; }

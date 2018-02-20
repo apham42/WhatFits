@@ -18,10 +18,10 @@ namespace Whatfits.Models.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method
             //  to avoid creating duplicate seed data.
-            context.Users.AddOrUpdate(x => x.UserID,
+            context.Users.AddOrUpdate(x => x.ID,
                 new User()
                 {
-                    UserID = 0001,
+                    ID = 0001,
                     FirstName = "Luke",
                     Email = "asdf@gmail.com",
                     LastName = "Atmey",
@@ -29,7 +29,7 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0002,
+                    ID = 0002,
                     FirstName = "April",
                     LastName = "May",
                     Email = "asdf@gmail.com",
@@ -37,7 +37,7 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0003,
+                    ID = 0003,
                     FirstName = "Rock",
                     LastName = "Strong",
                     Email = "asdf@live.com",
@@ -45,7 +45,7 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0004,
+                    ID = 0004,
                     FirstName = "Red",
                     LastName = "Blue",
                     Email = "asdf@yahoo.com",
@@ -53,7 +53,7 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0005,
+                    ID = 0005,
                     FirstName = "Cody",
                     LastName = "Hackins",
                     Email = "zzz@channel.com",
@@ -61,7 +61,7 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0006,
+                    ID = 0006,
                     FirstName = "Winston",
                     LastName = "Payne",
                     Email = "jdjd@hotmail.com",
@@ -69,7 +69,7 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0007,
+                    ID = 0007,
                     FirstName = "Jack",
                     LastName = "Hammers",
                     Email = "qwer@facebook.com",
@@ -77,7 +77,7 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0008,
+                    ID = 0008,
                     FirstName = "Penny",
                     LastName = "Nichols",
                     Email = "pn@live.com",
@@ -85,7 +85,7 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0009,
+                    ID = 0009,
                     FirstName = "Cindy",
                     LastName = "Stone",
                     Email = "poui@live.com",
@@ -93,72 +93,72 @@ namespace Whatfits.Models.Migrations
                 },
                 new User()
                 {
-                    UserID = 0010,
+                    ID = 0010,
                     FirstName = "Dee",
                     LastName = "Vasquez",
                     Email = "ohhoho@hotmail.com",
                     Gender = "Female"
                 }
                 );
-            context.Credentials.AddOrUpdate(x => x.UserNameID,
+            context.Credentials.AddOrUpdate(x => x.UserID,
                 new Credential()
                 {
                     UserID = 0001,
-                    UserNameID = "latmey",
+                    UserName = "latmey",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0002,
-                    UserNameID = "amay",
+                    UserName = "amay",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0003,
-                    UserNameID = "rstrong",
+                    UserName = "rstrong",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0004,
-                    UserNameID = "rblue",
+                    UserName = "rblue",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0005,
-                    UserNameID = "chackins",
+                    UserName = "chackins",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0006,
-                    UserNameID = "wpayne",
+                    UserName = "wpayne",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0007,
-                    UserNameID = "jhammers",
+                    UserName = "jhammers",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0008,
-                    UserNameID = "pnichols",
+                    UserName = "pnichols",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0009,
-                    UserNameID = "cstone",
+                    UserName = "cstone",
                     Password = "123456",
                 },
                 new Credential()
                 {
                     UserID = 0010,
-                    UserNameID = "dvasquez",
+                    UserName = "dvasquez",
                     Password = "123456",
                 }
                 );
@@ -287,6 +287,25 @@ namespace Whatfits.Models.Migrations
                     CreatedAt = "2018-02-19T23:02:16"
                 }
                 );
+            /*
+            context.PersonalKeys.AddOrUpdate(x => x.PersonalKeyID,
+                    new PersonalKey()
+                    {
+                        CredentialID = 1,
+                        Salt = "asdf"
+                    },
+                    new PersonalKey()
+                    {
+                        CredentialID = 2,
+                        Salt = "zxc"
+                    },
+                    new PersonalKey()
+                    {
+                        CredentialID = 3,
+                        Salt = "sdfsdfs"
+                    }
+                );
+                */
         }
     }
 }
