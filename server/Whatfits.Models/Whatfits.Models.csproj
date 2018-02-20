@@ -52,8 +52,17 @@
     <Compile Include="Migrations\201802202044208_init.Designer.cs">
       <DependentUpon>201802202044208_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802202208378_claims.cs" />
+    <Compile Include="Migrations\201802202208378_claims.Designer.cs">
+      <DependentUpon>201802202208378_claims.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802202211395_claims2.cs" />
+    <Compile Include="Migrations\201802202211395_claims2.Designer.cs">
+      <DependentUpon>201802202211395_claims2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chatroom.cs" />
+    <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Credential.cs" />
@@ -78,6 +87,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802202044208_init.resx">
       <DependentUpon>201802202044208_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802202208378_claims.resx">
+      <DependentUpon>201802202208378_claims.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802202211395_claims2.resx">
+      <DependentUpon>201802202211395_claims2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

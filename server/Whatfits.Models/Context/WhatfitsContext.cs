@@ -20,6 +20,7 @@ namespace Whatfits.Models.Context
         public DbSet<Message> Messages { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<PersonalKey> PersonalKeys { get; set; }
+        public DbSet<Claim> Claims { get; set; }
         /*
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

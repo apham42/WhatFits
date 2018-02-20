@@ -19,10 +19,10 @@ namespace Whatfits.Models
         // Body
         public string UserName { get; set; }
         public string Password { get; set; }
-        public string Salt { get; set; }
+        public string Role { get; set; }
+       // public string Salt { get; set; }
         // Navigation Property
         public virtual User User { get; set; }
-        
-
+        List<int> ClaimsList { get; set; }
     }
 }
