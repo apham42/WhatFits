@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace Whatfits.Models
 {
-    public  class Credential
+    public partial class Credential
     {
         public Credential()
         {
 
         }
+        [Key,ForeignKey("User")]
         public int UserID { get; set; }
         // Body
         public string UserName { get; set; }

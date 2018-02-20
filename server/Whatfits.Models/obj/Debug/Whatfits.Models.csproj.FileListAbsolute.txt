@@ -1,2 +1,12 @@
-C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csprojResolveAssemblyReference.cache
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\Whatfits.Models.dll.config
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\Whatfits.Models.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\Whatfits.Models.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.xml
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csproj.CoreCompileInputs.cache
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.init.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csproj.GenerateResource.Cache

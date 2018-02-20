@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Whatfits.Models
 {
-    public class User
+    public partial class User
     {
         public User()
         {

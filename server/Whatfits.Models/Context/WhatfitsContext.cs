@@ -19,7 +19,8 @@ namespace Whatfits.Models.Context
         public DbSet<Chatroom> Chatrooms { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Event> Events { get; set; }
-        
+        public DbSet<PersonalKey> PersonalKeys { get; set; }
+        /*
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
@@ -29,6 +30,8 @@ namespace Whatfits.Models.Context
             modelBuilder.Entity<Credential>()
                 .HasKey(a => a.UserID);
         }
+        */
+
         //public DbSet<Permission> Permissions { get; set; }
         //public DbSet<UserPermission> UserPermissions { get; set; }
         //public DbSet<SecurityAnswer> Securit yAnswers { get; set; }
