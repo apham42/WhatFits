@@ -25,7 +25,7 @@ namespace Whatfits.Models
         public ICollection<Message> Messages { get; set; }
         public ICollection<Event> Event { get; set; }
         //public ICollection<SecurityAnswer> Answers { get; set; }
-        //public ICollection<WorkoutLog> WorkoutLogs { get; set; }
+        public ICollection<WorkoutLog> WorkoutLogs { get; set; }
         //public ICollection<UserPermission> UserPermission { get; set; }
         //public ICollection<Following> Following { get; set; }
         //public ICollection<Review> Review { get; set; }

@@ -64,6 +64,26 @@
     <Compile Include="Migrations\201802202254296_Security.Designer.cs">
       <DependentUpon>201802202254296_Security.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802202308264_workout.cs" />
+    <Compile Include="Migrations\201802202308264_workout.Designer.cs">
+      <DependentUpon>201802202308264_workout.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802202326382_cardio.cs" />
+    <Compile Include="Migrations\201802202326382_cardio.Designer.cs">
+      <DependentUpon>201802202326382_cardio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802202327595_resistance.cs" />
+    <Compile Include="Migrations\201802202327595_resistance.Designer.cs">
+      <DependentUpon>201802202327595_resistance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802202330256_workoutlogcomplete.cs" />
+    <Compile Include="Migrations\201802202330256_workoutlogcomplete.Designer.cs">
+      <DependentUpon>201802202330256_workoutlogcomplete.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802202332366_datanote.cs" />
+    <Compile Include="Migrations\201802202332366_datanote.Designer.cs">
+      <DependentUpon>201802202332366_datanote.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Claim.cs" />
@@ -75,15 +95,13 @@
     <Compile Include="Models\Recovery.cs" />
     <Compile Include="Models\SecurityAnswer.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\WeightLifting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TodoModels\Cardio.cs" />
+    <Compile Include="Models\Cardio.cs" />
     <Compile Include="TodoModels\Following.cs" />
-    <Compile Include="TodoModels\Permission.cs" />
     <Compile Include="TodoModels\Review.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />
-    <Compile Include="TodoModels\UserPermission.cs" />
-    <Compile Include="TodoModels\WeightLifting.cs" />
-    <Compile Include="TodoModels\WorkoutLog.cs" />
+    <Compile Include="Models\WorkoutLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -101,6 +119,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802202254296_Security.resx">
       <DependentUpon>201802202254296_Security.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802202308264_workout.resx">
+      <DependentUpon>201802202308264_workout.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802202326382_cardio.resx">
+      <DependentUpon>201802202326382_cardio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802202327595_resistance.resx">
+      <DependentUpon>201802202327595_resistance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802202330256_workoutlogcomplete.resx">
+      <DependentUpon>201802202330256_workoutlogcomplete.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802202332366_datanote.resx">
+      <DependentUpon>201802202332366_datanote.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
