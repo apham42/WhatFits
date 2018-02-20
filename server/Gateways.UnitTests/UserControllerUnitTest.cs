@@ -16,11 +16,13 @@ namespace Gateways.UnitTests
         {
             Assert.Equal(4, Add(2,2));
         }
+        
         [Fact]
         public void TestCreateUser()
         {
             UserController controllerUnderTest = new UserController();
             User usr = new User();
+            usr.UserID = 16;
             usr.Email = "jjjj";
             usr.FirstName = "dfsadfa";
             usr.LastName = "dfasd";

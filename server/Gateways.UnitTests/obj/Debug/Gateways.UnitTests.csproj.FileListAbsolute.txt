@@ -48,6 +48,3 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xun
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\xunit.runner.utility.net452.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\Whatfits.Gateways.dll
-C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\Whatfits.Gateways.pdb
-C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\bin\Debug\Whatfits.Gateways.dll.config

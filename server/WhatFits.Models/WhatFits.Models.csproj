@@ -47,12 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Context\WhatfitsContext.cs" />
     <Compile Include="Migrations\201802200448420_init.cs" />
     <Compile Include="Migrations\201802200448420_init.Designer.cs">
       <DependentUpon>201802200448420_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+=======
+>>>>>>> parent of 3f90cf7... Entityframework moved
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\Location.cs" />
@@ -75,10 +78,13 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+<<<<<<< HEAD
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201802200448420_init.resx">
       <DependentUpon>201802200448420_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+=======
+>>>>>>> parent of 3f90cf7... Entityframework moved
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatfits.Models", "Whatfits
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateways.UnitTests", "Gateways.UnitTests\Gateways.UnitTests.csproj", "{208BFED7-5F63-4831-B0BD-E105C508E08C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatfits.Gateways", "Whatfits.Gateways\Whatfits.Gateways.csproj", "{7E234319-0927-48B6-B3F2-0C96D169C55D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{208BFED7-5F63-4831-B0BD-E105C508E08C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{208BFED7-5F63-4831-B0BD-E105C508E08C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{208BFED7-5F63-4831-B0BD-E105C508E08C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7E234319-0927-48B6-B3F2-0C96D169C55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7E234319-0927-48B6-B3F2-0C96D169C55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7E234319-0927-48B6-B3F2-0C96D169C55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7E234319-0927-48B6-B3F2-0C96D169C55D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
