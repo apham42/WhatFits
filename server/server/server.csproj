@@ -278,9 +278,19 @@
     <Content Include="WSHandler.ashx" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Data\" />
     <Folder Include="Views\Chat\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.Gateways.csproj">
+      <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
+      <Name>Whatfits.Gateways</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">
+      <Project>{7ccda19c-9b92-4029-a6ca-529599acdeb4}</Project>
+      <Name>Whatfits.Models</Name>
+    </ProjectReference>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />

@@ -1,0 +1,2 @@
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\obj\Debug\Gateways.UnitTests.csprojResolveAssemblyReference.cache
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateways.UnitTests\obj\Debug\Gateways.UnitTests.csproj.CoreCompileInputs.cache
