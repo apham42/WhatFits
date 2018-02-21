@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace server.Models
+namespace Whatfits.Models
 {
     public class Location
     {

@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace server.Models
+namespace Whatfits.Models
 {
-    public class Credential
+    public partial class Credential
     {
         public Credential()
         {
 
         }
-        [Required][Key]
-        public string UserNameID { get; set; }
-        public string Password { get; set; }
-        // Foreign Key
+        [Key,ForeignKey("User")]
         public int UserID { get; set; }
+        // Body
+        public string UserName { get; set; }
+        public string Password { get; set; }
         // Navigation Property
-        public User User { get; set; }
-
+        public virtual User User { get; set; }
+        List<int> ClaimsList { get; set; }
     }
 }
