@@ -7,15 +7,13 @@ namespace server.Models
 {
     public class Chatroom
     {
-        public int ChatId { get; }
+        public int ChatId { get; set; }
         private User[] _joined;
         private int _joinedIndex;
 
         public Chatroom (int chatid)
         {
             ChatId = chatid;
-            _joined = new User[2];
-            _joinedIndex = 0;
         }
 
         public bool AddUser (User user)
@@ -28,21 +26,6 @@ namespace server.Models
             }
 
             return false;
-        }
-
-        public bool DeleteUser (User user)
-        {
-
-        }
-
-        public bool Send (Message message, User user)
-        {
-            //Encrypt
-        }
-
-        public bool Receive (Message message)
-        {
-            //Decrypt
         }
     }
 }
