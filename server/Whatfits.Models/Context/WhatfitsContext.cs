@@ -25,9 +25,7 @@ namespace Whatfits.Models.Context
         public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
         //public DbSet<Review> Review { get; set; }
         public DbSet<WorkoutLog> WorkoutLogs { get; set; }
-        //public DbSet<WeightLifting> WeightLifting { get; set; }
-        //public DbSet<Following> Following { get; set; }
-        // Note: Do i not need this?
-        //public DbSet<Cardio> Cardio { get; set; }  
+        public DbSet<Following> Following { get; set; }
+        public DbSet<Follower> Followers { get; set; }
     }
 }

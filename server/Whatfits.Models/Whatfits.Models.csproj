@@ -48,46 +48,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Context\WhatfitsContext.cs" />
-    <Compile Include="Migrations\201802202044208_init.cs" />
-    <Compile Include="Migrations\201802202044208_init.Designer.cs">
-      <DependentUpon>201802202044208_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802202208378_claims.cs" />
-    <Compile Include="Migrations\201802202208378_claims.Designer.cs">
-      <DependentUpon>201802202208378_claims.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802202211395_claims2.cs" />
-    <Compile Include="Migrations\201802202211395_claims2.Designer.cs">
-      <DependentUpon>201802202211395_claims2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802202254296_Security.cs" />
-    <Compile Include="Migrations\201802202254296_Security.Designer.cs">
-      <DependentUpon>201802202254296_Security.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802202308264_workout.cs" />
-    <Compile Include="Migrations\201802202308264_workout.Designer.cs">
-      <DependentUpon>201802202308264_workout.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802202326382_cardio.cs" />
-    <Compile Include="Migrations\201802202326382_cardio.Designer.cs">
-      <DependentUpon>201802202326382_cardio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802202327595_resistance.cs" />
-    <Compile Include="Migrations\201802202327595_resistance.Designer.cs">
-      <DependentUpon>201802202327595_resistance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802202330256_workoutlogcomplete.cs" />
-    <Compile Include="Migrations\201802202330256_workoutlogcomplete.Designer.cs">
-      <DependentUpon>201802202330256_workoutlogcomplete.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201802202332366_datanote.cs" />
-    <Compile Include="Migrations\201802202332366_datanote.Designer.cs">
-      <DependentUpon>201802202332366_datanote.cs</DependentUpon>
+    <Compile Include="Migrations\201802210126360_init.cs" />
+    <Compile Include="Migrations\201802210126360_init.Designer.cs">
+      <DependentUpon>201802210126360_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Event.cs" />
+    <Compile Include="Models\Follower.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Credential.cs" />
     <Compile Include="Models\Message.cs" />
@@ -98,8 +67,8 @@
     <Compile Include="Models\WeightLifting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\Cardio.cs" />
-    <Compile Include="TodoModels\Following.cs" />
-    <Compile Include="TodoModels\Review.cs" />
+    <Compile Include="Models\Following.cs" />
+    <Compile Include="Models\Review.cs" />
     <Compile Include="Models\SecurityQuestion.cs" />
     <Compile Include="Models\WorkoutLog.cs" />
   </ItemGroup>
@@ -107,33 +76,10 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802202044208_init.resx">
-      <DependentUpon>201802202044208_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802202208378_claims.resx">
-      <DependentUpon>201802202208378_claims.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802202211395_claims2.resx">
-      <DependentUpon>201802202211395_claims2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802202254296_Security.resx">
-      <DependentUpon>201802202254296_Security.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802202308264_workout.resx">
-      <DependentUpon>201802202308264_workout.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802202326382_cardio.resx">
-      <DependentUpon>201802202326382_cardio.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802202327595_resistance.resx">
-      <DependentUpon>201802202327595_resistance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802202330256_workoutlogcomplete.resx">
-      <DependentUpon>201802202330256_workoutlogcomplete.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201802202332366_datanote.resx">
-      <DependentUpon>201802202332366_datanote.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201802210126360_init.resx">
+      <DependentUpon>201802210126360_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
