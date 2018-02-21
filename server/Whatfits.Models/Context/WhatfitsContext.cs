@@ -23,7 +23,7 @@ namespace Whatfits.Models.Context
         public DbSet<Claim> Claims { get; set; }
         public DbSet<SecurityAnswer> SecurityAnswers { get; set; }
         public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
-        //public DbSet<Review> Review { get; set; }
+        public DbSet<Review> Review { get; set; }
         public DbSet<WorkoutLog> WorkoutLogs { get; set; }
         public DbSet<Following> Following { get; set; }
         public DbSet<Follower> Followers { get; set; }
