@@ -9,9 +9,10 @@ namespace Whatfits.Models
 {
     public class Chatroom
     {
-        public Chatroom()
+        public Chatroom(User user, User friend)
         {
-
+            ChatroomID = user.ID + friend.ID;
+            CreatedAt = DateTime.Now.ToLongDateString();
         }
         // Primary Key
         public int ChatroomID { get; set; }
