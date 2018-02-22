@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Whatfits.Models
 {
-    public partial class PersonalKey
+    public class PersonalKey
     {
         public PersonalKey()
         {

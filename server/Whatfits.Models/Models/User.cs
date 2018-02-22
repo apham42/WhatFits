@@ -7,7 +7,7 @@ using System.Web;
 
 namespace Whatfits.Models
 {
-    public partial class User
+    public class User
     {
         public User()
         {
@@ -18,6 +18,7 @@ namespace Whatfits.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
+        public Boolean IsDisabled { get; set; }
         // User can have One:
         public  virtual Credential Credential { get; set; }
         // Users can have many:

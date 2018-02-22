@@ -109,7 +109,7 @@
       <Project>{59fd5d82-720e-4e76-85a4-eeb92aeeba94}</Project>
       <Name>server</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.Gateways.csproj">
+    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.DataAccess.csproj">
       <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
       <Name>Whatfits.Gateways</Name>
     </ProjectReference>

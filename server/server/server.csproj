@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -92,7 +98,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -100,7 +124,13 @@
   <ItemGroup>
     <Compile Include="App_Start\Program.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\ClaimsController.cs" />
+    <Compile Include="Controllers\CredentialsController.cs" />
+    <Compile Include="Controllers\LocationsController.cs" />
+    <Compile Include="Controllers\PersonalKeysController.cs" />
+    <Compile Include="Controllers\SecurityAnswersController.cs" />
+    <Compile Include="Controllers\SecurityQuestionsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -109,6 +139,44 @@
   <ItemGroup>
     <Content Include="Views\web.config" />
     <None Include="packages.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Users\Create.cshtml" />
+    <Content Include="Views\Users\Delete.cshtml" />
+    <Content Include="Views\Users\Details.cshtml" />
+    <Content Include="Views\Users\Edit.cshtml" />
+    <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Credentials\Create.cshtml" />
+    <Content Include="Views\Credentials\Delete.cshtml" />
+    <Content Include="Views\Credentials\Details.cshtml" />
+    <Content Include="Views\Credentials\Edit.cshtml" />
+    <Content Include="Views\Credentials\Index.cshtml" />
+    <Content Include="Views\Claims\Create.cshtml" />
+    <Content Include="Views\Claims\Delete.cshtml" />
+    <Content Include="Views\Claims\Details.cshtml" />
+    <Content Include="Views\Claims\Edit.cshtml" />
+    <Content Include="Views\Claims\Index.cshtml" />
+    <Content Include="Views\Locations\Create.cshtml" />
+    <Content Include="Views\Locations\Delete.cshtml" />
+    <Content Include="Views\Locations\Details.cshtml" />
+    <Content Include="Views\Locations\Edit.cshtml" />
+    <Content Include="Views\Locations\Index.cshtml" />
+    <Content Include="Views\SecurityAnswers\Create.cshtml" />
+    <Content Include="Views\SecurityAnswers\Delete.cshtml" />
+    <Content Include="Views\SecurityAnswers\Details.cshtml" />
+    <Content Include="Views\SecurityAnswers\Edit.cshtml" />
+    <Content Include="Views\SecurityAnswers\Index.cshtml" />
+    <Content Include="Views\PersonalKeys\Create.cshtml" />
+    <Content Include="Views\PersonalKeys\Delete.cshtml" />
+    <Content Include="Views\PersonalKeys\Details.cshtml" />
+    <Content Include="Views\PersonalKeys\Edit.cshtml" />
+    <Content Include="Views\PersonalKeys\Index.cshtml" />
+    <Content Include="Views\SecurityQuestions\Create.cshtml" />
+    <Content Include="Views\SecurityQuestions\Delete.cshtml" />
+    <Content Include="Views\SecurityQuestions\Details.cshtml" />
+    <Content Include="Views\SecurityQuestions\Edit.cshtml" />
+    <Content Include="Views\SecurityQuestions\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -121,9 +189,9 @@
     <Folder Include="Data\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.Gateways.csproj">
+    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.DataAccess.csproj">
       <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
-      <Name>Whatfits.Gateways</Name>
+      <Name>Whatfits.DataAccess</Name>
     </ProjectReference>
     <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">
       <Project>{7ccda19c-9b92-4029-a6ca-529599acdeb4}</Project>

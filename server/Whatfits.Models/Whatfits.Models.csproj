@@ -47,12 +47,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Context\EventsContext.cs" />
+    <Compile Include="Context\ReviewsContext.cs" />
+    <Compile Include="Context\UserDataContext.cs" />
     <Compile Include="Context\WhatfitsContext.cs" />
-    <Compile Include="Migrations\201802210126360_init.cs" />
-    <Compile Include="Migrations\201802210126360_init.Designer.cs">
-      <DependentUpon>201802210126360_init.cs</DependentUpon>
+    <Compile Include="Context\ChatContext.cs" />
+    <Compile Include="Migrations\ChatMigrations\201802212119063_Init.cs" />
+    <Compile Include="Migrations\ChatMigrations\201802212119063_Init.Designer.cs">
+      <DependentUpon>201802212119063_Init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Migrations\ChatMigrations\Configuration.cs" />
+    <Compile Include="Migrations\EventMigrations\201802212148003_Init.cs" />
+    <Compile Include="Migrations\EventMigrations\201802212148003_Init.Designer.cs">
+      <DependentUpon>201802212148003_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\EventMigrations\Configuration.cs" />
+    <Compile Include="Migrations\UserDataMigrations\201802212058024_Init.cs" />
+    <Compile Include="Migrations\UserDataMigrations\201802212058024_Init.Designer.cs">
+      <DependentUpon>201802212058024_Init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\UserDataMigrations\Configuration.cs" />
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Event.cs" />
@@ -76,10 +90,15 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201802210126360_init.resx">
-      <DependentUpon>201802210126360_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ChatMigrations\201802212119063_Init.resx">
+      <DependentUpon>201802212119063_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\EventMigrations\201802212148003_Init.resx">
+      <DependentUpon>201802212148003_Init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\UserDataMigrations\201802212058024_Init.resx">
+      <DependentUpon>201802212058024_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

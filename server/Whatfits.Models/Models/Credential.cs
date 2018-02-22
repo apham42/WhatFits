@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Whatfits.Models
 {
-    public partial class Credential
+    public class Credential
     {
         public Credential()
         {

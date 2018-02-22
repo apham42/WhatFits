@@ -21,14 +21,14 @@ namespace Gateways.UnitTests
         [Fact]
         public void TestCreateUser()
         {
-            UserController controllerUnderTest = new UserController();
+            UserDataGateway controllerUnderTest = new UserDataGateway();
             User usr = new User();
             usr.ID = 16;
             usr.Email = "jjjj";
             usr.FirstName = "dfsadfa";
             usr.LastName = "dfasd";
             usr.Gender = "Sdfsdf";
-            var result = controllerUnderTest.Create(usr);
+            var result = controllerUnderTest.CreateUser(usr);
             
             Assert.Equal(result,controllerUnderTest.Details(16));
         }
