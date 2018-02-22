@@ -23,7 +23,7 @@ namespace server.Controllers
             }
             return View();
         }
-
+        /*
         [HttpPost]
         public ActionResult SendMessage(Message message, User friend)
         {
@@ -35,5 +35,6 @@ namespace server.Controllers
         {
 
         }
+        */
     }
 }
