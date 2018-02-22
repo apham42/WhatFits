@@ -12,3 +12,17 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Debug\What
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.Gateways.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.Gateways.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.Gateways.pdb
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\Whatfits.Gateways.dll.config
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\Whatfits.Gateways.dll
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\Whatfits.Gateways.pdb
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\EntityFramework.dll
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\Whatfits.Models.dll
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\Whatfits.Models.pdb
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\Whatfits.Models.dll.config
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\EntityFramework.xml
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.Gateways.csprojResolveAssemblyReference.cache
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.Gateways.csproj.CoreCompileInputs.cache
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.Gateways.dll
+C:\Users\LONGCHENG\source\repos\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.Gateways.pdb

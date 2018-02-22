@@ -1,0 +1,82 @@
+﻿
+@{
+    ViewBag.Title = "Chat";
+}
+
+<h2>Chat</h2>
+<div class="container">
+    <input type="button" value="Connect" id="btnConnect" />
+    <input type="button" value="Disconnet" id="btnDisconnect"/>
+    <input type="text" id="textInput" />
+    <input type="button" value="Send" id="btnSend" />
+    <span id="spanStatus"></span>
+
+</div>
+
+@section scripts {
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script>
+    //$(document).ready(function () {
+    //    var loc = window.location, new_uri;
+    //    if (loc.protocol == "https:") {
+    //        new_uri = "wss:";
+    //    }
+    //    else {
+    //        new_uri = "ws:";
+    //    }
+    //    new_uri += "//" + loc.hostname;
+        //websocket = new WebSocket(new_uri + '/server/WSHandler.ashx');
+        //websocket = new WebSocket(new_uri + '/server/Controllers/ChatController.cs')
+        //websocket.onopen = function () {
+        //    $('#message').prepend('<div>Connected.</div>');
+        //    $('#chatform').submit(function (event) {
+        //        websocket.send($('#inputbox').val());
+        //        $('#inputbox').val('');
+        //        event.preventDefault();
+        //    });
+        //};
+        //websocket.onerror = function (event) {
+        //    $('#message').prepend('<div>ERROR</div>');
+        //};
+        //websocket.onmessage = function (event) {
+        //    $('#message').prepend('<div>' + event.data + '</div>');
+        //};
+    $(document).ready(function () {
+        var loc = window.location, new_uri;
+        if (loc.protocol == "https:") {
+            new_uri = "wss:";
+        }
+        else {
+            new_uri = "ws:";
+        }
+        new_uri += "//" + loc.hostname;
+        $("#btnConnect").click(function () {
+            $("#spanStatus").text("connecting");
+            websocket = new WebSocket(new_uri + '/api/chat');
+            websocket.onopen = function () {
+                $("#spanStatus").text("connected");
+            };
+            websocket.onmessage = function (event) {
+                $("#spanStatus").text(event.data);
+            };
+            websocket.onerror = function (event) {
+                $("#spanStatus").text(event.message);
+            };
+            websocket.onclose = function () {
+                $("#spanStatus").text("disconnected");
+            };
+        });
+        $("#btnSend").click(function () {
+            if (websocket.readyState == WebSocket.OPEN) {
+                websocket.send($("#textInput").val());
+            }
+            else {
+                $("#spanStatus").text("Connection is closed");
+            }
+        });
+        $("#btnDisconnect").click(function () {
+            websocket.close();
+        });
+    });
+</script>
+    }
