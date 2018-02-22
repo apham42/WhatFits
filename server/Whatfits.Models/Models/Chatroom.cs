@@ -11,11 +11,11 @@ namespace Whatfits.Models
     {
         public Chatroom(User user, User friend)
         {
-            ChatroomID = user.ID + friend.ID;
+            ChatroomID = user.ID+ ";" + friend.ID;
             CreatedAt = DateTime.Now.ToLongDateString();
         }
         // Primary Key
-        public int ChatroomID { get; set; }
+        public string ChatroomID { get; set; }
         public string Name { get; set; }
         public string CreatedAt { get; set; }
         // A chat can have multiple Messages
