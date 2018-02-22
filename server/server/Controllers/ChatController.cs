@@ -1,51 +1,39 @@
-﻿using server.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
-using System.Net.WebSockets;
 using System.Web;
+using server.Service;
 using System.Web.Mvc;
-using System.Web.WebSockets;
+using Whatfits.Models;
 
 namespace server.Controllers
 {
     public class ChatController : Controller
     {
-        
         // GET: Chat
-        public HttpResponseMessage Get()
+        [HttpPost]
+        public ActionResult Chat(User user, User friend)
         {
+            SocketHandler socketHandler = new SocketHandler();
             if (HttpContext.IsWebSocketRequest)
             {
-                HttpContext.AcceptWebSocketRequest(SendMessage);
+                Chatroom chatroom = socketHandler.Getroom(user,friend);
+                return RedirectToAction("Chat");
             }
-            return new HttpResponseMessage(HttpStatusCode.SwitchingProtocols);
-        }
-
-
-         
-        [HttpPost]
-        public JsonResult SendMessage (string message, string friend)
-        {
-            
-            return Json(null);
+            return View();
         }
 
         [HttpPost]
-        public JsonResult receive()
+        public ActionResult SendMessage(Message message, User friend)
         {
-            try
-            {
 
-                return Json(message);
-            }
+        }
 
-            catch (Exception)
-            {
-                return null;
-            }
+        [HttpPost]
+        public ActionResult LeaveRoom(User friend)
+        {
+
         }
     }
 }
