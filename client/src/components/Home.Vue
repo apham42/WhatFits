@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
 //   name: 'Home',
@@ -64,15 +64,27 @@ export default {
   },
 
   created () {
-    alert('get')
-    axios.get('http://localhost/newtest')
-      .then(response => {
-        this.posts = response.data
-      })
-      .catch(e => {
-        alert('error')
-        this.errors.push(e)
-      })
+    alert('Chat')
+    var WebSocketClient = require('websocket').client
+    var client = new WebSocketClient()
+    client.on('connectFailed', function (error) {
+      console.log('Connect Error' + error.toString())
+    })
+
+    client.on('connect', function (connection) {
+      console.log('WebSocket Client Connected')
+    })
+
+    client.connect('ws://localhost/server/Chat')
+
+    // axios.get('http://localhost/server/Chat')
+    //   .then(response => {
+    //     this.posts = response.data
+    //   })
+    //   .catch(e => {
+    //     alert('error')
+    //     this.errors.push(e)
+    //   })
   }
 }
 

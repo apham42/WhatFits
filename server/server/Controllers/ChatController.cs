@@ -24,14 +24,22 @@ namespace server.Controllers
         }
         */
         [HttpGet]
-        public void ProcessRequest(HttpContext httpContext)
+        public ActionResult Index()
         {
-            if(httpContext.IsWebSocketRequest)
+            if(HttpContext.IsWebSocketRequest)
             {
-                httpContext.AcceptWebSocketRequest(ProcessWebSocket);   
+                //return httpContext.AcceptWebSocketRequest(ProcessWebSocket);
+                return PartialView(socketHandler);
             }
-        }
 
+            else
+            {
+                var result = new HttpStatusCodeResult(404);
+                return result;
+            }
+
+        }
+        /*
         private Task ProcessWebSocket(AspNetWebSocketContext aspNetWebSocketContext)
         {
             var process = socketHandler.ProcessWebSocketRequestAsync(aspNetWebSocketContext);
