@@ -18,6 +18,16 @@ namespace Whatfits.Models.Migrations
 
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
+            context.Users.AddOrUpdate(x => x.ID,
+                new User()
+                {
+                    ID = "0001",
+                    FirstName = "Longcheng",
+                    Email = "lc@gmail.com",
+                    LastName = "Chi",
+                    Gender = "Male"
+                }
+                );
         }
     }
 }

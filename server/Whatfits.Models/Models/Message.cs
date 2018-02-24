@@ -14,7 +14,7 @@ namespace Whatfits.Models
 
         }
         // Primary Key
-        public int MessageID { get; set; }
+        public string MessageID { get; set; }
         // Foreign Key
         public int UserID { get; set; }
         // Navigation Property of User
