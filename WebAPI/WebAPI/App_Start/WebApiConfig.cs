@@ -9,6 +9,8 @@ namespace WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
+            // Allow cross origin
+            config.EnableCors();
             // Web API configuration and services
 
             // Web API routes
