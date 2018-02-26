@@ -19,7 +19,6 @@ namespace WebAPI.Custom_Module
         // If this module requires cleanup
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public void Init(HttpApplication application)
@@ -43,7 +42,7 @@ namespace WebAPI.Custom_Module
                 VirtualPathUtility.GetExtension(filePath);
             if (fileExtension.Equals(".aspx"))
             {
-                context.Response.Write("<h1><font color=red>" +
+                context.Response.Write("<h1><font color=green>" +
                     "ChatModule: Beginning of Request" +
                     "</font></h1><hr>");
             }
@@ -65,7 +64,7 @@ namespace WebAPI.Custom_Module
             if (fileExtension.Equals(".aspx"))
             {
                 context.Response.Write("<hr><h1><font color=red>" +
-                    "ChatModule: End of Request</font></h1>");
+                    "ChatModule: End of Request</font></h1>" + elapsedtime);
             }
         }
     }
