@@ -47,17 +47,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTransferObjects\UserDataDTOs\CreateUserDTO.cs" />
-    <Compile Include="DataTransferObjects\UserDataDTOs\SSOCreateUserDTO.cs" />
-    <Compile Include="GatewayInterfaces\IUserDataGateway.cs" />
-    <Compile Include="GatewayInterfaces\User.cs" />
-    <Compile Include="Gateways\UserDataGateway.cs" />
-    <Compile Include="GatewayInterfaces\IDataGateways.cs" />
+    <Compile Include="DataTransferObjects\RegistrationDTOs\RegistrationDTO.cs" />
+    <Compile Include="DataTransferObjects\UserManagementDTOs\UserManagementDTO.cs" />
+    <Compile Include="GatewayInterfaces\IDataGateway.cs" />
+    <Compile Include="Gateways\ChatGateway.cs" />
+    <Compile Include="Gateways\RegistrationGateway.cs" />
+    <Compile Include="Gateways\UserManagementGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DataTransferObjects\ChatDTOs\" />
     <Folder Include="DataTransferObjects\RatingsReviewDTOs\" />
+    <Folder Include="DataTransferObjects\RegistrationDTOs\UserDTO\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">

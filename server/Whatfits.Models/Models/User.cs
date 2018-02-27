@@ -19,6 +19,7 @@ namespace Whatfits.Models
         public string LastName { get; set; }
         public string Gender { get; set; }
         public Boolean IsDisabled { get; set; }
+        public Boolean IsPartialRegistration { get; set; }
         // User can have One:
         public  virtual Credential Credential { get; set; }
         // Users can have many:

@@ -49,24 +49,44 @@
   <ItemGroup>
     <Compile Include="Context\EventsContext.cs" />
     <Compile Include="Context\ReviewsContext.cs" />
-    <Compile Include="Context\UserDataContext.cs" />
+    <Compile Include="Context\UserAccessControlContext.cs" />
+    <Compile Include="Context\RegistrationContext.cs" />
+    <Compile Include="Context\UserManagementContext.cs" />
     <Compile Include="Context\WhatfitsContext.cs" />
     <Compile Include="Context\ChatContext.cs" />
-    <Compile Include="Migrations\ChatMigrations\201802212119063_Init.cs" />
-    <Compile Include="Migrations\ChatMigrations\201802212119063_Init.Designer.cs">
-      <DependentUpon>201802212119063_Init.cs</DependentUpon>
+    <Compile Include="Migrations\ChatMigration\201802261852486_init.cs" />
+    <Compile Include="Migrations\ChatMigration\201802261852486_init.Designer.cs">
+      <DependentUpon>201802261852486_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ChatMigrations\Configuration.cs" />
-    <Compile Include="Migrations\EventMigrations\201802212148003_Init.cs" />
-    <Compile Include="Migrations\EventMigrations\201802212148003_Init.Designer.cs">
-      <DependentUpon>201802212148003_Init.cs</DependentUpon>
+    <Compile Include="Migrations\ChatMigration\Configuration.cs" />
+    <Compile Include="Migrations\EventsMigration\201802261912559_init.cs" />
+    <Compile Include="Migrations\EventsMigration\201802261912559_init.Designer.cs">
+      <DependentUpon>201802261912559_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\EventMigrations\Configuration.cs" />
-    <Compile Include="Migrations\UserDataMigrations\201802212058024_Init.cs" />
-    <Compile Include="Migrations\UserDataMigrations\201802212058024_Init.Designer.cs">
-      <DependentUpon>201802212058024_Init.cs</DependentUpon>
+    <Compile Include="Migrations\EventsMigration\Configuration.cs" />
+    <Compile Include="Migrations\RegistrationMigration\201802261859451_init.cs" />
+    <Compile Include="Migrations\RegistrationMigration\201802261859451_init.Designer.cs">
+      <DependentUpon>201802261859451_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\UserDataMigrations\Configuration.cs" />
+    <Compile Include="Migrations\RegistrationMigration\201802270110055_init2.cs" />
+    <Compile Include="Migrations\RegistrationMigration\201802270110055_init2.Designer.cs">
+      <DependentUpon>201802270110055_init2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\RegistrationMigration\Configuration.cs" />
+    <Compile Include="Migrations\UserAccessControlMigration\201802261906150_init.cs" />
+    <Compile Include="Migrations\UserAccessControlMigration\201802261906150_init.Designer.cs">
+      <DependentUpon>201802261906150_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\UserAccessControlMigration\Configuration.cs" />
+    <Compile Include="Migrations\UserManagementMigration\201802261849174_init.cs" />
+    <Compile Include="Migrations\UserManagementMigration\201802261849174_init.Designer.cs">
+      <DependentUpon>201802261849174_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\UserManagementMigration\201802271820543_addPersonalkey.cs" />
+    <Compile Include="Migrations\UserManagementMigration\201802271820543_addPersonalkey.Designer.cs">
+      <DependentUpon>201802271820543_addPersonalkey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\UserManagementMigration\Configuration.cs" />
     <Compile Include="Models\Chatroom.cs" />
     <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Event.cs" />
@@ -74,6 +94,7 @@
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Credential.cs" />
     <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\PersonalKey.cs" />
     <Compile Include="Models\Recovery.cs" />
     <Compile Include="Models\SecurityAnswer.cs" />
@@ -91,14 +112,26 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ChatMigrations\201802212119063_Init.resx">
-      <DependentUpon>201802212119063_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ChatMigration\201802261852486_init.resx">
+      <DependentUpon>201802261852486_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\EventMigrations\201802212148003_Init.resx">
-      <DependentUpon>201802212148003_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\EventsMigration\201802261912559_init.resx">
+      <DependentUpon>201802261912559_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\UserDataMigrations\201802212058024_Init.resx">
-      <DependentUpon>201802212058024_Init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\RegistrationMigration\201802261859451_init.resx">
+      <DependentUpon>201802261859451_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\RegistrationMigration\201802270110055_init2.resx">
+      <DependentUpon>201802270110055_init2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\UserAccessControlMigration\201802261906150_init.resx">
+      <DependentUpon>201802261906150_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\UserManagementMigration\201802261849174_init.resx">
+      <DependentUpon>201802261849174_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\UserManagementMigration\201802271820543_addPersonalkey.resx">
+      <DependentUpon>201802271820543_addPersonalkey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
