@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿/* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
@@ -13,12 +14,19 @@
  *
  * NUGET: END LICENSE TEXT */
 /*
+=======
+﻿/*
+>>>>>>> master
 * This file has been commented to support Visual Studio Intellisense.
 * You should not use this file at runtime inside the browser--it is only
 * intended to be used only for design-time IntelliSense.  Please use the
 * standard jQuery library for all production use.
 *
+<<<<<<< HEAD
 * Comment version: 1.11.1
+=======
+* Comment version: 1.17.0
+>>>>>>> master
 */
 
 /*
@@ -29,7 +37,11 @@
 * for informational purposes only and are not the license terms under
 * which Microsoft distributed this file.
 *
+<<<<<<< HEAD
 * jQuery Validation Plugin - v1.11.1 - 2/4/2013
+=======
+* jQuery Validation Plugin - v1.17.0 - 12/5/2016
+>>>>>>> master
 * https://github.com/jzaefferer/jquery-validation
 * Copyright (c) 2013 Jörn Zaefferer; Licensed MIT
 *
