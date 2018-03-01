@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Whatfits.Models.SecurityAnswer>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.SecurityQuestion.Question)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Answer)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.SecurityQuestion.Question)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Answer)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SecurityAnswerID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SecurityAnswerID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SecurityAnswerID })
+        </td>
+    </tr>
+}
+
+</table>
