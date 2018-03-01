@@ -9,6 +9,12 @@ namespace server
     {
         public static void Register(HttpConfiguration config)
         {
+<<<<<<< HEAD
+=======
+            // Web API configuration and services
+
+            // Web API routes
+>>>>>>> master
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
