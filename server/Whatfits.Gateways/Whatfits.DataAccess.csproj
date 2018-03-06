@@ -7,8 +7,8 @@
     <ProjectGuid>{7E234319-0927-48B6-B3F2-0C96D169C55D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Whatfits.Gateways</RootNamespace>
-    <AssemblyName>Whatfits.Gateways</AssemblyName>
+    <RootNamespace>Whatfits.DataAccess</RootNamespace>
+    <AssemblyName>Whatfits.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,20 +47,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTransferObjects\ChatDTOs\ChatDTO.cs" />
-    <Compile Include="DataTransferObjects\RegistrationDTOs\RegistrationDTO.cs" />
-    <Compile Include="DataTransferObjects\UserManagementDTOs\UserManagementDTO.cs" />
+    <Compile Include="DataTransferObjects\ContentDTOs\ChatDTO.cs" />
+    <Compile Include="DataTransferObjects\ContentDTOs\EventDTO.cs" />
+    <Compile Include="DataTransferObjects\ContentDTOs\FollowsDTO.cs" />
+    <Compile Include="DataTransferObjects\ContentDTOs\NotificationDTO.cs" />
+    <Compile Include="DataTransferObjects\ContentDTOs\ReviewsDTO.cs" />
+    <Compile Include="DataTransferObjects\ContentDTOs\SearchDTO.cs" />
+    <Compile Include="DataTransferObjects\ContentDTOs\WorkoutLogDTO.cs" />
+    <Compile Include="DataTransferObjects\CoreDTOs\LoginDTO.cs" />
+    <Compile Include="DataTransferObjects\CoreDTOs\RegistrationDTO.cs" />
+    <Compile Include="DataTransferObjects\CoreDTOs\UserAccessDTO.cs" />
+    <Compile Include="DataTransferObjects\CoreDTOs\UserManagementDTO.cs" />
     <Compile Include="GatewayInterfaces\IDataGateway.cs" />
-    <Compile Include="Gateways\ChatGateway.cs" />
-    <Compile Include="Gateways\RegistrationGateway.cs" />
-    <Compile Include="Gateways\UserManagementGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\ChatGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\EventGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\FollowsGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\NotificationGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\ReviewsGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\SearchGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\WorkoutLogGateway.cs" />
+    <Compile Include="Gateways\CoreGateways\LoginGateway.cs" />
+    <Compile Include="Gateways\CoreGateways\RegistrationGateway.cs" />
+    <Compile Include="Gateways\CoreGateways\UserAccessControlGateway.cs" />
+    <Compile Include="Gateways\CoreGateways\UserManagementGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DataTransferObjects\RatingsReviewDTOs\" />
-    <Folder Include="DataTransferObjects\RegistrationDTOs\UserDTO\" />
-    <Folder Include="DataTransferObjects\UserAccessDTOs\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">
       <Project>{7ccda19c-9b92-4029-a6ca-529599acdeb4}</Project>

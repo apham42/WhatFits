@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Whatfits.Models
+namespace Whatfits.Models.Models
 {
     public class PersonalKey
     {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Whatfits.Models.Models
 {
-    class Notification
+    public class Notification
     {
         public Notification()
         {
