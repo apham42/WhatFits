@@ -1,0 +1,8 @@
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Whatfits.UserAccessControl.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Whatfits.UserAccessControl.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Whatfits.UserAccessControl.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\obj\Debug\Whatfits.UserAccessControl.csproj.CoreCompileInputs.cache
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\obj\Debug\Whatfits.UserAccessControl.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\obj\Debug\Whatfits.UserAccessControl.pdb
