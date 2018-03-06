@@ -8,22 +8,23 @@ namespace server.Controllers
 {
     public class ChatController : ApiController
     {
-        public HttpResponseMessage Get(string username, int roomid)
+        [AcceptVerbs ("GET","POST")]
+        public HttpResponseMessage Connect()
         {
-            HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username, roomid));
+            if (!HttpContext.Current.IsWebSocketRequest)
+                return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
+
+            HttpContext.Current.AcceptWebSocketRequest(new ChatHandler());
             return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
         }
         
         class ChatHandler : WebSocketHandler
         {
             private static WebSocketCollection _chatUser = new WebSocketCollection();
-            private string _userName;
-            private int _roomId;
+            private string connectedUser;
 
-            public ChatHandler(string username, int roomid)
+            public ChatHandler()
             {
-                _userName = username;
-                _roomId = roomid;
             }
 
             public override void OnOpen()
@@ -33,7 +34,7 @@ namespace server.Controllers
 
             public override void OnMessage(byte[] message)
             {
-                _chatUser.Broadcast(_userName + ": " + message);
+                _chatUser.Broadcast(": " + message);
             }
 
             public override void OnError()
