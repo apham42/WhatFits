@@ -137,3 +137,9 @@ C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.UserAccessControl
 C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.JsonWebToken.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.JsonWebToken.pdb
 C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.JsonWebToken.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Microsoft.IdentityModel.Logging.xml
