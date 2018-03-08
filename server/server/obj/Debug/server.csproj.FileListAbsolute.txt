@@ -130,3 +130,10 @@ C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.csprojResolve
 C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.csproj.CoreCompileInputs.cache
 C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.csproj.CopyComplete
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.UserAccessControl.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.UserAccessControl.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.UserAccessControl.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.JsonWebToken.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.JsonWebToken.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\Whatfits.JsonWebToken.dll.config
