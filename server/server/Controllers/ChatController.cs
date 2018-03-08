@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
@@ -32,9 +33,9 @@ namespace server.Controllers
                 _chatUser.Add(this);
             }
 
-            public override void OnMessage(byte[] message)
+            public override void OnMessage(string message)
             {
-                _chatUser.Broadcast(": " + message);
+                _chatUser.Broadcast("A stranger said: " + message);
             }
 
             public override void OnError()
