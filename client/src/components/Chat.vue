@@ -1,75 +1,46 @@
 <template>
     <div id="Chat">
-        <chat-box v-if="loggedIn"></chat-box>
-
-        <div id="Chat__Login" v-else>
-            <form action="/" @submit="login">
-                <input type="text" v-model="username" placeholder="Enter your username...">
-            </form>
+        <p>{{message}}</p>
+        <form id="message-form" action="#" method="get">
+            <textarea v-model="messages" placeholder="Enter the message" required/><br/><br/>
+            <button type="submit" @click="SendMessage">Send Message</button>
+        </form>
+        <br/>
+        <div>
+          {{receives}}
         </div>
     </div>
 </template>
 
 <script>
-import ChatBox from './ChatBox.vue'
 export default {
-  name: 'Chat',
+  name: 'Chatt',
   data () {
     return {
-      socket: null,
-      loggedIn: false,
-      username: ''
+      ws: new WebSocket('ws://localhost/server/chat'),
+      message: 'Welcome',
+      messages: '',
+      receives: ''
     }
   },
-
-  components: { ChatBox },
-
-  ready () {
-    var io = require('websocket')
-    this.socket = io('http://localhost/server/chat')
+  mounted () {
+    this.Connection(this.receives)
   },
-
   methods: {
-    login (event) {
-      event.preventDefault()
-      this.loggedIn = true
-      this.socket.emit('user logged in', this.username)
+    Connection: function (receives) {
+      this.ws.onopen = function (event) {
+        console.log('connected')
+        this.onmessage = function receivemessage (event) {
+          console.log(event.data)
+          receives = event.data
+        }
+      }
+    },
+    SendMessage: function () {
+      if (this.ws.readyState === WebSocket.OPEN) {
+        this.ws.send(this.messages)
+      }
     }
   }
 }
 </script>
-
-<style>
-html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-#Chat {
-    width: 100%;
-    height: 100%;
-}
-#Chat__Login {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    width: 100%;
-    height: 100%;
-}
-#Chat__Login form {
-    width: 100%;
-    text-align: center;
-}
-#Chat__Login input {
-    margin: 0 auto;
-    font-size: 2em;
-    -webkit-appearance: none;
-    padding: 10px;
-    border: 2px solid #eee;
-}
-#Chat__Login input:focus {
-    outline: none;
-    background: #eee;
-}
-</style>
