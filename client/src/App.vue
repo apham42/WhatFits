@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app">Chat Application<br/><br/>
     <img src="./assets/logo.png">
     <router-view/>
   </div>
