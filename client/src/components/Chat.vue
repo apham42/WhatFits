@@ -6,9 +6,7 @@
             <button type="submit" @click="SendMessage">Send Message</button>
         </form>
         <br/>
-        <div>
-          {{receives}}
-        </div>
+        <textarea id="receives" name="lol"/>
     </div>
 </template>
 
@@ -24,15 +22,14 @@ export default {
     }
   },
   mounted () {
-    this.Connection(this.receives)
+    this.Connection()
   },
   methods: {
-    Connection: function (receives) {
+    Connection: function () {
       this.ws.onopen = function (event) {
         console.log('connected')
         this.onmessage = function receivemessage (event) {
-          console.log(event.data)
-          receives = event.data
+          window.document.getElementById('receives').textContent = event.data
         }
       }
     },
