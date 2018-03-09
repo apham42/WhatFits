@@ -1,6 +1,5 @@
 <template>
   <div id="app">Chat Application<br/><br/>
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
@@ -17,7 +16,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: white;
+  margin-top: 10px;
 }
 </style>
