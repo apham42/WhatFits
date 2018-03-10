@@ -17,6 +17,6 @@ namespace Whatfits.Models.Models
         [Key]
         public int ClaimID { get; set; }
         public String ClaimsType { get; set; }
-        public String ClaimsValue { get; set; }       
+        public String ClaimsValue { get; set; }
     }
 }

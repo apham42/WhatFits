@@ -5,57 +5,62 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.Entity;
-// Used For Models
 using Whatfits.Models.Models;
-// Used for Context File Registration
 using Whatfits.Models.Context.Core;
-// Used for Data Transfer Objects
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.GatewayInterfaces;
 
 namespace Whatfits.Gateways.Gateways.CoreGateways
 {
-    public class RegistrationGateway: IDataGateway<RegistrationDTO>
+    public class RegistrationGateway //: IDataGateway<RegistrationDTO>
     {
         private RegistrationContext db = new RegistrationContext();
 
-        public void Create(RegistrationDTO obj)
+        public void RegisterUser(RegistrationDTO obj)
         {
             User user = new User
             {
-                FirstName = obj.GetFirstName(),
-                LastName = obj.GetLastName(),
-                ID = obj.GetID(),
-                Email = obj.GetEmail(),
-                Gender = obj.GetGender(),
-                IsPartialRegistration = obj.GetPartialRegistration(),
-                IsDisabled = obj.GetIsDisabled()
+                FirstName = obj.FirstName,
+                LastName = obj.LastName,
+                //ID = obj.ID,
+                Email = obj.Email,
+                Gender = obj.Gender,
+                IsPartialRegistration = obj.IsPartial,
+                IsDisabled = obj.IsDisable
             };
+
             Credential credential = new Credential {
-                UserName = obj.GetUserName(),
-                Password = obj.GetPassword(),
-                UserID = obj.GetID()
+                UserName = obj.UserName,
+                Password = obj.Password,
+                UserID = obj.ID
             };
+
             Location location = new Location {
-                Address = obj.GetAddress(),
-                City = obj.GetCity(),
-                State = obj.GetState(),
-                Zipcode = obj.GetZipcode(),
-                UserID = obj.GetID()
+                Address = obj.Address,
+                City = obj.City,
+                State = obj.State,
+                Zipcode = obj.Zipcode,
+                UserID = obj.ID
             };
+
             PersonalKey personalkey = new PersonalKey
             {
-                Salt = obj.GetSalt(),
-                UserID = obj.GetID()
+                Salt = obj.Salt,
+                UserID = obj.ID
             };
 
             db.Users.Add(user);
+            var id = db.Users.Find();
+            // Find UserID to relate to user class
             // implementing userClaims
-            List<int> claims = obj.GetUserClaims();
+            List<int> claims = obj.ClaimID;
             for (int i = 0; i < claims.Count; i++)
             {
-                UserClaims temp = new UserClaims();
-                temp.ClaimID = claims[i];
+                UserClaims temp = new UserClaims
+                {
+                    UserID = user.ID,
+                    ClaimID = claims[i]
+                };
                 db.UserClaims.Add(temp);
             }
             db.Credentials.Add(credential);
@@ -64,41 +69,29 @@ namespace Whatfits.Gateways.Gateways.CoreGateways
             Save();
         }
 
-        public void Update(RegistrationDTO obj)
+        public string FindUserNameByID(int id)
         {
-            throw new NotImplementedException();
-        }
-
-  
-
-        public void Disable(int? id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string FindByID(int id)
-        {
+            var result = db.Credentials.Find(id);
+            return result.UserName;
+            /*
+             * Reminder: Compare with the new query
             string UserName = (from x in db.Credentials
                                where x.UserID == id
                                select x.UserName).FirstOrDefault();
             return UserName;
+            */
         }
 
-        public int FindByUserName(string userName)
+        public int FindIDByUserName(string userName)
         {
-            
-            int userID = (from u in db.Credentials
-                        where u.UserName == userName
-                        select u.UserID).FirstOrDefault();
-
-            return userID;
+            var userID = db.Credentials.Find(userName);
+            return userID.UserID;
         }
+
         public Boolean DoesUserNameExist(string userName)
         {
-            string foundUserName = (from x in db.Credentials
-                         where x.UserName == userName
-                         select x.UserName).FirstOrDefault();
-            if (userName == foundUserName)
+            var foundUserName = db.Credentials.Find(userName);
+            if (userName == foundUserName.UserName)
                 return true;
             else
                 return false;
@@ -107,11 +100,6 @@ namespace Whatfits.Gateways.Gateways.CoreGateways
         public void Save()
         {
             db.SaveChanges();
-        }
-
-        public void Delete(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

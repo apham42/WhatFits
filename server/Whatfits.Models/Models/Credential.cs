@@ -21,7 +21,5 @@ namespace Whatfits.Models.Models
         public string Password { get; set; }
         // Navigation Property
         public virtual User User { get; set; }
-        // List of Claims
-        List<int> ClaimsList { get; set; }
     }
 }

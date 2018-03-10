@@ -9,6 +9,7 @@ namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
 {
     public class RegistrationDTO
     {
+        /*
         // UserData
         public int mID { get; set; }
         public string mEmail { get; set; }
@@ -159,6 +160,29 @@ namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
         {
             return mSalt;
         }
-        
+        */
+        // UserData
+        public int ID { get; set; }
+        public string Email { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
+        public Boolean IsPartial { get; set; }
+        public Boolean IsDisable { get; set; }
+        // Location
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string Zipcode { get; set; }
+
+        // Credentials
+        public string UserName { get; set; }
+        public string Password { get; set; }
+        // Claims
+        public string ClaimType { get; set; }
+        public string ClaimValue { get; set; }
+        public List<int> ClaimID { get; set; }
+        // PersonalKey
+        public string Salt { get; set; }
     }
 }

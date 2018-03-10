@@ -4,7 +4,6 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-
 namespace Whatfits.Models.Models
 {
     public class User
@@ -30,5 +29,6 @@ namespace Whatfits.Models.Models
         public ICollection<Following> Following { get; set; }
         public ICollection<Follower> Followers { get; set; }
         public ICollection<Review> Review { get; set; }
+        public ICollection<SecurityAnswer> SecurityAnswers { get; set; }
     }
 }
