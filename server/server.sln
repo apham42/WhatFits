@@ -11,11 +11,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatfits.UserAccessControl"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatfits.UserAccessControl.Test", "Whatfits.UserAccessControl.Test\Whatfits.UserAccessControl.Test.csproj", "{F5D7A161-EC33-4AD0-9009-55AECBE70F4B}"
 EndProject
+<<<<<<< HEAD
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{67765B86-DD0F-400A-98A1-4F4AC7CDEE7D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatfits.JsonWebToken", "Whatfits.JsonWebToken\Whatfits.JsonWebToken.csproj", "{C0325899-07D9-47F8-B890-561A78A1E8D0}"
+=======
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatfits.Models", "Whatfits.Models\Whatfits.Models.csproj", "{7CCDA19C-9B92-4029-A6CA-529599ACDEB4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatfits.DataAccess", "Whatfits.Gateways\Whatfits.DataAccess.csproj", "{7E234319-0927-48B6-B3F2-0C96D169C55D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data Access Layer", "Data Access Layer", "{424E4172-E786-40CF-BAED-4A6DB0D0ED96}"
+>>>>>>> master
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,6 +41,12 @@ Global
 		{F5D7A161-EC33-4AD0-9009-55AECBE70F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5D7A161-EC33-4AD0-9009-55AECBE70F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5D7A161-EC33-4AD0-9009-55AECBE70F4B}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
+		{C0325899-07D9-47F8-B890-561A78A1E8D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0325899-07D9-47F8-B890-561A78A1E8D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0325899-07D9-47F8-B890-561A78A1E8D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0325899-07D9-47F8-B890-561A78A1E8D0}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
 		{7CCDA19C-9B92-4029-A6CA-529599ACDEB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7CCDA19C-9B92-4029-A6CA-529599ACDEB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CCDA19C-9B92-4029-A6CA-529599ACDEB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -43,6 +55,7 @@ Global
 		{7E234319-0927-48B6-B3F2-0C96D169C55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E234319-0927-48B6-B3F2-0C96D169C55D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E234319-0927-48B6-B3F2-0C96D169C55D}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> master
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,8 +63,12 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{26E2C11E-8DF4-4367-9238-1BF7CB63CB0A} = {D0FF923D-B0D0-4556-AB51-40F6204BD9AA}
 		{F5D7A161-EC33-4AD0-9009-55AECBE70F4B} = {D0FF923D-B0D0-4556-AB51-40F6204BD9AA}
+<<<<<<< HEAD
+		{C0325899-07D9-47F8-B890-561A78A1E8D0} = {67765B86-DD0F-400A-98A1-4F4AC7CDEE7D}
+=======
 		{7CCDA19C-9B92-4029-A6CA-529599ACDEB4} = {424E4172-E786-40CF-BAED-4A6DB0D0ED96}
 		{7E234319-0927-48B6-B3F2-0C96D169C55D} = {424E4172-E786-40CF-BAED-4A6DB0D0ED96}
+>>>>>>> master
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D62435F-1FCA-4597-96A4-AF90635654A6}
