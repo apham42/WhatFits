@@ -24,17 +24,11 @@ namespace Whatfits.UserAccessControl.Auth
         {
             // create jwt
             var tokenhandler = new JwtSecurityTokenHandler();
+            // create token from incomming token string
             var token = tokenhandler.ReadJwtToken(incommingToken);
 
-            // get claims from token
-            List<Claim> tokenClaims = new List<Claim>();
-
-            foreach (Claim claim in token.Claims)
-            {
-                tokenClaims.Add(claim);
-            }
-
-            return new ClaimsPrincipal(new ClaimsIdentity(tokenClaims));
+            // return users principal
+            return new ClaimsPrincipal(new ClaimsIdentity(token.Claims));
         }
     }
 }

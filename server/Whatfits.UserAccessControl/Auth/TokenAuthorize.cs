@@ -14,21 +14,6 @@ namespace Whatfits.UserAccessControl.Auth
         // claim value
         public string claimValue;
 
-        // test function
-        public List<Claim> getClaims(string username)
-        {
-            List<Claim> userClaims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Webpage, "Whatfits.social"),
-                new Claim("WORKOUT_ADD", "ADD")
-            };
-            
-
-            return userClaims;
-        }
-        
-        //
         // Summary:
         //     Calls when an action is being authorized.
         //
@@ -48,45 +33,22 @@ namespace Whatfits.UserAccessControl.Auth
             // get string token
             string tokenstr = header.GetValues("Token").First();
 
+            // create principal of user from jwt
             ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
-
-            //ClaimsIdentity currentid = 
-            //token.ReadToken(yo);
+            
+            // creat authorization context to check if user has claims
             AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
 
+            // check if user has claims
             if (new AuthorizationManager().CheckAccess(authcontext))
             {
+                // if user does have those specififed claims
                 base.IsAuthorized(actionContext);
             } else
             {
+                // if user does NOT have those specified claims
                 base.HandleUnauthorizedRequest(actionContext);
             }
-        }
-        //
-        // Summary:
-        //     Indicates whether the specified control is authorized.
-        //
-        // Parameters:
-        //   actionContext:
-        //     The context.
-        //
-        // Returns:
-        //     true if the control is authorized; otherwise, false.
-        protected override bool IsAuthorized(HttpActionContext actionContext)
-        {
-            return true;
-        }
-
-        //
-        // Summary:
-        //     Processes requests that fail authorization.
-        //
-        // Parameters:
-        //   actionContext:
-        //     The context.
-        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
-        {
-
         }
     }
 }

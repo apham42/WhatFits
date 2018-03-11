@@ -13,7 +13,7 @@ namespace server.Controllers
     {
 
         [HttpPost]
-        [TokenAuthorize(claimType = "WORKOUT_ADD", claimValue = "ADD")]
+        [TokenAuthorize(claimType = "WORKOUT_ADD", claimValue = "DD")]
         public string one()
         {
             return "PASS";
