@@ -1,17 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using System.Linq;
-using System.Web;
+
 using System.Web.Http;
 using System.Web.Http.Controllers;
-
 
 namespace Whatfits.UserAccessControl.Auth
 {
     public class TokenAuthorize : AuthorizeAttribute
     {
+        // claim type
         public string claimType;
+        // claim value
         public string claimValue;
 
         // test function
@@ -41,15 +41,26 @@ namespace Whatfits.UserAccessControl.Auth
         //     The context parameter is null.
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            var re = actionContext.Request;
-            var hey = re.Headers;
-            string yo = hey.GetValues("Token").First();
+            // get http request
+            var request = actionContext.Request;
+            // get header from request
+            var header = request.Headers;
+            // get string token
+            string tokenstr = header.GetValues("Token").First();
 
-            
+            ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
 
-            
+            //ClaimsIdentity currentid = 
             //token.ReadToken(yo);
+            AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
 
+            if (new AuthorizationManager().CheckAccess(authcontext))
+            {
+                base.IsAuthorized(actionContext);
+            } else
+            {
+                base.HandleUnauthorizedRequest(actionContext);
+            }
         }
         //
         // Summary:
@@ -61,10 +72,11 @@ namespace Whatfits.UserAccessControl.Auth
         //
         // Returns:
         //     true if the control is authorized; otherwise, false.
-        //protected override bool IsAuthorized(HttpActionContext actionContext)
-        //{
-        //    return false;
-        //}
+        protected override bool IsAuthorized(HttpActionContext actionContext)
+        {
+            return true;
+        }
+
         //
         // Summary:
         //     Processes requests that fail authorization.
