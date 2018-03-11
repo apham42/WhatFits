@@ -3,11 +3,11 @@
     <div id="ChatBox">
       <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
       <div id="chatbody" v-if="chatshow">
-        <div id="username" v-on:click="msgshow = !msgshow">ROBBY</div>
+        <div id="username" v-on:click="msgshow = !msgshow">{{onlineUsers}}</div>
       </div>
     </div>
     <div id="MsgBox" style="right:290px" v-if="msgshow">
-      <div id="msghead" v-on:click="msgshow = !msgshow">ROBBY</div>
+      <div id="msghead" v-on:click="msgshow = !msgshow">{{onlineUsers}}</div>
       <div id="msgbody">
         <textarea id="receives" rows="10"/>
       </div>
@@ -24,13 +24,16 @@ export default {
   name: 'Chatt',
   data () {
     return {
-      ws: new WebSocket('ws://localhost/server/chat' + '?username=' + 'ROBBY'),
+      ws: '',
       messages: '',
       chatshow: false,
+      onlineUsers: '',
       msgshow: false
     }
   },
   mounted () {
+    this.onlineUsers = prompt('Enter the name to connect chat: ')
+    this.ws = new WebSocket('ws://localhost/server/chat' + '?username=' + this.onlineUsers)
     this.Connection()
   },
   methods: {
@@ -54,8 +57,8 @@ export default {
 <style>
 #ChatBox,#MsgBox{
   cursor: pointer;
-  background: white;
-  width: 250px;
+  background: grey;
+  width: 150px;
   position: fixed;
   bottom: 0px;
   right: 20px;
@@ -64,11 +67,11 @@ export default {
 }
 #send{
   margin-right: 80%;
-  background: gray
+  background: #16a085;
 }
 #chathead,#msghead{
   background: rgb(54, 53, 52);
-  padding: 15px;
+  padding: 5px;
   color:white;
   border-radius: 5px 5px 0px 0px;
 }
@@ -81,6 +84,8 @@ export default {
 }
 #msgbody{
   height:200px;
+  overflow: auto;
+  overflow-y: auto;
 }
 #msgclose{
   float:right;
@@ -99,12 +104,12 @@ export default {
 }
 #username{
   background: gray;
-  padding: 10px 25px;
+  padding: 5px 25px;
   position: relative;
   color: black;
 }
 #username:hover{
-  background:#f8f8f8
+  background:white
 }
 #username:before{
   content:'';
