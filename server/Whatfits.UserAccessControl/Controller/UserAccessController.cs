@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Security.Claims;
 using Whatfits.UserAccessControl.Constants;
-using System.Web.Http;
+using System.Net.Http;
 
 using Whatfits.UserAccessControl.Auth;
 using System.Text;
@@ -37,6 +37,23 @@ namespace Whatfits.UserAccessControl.Controller
 
         }
 
+        /*
+         * Add new claim for user
+         * @param Claim claim, new claim to be added
+         * */
+        public static void AddClaim(Claim claim)
+        {
+
+        }
+
+        /*
+         * Remove new claim for user
+         * @param Claim claim, claim to removed
+         * */
+        public static void RemoveClaim(Claim claim)
+        {
+
+        }
         
     }
 }

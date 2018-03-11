@@ -1,18 +1,18 @@
 <template>
   <div id="Chat">
     <div id="ChatBox">
-      <div id="chathead">Friends</div>
-      <div id="chatbody">
-        <div id="username">ROBBY</div>
+      <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
+      <div id="chatbody" v-if="chatshow">
+        <div id="username" v-on:click="msgshow = !msgshow">ROBBY</div>
       </div>
     </div>
-    <div id="MsgBox" style="right:300px">
-      <div id="msghead">ROBBY</div>
+    <div id="MsgBox" style="right:290px" v-if="msgshow">
+      <div id="msghead" v-on:click="msgshow = !msgshow">ROBBY</div>
       <div id="msgbody">
-        <textarea id="receives" rows="10" name="lol"/>
+        <textarea id="receives" rows="10"/>
       </div>
       <div id="msgfoot">
-        <textarea id="messagesent" v-model="messages" rows="4" placeholder="Enter the message" required></textarea>
+        <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message" required></textarea>
         <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
       </div>
     </div>
@@ -24,9 +24,10 @@ export default {
   name: 'Chatt',
   data () {
     return {
-      ws: new WebSocket('ws://localhost/server/chat'),
+      ws: new WebSocket('ws://localhost/server/chat' + '?username=' + 'ROBBY'),
       messages: '',
-      receives: ''
+      chatshow: false,
+      msgshow: false
     }
   },
   mounted () {
@@ -37,13 +38,14 @@ export default {
       this.ws.onopen = function (event) {
         console.log('connected')
         this.onmessage = function receivemessage (event) {
-          window.document.getElementById('receives').textContent = event.data
+          window.document.getElementById('receives').prepend(event.data + '\n')
         }
       }
     },
     SendMessage: function () {
       if (this.ws.readyState === WebSocket.OPEN) {
         this.ws.send(this.messages)
+        this.messages = ''
       }
     }
   }
@@ -51,6 +53,7 @@ export default {
 </script>
 <style>
 #ChatBox,#MsgBox{
+  cursor: pointer;
   background: white;
   width: 250px;
   position: fixed;
@@ -78,6 +81,11 @@ export default {
 }
 #msgbody{
   height:200px;
+}
+#msgclose{
+  float:right;
+  color:white;
+  padding: 3px;
 }
 #msgfoot{
   width:250px;

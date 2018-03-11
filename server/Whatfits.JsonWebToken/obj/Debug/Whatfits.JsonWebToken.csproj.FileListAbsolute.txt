@@ -1,6 +1,5 @@
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.pdb
-C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csprojResolveAssemblyReference.cache
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csproj.CoreCompileInputs.cache
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.pdb
@@ -14,18 +13,4 @@ C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Micro
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Newtonsoft.Json.xml
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csproj.CopyComplete
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.dll.config
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.dll
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.pdb
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Logging.dll
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Tokens.dll
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Newtonsoft.Json.dll
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Logging.xml
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Tokens.xml
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Newtonsoft.Json.xml
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csprojResolveAssemblyReference.cache
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csproj.CoreCompileInputs.cache
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.dll
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csprojResolveAssemblyReference.cache

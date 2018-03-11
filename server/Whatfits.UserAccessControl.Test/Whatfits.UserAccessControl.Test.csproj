@@ -64,12 +64,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Whatfits.UserAccessControl\Whatfits.UserAccessControl.csproj">
-      <Project>{26e2c11e-8df4-4367-9238-1bf7cb63cb0a}</Project>
-      <Name>Whatfits.UserAccessControl</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.8.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>

@@ -6,7 +6,7 @@ using System.Security.Claims;
 
 namespace Whatfits.UserAccessControl.Constants
 {
-    static public class ClaimConstants
+    public static class ClaimConstants
     {
 
         public static List<Claim> DEFAULT_CLAIMS = new List<Claim>()
