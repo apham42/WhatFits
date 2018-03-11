@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Security.Claims;
 using Whatfits.UserAccessControl.Constants;
-using System.Web.Http;
+using System.Net.Http;
 
 using Whatfits.UserAccessControl.Auth;
 using System.Text;
