@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
@@ -9,12 +10,12 @@ namespace server.Controllers
     public class ChatController : ApiController
     {
         [AcceptVerbs ("GET","POST")]
-        public HttpResponseMessage Connect()
+        public HttpResponseMessage Connect(string username)
         {
             if (!HttpContext.Current.IsWebSocketRequest)
                 return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
 
-            HttpContext.Current.AcceptWebSocketRequest(new ChatHandler());
+            HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username));
             return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
         }
         
@@ -23,8 +24,9 @@ namespace server.Controllers
             private static WebSocketCollection _chatUser = new WebSocketCollection();
             private string connectedUser;
 
-            public ChatHandler()
+            public ChatHandler(string username)
             {
+                connectedUser = username;
             }
 
             public override void OnOpen()
@@ -32,9 +34,9 @@ namespace server.Controllers
                 _chatUser.Add(this);
             }
 
-            public override void OnMessage(byte[] message)
+            public override void OnMessage(string message)
             {
-                _chatUser.Broadcast(": " + message);
+                _chatUser.Broadcast(connectedUser + " said: " + message);
             }
 
             public override void OnError()
