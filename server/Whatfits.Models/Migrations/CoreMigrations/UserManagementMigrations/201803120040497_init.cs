@@ -1,4 +1,4 @@
-namespace Whatfits.Models.Migrations.CoreMigrations.LoginMigrations
+namespace Whatfits.Models.Migrations.CoreMigrations.UserManagementMigrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -7,6 +7,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.LoginMigrations
     {
         public override void Up()
         {
+           
             
         }
         
