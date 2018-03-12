@@ -9,10 +9,6 @@ namespace Whatfits.Models.Models
 {
     public class Event
     {
-        public Event()
-        {
-
-        }
         // Primary Key
         public int EventID { get; set; }
         public string Location { get; set; }

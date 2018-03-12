@@ -30,11 +30,7 @@ C:\Users\rsanc\Documents\WhatFits\WhatFits\server\Whatfits.Models\obj\Debug\What
 C:\Users\rsanc\Documents\WhatFits\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.RegistrationMigration.addclaims.resources
 C:\Users\rsanc\Documents\WhatFits\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.RegistrationMigration.improvedClaims.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csprojResolveAssemblyReference.cache
-C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations.init.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csproj.GenerateResource.Cache
-C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.UserManagementMigrations.init.resources
-C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.UserAccessControlMigrations.init.resources
-C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.LoginMigrations.init.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.init.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.init.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.SearchMigrations.init.resources
@@ -42,4 +38,7 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfi
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.init.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations.init.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations.init.resources
-C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations.claimsfix.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations.init.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.UserManagementMigrations.init.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.UserAccessControlMigrations.init.resources
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.LoginMigrations.init.resources

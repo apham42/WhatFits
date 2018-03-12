@@ -12,93 +12,84 @@ using Whatfits.DataAccess.GatewayInterfaces;
 
 namespace Whatfits.Gateways.Gateways.CoreGateways
 {
-    public class RegistrationGateway //: IDataGateway<RegistrationDTO>
+    /// <summary>
+    /// This gateway provides methods to register a user.
+    /// </summary>
+    public class RegistrationGateway
     {
         private RegistrationContext db = new RegistrationContext();
 
         public void RegisterUser(RegistrationDTO obj)
         {
+            // Creating new User
             User user = new User
             {
                 FirstName = obj.FirstName,
                 LastName = obj.LastName,
-                //ID = obj.ID,
                 Email = obj.Email,
                 Gender = obj.Gender,
-                IsPartialRegistration = obj.IsPartial,
-                IsDisabled = obj.IsDisable
             };
-
-            Credential credential = new Credential {
+            // Createing new Credential
+            Credential credential = new Credential
+            {
                 UserName = obj.UserName,
                 Password = obj.Password,
-                UserID = obj.ID
+                IsFullyRegistered = obj.IsFullyRegistered,
+                Status = obj.Status
             };
-
-            Location location = new Location {
+            // Creating new Salt
+            Salt salt = new Salt
+            {
+                SaltValue = obj.Salt
+            };
+            // Save these tables since they are 1 to 1
+            // So they'll have the same UserID
+            db.Users.Add(user);
+            db.Credentials.Add(credential);
+            db.Salts.Add(salt);
+            Save();
+            // Find new User's ID
+            var newUser = db.Credentials.Find(obj.UserName);
+            // Creating location for User
+            Location location = new Location
+            {
                 Address = obj.Address,
                 City = obj.City,
                 State = obj.State,
                 Zipcode = obj.Zipcode,
-                UserID = obj.ID
+                UserID = newUser.UserID
             };
-
-            PersonalKey personalkey = new PersonalKey
-            {
-                Salt = obj.Salt,
-                UserID = obj.ID
-            };
-
-            db.Users.Add(user);
-            var id = db.Users.Find();
-            // Find UserID to relate to user class
-            // implementing userClaims
-            List<int> claims = obj.ClaimID;
-            for (int i = 0; i < claims.Count; i++)
-            {
-                UserClaims temp = new UserClaims
-                {
-                    UserID = user.ID,
-                    ClaimID = claims[i]
-                };
-                db.UserClaims.Add(temp);
-            }
-            db.Credentials.Add(credential);
+            // Saving Data for new user
             db.Locations.Add(location);
-            db.PersonalKeys.Add(personalkey);
             Save();
+            // Add UserClaims
+            for (int i = 0; i < obj.ClaimIDs.Count; i++)
+            {
+                UserClaims temp = new UserClaims { ClaimID = obj.ClaimIDs[i] };
+                db.UserClaims.Add(temp);
+                Save();
+            }
+            // Add Security QandAs
+            for (int i = 0; i < obj.QuestionIDs.Count; i++)
+            {
+                SecurityQandA temp = new SecurityQandA { UserID = newUser.UserID, SecurityQuestionID = obj.QuestionIDs[i], Answer = obj.Answers[i] };
+                db.SecurityQandA.Add(temp);
+                Save();
+            }
         }
-
-        public string FindUserNameByID(int id)
+        public Boolean DoesUserNameExists(RegistrationDTO obj)
         {
-            var result = db.Credentials.Find(id);
-            return result.UserName;
-            /*
-             * Reminder: Compare with the new query
-            string UserName = (from x in db.Credentials
-                               where x.UserID == id
-                               select x.UserName).FirstOrDefault();
-            return UserName;
-            */
-        }
-
-        public int FindIDByUserName(string userName)
-        {
-            var userID = db.Credentials.Find(userName);
-            return userID.UserID;
-        }
-
-        public Boolean DoesUserNameExist(string userName)
-        {
-            var foundUserName = db.Credentials.Find(userName);
-            if (userName == foundUserName.UserName)
-                return true;
-            else
+            // Searches through system for username
+            var founduser = db.Credentials.Find(obj.UserName);
+            // Makes comparison if it found the username
+            if (founduser.UserName == "Null")
                 return false;
+            else
+                return true;
         }
-
-        public void Save()
+        private void Save()
         {
+            // Saves any changes to the database
             db.SaveChanges();
         }
     }

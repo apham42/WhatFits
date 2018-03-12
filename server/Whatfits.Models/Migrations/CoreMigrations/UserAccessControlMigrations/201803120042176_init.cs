@@ -1,4 +1,4 @@
-namespace Whatfits.Models.Migrations.CoreMigrations.UserManagementMigrations
+namespace Whatfits.Models.Migrations.CoreMigrations.UserAccessControlMigrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -12,7 +12,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.UserManagementMigrations
         
         public override void Down()
         {
-
+           
         }
     }
 }
