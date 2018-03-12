@@ -17,6 +17,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
 
         protected override void Seed(Whatfits.Models.Context.Core.RegistrationContext context)
         {
+<<<<<<< Updated upstream
             var users = new List<User>
             {
                 new User{ FirstName = "Luke",  LastName = "Atmey", Email = "asdf@gmail.com", Gender = "Male"},
@@ -126,6 +127,59 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
             };
             answers.ForEach(a => context.SecurityQandA.AddOrUpdate(a));
             context.SaveChanges();
+=======
+            context.Users.AddOrUpdate(x => x.ID,
+                new User()
+                {
+                    ID = 0001,
+                    FirstName = "Luke",
+                    Email = "asdf@gmail.com",
+                    LastName = "Atmey",
+                    Gender = "Male",
+                    IsDisabled = false,
+                    IsPartialRegistration = false
+                },
+                new User()
+                {
+                    ID = 0002,
+                    FirstName = "April",
+                    LastName = "May",
+                    Email = "asdf@gmail.com",
+                    Gender = "Female",
+                    IsDisabled = false,
+                    IsPartialRegistration = false
+                },
+                new User()
+                {
+                    ID = 0003,
+                    FirstName = "Rock",
+                    LastName = "Strong",
+                    Email = "asdf@live.com",
+                    Gender = "Male",
+                    IsDisabled = false,
+                    IsPartialRegistration = false
+                },
+                new User()
+                {
+                    ID = 0004,
+                    FirstName = "Red",
+                    LastName = "Blue",
+                    Email = "asdf@yahoo.com",
+                    Gender = "Male",
+                    IsDisabled = false,
+                    IsPartialRegistration = false
+                },
+                new User()
+                {
+                    ID = 0005,
+                    FirstName = "Cody",
+                    LastName = "Hackins",
+                    Email = "zzz@channel.com",
+                    Gender = "Male",
+                    IsDisabled = false,
+                    IsPartialRegistration = false
+                });
+>>>>>>> Stashed changes
         }
     }
 }

@@ -16,6 +16,6 @@ namespace Whatfits.Models.Context.Content
         }
         public DbSet<User> User { get; set; }
         public DbSet<Credential> Credentials { get; set; }
-        public DbSet<Review> Review { get; set; }
+        public DbSet<Review> Reviews { get; set; }
     }
 }

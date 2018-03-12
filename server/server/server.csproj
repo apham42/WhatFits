@@ -44,6 +44,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -90,7 +93,11 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+<<<<<<< Updated upstream
     <Compile Include="Controllers\UACTESTController.cs" />
+=======
+    <Compile Include="Controllers\ReviewController.cs" />
+>>>>>>> Stashed changes
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -110,6 +117,7 @@
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< Updated upstream
     <ProjectReference Include="..\Whatfits.JsonWebToken\Whatfits.JsonWebToken.csproj">
       <Project>{c0325899-07d9-47f8-b890-561a78a1e8d0}</Project>
       <Name>Whatfits.JsonWebToken</Name>
@@ -117,6 +125,15 @@
     <ProjectReference Include="..\Whatfits.UserAccessControl\Whatfits.UserAccessControl.csproj">
       <Project>{0ce3e9e9-95e4-449e-abdb-7ab4f8d72243}</Project>
       <Name>Whatfits.UserAccessControl</Name>
+=======
+    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.DataAccess.csproj">
+      <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
+      <Name>Whatfits.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">
+      <Project>{7ccda19c-9b92-4029-a6ca-529599acdeb4}</Project>
+      <Name>Whatfits.Models</Name>
+>>>>>>> Stashed changes
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
