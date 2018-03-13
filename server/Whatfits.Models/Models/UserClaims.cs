@@ -13,10 +13,6 @@ namespace Whatfits.Models.Models
     /// </summary>
     public class UserClaims
     {
-        // Primary Key for UserClaims
-        //  [Key]
-        // public int UserClaimsID { get; set; }
-
         // Foreign Key to Claims Model
         [Key, Column(Order = 0)]
         public int ClaimID { get; set; }
