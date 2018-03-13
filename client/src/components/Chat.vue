@@ -3,11 +3,11 @@
     <div id="ChatBox">
       <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
       <div id="chatbody" v-if="chatshow">
-        <div id="username" v-on:click="msgshow = !msgshow">{{onlineUsers}}</div>
+        <div id="username" v-on:click="msgshow = !msgshow"><li v-for="value in users" :key="value">{{value}}</li></div>
       </div>
     </div>
     <div id="MsgBox" style="right:290px" v-if="msgshow">
-      <div id="msghead" v-on:click="msgshow = !msgshow">{{onlineUsers}}</div>
+      <div id="msghead" v-on:click="msgshow = !msgshow">{{users}}</div>
       <div id="msgbody">
         <textarea id="receives" rows="10"/>
       </div>
@@ -27,14 +27,22 @@ export default {
       ws: '',
       messages: '',
       chatshow: false,
-      onlineUsers: '',
+      onlineUsers: [],
       msgshow: false
     }
   },
   mounted () {
-    this.onlineUsers = prompt('Enter the name to connect chat: ')
+    // this.onlineUsers.push(prompt('Enter the name to connect chat: '))
+    var user = prompt('Enter your name')
+    localStorage.setItem('users', user)
+    this.onlineUsers.push(localStorage.getItem('users'))
     this.ws = new WebSocket('ws://localhost/server/chat' + '?username=' + this.onlineUsers)
     this.Connection()
+  },
+  computed: {
+    users () {
+      return this.$store.getters.users
+    }
   },
   methods: {
     Connection: function () {
