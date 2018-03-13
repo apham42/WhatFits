@@ -94,9 +94,11 @@
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\UACTESTController.cs" />
     <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
+    <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredResponseDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
   </ItemGroup>
@@ -111,7 +113,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Whatfits.JsonWebToken\Whatfits.JsonWebToken.csproj">

@@ -7,7 +7,7 @@ namespace server.Data_Transfer_Objects.AccountDTO_s
 {
     public class UserCredentialDTO
     {
-        public string username { get; }
+        public string userName { get; }
         public string password { get; }
         public string userType { get; }
     }

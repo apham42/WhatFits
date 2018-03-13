@@ -12,47 +12,77 @@ namespace server.Services
     {
         private string user = "Abram";
 
-        public bool RegisterCredentials(UserCredentialDTO creds)
+        public UserCredResponseDTO RegisterCredentials(UserCredentialDTO creds)
         {
-            ValidateCredentials(creds);
+            UserCredResponseDTO response = ValidateCredentials(creds);
+            return response;
+        }
+
+        public UserCredResponseDTO ValidateCredentials (UserCredentialDTO creds)
+        {
+            UserCredResponseDTO response = new UserCredResponseDTO();
+            if (!ValidateUserName(creds.userName, response))
+            {
+                return response;
+            }
+            ValidatePassword(creds.password, response);
+
+            return response;
+        }
+
+        public bool ValidateUserName(string userName, UserCredResponseDTO response)
+        {
+            if (!ValidateCharacters(userName))
+            {
+                response.message = AccountConstants.USERNAME_INVALID_CHARACTERS_ERROR;
+                response.status = false;
+                return false;
+            }
+
+            // Checks username if its unique using gateway
+            response.message = AccountConstants.USERNAME_VALID;
+            response.status = true;
             return true;
         }
 
-        public bool ValidateCredentials (UserCredentialDTO creds)
+        //public bool ValidateUserNameCharacters( string userName)
+
+        public bool ValidatePassword(string password, UserCredResponseDTO response)
         {
+            if (password.Length < 8)
+            {
+                response.message = AccountConstants.PASSWORD_SHORT_ERROR;
+                response.status = false;
+                return false;
+            }
+
+            if (password.Length > 64)
+            {
+                response.message = AccountConstants.PASSWORD_LONG_ERROR;
+                response.status = false;
+                return false;
+            }
+
+            if (!ValidateCharacters(password))
+            {
+                response.message = AccountConstants.PASSWORD_INVALID_CHARACTERS_ERROR;
+                response.status = false;
+                return false;
+            }
+
+            response.message = AccountConstants.USER_AND_PASSWORD_VALID;
+            response.status = true;
             return true;
-        }
-
-        public bool ValidateUserName(string userName)
-        {
-            bool isUserValid = false;
-
-            if (!userName.Equals(user) && ValidateCharacters(userName))
-            {
-                isUserValid = true;
-            }
-            return isUserValid;
-        }
-
-        public bool ValidatePassword(string password)
-        {
-            bool isPassValid = false;
-            if (password.Length >= 8 && password.Length <= 64 && ValidateCharacters(password))
-            {
-                isPassValid = true;
-            }
-            return isPassValid;
         }
 
         public bool ValidateCharacters(string credential)
         {
-            bool isCredentialValid = false;
             var rgxCheck = new Regex(AccountConstants.CREDCHARACTERS);
             if (rgxCheck.IsMatch(credential))
             {
-                isCredentialValid = true;
+                return true;
             }
-            return isCredentialValid;
+            return false;
         }
 
         
