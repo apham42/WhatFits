@@ -12,106 +12,97 @@ using Whatfits.DataAccess.GatewayInterfaces;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
-    public class UserManagementGateway : IDataGateway<UserManagementDTO>
+    public class UserManagementGateway 
     {
         private UserManagementContext db = new UserManagementContext();
-
-        public void Create(UserManagementDTO obj)
+        public void CreateUser(UserManagementDTO obj)
         {
+            // Creating new User
             User user = new User
             {
-                FirstName = obj.GetFirstName(),
-                LastName = obj.GetLastName(),
-                ID = obj.GetID(),
-                Email = obj.GetEmail(),
-                Gender = obj.GetGender(),
-                IsPartialRegistration = obj.GetPartialRegistration(),
-                IsDisabled = obj.GetIsDisabled()
+                FirstName = obj.FirstName,
+                LastName = obj.LastName,
+                Email = obj.Email,
+                Gender = obj.Gender,
             };
+            // Createing new Credential
             Credential credential = new Credential
             {
-                UserName = obj.GetUserName(),
-                Password = obj.GetPassword(),
-                UserID = obj.GetID()
+                UserName = obj.UserName,
+                Password = obj.Password,
+                IsFullyRegistered = obj.IsFullyRegistered,
+                Status = obj.Status
             };
-            PersonalKey personalkey = new PersonalKey
+            // Creating new Salt
+            Salt salt = new Salt
             {
-                Salt = obj.GetSalt(),
-                UserID = obj.GetID()
+                SaltValue = obj.Salt
             };
-            /*
-            Claim newClaim = new Claim
-            {
-                UserID = obj.GetID(),
-                ClaimsType = obj.GetClaimType(),
-                ClaimsValue = obj.GetClaimValue()
-            };
-            */
+            // Save these tables since they are 1 to 1
+            // So they'll have the same UserID
             db.Users.Add(user);
-            // Note: Replace With UserClaims
-            //db.Claims.Add(newClaim);
             db.Credentials.Add(credential);
-            db.PersonalKeys.Add(personalkey);
+            db.Salts.Add(salt);
             Save();
-        }
-
-        public void Delete(int id)
-        {
-            User usr = new User() { ID = id };
-            db.Users.Attach(usr);
-            db.Users.Remove(usr);
+            // Find new User's ID
+            var newUser = db.Credentials.Find(obj.UserName);
+            // Creating location for User
+            Location location = new Location
+            {
+                Address = obj.Address,
+                City = obj.City,
+                State = obj.State,
+                Zipcode = obj.Zipcode,
+                UserID = newUser.UserID
+            };
+            // Saving Data for new user
+            db.Locations.Add(location);
             Save();
+            // Add UserClaims
+            for (int i = 0; i < obj.ClaimIDs.Count; i++)
+            {
+                UserClaims temp = new UserClaims { ClaimID = obj.ClaimIDs[i] };
+                db.UserClaims.Add(temp);
+                Save();
+            }
+            // Add Security QandAs
+            for (int i = 0; i < obj.QuestionIDs.Count; i++)
+            {
+                SecurityQandA temp = new SecurityQandA { UserID = newUser.UserID, SecurityQuestionID = obj.QuestionIDs[i], Answer = obj.Answers[i] };
+                db.SecurityQandA.Add(temp);
+                Save();
+            }
         }
-
-        public void Disable(int? id)
+        public void EditUser(UserManagementDTO obj)
         {
-            throw new NotImplementedException();
+            // TODO: Need to do this but I need to understand 
+            // what is being edited. Just UserName and Password?
         }
-
-        public void DisableUser(int? id)
+        public void DisableUser(UserManagementDTO obj)
         {
-            // Need to Implement
+            var foundUser = db.Credentials.Find(obj.UserName);
+            if (foundUser != null)
+            {
+                foundUser.Status = true;
+                Save();
+            }
         }
-
-        public void EnableUser(int? id)
+        public void EnableUser(UserManagementDTO obj)
         {
-            // Need to Implement
+            var foundUser = db.Credentials.Find(obj.UserName);
+            if (foundUser != null)
+            {
+                foundUser.Status = false;
+                Save();
+            }
         }
-
-        public string FindByID(int? id)
+        public void DeleteUser(UserManagementDTO obj)
         {
-            string UserName = (from x in db.Credentials
-                               where x.UserID == id
-                               select x.UserName).FirstOrDefault();
-            return UserName;
+            // Not Implementing
         }
-
-        public string FindByID(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int FindByUserName(string userName)
-        {
-            int userID = (from u in db.Credentials
-                          where u.UserName == userName
-                          select u.UserID).FirstOrDefault();
-            return userID;
-        }
-
-        public void Save()
+        private void Save()
         {
             db.SaveChanges();
-        }
-
-        public void Update(UserManagementDTO obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void UpdatePassword(int id, string password)
-        {
-            // update Password in exists
         }
     }
 }

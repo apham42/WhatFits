@@ -64,16 +64,16 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Whatfits.UserAccessControl\Whatfits.UserAccessControl.csproj">
-      <Project>{26e2c11e-8df4-4367-9238-1bf7cb63cb0a}</Project>
-      <Name>Whatfits.UserAccessControl</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.8.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Whatfits.UserAccessControl\Whatfits.UserAccessControl.csproj">
+      <Project>{0ce3e9e9-95e4-449e-abdb-7ab4f8d72243}</Project>
+      <Name>Whatfits.UserAccessControl</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
