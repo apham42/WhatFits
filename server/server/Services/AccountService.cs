@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Text.RegularExpressions;
 using server.Constants;
+using server.Data_Transfer_Objects.AccountDTO_s;
 
 namespace server.Services
 {
@@ -11,7 +12,13 @@ namespace server.Services
     {
         private string user = "Abram";
 
-        public bool RegisterCredentials()
+        public bool RegisterCredentials(UserCredentialDTO creds)
+        {
+            ValidateCredentials(creds);
+            return true;
+        }
+
+        public bool ValidateCredentials (UserCredentialDTO creds)
         {
             return true;
         }
@@ -47,5 +54,7 @@ namespace server.Services
             }
             return isCredentialValid;
         }
+
+        
     }
 }

@@ -93,6 +93,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\UACTESTController.cs" />
+    <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -110,7 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Data Transfer Objects\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Whatfits.JsonWebToken\Whatfits.JsonWebToken.csproj">
