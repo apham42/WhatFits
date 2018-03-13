@@ -223,3 +223,16 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.UserAccessCo
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\roslyn\System.IO.Pipes.AccessControl.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.JsonWebToken.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.UserAccessControl.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.IdentityModel.Logging.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.JsonWebToken.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.JsonWebToken.dll.config
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.UserAccessControl.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.UserAccessControl.dll.config
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.IdentityModel.Tokens.Jwt.xml
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.xml
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.IdentityModel.Logging.xml
