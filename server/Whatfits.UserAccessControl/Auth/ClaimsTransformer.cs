@@ -11,7 +11,7 @@ namespace Whatfits.UserAccessControl.Auth
         public ClaimsPrincipal Authenticate(string incommingToken)
         {
             // check if token exist
-            if(string.IsNullOrEmpty(incommingToken))
+            if (string.IsNullOrEmpty(incommingToken))
             {
                 throw new SecurityException("No Token");
             }
@@ -24,11 +24,20 @@ namespace Whatfits.UserAccessControl.Auth
         {
             // create jwt
             var tokenhandler = new JwtSecurityTokenHandler();
-            // create token from incomming token string
-            var token = tokenhandler.ReadJwtToken(incommingToken);
+            var token = new JwtSecurityToken();
+            ClaimsPrincipal cp = new ClaimsPrincipal();
+            
+            // check if valid token
+            if (tokenhandler.CanReadToken(incommingToken)) {
+                // create token from incomming token string
+                token = tokenhandler.ReadJwtToken(incommingToken); 
 
-            // return users principal
-            return new ClaimsPrincipal(new ClaimsIdentity(token.Claims));
+                // return users principal
+                cp = new ClaimsPrincipal(new ClaimsIdentity(token.Claims));
+                return cp;
+            }
+
+            return cp;
         }
     }
 }
