@@ -22,7 +22,7 @@ namespace Whatfits.Models.Models
         public int UserID { get; set; }
 
         // Navigation Property to User Model
-        public virtual User User { get; set; }
+        public virtual Credential Credential { get; set; }
 
         // Navigation Property to Claims Model
         public virtual Claim Claims { get; set; }
