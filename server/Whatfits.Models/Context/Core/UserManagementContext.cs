@@ -16,11 +16,11 @@ namespace Whatfits.Models.Context.Core
         }
         public DbSet<User> Users { get; set; }
         public DbSet<Credential> Credentials { get; set; }
-        public DbSet<Location> Locations { get; set; }
-        public DbSet<PersonalKey> PersonalKeys { get; set; }
-        public DbSet<SecurityAnswer> SecurityAnswers { get; set; }
-        public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
+        public DbSet<Salt> Salts { get; set; }
         public DbSet<Claim> Claims { get; set; }
         public DbSet<UserClaims> UserClaims { get; set; }
+        public DbSet<SecurityQandA> SecurityQandA { get; set; }
+        public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
+        public DbSet<Location> Locations { get; set; }
     }
 }
