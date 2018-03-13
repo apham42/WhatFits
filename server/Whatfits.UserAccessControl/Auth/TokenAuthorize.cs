@@ -31,22 +31,32 @@ namespace Whatfits.UserAccessControl.Auth
             // get header from request
             var header = request.Headers;
             // get string token
-            string tokenstr = header.GetValues("Token").First();
 
-            // create principal of user from jwt
-            ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
-            
-            // creat authorization context to check if user has claims
-            AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
-
-            // check if user has claims
-            if (new AuthorizationManager().CheckAccess(authcontext))
+            if (header.Contains("Token"))
             {
-                // if user does have those specififed claims
-                base.IsAuthorized(actionContext);
+                string tokenstr = header.GetValues("Token").First();
+
+
+                // create principal of user from jwt
+                ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
+
+                // creat authorization context to check if user has claims
+                AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
+
+
+                // check if user has claims
+                if (new AuthorizationManager().CheckAccess(authcontext))
+                {
+                    // if user does have those specififed claims
+                    base.IsAuthorized(actionContext);
+                }
+                else
+                {
+                    // if user does NOT have those specified claims
+                    base.HandleUnauthorizedRequest(actionContext);
+                }
             } else
             {
-                // if user does NOT have those specified claims
                 base.HandleUnauthorizedRequest(actionContext);
             }
         }
