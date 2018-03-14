@@ -12,8 +12,8 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ChatMigrations
                 c => new
                     {
                         ChatroomID = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        CreatedAt = c.String(),
+                        Name = c.String(nullable: false),
+                        CreatedAt = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.ChatroomID);
             
@@ -21,18 +21,17 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ChatMigrations
                 "dbo.Messages",
                 c => new
                     {
-                        MessageID = c.Int(nullable: false, identity: true),
+                        MessageID = c.Int(nullable: false),
                         UserID = c.Int(nullable: false),
                         ChatroomID = c.Int(nullable: false),
                         MessageContent = c.String(),
                         CreatedAt = c.String(),
                     })
-                .PrimaryKey(t => t.MessageID)
+                .PrimaryKey(t => new { t.MessageID, t.UserID, t.ChatroomID })
                 .ForeignKey("dbo.Chatrooms", t => t.ChatroomID, cascadeDelete: true)
                 .ForeignKey("dbo.Users", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID)
                 .Index(t => t.ChatroomID);
-
         }
         
         public override void Down()
