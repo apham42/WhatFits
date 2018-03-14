@@ -28,6 +28,6 @@ namespace Whatfits.Models.Models
         // Navigation Property for Security Question
         public virtual SecurityQuestion SecurityQuestion { get; set; }
         // Navigation Property for User
-        public virtual User Users { get; set; }
+        public virtual Credential Credential { get; set; }
     }
 }
