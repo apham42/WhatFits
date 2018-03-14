@@ -7,6 +7,10 @@ using System.Web.Http.Controllers;
 
 namespace Whatfits.UserAccessControl.Auth
 {
+    /// <summary>
+    /// Allows users to pass in a token in the http request.
+    /// Get the token and sends to the claimstransformer
+    /// </summary>
     public class TokenAuthorize : AuthorizeAttribute
     {
         // claim type
@@ -32,6 +36,7 @@ namespace Whatfits.UserAccessControl.Auth
             var header = request.Headers;
             // get string token
 
+            // check if token exists
             if (header.Contains("Token"))
             {
                 string tokenstr = header.GetValues("Token").First();
@@ -57,6 +62,7 @@ namespace Whatfits.UserAccessControl.Auth
                 }
             } else
             {
+                // if the header does not contain a Token
                 base.HandleUnauthorizedRequest(actionContext);
             }
         }
