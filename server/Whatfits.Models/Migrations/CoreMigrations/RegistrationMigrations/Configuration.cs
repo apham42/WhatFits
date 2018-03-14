@@ -132,7 +132,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
             };
             answers.ForEach(a => context.SecurityQandA.Add(a));
             context.SaveChanges();
-            */
+            //*/
         }
     }
 }

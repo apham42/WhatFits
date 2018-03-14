@@ -7,9 +7,9 @@ using Xunit;
 namespace Gateway.Tester
 {
     /// <summary>
-    /// FILENAME: RegistrationTests
-    /// DESCRIPTION: This is a test of the Registration Gateway.
-    /// PURPOSE: Tests RegisterUser and DoesUserNameExists.
+    /// FileName: RegistrationTests
+    /// Description: This is a test of the Registration Gateway.
+    /// Purpose: Tests RegisterUser and DoesUserNameExists.
     /// </summary>
     public class RegistrationTests
     {
