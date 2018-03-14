@@ -13,7 +13,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201803141751597_init"; }
+            get { return "201803141826112_init"; }
         }
         
         string IMigrationMetadata.Source
