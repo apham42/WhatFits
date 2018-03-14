@@ -15,7 +15,7 @@ namespace Whatfits.Models.Models
     public class Credential
     {
         // Primary and Foreign Key, maps to the User Class in a 1 to 1 relationship
-        [Key, ForeignKey("User")]
+        [Key]
         public int UserID { get; set; }
 
         // Stores the Username of the User
@@ -28,7 +28,7 @@ namespace Whatfits.Models.Models
 
         // Tracks the status of the account such as Disabled or Enabled.
         [Required]
-        public Boolean Status { get; set; }
+        public Boolean IsBanned { get; set; }
 
         // Tracks if the user is fully registered or not
         [Required]
@@ -36,5 +36,7 @@ namespace Whatfits.Models.Models
 
         // Navigation Property to the User Class
         public virtual User User { get; set; }
+        public ICollection<UserClaims> UserClaims { get; set; }
+        public ICollection<SecurityQandA> SecurityQandAs { get; set; }
     }
 }

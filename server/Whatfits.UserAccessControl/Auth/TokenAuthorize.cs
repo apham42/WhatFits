@@ -7,6 +7,10 @@ using System.Web.Http.Controllers;
 
 namespace Whatfits.UserAccessControl.Auth
 {
+    /// <summary>
+    /// Allows users to pass in a token in the http request.
+    /// Get the token and sends to the claimstransformer
+    /// </summary>
     public class TokenAuthorize : AuthorizeAttribute
     {
         // claim type
@@ -31,22 +35,34 @@ namespace Whatfits.UserAccessControl.Auth
             // get header from request
             var header = request.Headers;
             // get string token
-            string tokenstr = header.GetValues("Token").First();
 
-            // create principal of user from jwt
-            ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
-            
-            // creat authorization context to check if user has claims
-            AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
-
-            // check if user has claims
-            if (new AuthorizationManager().CheckAccess(authcontext))
+            // check if token exists
+            if (header.Contains("Token"))
             {
-                // if user does have those specififed claims
-                base.IsAuthorized(actionContext);
+                string tokenstr = header.GetValues("Token").First();
+
+
+                // create principal of user from jwt
+                ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
+
+                // creat authorization context to check if user has claims
+                AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
+
+
+                // check if user has claims
+                if (new AuthorizationManager().CheckAccess(authcontext))
+                {
+                    // if user does have those specififed claims
+                    base.IsAuthorized(actionContext);
+                }
+                else
+                {
+                    // if user does NOT have those specified claims
+                    base.HandleUnauthorizedRequest(actionContext);
+                }
             } else
             {
-                // if user does NOT have those specified claims
+                // if the header does not contain a Token
                 base.HandleUnauthorizedRequest(actionContext);
             }
         }
