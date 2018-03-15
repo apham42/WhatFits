@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    interface IResponseDTO
+    interface IRevision
     {
-        string Message { get; set; }
-        bool Status { get; set; }
+        IResponseDTO Update<T>(T obj);
     }
 }

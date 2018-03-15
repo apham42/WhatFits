@@ -4,10 +4,11 @@ using System.Linq;
 using System.Web;
 using server.Interfaces;
 
-namespace server.Model.Data_Transfer_Objects.AccountDTO_s
+namespace server.Model.Data_Transfer_Objects.SecurityDTO_s
 {
-    public class UserCredResponseDTO: IResponseDTO
+    public class HashResponseDTO : IResponseDTO
     {
+        public string Hash { get; set; }
         public string Message { get; set; }
         public bool Status { get; set; }
     }

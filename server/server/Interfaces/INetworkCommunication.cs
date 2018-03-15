@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    interface IResponseDTO
+    interface INetworkCommunication: IRequest
     {
-        string Message { get; set; }
-        bool Status { get; set; }
+        
     }
 }

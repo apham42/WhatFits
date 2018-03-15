@@ -14,10 +14,10 @@ namespace server.Controllers
     public class SignUpController : ApiController
     {
         [HttpPost]
-        public IHttpActionResult Register([FromBody] string username, [FromBody] string password)
+        public IHttpActionResult Register(UserCredentials userCred)
         {
             AccountService service = new AccountService();
-            UserCredentials userCred = new UserCredentials(username, password);
+            //UserCredentials userCred = new UserCredentials(username, password);
             UserCredentialValidator validator = new UserCredentialValidator();
             ValidationResult results = validator.Validate(userCred);
             IList<ValidationFailure> failures = results.Errors;
