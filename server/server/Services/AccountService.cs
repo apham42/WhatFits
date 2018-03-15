@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Text.RegularExpressions;
 using server.Constants;
-using server.Data_Transfer_Objects.AccountDTO_s;
+using server.Model.Data_Transfer_Objects.AccountDTO_s;
 
 namespace server.Services
 {
@@ -21,11 +21,11 @@ namespace server.Services
         public UserCredResponseDTO ValidateCredentials (UserCredentialDTO creds)
         {
             UserCredResponseDTO response = new UserCredResponseDTO();
-            if (!ValidateUserName(creds.userName, response))
+            if (!ValidateUserName(creds.UserName, response))
             {
                 return response;
             }
-            ValidatePassword(creds.password, response);
+            ValidatePassword(creds.Password, response);
 
             return response;
         }
