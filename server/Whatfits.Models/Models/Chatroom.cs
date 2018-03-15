@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Whatfits.Models.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Chatroom
     {
-        public Chatroom()
-        {
-
-        }
         // Primary Key
+        [Key]
         public int ChatroomID { get; set; }
+        // Name of the chatroom
+        [Required]
         public string Name { get; set; }
+        // Records the time Chatroom was created
+        [Required]
         public string CreatedAt { get; set; }
-        // A chat can have multiple Messages
-        ICollection<Message> Messages { get; set; }
+        // Navigation Property to Message
+        ICollection<Message> Message { get; set; }
     }
 }

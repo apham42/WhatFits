@@ -11,22 +11,22 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
                 "dbo.Reviews",
                 c => new
                     {
-                        ReviewID = c.Int(nullable: false, identity: true),
-                        ReviewerID = c.Int(nullable: false),
+                        UserID = c.Int(nullable: false),
+                        ReviewID = c.Int(nullable: false),
                         RevieweeID = c.Int(nullable: false),
                         Rating = c.Int(nullable: false),
-                        ReviewMessage = c.String(),
-                        DateTime = c.String(),
+                        ReviewMessage = c.String(nullable: false),
+                        DateTime = c.String(nullable: false),
                     })
-                .PrimaryKey(t => t.ReviewID)
-                .ForeignKey("dbo.Users", t => t.ReviewerID, cascadeDelete: true)
-                .Index(t => t.ReviewerID); 
+                .PrimaryKey(t => new { t.UserID, t.ReviewID })
+                .ForeignKey("dbo.Users", t => t.UserID, cascadeDelete: true)
+                .Index(t => t.UserID);   
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Reviews", "ReviewerID", "dbo.Users");
-            DropIndex("dbo.Reviews", new[] { "ReviewerID" });
+            DropForeignKey("dbo.Reviews", "UserID", "dbo.Users");
+            DropIndex("dbo.Reviews", new[] { "UserID" });
             DropTable("dbo.Reviews");
         }
     }

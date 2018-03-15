@@ -47,13 +47,15 @@ namespace Whatfits.Models.Models
 
         // Users can have many:
         public ICollection<Event> Events { get; set; }
-        /*
+        public ICollection<Review> Review { get; set; }
         public ICollection<Message> Messages { get; set; }
+        
+        /*
         public ICollection<Event> Event { get; set; }
         public ICollection<WorkoutLog> WorkoutLogs { get; set; }
         public ICollection<Following> Following { get; set; }
         public ICollection<Follower> Followers { get; set; }
-        public ICollection<Review> Review { get; set; }
+        
         */
     }
 }
