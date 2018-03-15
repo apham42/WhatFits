@@ -94,25 +94,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\AccountConstants.cs" />
     <Compile Include="Controllers\ChatController.cs" />
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-=======
-=======
-    <Compile Include="Controllers\ReviewController.cs" />
->>>>>>> master
     <Compile Include="Controllers\SignUpController.cs" />
->>>>>>> master
     <Compile Include="Controllers\UACTESTController.cs" />
-<<<<<<< HEAD
-=======
     <Compile Include="Controllers\ReviewController.cs" />
->>>>>>> Stashed changes
-=======
     <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
     <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredResponseDTO.cs" />
     <Compile Include="Data Transfer Objects\ReviewDTO%27s\ReviewDTO.cs" />
->>>>>>> master
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -134,7 +121,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< Updated upstream
     <ProjectReference Include="..\Whatfits.JsonWebToken\Whatfits.JsonWebToken.csproj">
       <Project>{c0325899-07d9-47f8-b890-561a78a1e8d0}</Project>
       <Name>Whatfits.JsonWebToken</Name>
@@ -142,7 +128,7 @@
     <ProjectReference Include="..\Whatfits.UserAccessControl\Whatfits.UserAccessControl.csproj">
       <Project>{0ce3e9e9-95e4-449e-abdb-7ab4f8d72243}</Project>
       <Name>Whatfits.UserAccessControl</Name>
-=======
+    </ProjectReference>
     <ProjectReference Include="..\Whatfits.Gateways\Whatfits.DataAccess.csproj">
       <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
       <Name>Whatfits.DataAccess</Name>
@@ -150,7 +136,6 @@
     <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">
       <Project>{7ccda19c-9b92-4029-a6ca-529599acdeb4}</Project>
       <Name>Whatfits.Models</Name>
->>>>>>> Stashed changes
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

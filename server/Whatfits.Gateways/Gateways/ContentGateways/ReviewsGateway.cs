@@ -32,7 +32,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                         DateTime = b.DateTime
                     };
                     //add into database t he new instance and saves
-                    db.Review.Add(r);
+                    db.Reviews.Add(r);
                     Save();
                 } catch(Exception)
                 {
@@ -44,8 +44,8 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         //Get:api/Reviews/[userID]
         public List<Review> GetReviews(ReviewsDTO obj)
         {
-            var target = db.Review.Find(obj.UserID);
-            return  (from b in db.Review
+            var target = db.Reviews.Find(obj.UserID);
+            return  (from b in db.Reviews
                      where b.UserID == target.UserID
                      select new Review()
                      {
