@@ -34,9 +34,9 @@ export default {
   mounted () {
     // this.onlineUsers.push(prompt('Enter the name to connect chat: '))
     var user = prompt('Enter your name')
-    localStorage.setItem('users', user)
-    this.onlineUsers.push(localStorage.getItem('users'))
-    this.ws = new WebSocket('ws://localhost/server/chat' + '?username=' + this.onlineUsers)
+    // localStorage.setItem('users', user)
+    // this.onlineUsers.push(localStorage.getItem('users'))
+    this.ws = new WebSocket('ws://localhost/server/chat' + '?username=' + user)
     this.Connection()
   },
   computed: {
