@@ -8,5 +8,9 @@ namespace Whatfits.JsonWebToken.Controller
 {
     class VerifyJWT
     {
+        public static bool Verify(string jwt)
+        {
+            return true;
+        }
     }
 }

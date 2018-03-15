@@ -5,6 +5,9 @@ using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
+using Whatfits.UserAccessControl.Service;
+using System;
+
 namespace Whatfits.UserAccessControl.Auth
 {
     /// <summary>
@@ -30,41 +33,46 @@ namespace Whatfits.UserAccessControl.Auth
         //     The context parameter is null.
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            // get http request
-            var request = actionContext.Request;
-            // get header from request
-            var header = request.Headers;
-            // get string token
-
-            // check if token exists
-            if (header.Contains("Token"))
+            try
             {
-                string tokenstr = header.GetValues("Token").First();
-
+                string tokenstr = RequestTransformer.GetToken(actionContext);
 
                 // create principal of user from jwt
                 ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
 
                 // creat authorization context to check if user has claims
                 AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
-
-
-                // check if user has claims
-                if (new AuthorizationManager().CheckAccess(authcontext))
-                {
-                    // if user does have those specififed claims
-                    base.IsAuthorized(actionContext);
-                }
-                else
-                {
-                    // if user does NOT have those specified claims
-                    base.HandleUnauthorizedRequest(actionContext);
-                }
-            } else
+            } catch (Exception e)
             {
-                // if the header does not contain a Token
                 base.HandleUnauthorizedRequest(actionContext);
             }
+
+            //    // check if user has claims
+            //    if (new AuthorizationManager().CheckAccess(authcontext))
+            //    {
+            //        // if user does have those specififed claims
+            //        base.IsAuthorized(actionContext);
+            //    }
+            //    else
+            //    {
+            //        // if user does NOT have those specified claims
+            //        base.HandleUnauthorizedRequest(actionContext);
+            //    }
+            //} else
+            //{
+            //    // if the header does not contain a Token
+            //    base.HandleUnauthorizedRequest(actionContext);
+            //}
+        }
+
+
+        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
+        {
+
+        }
+        protected override bool IsAuthorized(HttpActionContext actionContext)
+        {
+            return false;
         }
     }
 }

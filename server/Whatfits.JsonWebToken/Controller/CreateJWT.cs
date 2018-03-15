@@ -36,7 +36,6 @@ namespace Whatfits.JsonWebToken.Controller
                 }),
 
                 //Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
-
                 //signing credentials
                 SigningCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(symmetricKey), SecurityAlgorithms.HmacSha256Signature)
             };

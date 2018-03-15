@@ -18,12 +18,12 @@ namespace Whatfits.JsonWebToken.Constant
         }
 
         // create string into base 64
-        public static byte[] getBytes(string input)
-        {
-            var bytes = new byte[input.Length * sizeof(char)];
-            Buffer.BlockCopy(input.ToCharArray(), 0, bytes, 0, bytes.Length);
+        //public static byte[] getBytes(string input)
+        //{
+        //    var bytes = new byte[input.Length * sizeof(char)];
+        //    Buffer.BlockCopy(input.ToCharArray(), 0, bytes, 0, bytes.Length);
 
-            return bytes;
-        }
+        //    return bytes;
+        //}
     }
 }
