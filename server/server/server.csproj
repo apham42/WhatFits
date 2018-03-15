@@ -91,16 +91,19 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\AccountConstants.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\UACTESTController.cs" />
     <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
     <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredResponseDTO.cs" />
+    <Compile Include="Data Transfer Objects\ReviewDTO%27s\ReviewDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\ReviewService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
