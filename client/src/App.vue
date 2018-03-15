@@ -1,5 +1,5 @@
 <template>
-  <div id="app">Chat Application<br/><br/>
+  <div id="app">Whatfits<br/><br/>
     <router-view/>
   </div>
 </template>
