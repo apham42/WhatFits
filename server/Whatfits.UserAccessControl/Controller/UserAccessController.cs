@@ -12,6 +12,9 @@ using System.IdentityModel.Tokens;
 
 namespace Whatfits.UserAccessControl.Controller
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class UserAccessController
     {
         /*

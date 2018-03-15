@@ -58,9 +58,9 @@
     <Compile Include="Context\Core\UserManagementContext.cs" />
     <Compile Include="Context\Content\ChatContext.cs" />
     <Compile Include="Context\Content\WorkoutLogContext.cs" />
-    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803061846139_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803061846139_init.Designer.cs">
-      <DependentUpon>201803061846139_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803141825086_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803141825086_init.Designer.cs">
+      <DependentUpon>201803141825086_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\EventsMigrations\201803061853141_init.cs" />
@@ -78,9 +78,9 @@
       <DependentUpon>201803061858310_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\NotificationMigrations\Configuration.cs" />
-    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201803061902318_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201803061902318_init.Designer.cs">
-      <DependentUpon>201803061902318_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201803141826112_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201803141826112_init.Designer.cs">
+      <DependentUpon>201803141826112_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\SearchMigrations\201803061851473_init.cs" />
@@ -93,24 +93,28 @@
       <DependentUpon>201803061849398_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CoreMigrations\LoginMigrations\201803120043106_init.cs" />
-    <Compile Include="Migrations\CoreMigrations\LoginMigrations\201803120043106_init.Designer.cs">
-      <DependentUpon>201803120043106_init.cs</DependentUpon>
+    <Compile Include="Migrations\CoreMigrations\LoginMigrations\201803132247157_init.cs" />
+    <Compile Include="Migrations\CoreMigrations\LoginMigrations\201803132247157_init.Designer.cs">
+      <DependentUpon>201803132247157_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\CoreMigrations\LoginMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803120037271_init.cs" />
-    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803120037271_init.Designer.cs">
-      <DependentUpon>201803120037271_init.cs</DependentUpon>
+    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803132237481_init.cs" />
+    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803132237481_init.Designer.cs">
+      <DependentUpon>201803132237481_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803141820070_enabledChatandReviews.cs" />
+    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803141820070_enabledChatandReviews.Designer.cs">
+      <DependentUpon>201803141820070_enabledChatandReviews.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803120042176_init.cs" />
-    <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803120042176_init.Designer.cs">
-      <DependentUpon>201803120042176_init.cs</DependentUpon>
+    <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803132250279_init.cs" />
+    <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803132250279_init.Designer.cs">
+      <DependentUpon>201803132250279_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CoreMigrations\UserManagementMigrations\201803120040497_init.cs" />
-    <Compile Include="Migrations\CoreMigrations\UserManagementMigrations\201803120040497_init.Designer.cs">
-      <DependentUpon>201803120040497_init.cs</DependentUpon>
+    <Compile Include="Migrations\CoreMigrations\UserManagementMigrations\201803132251350_init.cs" />
+    <Compile Include="Migrations\CoreMigrations\UserManagementMigrations\201803132251350_init.Designer.cs">
+      <DependentUpon>201803132251350_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\CoreMigrations\UserManagementMigrations\Configuration.cs" />
     <Compile Include="Models\Chatroom.cs" />
@@ -139,8 +143,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803061846139_init.resx">
-      <DependentUpon>201803061846139_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803141825086_init.resx">
+      <DependentUpon>201803141825086_init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\EventsMigrations\201803061853141_init.resx">
       <DependentUpon>201803061853141_init.cs</DependentUpon>
@@ -151,8 +155,8 @@
     <EmbeddedResource Include="Migrations\ContentMigrations\NotificationMigrations\201803061858310_init.resx">
       <DependentUpon>201803061858310_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\ReviewsMigrations\201803061902318_init.resx">
-      <DependentUpon>201803061902318_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\ReviewsMigrations\201803141826112_init.resx">
+      <DependentUpon>201803141826112_init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\SearchMigrations\201803061851473_init.resx">
       <DependentUpon>201803061851473_init.cs</DependentUpon>
@@ -160,17 +164,20 @@
     <EmbeddedResource Include="Migrations\ContentMigrations\WorkoutLogMigrations\201803061849398_init.resx">
       <DependentUpon>201803061849398_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\LoginMigrations\201803120043106_init.resx">
-      <DependentUpon>201803120043106_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\CoreMigrations\LoginMigrations\201803132247157_init.resx">
+      <DependentUpon>201803132247157_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\RegistrationMigrations\201803120037271_init.resx">
-      <DependentUpon>201803120037271_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\CoreMigrations\RegistrationMigrations\201803132237481_init.resx">
+      <DependentUpon>201803132237481_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803120042176_init.resx">
-      <DependentUpon>201803120042176_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\CoreMigrations\RegistrationMigrations\201803141820070_enabledChatandReviews.resx">
+      <DependentUpon>201803141820070_enabledChatandReviews.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\UserManagementMigrations\201803120040497_init.resx">
-      <DependentUpon>201803120040497_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803132250279_init.resx">
+      <DependentUpon>201803132250279_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\CoreMigrations\UserManagementMigrations\201803132251350_init.resx">
+      <DependentUpon>201803132251350_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

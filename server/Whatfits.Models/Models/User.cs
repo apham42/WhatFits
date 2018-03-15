@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 namespace Whatfits.Models.Models
 {
@@ -12,7 +11,7 @@ namespace Whatfits.Models.Models
     public class User
     {
         // Primary key of the User model
-        [Key]
+        [Key, ForeignKey("Credential")]
         public int UserID { get; set; }
 
         // Stores Email address of the User
@@ -34,21 +33,29 @@ namespace Whatfits.Models.Models
         [Required, StringLength(50, MinimumLength = 2)]
         public string Gender { get; set; }
 
+        // Stores the User Skill level for workingout
+        [Required, StringLength(20, MinimumLength = 2)]
+        public string SkillLevel { get; set; }
+
+        // User Description for Profile
+        [StringLength(250)]
+        public string Description { get; set; }
         // User can have One:
-        //[Required]
+        // [Required]
         // Note: This causes an error, don't know why
         public virtual Credential Credential { get; set; }
 
         // Users can have many:
-        public ICollection<UserClaims> UserClaims { get; set; }
-        public ICollection<SecurityQandA> SecurityQandAs { get; set; }
-        /*
+        public ICollection<Event> Events { get; set; }
+        public ICollection<Review> Review { get; set; }
         public ICollection<Message> Messages { get; set; }
+        
+        /*
         public ICollection<Event> Event { get; set; }
         public ICollection<WorkoutLog> WorkoutLogs { get; set; }
         public ICollection<Following> Following { get; set; }
         public ICollection<Follower> Followers { get; set; }
-        public ICollection<Review> Review { get; set; }
+        
         */
     }
 }
