@@ -95,19 +95,31 @@
     <Compile Include="Constants\AccountConstants.cs" />
     <Compile Include="Controllers\ChatController.cs" />
 <<<<<<< HEAD
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 =======
+=======
+    <Compile Include="Controllers\ReviewController.cs" />
+>>>>>>> master
     <Compile Include="Controllers\SignUpController.cs" />
 >>>>>>> master
     <Compile Include="Controllers\UACTESTController.cs" />
+<<<<<<< HEAD
 =======
     <Compile Include="Controllers\ReviewController.cs" />
 >>>>>>> Stashed changes
+=======
+    <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
+    <Compile Include="Data Transfer Objects\AccountDTO%27s\UserCredResponseDTO.cs" />
+    <Compile Include="Data Transfer Objects\ReviewDTO%27s\ReviewDTO.cs" />
+>>>>>>> master
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\ReviewService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -120,7 +132,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Data Transfer Objects\" />
   </ItemGroup>
   <ItemGroup>
 <<<<<<< Updated upstream

@@ -20,7 +20,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
             var users = new List<User>
 =======
             // NOTE: Only use to create tables for CORE features and any other content.
-            /*
+            /**
             var credentials = new List<Credential>
 >>>>>>> master
             {
@@ -138,6 +138,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
             answers.ForEach(a => context.SecurityQandA.Add(a));
             context.SaveChanges();
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
             context.Users.AddOrUpdate(x => x.ID,
                 new User()
@@ -193,6 +194,9 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
 >>>>>>> Stashed changes
 =======
             //*/
+>>>>>>> master
+=======
+           **/
 >>>>>>> master
         }
     }

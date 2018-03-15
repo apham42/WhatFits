@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,21 @@ using Whatfits.Models.Context.Content;
 
 
 //need a data access object for reviews
+=======
+﻿using server.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+>>>>>>> master
 namespace server.Controllers
 {
     public class ReviewController : ApiController
     {
+<<<<<<< HEAD
         //gets list of reviews from database
         //Need to alter web config files and etc, refer to sql server in kudvenkat
         public IEnumerable<Review> Get()
@@ -48,3 +60,14 @@ namespace server.Controllers
         }
     }
 }
+=======
+        [HttpPost]
+        public IHttpActionResult Review([FromBody] string message, int rating)
+        {
+            ReviewService service = new ReviewService();
+            var response = Request.CreateResponse(HttpStatusCode.OK);
+            return Ok();
+        }
+    }
+}
+>>>>>>> master
