@@ -2,11 +2,14 @@
 using System.Security.Claims;
 using System.Linq;
 
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
 using Whatfits.UserAccessControl.Service;
 using System;
+using System.Net.Http;
+using System.Net;
 
 namespace Whatfits.UserAccessControl.Auth
 {
@@ -20,6 +23,8 @@ namespace Whatfits.UserAccessControl.Auth
         public string claimType;
         // claim value
         public string claimValue;
+
+        private string _reason = "sup";
 
         // Summary:
         //     Calls when an action is being authorized.
@@ -37,38 +42,28 @@ namespace Whatfits.UserAccessControl.Auth
             {
                 string tokenstr = RequestTransformer.GetToken(actionContext);
 
-                // create principal of user from jwt
-                ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
+                if(tokenstr != "False")
+                {
+                    // create principal of user from jwt
+                    ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
 
-                // creat authorization context to check if user has claims
-                AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
-            } catch (Exception e)
+                    // creat authorization context to check if user has claims
+                    AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
+
+                } else
+                {
+                    throw new Exception();
+                }
+            } catch (Exception)
             {
-                base.HandleUnauthorizedRequest(actionContext);
+                HandleUnauthorizedRequest(actionContext);
             }
-
-            //    // check if user has claims
-            //    if (new AuthorizationManager().CheckAccess(authcontext))
-            //    {
-            //        // if user does have those specififed claims
-            //        base.IsAuthorized(actionContext);
-            //    }
-            //    else
-            //    {
-            //        // if user does NOT have those specified claims
-            //        base.HandleUnauthorizedRequest(actionContext);
-            //    }
-            //} else
-            //{
-            //    // if the header does not contain a Token
-            //    base.HandleUnauthorizedRequest(actionContext);
-            //}
         }
 
 
         protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
         {
-
+            actionContext.Response = new HttpResponseMessage(HttpStatusCode.Forbidden);
         }
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {

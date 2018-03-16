@@ -13,8 +13,6 @@ namespace Whatfits.UserAccessControl.Service
         {
             try
             {
-
-
                 string token = null;
 
                 var request = actionContext.Request;
@@ -24,9 +22,9 @@ namespace Whatfits.UserAccessControl.Service
                 
                 return token;
             }
-            catch (Exception e)
+            catch (InvalidOperationException)
             {
-                return e.StackTrace;
+                return "False";
             }
         }
     }

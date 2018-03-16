@@ -31,7 +31,7 @@ namespace Whatfits.UserAccessControl.Controller
                 new Claim(ClaimTypes.Name, username),
                 new Claim(ClaimTypes.Webpage, "Whatfits.social")
             };
-            
+
             // add default claims to new user
             DefaultClaims.AddRange(ClaimConstants.DEFAULT_CLAIMS);
 
@@ -40,6 +40,14 @@ namespace Whatfits.UserAccessControl.Controller
 
         }
 
+        public static List<Claim> GetviewClaims(string username)
+        {
+            List<Claim> viewPage = new List<Claim>();
+
+
+
+            return viewPage;
+        }
         /*
          * Add new claim for user
          * @param Claim claim, new claim to be added

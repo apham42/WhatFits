@@ -1,7 +1,6 @@
 <template>
     <div>
-        <input type="hidden" name="_token">
-          <button v-on:click="TestPOST">{{ testingdata }}</button>
+        <button v-on:click="TestPOST">{{ testingdata }}</button>
     </div>
 </template>
 
@@ -12,9 +11,7 @@ export default {
   data () {
     return {
       testingdata: 'Test Button',
-      jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFwaGFtNDIiLCJ3ZWJzaXRlIjoiV2hhdGZpdHMuc29jaWFsIiwiV09SS09VVF9BREQiOiJBREQiLCJuYmYiOjE1MjA1NjUxMjEsImV4cCI6MTUyMDU2ODcyMSwiaWF0IjoxNTIwNTY1MTIxfQ.HFFQr8QtI6efVh2kqbbVDShUXyaHQM72sbj5cxAJs-U',
-      RequestVerificationToken: ''
-    }
+      jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFwaGFtNDIiLCJ3ZWJzaXRlIjoiV2hhdGZpdHMuc29jaWFsIiwiV09SS09VVF9BREQiOiJBREQiLCJuYmYiOjE1MjA1NjUxMjEsImV4cCI6MTUyMDU2ODcyMSwiaWF0IjoxNTIwNTY1MTIxfQ.HFFQr8QtI6efVh2kqbbVDShUXyaHQM72sbj5cxAJs-U'}
   },
   methods: {
     TestingMethod () {
@@ -26,9 +23,8 @@ export default {
         url: 'http://localhost/server/UACTEST/one',
         headers: {
           'contentType': 'application/json; charset=utf-8',
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Token': this.$data.jwt,
-          'X-CSRF-TOKEN': this.$data.RequestVerificationToken
+          'Access-Control-Allow-Origin': 'http://localhost:8080'
+          // 'Token': this.$data.jwt
         }
       }).then((response) => {
         this.$data.testingdata = response.data

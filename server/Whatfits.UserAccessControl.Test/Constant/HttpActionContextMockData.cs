@@ -11,8 +11,8 @@ namespace Whatfits.UserAccessControl.Test.Constant
 {
     public class HttpActionContextMockData
     {
-        static string VALID_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFwaGFtNDIiLCJ3ZWJzaXRlIjoiV2hhdGZpdHMuc29jaWFsIiwiV09SS09VVF9BREQiOiJBREQiLCJuYmYiOjE1MjA1NjUxMjEsImV4cCI6MTUyMDU2ODcyMSwiaWF0IjoxNTIwNTY1MTIxfQ.HFFQr8QtI6efVh2kqbbVDShUXyaHQM72sbj5cxAJs-U";
-        static string INVALID_TOKEN = "invalidToken";
+        public static string VALID_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFwaGFtNDIiLCJ3ZWJzaXRlIjoiV2hhdGZpdHMuc29jaWFsIiwiV09SS09VVF9BREQiOiJBREQiLCJuYmYiOjE1MjA1NjUxMjEsImV4cCI6MTUyMDU2ODcyMSwiaWF0IjoxNTIwNTY1MTIxfQ.HFFQr8QtI6efVh2kqbbVDShUXyaHQM72sbj5cxAJs-U";
+        public static string INVALID_TOKEN = "invalidToken";
 
         public static HttpActionContext validActionContext()
         {
@@ -44,7 +44,7 @@ namespace Whatfits.UserAccessControl.Test.Constant
             return context;
         }
 
-        public HttpActionContext NoTokenHeader()
+        public static HttpActionContext NoTokenHeader()
         {
             HttpActionContext context = new HttpActionContext();
             AuthenticationHeaderValue headerValue = new AuthenticationHeaderValue("Basic", "bzUwkDal=");
