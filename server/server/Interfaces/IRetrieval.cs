@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    interface IRetrieval
+    public interface IRetrieval
     {
-        IResponseDTO Retrieve<T>(T obj);
+        bool Retrieve<T>(T obj);
     }
 }

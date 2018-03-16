@@ -5,86 +5,69 @@ using System.Web;
 using System.Text.RegularExpressions;
 using server.Constants;
 using server.Model.Data_Transfer_Objects.AccountDTO_s;
+using server.Interfaces;
+using server.Model.Account;
+using server.Model.Validators;
+using FluentValidation.Results;
 
 namespace server.Services
 {
-    public class AccountService 
+    public class AccountService :ICreation
     {
-        private string user = "Abram";
-
-        public UserCredResponseDTO RegisterCredentials(UserCredentialDTO creds)
+        public UserCredResponseDTO RegisterCredentials(UserCredentials creds)
         {
-            UserCredResponseDTO response = ValidateCredentials(creds);
-            return response;
-        }
-
-        public UserCredResponseDTO ValidateCredentials (UserCredentialDTO creds)
-        {
-            UserCredResponseDTO response = new UserCredResponseDTO();
-            if (!ValidateUserName(creds.UserName, response))
+            var response = ValidateCredentials(creds);
+            if(!response.isSuccessful)
             {
                 return response;
             }
-            ValidatePassword(creds.Password, response);
 
+            response.Messages.Clear();
+
+            if (Create(creds))
+            {
+                response.isSuccessful = true;
+                response.Messages.Add(AccountConstants.USER_CREATED);
+            }
+            else
+            {
+                response.isSuccessful = false;
+                response.Messages.Add(AccountConstants.USER_CREATE_FAIL);
+            }
             return response;
         }
 
-        public bool ValidateUserName(string userName, UserCredResponseDTO response)
+        public UserCredResponseDTO ValidateCredentials(UserCredentials userCreds)
         {
-            if (!ValidateCharacters(userName))
+            UserCredResponseDTO validationResult = new UserCredResponseDTO();
+            UserCredentialValidator validator = new UserCredentialValidator();
+            ValidationResult results = validator.Validate(userCreds);
+            IList<ValidationFailure> failures = results.Errors;
+            List<string> messages = new List<string>();
+
+            if (!failures.Any())
             {
-                response.Message = AccountConstants.USERNAME_INVALID_CHARACTERS_ERROR;
-                response.Status = false;
-                return false;
+                validationResult.isSuccessful = true;
+            }
+            else
+            {
+                foreach(ValidationFailure failure in failures)
+                {
+                    messages.Add(failure.ErrorMessage);
+                }
+                validationResult.isSuccessful = false;
             }
 
-            // Checks username if its unique using gateway
-            response.Message = AccountConstants.USERNAME_VALID;
-            response.Status = true;
-            return true;
+            validationResult.Messages = messages;
+            return validationResult;
         }
 
-        //public bool ValidateUserNameCharacters( string userName)
-
-        public bool ValidatePassword(string password, UserCredResponseDTO response)
+        public bool Create<T>(T user)
         {
-            if (password.Length < 8)
-            {
-                response.Message = AccountConstants.PASSWORD_SHORT_ERROR;
-                response.Status = false;
-                return false;
-            }
 
-            if (password.Length > 64)
-            {
-                response.Message = AccountConstants.PASSWORD_LONG_ERROR;
-                response.Status = false;
-                return false;
-            }
-
-            if (!ValidateCharacters(password))
-            {
-                response.Message = AccountConstants.PASSWORD_INVALID_CHARACTERS_ERROR;
-                response.Status = false;
-                return false;
-            }
-
-            response.Message = AccountConstants.USER_AND_PASSWORD_VALID;
-            response.Status = true;
-            return true;
-        }
-
-        public bool ValidateCharacters(string credential)
-        {
-            var rgxCheck = new Regex(AccountConstants.CREDCHARACTERS);
-            if (rgxCheck.IsMatch(credential))
-            {
-                return true;
-            }
             return false;
         }
-
         
+
     }
 }

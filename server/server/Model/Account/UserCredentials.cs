@@ -7,13 +7,13 @@ namespace server.Model.Account
 {
     public class UserCredentials
     {
-        public UserCredentials(string user, string pass)
+        public UserCredentials(string username, string password)
         {
-            UserName = user;
-            Password = pass;
+            Username = username;
+            Password = password;
         }
 
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string Username { get; private set; }
+        public string Password { get; private set; }
     }
 }

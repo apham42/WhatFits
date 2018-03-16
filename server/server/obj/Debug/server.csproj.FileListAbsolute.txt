@@ -308,3 +308,8 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.ComponentMo
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.ComponentModel.Primitives.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\FluentValidation.xml
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\FluentValidation.WebApi.xml
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Whatfits.Models.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\EntityFramework.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Whatfits.Models.pdb
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Whatfits.Models.dll.config
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\EntityFramework.xml

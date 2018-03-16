@@ -8,6 +8,7 @@ namespace server.Constants
     public class AccountConstants
     {
         public const string CREDCHARACTERS = @"^[A-Za-z\d~`!@#$%^&*()-_+=\\|\]}\[{'"";:/?.>,<]+$";
+        public const string USER_CREATED = "User has been created";
 
         // username constants
         public const string USERNAME_VALID = "Username is valid";
@@ -17,7 +18,6 @@ namespace server.Constants
         public const string USERNAME_LONG_ERROR = "Username is too long. Maximum length is 64 characters";
 
         // password constants
-        public const string USER_AND_PASSWORD_VALID = "Username and password is valid";
         public const string PASSWORD_SHORT_ERROR = "Password does not reach the minimum length of 8";
         public const string PASSWORD_LONG_ERROR = "Password is too long. Maximum length is 64 characters";
         public const string PASSWORD_INVALID_CHARACTERS_ERROR = "Password has invalid special characters";
