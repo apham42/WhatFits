@@ -8,7 +8,7 @@ namespace server.Interfaces
 {
     interface IResponseDTO
     {
-        string message { get; set; }
-        bool status { get; set; }
+        string Message { get; set; }
+        bool Status { get; set; }
     }
 }
