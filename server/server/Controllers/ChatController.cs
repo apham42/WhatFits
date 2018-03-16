@@ -3,8 +3,10 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Microsoft.Web.WebSockets;
-using System.Web.SessionState;
+using Whatfits.Models.Models;
 using System;
+using Whatfits.DataAccess.Gateways.ContentGateways;
+using Whatfits.DataAccess.DataTransferObjects.ContentDTOs;
 
 namespace server.Controllers
 {
@@ -13,10 +15,17 @@ namespace server.Controllers
         [AcceptVerbs ("GET","POST")]
         public HttpResponseMessage Connect(string username)
         {
+            ChatDTO chatuser = new ChatDTO();
+            chatuser.UserName = username;
+            ChatGateway mychat = new ChatGateway();
             if (!HttpContext.Current.IsWebSocketRequest)
                 return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
-            HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username));
-            return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
+            if (mychat.DoesUserNameExists(chatuser))
+            {
+                HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username));
+                return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
+            }
+            return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
         
         class ChatHandler : WebSocketHandler

@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -115,9 +121,17 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.DataAccess.csproj">
+      <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
+      <Name>Whatfits.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Whatfits.JsonWebToken\Whatfits.JsonWebToken.csproj">
       <Project>{c0325899-07d9-47f8-b890-561a78a1e8d0}</Project>
       <Name>Whatfits.JsonWebToken</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">
+      <Project>{7ccda19c-9b92-4029-a6ca-529599acdeb4}</Project>
+      <Name>Whatfits.Models</Name>
     </ProjectReference>
     <ProjectReference Include="..\Whatfits.UserAccessControl\Whatfits.UserAccessControl.csproj">
       <Project>{0ce3e9e9-95e4-449e-abdb-7ab4f8d72243}</Project>

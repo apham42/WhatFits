@@ -62,6 +62,10 @@
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803141825086_init.Designer.cs">
       <DependentUpon>201803141825086_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803160122231_addcredential.cs" />
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803160122231_addcredential.Designer.cs">
+      <DependentUpon>201803160122231_addcredential.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\EventsMigrations\201803061853141_init.cs" />
     <Compile Include="Migrations\ContentMigrations\EventsMigrations\201803061853141_init.Designer.cs">
@@ -145,6 +149,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803141825086_init.resx">
       <DependentUpon>201803141825086_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803160122231_addcredential.resx">
+      <DependentUpon>201803160122231_addcredential.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\EventsMigrations\201803061853141_init.resx">
       <DependentUpon>201803061853141_init.cs</DependentUpon>

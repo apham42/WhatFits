@@ -4,14 +4,33 @@ using System.Data.Entity;
 using System.Linq;
 using Whatfits.Models;
 using Whatfits.Models.Context.Content;
+using Whatfits.Models.Models;
+using System;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DataTransferObjects.ContentDTOs;
 
-namespace Whatfits.DataAccess.Gate
+namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
     public class ChatGateway
     {
         private ChatContext db = new ChatContext();
-        
-        bool UserJoin()
+
+        public Boolean DoesUserNameExists(ChatDTO obj)
+        {
+            // Find username inside database based on obj.UserName
+            var foundUserName = (from credentials in db.Credentials
+                                 where credentials.UserName == obj.UserName
+                                 select credentials.UserName);
+            // Checking if it found a user
+            if (foundUserName == null)
+                // returns false if passed username does not exists in database
+                return false;
+            else
+                // returns true if passed username does exists in database
+                return true;
+        }
+
+        bool UserJoin(int userID, string userName)
         {
             return false;
         }

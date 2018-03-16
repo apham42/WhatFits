@@ -236,3 +236,13 @@ C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.UserAcce
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.DataAccess.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Models.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\EntityFramework.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.DataAccess.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.DataAccess.dll.config
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Models.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Models.dll.config
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\EntityFramework.xml
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\EntityFramework.SqlServer.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\EntityFramework.SqlServer.xml
