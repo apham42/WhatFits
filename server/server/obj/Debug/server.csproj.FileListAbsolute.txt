@@ -302,3 +302,9 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\server\obj\Debug\server.cspro
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\obj\Debug\server.csproj.CoreCompileInputs.cache
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\obj\Debug\server.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\obj\Debug\server.pdb
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\FluentValidation.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\FluentValidation.WebApi.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.ComponentModel.Annotations.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.ComponentModel.Primitives.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\FluentValidation.xml
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\FluentValidation.WebApi.xml
