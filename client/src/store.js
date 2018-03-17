@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    username: []
+    username: ['lol', 'me', 'hi', 'test']
   },
   getters: {
     users: function (state) {
@@ -13,8 +13,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    addUser: function (state, payload) {
-      state.username.push = payload
+    addUser: function (payload) {
+      this.state.username.push(payload)
     }
   }
 })

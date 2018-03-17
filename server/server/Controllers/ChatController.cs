@@ -12,12 +12,13 @@ namespace server.Controllers
 {
     public class ChatController : ApiController
     {
+        ChatDTO chatuser = new ChatDTO();
+        ChatGateway mychat = new ChatGateway();
+
         [AcceptVerbs ("GET","POST")]
         public HttpResponseMessage Connect(string username)
         {
-            ChatDTO chatuser = new ChatDTO();
             chatuser.UserName = username;
-            ChatGateway mychat = new ChatGateway();
             if (!HttpContext.Current.IsWebSocketRequest)
                 return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
             if (mychat.DoesUserNameExists(chatuser))
@@ -56,6 +57,11 @@ namespace server.Controllers
             public override void OnClose()
             {
                 _chatUser.Remove(this);
+            }
+
+            public string ConnectedUsers()
+            {
+                return _chatUser.ToString();
             }
         }
     }

@@ -3,11 +3,17 @@
     <div id="ChatBox">
       <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
       <div id="chatbody" v-if="chatshow">
-        <div id="username" v-on:click="msgshow = !msgshow"><li v-for="value in users" :key="value">{{value}}</li></div>
+        <div id="username" v-for ="(value, index) in users" :key="index" list-style:none>
+          <div id="user" v-on:click="SpanBox(index)">
+            {{value}}
+          </div>
+        </div>
       </div>
     </div>
     <div id="MsgBox" style="right:290px" v-if="msgshow">
-      <div id="msghead" v-on:click="msgshow = !msgshow">{{users}}</div>
+      <div id="msghead">
+        {{clickeduser}}
+      </div>
       <div id="msgbody">
         <textarea id="receives" rows="10"/>
       </div>
@@ -26,17 +32,17 @@ export default {
     return {
       ws: '',
       messages: '',
+      onlineUser: '',
+      clickeduser: '',
+      chatusers: [],
       chatshow: false,
-      onlineUsers: [],
       msgshow: false
     }
   },
   mounted () {
-    // this.onlineUsers.push(prompt('Enter the name to connect chat: '))
-    var user = prompt('Enter your name')
-    // localStorage.setItem('users', user)
-    // this.onlineUsers.push(localStorage.getItem('users'))
-    this.ws = new WebSocket('ws://localhost/server/chat' + '?username=' + user)
+    this.onlineUser = prompt('Enter your name')
+    this.ws = new WebSocket('ws://localhost/server/chat' + '?username=' + this.onlineUser)
+    this.$store.state.username.push(this.onlineUser)
     this.Connection()
   },
   computed: {
@@ -54,10 +60,15 @@ export default {
       }
     },
     SendMessage: function () {
+      console.log('send message???')
       if (this.ws.readyState === WebSocket.OPEN) {
         this.ws.send(this.messages)
         this.messages = ''
       }
+    },
+    SpanBox: function (payload) {
+      this.clickeduser = this.$store.state.username[payload]
+      this.msgshow = !this.msgshow
     }
   }
 }
@@ -125,7 +136,8 @@ export default {
   background:#2ecc71;
   width:10px;
   height:10px;
-  left:5px;
+  left:35px;
+  top: 12px;
 }
 #messagesent{
   border: transparent;
