@@ -39,10 +39,19 @@ namespace server.Services
         public UserCredResponseDTO ValidateCredentials(UserCredInfo userCreds)
         {
             UserCredResponseDTO validationResult = new UserCredResponseDTO();
+            List<string> messages = new List<string>();
+
+            if (userCreds == null)
+            {
+                validationResult.isSuccessful = false;
+                validationResult.Messages = messages;
+                validationResult.Messages.Add("EMPTY");
+                return validationResult;
+            }
+
             UserCredentialValidator validator = new UserCredentialValidator();
             ValidationResult results = validator.Validate(userCreds);
             IList<ValidationFailure> failures = results.Errors;
-            List<string> messages = new List<string>();
 
             if (!failures.Any())
             {
@@ -89,8 +98,6 @@ namespace server.Services
                 Username = user.Username
 
             };
-
-
 
             return true;
         }

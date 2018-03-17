@@ -15,30 +15,66 @@ namespace Whatfits.Hash
         {
             // Empty salt array
             byte[] salt = new byte[32];
-
-            using (var random = new RNGCryptoServiceProvider())
+            string generatedSalt;
+            string result;
+            try
             {
-                random.GetNonZeroBytes(salt);
+                using (var random = new RNGCryptoServiceProvider())
+                {
+                    random.GetNonZeroBytes(salt);
+                }
+
+                generatedSalt = Convert.ToBase64String(salt);
+            }
+            catch (ArgumentNullException)
+            {
+                throw;
+            }
+            catch (CryptographicException)
+            {
+                throw;
+            }
+            finally
+            {
+                result = "";
             }
 
-            return Convert.ToBase64String(salt);
+            return result;
             
         }
 
         public string Hash(HashDTO dto)
         {
             // changes the hashDTO original to bytes
-            byte[] convertedOriginal = Encoding.ASCII.GetBytes(dto.Original);
             string result;
 
-            // creates the hash in bytes based on the converted original
-            using (SHA256Cng sha256 = new SHA256Cng())
+            try
             {
-                byte[] hash = sha256.ComputeHash(convertedOriginal);
+                byte[] convertedOriginal = Encoding.ASCII.GetBytes(dto.Original);
 
-                //converts back to string
-                result = Encoding.ASCII.GetString(hash);
+
+                // creates the hash in bytes based on the converted original
+                using (SHA256Cng sha256 = new SHA256Cng())
+                {
+                    byte[] hash = sha256.ComputeHash(convertedOriginal);
+
+                    //converts back to string
+                    result = Encoding.ASCII.GetString(hash);
+                }
             }
+            catch (EncoderFallbackException)
+            {
+                throw;
+            }
+            catch (ObjectDisposedException)
+            {
+                throw;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            
 
             return result;
         }

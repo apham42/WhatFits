@@ -313,3 +313,5 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\EntityFramework.dl
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Whatfits.Models.pdb
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Whatfits.Models.dll.config
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\EntityFramework.xml
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Whatfits.Hash.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Whatfits.Hash.pdb

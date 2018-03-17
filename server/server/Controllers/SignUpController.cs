@@ -15,27 +15,32 @@ namespace server.Controllers
     public class SignUpController : ApiController
     {
         [HttpPost]
-        public IHttpActionResult Register(UserCredentials userCred)
+        public IHttpActionResult Register(UserCredInfo userCred)
         {
             AccountService service = new AccountService();
             //UserCredentials userCred = new UserCredentials(username, password);
             UserCredentialValidator validator = new UserCredentialValidator();
+            if (userCred == null)
+            {
+                return Content(HttpStatusCode.BadRequest, "ASD");
+
+            }
             ValidationResult results = validator.Validate(userCred);
             IList<ValidationFailure> failures = results.Errors;
-            List<string> failure = new List<string>();
+            List<string> messages = new List<string>();
 
             foreach (ValidationFailure fail in failures)
             {
-                failure.Add(fail.ErrorMessage);
+                messages.Add(fail.ErrorMessage);
             }
 
-            if(!failures.Any())
+            if(!messages.Any())
             {
                 return Ok("Works");
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest, new { failure });
+                return Content(HttpStatusCode.BadRequest, new { userCred.Username });
             }
             
         }

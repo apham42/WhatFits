@@ -113,7 +113,7 @@
     <Compile Include="Interfaces\IRevision.cs" />
     <Compile Include="Interfaces\IValidation.cs" />
     <Compile Include="Model\Account\SecurityQuestion.cs" />
-    <Compile Include="Model\Account\UserCredentials.cs" />
+    <Compile Include="Model\Account\UserCredInfo.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredResponseDTO.cs" />
@@ -122,9 +122,6 @@
     </Compile>
     <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UsernameDTO.cs" />
-    <Compile Include="Model\Data Transfer Objects\SecurityDTO%27s\HashDTO.cs" />
-    <Compile Include="Model\Data Transfer Objects\SecurityDTO%27s\HashResponseDTO.cs" />
-    <Compile Include="Model\Data Transfer Objects\SecurityDTO%27s\SaltResponseDTO.cs" />
     <Compile Include="Model\Address\Location.cs" />
     <Compile Include="Model\Validators\UserCredentialValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,8 +138,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Whatfits.Hash\Whatfits.Hash.csproj">
+      <Project>{8cc680df-550a-4e98-82ec-df265a5869fc}</Project>
+      <Name>Whatfits.Hash</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Whatfits.JsonWebToken\Whatfits.JsonWebToken.csproj">
       <Project>{c0325899-07d9-47f8-b890-561a78a1e8d0}</Project>
       <Name>Whatfits.JsonWebToken</Name>
