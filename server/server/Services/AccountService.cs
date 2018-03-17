@@ -9,20 +9,19 @@ using server.Interfaces;
 using server.Model.Account;
 using server.Model.Validators;
 using FluentValidation.Results;
+using Whatfits.Hash;
 
 namespace server.Services
 {
-    public class AccountService :ICreation
+    public class AccountService :ICreation<UserCredInfo>
     {
-        public UserCredResponseDTO RegisterCredentials(UserCredentials creds)
+        public UserCredResponseDTO CreateUser(UserCredInfo creds)
         {
             var response = ValidateCredentials(creds);
             if(!response.isSuccessful)
             {
                 return response;
             }
-
-            response.Messages.Clear();
 
             if (Create(creds))
             {
@@ -37,7 +36,7 @@ namespace server.Services
             return response;
         }
 
-        public UserCredResponseDTO ValidateCredentials(UserCredentials userCreds)
+        public UserCredResponseDTO ValidateCredentials(UserCredInfo userCreds)
         {
             UserCredResponseDTO validationResult = new UserCredResponseDTO();
             UserCredentialValidator validator = new UserCredentialValidator();
@@ -62,12 +61,39 @@ namespace server.Services
             return validationResult;
         }
 
-        public bool Create<T>(T user)
-        {
 
-            return false;
+
+        public bool Create(UserCredInfo user)
+        {
+            HMAC256 hmac = new HMAC256();
+            var salt = hmac.GenerateSalt();
+
+            if (salt != null || salt.Equals(""))
+            {
+                return false;
+            }
+
+            var original = new HashDTO()
+            {
+                Original = user.Password
+            };
+
+            var hashPassword = hmac.Hash(original);
+            if (hashPassword != null || hashPassword.Equals(""))
+            {
+                return false;
+            }
+
+            var userCredentials = new UserCredentialDTO()
+            {
+                Username = user.Username
+
+            };
+
+
+
+            return true;
         }
-        
 
     }
 }

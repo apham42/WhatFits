@@ -9,7 +9,7 @@ namespace server.Constants
     {
         public const string CREDCHARACTERS = @"^[A-Za-z\d~`!@#$%^&*()-_+=\\|\]}\[{'"";:/?.>,<]+$";
         public const string USER_CREATED = "User has been created";
-
+        public const string USER_CREATE_FAIL = "User could not be created. Please try again later.";
         // username constants
         public const string USERNAME_VALID = "Username is valid";
         public const string USERNAME_EXISTS_ERROR = "Username already exists";

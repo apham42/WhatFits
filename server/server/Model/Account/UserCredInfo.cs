@@ -5,15 +5,16 @@ using System.Web;
 
 namespace server.Model.Account
 {
-    public class UserCredentials
+    public class UserCredInfo
     {
-        public UserCredentials(string username, string password)
+        // 
+        public UserCredInfo(string username, string password)
         {
             Username = username;
             Password = password;
         }
 
         public string Username { get; private set; }
-        public string Password { get; private set; }
+        public string Password { get; private set; }       
     }
 }
