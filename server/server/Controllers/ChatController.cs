@@ -1,9 +1,10 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Microsoft.Web.WebSockets;
+using System.Web.SessionState;
+using System;
 
 namespace server.Controllers
 {
@@ -14,7 +15,6 @@ namespace server.Controllers
         {
             if (!HttpContext.Current.IsWebSocketRequest)
                 return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
-
             HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username));
             return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
         }
@@ -36,7 +36,7 @@ namespace server.Controllers
 
             public override void OnMessage(string message)
             {
-                _chatUser.Broadcast(connectedUser + " said: " + message);
+                _chatUser.Broadcast(connectedUser + " said: " + message + "  \n" +DateTime.Now.ToLocalTime());
             }
 
             public override void OnError()

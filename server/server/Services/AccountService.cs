@@ -4,48 +4,87 @@ using System.Linq;
 using System.Web;
 using System.Text.RegularExpressions;
 using server.Constants;
+using server.Model.Data_Transfer_Objects.AccountDTO_s;
 
 namespace server.Services
 {
-    public class AccountService
+    public class AccountService 
     {
         private string user = "Abram";
 
-        public bool RegisterCredentials()
+        public UserCredResponseDTO RegisterCredentials(UserCredentialDTO creds)
         {
+            UserCredResponseDTO response = ValidateCredentials(creds);
+            return response;
+        }
+
+        public UserCredResponseDTO ValidateCredentials (UserCredentialDTO creds)
+        {
+            UserCredResponseDTO response = new UserCredResponseDTO();
+            if (!ValidateUserName(creds.UserName, response))
+            {
+                return response;
+            }
+            ValidatePassword(creds.Password, response);
+
+            return response;
+        }
+
+        public bool ValidateUserName(string userName, UserCredResponseDTO response)
+        {
+            if (!ValidateCharacters(userName))
+            {
+                response.Message = AccountConstants.USERNAME_INVALID_CHARACTERS_ERROR;
+                response.Status = false;
+                return false;
+            }
+
+            // Checks username if its unique using gateway
+            response.Message = AccountConstants.USERNAME_VALID;
+            response.Status = true;
             return true;
         }
 
-        public bool ValidateUserName(string userName)
-        {
-            bool isUserValid = false;
+        //public bool ValidateUserNameCharacters( string userName)
 
-            if (!userName.Equals(user) && ValidateCharacters(userName))
-            {
-                isUserValid = true;
-            }
-            return isUserValid;
-        }
-
-        public bool ValidatePassword(string password)
+        public bool ValidatePassword(string password, UserCredResponseDTO response)
         {
-            bool isPassValid = false;
-            if (password.Length >= 8 && password.Length <= 64 && ValidateCharacters(password))
+            if (password.Length < 8)
             {
-                isPassValid = true;
+                response.Message = AccountConstants.PASSWORD_SHORT_ERROR;
+                response.Status = false;
+                return false;
             }
-            return isPassValid;
+
+            if (password.Length > 64)
+            {
+                response.Message = AccountConstants.PASSWORD_LONG_ERROR;
+                response.Status = false;
+                return false;
+            }
+
+            if (!ValidateCharacters(password))
+            {
+                response.Message = AccountConstants.PASSWORD_INVALID_CHARACTERS_ERROR;
+                response.Status = false;
+                return false;
+            }
+
+            response.Message = AccountConstants.USER_AND_PASSWORD_VALID;
+            response.Status = true;
+            return true;
         }
 
         public bool ValidateCharacters(string credential)
         {
-            bool isCredentialValid = false;
             var rgxCheck = new Regex(AccountConstants.CREDCHARACTERS);
             if (rgxCheck.IsMatch(credential))
             {
-                isCredentialValid = true;
+                return true;
             }
-            return isCredentialValid;
+            return false;
         }
+
+        
     }
 }
