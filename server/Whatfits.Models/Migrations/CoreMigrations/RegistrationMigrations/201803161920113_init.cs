@@ -8,7 +8,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Claims",
+                "dbo.ClaimItems",
                 c => new
                     {
                         ClaimID = c.Int(nullable: false, identity: true),
@@ -23,7 +23,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
                     {
                         UserID = c.Int(nullable: false, identity: true),
                         UserName = c.String(nullable: false, maxLength: 64),
-                        Password = c.String(nullable: false, maxLength: 64),
+                        Password = c.String(nullable: false),
                         IsBanned = c.Boolean(nullable: false),
                         IsFullyRegistered = c.Boolean(nullable: false),
                     })
@@ -35,7 +35,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
                     {
                         UserID = c.Int(nullable: false),
                         SecurityQuestionID = c.Int(nullable: false),
-                        Answer = c.String(nullable: false, maxLength: 100),
+                        Answer = c.String(nullable: false),
                     })
                 .PrimaryKey(t => new { t.UserID, t.SecurityQuestionID })
                 .ForeignKey("dbo.Credentials", t => t.UserID, cascadeDelete: true)
@@ -58,7 +58,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
                     {
                         UserID = c.Int(nullable: false),
                         Email = c.String(nullable: false, maxLength: 256),
-                        ProfilePicture = c.Binary(),
+                        ProfilePicture = c.String(),
                         FirstName = c.String(nullable: false, maxLength: 50),
                         LastName = c.String(nullable: false, maxLength: 50),
                         Gender = c.String(nullable: false, maxLength: 50),
@@ -70,23 +70,6 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
                 .Index(t => t.UserID);
             
             CreateTable(
-                "dbo.Events",
-                c => new
-                    {
-                        UserID = c.Int(nullable: false, identity: true),
-                        Location = c.String(nullable: false),
-                        Title = c.String(nullable: false),
-                        CreatedAt = c.String(nullable: false),
-                        DateTime = c.String(nullable: false),
-                        Description = c.String(nullable: false),
-                        Image = c.Binary(),
-                        User_UserID = c.Int(),
-                    })
-                .PrimaryKey(t => t.UserID)
-                .ForeignKey("dbo.Users", t => t.User_UserID)
-                .Index(t => t.User_UserID);
-            
-            CreateTable(
                 "dbo.UserClaims",
                 c => new
                     {
@@ -94,7 +77,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
                         UserID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.ClaimID, t.UserID })
-                .ForeignKey("dbo.Claims", t => t.ClaimID, cascadeDelete: true)
+                .ForeignKey("dbo.ClaimItems", t => t.ClaimID, cascadeDelete: true)
                 .ForeignKey("dbo.Credentials", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.ClaimID)
                 .Index(t => t.UserID);
@@ -108,6 +91,8 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
                         City = c.String(nullable: false),
                         State = c.String(nullable: false),
                         Zipcode = c.String(nullable: false),
+                        Latitude = c.String(nullable: false),
+                        Longitude = c.String(nullable: false),
                         UserID = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.LocationID)
@@ -132,8 +117,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
             DropForeignKey("dbo.Salts", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.Locations", "UserID", "dbo.Users");
             DropForeignKey("dbo.UserClaims", "UserID", "dbo.Credentials");
-            DropForeignKey("dbo.UserClaims", "ClaimID", "dbo.Claims");
-            DropForeignKey("dbo.Events", "User_UserID", "dbo.Users");
+            DropForeignKey("dbo.UserClaims", "ClaimID", "dbo.ClaimItems");
             DropForeignKey("dbo.Users", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.SecurityQandAs", "SecurityQuestionID", "dbo.SecurityQuestions");
             DropForeignKey("dbo.SecurityQandAs", "UserID", "dbo.Credentials");
@@ -141,19 +125,17 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
             DropIndex("dbo.Locations", new[] { "UserID" });
             DropIndex("dbo.UserClaims", new[] { "UserID" });
             DropIndex("dbo.UserClaims", new[] { "ClaimID" });
-            DropIndex("dbo.Events", new[] { "User_UserID" });
             DropIndex("dbo.Users", new[] { "UserID" });
             DropIndex("dbo.SecurityQandAs", new[] { "SecurityQuestionID" });
             DropIndex("dbo.SecurityQandAs", new[] { "UserID" });
             DropTable("dbo.Salts");
             DropTable("dbo.Locations");
             DropTable("dbo.UserClaims");
-            DropTable("dbo.Events");
             DropTable("dbo.Users");
             DropTable("dbo.SecurityQuestions");
             DropTable("dbo.SecurityQandAs");
             DropTable("dbo.Credentials");
-            DropTable("dbo.Claims");
+            DropTable("dbo.ClaimItems");
         }
     }
 }

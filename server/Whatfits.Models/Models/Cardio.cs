@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
-namespace Whatfits.Models.Models
+﻿namespace Whatfits.Models.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Cardio
     {
-        public Cardio()
-        {
-
-        }
         // Foreign Key
         public int WorkoutID { get; set; }
         public WorkoutLog WorkoutLog { get; set; }

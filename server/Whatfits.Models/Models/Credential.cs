@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Whatfits.Models.Models
 {
@@ -23,7 +19,7 @@ namespace Whatfits.Models.Models
         public string UserName { get; set; }
 
         // Stores the hash of the password of the User
-        [Required, StringLength(64, MinimumLength = 2)]
+        [Required]
         public string Password { get; set; }
 
         // Tracks the status of the account such as Disabled or Enabled.

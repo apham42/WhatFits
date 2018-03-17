@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Whatfits.Models.Models
 {
     public class Following
     {
-        public Following()
-        {
-
-        }
         // Foreign Key
         public int UserID { get; set; }
         public User User { get; set; }

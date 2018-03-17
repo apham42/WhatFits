@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 
 namespace Whatfits.Models.Models
 {
@@ -25,6 +22,6 @@ namespace Whatfits.Models.Models
         public virtual Credential Credential { get; set; }
 
         // Navigation Property to Claims Model
-        public virtual Claim Claims { get; set; }
+        public virtual ClaimItem Claims { get; set; }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Xunit;
+using System.Security.Claims;
 
 namespace Gateway.Tester
 {
@@ -41,21 +42,23 @@ namespace Gateway.Tester
                 City = "Los Angeles",
                 State = "California",
                 Zipcode = "90012",
+                Longitude = "NULL",
+                Latitude = "NULL",
 
                 // Creating Salt Data
                 Salt = "asdfasfasdfa",
 
                 // Creating Security Questions and Answers
-
                 QuestionIDs = new List<int> { 1, 2, 3 },
                 Answers = new List<string> { "First Answer to Q1", "Second Answer to Q2", "Third Answer to Q3." },
 
                 // Creating UserClaims
                 ClaimIDs = new List<int> { 1, 2, 3 }
+
             };
 
             // Passing DTO to gateway to be processed and stored
-            reg.RegisterUser(usr);
+            reg.RegisterFullUser(usr);
             // Finding UserID by Name that is stored
             Boolean found = reg.DoesUserNameExists(usr);
             Assert.True(found);

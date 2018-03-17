@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Whatfits.Models.Models
 {
@@ -37,8 +33,8 @@ namespace Whatfits.Models.Models
         [Required]
         public string Description { get; set; }
 
-        // OPTIONAL: An image for the event
-        public byte[] Image { get; set; }
+        // An image for the event
+        public string Image { get; set; }
 
         // Navigation Property
         public User User { get; set; }

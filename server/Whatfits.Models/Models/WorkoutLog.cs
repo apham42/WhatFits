@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace Whatfits.Models.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class WorkoutLog
     {
-        public WorkoutLog()
-        {
-
-        }
         // Foreign Key
         public int UserID { get; set; }
         public User User { get; set; }

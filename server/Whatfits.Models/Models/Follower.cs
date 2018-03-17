@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Whatfits.Models.Models
+﻿namespace Whatfits.Models.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class Follower
     {
-        public Follower()
-        {
-
-        }
         // Foreign Key
         public int UserID { get; set; }
         public User User { get; set; }

@@ -64,8 +64,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LoginTests.cs" />
     <Compile Include="RegistrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserAccessControlTests.cs" />
     <Compile Include="UserManagementTests.cs" />
   </ItemGroup>
   <ItemGroup>

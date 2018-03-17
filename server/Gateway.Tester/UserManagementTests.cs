@@ -46,6 +46,8 @@ namespace Gateway.Tester
                 City = "Los Angeles",
                 State = "California",
                 Zipcode = "90012",
+                Longitude = "NULL",
+                Latitude = "NULL",
 
                 // Creating Salt Data
                 Salt = "asdfasfasdfa",
@@ -99,8 +101,6 @@ namespace Gateway.Tester
             UserManagementDTO SearchName = new UserManagementDTO()
             {
                 UserName = "rstrong",
-                IsBanned = true
-
             };
             Boolean result = userMan.DisableUser(SearchName);
             Assert.True(result);
@@ -191,7 +191,7 @@ namespace Gateway.Tester
             UserManagementDTO profilePictureChange = new UserManagementDTO()
             {
                 UserName = "amay",
-                ProfilePicture = new byte[] { 0x30, 0x30, 0x30, 0x30 }
+                ProfilePicture = "Directory",
             };
             Boolean result = userMan.EditProfilePicture(profilePictureChange);
             Assert.True(result);

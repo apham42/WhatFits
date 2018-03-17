@@ -65,6 +65,8 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         City = obj.City,
                         State = obj.State,
                         Zipcode = obj.Zipcode,
+                        Longitude = obj.Longitude,
+                        Latitude = obj.Latitude
                     };
                     // Saving Data for new user
                     db.Locations.Add(location);

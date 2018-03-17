@@ -13,23 +13,50 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     public class RegistrationGateway
     {
         private RegistrationContext db = new RegistrationContext();
-
-        public void RegisterUser(RegistrationDTO obj)
+        /// <summary>
+        /// Used for Users who registered on the Registration page in app.
+        /// </summary>
+        public void RegisterFullUser(RegistrationDTO obj)
+        {
+            RegisterPartialUser(obj);
+            ContinueRegistration(obj);
+        }
+        /// <summary>
+        /// Used for Users who registered on the homepage or from SSO
+        /// </summary>
+        public void RegisterPartialUser(RegistrationDTO obj)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
-                    // Createing new Credential
-                    Credential credential = new Credential
+                    Credential newCredential = new Credential()
                     {
                         UserName = obj.UserName,
                         Password = obj.Password,
-                        IsFullyRegistered = obj.IsFullyRegistered,
-                        IsBanned = obj.IsBanned
+                        IsBanned = obj.IsBanned,
+                        IsFullyRegistered = false
                     };
-                    db.Credentials.Add(credential);
+                    db.Credentials.Add(newCredential);
                     Save();
+                    dbTransaction.Commit();
+                }
+                catch (Exception)
+                {
+                    dbTransaction.Rollback();
+                }
+            }
+        }
+        /// <summary>
+        /// Continues the registration process for users who partially registered from 
+        /// the homepage or SSO when they login for first time.
+        /// </summary>
+        public void ContinueRegistration(RegistrationDTO obj)
+        {
+            using (var dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
                     int newUserID = (from u in db.Credentials
                                      where u.UserName == obj.UserName
                                      select u.UserID).FirstOrDefault();
@@ -64,6 +91,8 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         City = obj.City,
                         State = obj.State,
                         Zipcode = obj.Zipcode,
+                        Latitude = obj.Latitude,
+                        Longitude = obj.Longitude
                     };
                     // Saving Data for new user
                     db.Locations.Add(location);
@@ -93,21 +122,23 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 }
             }
         }
+        /// <summary>
+        /// This function checks if the incoming username exists in the database
+        /// </summary>
+        /// <returns>
+        ///     True : When UserName exists in database
+        ///     False: When UserName does NOT exists in database
+        /// </returns>
         public Boolean DoesUserNameExists(RegistrationDTO obj)
         {
-            // Find username inside database based on obj.UserName
             var foundUserName = (from credentials in db.Credentials
                                  where credentials.UserName == obj.UserName
                                  select credentials.UserName);
-            // Checking if it found a user
             if (foundUserName == null)
-                // returns false if passed username does not exists in database
                 return false;
             else
-                // returns true if passed username does exists in database
                 return true;
         }
-
         private void Save()
         {
             // Saves any changes to the database

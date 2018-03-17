@@ -1,33 +1,53 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Data;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
+using System.Security.Claims;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using System;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 { 
+    /// <summary>
+    /// Provides the following functions for UserAcccess Control
+    /// - Add new Claim to ClaimsList
+    /// - Remove Claim from ClaimsList
+    /// - Get ClaimsList
+    /// - Add new UserClaim to User
+    /// - Remove UserClaim from User
+    /// - Get UserClaims
+    /// </summary>
     public class UserAccessControlGateway
     {
         private RegistrationContext db = new RegistrationContext();
-        public void AddToClaimsList(UserAccessDTO obj)
+        // Reference Claims
+        public void AddtoClaimsList(Claim obj)
         {
-            // Create new Claim object with the information from the DTO
-            Claim newClaim = new Claim()
+            using (var dbTransaction = db.Database.BeginTransaction())
             {
-                ClaimValue = obj.ClaimValue,
-                ClaimType = obj.ClaimType
-            };
-            // Add claim to database
-            db.Claims.Add(newClaim);
-            // Saves changes made
-            Save();
+                try
+                {
+                    ClaimItem newClaim = new ClaimItem()
+                    {
+                        ClaimValue = obj.Value,
+                        ClaimType = obj.Type
+                    };
+                    db.Claims.Add(newClaim);
+                    Save();
+                    dbTransaction.Commit();
+                    
+                }
+                catch (Exception)
+                {
+                    dbTransaction.Rollback();
+                }
+            }
         }
 
         public void RemoveFromClaimsList(UserAccessDTO obj)
         {
             // Creates a temporary claim with the id
-            var removeClaim = new Claim { ClaimID = obj.ClaimID };
+            var removeClaim = new ClaimItem { ClaimID = obj.ClaimID };
             // Attaches claim to be removed
             db.Claims.Attach(removeClaim);
             // Removes claim
@@ -35,7 +55,20 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             // Saves changes
             Save();
         }
-
+        public List<Claim> GetClaimsList()
+        {
+            var claims = db.Claims.ToList();
+            List<Claim> ClaimsList = new List<Claim>();
+            for (int i = 0; i < claims.Count; i++)
+            {
+                ClaimsList.Add(new Claim(claims[i].ClaimType, claims[i].ClaimValue));
+            }
+            return ClaimsList;
+        }
+        //---------------------------------------------------------------------------------
+        //  UserClaims
+        //---------------------------------------------------------------------------------
+        // TODO: Map Claim Type and Value to ClaimID
         public void AddUserClaims(UserAccessDTO obj)
         {
             // Find user based off Username
@@ -50,7 +83,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             db.UserClaims.Add(newUserClaim);
             Save();
         }
-
+        
         public void RemoveUserClaims(UserAccessDTO obj)
         {
             // Find UserId by Username
@@ -68,14 +101,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             // Saves changes
             Save();
         }
-
-        public List<Claim> GetReferenceClaims()
-        {
-            IEnumerable<int> temp = Enumerable.Empty<int>();
-            var claims = db.Claims.ToList();
-
-            return claims;
-        }
+        // TODO: TEST
+        
+        /*
         public List<int> GetUserClaims(UserAccessDTO obj)
         {
             // Find UserId by Username
@@ -88,6 +116,15 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             // Returns list of claims
             return ClaimsList;
         }
+        */
+        //*
+        // TODO: Complete this -Rob
+        public List<Claim> GetUserClaims(UserAccessDTO obj)
+        {
+            List<Claim> temp = new List<Claim>();
+            return temp;
+        }
+        //*/
         private void Save()
         {
             db.SaveChanges();

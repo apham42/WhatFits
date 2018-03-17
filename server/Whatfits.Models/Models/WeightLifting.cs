@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Whatfits.Models.Models
 {
     public class WeightLifting
     {
-        public WeightLifting()
-        {
-
-        }
         // Foreign Key
         public int WorkoutID { get; set; }
         public WorkoutLog WorkoutLog { get; set; }

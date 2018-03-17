@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 namespace Whatfits.Models.Models
 {
     /// <summary>
@@ -19,7 +18,7 @@ namespace Whatfits.Models.Models
         public string Email { get; set; }
 
         // Stores Profile picture of each user
-        public byte[] ProfilePicture { get; set; }
+        public string ProfilePicture { get; set; }
 
         // Stores First Name of the User
         [Required, StringLength(50, MinimumLength = 2)]
