@@ -44,6 +44,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.7.5.1\lib\net45\FluentValidation.dll</HintPath>
     </Reference>
@@ -141,6 +147,10 @@
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.DataAccess.csproj">
+      <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
+      <Name>Whatfits.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Whatfits.Hash\Whatfits.Hash.csproj">
       <Project>{8cc680df-550a-4e98-82ec-df265a5869fc}</Project>
       <Name>Whatfits.Hash</Name>

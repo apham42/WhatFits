@@ -16,7 +16,7 @@ namespace Whatfits.Hash
             // Empty salt array
             byte[] salt = new byte[32];
             string generatedSalt;
-            string result;
+            string result = "";
             try
             {
                 using (var random = new RNGCryptoServiceProvider())
@@ -33,10 +33,6 @@ namespace Whatfits.Hash
             catch (CryptographicException)
             {
                 throw;
-            }
-            finally
-            {
-                result = "";
             }
 
             return result;
