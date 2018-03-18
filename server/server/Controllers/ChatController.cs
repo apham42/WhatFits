@@ -62,7 +62,7 @@ namespace server.Controllers
             public override void OnMessage(string message)
             {
                 //_chatUser.Broadcast(connectedUser + " said: " + message + "  \n" +DateTime.Now.ToLocalTime());
-                _chatUser.Broadcast(JsonConvert.SerializeObject(message));
+                _chatUser.Broadcast(JsonConvert.SerializeObject(connectedUser + " said: " + message + "  \n" + DateTime.Now.ToLocalTime()));
             }
 
             public override void OnError()

@@ -42,23 +42,32 @@ export default {
   mounted () {
     this.onlineUser = prompt('Enter your name')
     this.ws = new WebSocket('ws://localhost/server/chat' + '?username=' + this.onlineUser)
-    this.$store.state.username.push(this.onlineUser)
     this.Connection()
   },
   watch: {
     chatusers: function () {
-      console.log('changed')
+      console.log('chatusers changed')
     }
   },
   methods: {
     Connection: function () {
       var vm = this
-      this.ws.onopen = function () {
+      this.ws.onopen = function (event) {
         console.log('connected')
-        this.onmessage = function (event) {
-          // window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
-          console.log(event.data)
+        vm.ReceiveMessage()
+      }
+    },
+    ReceiveMessage: function () {
+      var vm = this
+      this.ws.onmessage = function (event) {
+        if (vm.chatusers.length > 0) {
+          window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
+        } else {
           vm.chatusers = JSON.parse(event.data).split(',')
+          if (vm.chatusers.includes(vm.onlineUser)) {
+            var index = vm.chatusers.indexOf(vm.onlineUser)
+            vm.chatusers.splice(index, 1)
+          }
         }
       }
     },
@@ -72,7 +81,16 @@ export default {
     SpanBox: function (index) {
       this.clickeduser = this.chatusers[index]
       this.msgshow = !this.msgshow
-      document.getElementById('msgbody').focus()
+    },
+    Disconnection: function () {
+      if (this.ws.readyState === WebSocket.OPEN) {
+        this.ws.onclose()
+      }
+    },
+    Error: function () {
+      this.ws.onerror = function (event) {
+        window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
+      }
     }
   }
 }
