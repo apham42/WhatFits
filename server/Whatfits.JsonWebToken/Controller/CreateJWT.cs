@@ -36,16 +36,21 @@ namespace Whatfits.JsonWebToken.Controller
 
         private static JwtPayload CreatePayload()
         {
-            JwtPayload payload = new JwtPayload();
+            JwtPayload payload = new JwtPayload()
+            {
 
-            DateTime currenttime = DateTime.Now;
+            };
 
-            payload.Add("Iss", "https://www.Whatfits.social/");
-            payload.Add("Iat", currenttime.ToString());
-            payload.Add("Exp", currenttime.AddHours(1).ToString());
-            
+            DateTime foo = DateTime.Now;
+            long unixTime = ((DateTimeOffset)foo).ToUnixTimeSeconds();
+            long hrtime = ((DateTimeOffset)foo.AddHours(1)).ToUnixTimeSeconds();
 
 
+            payload.Add("iss", "https://www.Whatfits.social/");
+            payload.Add("aud", "user");
+            payload.Add("iat", unixTime.ToString());
+            payload.Add("exp", hrtime.ToString());
+           
             return payload;
         }
     }

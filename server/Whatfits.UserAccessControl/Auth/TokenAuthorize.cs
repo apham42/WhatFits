@@ -24,8 +24,6 @@ namespace Whatfits.UserAccessControl.Auth
         // claim value
         public string claimValue;
 
-        private string _reason = "sup";
-
         // Summary:
         //     Calls when an action is being authorized.
         //
