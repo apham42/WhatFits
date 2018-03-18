@@ -7,6 +7,8 @@ using Whatfits.Models.Models;
 using System;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 using Whatfits.DataAccess.DataTransferObjects.ContentDTOs;
+using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace server.Controllers
 {
@@ -29,24 +31,38 @@ namespace server.Controllers
             return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
         
-        class ChatHandler : WebSocketHandler
+        class ChatHandler : WebSocketHandler , IDisposable
         {
+            private ChatGateway mychat = new ChatGateway();
             private static WebSocketCollection _chatUser = new WebSocketCollection();
+            private static List<string> users = new List<string>();
             private string connectedUser;
 
             public ChatHandler(string username)
             {
                 connectedUser = username;
+                if(!users.Contains(connectedUser))
+                    users.Add(connectedUser);
             }
 
             public override void OnOpen()
             {
-                _chatUser.Add(this);
+                if(!_chatUser.Contains(this))
+                    _chatUser.Add(this);
+                string output = "";
+                int length = users.Count;
+                for (int i = 0; i < length; i++)
+                    if (i > 0)
+                        output += "," + users[i];
+                    else
+                        output += users[i];
+                _chatUser.Broadcast(JsonConvert.SerializeObject(output));
             }
 
             public override void OnMessage(string message)
             {
-                _chatUser.Broadcast(connectedUser + " said: " + message + "  \n" +DateTime.Now.ToLocalTime());
+                //_chatUser.Broadcast(connectedUser + " said: " + message + "  \n" +DateTime.Now.ToLocalTime());
+                _chatUser.Broadcast(JsonConvert.SerializeObject(message));
             }
 
             public override void OnError()
@@ -59,9 +75,9 @@ namespace server.Controllers
                 _chatUser.Remove(this);
             }
 
-            public string ConnectedUsers()
+            public void Dispose()
             {
-                return _chatUser.ToString();
+                _chatUser.Clear();
             }
         }
     }

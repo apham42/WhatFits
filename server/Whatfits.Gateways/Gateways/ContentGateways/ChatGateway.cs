@@ -3,6 +3,7 @@ using System.Linq;
 using Whatfits.Models.Context.Content;
 using System;
 using Whatfits.DataAccess.DataTransferObjects.ContentDTOs;
+using System.Collections.Generic;
 
 namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
@@ -11,7 +12,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         private ChatContext db = new ChatContext();
 
         public Boolean DoesUserNameExists(ChatDTO obj)
-        {   
+        {
             // Find username inside database based on obj.UserName
             var foundUserName = (from credentials in db.Credentials
                                  where credentials.UserName == obj.UserName
@@ -24,7 +25,12 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 // returns true if passed username does exists in database
                 return true;
         }
-
+        public List<string> GetUsers()
+        {
+            var founduser = (from credentials in db.Credentials
+                             select credentials.UserName).ToList();
+            return founduser;
+        }
         bool UserJoin(int userID, string userName)
         {
             return false;

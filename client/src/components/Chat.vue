@@ -3,7 +3,7 @@
     <div id="ChatBox">
       <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
       <div id="chatbody" v-if="chatshow">
-        <div id="username" v-for ="(value, index) in users" :key="index" list-style:none>
+        <div id="username" v-for ="(value, index) in chatusers" :key="index" list-style:none>
           <div id="user" v-on:click="SpanBox(index)">
             {{value}}
           </div>
@@ -18,7 +18,7 @@
         <textarea id="receives" rows="10"/>
       </div>
       <div id="msgfoot">
-        <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message" required></textarea>
+        <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message"></textarea>
         <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
       </div>
     </div>
@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'Chatt',
+  name: 'Chats',
   data () {
     return {
       ws: '',
@@ -45,17 +45,20 @@ export default {
     this.$store.state.username.push(this.onlineUser)
     this.Connection()
   },
-  computed: {
-    users () {
-      return this.$store.getters.users
+  watch: {
+    chatusers: function () {
+      console.log('changed')
     }
   },
   methods: {
     Connection: function () {
-      this.ws.onopen = function (event) {
+      var vm = this
+      this.ws.onopen = function () {
         console.log('connected')
-        this.onmessage = function receivemessage (event) {
-          window.document.getElementById('receives').prepend(event.data + '\n')
+        this.onmessage = function (event) {
+          // window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
+          console.log(event.data)
+          vm.chatusers = JSON.parse(event.data).split(',')
         }
       }
     },
@@ -66,9 +69,10 @@ export default {
         this.messages = ''
       }
     },
-    SpanBox: function (payload) {
-      this.clickeduser = this.$store.state.username[payload]
+    SpanBox: function (index) {
+      this.clickeduser = this.chatusers[index]
       this.msgshow = !this.msgshow
+      document.getElementById('msgbody').focus()
     }
   }
 }
