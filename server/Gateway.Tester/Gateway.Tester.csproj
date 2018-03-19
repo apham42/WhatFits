@@ -64,9 +64,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RegistrationTests.cs" />
+    <Compile Include="Tests\LoginTests.cs" />
+    <Compile Include="Tests\RegistrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserManagementTests.cs" />
+    <Compile Include="Tests\UserAccessControlTests.cs" />
+    <Compile Include="Tests\UserManagementTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -77,6 +79,12 @@
       <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
       <Name>Whatfits.DataAccess</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\xunit.analyzers.0.8.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

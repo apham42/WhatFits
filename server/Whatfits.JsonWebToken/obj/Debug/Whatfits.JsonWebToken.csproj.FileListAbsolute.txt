@@ -13,7 +13,6 @@ C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Micro
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Newtonsoft.Json.xml
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csproj.CopyComplete
-C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csprojResolveAssemblyReference.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.dll.config
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.pdb

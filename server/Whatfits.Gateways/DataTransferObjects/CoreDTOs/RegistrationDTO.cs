@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
 {
@@ -16,20 +17,21 @@ namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
         public string Email { get; set; }
         public string Gender { get; set; }
         public string Description { get; set; }
-        public byte[] ProfilePicture { get; set; }
+        public string ProfilePicture { get; set; }
         public string SkillLevel { get; set; }
         // Location
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }
         public string Zipcode { get; set; }
+        public string Longitude { get; set; }
+        public string Latitude { get; set; }
         // Credentials
         public string UserName { get; set; }
         public string Password { get; set; }
-        public Boolean IsFullyRegistered { get; set; }
-        public Boolean IsBanned { get; set; }
+        public string Type { get; set; }
         // UserClaims
-        public List<int> ClaimIDs { get; set; }
+        public List<Claim> UserClaims { get; set; }
         // Salt
         public string Salt { get; set; }
         // Security Q&A

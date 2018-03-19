@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 using Whatfits.Models.Models;
 
 namespace Whatfits.Models.Context.Content
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class NotificationContext : DbContext
     {
-        public NotificationContext() : base("WhatfitsDb")
-        {
-
-        }
+        public NotificationContext() : base("WhatfitsDb") { }
         // Insert Model files required for Notifications
         public DbSet<User> Users { get; set; }
         public DbSet<Credential> Credentials { get; set; }

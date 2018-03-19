@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Whatfits.Models.Models
 {
@@ -33,12 +29,12 @@ namespace Whatfits.Models.Models
         [Required]
         public string Zipcode { get; set; }
 
-        [ForeignKey("User")]
-        // Foreign Key to User Table
-        public int UserID { get; set; }
-
-        // Navigation Property
-        public User User { get; set; }
+        // Stores the Latitude coordinate
+        [Required]
+        public string Latitude { get; set; }
+        // Stores the Longitude coordinate
+        [Required]
+        public string Longitude { get; set; }
 
         // Location can have many users
         ICollection<User> Users { get; set; }

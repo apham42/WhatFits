@@ -4,6 +4,7 @@ using System.Data;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using System.Collections.Generic;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -13,40 +14,84 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     public class RegistrationGateway
     {
         private RegistrationContext db = new RegistrationContext();
-
-        public void RegisterUser(RegistrationDTO obj)
+        /// <summary>
+        /// Used for Users who registered on the Registration page in app.
+        /// </summary>
+        public void RegisterFullUser(RegistrationDTO obj)
+        {
+            RegisterPartialUser(obj);
+            ContinueRegistration(obj);
+        }
+        /// <summary>
+        /// Used for Users who registered on the homepage or from SSO
+        /// </summary>
+        public void RegisterPartialUser(RegistrationDTO obj)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
-                    // Createing new Credential
-                    Credential credential = new Credential
+                    Credential newCredential = new Credential()
                     {
                         UserName = obj.UserName,
                         Password = obj.Password,
-                        IsFullyRegistered = obj.IsFullyRegistered,
-                        IsBanned = obj.IsBanned
                     };
-                    db.Credentials.Add(credential);
-                    Save();
+                    db.Credentials.Add(newCredential);
+                    db.SaveChanges();
+                    dbTransaction.Commit();
+                }
+                catch (Exception)
+                {
+                    dbTransaction.Rollback();
+                }
+            }
+        }
+        /// <summary>
+        /// Continues the registration process for users who partially registered from 
+        /// the homepage or SSO when they login for first time.
+        /// </summary>
+        public void ContinueRegistration(RegistrationDTO obj)
+        {
+            using (var dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
                     int newUserID = (from u in db.Credentials
                                      where u.UserName == obj.UserName
                                      select u.UserID).FirstOrDefault();
+                    // Creating Location
+                    Location location = new Location
+                    {
+                        Address = obj.Address,
+                        City = obj.City,
+                        State = obj.State,
+                        Zipcode = obj.Zipcode,
+                        Latitude = obj.Latitude,
+                        Longitude = obj.Longitude
+                    };
+                    // Saving Data for new user
+                    db.Locations.Add(location);
+                    db.SaveChanges();
+
+                    int newLocation = (from u in db.Locations
+                                     where u.Address == obj.Address && u.City == obj.City && u.State == obj.State && u.Zipcode == obj.Zipcode
+                                     select u.LocationID).FirstOrDefault();
                     // Creating new User
                     User user = new User
                     {
                         UserID = newUserID,
+                        LocationID = newLocation,
                         FirstName = obj.FirstName,
                         LastName = obj.LastName,
                         Email = obj.Email,
                         Gender = obj.Gender,
                         Description = obj.Description,
                         ProfilePicture = obj.ProfilePicture,
-                        SkillLevel = obj.SkillLevel
+                        SkillLevel = obj.SkillLevel,
+                        Type = obj.Type
                     };
                     db.Users.Add(user);
-                    Save();
+                    db.SaveChanges();
                     // Creating new Salt
                     Salt salt = new Salt
                     {
@@ -54,36 +99,26 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         SaltValue = obj.Salt
                     };
                     db.Salts.Add(salt);
-                    Save();
+                    db.SaveChanges();;
 
-                    // Creating location for User
-                    Location location = new Location
-                    {
-                        UserID = newUserID,
-                        Address = obj.Address,
-                        City = obj.City,
-                        State = obj.State,
-                        Zipcode = obj.Zipcode,
-                    };
-                    // Saving Data for new user
-                    db.Locations.Add(location);
-                    Save();
 
+                    
                     // Add UserClaims
-                    for (int i = 0; i < obj.ClaimIDs.Count; i++)
+                    for (int i = 0; i < obj.UserClaims.Count; i++)
                     {
-                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimID = obj.ClaimIDs[i] };
+                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType= obj.UserClaims[i].Value, ClaimValue=obj.UserClaims[i].Value };
                         db.UserClaims.Add(temp);
-                        Save();
+                        db.SaveChanges();;
                     }
                     // Add Security QandAs
                     for (int i = 0; i < obj.QuestionIDs.Count; i++)
                     {
                         SecurityQandA temp = new SecurityQandA { UserID = newUserID, SecurityQuestionID = obj.QuestionIDs[i], Answer = obj.Answers[i] };
                         db.SecurityQandA.Add(temp);
-                        Save();
+                        db.SaveChanges();;
                     }
                     // Commits changes in database
+                    
                     dbTransaction.Commit();
                 }
                 catch (Exception)
@@ -93,25 +128,29 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 }
             }
         }
+        /// <summary>
+        /// This function checks if the incoming username exists in the database
+        /// </summary>
+        /// <returns>
+        ///     True : When UserName exists in database
+        ///     False: When UserName does NOT exists in database
+        /// </returns>
         public Boolean DoesUserNameExists(RegistrationDTO obj)
         {
-            // Find username inside database based on obj.UserName
             var foundUserName = (from credentials in db.Credentials
                                  where credentials.UserName == obj.UserName
                                  select credentials.UserName);
-            // Checking if it found a user
             if (foundUserName == null)
-                // returns false if passed username does not exists in database
                 return false;
             else
-                // returns true if passed username does exists in database
                 return true;
         }
-
-        private void Save()
+        public List<string> GetUserList()
         {
-            // Saves any changes to the database
-            db.SaveChanges();
+            List<string> usrlist = (from x in db.Users join y in db.Credentials
+                                    on x.UserID equals y.UserID
+                                    select y.UserName).ToList<string>();
+            return usrlist;
         }
     }
 }
