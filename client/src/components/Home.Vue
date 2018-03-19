@@ -1,101 +1,49 @@
 <template>
-  <div>
-    <header>
-        <div class = "container">
-            <div id = "brand">
-                <h1>Whatfits</h1>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href = "index.html">Home</a></li>
-                    <li><a href = "index.html">About</a></li>
-                    <li><a href = "index.html">Contact Us</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <section id = "showcase">
-        <div class = "container">
-            <h1>Find what fitness fits with you</h1>
-            <p>Fitness based social media platform that will connect others </p>
-        </div>
-    </section>
-
-    <section id ="Home-Registration">
-        <div class = "container">
-            <h1>Register for Whatfits</h1>
-            <form>
-                <h2>Username</h2>
-                <input type = "username" placeholder = "Enter Username">
-                <h2>Password</h2>
-                <input type = "password" placeholder = "Enter Password">
-                <h2>Confirm Password</h2>
-                <input type = "confirmPassword" placeholder = "Confirm Password">
-                <div class = "checkbox">
-                    LA/OC resident<input type = "checkbox" name = "resident" value = "LA/OC resident"><br>
-                    18 years or older<input type = "checkbox" name = "year" value = "18 years or older">
-                </div>
-                <div id = "RegisterButton">
-                    <router-link to = "/registration" tag = "button" @click.native = "checkCredentials" >Continue Registration</router-link>
-                </div>
-            </form>
-        </div>
-    </section>
-
+  <div class = "container">
+    <h1>Whatfits</h1>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-
+import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 export default {
-//   name: 'Home',
-//   methods: {
-//     checkCredentials () {
-//       alert('HEllo')
-//       }
-//   }
-  data () {
+  name: 'Home',
+
+  data: function () {
     return {
-      posts: [],
-      errors: []
+      username: '',
+      isNameValid: false,
+      password: '',
+      isPassValid: false,
+      response: ''
     }
   },
 
-  created () {
-    // alert('Chat')
-    // var WebSocketClient = require('websocket').client
-    // var client = new WebSocketClient()
-    // client.on('connectFailed', function (error) {
-    //   console.log('Connect Error' + error.toString())
-    // })
-
-    // client.on('connect', function (connection) {
-    //   console.log('WebSocket Client Connected')
-    // })
-
-    // client.connect('ws://localhost/server/Chat')
-
-    axios.get('http://localhost/webapi/api/home')
-      .then(response => {
-        this.posts = response.data
-      })
-      .catch(e => {
-        alert('error')
-        this.errors.push(e)
-      })
+  // validations based on business rules
+  validations: {
+    username: {
+      required
+    },
+    password: {
+      required,
+      maxLength: maxLength(64),
+      minLength: minLength(8)
+    },
+    confirmPassword: {
+      required,
+      sameAsPassword: sameAs('password')
+    }
   }
 }
 
 </script>
 
 <style>
-.form.h2 {
-  float: left;
-  clear: right;
+.form.h2{
+    float: left;
+    clear: right;
 }
-.form.input {
-  float: right;
+.form.input{
+    float: right;
 }
 </style>

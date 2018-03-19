@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    interface ICreation
+    public interface ICreation<T>
     {
-        IResponseDTO Create<T>(T obj);
+        bool Create(T obj);
     }
 }
