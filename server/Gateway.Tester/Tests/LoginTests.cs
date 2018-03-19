@@ -14,8 +14,21 @@ namespace Gateway.Tester
     {
         LoginGateway auth = new LoginGateway();
         [Fact]
-        public void GetCredentials(LoginDTO obj)
+        public void GetCredentials()
         {
+            // Getting Credentials from amay
+            LoginDTO findCredential = new LoginDTO
+            {
+                UserName = "latmey"
+            };
+            LoginDTO expectedCredential = new LoginDTO
+            {
+                UserID = 2,
+                Password = "123456",
+                Salt = "asdf",
+                Type = "General"
+            };
+            Assert.Equal(expectedCredential, auth.GetCredentials(findCredential));
 
         }
     }

@@ -63,42 +63,21 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
               salts.ForEach(s => context.Salts.Add(s));
               context.SaveChanges();
               
-            var claims = new List<ClaimItem>
-              {
-                  new ClaimItem{ ClaimType = "User", ClaimValue = "Add"},
-                  new ClaimItem{ ClaimType = "User", ClaimValue = "Edit"},
-                  new ClaimItem{ ClaimType = "User", ClaimValue = "Disable"},
-                  new ClaimItem{ ClaimType = "User", ClaimValue = "Delete"},
-                  new ClaimItem{ ClaimType = "Event", ClaimValue = "Create"},
-                  new ClaimItem{ ClaimType = "Event", ClaimValue = "Edit"},
-                  new ClaimItem{ ClaimType = "Event", ClaimValue = "Delete"},
-                  new ClaimItem{ ClaimType = "Review", ClaimValue = "True"},
-                  new ClaimItem{ ClaimType = "Rate", ClaimValue = "True"},
-                  new ClaimItem{ ClaimType = "Follow", ClaimValue = "Following"},
-                  new ClaimItem{ ClaimType = "Follow", ClaimValue = "Following"},
-                  new ClaimItem{ ClaimType = "Chat", ClaimValue = "True"},
-                  new ClaimItem{ ClaimType = "Search", ClaimValue = "True"},
-                  new ClaimItem{ ClaimType = "Workoutlog", ClaimValue = "Add"},
-                  new ClaimItem{ ClaimType = "Workoutlog", ClaimValue = "View" }
-              };
-              claims.ForEach(c => context.Claims.Add(c));
-              context.SaveChanges();
               var userClaims = new List<UserClaims>
               {
-                  new UserClaims{ UserID = 0001, ClaimID = 1},
-                  new UserClaims{ UserID = 0001, ClaimID = 2},
-                  new UserClaims{ UserID = 0002, ClaimID = 1},
-                  new UserClaims{ UserID = 0002, ClaimID = 2},
-                  new UserClaims{ UserID = 0003, ClaimID = 1},
-                  new UserClaims{ UserID = 0003, ClaimID = 2},
-                  new UserClaims{ UserID = 0004, ClaimID = 1},
-                  new UserClaims{ UserID = 0004, ClaimID = 2},
-                  new UserClaims{ UserID = 0005, ClaimID = 1},
-                  new UserClaims{ UserID = 0005, ClaimID = 2}
+                  new UserClaims{ UserID = 0001, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
+                  new UserClaims{ UserID = 0001, ClaimType="ClaimType", ClaimValue="ClaimValue3"},
+                  new UserClaims{ UserID = 0002, ClaimType="AmayClaimType1", ClaimValue="AmayClaimValue1"},
+                  new UserClaims{ UserID = 0002, ClaimType="AmayClaimType2", ClaimValue="AmayClaimValue2"},
+                  new UserClaims{ UserID = 0003, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
+                  new UserClaims{ UserID = 0003, ClaimType="ClaimType", ClaimValue="ClaimValue3"},
+                  new UserClaims{ UserID = 0004, ClaimType="ClaimType", ClaimValue="ClaimValue3"},
+                  new UserClaims{ UserID = 0004, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
+                  new UserClaims{ UserID = 0005, ClaimType="ClaimType", ClaimValue="ClaimValue3"},
+                  new UserClaims{ UserID = 0005, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
               };
               userClaims.ForEach(uc => context.UserClaims.Add(uc));
               context.SaveChanges();
-
               var questions = new List<SecurityQuestion>
               {
                   new SecurityQuestion{ Question = "Who was the company you first worked for?"},
@@ -113,7 +92,6 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
               };
               questions.ForEach(q => context.SecurityQuestions.Add(q));
               context.SaveChanges();
-
               var answers = new List<SecurityQandA>
               {
                   new SecurityQandA{ UserID = 0001, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
@@ -138,4 +116,4 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
               //*/
         }
     }
-  }
+}

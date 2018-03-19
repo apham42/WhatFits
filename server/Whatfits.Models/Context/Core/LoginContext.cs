@@ -4,7 +4,7 @@ using Whatfits.Models.Models;
 namespace Whatfits.Models.Context.Core
 {
     /// <summary>
-    /// 
+    /// Represents all the models used for this context
     /// </summary>
     public class LoginContext : DbContext
     {
@@ -15,5 +15,6 @@ namespace Whatfits.Models.Context.Core
         public DbSet<UserClaims> UserClaims { get; set; }
         public DbSet<SecurityQandA> SecurityQandA { get; set; }
         public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
+        public DbSet<TokenBlackList> TokenBlackLists { get; set; }
     }
 }

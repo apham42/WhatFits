@@ -10,18 +10,21 @@ namespace Whatfits.Models.Models
     /// </summary>
     public class UserClaims
     {
-        // Foreign Key to Claims Model
-        [Key, Column(Order = 0)]
+        // Primary Key to Claims Model
+        [Key]
         public int ClaimID { get; set; }
 
         // Foreign Key to User Model
-        [Key, Column(Order = 1)]
+        [ForeignKey("Credential")]
         public int UserID { get; set; }
+
+        // Stores the Claim Value
+        public string ClaimValue { get; set; }
+
+        // Stores the Claim Type
+        public string ClaimType { get; set; }
 
         // Navigation Property to User Model
         public virtual Credential Credential { get; set; }
-
-        // Navigation Property to Claims Model
-        public virtual ClaimItem Claims { get; set; }
     }
 }

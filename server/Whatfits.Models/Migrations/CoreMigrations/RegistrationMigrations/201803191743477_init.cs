@@ -8,16 +8,6 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
         public override void Up()
         {
             CreateTable(
-                "dbo.ClaimItems",
-                c => new
-                    {
-                        ClaimID = c.Int(nullable: false, identity: true),
-                        ClaimType = c.String(nullable: false, maxLength: 80),
-                        ClaimValue = c.String(nullable: false, maxLength: 80),
-                    })
-                .PrimaryKey(t => t.ClaimID);
-            
-            CreateTable(
                 "dbo.Credentials",
                 c => new
                     {
@@ -51,6 +41,33 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
                 .PrimaryKey(t => t.SecurityQuestionID);
             
             CreateTable(
+                "dbo.UserClaims",
+                c => new
+                    {
+                        ClaimID = c.Int(nullable: false, identity: true),
+                        UserID = c.Int(nullable: false),
+                        ClaimValue = c.String(),
+                        ClaimType = c.String(),
+                    })
+                .PrimaryKey(t => t.ClaimID)
+                .ForeignKey("dbo.Credentials", t => t.UserID, cascadeDelete: true)
+                .Index(t => t.UserID);
+            
+            CreateTable(
+                "dbo.Locations",
+                c => new
+                    {
+                        LocationID = c.Int(nullable: false, identity: true),
+                        Address = c.String(nullable: false),
+                        City = c.String(nullable: false),
+                        State = c.String(nullable: false),
+                        Zipcode = c.String(nullable: false),
+                        Latitude = c.String(nullable: false),
+                        Longitude = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.LocationID);
+            
+            CreateTable(
                 "dbo.Users",
                 c => new
                     {
@@ -72,33 +89,6 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
                 .Index(t => t.LocationID);
             
             CreateTable(
-                "dbo.Locations",
-                c => new
-                    {
-                        LocationID = c.Int(nullable: false, identity: true),
-                        Address = c.String(nullable: false),
-                        City = c.String(nullable: false),
-                        State = c.String(nullable: false),
-                        Zipcode = c.String(nullable: false),
-                        Latitude = c.String(nullable: false),
-                        Longitude = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.LocationID);
-
-            CreateTable(
-                "dbo.UserClaims",
-                c => new
-                    {
-                        ClaimID = c.Int(nullable: false),
-                        UserID = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.ClaimID, t.UserID })
-                .ForeignKey("dbo.ClaimItems", t => t.ClaimID, cascadeDelete: true)
-                .ForeignKey("dbo.Credentials", t => t.UserID, cascadeDelete: true)
-                .Index(t => t.ClaimID)
-                .Index(t => t.UserID);
-            
-            CreateTable(
                 "dbo.Salts",
                 c => new
                     {
@@ -113,27 +103,24 @@ namespace Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations
         public override void Down()
         {
             DropForeignKey("dbo.Salts", "UserID", "dbo.Credentials");
-            DropForeignKey("dbo.UserClaims", "UserID", "dbo.Credentials");
-            DropForeignKey("dbo.UserClaims", "ClaimID", "dbo.ClaimItems");
             DropForeignKey("dbo.Users", "LocationID", "dbo.Locations");
             DropForeignKey("dbo.Users", "UserID", "dbo.Credentials");
+            DropForeignKey("dbo.UserClaims", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.SecurityQandAs", "SecurityQuestionID", "dbo.SecurityQuestions");
             DropForeignKey("dbo.SecurityQandAs", "UserID", "dbo.Credentials");
             DropIndex("dbo.Salts", new[] { "UserID" });
-            DropIndex("dbo.UserClaims", new[] { "UserID" });
-            DropIndex("dbo.UserClaims", new[] { "ClaimID" });
             DropIndex("dbo.Users", new[] { "LocationID" });
             DropIndex("dbo.Users", new[] { "UserID" });
+            DropIndex("dbo.UserClaims", new[] { "UserID" });
             DropIndex("dbo.SecurityQandAs", new[] { "SecurityQuestionID" });
             DropIndex("dbo.SecurityQandAs", new[] { "UserID" });
             DropTable("dbo.Salts");
-            DropTable("dbo.UserClaims");
-            DropTable("dbo.Locations");
             DropTable("dbo.Users");
+            DropTable("dbo.Locations");
+            DropTable("dbo.UserClaims");
             DropTable("dbo.SecurityQuestions");
             DropTable("dbo.SecurityQandAs");
             DropTable("dbo.Credentials");
-            DropTable("dbo.ClaimItems");
         }
     }
 }

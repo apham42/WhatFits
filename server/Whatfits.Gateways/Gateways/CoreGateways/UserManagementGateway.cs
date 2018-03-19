@@ -100,14 +100,11 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         SaltValue = obj.Salt
                     };
                     db.Salts.Add(salt);
-                    db.SaveChanges(); ;
-
-
-
+                    db.SaveChanges();
                     // Add UserClaims
-                    for (int i = 0; i < obj.ClaimIDs.Count; i++)
+                    for (int i = 0; i < obj.UserClaims.Count; i++)
                     {
-                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimID = obj.ClaimIDs[i] };
+                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType = obj.UserClaims[i].Value, ClaimValue = obj.UserClaims[i].Value };
                         db.UserClaims.Add(temp);
                         db.SaveChanges(); ;
                     }
@@ -119,7 +116,6 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         db.SaveChanges(); ;
                     }
                     // Commits changes in database
-
                     dbTransaction.Commit();
                 }
                 catch (Exception)

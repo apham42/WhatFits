@@ -8,21 +8,16 @@ namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
     {
         // UserData
         public int UserID { get; set; }
-        public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Gender { get; set; }
         // Credentials
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Type { get; set; }
-        // UserClaims
-        public List<int> ClaimIDs { get; set; }
-        public List<Claim> UserClaims { get; set; }
         // Salt
         public string Salt { get; set; }
         // Security Q&A
         public Dictionary<int, String> Answers { get; set; }
         public Dictionary<int, String> Questions { get; set; }
+        // Token
+        public string Token { get; set; }
     }
 }
