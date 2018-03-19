@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
-using Whatfits.UserAccessControl.Constants;
 
 namespace Whatfits.UserAccessControl.Controller
 {
@@ -12,20 +11,18 @@ namespace Whatfits.UserAccessControl.Controller
         /*
          * Gives new users a set of default claims.
          * This should only be used in Registration.
-         * @param string username, username of the new registered user
          * @returns List<int>, returns list of ints(id of the claims) 
          * */
-        public static List<Claim> SetDefaultClaims(string username)
+        public static List<Claim> SetDefaultClaims()
         {
             // create list
             List<Claim> DefaultClaims = new List<Claim>();
 
             // add default claims to new user
-            DefaultClaims.AddRange(ClaimConstants.DEFAULT_CLAIMS);
+            DefaultClaims.AddRange(Service.SetDefaultClaims.GetDefaultClaims());
 
             // return default claims for new user
             return DefaultClaims;
-
         }
 
         /*
