@@ -1,3 +1,4 @@
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll.config
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.pdb
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csproj.CoreCompileInputs.cache

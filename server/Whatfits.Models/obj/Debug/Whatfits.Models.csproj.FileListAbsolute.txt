@@ -77,9 +77,9 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Wha
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.init.resources
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.LoginMigrations.init.resources
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations.init.resources
-C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations.enabledChatandReviews.resources
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.UserAccessControlMigrations.init.resources
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.UserManagementMigrations.init.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.UserManagementMigrations.init1.resources
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csproj.GenerateResource.Cache
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csproj.CoreCompileInputs.cache
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.dll
