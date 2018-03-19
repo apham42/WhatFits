@@ -12,7 +12,7 @@ namespace Whatfits.Models.Migrations.CoreMigrations.UserAccessControlMigrations
         
         public override void Down()
         {
-           
+            
         }
     }
 }

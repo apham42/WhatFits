@@ -52,8 +52,12 @@ namespace Gateway.Tester
                 Answers = new List<string> { "First Answer to Q1", "Second Answer to Q2", "Third Answer to Q3." },
 
                 // Creating UserClaims
-                ClaimIDs = new List<int> { 1, 2, 3 }
-
+                UserClaims = new List<Claim>()
+                {
+                    new Claim("NewClaimType1", "NewClaimValue1"),
+                    new Claim("NewClaimType2", "NewClaimValue2"),
+                    new Claim("NewClaimType3", "NewClaimValue3"),
+                }
             };
 
             // Passing DTO to gateway to be processed and stored
@@ -77,8 +81,19 @@ namespace Gateway.Tester
         [Fact]
         public void GetUserListTest()
         {
-            reg.GetUserList();
-            Assert.True(true);
+            // NOTE: Run this first before register user
+            List<string> expectedList = new List<string>
+            {
+                "latmey","amay","rstrong","rblue","chackins"
+            };
+
+            Assert.Equal(expectedList,reg.GetUserList());
+        }
+        [Fact]
+        public void GetSecurityQuestions()
+        {
+
+            // Create this
         }
     }
 }
