@@ -3,25 +3,25 @@
         <form>
             <div class = "UserCredentials">
               <h3>Username</h3>
-              <input id = "username" placeholder = "Enter Username" v-model.trim = "username" @input="$v.username.$touch()">
+              <input id = "username" placeholder = "Enter Username" v-model.trim = "username" @input="delayTouch($v.username)">
                 <div class = "usernameValidations">
                   <span class = "validations" v-show="!$v.username.required && $v.username.$dirty">Field is required</span>
-                  <span class = "validations" v-show="!$v.username.minLength">Username must have at least {{$v.username.$params.minLength.min}} letters.</span>
-                  <span class = "validations" v-show="!$v.username.maxLength">Username must have at most {{$v.username.$params.maxLength.max}} letters.</span>
+                  <span class = "validations" v-show="!$v.username.minLength && $v.username.$dirty">Username must have at least {{$v.username.$params.minLength.min}} letters</span>
+                  <span class = "validations" v-show="!$v.username.maxLength && $v.username.$dirty">Username must have at most {{$v.username.$params.maxLength.max}} letters</span>
                   <pre>{{$v.username}}</pre>
                 </div>
               <h3>Password</h3>
-              <input id = "password" placeholder = "Enter Password"  v-model.trim = "password" @input="$v.password.$touch()">
+              <input type = "password" id = "userPassword" placeholder = "Enter Password"  v-model.trim = "password" @input="delayTouch($v.password)">
                   <div class = "passwordValidations">
-                    <span class = "validations" v-show="!$v.password.minLength">Minimum length is {{$v.password.$params.minLength.min}}</span>
-                    <span class = "validations" v-show="!$v.password.maxLength">Maximum length is {{$v.password.$params.maxLength.max}}</span>
-                    <span class = "validations" v-show="!$v.password.required && $v.password.$dirty">This field is required</span>
+                    <span class = "validations" v-show="!$v.password.minLength && $v.password.$dirty">Minimum length is {{$v.password.$params.minLength.min}}</span>
+                    <span class = "validations" v-show="!$v.password.maxLength && $v.password.$dirty">Maximum length is {{$v.password.$params.maxLength.max}}</span>
+                    <span class = "validations" v-show="!$v.password.required && $v.password.$dirty">Field is required</span>
                     <pre>{{$v.password}}</pre>
                   </div>
               <h3>Confirm Password</h3>
-              <input id = "confirmPassword" placeholder = "Confirm Password" v-model.trim = "confirmPassword" @input="$v.confirmPassword.$touch()">
+              <input type = "password" id = "confirmPassword" placeholder = "Confirm Password" v-model.trim = "confirmPassword" @input="delayTouch($v.confirmPassword)">
                   <div class = "confirmPassValidations">
-                    <span class = "validations" v-show="!$v.confirmPassword.sameAsPassword && $v.confirmPassword.$dirty">Passwords must be identical.</span>
+                    <span class = "validations" v-show="!$v.confirmPassword.sameAsPassword && $v.confirmPassword.$dirty">Passwords must be identical</span>
                     <pre>{{$v.confirmPassword}}</pre>
                   </div>
               </div>
@@ -37,33 +37,33 @@
               <input id = "zipCode" placeholder = "Enter Zip Code" v-model.trim = "zipCode">
             </div>
             <div class = "Security Questions">
-                <h3>Security Question 1</h3>
+              <h3>Security Question 1</h3>
                 <select v-model="securityQues1">
-                    <option disabled value=""></option>
-                    <option v-for="securityQuestion in securityQuestionSet1" :key="securityQuestion"> {{securityQuestion.question}} </option>
+                  <option disabled value=""></option>
+                  <option v-for="securityQuestion in securityQuestionSet1" :key="securityQuestion"> {{securityQuestion.question}} </option>
                 </select>
-                <input id = "firstAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues1">
+              <input id = "firstAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues1">
 
-                <h3>Security Question 2</h3>
+              <h3>Security Question 2</h3>
                 <select v-model="securityQues2">
-                    <option disabled value=""></option>
-                    <option v-for="securityQuestion in securityQuestionSet2" :key="securityQuestion"> {{securityQuestion.question}} </option>
+                  <option disabled value=""></option>
+                  <option v-for="securityQuestion in securityQuestionSet2" :key="securityQuestion"> {{securityQuestion.question}} </option>
                 </select>
-                <input id = "secondAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues2">
+              <input id = "secondAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues2">
 
-                <h3>Security Question 3</h3>
+              <h3>Security Question 3</h3>
                 <select v-model="securityQues3">
                     <option disabled value=""></option>
                     <option v-for="securityQuestion in securityQuestionSet3" :key="securityQuestion"> {{securityQuestion.question}} </option>
                 </select>
-                <input id = "ThirdAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues3">
+              <input id = "ThirdAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues3">
             </div>
 
             <div class = "checkbox">
                 <p>Agree To Terms and Conditions</p>
                 <input type = "checkbox" name = "terms">
             </div>
-            <button type = "submit" class = "register-button" v-bind:class = "{disabled: disableButton}">Register</button>
+            <button type = "submit" class = "register-button" v-on:click = "register">Register</button>
         </form>
     </div>
 </template>
@@ -71,6 +71,9 @@
 <script>
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 // import Terms from '@/components/Terms'
+
+const touchMap = new WeakMap()
+
 export default {
   name: 'Registration',
   // component: Terms,
@@ -124,7 +127,6 @@ export default {
     },
     address: {
       required,
-      minLength: minLength(2),
       maxLength: maxLength(200)
     },
     city: {
@@ -139,6 +141,40 @@ export default {
       required,
       minLength: minLength(5),
       maxLength: maxLength(16)
+    },
+    securityQues1: {
+      required
+    },
+    securityQues2: {
+      required
+    },
+    securityQues3: {
+      required
+    },
+    answerToSecQues1: {
+      required,
+      maxLength: maxLength(150)
+    },
+    answerToSecQues2: {
+      required,
+      maxLength: maxLength(150)
+    },
+    answerToSecQues3: {
+      required,
+      maxLength: maxLength(150)
+    }
+  },
+
+  methods: {
+    delayTouch ($v) {
+      $v.$reset()
+      if (touchMap.has($v)) {
+        clearTimeout(touchMap.get($v))
+      }
+      touchMap.set($v, setTimeout($v.$touch, 2000))
+    },
+    register () {
+      this.$router.push('Home')
     }
   }
 }
