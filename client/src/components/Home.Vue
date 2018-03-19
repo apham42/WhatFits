@@ -1,28 +1,7 @@
 <template>
   <div class = "container">
-        <h1>Register for Whatfits</h1>
-        <form>
-            <h2>Username</h2>
-            <input type = "username" placeholder = "Enter Username" v-model.trim = "username">
-            <h2>Password</h2>
-                <input type = "password" placeholder = "Enter Password"  v-model.trim = "password" @input="$v.password.$touch()">
-                <span class="form-password-message" v-if="!$v.password.minLength">Minimum length is 8</span>
-                <span class="form-password-message" v-if="!$v.password.maxLength">Maximum length is 64</span>
-                <pre>{{$v.password}}</pre>
-                <h2>Confirm Password</h2>
-                <input type = "password" placeholder = "Confirm Password" @input="$v.confirmPassword.$touch()">
-                <span class="form-password-message" v-if="!$v.confirmPassword.sameAsPassword && $v.confirmPassword.$dirty">Password is not the same</span>
-                <pre>{{$v.confirmPassword}}</pre>
-
-                <div class = "checkbox">
-                    LA/OC resident<input type = "checkbox" name = "resident" value = "LA/OC resident"><br>
-                    18 years or older<input type = "checkbox" name = "year" value = "18 years or older">
-                </div>
-                <div id = "RegisterButton">
-                    <router-link to = "/registration" tag = "button" @click.native = "sendCredentials" >Continue Registration</router-link>
-                </div>
-            </form>
-    </div>
+    <h1>Whatfits</h1>
+  </div>
 </template>
 
 <script>
