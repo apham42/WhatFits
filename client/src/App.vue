@@ -1,10 +1,12 @@
 <template>
-  <div id="app">Whatfits<br/><br/>
-    <router-view/>
+  <div>
+    <router-view></router-view>
+
   </div>
 </template>
 
 <script>
+
 export default {
   name: 'App'
 }
@@ -16,7 +18,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: white;
-  margin-top: 10px;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>

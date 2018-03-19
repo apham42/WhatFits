@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    interface INetworkCommunication: IRequest
+    public interface INetworkCommunication: IRequest
     {
         
     }

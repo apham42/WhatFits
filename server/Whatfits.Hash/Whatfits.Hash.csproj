@@ -40,15 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Hash.cs" />
+    <Compile Include="HMAC256.cs" />
     <Compile Include="HashConstants.cs" />
+    <Compile Include="HashDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\server\server.csproj">
-      <Project>{283325fc-f16b-46ad-9137-a6158d0ad1d4}</Project>
-      <Name>server</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
