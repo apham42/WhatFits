@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 
 namespace Whatfits.Models.Models
 {
@@ -14,7 +10,7 @@ namespace Whatfits.Models.Models
     public class SecurityQandA
     {
         // Answer Stored to a question 
-        [Required, StringLength(100, MinimumLength = 2)]
+        [Required]
         public string Answer { get; set; }
 
         // Foreign Key - Maps to the User Table
