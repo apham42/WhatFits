@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Whatfits.Models.Models
@@ -33,7 +34,7 @@ namespace Whatfits.Models.Models
 
         // Records the DateTime when the review was created
         [Required]
-        public string DateTime { get; set; }
+        public DateTime DateAndTime { get; set; }
 
         // Navigation Property back to User model
         public User User { get; set; }

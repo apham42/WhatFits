@@ -5,7 +5,7 @@ using System.Linq;
 using Whatfits.Models;
 using Whatfits.Models.Context.Content;
 
-namespace Whatfits.DataAccess.Gate
+namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
     public class ChatGateway
     {

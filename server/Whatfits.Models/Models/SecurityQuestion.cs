@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Whatfits.Models.Models
 {
@@ -16,6 +11,7 @@ namespace Whatfits.Models.Models
         // Primary Key
         [Key, Required]
         public int SecurityQuestionID { get; set; }
+
         // Actual Questions Stored
         public string Question { get; set; }
     }
