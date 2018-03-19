@@ -4,6 +4,7 @@ using System.Data;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using System.Collections.Generic;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -34,11 +35,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     {
                         UserName = obj.UserName,
                         Password = obj.Password,
-                        IsBanned = obj.IsBanned,
-                        IsFullyRegistered = false
                     };
                     db.Credentials.Add(newCredential);
-                    Save();
+                    db.SaveChanges();
                     dbTransaction.Commit();
                 }
                 catch (Exception)
@@ -60,33 +59,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     int newUserID = (from u in db.Credentials
                                      where u.UserName == obj.UserName
                                      select u.UserID).FirstOrDefault();
-                    // Creating new User
-                    User user = new User
-                    {
-                        UserID = newUserID,
-                        FirstName = obj.FirstName,
-                        LastName = obj.LastName,
-                        Email = obj.Email,
-                        Gender = obj.Gender,
-                        Description = obj.Description,
-                        ProfilePicture = obj.ProfilePicture,
-                        SkillLevel = obj.SkillLevel
-                    };
-                    db.Users.Add(user);
-                    Save();
-                    // Creating new Salt
-                    Salt salt = new Salt
-                    {
-                        UserID = newUserID,
-                        SaltValue = obj.Salt
-                    };
-                    db.Salts.Add(salt);
-                    Save();
-
-                    // Creating location for User
+                    // Creating Location
                     Location location = new Location
                     {
-                        UserID = newUserID,
                         Address = obj.Address,
                         City = obj.City,
                         State = obj.State,
@@ -96,23 +71,54 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     };
                     // Saving Data for new user
                     db.Locations.Add(location);
-                    Save();
+                    db.SaveChanges();
 
+                    int newLocation = (from u in db.Locations
+                                     where u.Address == obj.Address && u.City == obj.City && u.State == obj.State && u.Zipcode == obj.Zipcode
+                                     select u.LocationID).FirstOrDefault();
+                    // Creating new User
+                    User user = new User
+                    {
+                        UserID = newUserID,
+                        LocationID = newLocation,
+                        FirstName = obj.FirstName,
+                        LastName = obj.LastName,
+                        Email = obj.Email,
+                        Gender = obj.Gender,
+                        Description = obj.Description,
+                        ProfilePicture = obj.ProfilePicture,
+                        SkillLevel = obj.SkillLevel,
+                        Type = obj.Type
+                    };
+                    db.Users.Add(user);
+                    db.SaveChanges();
+                    // Creating new Salt
+                    Salt salt = new Salt
+                    {
+                        UserID = newUserID,
+                        SaltValue = obj.Salt
+                    };
+                    db.Salts.Add(salt);
+                    db.SaveChanges();;
+
+
+                    
                     // Add UserClaims
                     for (int i = 0; i < obj.ClaimIDs.Count; i++)
                     {
                         UserClaims temp = new UserClaims { UserID = newUserID, ClaimID = obj.ClaimIDs[i] };
                         db.UserClaims.Add(temp);
-                        Save();
+                        db.SaveChanges();;
                     }
                     // Add Security QandAs
                     for (int i = 0; i < obj.QuestionIDs.Count; i++)
                     {
                         SecurityQandA temp = new SecurityQandA { UserID = newUserID, SecurityQuestionID = obj.QuestionIDs[i], Answer = obj.Answers[i] };
                         db.SecurityQandA.Add(temp);
-                        Save();
+                        db.SaveChanges();;
                     }
                     // Commits changes in database
+                    
                     dbTransaction.Commit();
                 }
                 catch (Exception)
@@ -139,10 +145,12 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             else
                 return true;
         }
-        private void Save()
+        public List<string> GetUserList()
         {
-            // Saves any changes to the database
-            db.SaveChanges();
+            List<string> usrlist = (from x in db.Users join y in db.Credentials
+                                    on x.UserID equals y.UserID
+                                    select y.UserName).ToList<string>();
+            return usrlist;
         }
     }
 }

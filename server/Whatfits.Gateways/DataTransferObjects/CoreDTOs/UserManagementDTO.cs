@@ -24,8 +24,7 @@ namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
         // Credentials
         public string UserName { get; set; }
         public string Password { get; set; }
-        public Boolean IsFullyRegistered { get; set; }
-        public Boolean IsBanned { get; set; }
+        public string Type { get; set; }
         // UserClaims
         public List<int> ClaimIDs { get; set; }
         // Salt

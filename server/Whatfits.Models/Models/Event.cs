@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Whatfits.Models.Models
@@ -9,13 +10,15 @@ namespace Whatfits.Models.Models
     /// </summary>
     public class Event
     {
-        // Foreign Key - Maps to the User Table
-        [Key, Column(Order = 0)]
+        [Key]
+        public int EventID { get; set; }
+         // Foreign Key - Maps to the User Table
+        [ForeignKey("User")]
         public int UserID { get; set; }
-
+        
         // The place where the event will take place
-        [Required]
-        public string Location { get; set; }
+        [ForeignKey("Location")]
+        public int LocationID { get; set; }
 
         // Title for the event
         [Required]
@@ -27,16 +30,17 @@ namespace Whatfits.Models.Models
 
         // Time when the event will take place
         [Required]
-        public string DateTime { get; set; }
+        public DateTime DateAndTime { get; set; }
 
         // A general description of the event
         [Required]
         public string Description { get; set; }
 
-        // An image for the event
+        // OPTIONAL: An image for the event
         public string Image { get; set; }
 
         // Navigation Property
-        public User User { get; set; }
+        public virtual User User { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

@@ -13,6 +13,5 @@ namespace Whatfits.Models.Context.Content
         public DbSet<User> Users { get; set; }
         public DbSet<Credential> Crendtials { get; set; }
         public DbSet<Following> Following { get; set; }
-        public DbSet<Follower> Follower { get; set; }
     }
 }

@@ -11,6 +11,7 @@ namespace Whatfits.Models.Models
         // Primary Key
         [Key, Required]
         public int SecurityQuestionID { get; set; }
+
         // Actual Questions Stored
         public string Question { get; set; }
     }

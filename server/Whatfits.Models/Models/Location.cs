@@ -36,13 +36,6 @@ namespace Whatfits.Models.Models
         [Required]
         public string Longitude { get; set; }
 
-        [ForeignKey("User")]
-        // Foreign Key to User Table
-        public int UserID { get; set; }
-
-        // Navigation Property
-        public User User { get; set; }
-
         // Location can have many users
         ICollection<User> Users { get; set; }
     }

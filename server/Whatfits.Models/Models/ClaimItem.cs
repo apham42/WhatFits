@@ -14,9 +14,11 @@ namespace Whatfits.Models.Models
         // Primary Key
         [Key]
         public int ClaimID { get; set; }
+
         // Stores the type of claim
         [Required, StringLength(80, MinimumLength = 2)]
         public String ClaimType { get; set; }
+
         // Stores the value of the claim
         [Required, StringLength(80, MinimumLength = 2)]
         public String ClaimValue { get; set; }

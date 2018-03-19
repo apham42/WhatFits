@@ -12,12 +12,16 @@ namespace Whatfits.Models.Models
         // Primary key of the User model
         [Key, ForeignKey("Credential")]
         public int UserID { get; set; }
+        
+        // Foriegn Key to Locations
+        [ForeignKey("Location")]
+        public int LocationID { get; set; }
 
         // Stores Email address of the User
         [Required, StringLength(256)]
         public string Email { get; set; }
 
-        // Stores Profile picture of each user
+        // Stores the directory path of the profile picture
         public string ProfilePicture { get; set; }
 
         // Stores First Name of the User
@@ -39,22 +43,23 @@ namespace Whatfits.Models.Models
         // User Description for Profile
         [StringLength(250)]
         public string Description { get; set; }
+        
+        // Determines what type of user they are.
+        [Required]
+        public string Type { get; set; }
+        
         // User can have One:
-        // [Required]
-        // Note: This causes an error, don't know why
         public virtual Credential Credential { get; set; }
 
+        // Navigation Property
+        public virtual Location Location { get; set; }
+
         // Users can have many:
-        public ICollection<Event> Events { get; set; }
         public ICollection<Review> Review { get; set; }
         public ICollection<Message> Messages { get; set; }
-        
-        /*
-        public ICollection<Event> Event { get; set; }
+        public ICollection<Event> Events { get; set; }
         public ICollection<WorkoutLog> WorkoutLogs { get; set; }
-        public ICollection<Following> Following { get; set; }
-        public ICollection<Follower> Followers { get; set; }
-        
-        */
+        public ICollection<Following> Followers { get; set; }
+        public ICollection<Notification> Notifications { get; set; }
     }
 }

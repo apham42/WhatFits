@@ -35,8 +35,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     UserID = foundCredential.UserID,
                     Password = foundCredential.Password,
                     Salt = db.Salts.Find(foundCredential.UserID).SaltValue,
-                    IsBanned = foundCredential.IsBanned,
-                    IsFullyRegistered = foundCredential.IsFullyRegistered
+                    Type = "General"
                 };
                 // Returns data
                 return credentials;
@@ -50,8 +49,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     UserID = -1,
                     Password = null,
                     Salt = null,
-                    IsBanned = false,
-                    IsFullyRegistered = false
+                    Type = null
                 };
                 // Returns null data
                 return nullValues;
