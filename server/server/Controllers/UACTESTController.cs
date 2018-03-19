@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web.Http;
-
-using Whatfits.UserAccessControl.Auth;
-using Whatfits.JsonWebToken.Controller;
+﻿using System.Web.Http;
 using Whatfits.JsonWebToken.Constant;
-using Newtonsoft.Json;
+using Whatfits.JsonWebToken.Controller;
+using Whatfits.UserAccessControl.Auth;
 
 namespace server.Controllers
 {
@@ -25,13 +19,13 @@ namespace server.Controllers
         [HttpPost]
         public string two()
         {
-            return CreateJWT.CreateToken();
+            return CreateJWT.CreateToken("apham42");
         }
 
         [HttpPost]
-        public string three()
+        public bool three()
         {
-            return VerifyJWT.VerifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3d3dy5XaGF0Zml0cy5zb2NpYWwvIiwiYXVkIjoidXNlciIsImlhdCI6IjE1MjEzNDIzODciLCJleHAiOiIxNTIxMzQ1OTg3In0.RtD1caVzD-Q3bjc_zTdyBZ20N1VF8oOMPmYyMfpsRPE", Key.secret);
+            return VerifyJWT.VerifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3d3dy5XaGF0Zml0cy5zb2NpYWwvIiwic3ViIjoiYXBoYW00MiIsImF1ZCI6IkdlbmVyYWwiLCJpYXQiOiIxNTIxNDIxMjY3IiwibmJmIjoiMTUyMTQyMTI2NyIsImV4cCI6IjE1MjE0MjQ4NjciLCJXT1JLT1VUX0FERCI6IkFERCIsIldPUktPVVRfVklFVyI6IlZJRVcifQ.J2BJmCDdvsVhYhH5-g-w4wPsjqUSwNoDHWK4AGZL-xw", Key.secret);
         }
 
 

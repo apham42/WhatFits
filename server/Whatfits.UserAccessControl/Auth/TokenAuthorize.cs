@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
-using System.Linq;
-
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Controllers;
-
 using Whatfits.UserAccessControl.Service;
-using System;
-using System.Net.Http;
-using System.Net;
 
 namespace Whatfits.UserAccessControl.Auth
 {

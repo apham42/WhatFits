@@ -1,57 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.IdentityModel.Tokens.Jwt;
-using System.IdentityModel.Tokens;
-using System.Security.Claims;
-using Whatfits.JsonWebToken.Constant;
+using Whatfits.JsonWebToken.Service;
 
 namespace Whatfits.JsonWebToken.Controller
 {
+    /// <summary>
+    /// Create jwt
+    /// CreateToken(): combines header and payload to make token
+    /// CreateHeader(): creates header of token
+    /// CreatePayload(): creates payload of token
+    /// </summary>
     public static class CreateJWT
     {
-
-        public static string CreateToken()
+        /**
+         * Create tokens from CreateHeader(), and CreatePayload();
+         * @return: Return jwt else return fail
+         * */
+        public static string CreateToken(string username)
         {
-            // creates jwt
-            var jwt = new JwtSecurityToken(CreateHeader(), CreatePayload());
-            // create handler for jwt
-            var handler = new JwtSecurityTokenHandler();
+            // creates jwtsecuritytoken
+            var jwt = new JwtSecurityToken(Create.CreateHeader(), Create.CreatePayload(username));
+
             // converts JwtSecurityToken into serialized format
-            return handler.WriteToken(jwt);
-        }
-
-        private static JwtHeader CreateHeader()
-        {
-            var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Key.secret);
-            var signingCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(
-                                        securityKey,
-                                        "HS256");
-
-            return new JwtHeader(signingCredentials);
-        }
-
-        private static JwtPayload CreatePayload()
-        {
-            JwtPayload payload = new JwtPayload()
+            // Signs token with SigningCredentials in WriteToken()
+            try
             {
-
-            };
-
-            DateTime foo = DateTime.Now;
-            long unixTime = ((DateTimeOffset)foo).ToUnixTimeSeconds();
-            long hrtime = ((DateTimeOffset)foo.AddHours(1)).ToUnixTimeSeconds();
-
-
-            payload.Add("iss", "https://www.Whatfits.social/");
-            payload.Add("aud", "user");
-            payload.Add("iat", unixTime.ToString());
-            payload.Add("exp", hrtime.ToString());
-           
-            return payload;
+                return new JwtSecurityTokenHandler().WriteToken(jwt);
+            }
+            /*
+             * Catch if
+             *      System.ArgumentNullException
+             *      System.ArgumentException
+             *      Microsoft.IdentityModel.Tokens.SecurityTokenEncryptionFailedException
+             * */
+            catch (Exception) 
+            {
+                return "Failed";
+            }
         }
+
+        
     }
 }

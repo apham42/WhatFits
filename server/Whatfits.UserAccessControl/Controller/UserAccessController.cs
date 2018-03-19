@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.Security.Claims;
 using Whatfits.UserAccessControl.Constants;
-using System.Net.Http;
-
-using Whatfits.UserAccessControl.Auth;
-using System.Text;
-using System.IdentityModel.Tokens;
 
 namespace Whatfits.UserAccessControl.Controller
 {
@@ -26,11 +18,7 @@ namespace Whatfits.UserAccessControl.Controller
         public static List<Claim> SetDefaultClaims(string username)
         {
             // create list
-            List<Claim> DefaultClaims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.Name, username),
-                new Claim(ClaimTypes.Webpage, "Whatfits.social")
-            };
+            List<Claim> DefaultClaims = new List<Claim>();
 
             // add default claims to new user
             DefaultClaims.AddRange(ClaimConstants.DEFAULT_CLAIMS);
@@ -40,14 +28,6 @@ namespace Whatfits.UserAccessControl.Controller
 
         }
 
-        public static List<Claim> GetviewClaims(string username)
-        {
-            List<Claim> viewPage = new List<Claim>();
-
-
-
-            return viewPage;
-        }
         /*
          * Add new claim for user
          * @param Claim claim, new claim to be added
@@ -66,5 +46,16 @@ namespace Whatfits.UserAccessControl.Controller
 
         }
         
+        /*
+         * Get view page claims from db
+         * @return: view page claims 
+         * */
+        public static List<Claim> GetViewClaims()
+        {
+            List<Claim> ViewClaims = new List<Claim>();
+
+            return ViewClaims;
+
+        }
     }
 }
