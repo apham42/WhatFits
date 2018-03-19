@@ -1,53 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.IdentityModel.Tokens.Jwt;
-using System.IdentityModel.Tokens;
-using System.Security.Claims;
-using Whatfits.JsonWebToken.Constant;
+using Whatfits.JsonWebToken.Service;
 
 namespace Whatfits.JsonWebToken.Controller
 {
+    /// <summary>
+    /// Create jwt
+    /// CreateToken(): combines header and payload to make token
+    /// CreateHeader(): creates header of token
+    /// CreatePayload(): creates payload of token
+    /// </summary>
     public static class CreateJWT
     {
-        public static string CreateJsonWebToken()
+        /**
+         * Create tokens from CreateHeader(), and CreatePayload();
+         * @return: Return jwt else return fail
+         * */
+        public static string CreateToken(string username)
         {
-            // convert to base 64
-            var symmetricKey = Convert.FromBase64String(Key.secret);
+            // creates jwtsecuritytoken
+            var jwt = new JwtSecurityToken(Create.CreateHeader(), Create.CreatePayload(username));
 
-            // create jwt handler
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            
-            var now = DateTime.UtcNow;
-
-            // in token
-            var tokenDescriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
+            // converts JwtSecurityToken into serialized format
+            // Signs token with SigningCredentials in WriteToken()
+            try
             {
-                //identity in token
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, "apham42"),
-                    new Claim(ClaimTypes.Webpage, "Whatfits.social"),
-                    new Claim("WORKOUT_ADD", "ADD")
-                }),
-
-                //Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
-
-                //signing credentials
-                SigningCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(symmetricKey), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            // create the token from handler
-            var stoken = tokenHandler.CreateToken(tokenDescriptor);
-            // convert to string
-            var token = tokenHandler.WriteToken(stoken);
-
-            // return string jwt
-            return token;
+                return new JwtSecurityTokenHandler().WriteToken(jwt);
+            }
+            /*
+             * Catch if
+             *      System.ArgumentNullException
+             *      System.ArgumentException
+             *      Microsoft.IdentityModel.Tokens.SecurityTokenEncryptionFailedException
+             * */
+            catch (Exception) 
+            {
+                return "Failed";
+            }
         }
+
+        
     }
 }

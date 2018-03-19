@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
-using System.Linq;
-
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using Whatfits.UserAccessControl.Service;
 
 namespace Whatfits.UserAccessControl.Auth
 {
@@ -30,41 +31,36 @@ namespace Whatfits.UserAccessControl.Auth
         //     The context parameter is null.
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            // get http request
-            var request = actionContext.Request;
-            // get header from request
-            var header = request.Headers;
-            // get string token
-
-            // check if token exists
-            if (header.Contains("Token"))
+            try
             {
-                string tokenstr = header.GetValues("Token").First();
+                string tokenstr = RequestTransformer.GetToken(actionContext);
 
-
-                // create principal of user from jwt
-                ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
-
-                // creat authorization context to check if user has claims
-                AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
-
-
-                // check if user has claims
-                if (new AuthorizationManager().CheckAccess(authcontext))
+                if(tokenstr != "False")
                 {
-                    // if user does have those specififed claims
-                    base.IsAuthorized(actionContext);
-                }
-                else
+                    // create principal of user from jwt
+                    ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
+
+                    // creat authorization context to check if user has claims
+                    AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
+
+                } else
                 {
-                    // if user does NOT have those specified claims
-                    base.HandleUnauthorizedRequest(actionContext);
+                    throw new Exception();
                 }
-            } else
+            } catch (Exception)
             {
-                // if the header does not contain a Token
-                base.HandleUnauthorizedRequest(actionContext);
+                HandleUnauthorizedRequest(actionContext);
             }
+        }
+
+
+        protected override void HandleUnauthorizedRequest(HttpActionContext actionContext)
+        {
+            actionContext.Response = new HttpResponseMessage(HttpStatusCode.Forbidden);
+        }
+        protected override bool IsAuthorized(HttpActionContext actionContext)
+        {
+            return false;
         }
     }
 }

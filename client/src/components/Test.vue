@@ -18,15 +18,13 @@ export default {
       this.$data.testingdata = 'buttonworks'
     },
     TestPOST () {
-      var token = ('input[name="__RequestVerificationToken"]').val()
       axios({
         method: 'POST',
         url: 'http://localhost/server/UACTEST/one',
         headers: {
           'contentType': 'application/json; charset=utf-8',
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Token': this.$data.jwt,
-          '__RequestVerificationToken': token
+          'Access-Control-Allow-Origin': 'http://localhost:8080'
+          // 'Token': this.$data.jwt
         }
       }).then((response) => {
         this.$data.testingdata = response.data
