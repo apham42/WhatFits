@@ -40,21 +40,21 @@
               <h3>Security Question 1</h3>
                 <select v-model="securityQues1">
                   <option disabled value=""></option>
-                  <option v-for="securityQuestion in securityQuestionSet1" :key="securityQuestion"> {{securityQuestion.question}} </option>
+                  <option v-for="securityQuestion1 in securityQuestionSet1" :key="securityQuestion1"> {{securityQuestion1.question}} </option>
                 </select>
               <input id = "firstAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues1">
 
               <h3>Security Question 2</h3>
                 <select v-model="securityQues2">
                   <option disabled value=""></option>
-                  <option v-for="securityQuestion in securityQuestionSet2" :key="securityQuestion"> {{securityQuestion.question}} </option>
+                  <option v-for="securityQuestion2 in securityQuestionSet2" :key="securityQuestion2"> {{securityQuestion2.question}} </option>
                 </select>
               <input id = "secondAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues2">
 
               <h3>Security Question 3</h3>
                 <select v-model="securityQues3">
                     <option disabled value=""></option>
-                    <option v-for="securityQuestion in securityQuestionSet3" :key="securityQuestion"> {{securityQuestion.question}} </option>
+                    <option v-for="securityQuestion3 in securityQuestionSet3" :key="securityQuestion3"> {{securityQuestion3.question}} </option>
                 </select>
               <input id = "ThirdAnswer" placeholder = "Answer" v-model.trim = "answerToSecQues3">
             </div>
