@@ -30,12 +30,14 @@ namespace Gateway.Tester
                 Type = "General"
             };
             Assert.Equal(expectedCredential, auth.GetCredentials(findCredential));
-
         }
         [Fact]
         public void CheckBlacklistToken()
         {
-
+            LoginDTO expectedToken = new LoginDTO
+            {
+                Token = "adhlfkjh323hdh93"
+            };
         }
         [Fact]
         public void GetUsersSecurityQandAs()

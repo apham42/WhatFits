@@ -90,23 +90,16 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     {
                         try
                         {
-                            for (int i = 0; i < obj.UserClaims.Count; i++)
+                        // Finds the User's Claims
+                            var foundUserClaims = (from userClaims in db.UserClaims
+                                                   where userClaims.UserID == foundUser.UserID
+                                                   select userClaims);
+                            // Deletes each UserClaim from user
+                            foreach (var userClaim in foundUserClaims)
                             {
-                                var foundClaimID = (from claimItem in db.UserClaims
-                                                    where claimItem.UserID == foundUser.UserID && claimItem.ClaimType == obj.UserClaims[i].Type && claimItem.ClaimValue == obj.UserClaims[i].Value
-                                                    select claimItem).FirstOrDefault();
-
-                                UserClaims removeUserClaim = new UserClaims()
-                                {
-                                    ClaimType = obj.UserClaims[i].Type,
-                                    ClaimValue = obj.UserClaims[i].Value,
-                                    UserID = foundUser.UserID,
-                                    ClaimID = foundClaimID.ClaimID
-                                };
-                                db.UserClaims.Attach(removeUserClaim);
-                                db.UserClaims.Remove(removeUserClaim);
-                                db.SaveChanges();
+                                db.UserClaims.Remove(userClaim);
                             }
+                            db.SaveChanges();
                             dbTransaction.Commit();
                             return true;
                         }

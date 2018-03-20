@@ -34,12 +34,7 @@ namespace Gateway.Tester
             // Find ClaimID by Comparing them and returning ID
             UserAccessDTO username = new UserAccessDTO
             {
-                UserName = "chackins",
-                UserClaims = new List<Claim>
-                {
-                    new Claim("ClaimType","ClaimValue3"),
-                    new Claim("ClaimType","ClaimValue1")
-                }
+                UserName = "chackins",              
             };
             Assert.True(uac.RemoveUserClaims(username));
         }
