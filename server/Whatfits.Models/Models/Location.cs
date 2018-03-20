@@ -37,6 +37,6 @@ namespace Whatfits.Models.Models
         public string Longitude { get; set; }
 
         // Location can have many users
-        ICollection<User> Users { get; set; }
+        ICollection<UserProfile> Users { get; set; }
     }
 }

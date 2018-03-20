@@ -23,7 +23,7 @@ namespace Whatfits.Models.Models
         public string Message { get; set; }
 
         // Navigation Property for User
-        public virtual User User { get; set; }
+        public virtual UserProfile User { get; set; }
 
         
     }
