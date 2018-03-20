@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Security.Claims;
-
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security;
+using System.Security.Claims;
+using System.Threading;
 
-namespace Whatfits.UserAccessControl.Auth
+namespace Whatfits.UserAccessControl.Service
 {
     /// <summary>
     /// Convert the incoming Token into 
@@ -37,14 +36,16 @@ namespace Whatfits.UserAccessControl.Auth
 
             // create users principal
             ClaimsPrincipal cp = new ClaimsPrincipal();
-            
+
             // check if valid token
-            if (tokenhandler.CanReadToken(incommingToken)) {
+            if (tokenhandler.CanReadToken(incommingToken))
+            {
                 // create token from incomming token string
-                token = tokenhandler.ReadJwtToken(incommingToken); 
+                token = tokenhandler.ReadJwtToken(incommingToken);
 
                 // return users principal
                 cp = new ClaimsPrincipal(new ClaimsIdentity(token.Claims));
+                Thread.CurrentPrincipal = cp;
                 return cp;
             }
 

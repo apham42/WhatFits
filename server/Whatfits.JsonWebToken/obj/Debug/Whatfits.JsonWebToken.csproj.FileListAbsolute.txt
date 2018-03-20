@@ -44,3 +44,10 @@ C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\obj\De
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.pdb
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csprojResolveAssemblyReference.cache
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.UserAccessControl.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.Web.Http.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.UserAccessControl.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.UserAccessControl.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.Web.Http.xml
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.Net.Http.Formatting.xml

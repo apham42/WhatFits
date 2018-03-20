@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿using System.Linq;
 using System.Security.Claims;
 
-
-namespace Whatfits.UserAccessControl.Auth
+namespace Whatfits.UserAccessControl.Service
 {
     /// <summary>
     /// 
@@ -29,11 +24,11 @@ namespace Whatfits.UserAccessControl.Auth
             var principal = context.Principal;
 
             // Check if Has Claim
-            if(principal.HasClaim(type, value))
+            if (principal.HasClaim(type, value))
             {
                 return true; // return true if has claim
             }
-            
+
             return false;
         }
     }
