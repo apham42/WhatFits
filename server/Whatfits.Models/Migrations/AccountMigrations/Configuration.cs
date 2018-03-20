@@ -15,7 +15,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
         protected override void Seed(Whatfits.Models.Context.Core.AccountContext context)
         {
             // NOTE: Only use to create tables for CORE features and any other content.
-            /*
+            //*
             var credentials = new List<Credential>
             {
                 new Credential{ UserName = "latmey", Password = "123456" },
