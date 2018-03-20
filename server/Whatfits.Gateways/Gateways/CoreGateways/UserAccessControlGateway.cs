@@ -83,41 +83,43 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             var foundUser = (from account in db.Credentials
                              where account.UserName == obj.UserName
                              select account).FirstOrDefault();
-            using (var dbTransaction = db.Database.BeginTransaction())
-            {
+
                 if (foundUser!=null)
                 {
-                    try
+                    using (var dbTransaction = db.Database.BeginTransaction())
                     {
-                        for (int i = 0; i < obj.UserClaims.Count; i++)
+                        try
                         {
-                            var foundClaimID = (from claimItem in db.UserClaims
-                                                where claimItem.UserID == foundUser.UserID && claimItem.ClaimType == obj.UserClaims[i].Type && claimItem.ClaimValue == obj.UserClaims[i].Value
-                                                select claimItem).FirstOrDefault();
-
-                            UserClaims removeUserClaim = new UserClaims()
+                            for (int i = 0; i < obj.UserClaims.Count; i++)
                             {
-                                ClaimType = obj.UserClaims[i].Type,
-                                ClaimValue = obj.UserClaims[i].Value,
-                                UserID = foundUser.UserID,
-                                ClaimID = foundClaimID.ClaimID
-                            };
-                            db.UserClaims.Attach(removeUserClaim);
-                            db.UserClaims.Remove(removeUserClaim);
-                            db.SaveChanges();
+                                var foundClaimID = (from claimItem in db.UserClaims
+                                                    where claimItem.UserID == foundUser.UserID && claimItem.ClaimType == obj.UserClaims[i].Type && claimItem.ClaimValue == obj.UserClaims[i].Value
+                                                    select claimItem).FirstOrDefault();
+
+                                UserClaims removeUserClaim = new UserClaims()
+                                {
+                                    ClaimType = obj.UserClaims[i].Type,
+                                    ClaimValue = obj.UserClaims[i].Value,
+                                    UserID = foundUser.UserID,
+                                    ClaimID = foundClaimID.ClaimID
+                                };
+                                db.UserClaims.Attach(removeUserClaim);
+                                db.UserClaims.Remove(removeUserClaim);
+                                db.SaveChanges();
+                            }
+                            dbTransaction.Commit();
+                            return true;
                         }
-                        dbTransaction.Commit();
-                        return true;
-                    }
-                    catch (Exception)
-                    {
-                        dbTransaction.Rollback();
-                        return false;
+                        catch (Exception)
+                        {
+                            dbTransaction.Rollback();
+                            return false;
+                        }
                     }
                 }
                 else
                     return false;
-            }
+            
         }
         /// <summary>
         /// Gets a list of Claims that the user has
