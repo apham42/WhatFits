@@ -92,9 +92,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         {
             var query = db.SecurityQuestions.ToList();
             Dictionary<int,String> temp = new Dictionary<int, string>();
-            for(int i =0; i< query.Count();i++)
+            foreach (var question in query)
             {
-                temp.Add(query[i].SecurityQuestionID, query[i].Question);
+                temp.Add(question.SecurityQuestionID, question.Question);
             }
             LoginDTO results = new LoginDTO()
             {
@@ -103,30 +103,44 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             return results;
         }
         /// <summary>
-        /// Returns the list of security answers
+        /// Determines whether token is on blacklist
         /// </summary>
         /// <param name="obj">
-        /// - UserName
+        /// - Token(string)
         /// </param>
         /// <returns>
-        /// Returns a list of security answers via LoginDTO
+        /// True - Token exists in BlackList
+        /// False - Token does not exists in Blacklist
         /// </returns>
-        public LoginDTO GetSecurityAnswers(LoginDTO obj)
+        public Boolean CheckIfOnBlackList(LoginDTO obj)
         {
-            var foundUser = (from u in db.Credentials
-                             where u.UserName == obj.UserName
-                             select u).FirstOrDefault();
-            var foundAnswers = (from x in db.SecurityQandA
-                                where x.UserID == foundUser.UserID
-                                select x);
-            
-            LoginDTO temp = new LoginDTO
+            var query = (from x in db.TokenBlackLists
+                         where x.Tokens == obj.Token
+                         select x).FirstOrDefault();
+            if(query != null)
             {
-                // Returns a list of Ints regarding to Number of question choosen
-                //Questions = 
-                // Returns a list of strings with the answers
-            };
-            return temp;
-        }        
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public Boolean AddTokenToBlackList(LoginDTO obj)
+        {
+            var query = (from x in db.TokenBlackLists
+                         where x.Tokens == obj.Token
+                         select x).FirstOrDefault();
+            if (query != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
     }
 }

@@ -19,5 +19,6 @@ namespace Whatfits.DataAccess.DTOs.CoreDTOs
         public Dictionary<int, String> Questions { get; set; }
         // Token
         public string Token { get; set; }
+        public int TokenID { get; set; }
     }
 }
