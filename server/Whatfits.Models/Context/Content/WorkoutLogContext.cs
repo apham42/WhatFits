@@ -10,7 +10,7 @@ namespace Whatfits.Models.Context.Content
     {
         public WorkoutLogContext() : base("WhatfitsDb") { }
         // Insert Model files required for Workout Logger
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> Users { get; set; }
         public DbSet<Credential> Credentials { get; set; }
         public DbSet<WorkoutLog> Workouts { get; set; }
         public DbSet<Cardio> Cardios { get; set; }

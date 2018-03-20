@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Whatfits.DataAccess.Gateways.CoreGateways;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Xunit;
 using System.Security.Claims;
 

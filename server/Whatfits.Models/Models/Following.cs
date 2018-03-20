@@ -22,7 +22,7 @@ namespace Whatfits.Models.Models
         public int PersonFollowing { get; set; }
 
         // Navigation Property for Workoutlog
-        public virtual User User { get; set; }
+        public virtual UserProfile User { get; set; }
         
     }
 }

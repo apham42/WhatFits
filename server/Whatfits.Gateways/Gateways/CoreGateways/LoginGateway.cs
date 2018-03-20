@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using Whatfits.Models.Context.Core;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -11,7 +11,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     /// </summary>
     public class LoginGateway
     {
-        LoginContext db = new LoginContext();
+        AccountContext db = new AccountContext();
         /// <summary>
         /// Gets credential information for login
         /// </summary>
@@ -101,6 +101,32 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 Questions = temp
             };
             return results;
-        }       
+        }
+        /// <summary>
+        /// Returns the list of security answers
+        /// </summary>
+        /// <param name="obj">
+        /// - UserName
+        /// </param>
+        /// <returns>
+        /// Returns a list of security answers via LoginDTO
+        /// </returns>
+        public LoginDTO GetSecurityAnswers(LoginDTO obj)
+        {
+            var foundUser = (from u in db.Credentials
+                             where u.UserName == obj.UserName
+                             select u).FirstOrDefault();
+            var foundAnswers = (from x in db.SecurityQandA
+                                where x.UserID == foundUser.UserID
+                                select x);
+            
+            LoginDTO temp = new LoginDTO
+            {
+                // Returns a list of Ints regarding to Number of question choosen
+                //Questions = 
+                // Returns a list of strings with the answers
+            };
+            return temp;
+        }        
     }
 }

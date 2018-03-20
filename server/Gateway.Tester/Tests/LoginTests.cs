@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Whatfits.DataAccess.Gateways.CoreGateways;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Xunit;
 
 namespace Gateway.Tester
@@ -13,6 +13,7 @@ namespace Gateway.Tester
     public class LoginTests
     {
         LoginGateway auth = new LoginGateway();
+
         [Fact]
         public void GetCredentials()
         {
@@ -31,5 +32,17 @@ namespace Gateway.Tester
             Assert.Equal(expectedCredential, auth.GetCredentials(findCredential));
 
         }
+        [Fact]
+        public void CheckBlacklistToken()
+        {
+
+        }
+        [Fact]
+        public void GetUsersSecurityQandAs()
+        {
+
+        }
+
     }
+    
 }

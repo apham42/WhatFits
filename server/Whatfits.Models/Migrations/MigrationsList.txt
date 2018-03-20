@@ -1,0 +1,42 @@
+﻿Description: List for creating, adding, and updating migrations.
+Author: Roberto Sanchez
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+For Account
+enable-migrations -ContextTypeName Whatfits.Models.Context.Core.AccountContext -MigrationsDirectory:Migrations\AccountMigrations
+add-migration -configuration Whatfits.Models.Migrations.AccountMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.AccountMigrations.Configuration -verbose
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+For Chat
+enable-migrations -ContextTypeName Whatfits.Models.Context.Content.ChatContext -MigrationsDirectory:Migrations\ContentMigrations\ChatMigrations
+add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.Configuration -verbose
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+For Workout Logger
+enable-migrations -ContextTypeName Whatfits.Models.Context.Content.WorkoutLogContext -MigrationsDirectory:Migrations\ContentMigrations\WorkoutLogMigrations
+add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration -verbose
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+For Search
+enable-migrations -ContextTypeName Whatfits.Models.Context.Content.SearchContext -MigrationsDirectory:Migrations\ContentMigrations\SearchMigrations
+add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.SearchMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.ContentMigrations.SearchMigrations.Configuration -verbose
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+For Events
+enable-migrations -ContextTypeName Whatfits.Models.Context.Content.EventsContext -MigrationsDirectory:Migrations\ContentMigrations\EventsMigrations
+add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration -verbose
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+For FollowsList
+enable-migrations -ContextTypeName Whatfits.Models.Context.Content.FollowsContext -MigrationsDirectory:Migrations\ContentMigrations\FollowsMigrations
+add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.Configuration -verbose
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+For Notifications
+enable-migrations -ContextTypeName Whatfits.Models.Context.Content.NotificationContext -MigrationsDirectory:Migrations\ContentMigrations\NotificationMigrations
+add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations.Configuration -verbose
+//---------------------------------------------------------------------------------------------------------------------------------------------------------
+For RatingsAndReview
+enable-migrations -ContextTypeName Whatfits.Models.Context.Content.ReviewsContext -MigrationsDirectory:Migrations\ContentMigrations\ReviewsMigrations
+add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations.Configuration -verbose
