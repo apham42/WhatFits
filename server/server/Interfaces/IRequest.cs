@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    interface IRequest
+    public interface IRequest
     {
-        IResponseDTO Request<T>(T location);
+        List<T> Request<T>(T location);
     }
 }
