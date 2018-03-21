@@ -9,7 +9,8 @@ namespace server.Model.Data_Transfer_Objects.AccountDTO_s
 {
     public class RegInfoDTO
     {
-        public SecurityQuestion[] SecurityQuestions { get; }
+        public UserCredential UserCredInfo { get; set; }
+        public SecurityQuestion[] SecurityQandAs { get; set; }
         public Location UserLocation { get; set; }
     }
 }

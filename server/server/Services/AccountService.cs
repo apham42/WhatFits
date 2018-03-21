@@ -13,11 +13,11 @@ using Whatfits.Hash;
 
 namespace server.Services
 {
-    public class AccountService :ICreation<UserCredInfo>
+    public class AccountService :ICreation<RegInfoDTO>
     {
-        public UserCredResponseDTO CreateUser(UserCredInfo creds)
+        public UserCredResponseDTO CreateUser(RegInfoDTO creds)
         {
-            var response = ValidateCredentials(creds);
+            var response = ValidateRegInfo(creds);
             if(!response.isSuccessful)
             {
                 return response;
@@ -36,7 +36,7 @@ namespace server.Services
             return response;
         }
 
-        public UserCredResponseDTO ValidateCredentials(UserCredInfo userCreds)
+        public UserCredResponseDTO ValidateRegInfo(RegInfoDTO userCreds)
         {
             UserCredResponseDTO validationResult = new UserCredResponseDTO();
             List<string> messages = new List<string>();
@@ -45,12 +45,15 @@ namespace server.Services
             {
                 validationResult.isSuccessful = false;
                 validationResult.Messages = messages;
-                validationResult.Messages.Add("EMPTY");
+                validationResult.Messages.Add("Registration Information is not valid. Please include the proper information needed.");
                 return validationResult;
             }
 
-            UserCredentialValidator validator = new UserCredentialValidator();
+            RegInfoValidator validator = new RegInfoValidator();
             ValidationResult results = validator.Validate(userCreds);
+
+
+
             IList<ValidationFailure> failures = results.Errors;
 
             if (!failures.Any())
@@ -72,7 +75,7 @@ namespace server.Services
 
 
 
-        public bool Create(UserCredInfo user)
+        public bool Create(RegInfoDTO user)
         {
             HMAC256 hmac = new HMAC256();
             var salt = hmac.GenerateSalt();
@@ -84,7 +87,7 @@ namespace server.Services
 
             var original = new HashDTO()
             {
-                Original = user.Password
+                Original = user.UserCredInfo.Password
             };
 
             var hashPassword = hmac.Hash(original);
@@ -95,7 +98,7 @@ namespace server.Services
 
             var userCredentials = new UserCredentialDTO()
             {
-                Username = user.Username
+                Username = user.UserCredInfo.Username
 
             };
 

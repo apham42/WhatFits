@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace server.Model.Data_Transfer_Objects.AccountDTO_s
+namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
 {
     public class UsernameDTO
     {

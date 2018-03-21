@@ -16,7 +16,7 @@ namespace Whatfits.Hash
             // Empty salt array
             byte[] salt = new byte[32];
             string generatedSalt;
-            string result = "";
+            string result;
             try
             {
                 using (var random = new RNGCryptoServiceProvider())
@@ -25,6 +25,7 @@ namespace Whatfits.Hash
                 }
 
                 generatedSalt = Convert.ToBase64String(salt);
+                result = generatedSalt;
             }
             catch (ArgumentNullException)
             {
@@ -70,7 +71,6 @@ namespace Whatfits.Hash
             {
                 throw;
             }
-            
 
             return result;
         }

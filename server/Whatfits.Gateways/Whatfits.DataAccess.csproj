@@ -55,9 +55,11 @@
     <Compile Include="DataTransferObjects\ContentDTOs\SearchDTO.cs" />
     <Compile Include="DataTransferObjects\ContentDTOs\WorkoutLogDTO.cs" />
     <Compile Include="DataTransferObjects\CoreDTOs\LoginDTO.cs" />
-    <Compile Include="DataTransferObjects\CoreDTOs\RegistrationDTO.cs" />
+    <Compile Include="DataTransferObjects\CoreDTOs\RegGatewayDTO.cs" />
     <Compile Include="DataTransferObjects\CoreDTOs\UserAccessDTO.cs" />
     <Compile Include="DataTransferObjects\CoreDTOs\UserManagementDTO.cs" />
+    <Compile Include="DataTransferObjects\CoreDTOs\UsernameDTO.cs" />
+    <Compile Include="DataTransferObjects\CoreDTOs\UsernameResponseDTO.cs" />
     <Compile Include="GatewayInterfaces\IDataGateway.cs" />
     <Compile Include="Gateways\ContentGateways\ChatGateway.cs" />
     <Compile Include="Gateways\ContentGateways\EventGateway.cs" />
@@ -70,6 +72,7 @@
     <Compile Include="Gateways\CoreGateways\RegistrationGateway.cs" />
     <Compile Include="Gateways\CoreGateways\UserAccessControlGateway.cs" />
     <Compile Include="Gateways\CoreGateways\UserManagementGateway.cs" />
+    <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

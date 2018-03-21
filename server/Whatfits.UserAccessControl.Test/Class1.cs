@@ -15,7 +15,7 @@ namespace Whatfits.UserAccessControl.Test
         public void DefaultClaims()
         {
             string username = "test";
-            List<Claim> Default_Claims = UserAccessController.SetDefaultClaims(username);
+            List<Claim> Default_Claims = UserAccessController.SetDefaultClaims();
             Assert.NotEmpty(Default_Claims);
         }
     }

@@ -7,7 +7,13 @@ namespace server.Model.Account
 {
     public class SecurityQuestion
     {
-        private string Question { get; set; }
-        private string Answer { get; set; }
+        public SecurityQuestion (string question, string answer)
+        {
+            Question = question;
+            Answer = answer;
+        }
+
+        public string Question { get; private set; }
+        public string Answer { get; private set; }
     }
 }

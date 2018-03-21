@@ -67,7 +67,6 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\bin\Debug\Ent
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.xml
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csprojResolveAssemblyReference.cache
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.init.resources
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.init.resources
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.init.resources

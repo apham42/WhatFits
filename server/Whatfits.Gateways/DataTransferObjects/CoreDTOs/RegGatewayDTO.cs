@@ -8,7 +8,7 @@ namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
     /// RegistrationDTO
     /// PURPOSE: Contains all data required to register a user.
     /// </summary>
-    public class RegistrationDTO
+    public class RegGatewayDTO
     {
         // UserData
         public int UserID { get; set; }

@@ -17,7 +17,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// <summary>
         /// Used for Users who registered on the Registration page in app.
         /// </summary>
-        public void RegisterFullUser(RegistrationDTO obj)
+        public void RegisterFullUser(RegGatewayDTO obj)
         {
             RegisterPartialUser(obj);
             ContinueRegistration(obj);
@@ -25,7 +25,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// <summary>
         /// Used for Users who registered on the homepage or from SSO
         /// </summary>
-        public void RegisterPartialUser(RegistrationDTO obj)
+        public void RegisterPartialUser(RegGatewayDTO obj)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
             {
@@ -50,7 +50,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// Continues the registration process for users who partially registered from 
         /// the homepage or SSO when they login for first time.
         /// </summary>
-        public void ContinueRegistration(RegistrationDTO obj)
+        public void ContinueRegistration(RegGatewayDTO obj)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
             {
@@ -135,21 +135,21 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         ///     True : When UserName exists in database
         ///     False: When UserName does NOT exists in database
         /// </returns>
-        public Boolean DoesUserNameExists(RegistrationDTO obj)
+        public bool CheckUserName(UsernameDTO dto)
         {
-            var foundUserName = (from credentials in db.Credentials
-                                 where credentials.UserName == obj.UserName
-                                 select credentials.UserName);
-            if (foundUserName == null)
+            string foundUserName = (from x in db.Credentials
+                                    where x.UserName == dto.Username
+                                    select x.UserName).FirstOrDefault();
+            if (dto.Username == foundUserName)
                 return false;
             else
                 return true;
         }
+
         public List<string> GetUserList()
         {
-            List<string> usrlist = (from x in db.Users join y in db.Credentials
-                                    on x.UserID equals y.UserID
-                                    select y.UserName).ToList<string>();
+            List<string> usrlist = (from credentials in db.Credentials
+                                    select credentials.UserName).ToList<string>();
             return usrlist;
         }
     }

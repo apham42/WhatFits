@@ -20,7 +20,7 @@ namespace Gateway.Tester
         [Fact]
         public void TestAddUser()
         {
-            RegistrationDTO usr = new RegistrationDTO()
+            RegGatewayDTO usr = new RegGatewayDTO()
             {
                 // Creating User Table Data
                 FirstName = "Test",
@@ -63,20 +63,25 @@ namespace Gateway.Tester
             // Passing DTO to gateway to be processed and stored
             reg.RegisterFullUser(usr);
             // Finding UserID by Name that is stored
-            Boolean found = reg.DoesUserNameExists(usr);
-            Assert.True(found);
+            UsernameDTO dto = new UsernameDTO()
+            {
+                Username = usr.UserName
+            };
+
+            Boolean found = reg.CheckUserName(dto);
+            Assert.False(found);
         }
 
         [Fact]
         public void DoesUserNameExistsTest()
         {
             // UserName amay exists in database
-            RegistrationDTO SearchName = new RegistrationDTO()
+            UsernameDTO SearchName = new UsernameDTO()
             {
-                UserName = "amay"
+                Username = "amay"
             };
-            Boolean result = reg.DoesUserNameExists(SearchName);
-            Assert.True(result);
+            Boolean result = reg.CheckUserName(SearchName);
+            Assert.False(result);
         }
         [Fact]
         public void GetUserListTest()

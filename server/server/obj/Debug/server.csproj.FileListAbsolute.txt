@@ -223,6 +223,7 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Whatfits.UserAccessCo
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\System.IdentityModel.Tokens.Jwt.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\bin\Microsoft.IdentityModel.Logging.xml
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\roslyn\VBCSCompiler.exe
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\server.dll.config
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\server.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\server.pdb
@@ -273,7 +274,6 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\roslyn\System.Xml.
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\roslyn\vbc.exe
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\roslyn\vbc.exe.config
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\roslyn\vbc.rsp
-C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\roslyn\VBCSCompiler.exe
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\EntityFramework.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\EntityFramework.SqlServer.dll

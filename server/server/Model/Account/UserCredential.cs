@@ -5,10 +5,10 @@ using System.Web;
 
 namespace server.Model.Account
 {
-    public class UserCredInfo
+    public class UserCredential
     {
         // 
-        public UserCredInfo(string username, string password)
+        public UserCredential(string username, string password)
         {
             Username = username;
             Password = password;
