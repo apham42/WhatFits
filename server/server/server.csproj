@@ -128,9 +128,9 @@
     <Compile Include="Model\Account\SecurityQuestion.cs" />
     <Compile Include="Model\Account\UserCredential.cs" />
     <Compile Include="Model\Address\GoogleMapLocation.cs" />
-    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoDTO.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfo.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
-    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredResponseDTO.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoResponseDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -139,7 +139,8 @@
     <Compile Include="Model\Data Transfer Objects\Class1.cs" />
     <Compile Include="Model\Network Communication\GoogleMapComm.cs" />
     <Compile Include="Model\Network Communication\NetworkConstants.cs" />
-    <Compile Include="Model\Validators\RegInfoValidator.cs" />
+    <Compile Include="Model\Validators\Account Validator\RegInfoValidator.cs" />
+    <Compile Include="Model\Validators\Account Validator\UserCredValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

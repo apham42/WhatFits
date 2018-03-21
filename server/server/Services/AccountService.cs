@@ -7,15 +7,15 @@ using server.Constants;
 using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using server.Interfaces;
 using server.Model.Account;
-using server.Model.Validators;
+using server.Model.Validators.Account_Validator;
 using FluentValidation.Results;
 using Whatfits.Hash;
 
 namespace server.Services
 {
-    public class AccountService :ICreation<RegInfoDTO>
+    public class AccountService :ICreation<RegInfo>
     {
-        public UserCredResponseDTO CreateUser(RegInfoDTO creds)
+        public RegInfoResponseDTO CreateUser(RegInfo creds)
         {
             var response = ValidateRegInfo(creds);
             if(!response.isSuccessful)
@@ -36,9 +36,9 @@ namespace server.Services
             return response;
         }
 
-        public UserCredResponseDTO ValidateRegInfo(RegInfoDTO userCreds)
+        public RegInfoResponseDTO ValidateRegInfo(RegInfo userCreds)
         {
-            UserCredResponseDTO validationResult = new UserCredResponseDTO();
+            RegInfoResponseDTO validationResult = new RegInfoResponseDTO();
             List<string> messages = new List<string>();
 
             if (userCreds == null)
@@ -49,8 +49,8 @@ namespace server.Services
                 return validationResult;
             }
 
-            RegInfoValidator validator = new RegInfoValidator();
-            ValidationResult results = validator.Validate(userCreds);
+            UserCredValidator validator = new UserCredValidator();
+            ValidationResult results = validator.Validate(userCreds.UserCredInfo);
 
 
 
@@ -75,7 +75,7 @@ namespace server.Services
 
 
 
-        public bool Create(RegInfoDTO user)
+        public bool Create(RegInfo user)
         {
             HMAC256 hmac = new HMAC256();
             var salt = hmac.GenerateSalt();

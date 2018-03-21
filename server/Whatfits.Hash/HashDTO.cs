@@ -9,5 +9,6 @@ namespace Whatfits.Hash
     public class HashDTO
     {
         public string Original { get; set; }
+        public string Salt { get; set; }
     }
 }

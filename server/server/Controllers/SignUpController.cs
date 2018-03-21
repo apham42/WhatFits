@@ -21,12 +21,12 @@ namespace server.Controllers
     public class SignUpController : ApiController
     {
         [HttpPost]
-        public IHttpActionResult Register(RegInfoDTO userCred)
+        public IHttpActionResult Register(RegInfo userCred)
         {
             AccountService service = new AccountService();
             //UserCredentials userCred = new UserCredentials(username, password);
             //UserCredentialValidator validator = new UserCredentialValidator();
-            UserCredResponseDTO response = service.ValidateRegInfo(userCred);
+            RegInfoResponseDTO response = service.ValidateRegInfo(userCred);
             /**
             if (userCred == null)
             {
