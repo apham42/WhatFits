@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.Models.Context.Content;
 using Whatfits.Models.Models;
 
@@ -14,7 +15,6 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
     public class ReviewsGateway
     {
         private ReviewsContext db = new ReviewsContext();
-
         //Add Review into the database
         public void AddReview(ReviewsDTO b)
         {
@@ -33,7 +33,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     };
                     //add into database t he new instance and saves
                     db.Review.Add(r);
-                    Save();
+                    db.SaveChanges();
                     dbTransaction.Commit();
 
                 }
@@ -44,29 +44,16 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             }
         }
 
-        //Get:api/Reviews/[userID]
-        public List<Review> GetReviews(ReviewsDTO obj)
+        //Retrieves all reviews based on userID
+        public List<string> GetReviews(int UserID)
         {
-            var target = db.Review.Find(obj.UserID);
-            return (from b in db.Review
-                    where b.UserID == target.UserID
-                    select new Review()
-                    {
-                        ReviewID = b.ReviewID,
-                        RevieweeID = b.RevieweeID,
-                        UserID = b.UserID,
-                        ReviewMessage = b.ReviewMessage,
-                        DateAndTime = b.DateAndTime
-                    }).ToList();
+            List<string> rmsg = (from b in db.Review
+                                 where b.UserID == UserID
+                               select b.ReviewMessage
+                                  ).ToList();
+            return rmsg;
         }
-
-        private void Save()
-        {
-            // Saves any changes to the database
-            db.SaveChanges();
-        }
-
-
+        
         public Boolean ReviewExist(ReviewsDTO r)
         {
             var foundReviewID = (from b in db.Review
@@ -77,6 +64,16 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             else
                 return true;
         }
+
+        public List<int> GetReviewList()
+        {
+            List<int> rlist = (from b in db.Review
+                                  select b.ReviewID
+                                  ).ToList();
+            return rlist;
+        }
+
+       
     }
 
 }
