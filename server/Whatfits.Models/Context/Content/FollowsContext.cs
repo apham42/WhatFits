@@ -10,7 +10,7 @@ namespace Whatfits.Models.Context.Content
     {
         public FollowsContext() : base("WhatfitsDb") { }
         // Insert Model files required for Followers
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> Users { get; set; }
         public DbSet<Credential> Crendtials { get; set; }
         public DbSet<Following> Following { get; set; }
     }

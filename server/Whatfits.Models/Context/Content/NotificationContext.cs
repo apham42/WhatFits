@@ -10,7 +10,7 @@ namespace Whatfits.Models.Context.Content
     {
         public NotificationContext() : base("WhatfitsDb") { }
         // Insert Model files required for Notifications
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> Users { get; set; }
         public DbSet<Credential> Credentials { get; set; }
         public DbSet<Notification> Notifications { get; set; }
     }

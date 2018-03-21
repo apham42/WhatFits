@@ -50,7 +50,7 @@ namespace Whatfits.JsonWebToken.Controller
                 return false;
             }
             // returns true
-            return validatedToken != null;
+            return true;
             
         }
     }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Data;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -13,7 +13,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     /// </summary>
     public class UserManagementGateway
     {
-        private UserManagementContext db = new UserManagementContext();
+        private AccountContext db = new AccountContext();
         /// <summary>
         /// 
         /// </summary>
@@ -78,7 +78,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                        where u.Address == obj.Address && u.City == obj.City && u.State == obj.State && u.Zipcode == obj.Zipcode
                                        select u.LocationID).FirstOrDefault();
                     // Creating new User
-                    User user = new User
+                    UserProfile user = new UserProfile
                     {
                         UserID = newUserID,
                         LocationID = newLocation,

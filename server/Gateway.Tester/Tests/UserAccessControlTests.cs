@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xunit;
 using Whatfits.DataAccess.Gateways.CoreGateways;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 using System.Security.Claims;
 namespace Gateway.Tester
 {
@@ -31,14 +31,10 @@ namespace Gateway.Tester
         public void RemoveUserClaimTest()
         {
             // This test should remove all claims for chackins UserId=5
+            // Find ClaimID by Comparing them and returning ID
             UserAccessDTO username = new UserAccessDTO
             {
-                UserName = "chackins",
-                UserClaims = new List<Claim>
-                {
-                    new Claim("ClaimType","ClaimValue3"),
-                    new Claim("ClaimType","ClaimValue1")
-                }
+                UserName = "chackins",              
             };
             Assert.True(uac.RemoveUserClaims(username));
         }
@@ -49,13 +45,13 @@ namespace Gateway.Tester
             {
                 UserName = "amay"
             };
-            List<Claim> foundClaims = uac.GetUserClaims(userName);
+            UserAccessDTO foundClaims = uac.GetUserClaims(userName);
             List<Claim> expectedClaims = new List<Claim>
             {
                 new Claim("AmayClaimType1", "AmayClaimValue1"),
                 new Claim("AmayClaimType2", "AmayClaimValue2"),
             };
-            Assert.Equal(expectedClaims,foundClaims);
+            Assert.Equal(expectedClaims,foundClaims.UserClaims);
         }
     }
 }

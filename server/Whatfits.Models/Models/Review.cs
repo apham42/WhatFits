@@ -37,6 +37,6 @@ namespace Whatfits.Models.Models
         public DateTime DateAndTime { get; set; }
 
         // Navigation Property back to User model
-        public User User { get; set; }
+        public UserProfile User { get; set; }
     }
 }

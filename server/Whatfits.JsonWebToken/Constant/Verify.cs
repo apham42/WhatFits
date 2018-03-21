@@ -10,7 +10,7 @@ namespace Whatfits.JsonWebToken.Constant
             {
                 ValidIssuers = new[] { "https://www.Whatfits.social/" },
                 ValidAudiences = new[] { "Admin", "General" },
-                IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Key.secret),
+                IssuerSigningKey = new SymmetricSecurityKey(Key.ssosecret),
                 ValidateLifetime = true,
                 ValidateAudience = true,
                 ValidateIssuer = true,

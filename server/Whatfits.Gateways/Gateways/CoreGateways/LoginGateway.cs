@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Collections.Generic;
 using Whatfits.Models.Context.Core;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -11,7 +11,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     /// </summary>
     public class LoginGateway
     {
-        LoginContext db = new LoginContext();
+        AccountContext db = new AccountContext();
         /// <summary>
         /// Gets credential information for login
         /// </summary>
@@ -92,15 +92,55 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         {
             var query = db.SecurityQuestions.ToList();
             Dictionary<int,String> temp = new Dictionary<int, string>();
-            for(int i =0; i< query.Count();i++)
+            foreach (var question in query)
             {
-                temp.Add(query[i].SecurityQuestionID, query[i].Question);
+                temp.Add(question.SecurityQuestionID, question.Question);
             }
             LoginDTO results = new LoginDTO()
             {
                 Questions = temp
             };
             return results;
-        }       
+        }
+        /// <summary>
+        /// Determines whether token is on blacklist
+        /// </summary>
+        /// <param name="obj">
+        /// - Token(string)
+        /// </param>
+        /// <returns>
+        /// True - Token exists in BlackList
+        /// False - Token does not exists in Blacklist
+        /// </returns>
+        public Boolean CheckIfOnBlackList(LoginDTO obj)
+        {
+            var query = (from x in db.TokenBlackLists
+                         where x.Tokens == obj.Token
+                         select x).FirstOrDefault();
+            if(query != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+        public Boolean AddTokenToBlackList(LoginDTO obj)
+        {
+            var query = (from x in db.TokenBlackLists
+                         where x.Tokens == obj.Token
+                         select x).FirstOrDefault();
+            if (query != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        
     }
 }
