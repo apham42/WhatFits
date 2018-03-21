@@ -6,7 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using Whatfits.UserAccessControl.Service;
 
-namespace Whatfits.UserAccessControl.Auth
+namespace Whatfits.UserAccessControl.Controller
 {
     /// <summary>
     /// Allows users to pass in a token in the http request.
@@ -35,7 +35,7 @@ namespace Whatfits.UserAccessControl.Auth
             {
                 string tokenstr = RequestTransformer.GetToken(actionContext);
 
-                if(tokenstr != "False")
+                if (tokenstr != "False")
                 {
                     // create principal of user from jwt
                     ClaimsPrincipal incommingPrincipal = new ClaimsTransformer().Authenticate(tokenstr);
@@ -43,11 +43,13 @@ namespace Whatfits.UserAccessControl.Auth
                     // creat authorization context to check if user has claims
                     AuthorizationContext authcontext = new AuthorizationContext(incommingPrincipal, claimType, claimValue);
 
-                } else
+                }
+                else
                 {
                     throw new Exception();
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 HandleUnauthorizedRequest(actionContext);
             }

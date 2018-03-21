@@ -51,6 +51,8 @@ namespace Whatfits.UserAccessControl.Controller
         {
             List<Claim> ViewClaims = new List<Claim>();
 
+
+            
             return ViewClaims;
 
         }
