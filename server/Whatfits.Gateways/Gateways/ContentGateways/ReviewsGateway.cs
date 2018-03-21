@@ -34,6 +34,8 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     //add into database t he new instance and saves
                     db.Review.Add(r);
                     Save();
+                    dbTransaction.Commit();
+
                 }
                 catch (Exception)
                 {
@@ -62,6 +64,18 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         {
             // Saves any changes to the database
             db.SaveChanges();
+        }
+
+
+        public Boolean ReviewExist(ReviewsDTO r)
+        {
+            var foundReviewID = (from b in db.Review
+                                 where b.ReviewID == r.ReviewID
+                                 select b.ReviewID);
+            if (foundReviewID == null)
+                return false;
+            else
+                return true;
         }
     }
 
