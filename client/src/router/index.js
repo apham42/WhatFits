@@ -4,11 +4,8 @@ import Vuelidate from 'vuelidate'
 import Home from '@/components/Home'
 import Chat from '@/components/Chat'
 import Test from '@/components/Test'
-import HomeRegistration from '@/components/HomeRegistration'
-import Profile from '@/components/ProfilePage'
 import Registration from '@/components/Registration'
 import Terms from '@/components/Terms'
-import Review from '@/components/Review'
 
 Vue.component('Terms', Terms)
 Vue.use(Router)
@@ -30,11 +27,6 @@ export default new Router({
       path: '/Chat',
       name: 'Chat',
       component: Chat
-    },
-    {
-      path: '/',
-      name: 'HomeRegistration',
-      component: HomeRegistration
     },
     {
       path: '/Test',
