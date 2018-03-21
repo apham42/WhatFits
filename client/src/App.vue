@@ -1,12 +1,18 @@
 <template>
-  <div id="app">Whatfits<br/><br/>
+  <div id="app">
+    <NavBar></NavBar>
     <router-view/>
   </div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue'
+import 'bulma/css/bulma.css'
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    'NavBar': NavBar
+  }
 }
 </script>
 
@@ -17,6 +23,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: white;
-  margin-top: 10px;
 }
 </style>

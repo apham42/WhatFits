@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <button v-on:click="TestPOST">{{ testingdata }}</button>
-    </div>
+  <div>
+  </div>
 </template>
 
 <script>
