@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    interface IDeletion
+    public interface IDeletion
     {
-        IResponseDTO Delete<T>(T obj);
+        bool Delete<T>(T obj);
     }
 }

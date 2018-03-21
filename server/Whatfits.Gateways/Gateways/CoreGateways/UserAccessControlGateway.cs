@@ -3,7 +3,7 @@ using System.Linq;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
 using System.Security.Claims;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 using System;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
@@ -19,98 +19,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     /// </summary>
     public class UserAccessControlGateway
     {
-        private RegistrationContext db = new RegistrationContext();
-        /// <summary>
-        /// Adds a new claim to the ClaimsList which is used as a reference
-        /// to all claims on the system.
-        /// </summary>
-        /// <param name="obj">
-        /// - ClaimValue
-        /// - ClaimType
-        /// </param>
-        /// <returns>
-        /// - TRUE: Succeeds to add Claim
-        /// - FALSE: Fails to add Claim
-        /// </returns>
-        public Boolean AddtoClaimsList(Claim obj)
-        {
-            using (var dbTransaction = db.Database.BeginTransaction())
-            {
-                try
-                {
-                    ClaimItem newClaim = new ClaimItem()
-                    {
-                        ClaimValue = obj.Value,
-                        ClaimType = obj.Type
-                    };
-                    db.Claims.Add(newClaim);
-                    db.SaveChanges();
-                    dbTransaction.Commit();
-                    return true;
-                }
-                catch (Exception)
-                {
-                    dbTransaction.Rollback();
-                    return false;
-                }
-            }
-        }
-        /// <summary>
-        /// Removes a claim from the ClaimsList
-        /// </summary>
-        /// <param name="obj">
-        /// - ClaimID
-        /// </param>
-        /// <returns>
-        /// - TRUE: Succeeds to remove Claim
-        /// - FALSE: Fails to remove Claim
-        /// </returns>
-        public Boolean RemoveFromClaimsList(UserAccessDTO obj)
-        {
-            using (var dbTransaction = db.Database.BeginTransaction())
-            {
-                try
-                {
-                    for(int i = 0; i < obj.ClaimID.Count; i++)
-                    {
-                        // Creates a temporary claim with the id
-                        var removeClaim = new ClaimItem { ClaimID = obj.ClaimID[i] };
-                        // Attaches claim to be removed
-                        db.Claims.Attach(removeClaim);
-                        // Removes claim
-                        db.Claims.Remove(removeClaim);
-                        // Saves changes
-                        db.SaveChanges();
-                    }
-                    dbTransaction.Commit();
-                    return true;
-                }
-                catch (Exception)
-                {
-                    dbTransaction.Rollback();
-                    return false;
-                }
-            }
-        }
-        /// <summary>
-        /// Gets the whole ClaimsList as a List of claim objects
-        /// </summary>
-        /// <returns>
-        /// Returns a List of Claim objects
-        /// </returns>
-        public List<Claim> GetClaimsList()
-        {
-            var claims = db.Claims.ToList();
-
-            List<Claim> ClaimsList = new List<Claim>();
-
-            for (int i = 0; i < claims.Count; i++)
-            {
-                ClaimsList.Add(new Claim(claims[i].ClaimType, claims[i].ClaimValue));
-            }
-            return ClaimsList;
-        }
-
+        private AccountContext db = new AccountContext();
         /// <summary>
         /// Adds a claim to the user
         /// </summary>
@@ -125,18 +34,21 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         public Boolean AddUserClaims(UserAccessDTO obj)
         {
             // Find user based off Username
-            var foundUser = db.Credentials.Find(obj.UserName);
+            var foundUser = (from account in db.Credentials
+                             where account.UserName == obj.UserName
+                             select account).FirstOrDefault();
             if (foundUser != null)
             {
                 using (var dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
-                        for (int i = 0; i < obj.ClaimID.Count; i++)
+                        for (int i = 0; i < obj.UserClaims.Count; i++)
                         {
                             UserClaims newUserClaim = new UserClaims()
                             {
-                                ClaimID = obj.ClaimID[i],
+                                ClaimType = obj.UserClaims[i].Type,
+                                ClaimValue = obj.UserClaims[i].Value,
                                 UserID = foundUser.UserID
                             };
                             db.UserClaims.Add(newUserClaim);
@@ -168,36 +80,39 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// </returns>
         public Boolean RemoveUserClaims(UserAccessDTO obj)
         {
-            var foundUser = db.Credentials.Find(obj.UserName);
-            using (var dbTransaction = db.Database.BeginTransaction())
-            {
+            var foundUser = (from account in db.Credentials
+                             where account.UserName == obj.UserName
+                             select account).FirstOrDefault();
+
                 if (foundUser!=null)
                 {
-                    try
+                    using (var dbTransaction = db.Database.BeginTransaction())
                     {
-                        for (int i = 0; i < obj.ClaimID.Count; i++)
+                        try
                         {
-                            UserClaims removeUserClaim = new UserClaims()
+                        // Finds the User's Claims
+                            var foundUserClaims = (from userClaims in db.UserClaims
+                                                   where userClaims.UserID == foundUser.UserID
+                                                   select userClaims);
+                            // Deletes each UserClaim from user
+                            foreach (var userClaim in foundUserClaims)
                             {
-                                ClaimID = obj.ClaimID[i],
-                                UserID = foundUser.UserID
-                            };
-                            db.UserClaims.Attach(removeUserClaim);
-                            db.UserClaims.Remove(removeUserClaim);
+                                db.UserClaims.Remove(userClaim);
+                            }
                             db.SaveChanges();
+                            dbTransaction.Commit();
+                            return true;
                         }
-                        dbTransaction.Commit();
-                        return true;
-                    }
-                    catch (Exception)
-                    {
-                        dbTransaction.Rollback();
-                        return false;
+                        catch (Exception)
+                        {
+                            dbTransaction.Rollback();
+                            return false;
+                        }
                     }
                 }
                 else
                     return false;
-            }
+            
         }
         /// <summary>
         /// Gets a list of Claims that the user has
@@ -206,11 +121,10 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// - UserName(string)
         /// </param>
         /// <returns>
-        /// - List<Claim>
+        /// - List<Claim> via UserAcccessDTO
         /// </returns>
-        public List<Claim> GetUserClaims(UserAccessDTO obj)
+        public UserAccessDTO GetUserClaims(UserAccessDTO obj)
         {
-            List<Claim> temp = new List<Claim>();
             var foundUser = (from account in db.Credentials
                              where account.UserName == obj.UserName
                              select account).FirstOrDefault();
@@ -220,28 +134,35 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 var foundUserClaims = (from userClaims in db.UserClaims
                                        where userClaims.UserID == foundUser.UserID
                                        select userClaims);
-                // TODO Need to map the ClaimIDs to the ClaimList
+                UserAccessDTO temp = new UserAccessDTO
+                {
+                    UserClaims = QueryToClaims(foundUserClaims)
+                };
                 return temp;
             }
             else
             {
-                return temp;
+                return null;
             }
         }
-        /*
-        public List<int> GetUserClaims(UserAccessDTO obj)
+        /// <summary>
+        /// Converts a query into a list of claims
+        /// </summary>
+        /// <param name="obj">
+        /// IQueryable<UserClaims>
+        /// </param>
+        /// <returns>
+        /// List of Claim objects
+        /// </returns>
+        private List<Claim> QueryToClaims(IQueryable<UserClaims> obj)
         {
-            var foundUser = (from account in db.Credentials
-                             where account.UserName == obj.UserName
-                             select account).FirstOrDefault();
-            // Find all records of that userID and return all claimIds
-            // as a list.
-            var ClaimsList = (from p in db.UserClaims
-                              where p.UserID == foundUser.UserID
-                              select p.ClaimID).ToList();
-            // Returns list of claims
-            return ClaimsList;
+            List<Claim> temp = new List<Claim>();
+            
+            foreach (var userClaim in obj )
+            {
+                temp.Add(new Claim(userClaim.ClaimType,userClaim.ClaimValue));
+            }
+            return temp;
         }
-        */
     }
 }

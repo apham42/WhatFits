@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xunit;
 using Whatfits.DataAccess.Gateways.CoreGateways;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 using System.Security.Claims;
 namespace Gateway.Tester
 {
@@ -13,48 +13,45 @@ namespace Gateway.Tester
     {
         private UserAccessControlGateway uac = new UserAccessControlGateway();
         [Fact]
-        public void AddClaimTest()
-        {
-            UserAccessDTO temp = new UserAccessDTO()
-            {
-                ClaimItem = new Claim("TestClaimType","TestClaimValue")
-            };
-            Assert.True(uac.AddUserClaims(temp));
-        }
-        [Fact]
-        public void RemoveClaimTest()
-        {
-            UserAccessDTO temp = new UserAccessDTO()
-            {
-                ClaimItem = new Claim("User", "Edit")
-            };
-            Assert.True(uac.RemoveFromClaimsList(temp));
-        }
-        [Fact]
-        public void GetClaimsListTest()
-        {
-            List<Claim> temp = new List<Claim>();
-            temp = uac.GetClaimsList();
-        }
-        [Fact]
         public void AddUserClaimTest()
         {
-            UserAccessDTO temp = new UserAccessDTO()
+            // By default rblue only has ClaimType and ClaimValue3, ClaimType and ClaimValue1
+            UserAccessDTO userName = new UserAccessDTO
             {
-                UserName = "amay",
-                ClaimID = { 8,3,2 }
+                UserName = "rblue",
+                UserClaims = new List<Claim>()
+                {
+                    new Claim("NewClaimType", "NewClaimValue")
+                }
+
             };
-            Assert.True(uac.AddUserClaims(temp));
+            Assert.True(uac.AddUserClaims(userName));
         }
         [Fact]
         public void RemoveUserClaimTest()
         {
-
+            // This test should remove all claims for chackins UserId=5
+            // Find ClaimID by Comparing them and returning ID
+            UserAccessDTO username = new UserAccessDTO
+            {
+                UserName = "chackins",              
+            };
+            Assert.True(uac.RemoveUserClaims(username));
         }
         [Fact]
-        public void GetUserClaimsTest()
+        public void GetUserClaims()
         {
-
+            UserAccessDTO userName = new UserAccessDTO
+            {
+                UserName = "amay"
+            };
+            UserAccessDTO foundClaims = uac.GetUserClaims(userName);
+            List<Claim> expectedClaims = new List<Claim>
+            {
+                new Claim("AmayClaimType1", "AmayClaimValue1"),
+                new Claim("AmayClaimType2", "AmayClaimValue2"),
+            };
+            Assert.Equal(expectedClaims,foundClaims.UserClaims);
         }
     }
 }

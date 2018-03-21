@@ -3,7 +3,7 @@ using System.Linq;
 using System.Data;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -13,7 +13,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     /// </summary>
     public class UserManagementGateway
     {
-        private UserManagementContext db = new UserManagementContext();
+        private AccountContext db = new AccountContext();
         /// <summary>
         /// 
         /// </summary>
@@ -78,7 +78,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                        where u.Address == obj.Address && u.City == obj.City && u.State == obj.State && u.Zipcode == obj.Zipcode
                                        select u.LocationID).FirstOrDefault();
                     // Creating new User
-                    User user = new User
+                    UserProfile user = new UserProfile
                     {
                         UserID = newUserID,
                         LocationID = newLocation,
@@ -100,14 +100,11 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         SaltValue = obj.Salt
                     };
                     db.Salts.Add(salt);
-                    db.SaveChanges(); ;
-
-
-
+                    db.SaveChanges();
                     // Add UserClaims
-                    for (int i = 0; i < obj.ClaimIDs.Count; i++)
+                    for (int i = 0; i < obj.UserClaims.Count; i++)
                     {
-                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimID = obj.ClaimIDs[i] };
+                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType = obj.UserClaims[i].Value, ClaimValue = obj.UserClaims[i].Value };
                         db.UserClaims.Add(temp);
                         db.SaveChanges(); ;
                     }
@@ -119,7 +116,6 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         db.SaveChanges(); ;
                     }
                     // Commits changes in database
-
                     dbTransaction.Commit();
                 }
                 catch (Exception)

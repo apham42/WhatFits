@@ -10,7 +10,7 @@ namespace Whatfits.Models.Context.Content
     {
         public EventsContext() : base("WhatfitsDb") { }
         // Insert Model files required for Events
-        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> Users { get; set; }
         public DbSet<Credential> Credentials { get; set; }
         public DbSet<Event> Events { get; set; }
     }

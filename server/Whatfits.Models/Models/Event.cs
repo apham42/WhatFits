@@ -40,7 +40,7 @@ namespace Whatfits.Models.Models
         public string Image { get; set; }
 
         // Navigation Property
-        public virtual User User { get; set; }
+        public virtual UserProfile User { get; set; }
         public virtual Location Location { get; set; }
     }
 }
