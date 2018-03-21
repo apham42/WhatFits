@@ -5,7 +5,7 @@ using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
-    [Authenticate]
+    [TokenAuthenticate]
     public class UACTESTController : ApiController
     {
 

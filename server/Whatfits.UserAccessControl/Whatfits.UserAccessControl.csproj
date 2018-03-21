@@ -64,7 +64,7 @@
   <ItemGroup>
     <Compile Include="Constants\TypeConstant.cs" />
     <Compile Include="Constants\ValueConstant.cs" />
-    <Compile Include="Controller\Authenticate.cs" />
+    <Compile Include="Controller\TokenAuthenticate.cs" />
     <Compile Include="Controller\TokenAuthorize.cs" />
     <Compile Include="Controller\UserAccessController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
