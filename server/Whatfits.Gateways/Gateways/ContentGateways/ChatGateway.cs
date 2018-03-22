@@ -31,6 +31,11 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                              select credentials.UserName).ToList();
             return founduser;
         }
+        public void StoreMessage(ChatDTO obj)
+        {
+
+        }
+
         bool UserJoin(int userID, string userName)
         {
             return false;

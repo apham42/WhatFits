@@ -38,6 +38,8 @@ export default {
       chatshow: false,
       msgshow: false,
       ciphertext: null,
+      key: [],
+      iv: [],
       receivestring: ''
     }
   },
@@ -62,12 +64,28 @@ export default {
     ReceiveMessage: function () {
       var vm = this
       this.ws.onmessage = function (event) {
+        var newiv = []
+        var newkey = []
         if (vm.chatusers.length > 0) {
           console.log('receive')
           vm.Decryption(event.data)
           window.document.getElementById('receives').prepend(vm.receivestring + '\n')
         } else {
           vm.chatusers = JSON.parse(event.data).split(',')
+          console.log(vm.chatusers)
+          // get iv
+          for (var i = 0; i < 16; i++) {
+            newiv.push(window.parseInt(vm.chatusers.pop()))
+          }
+          console.log(newiv)
+          vm.iv = newiv
+          // get key
+          for (var j = 0; j < 16; j++) {
+            newkey.push(window.parseInt(vm.chatusers.pop()))
+          }
+          console.log(newkey)
+          vm.key = newkey
+          // get users
           if (vm.chatusers.includes(vm.onlineUser)) {
             var index = vm.chatusers.indexOf(vm.onlineUser)
             vm.chatusers.splice(index, 1)
@@ -104,21 +122,21 @@ export default {
       }
     },
     Encryption: function () {
-      var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
-      var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
+      // var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+      // var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
       console.log('encryption called')
       var AesJS = require('aes-js')
       var StringtoBytes = AesJS.utils.utf8.toBytes(this.Padding(this.messages))
       // eslint-disable-next-line
-      var AesCBC = new AesJS.ModeOfOperation.cbc(key, iv)
+      var AesCBC = new AesJS.ModeOfOperation.cbc(this.key, this.iv)
       var EncryptedBytes = AesCBC.encrypt(StringtoBytes)
       var EncryptedHex = AesJS.utils.hex.fromBytes(EncryptedBytes)
       this.ciphertext = EncryptedHex
       console.log(this.ciphertext)
     },
     Decryption: function (data) {
-      var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
-      var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
+      // var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+      // var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
       var AesJS = require('aes-js')
       console.log('decryption called')
       console.log(data)
@@ -127,7 +145,7 @@ export default {
       console.log(hexmessage)
       var EncryptedBytes = AesJS.utils.hex.toBytes(hexmessage)
       // eslint-disable-next-line
-      var AesCBC = new AesJS.ModeOfOperation.cbc(key, iv)
+      var AesCBC = new AesJS.ModeOfOperation.cbc(this.key, this.iv)
       var DecryptedBytes = AesCBC.decrypt(EncryptedBytes)
       var Decryptedtext = AesJS.utils.utf8.fromBytes(DecryptedBytes)
       res[2] = Decryptedtext

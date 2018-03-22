@@ -18,6 +18,22 @@ namespace server.Controllers
     {
         ChatDTO chatuser = new ChatDTO();
         ChatGateway mychat = new ChatGateway();
+        private  byte[] key = new byte[16];
+        private  byte[] iv = new byte[16];
+        private  Random randomkey = new Random();
+        private  Random randomiv = new Random();
+
+        public byte[] Getkey()
+        {
+           randomkey.NextBytes(key);
+           return key;
+        }
+
+        public byte[] Getiv()
+        {
+           randomiv.NextBytes(iv);
+            return iv;
+        }
 
         [AcceptVerbs ("GET","POST")]
         public HttpResponseMessage Connect(string username)
@@ -27,7 +43,7 @@ namespace server.Controllers
                 return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
             if (mychat.DoesUserNameExists(chatuser))
             {
-                HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username));
+                HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username,Getkey(),Getiv()));
                 return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
             }
             return new HttpResponseMessage(HttpStatusCode.BadRequest);
@@ -39,26 +55,44 @@ namespace server.Controllers
             private static WebSocketCollection _chatUser = new WebSocketCollection();
             private static List<string> users = new List<string>();
             private string connectedUser;
+            private byte[] _key;
+            private byte[] _iv;
 
-            public ChatHandler(string username)
+            public ChatHandler(string username, byte[] key, byte[] iv)
             {
                 connectedUser = username;
                 if(!users.Contains(connectedUser))
                     users.Add(connectedUser);
+                _key = key;
+                _iv = iv;
             }
 
             public override void OnOpen()
             {
+                
                 if(!_chatUser.Contains(this))
                     _chatUser.Add(this);
-                string output = "";
+                var userlist = "";
                 int length = users.Count;
                 for (int i = 0; i < length; i++)
+                {
                     if (i > 0)
-                        output += "," + users[i];
+                        userlist += "," + users[i];
                     else
-                        output += users[i];
-                _chatUser.Broadcast(JsonConvert.SerializeObject(output));
+                        userlist += users[i];
+                }
+                // for sending key
+                for (int j = 0; j < _key.Length; j++)
+                {
+                        userlist += "," + _key[j];
+                }
+                // for sending iv
+                for (int k = 0; k < _iv.Length; k++)
+                {
+                        userlist += "," + _iv[k];
+                }
+                
+                _chatUser.Broadcast(JsonConvert.SerializeObject(userlist));
             }
 
             public override void OnMessage(string message)
