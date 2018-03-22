@@ -11,7 +11,7 @@ using System.Web.Http;
 namespace server.Services
 {
     public class ReviewService
-    {
+    {z
         public bool ValidateReview(string message, ReviewDTO response)
         {
             if (message.Length < 1)

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
-using Whatfits.Models.Models;
 using Xunit;
 
 namespace Gateway.Tester.Tests

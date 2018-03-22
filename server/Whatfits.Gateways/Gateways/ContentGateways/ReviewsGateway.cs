@@ -15,6 +15,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
     public class ReviewsGateway
     {
         private ReviewsContext db = new ReviewsContext();
+
         //Add Review into the database
         public void AddReview(ReviewsDTO b)
         {
@@ -49,11 +50,12 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         {
             List<string> rmsg = (from b in db.Review
                                  where b.UserID == UserID
-                               select b.ReviewMessage
+                                 select b.ReviewMessage
                                   ).ToList();
             return rmsg;
         }
         
+        //See if the review id exists
         public Boolean ReviewExist(ReviewsDTO r)
         {
             var foundReviewID = (from b in db.Review
@@ -65,6 +67,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 return true;
         }
 
+        //gets all the reviews in the database
         public List<int> GetReviewList()
         {
             List<int> rlist = (from b in db.Review
