@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Security.Cryptography;
+using Whatfits.Hash;
 
 namespace Whatfits.JsonWebToken.Constant
 {
@@ -14,6 +14,14 @@ namespace Whatfits.JsonWebToken.Constant
             get { return Convert.FromBase64String(SSOsecret); }
         }
         
+        public static byte[] secret
+        {
+            get
+            {
+                HMAC256 createnewsecret = new HMAC256();
+                return Convert.FromBase64String(createnewsecret.GenerateSalt());
+            }
+        }
 
 
         
