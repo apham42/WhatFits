@@ -1,5 +1,6 @@
 ﻿using server.Constants;
 using server.Data_Transfer_Objects.ReviewDTO_s;
+using server.Model.Data_Transfer_Objects.ReviewDTO_s;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,11 +49,11 @@ namespace server.Services
             }
             return false;
         }
-        
-        public void Create(ReviewsDTO rev)
+
+        public bool Create(ReviewsDTO rev)
         {
             var gateway = new ReviewsGateway();
-            gateway.AddReview(rev);
+            return gateway.AddReview(rev);
         }
 
         public List<string> GetUserReviews(int User)

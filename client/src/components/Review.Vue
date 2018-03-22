@@ -14,17 +14,18 @@
       <input type="number" id="UserID" size="8" placeholder="UserID" />
       <input type="number" id="RevieweeID" size="8" placeholder="RevieweeID" />
       <input type="number" id="ReviewID" size="8" placeholder="ReviewID"/>
-      <button v-on:click.once="Submit">Submit</button>
+      <button v-on:click.once="Submit" @click="input">Submit</button>
     </form>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import 'vue-awesome/icons/star'
 import 'vue-awesome/icons/star-o'
 import Icon from 'vue-awesome/components/Icon'
 export default {
-  name: 'Rating',
+  name: 'Review',
   components: { Icon },
   props: {
     grade: {
@@ -46,7 +47,7 @@ export default {
       ReviewMessage: '',
       UserID: '',
       RevieweeID: '',
-      DateTime: new Date().toLocaleDateString(),
+      DateAndTime: new Date().toLocaleDateString(),
       ReviewID: ''
     }
   },
@@ -55,6 +56,25 @@ export default {
       if (typeof star === 'number' && star <= this.maxRating && star >= 0) {
         this.Rating = this.Rating === star ? star - 1 : star
       }
+    },
+
+    input() {
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/Review/CreateReview',
+        data: {
+          Rating: this.$data.Rating,
+          ReviewMessage: this.$data.ReviewMessage,
+          UserID: this.$data.UserID,
+          RevieweeID: this.$data.RevieeID,
+          DateAndTime: this.$data.DateAndTime,
+          ReviewID: this.$data.ReviewID
+        },
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
+      })
     }
   }
 }

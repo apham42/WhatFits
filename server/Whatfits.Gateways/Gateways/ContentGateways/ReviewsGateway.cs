@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
@@ -17,12 +19,13 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         private ReviewsContext db = new ReviewsContext();
 
         //Add Review into the database
-        public void AddReview(ReviewsDTO b)
+        public bool AddReview(ReviewsDTO b)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
+
                     //creates a new review instance by grabbing object's data
                     Review r = new Review
                     {
@@ -37,11 +40,17 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     db.Review.Add(r);
                     db.SaveChanges();
                     dbTransaction.Commit();
-
+                    return true;
                 }
-                catch (Exception)
+                catch (SqlException)
                 {
                     dbTransaction.Rollback();
+                    return false;
+                }
+                catch (DataException)
+                {
+                    dbTransaction.Rollback();
+                    return false;
                 }
             }
         }

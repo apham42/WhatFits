@@ -1,4 +1,5 @@
-﻿using server.Services;
+﻿using server.Model.Data_Transfer_Objects.ReviewDTO_s;
+using server.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +12,23 @@ namespace server.Controllers
 {
     public class ReviewController : ApiController
     {
+        //Needs a response and promise in client side
         [HttpPost]
-        public IHttpActionResult Review(ReviewsDTO review)
+        public IHttpActionResult CreateReview(ReviewsDTO review)
         {
             ReviewService service = new ReviewService();
-            service.Create(review);
-            return Ok();
+            bool response = service.Create(review);
+            if (response)
+            {
+                return Ok("Review has been added");
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, "Review addition has failed");
+            }
         }
 
+        //Gets reviews of specific userID, *could be changed to username in the future*
         [Route("Review/GetUserReview/{userID}")]
         [HttpGet]
         public List<string> GetUserReview(int userID)
