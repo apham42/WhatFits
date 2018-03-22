@@ -9,6 +9,8 @@ using Whatfits.DataAccess.Gateways.ContentGateways;
 using Whatfits.DataAccess.DataTransferObjects.ContentDTOs;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Web.Script.Serialization;
+using System.Linq;
 
 namespace server.Controllers
 {
@@ -61,8 +63,13 @@ namespace server.Controllers
 
             public override void OnMessage(string message)
             {
-                //_chatUser.Broadcast(connectedUser + " said: " + message + "  \n" +DateTime.Now.ToLocalTime());
-                _chatUser.Broadcast(JsonConvert.SerializeObject(connectedUser + " said: " + message + "  \n" + DateTime.Now.ToLocalTime()));
+                var ser = new JavaScriptSerializer();
+                var deser = ser.Deserialize<Message>(message);
+                // get the index of receiver 
+                var index = users.IndexOf(deser.UserName);
+                // send to receiver
+                _chatUser.ElementAtOrDefault(index).Send(JsonConvert.SerializeObject(connectedUser + " said: " + deser.MessageContent + " \n" + DateTime.Now.ToLocalTime()));
+                
             }
 
             public override void OnError()
@@ -73,6 +80,7 @@ namespace server.Controllers
             public override void OnClose()
             {
                 _chatUser.Remove(this);
+                users.Remove(connectedUser);
             }
 
             public void Dispose()

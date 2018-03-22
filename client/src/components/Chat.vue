@@ -36,7 +36,9 @@ export default {
       clickeduser: '',
       chatusers: [],
       chatshow: false,
-      msgshow: false
+      msgshow: false,
+      ciphertext: null,
+      receivestring: ''
     }
   },
   mounted () {
@@ -61,7 +63,9 @@ export default {
       var vm = this
       this.ws.onmessage = function (event) {
         if (vm.chatusers.length > 0) {
-          window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
+          console.log('receive')
+          vm.Decryption(event.data)
+          window.document.getElementById('receives').prepend(vm.receivestring + '\n')
         } else {
           vm.chatusers = JSON.parse(event.data).split(',')
           if (vm.chatusers.includes(vm.onlineUser)) {
@@ -74,7 +78,14 @@ export default {
     SendMessage: function () {
       console.log('send message???')
       if (this.ws.readyState === WebSocket.OPEN) {
-        this.ws.send(this.messages)
+        this.Encryption()
+        var jmsg = {
+          UserName: this.clickeduser,
+          MessageContent: this.ciphertext
+        }
+        this.ws.send(JSON.stringify(jmsg))
+        window.document.getElementById('receives').prepend('You said: ' + this.messages)
+        console.log('sent')
         this.messages = ''
       }
     },
@@ -91,6 +102,50 @@ export default {
       this.ws.onerror = function (event) {
         window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
       }
+    },
+    Encryption: function () {
+      var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+      var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
+      console.log('encryption called')
+      var AesJS = require('aes-js')
+      var StringtoBytes = AesJS.utils.utf8.toBytes(this.Padding(this.messages))
+      // eslint-disable-next-line
+      var AesCBC = new AesJS.ModeOfOperation.cbc(key, iv)
+      var EncryptedBytes = AesCBC.encrypt(StringtoBytes)
+      var EncryptedHex = AesJS.utils.hex.fromBytes(EncryptedBytes)
+      this.ciphertext = EncryptedHex
+      console.log(this.ciphertext)
+    },
+    Decryption: function (data) {
+      var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
+      var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
+      var AesJS = require('aes-js')
+      console.log('decryption called')
+      console.log(data)
+      var res = data.split(' ')
+      var hexmessage = res[2]
+      console.log(hexmessage)
+      var EncryptedBytes = AesJS.utils.hex.toBytes(hexmessage)
+      // eslint-disable-next-line
+      var AesCBC = new AesJS.ModeOfOperation.cbc(key, iv)
+      var DecryptedBytes = AesCBC.decrypt(EncryptedBytes)
+      var Decryptedtext = AesJS.utils.utf8.fromBytes(DecryptedBytes)
+      res[2] = Decryptedtext
+      this.receivestring = res.join(' ')
+      console.log(this.receivestring)
+    },
+    Padding: function (source) {
+      var paddchar = ' '
+      console.log(source.length)
+      var extra = source.length % 16
+      console.log(extra)
+      if (extra > 0) {
+        for (var i = 0; i < 16 - extra; i++) {
+          source += paddchar
+        }
+      }
+      console.log(source.length)
+      return source
     }
   }
 }

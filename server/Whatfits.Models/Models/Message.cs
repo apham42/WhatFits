@@ -12,6 +12,7 @@ namespace Whatfits.Models.Models
         //  Primary Key
         [Key, Column(Order = 0)]
         public int MessageID { get; set; }
+        public string UserName { get; set; }
         // Stores the message sent by user
         public string MessageContent { get; set; }
         // Time stamps the message
