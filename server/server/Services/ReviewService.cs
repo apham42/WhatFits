@@ -7,11 +7,13 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web.Http;
+using Whatfits.DataAccess.DTOs.ContentDTOs;
+using Whatfits.DataAccess.Gateways.ContentGateways;
 
 namespace server.Services
 {
     public class ReviewService
-    {z
+    {
         public bool ValidateReview(string message, ReviewDTO response)
         {
             if (message.Length < 1)
@@ -45,6 +47,18 @@ namespace server.Services
                 return true;
             }
             return false;
+        }
+        
+        public void Create(ReviewsDTO rev)
+        {
+            var gateway = new ReviewsGateway();
+            gateway.AddReview(rev);
+        }
+
+        public List<string> GetUserReviews(int User)
+        {
+            var gateway = new ReviewsGateway();
+            return gateway.GetReviews(User);
         }
     }
 }

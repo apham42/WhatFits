@@ -11,7 +11,9 @@
         <br />
         <textarea v-model="ReviewMessage" class="form-control" placeholder="Input Review"></textarea>
       </div>
-      <input type="number" name="UserID" size="10" />
+      <input type="number" id="UserID" size="8" placeholder="UserID" />
+      <input type="number" id="RevieweeID" size="8" placeholder="RevieweeID" />
+      <input type="number" id="ReviewID" size="8" placeholder="ReviewID"/>
       <button v-on:click.once="Submit">Submit</button>
     </form>
   </div>
@@ -42,7 +44,10 @@ export default {
     return {
       Rating: this.grade,
       ReviewMessage: '',
-      UserID: ''
+      UserID: '',
+      RevieweeID: '',
+      DateTime: new Date().toLocaleDateString(),
+      ReviewID: ''
     }
   },
   methods: {

@@ -16,17 +16,16 @@ namespace Gateway.Tester.Tests
         public ReviewsGateway r = new ReviewsGateway();
 
         [Fact]
-        public void TestAddUser()
+        public void TestAddReview()
         {
             ReviewsDTO rev = new ReviewsDTO()
             {
+                RevieweeID = 3,
                 UserID = 5,
-                RevieweeID = 1,
                 ReviewMessage = "Here's the test",
-                ReviewID = 6,
                 Rating = 4,
-                DateAndTime = new DateTime(2017, 05, 15)
-
+                DateAndTime = new DateTime(2017, 05, 15),
+                ReviewID = 9
             };
 
             // Passing DTO to gateway to be processed and stored

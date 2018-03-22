@@ -5,17 +5,27 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Whatfits.DataAccess.DTOs.ContentDTOs;
 
 namespace server.Controllers
 {
     public class ReviewController : ApiController
     {
         [HttpPost]
-        public IHttpActionResult Review([FromBody] string message, int rating)
+        public IHttpActionResult Review(ReviewsDTO review)
         {
             ReviewService service = new ReviewService();
-            var response = Request.CreateResponse(HttpStatusCode.OK);
+            service.Create(review);
             return Ok();
-        }z
+        }
+
+        [Route("Review/GetUserReview/{userID}")]
+        [HttpGet]
+        public List<string> GetUserReview(int userID)
+        {
+            ReviewService service = new ReviewService();           
+            return service.GetUserReviews(userID);
+        }
+        
     }
 }

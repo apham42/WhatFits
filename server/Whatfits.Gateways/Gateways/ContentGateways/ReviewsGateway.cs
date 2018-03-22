@@ -26,11 +26,12 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     //creates a new review instance by grabbing object's data
                     Review r = new Review
                     {
-                        ReviewID = b.ReviewID,
                         RevieweeID = b.RevieweeID,
                         UserID = b.UserID,
                         ReviewMessage = b.ReviewMessage,
-                        DateAndTime = b.DateAndTime
+                        Rating = b.Rating,
+                        DateAndTime = b.DateAndTime,
+                        ReviewID = b.ReviewID
                     };
                     //add into database t he new instance and saves
                     db.Review.Add(r);
