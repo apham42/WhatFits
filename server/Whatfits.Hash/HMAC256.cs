@@ -10,7 +10,11 @@ namespace Whatfits.Hash
 {
     public class HMAC256
     {
+        public HMAC256()
+        {
 
+        }
+        
         public string GenerateSalt()
         {
             // Empty salt array
@@ -26,18 +30,17 @@ namespace Whatfits.Hash
 
                 generatedSalt = Convert.ToBase64String(salt);
                 result = generatedSalt;
+                return result;
+
             }
             catch (ArgumentNullException)
             {
-                throw;
+                return "";
             }
             catch (CryptographicException)
             {
-                throw;
-            }
-
-            return result;
-            
+                return "";
+            }            
         }
 
         public string Hash(HashDTO dto)
@@ -58,21 +61,20 @@ namespace Whatfits.Hash
                     //converts back to string
                     result = Encoding.ASCII.GetString(hash);
                 }
+                return result;
             }
             catch (EncoderFallbackException)
             {
-                throw;
+                return "";
             }
             catch (ObjectDisposedException)
             {
-                throw;
+                return "";
             }
             catch (ArgumentException)
             {
-                throw;
+                return "";
             }
-
-            return result;
         }
     }
 }

@@ -8,7 +8,6 @@ namespace server.Model.Data_Transfer_Objects.AccountDTO_s
 {
     public class RegInfoResponseDTO: IResponseDTO
     {
-        public int test { get; set; }
         public List<string> Messages { get; set; }
         public bool isSuccessful { get; set; }
     }

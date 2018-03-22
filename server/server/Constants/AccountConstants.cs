@@ -10,6 +10,8 @@ namespace server.Constants
         public const string CREDCHARACTERS = @"^[A-Za-z\d~`!@#$%^&*()-_+=\\|\]}\[{'"";:/?.>,<]+$";
         public const string USER_CREATED = "User has been created";
         public const string USER_CREATE_FAIL = "User could not be created. Please try again later.";
+        public const string REGISTRATION_INVALID = "Registration Information is not valid.Please include the proper information needed.";
+
         // username constants
         public const string USERNAME_VALID = "Username is valid";
         public const string USERNAME_EXISTS_ERROR = "Username already exists";
@@ -26,10 +28,9 @@ namespace server.Constants
         public const string ADDRESS_INVALID_ERROR = "Address does not exist";
         public const string ADDRESS_CONSTRAINT_ERROR = "Address does not exist in Los Angeles or Orange County";
 
-        // Map Web API info constants
-        public const string MAPAPI = @"https://maps.googleapis.com/maps/api/geocode/json?address=";
-        public const string MAPKEY = "&key=AIzaSyC2S7VIW4VHNZ1h0qHlBIo4QhbpIAkGgus";
-        //~`!@#$%^&*()-_+=\\|\]}\[{'"";:/?.>,<
-
+        // Question and Answer constants
+        public const string QUESTION_INVALID_ERROR = "Your security questions are not valid";
+        public const string QUESTION_AMOUNT_ERROR = "Registration requires 3 security questions";
+        public const string ANSWER_INVALID_ERROR = "Each question needs an answer";
     }
 }

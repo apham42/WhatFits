@@ -10,99 +10,86 @@ using server.Model.Account;
 using server.Model.Validators.Account_Validator;
 using FluentValidation.Results;
 using Whatfits.Hash;
+using server.Model.Location;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.Gateways.CoreGateways;
+using Whatfits.UserAccessControl.Service;
 
 namespace server.Services
 {
-    public class AccountService :ICreation<RegInfo>
+    public class AccountService
     {
+        public AccountService()
+        {
+
+        }
+
         public RegInfoResponseDTO CreateUser(RegInfo creds)
         {
-            var response = ValidateRegInfo(creds);
-            if(!response.isSuccessful)
+            var validator = new RegInfoValidator();
+            List<string> messages = new List<string>();
+            var response = validator.Validate(creds);
+            if (!response.isSuccessful)
             {
                 return response;
             }
 
-            if (Create(creds))
+            if (Create(creds, validator.ValidatedLocation))
             {
                 response.isSuccessful = true;
-                response.Messages.Add(AccountConstants.USER_CREATED);
+                messages.Add(AccountConstants.USER_CREATED);
+                response.Messages = messages;
             }
             else
             {
                 response.isSuccessful = false;
-                response.Messages.Add(AccountConstants.USER_CREATE_FAIL);
+                messages.Add(AccountConstants.USER_CREATE_FAIL);
+                response.Messages = messages;
             }
             return response;
         }
 
-        public RegInfoResponseDTO ValidateRegInfo(RegInfo userCreds)
+        public bool Create(RegInfo user, WebAPIGeocode geoCoordinates)
         {
-            RegInfoResponseDTO validationResult = new RegInfoResponseDTO();
-            List<string> messages = new List<string>();
-
-            if (userCreds == null)
-            {
-                validationResult.isSuccessful = false;
-                validationResult.Messages = messages;
-                validationResult.Messages.Add("Registration Information is not valid. Please include the proper information needed.");
-                return validationResult;
-            }
-
-            UserCredValidator validator = new UserCredValidator();
-            ValidationResult results = validator.Validate(userCreds.UserCredInfo);
-
-
-
-            IList<ValidationFailure> failures = results.Errors;
-
-            if (!failures.Any())
-            {
-                validationResult.isSuccessful = true;
-            }
-            else
-            {
-                foreach(ValidationFailure failure in failures)
-                {
-                    messages.Add(failure.ErrorMessage);
-                }
-                validationResult.isSuccessful = false;
-            }
-
-            validationResult.Messages = messages;
-            return validationResult;
-        }
-
-
-
-        public bool Create(RegInfo user)
-        {
-            HMAC256 hmac = new HMAC256();
+            var hmac = new HMAC256();
             var salt = hmac.GenerateSalt();
-
-            if (salt != null || salt.Equals(""))
-            {
-                return false;
-            }
 
             var original = new HashDTO()
             {
-                Original = user.UserCredInfo.Password
+                Original = user.UserCredInfo.Password,
+                Salt = salt
             };
 
             var hashPassword = hmac.Hash(original);
-            if (hashPassword != null || hashPassword.Equals(""))
+
+            var questions = new List<string>();
+            var answers = new List<string>();
+
+            foreach(SecurityQuestion QandA in user.SecurityQandAs)
             {
-                return false;
+                questions.Add(QandA.Question);
+                answers.Add(QandA.Answer);
             }
 
-            var userCredentials = new UserCredentialDTO()
+            var gatewayDTO = new RegGatewayDTO()
             {
-                Username = user.UserCredInfo.Username
+                UserName = user.UserCredInfo.Username,
+                Password = hashPassword,
+                Type = "General",
+                Address = user.UserLocation.Street,
+                City = user.UserLocation.City,
+                State = user.UserLocation.State,
+                Zipcode = user.UserLocation.ZipCode,
+                Longitude = geoCoordinates.Longitude,
+                Latitude = geoCoordinates.Latitude,
+                UserClaims = SetDefaultClaims.GetDefaultClaims(),
+                Salt = salt,
+                Questions = questions,
+                Answers = answers
+             };
 
-            };
-
-            return true;
+            var gateway = new RegistrationGateway();
+            return gateway.Create(gatewayDTO);
         }
 
     }

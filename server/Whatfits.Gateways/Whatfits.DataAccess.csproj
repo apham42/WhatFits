@@ -56,6 +56,7 @@
     <Compile Include="DataTransferObjects\ContentDTOs\WorkoutLogDTO.cs" />
     <Compile Include="DataTransferObjects\CoreDTOs\LoginDTO.cs" />
     <Compile Include="DataTransferObjects\CoreDTOs\RegGatewayDTO.cs" />
+    <Compile Include="DataTransferObjects\CoreDTOs\SecurityQuestionResponseDTO.cs" />
     <Compile Include="DataTransferObjects\CoreDTOs\UserAccessDTO.cs" />
     <Compile Include="DataTransferObjects\CoreDTOs\UserManagementDTO.cs" />
     <Compile Include="DataTransferObjects\CoreDTOs\UsernameDTO.cs" />
@@ -75,7 +76,9 @@
     <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DataTransferObjects\CoreDTOs\NewFolder1\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Whatfits.Models\Whatfits.Models.csproj">
       <Project>{7ccda19c-9b92-4029-a6ca-529599acdeb4}</Project>

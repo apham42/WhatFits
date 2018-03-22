@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    public interface IValidation<T>
+    public interface IValidation<Response, T>
     {
-        T Validate<DTO>(DTO obj);
+        Response Validate(T obj);
     }
 }

@@ -47,7 +47,14 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\S
 C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\Microsoft.IdentityModel.Tokens.xml
 C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\Microsoft.IdentityModel.Logging.xml
 C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\obj\Debug\RegistrationTests.csprojResolveAssemblyReference.cache
-C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\obj\Debug\RegistrationTests.dll.config
 C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\obj\Debug\RegistrationTests.csproj.CoreCompileInputs.cache
 C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\obj\Debug\RegistrationTests.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\obj\Debug\RegistrationTests.pdb
+C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\Newtonsoft.Json.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\Newtonsoft.Json.xml
+C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\FluentValidation.WebApi.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\System.ComponentModel.Annotations.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\System.ComponentModel.Primitives.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\RegistrationTests\bin\Debug\FluentValidation.WebApi.xml
