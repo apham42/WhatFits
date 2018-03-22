@@ -1,55 +1,63 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+﻿using System;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security;
 using System.Security.Claims;
 using System.Threading;
+using Whatfits.UserAccessControl.Controller;
 
 namespace Whatfits.UserAccessControl.Service
 {
     /// <summary>
-    /// Convert the incoming Token into 
+    /// Get incomming principal and claims from database
     /// </summary>
     public class ClaimsTransformer : ClaimsAuthenticationManager
     {
-        public ClaimsPrincipal Authenticate(string incommingToken)
+        /// <summary>
+        /// check if incomming principal is null
+        /// </summary>
+        /// <param name="incommingPrincipal">users principal</param>
+        /// <returns>ClaimsPrinciapl with added claims from db</returns>
+        public ClaimsPrincipal Authenticate(ClaimsPrincipal incommingPrincipal)
         {
             // check if token exist
-            if (string.IsNullOrEmpty(incommingToken))
+            if (incommingPrincipal == null)
             {
-                throw new SecurityException("No Token");
+                // throw exception to be caught in AuthenticateHttpMessageHandler
+                throw new SecurityException();
             }
 
             // create principal
-            return CreatePrincipal(incommingToken);
+            return AddClaimsToPrincipal(incommingPrincipal);
         }
-
-        /*
-        * Gives new users a set of default claims.
-        * This should only be used in Registration.
-        * @param string username, username of the new registered user
-        * @returns List<int>, returns list of ints(id of the claims) 
-        * */
-        private ClaimsPrincipal CreatePrincipal(string incommingToken)
+       
+        /// <summary>
+        /// add claims from db
+        /// </summary>
+        /// <param name="incommingPrincipal">principal from authenticateHttpMessageHandler</param>
+        /// <returns>incommingPrincipal with new claims</returns>
+        private ClaimsPrincipal AddClaimsToPrincipal(ClaimsPrincipal incommingPrincipal)
         {
-            // create jwt
-            var tokenhandler = new JwtSecurityTokenHandler();
-            var token = new JwtSecurityToken();
-
-            // create users principal
-            ClaimsPrincipal cp = new ClaimsPrincipal();
-
-            // check if valid token
-            if (tokenhandler.CanReadToken(incommingToken))
+            try
             {
-                // create token from incomming token string
-                token = tokenhandler.ReadJwtToken(incommingToken);
+                // new identity for principal
+                ClaimsIdentity ci = new ClaimsIdentity();
 
-                // return users principal
-                cp = new ClaimsPrincipal(new ClaimsIdentity(token.Claims));
-                Thread.CurrentPrincipal = cp;
-                return cp;
+                // create object to get claims
+                UserAccessDatabaseAccess dbAccess = new UserAccessDatabaseAccess(incommingPrincipal.Identity.Name);
+
+                // get claims from db and store in identity
+                ci.AddClaims(dbAccess.GetClaims());
+
+                // store new idenityt in principal
+                incommingPrincipal.AddIdentity(ci);
+
+                // return principal with all claims
+                return incommingPrincipal;
+            } catch (Exception)
+            {
+                // throw Exception to be caught in AuthenticateHttpMessageHandler
+                throw new Exception();
             }
-
-            return cp;
         }
     }
 }

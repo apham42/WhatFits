@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Whatfits.JsonWebToken.Constant;
-using Whatfits.UserAccessControl.Controller;
 
 namespace Whatfits.JsonWebToken.Service
 {
-    public static class Create
+    public class Create
     {
         public static JwtHeader CreateHeader()
         {
@@ -38,7 +37,7 @@ namespace Whatfits.JsonWebToken.Service
             long hrunixtime = ((DateTimeOffset)currenttime.AddHours(exptime)).ToUnixTimeSeconds();
 
             // Get view claims
-            List<Claim> ViewClaim = UserAccessController.GetViewClaims();
+            List<Claim> ViewClaim = GetViewClaims();
 
             // create payload of jwt
             JwtPayload payload = new JwtPayload()
@@ -56,6 +55,17 @@ namespace Whatfits.JsonWebToken.Service
 
             // return payload
             return payload;
+        }
+
+        private static List<Claim>  GetViewClaims()
+        {
+            return new List<Claim>()
+            {
+                new Claim("Workout", "add workout"),
+                new Claim("Event", "add event"),
+                new Claim("Friends", "you have friends, congrats."),
+                new Claim("Sup", "yo")
+            };
         }
     }
 }

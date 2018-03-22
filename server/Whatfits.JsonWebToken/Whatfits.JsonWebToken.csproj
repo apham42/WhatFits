@@ -66,9 +66,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Whatfits.UserAccessControl\Whatfits.UserAccessControl.csproj">
-      <Project>{0ce3e9e9-95e4-449e-abdb-7ab4f8d72243}</Project>
-      <Name>Whatfits.UserAccessControl</Name>
+    <ProjectReference Include="..\Whatfits.Hash\Whatfits.Hash.csproj">
+      <Project>{8cc680df-550a-4e98-82ec-df265a5869fc}</Project>
+      <Name>Whatfits.Hash</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
