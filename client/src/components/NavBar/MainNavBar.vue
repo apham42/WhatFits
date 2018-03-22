@@ -2,7 +2,7 @@
   <div id="navbarExampleTransparentExample" class="navbar-menu">
     <div class="navbar-start">
       <a class="navbar-item" href="https://bulma.io/">
-        FUCK
+        HOME
       </a>
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link" href="/documentation/overview/start/">

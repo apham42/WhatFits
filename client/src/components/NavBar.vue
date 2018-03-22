@@ -5,7 +5,7 @@
         <img src="https://bulma.io/images/bulma-logo.png" alt="WhatFits" width="112" height="28">
       </a>
     </div>
-    <HomeNavBar v-if="this.$route.name == 'HomeRegistration'"></HomeNavBar>
+    <HomeNavBar v-if="this.$route.name == 'Home'"></HomeNavBar>
     <MainNavBar v-else></MainNavBar>
   </nav>
 </template>

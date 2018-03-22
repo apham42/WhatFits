@@ -7,9 +7,8 @@ namespace server.Controllers
 {
     public class UACTESTController : ApiController
     {
-
         [HttpPost]
-        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "EE")]
+        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "DD")]
         public string one()
         {
             return "PASS";

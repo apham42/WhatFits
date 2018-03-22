@@ -32,7 +32,7 @@ namespace Whatfits.UserAccessControl.Controller
         {
             if(IsAuthorized(actionContext))
             {
-                actionContext.Response = new HttpResponseMessage(HttpStatusCode.OK);
+                base.IsAuthorized(actionContext);
             } else
             {
                 HandleUnauthorizedRequest(actionContext);
@@ -61,7 +61,7 @@ namespace Whatfits.UserAccessControl.Controller
         //     true if the control is authorized; otherwise, false.
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
-            ClaimsPrincipal incommingPrincipal = (ClaimsPrincipal) actionContext.RequestContext.Principal;
+            ClaimsPrincipal incommingPrincipal = (ClaimsPrincipal) System.Web.HttpContext.Current.User;//(ClaimsPrincipal) actionContext.RequestContext.Principal;
 
             if(incommingPrincipal.HasClaim(type, value))
             {
