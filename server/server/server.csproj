@@ -145,7 +145,6 @@
     <Compile Include="Model\Location\WebAPIGeocode.cs" />
     <Compile Include="Model\Network Communication\MapDataAdapter.cs" />
     <Compile Include="Model\Network Communication\MapWebAPIComm.cs" />
-    <Compile Include="Model\Network Communication\NetworkConstants.cs" />
     <Compile Include="Model\Validators\Account Validator\RegInfoValidator.cs" />
     <Compile Include="Model\Validators\Account Validator\SecurityQuestionValidator.cs" />
     <Compile Include="Model\Validators\Account Validator\UserCredValidator.cs" />

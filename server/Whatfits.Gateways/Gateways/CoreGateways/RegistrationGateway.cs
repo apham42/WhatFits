@@ -6,6 +6,8 @@ using Whatfits.Models.Context.Core;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -16,14 +18,17 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     {
         private RegistrationContext db = new RegistrationContext();
         /// <summary>
-        /// Used for Users who registered on the Registration page in app.
+        /// Creates a user based on registration information
         /// </summary>
+        /// <param name="dto"> Registeration Information </param>
+
         public bool Create(RegGatewayDTO dto)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
+                    // Saving Location and finding ID
                     bool doesLocationExist = (from x in db.Locations
                                       where x.Address == dto.Address &&
                                       x.Latitude == dto.Latitude && x.Longitude == x.Longitude
@@ -48,7 +53,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                       x.Latitude == dto.Latitude && x.Longitude == x.Longitude
                                       select x.LocationID).FirstOrDefault();
 
-
+                    // Saving Credentials
                     Credential credential = new Credential()
                     {
                         UserName = dto.UserName,
@@ -61,6 +66,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                      where u.UserName == dto.UserName
                                      select u.UserID).FirstOrDefault();
 
+                    // Saving Salt
                     Salt userSalt = new Salt()
                     {
                         UserID = userID,
@@ -69,6 +75,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     db.Salts.Add(userSalt);
                     db.SaveChanges();
 
+                    // Saving Security Question and user's Answers
                     int answerCounter = 0;
                     foreach(string question in dto.Questions)
                     {
@@ -89,9 +96,18 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         }
                     }
 
-                    // TODO: Save LocationID and UserID on User table for user management
+                    // Saving User info
+                    User userInfo = new User()
+                    {
+                        UserID = userID,
+                        LocationID = locationID,
+                        Type = dto.Type
+                    };
+                    db.Users.Add(userInfo);
+                    db.SaveChanges();
 
                     // TODO: Add default claims.
+
                     dbTransaction.Commit();
                     return true;
                 }
@@ -105,12 +121,19 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     dbTransaction.Rollback();
                     return false;
                 }
+                catch (InvalidOperationException)
+                {
+                    dbTransaction.Rollback();
+                    return false;
+                }
             }
         }
-        
+
         /// <summary>
         /// This function checks if the incoming username exists in the database
         /// </summary>
+        /// <param name="dto"> Username dto from Business layer to Data Access Layer </param>
+
         public UsernameResponseDTO CheckUserName(UsernameDTO dto)
         {
             UsernameResponseDTO response = new UsernameResponseDTO();
@@ -131,7 +154,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     response.isSuccessful = true;
                 }
             }
-            catch (System.Data.SqlClient.SqlException)
+            catch (SqlException)
             {
                 response.isSuccessful = false;
                 messages.Add("Your request could not be made. Please try again.");
@@ -146,6 +169,10 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             return response;
         }
 
+        /// <summary>
+        /// Gets all the security questions in the database
+        /// </summary>
+        /// <returns> list of security questions in the database</returns>
         public SecurityQuestionResponseDTO GetQuestions()
         {
             SecurityQuestionResponseDTO response = new SecurityQuestionResponseDTO();

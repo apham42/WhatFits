@@ -17,6 +17,9 @@ using Whatfits.UserAccessControl.Service;
 
 namespace server.Services
 {
+    /// <summary>
+    /// Handles all request that revolves around user accounts
+    /// </summary>
     public class AccountService
     {
         public AccountService()
@@ -24,6 +27,11 @@ namespace server.Services
 
         }
 
+        /// <summary>
+        /// Tries to create the user based on registration information
+        /// </summary>
+        /// <param name="creds"> Registeration Information </param>
+        /// <returns> A DTO that contains status and any messages </returns>
         public RegInfoResponseDTO CreateUser(RegInfo creds)
         {
             var validator = new RegInfoValidator();
@@ -49,6 +57,12 @@ namespace server.Services
             return response;
         }
 
+        /// <summary>
+        /// Creates user based on validated information
+        /// </summary>
+        /// <param name="user"> Validated registeration information </param>
+        /// <param name="geoCoordinates"> Validated Geocoordinates based on the location of registration information </param>
+        /// <returns> status of the creation of the user </returns>
         public bool Create(RegInfo user, WebAPIGeocode geoCoordinates)
         {
             var hmac = new HMAC256();

@@ -102,6 +102,10 @@
     <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803191743477_init.Designer.cs">
       <DependentUpon>201803191743477_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803222053352_RegistrationMigration.cs" />
+    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803222053352_RegistrationMigration.Designer.cs">
+      <DependentUpon>201803222053352_RegistrationMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\Configuration.cs" />
     <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803191749572_init.cs" />
     <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803191749572_init.Designer.cs">
@@ -167,6 +171,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\CoreMigrations\RegistrationMigrations\201803191743477_init.resx">
       <DependentUpon>201803191743477_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\CoreMigrations\RegistrationMigrations\201803222053352_RegistrationMigration.resx">
+      <DependentUpon>201803222053352_RegistrationMigration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803191749572_init.resx">
       <DependentUpon>201803191749572_init.cs</DependentUpon>

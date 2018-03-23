@@ -21,6 +21,11 @@ namespace server.Controllers
     public class SignUpController : ApiController
     {
         [HttpPost]
+        /// <summary>
+        /// Handles Register requests
+        /// </summary>
+        /// <param name="userCred"> Registeration Information </param>
+        /// <returns> Status of the request with a list of messages </returns>
         public IHttpActionResult Register(RegInfo userCred)
         {
             AccountService service = new AccountService();

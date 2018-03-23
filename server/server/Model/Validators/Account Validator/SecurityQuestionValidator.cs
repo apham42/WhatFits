@@ -8,6 +8,9 @@ using server.Constants;
 
 namespace server.Model.Validators.Account_Validator
 {
+    /// <summary>
+    /// Validates the security questions and answers based on business rules
+    /// </summary>
     public class SecurityQuestionValidator: AbstractValidator<List<SecurityQuestion>>
     {
         public SecurityQuestionValidator()
@@ -19,7 +22,11 @@ namespace server.Model.Validators.Account_Validator
            });
         }
 
-
+        /// <summary>
+        /// Checks user input of the answers to the security questions
+        /// </summary>
+        /// <param name="securityQuestions"></param>
+        /// <returns> status of the validation of the answers </returns>
         public bool checkAnswers(List<SecurityQuestion> securityQuestions)
         {
             foreach(SecurityQuestion question in securityQuestions)
@@ -31,5 +38,6 @@ namespace server.Model.Validators.Account_Validator
             }
             return true;
         }
+
     }
 }

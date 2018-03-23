@@ -6,6 +6,9 @@ using server.Model.Location;
 
 namespace server.Model.Account
 {
+    /// <summary>
+    /// Contains the data that is needed for registration
+    /// </summary>
     public class RegInfo
     {
         public UserCredential UserCredInfo { get; set; }

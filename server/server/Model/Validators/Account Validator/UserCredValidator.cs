@@ -11,6 +11,9 @@ namespace server.Model.Validators.Account_Validator
 {
     public class UserCredValidator : AbstractValidator<UserCredential>
     {
+        /// <summary>
+        /// Validates the user credentials based on business rules
+        /// </summary>
         public UserCredValidator()
         {
             RuleFor(UserCredInfo => UserCredInfo.Username).NotNull();
@@ -28,6 +31,11 @@ namespace server.Model.Validators.Account_Validator
 
         }
 
+        /// <summary>
+        /// Validates the characters of a credential
+        /// </summary>
+        /// <param name="credential"></param>
+        /// <returns>status of the validation of the credential</returns>
         public bool ValidateCharacters(string credential)
         {
             var rgxCheck = new Regex(AccountConstants.CREDCHARACTERS);

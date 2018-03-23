@@ -6,6 +6,9 @@ using server.Interfaces;
 
 namespace server.Model.Location
 {
+    /// <summary>
+    /// Contains the user's input address information
+    /// </summary>
     public class Address: ILocation
     {
         public Address(string street, string city, string state, string zipCode)

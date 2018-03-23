@@ -5,6 +5,10 @@ using System.Web;
 
 namespace server.Model.Account
 {
+    /// <summary>
+    /// Contains one of the security question and answer that the 
+    /// user entered for registration
+    /// </summary>
     public class SecurityQuestion
     {
         public SecurityQuestion (string question, string answer)

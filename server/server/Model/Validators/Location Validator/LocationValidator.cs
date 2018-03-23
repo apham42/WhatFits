@@ -13,7 +13,14 @@ namespace server.Model.Validators.Location_Validator
 {
     public class LocationValidator : AbstractValidator<Address>
     {
+        /// <summary>
+        /// Geocoordinates from the web api if the location is validated
+        /// </summary>
         public WebAPIGeocode ValidatedLocation { get; set; }
+
+        /// <summary>
+        /// Validates the location based on business rules
+        /// </summary>
         public LocationValidator()
         {
             RuleFor(locationInfo => locationInfo.Street).NotNull();
@@ -33,6 +40,11 @@ namespace server.Model.Validators.Location_Validator
 
         }
 
+        /// <summary>
+        /// Checks if the address is in the scope of Whatfits by sending a request to Google Maps Web API
+        /// </summary>
+        /// <param name="address"> location based on users input </param>
+        /// <returns> status of the validation of the location </returns>
         public bool CheckAddress(string address)
         {
             var location = address.Replace(' ', '+');

@@ -8,6 +8,9 @@ using System.Security.Cryptography;
 
 namespace Whatfits.Hash
 {
+    /// <summary>
+    /// Can create a salt and hash a value
+    /// </summary>
     public class HMAC256
     {
         public HMAC256()
@@ -15,6 +18,10 @@ namespace Whatfits.Hash
 
         }
         
+        /// <summary>
+        /// Generates a random salt value
+        /// </summary>
+        /// <returns> salt </returns>
         public string GenerateSalt()
         {
             // Empty salt array
@@ -43,6 +50,11 @@ namespace Whatfits.Hash
             }            
         }
 
+        /// <summary>
+        /// Generates a hash based on the original value and salt of the dto
+        /// </summary>
+        /// <param name="dto"> DTO that contains original value and a salt </param>
+        /// <returns> hashed value </returns>
         public string Hash(HashDTO dto)
         {
             // changes the hashDTO original to bytes

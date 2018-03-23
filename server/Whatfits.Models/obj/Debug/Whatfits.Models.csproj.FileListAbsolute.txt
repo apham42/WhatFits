@@ -83,3 +83,4 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Wha
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csproj.CoreCompileInputs.cache
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.pdb
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.CoreMigrations.RegistrationMigrations.RegistrationMigration.resources

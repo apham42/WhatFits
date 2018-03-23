@@ -7,7 +7,7 @@ namespace server.Constants
 {
     public class AccountConstants
     {
-        public const string CREDCHARACTERS = @"^[A-Za-z\d~`!@#$%^&*()-_+=\\|\]}\[{'"";:/?.>,<]+$";
+        public const string CREDCHARACTERS = @"^[ A-Za-z\d~`!@#$%^&*()-_+=\\|\]}\[{'"";:/?.>,<]+$";
         public const string USER_CREATED = "User has been created";
         public const string USER_CREATE_FAIL = "User could not be created. Please try again later.";
         public const string REGISTRATION_INVALID = "Registration Information is not valid.Please include the proper information needed.";

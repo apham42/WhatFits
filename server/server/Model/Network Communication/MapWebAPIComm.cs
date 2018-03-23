@@ -9,20 +9,31 @@ using server.Model.Data_Transfer_Objects.Network_Communication_DTO_s;
 using server.Interfaces;
 
 
+
 namespace server.Model.Network_Communication
 {
+    /// <summary>
+    /// Sends request to a Map Web API service
+    /// </summary>
     public class MapWebAPIComm : INetworkCommunication<NetworkLocationResponseDTO, NetworkLocationDTO>
     {
-        public string mapWebAPI = ConfigurationManager.AppSettings["mapURL"];
-        public string mapWebKey = ConfigurationManager.AppSettings["mapKey"];
+        /// <summary>
+        /// Contents that this needs to send to the Map Web API requires 
+        /// </summary>
+        private string mapWebAPI = ConfigurationManager.AppSettings["mapURL"];
+        private string mapWebKey = ConfigurationManager.AppSettings["mapKey"];
         public MapWebAPIComm()
         {
 
         }
+
+        /// <summary>
+        /// Sends a request to the Map Web API
+        /// </summary>
+        /// <param name="dto">DTO that contains the data that will be used in the request </param>
+        /// <returns> A response DTO that contains the data that was received from the request </returns>
         public async Task<NetworkLocationResponseDTO> Request(NetworkLocationDTO dto)
         {
-            string api = ConfigurationManager.AppSettings["mapURL"];
-            string key = ConfigurationManager.AppSettings["mapKey"];
             NetworkLocationResponseDTO responseDTO;
             using (HttpClient client = new HttpClient())
             {

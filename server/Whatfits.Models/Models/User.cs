@@ -18,26 +18,21 @@ namespace Whatfits.Models.Models
         public int LocationID { get; set; }
 
         // Stores Email address of the User
-        [Required, StringLength(256)]
         public string Email { get; set; }
 
         // Stores the directory path of the profile picture
         public string ProfilePicture { get; set; }
 
         // Stores First Name of the User
-        [Required, StringLength(50, MinimumLength = 2)]
         public string FirstName { get; set; }
 
         // Stores Last Name of the User
-        [Required, StringLength(50, MinimumLength = 2)]
         public string LastName { get; set; }
 
         // Stores Gender of the User
-        [Required, StringLength(50, MinimumLength = 2)]
         public string Gender { get; set; }
 
         // Stores the User Skill level for workingout
-        [Required, StringLength(20, MinimumLength = 2)]
         public string SkillLevel { get; set; }
 
         // User Description for Profile

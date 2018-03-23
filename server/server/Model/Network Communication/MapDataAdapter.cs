@@ -8,6 +8,9 @@ using server.Model.Location;
 
 namespace server.Model.Network_Communication
 {
+    /// <summary>
+    /// Maps the data recieved from the Map Web API
+    /// </summary>
     public class MapDataAdapter: IDataAdapter<WebAPIGeocode, string>
     {
         public MapDataAdapter()
@@ -15,16 +18,24 @@ namespace server.Model.Network_Communication
 
         }
 
-        public WebAPIGeocode Convert(string request)
+        /// <summary>
+        /// Converts the string content of the data received from the Web API
+        /// </summary>
+        /// <param name="apiData"></param>
+        /// <returns>A mapped object that contains the information we need from the web api data</returns>
+        public WebAPIGeocode Convert(string apiData)
         {
-            var data = JObject.Parse(request);
+            var data = JObject.Parse(apiData);
             var mappedData = new WebAPIGeocode();
+            
+            // Returns if the response of the api failed 
             if (!data["status"].ToString().Equals("OK"))
             {
                 mappedData.IsValid = false;
                 return mappedData;
             }
 
+            // Finds the county of the location in the web api data
             JArray convertedData = (JArray)data["results"][0]["address_components"];
             int addressComponentsLength = convertedData.Count;
             for (int i = 0; i < convertedData.Count; i++)
@@ -34,11 +45,14 @@ namespace server.Model.Network_Communication
                     mappedData.County = data["results"][0]["address_components"][i]["long_name"].ToString();
                 }
             }
+            // If it was not found, return false
             if (mappedData.County == null )
             {
                 mappedData.IsValid = false;
                 return mappedData;
             }
+
+            // Gets the latitude and longitude from the web api data
             mappedData.Latitude = data["results"][0]["geometry"]["location"]["lat"].ToString();
             mappedData.Longitude = data["results"][0]["geometry"]["location"]["lng"].ToString();
             mappedData.IsValid = true;

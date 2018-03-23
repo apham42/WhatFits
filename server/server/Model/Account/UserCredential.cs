@@ -5,9 +5,11 @@ using System.Web;
 
 namespace server.Model.Account
 {
+    /// <summary>
+    /// Contains the credentials of the user for them to login
+    /// </summary>
     public class UserCredential
     {
-        // 
         public UserCredential(string username, string password)
         {
             Username = username;

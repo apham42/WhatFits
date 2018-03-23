@@ -17,14 +17,26 @@ using System.Threading.Tasks;
 
 namespace server.Model.Validators.Account_Validator
 {
+    /// <summary>
+    /// Validates Registration Information
+    /// </summary>
     public class RegInfoValidator: IValidation<RegInfoResponseDTO, RegInfo>
     {
+        /// <summary>
+        /// Validated Geocoordinates from Google Map Web API based on user location
+        /// </summary>
         public WebAPIGeocode ValidatedLocation { get; set; }
+
         public RegInfoValidator()
         {
 
         }
 
+        /// <summary>
+        /// Validate command for registration information
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>A DTO that contains status and any messages</returns>
         public RegInfoResponseDTO Validate(RegInfo user)
         {
             var validationResult = new RegInfoResponseDTO();
@@ -38,6 +50,12 @@ namespace server.Model.Validators.Account_Validator
             return validationResult;
         }
 
+        /// <summary>
+        /// Validates the user credentials of the registraion information
+        /// </summary>
+        /// <param name="userCred"></param>
+        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
+        /// <returns>status if the credentials are valid based on business rules</returns>
         public bool ValidateUserCred(UserCredential userCred, RegInfoResponseDTO validationResult)
         {
             var messages = new List<string>();
@@ -69,6 +87,7 @@ namespace server.Model.Validators.Account_Validator
                 Username = userCred.Username
             };
 
+            // Checks username in the database
             var gateway = new RegistrationGateway();
             var gatewayResponse = gateway.CheckUserName(dto);
 
@@ -82,6 +101,12 @@ namespace server.Model.Validators.Account_Validator
             return true;
         }
 
+        /// <summary>
+        /// Validates the Security Questions and Answers of the Registration Information
+        /// </summary>
+        /// <param name="questions">List of Security questions with answers</param>
+        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
+        /// <returns> status if the security questions and answers are valid based on business rules </returns>
         public bool ValidateQandAs(List<SecurityQuestion> questions, RegInfoResponseDTO validationResult)
         {
             var messages = new List<string>();
@@ -140,6 +165,12 @@ namespace server.Model.Validators.Account_Validator
             return true;
         }
 
+        /// <summary>
+        /// Validates the User Location of the Registration Information
+        /// </summary>
+        /// <param name="userLocation"></param>
+        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
+        /// <returns>status if the location is valid based on business rules</returns>
         public bool ValidateLocation(Address userLocation, RegInfoResponseDTO validationResult)
         {
             var messages = new List<string>();

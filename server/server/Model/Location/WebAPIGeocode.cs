@@ -6,6 +6,9 @@ using server.Interfaces;
 
 namespace server.Model.Location
 {
+    /// <summary>
+    /// Contains the information that Whatfits need from the Web API.
+    /// </summary>
     public class WebAPIGeocode: IGeoCoordinates
     {
         public WebAPIGeocode()

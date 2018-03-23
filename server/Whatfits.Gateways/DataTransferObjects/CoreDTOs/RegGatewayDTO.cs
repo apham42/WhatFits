@@ -5,8 +5,8 @@ using System.Security.Claims;
 namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
 {
     /// <summary>
-    /// RegistrationDTO
-    /// PURPOSE: Contains all data required to register a user.
+    /// Contains the registration information that is needed to 
+    /// create a user in the database
     /// </summary>
     public class RegGatewayDTO
     {

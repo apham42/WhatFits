@@ -65,7 +65,6 @@
         </ol>
         <p>These Terms will be governed by and interpreted in accordance with the laws of the State of California, and you submit to the non-exclusive jurisdiction of the state and federal courts located in California for the resolution of any disputes.</p>
         <p>These terms and conditions have been generated at <a href="https://termsandcondiitionssample.com/" target="_blank">Terms And Conditions Sample.com</a>.</p>
-        <button type="button" class="btn-green" @click="close">Close</button>
     </div>
   </div>
 </template>
@@ -84,26 +83,8 @@ export default {
 <style>
   .modal {
     background: #FFFFFF;
-    box-shadow: 2px 2px 20px 1px;
     overflow-x: auto;
     display: flex;
     flex-direction: column;
-  }
-
-  .btn-close {
-    border: none;
-    font-size: 20px;
-    padding: 20px;
-    cursor: pointer;
-    font-weight: bold;
-    color: #4AAE9B;
-    background: transparent;
-  }
-
-  .btn-green {
-    color: white;
-    background: #4AAE9B;
-    border: 1px solid #4AAE9B;
-    border-radius: 2px;
   }
 </style>
