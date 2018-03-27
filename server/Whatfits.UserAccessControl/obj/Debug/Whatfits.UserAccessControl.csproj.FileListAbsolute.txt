@@ -109,3 +109,17 @@ C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Debug\
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.Models.pdb
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.Models.dll.config
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl\bin\Debug\EntityFramework.xml
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.DataAccess.dll
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.JsonWebToken.dll
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.Models.dll
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\EntityFramework.dll
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.Hash.dll
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.DataAccess.pdb
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.DataAccess.dll.config
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.JsonWebToken.pdb
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.JsonWebToken.dll.config
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.Models.pdb
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.Models.dll.config
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\EntityFramework.xml
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.Hash.pdb
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.UserAccessControl\bin\Debug\Whatfits.Hash.dll.config

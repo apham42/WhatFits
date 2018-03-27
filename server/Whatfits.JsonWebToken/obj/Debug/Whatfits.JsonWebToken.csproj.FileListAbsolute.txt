@@ -73,17 +73,10 @@ C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Mi
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Tokens.dll
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Newtonsoft.Json.dll
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\System.IdentityModel.Tokens.Jwt.dll
-C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.UserAccessControl.dll
-C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\System.Web.Http.dll
-C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\System.Net.Http.Formatting.dll
-C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.UserAccessControl.pdb
-C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.UserAccessControl.dll.config
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Logging.xml
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Tokens.xml
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Newtonsoft.Json.xml
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
-C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\System.Web.Http.xml
-C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\System.Net.Http.Formatting.xml
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csprojResolveAssemblyReference.cache
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csproj.CoreCompileInputs.cache
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csproj.CopyComplete
@@ -92,3 +85,6 @@ C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\obj\Debug\Wh
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Hash.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Hash.pdb
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Hash.dll.config
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Hash.dll
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Hash.pdb
+C:\Users\George\source\repos\WhatFits8\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Hash.dll.config
