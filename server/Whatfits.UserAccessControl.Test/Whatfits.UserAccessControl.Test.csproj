@@ -65,10 +65,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="Constant\HttpActionContextMockData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceTest\RequestTransformerTest.cs" />
+    <Compile Include="ServiceTest\SetDefaultClaimsTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

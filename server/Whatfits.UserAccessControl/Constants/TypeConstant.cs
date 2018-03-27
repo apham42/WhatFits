@@ -43,13 +43,13 @@ namespace Whatfits.UserAccessControl.Constants
         public const string VIEW_PAGE_CLAIM_TYPE_CHAT = "VIEW_CHAT";
 
         // VIEW EVENTS PAGE
-        public const string VIEW_PAGE_CLAIM_TYPE_EVENTS = "VIEW_CHAT";
+        public const string VIEW_PAGE_CLAIM_TYPE_EVENTS = "VIEW_EVENTS";
 
         // VIEW SEARCH PAGE
-        public const string VIEW_PAGE_CLAIM_TYPE_SEARCH = "VIEW_CHAT";
+        public const string VIEW_PAGE_CLAIM_TYPE_SEARCH = "VIEW_SEARCH";
 
         // VIEW RATINGS AND REVIEW PAGE
-        public const string VIEW_PAGE_CLAIM_TYPE_RATINGS_REVIEW = "VIEW_CHAT";
+        public const string VIEW_PAGE_CLAIM_TYPE_RATINGS_REVIEW = "VIEW_RATINGS_REVIEW";
 
     }
 }
