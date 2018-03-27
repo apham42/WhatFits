@@ -26,6 +26,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations
             DropForeignKey("dbo.Notifications", "UserID", "dbo.UserProfiles");
             DropIndex("dbo.Notifications", new[] { "UserID" });
             DropTable("dbo.Notifications");
+
         }
     }
 }

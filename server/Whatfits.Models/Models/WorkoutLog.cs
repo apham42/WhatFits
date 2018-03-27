@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
@@ -9,7 +10,7 @@ namespace Whatfits.Models.Models
     /// Represents a workoutlog that tracks one workout either cardio or 
     /// weightlifting.
     /// </summary>
-    public class WorkoutLog
+    public class WorkoutLog : IWorkoutLog
     {
         // Primary Key
         [Key, Column(Order = 0)]

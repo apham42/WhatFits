@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.CoreDTOs
 {
@@ -8,7 +9,7 @@ namespace Whatfits.DataAccess.DTOs.CoreDTOs
     /// RegistrationDTO
     /// PURPOSE: Contains all data required to register a user.
     /// </summary>
-    public class RegistrationDTO
+    public class RegistrationDTO : IUserProfile,ILocation, ICredential
     {
         // UserData
         public int UserID { get; set; }
@@ -35,8 +36,8 @@ namespace Whatfits.DataAccess.DTOs.CoreDTOs
         // Salt
         public string Salt { get; set; }
         // Security Q&A
-        public List<int> QuestionIDs { get; set; }
-        public List<String> Answers { get; set; }
+        public Dictionary<int, String> Answers { get; set; }
+        public Dictionary<int, String> Questions { get; set; }
 
     }
 }

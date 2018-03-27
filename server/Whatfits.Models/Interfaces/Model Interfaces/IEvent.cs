@@ -8,7 +8,7 @@ namespace Whatfits.Models.Interfaces
         string Title { get; set; }
 
         // Time stamp when the event was created
-        string CreatedAt { get; set; }
+        DateTime CreatedAt { get; set; }
 
         // Time when the event will take place
         DateTime DateAndTime { get; set; }

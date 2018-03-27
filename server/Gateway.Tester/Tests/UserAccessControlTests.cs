@@ -4,6 +4,8 @@ using Xunit;
 using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using System.Security.Claims;
+using Whatfits.DataAccess.DTOs;
+
 namespace Gateway.Tester
 {
     /// <summary>
@@ -25,7 +27,8 @@ namespace Gateway.Tester
                 }
 
             };
-            Assert.True(uac.AddUserClaims(userName));
+            ResponseDTO<Boolean> found = uac.AddUserClaims(userName);
+            Assert.True(found.IsSuccessful);
         }
         [Fact]
         public void RemoveUserClaimTest()
@@ -36,7 +39,8 @@ namespace Gateway.Tester
             {
                 UserName = "chackins",              
             };
-            Assert.True(uac.RemoveUserClaims(username));
+            ResponseDTO<Boolean> found = uac.RemoveUserClaims(username);
+            Assert.True(found.IsSuccessful);
         }
         [Fact]
         public void GetUserClaims()
@@ -45,13 +49,13 @@ namespace Gateway.Tester
             {
                 UserName = "amay"
             };
-            UserAccessDTO foundClaims = uac.GetUserClaims(userName);
+            ResponseDTO<List<Claim>> found = uac.GetUserClaims(userName);
             List<Claim> expectedClaims = new List<Claim>
             {
                 new Claim("AmayClaimType1", "AmayClaimValue1"),
                 new Claim("AmayClaimType2", "AmayClaimValue2"),
             };
-            Assert.Equal(expectedClaims,foundClaims.UserClaims);
+            Assert.Equal(expectedClaims,found.Data);
         }
     }
 }

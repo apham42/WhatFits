@@ -1,7 +1,10 @@
 namespace Whatfits.Models.Migrations.AccountMigrations
 {
+    using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Data.Entity.Migrations;
+    using System.Linq;
     using Whatfits.Models.Models;
 
     internal sealed class Configuration : DbMigrationsConfiguration<Whatfits.Models.Context.Core.AccountContext>
@@ -14,8 +17,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
 
         protected override void Seed(Whatfits.Models.Context.Core.AccountContext context)
         {
-            // NOTE: Only use to create tables for CORE features and any other content.
-            //*
+            /*
             var credentials = new List<Credential>
             {
                 new Credential{ UserName = "latmey", Password = "123456" },
@@ -26,7 +28,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
             };
             credentials.ForEach(c => context.Credentials.Add(c));
             context.SaveChanges();
-            
+
             var locations = new List<Location>
                 {
                     new Location{ Address = "1865 Locust Court", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
@@ -37,7 +39,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                 };
             locations.ForEach(l => context.Locations.Add(l));
             context.SaveChanges();
-            
+
             var users = new List<UserProfile>
               {
                   new UserProfile{ UserID = 0001, LocationID = 1, FirstName = "Luke",  LastName = "Atmey", Email = "asdf@gmail.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Beginner" , Type = "General"},
@@ -46,10 +48,10 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                   new UserProfile{ UserID = 0004, LocationID = 4, FirstName = "Red", LastName = "Blue", Email = "asdf@yahoo.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "General"},
                   new UserProfile{ UserID = 0005, LocationID = 5, FirstName = "Cody", LastName = "Hackins", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "General"},
               };
-              users.ForEach(u => context.Users.Add(u));
-              context.SaveChanges();
-              
-              var salts = new List<Salt>
+            users.ForEach(u => context.Users.Add(u));
+            context.SaveChanges();
+
+            var salts = new List<Salt>
               {
                   new Salt{ UserID = 0001, SaltValue = "asdf"},
                   new Salt{ UserID = 0002, SaltValue = "asdf"},
@@ -57,10 +59,10 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                   new Salt{ UserID = 0004, SaltValue = "asdf"},
                   new Salt{ UserID = 0005, SaltValue = "asdf"}
               };
-              salts.ForEach(s => context.Salts.Add(s));
-              context.SaveChanges();
-              
-              var userClaims = new List<UserClaims>
+            salts.ForEach(s => context.Salts.Add(s));
+            context.SaveChanges();
+
+            var userClaims = new List<UserClaims>
               {
                   new UserClaims{ UserID = 0001, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
                   new UserClaims{ UserID = 0001, ClaimType="ClaimType", ClaimValue="ClaimValue3"},
@@ -73,9 +75,9 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                   new UserClaims{ UserID = 0005, ClaimType="ClaimType", ClaimValue="ClaimValue3"},
                   new UserClaims{ UserID = 0005, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
               };
-              userClaims.ForEach(uc => context.UserClaims.Add(uc));
-              context.SaveChanges();
-              var questions = new List<SecurityQuestion>
+            userClaims.ForEach(uc => context.UserClaims.Add(uc));
+            context.SaveChanges();
+            var questions = new List<SecurityQuestion>
               {
                   new SecurityQuestion{ Question = "Who was the company you first worked for?"},
                   new SecurityQuestion{ Question = "Where did you go to highschool or college?"},
@@ -87,29 +89,29 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                   new SecurityQuestion{ Question = "What is the first name of the person you first kissed?"},
                   new SecurityQuestion{ Question = "In what city or town does your nearest sibling live?"}
               };
-              questions.ForEach(q => context.SecurityQuestions.Add(q));
-              context.SaveChanges();
-              var answers = new List<SecurityQandA>
+            questions.ForEach(q => context.SecurityQuestions.Add(q));
+            context.SaveChanges();
+            var answers = new List<SecurityAccount>
               {
-                  new SecurityQandA{ UserID = 0001, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
-                  new SecurityQandA{ UserID = 0001, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
-                  new SecurityQandA{ UserID = 0001, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
-                  new SecurityQandA{ UserID = 0002, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
-                  new SecurityQandA{ UserID = 0002, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
-                  new SecurityQandA{ UserID = 0002, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
-                  new SecurityQandA{ UserID = 0003, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
-                  new SecurityQandA{ UserID = 0003, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
-                  new SecurityQandA{ UserID = 0003, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
-                  new SecurityQandA{ UserID = 0004, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
-                  new SecurityQandA{ UserID = 0004, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
-                  new SecurityQandA{ UserID = 0004, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
-                  new SecurityQandA{ UserID = 0005, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
-                  new SecurityQandA{ UserID = 0005, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
-                  new SecurityQandA{ UserID = 0005, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
+                  new SecurityAccount{ UserID = 0001, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
+                  new SecurityAccount{ UserID = 0001, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
+                  new SecurityAccount{ UserID = 0001, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
+                  new SecurityAccount{ UserID = 0002, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
+                  new SecurityAccount{ UserID = 0002, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
+                  new SecurityAccount{ UserID = 0002, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
+                  new SecurityAccount{ UserID = 0003, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
+                  new SecurityAccount{ UserID = 0003, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
+                  new SecurityAccount{ UserID = 0003, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
+                  new SecurityAccount{ UserID = 0004, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
+                  new SecurityAccount{ UserID = 0004, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
+                  new SecurityAccount{ UserID = 0004, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
+                  new SecurityAccount{ UserID = 0005, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
+                  new SecurityAccount{ UserID = 0005, SecurityQuestionID = 3, Answer = "Answer to Question 3"},
+                  new SecurityAccount{ UserID = 0005, SecurityQuestionID = 4, Answer = "Answer to Question 4"},
               };
-              answers.ForEach(a => context.SecurityQandA.Add(a));
-              context.SaveChanges();
-              var tokenBlackList = new List<TokenBlackList>
+            answers.ForEach(a => context.SecurityQandA.Add(a));
+            context.SaveChanges();
+            var tokenBlackList = new List<TokenBlackList>
             {
                 new TokenBlackList { Tokens = "adhlfkjh323hdh93"},
                 new TokenBlackList { Tokens = "7sfgsfg8s7fgsdff"},
@@ -119,7 +121,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
             };
             tokenBlackList.ForEach(c => context.TokenBlackLists.Add(c));
             context.SaveChanges();
-              //*/
+            //*/
         }
     }
 }

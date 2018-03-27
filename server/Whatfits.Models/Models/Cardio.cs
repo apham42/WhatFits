@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
     /// <summary>
     /// Model to represent Cardio Logs
     /// </summary>
-    public class Cardio
+    public class Cardio : ICardio
     {
         // Primary Key
         [Key, Column(Order = 0)]

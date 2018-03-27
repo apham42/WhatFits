@@ -6,7 +6,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
     public partial class init : DbMigration
     {
         public override void Up()
-        {            
+        {
             CreateTable(
                 "dbo.Reviews",
                 c => new

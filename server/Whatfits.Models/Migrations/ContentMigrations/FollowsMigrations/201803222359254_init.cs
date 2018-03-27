@@ -6,16 +6,16 @@ namespace Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations
     public partial class init : DbMigration
     {
         public override void Up()
-        {   
+        {
             CreateTable(
                 "dbo.Followings",
                 c => new
                     {
-                        FollowingID = c.Int(nullable: false),
+                        FollowingID = c.Int(nullable: false, identity: true),
                         UserID = c.Int(nullable: false),
                         PersonFollowing = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.FollowingID, t.UserID })
+                .PrimaryKey(t => t.FollowingID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID);   
         }

@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Whatfits.Models.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.ContentDTOs
 {
-    public class NotificationDTO
+    public class NotificationDTO : INotification
     {
+        public string NotificationType { get; set; }
+        public string Message { get; set; }
     }
 }

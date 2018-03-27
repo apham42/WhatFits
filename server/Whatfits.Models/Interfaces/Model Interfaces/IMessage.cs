@@ -1,4 +1,6 @@
-﻿namespace Whatfits.Models.Interfaces
+﻿using System;
+
+namespace Whatfits.Models.Interfaces
 {
     public interface IMessage
     {
@@ -6,12 +8,9 @@
         string MessageContent { get; set; }
 
         // Time stamps the message
-        string CreatedAt { get; set; }
+        DateTime CreatedAt { get; set; }
 
         // Foreign Key, Tracks the User of the Message Sent
         int UserID { get; set; }
-
-        // Records the ChatroomID
-        int ChatroomID { get; set; }
     }
 }

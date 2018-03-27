@@ -18,7 +18,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                 .PrimaryKey(t => t.UserID);
             
             CreateTable(
-                "dbo.SecurityQandAs",
+                "dbo.SecurityAccounts",
                 c => new
                     {
                         UserID = c.Int(nullable: false),
@@ -54,20 +54,6 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                 .Index(t => t.UserID);
             
             CreateTable(
-                "dbo.Locations",
-                c => new
-                    {
-                        LocationID = c.Int(nullable: false, identity: true),
-                        Address = c.String(nullable: false),
-                        City = c.String(nullable: false),
-                        State = c.String(nullable: false),
-                        Zipcode = c.String(nullable: false),
-                        Latitude = c.String(nullable: false),
-                        Longitude = c.String(nullable: false),
-                    })
-                .PrimaryKey(t => t.LocationID);
-            
-            CreateTable(
                 "dbo.UserProfiles",
                 c => new
                     {
@@ -87,6 +73,20 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                 .ForeignKey("dbo.Locations", t => t.LocationID, cascadeDelete: true)
                 .Index(t => t.UserID)
                 .Index(t => t.LocationID);
+            
+            CreateTable(
+                "dbo.Locations",
+                c => new
+                    {
+                        LocationID = c.Int(nullable: false, identity: true),
+                        Address = c.String(nullable: false),
+                        City = c.String(nullable: false),
+                        State = c.String(nullable: false),
+                        Zipcode = c.String(nullable: false),
+                        Latitude = c.String(nullable: false),
+                        Longitude = c.String(nullable: false),
+                    })
+                .PrimaryKey(t => t.LocationID);
             
             CreateTable(
                 "dbo.Salts",
@@ -126,27 +126,27 @@ namespace Whatfits.Models.Migrations.AccountMigrations
         public override void Down()
         {
             DropForeignKey("dbo.TokenLists", "UserID", "dbo.Credentials");
-            DropForeignKey("dbo.Salts", "UserID", "dbo.Credentials");;
+            DropForeignKey("dbo.Salts", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.UserProfiles", "LocationID", "dbo.Locations");
             DropForeignKey("dbo.UserProfiles", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.UserClaims", "UserID", "dbo.Credentials");
-            DropForeignKey("dbo.SecurityQandAs", "SecurityQuestionID", "dbo.SecurityQuestions");
-            DropForeignKey("dbo.SecurityQandAs", "UserID", "dbo.Credentials");
+            DropForeignKey("dbo.SecurityAccounts", "SecurityQuestionID", "dbo.SecurityQuestions");
+            DropForeignKey("dbo.SecurityAccounts", "UserID", "dbo.Credentials");
             DropIndex("dbo.TokenLists", new[] { "UserID" });
             DropIndex("dbo.Salts", new[] { "UserID" });
             DropIndex("dbo.UserProfiles", new[] { "LocationID" });
             DropIndex("dbo.UserProfiles", new[] { "UserID" });
             DropIndex("dbo.UserClaims", new[] { "UserID" });
-            DropIndex("dbo.SecurityQandAs", new[] { "SecurityQuestionID" });
-            DropIndex("dbo.SecurityQandAs", new[] { "UserID" });
+            DropIndex("dbo.SecurityAccounts", new[] { "SecurityQuestionID" });
+            DropIndex("dbo.SecurityAccounts", new[] { "UserID" });
             DropTable("dbo.TokenLists");
             DropTable("dbo.TokenBlackLists");
             DropTable("dbo.Salts");
-            DropTable("dbo.UserProfiles");
             DropTable("dbo.Locations");
+            DropTable("dbo.UserProfiles");
             DropTable("dbo.UserClaims");
             DropTable("dbo.SecurityQuestions");
-            DropTable("dbo.SecurityQandAs");
+            DropTable("dbo.SecurityAccounts");
             DropTable("dbo.Credentials");
         }
     }

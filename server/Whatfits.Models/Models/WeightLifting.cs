@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
     /// <summary>
     /// Models to represent Weightlifting Logs
     /// </summary>
-    public class WeightLifting
+    public class WeightLifting : IWeightLifting
     {
         // Primary Key
         [Key, Column(Order = 0)]

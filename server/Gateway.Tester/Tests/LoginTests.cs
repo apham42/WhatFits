@@ -4,6 +4,7 @@ using System.Linq;
 using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Xunit;
+using Whatfits.DataAccess.DTOs;
 
 namespace Gateway.Tester
 {
@@ -29,7 +30,9 @@ namespace Gateway.Tester
                 Salt = "asdf",
                 Type = "General"
             };
-            Assert.Equal(expectedCredential, auth.GetCredentials(findCredential));
+            ResponseDTO <LoginDTO> found = auth.GetCredentials(findCredential);
+
+            //Assert.Equal(expectedCredential,found.Data);
         }
         [Fact]
         public void CheckBlacklistToken()
@@ -38,6 +41,9 @@ namespace Gateway.Tester
             {
                 Token = "adhlfkjh323hdh93"
             };
+
+            ResponseDTO<Boolean> found = auth.CheckIfTokenOnBlackList(expectedToken);
+            Assert.True(found.Data);
         }
         [Fact]
         public void GetUsersSecurityQandAs()

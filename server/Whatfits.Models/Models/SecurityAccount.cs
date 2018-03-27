@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
@@ -7,7 +8,7 @@ namespace Whatfits.Models.Models
     /// This model represents the table where all 
     /// security questions are mapped to 
     /// </summary>
-    public class SecurityQandA
+    public class SecurityAccount : ISecurityAcccount
     {
         // Answer Stored to a question 
         [Required]

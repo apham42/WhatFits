@@ -13,7 +13,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.SearchMigrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201803200159521_init"; }
+            get { return "201803230006534_init"; }
         }
         
         string IMigrationMetadata.Source

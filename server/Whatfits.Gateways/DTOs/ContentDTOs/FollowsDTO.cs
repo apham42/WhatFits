@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Whatfits.Models.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.ContentDTOs
 {
-    public class FollowsDTO
+    public class FollowsDTO : IFollowing
     {
+        public int PersonFollowing { get; set; }
     }
 }

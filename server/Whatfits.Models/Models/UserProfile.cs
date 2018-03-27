@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
     /// <summary>
     /// This model represents the User table of this system's database.   
     /// </summary>
-    public class UserProfile
+    public class UserProfile : IUserProfile
     {
         // Primary key of the User model
         [Key, ForeignKey("Credential")]
