@@ -1,16 +1,21 @@
 <template>
   <div class="review">
-    <ul class="list">
-      <li v-for="star in maxStars" :class="{ 'active': star <= stars }" @click="rate(star)" class="star">
-        <icon scale="2" :name="star <= stars ? 'star' : 'star-o'" />
-      </li>
-      <span v-if="hasCounter">{{ stars }} of {{ maxStars }}</span>
-    </ul>
-    <div class="message">
-      <br />
-      <textarea v-model="reviewText" class="form-control" placeholder="Input Review"></textarea>
-    </div>
-    <button v-on:click.once="Submit">Submit</button>
+    <form>
+      <ul class="list">
+        <li v-for="star in maxRating" :class="{ 'active': star <= Rating }" @click="rate(star)" class="star">
+          <icon scale="2" :name="star <= Rating ? 'star' : 'star-o'" />
+        </li>
+        <span v-if="hasCounter">{{ Rating }} of {{ maxRating }}</span>
+      </ul>
+      <div class="message">
+        <br />
+        <textarea v-model="ReviewMessage" class="form-control" placeholder="Input Review"></textarea>
+      </div>
+      <input type="number" id="UserID" size="8" placeholder="UserID" />
+      <input type="number" id="RevieweeID" size="8" placeholder="RevieweeID" />
+      <input type="number" id="ReviewID" size="8" placeholder="ReviewID"/>
+      <button type="submit" @click="input">Submit</button>
+    </form>
   </div>
 </template>
 
@@ -20,14 +25,10 @@ import 'vue-awesome/icons/star'
 import 'vue-awesome/icons/star-o'
 import Icon from 'vue-awesome/components/Icon'
 export default {
-  name: 'Rating',
+  name: 'Review',
   components: { Icon },
   props: {
-    grade: {
-      type: Number,
-      required: true
-    },
-    maxStars: {
+    maxRating: {
       type: Number,
       default: 5
     },
@@ -36,34 +37,43 @@ export default {
       default: true
     }
   },
-  data () {
+  data: function () {
     return {
-      stars: this.grade
+      Rating: this.Rating,
+      ReviewMessage: '',
+      UserID: '',
+      RevieweeID: '',
+      DateAndTime: new Date().toLocaleDateString(),
+      ReviewID: ''
     }
   },
   methods: {
     rate (star) {
-      if (typeof star === 'number' && star <= this.maxStars && star >= 0) {
-        this.stars = this.stars === star ? star - 1 : star
-      }
-    }
-    },
-    Submit: function (event) {
-      if (event) {
-        Rating.RatingDataPush()
+      if (typeof star === 'number' && star <= this.maxRating && star >= 0) {
+        this.Rating = this.Rating === star ? star - 1 : star
       }
     },
-    RatingDataPush: function () {
-     axios.post('http://localhost/server/Review/')
-      .then(respons => {
-        this.titlePost = respons.data
-        alert('Rating Submitted to Server!')
-      })
-      .catch(e => {
-        this.error.push(e)
+
+    input () {
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/Review/CreateReview',
+        data: {
+          Rating: this.$data.Rating,
+          ReviewMessage: this.$data.ReviewMessage,
+          UserID: this.$data.UserID,
+          RevieweeID: this.$data.RevieeID,
+          DateAndTime: this.$data.DateAndTime,
+          ReviewID: this.$data.ReviewID
+        },
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
       })
     }
   }
+}
 </script>
 
 <style>
