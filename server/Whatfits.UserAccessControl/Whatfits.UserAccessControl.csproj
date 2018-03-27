@@ -67,8 +67,6 @@
     <Compile Include="Constants\ValueConstant.cs" />
     <Compile Include="Controller\AuthenticateHttpMessageHandler.cs" />
     <Compile Include="Controller\AuthorizePrincipal.cs" />
-    <Compile Include="Controller\TokenAuthenticate.cs" />
-    <Compile Include="Controller\TokenAuthorize.cs" />
     <Compile Include="Controller\UserAccessController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\AuthorizationManager.cs" />
