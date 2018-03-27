@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DTOs\ContentDTOs\ChatDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\ReviewMessageDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\EventDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\FollowsDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\NotificationDTO.cs" />
