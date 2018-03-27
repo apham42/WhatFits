@@ -14,7 +14,7 @@
       <input type="number" id="UserID" size="8" placeholder="UserID" />
       <input type="number" id="RevieweeID" size="8" placeholder="RevieweeID" />
       <input type="number" id="ReviewID" size="8" placeholder="ReviewID"/>
-      <button v-on:click.once="Submit" @click="input">Submit</button>
+      <button type="submit" @click="input">Submit</button>
     </form>
   </div>
 </template>
@@ -28,10 +28,6 @@ export default {
   name: 'Review',
   components: { Icon },
   props: {
-    grade: {
-      type: Number,
-      required: true
-    },
     maxRating: {
       type: Number,
       default: 5
@@ -43,7 +39,7 @@ export default {
   },
   data: function () {
     return {
-      Rating: this.grade,
+      Rating: this.Rating,
       ReviewMessage: '',
       UserID: '',
       RevieweeID: '',
@@ -58,7 +54,7 @@ export default {
       }
     },
 
-    input() {
+    input () {
       axios({
         method: 'POST',
         url: 'http://localhost/server/Review/CreateReview',

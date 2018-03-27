@@ -137,6 +137,7 @@
     <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UsernameDTO.cs" />
     <Compile Include="Model\Address\Location.cs" />
+    <Compile Include="Model\Data Transfer Objects\ReviewDTO%27s\ReviewResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\ReviewDTO%27s\ReviewDTO.cs" />
     <Compile Include="Model\Validators\UserCredentialValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
