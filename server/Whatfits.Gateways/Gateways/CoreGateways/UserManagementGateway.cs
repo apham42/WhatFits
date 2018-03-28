@@ -307,7 +307,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             var foundCredentials = (from credentials in db.Credentials
                                     where credentials.UserName == obj.UserName
                                     select credentials).FirstOrDefault();
-            if (foundCredentials != null)
+            if (foundCredentials == null)
             {
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
@@ -354,7 +354,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                     where credentials.UserName == obj.UserName
                                     select credentials).FirstOrDefault();
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            if (foundCredentials != null)
+            if (foundCredentials == null)
             {
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
@@ -499,7 +499,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                     select credentials).FirstOrDefault();
             // Creating Response DTO
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            if (foundCredentials != null)
+            if (foundCredentials == null)
             {
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
@@ -548,7 +548,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                     select credentials).FirstOrDefault();
             // Creating Response DTO
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            if (foundCredentials != null)
+            if (foundCredentials == null)
             {
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
@@ -597,7 +597,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                     select credentials).FirstOrDefault();
             // Creating Response DTO
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            if (foundCredentials != null)
+            if (foundCredentials == null)
             {
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
@@ -622,7 +622,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     {
                         dbTransaction.Rollback();
                         response.IsSuccessful = false;
-                        response.Messages = new List<string> { "An error occured while editing gender." };
+                        response.Messages = new List<string> { "An error occured while editing Profile Picture." };
                         return response;
                     }
                 }
@@ -646,7 +646,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                     select credentials).FirstOrDefault();
             // Creating Response DTO
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            if (foundCredentials != null)
+            if (foundCredentials == null)
             {
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
@@ -671,7 +671,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     {
                         dbTransaction.Rollback();
                         response.IsSuccessful = false;
-                        response.Messages = new List<string> { "An error occured while editing gender." };
+                        response.Messages = new List<string> { "An error occured while editing description." };
                         return response;
                     }
                 }

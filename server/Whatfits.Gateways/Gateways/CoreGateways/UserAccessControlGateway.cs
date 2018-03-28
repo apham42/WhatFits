@@ -42,6 +42,12 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             ResponseDTO<Boolean> response = new ResponseDTO<bool>();
             if (foundUser == null)
             {
+                response.IsSuccessful = false;
+                response.Data = false;
+                return response;
+            }
+            else
+            {
                 using (var dbTransaction = db.Database.BeginTransaction())
                 {
                     try
@@ -72,12 +78,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     }
                 }
             }
-            else
-            {
-                response.IsSuccessful = false;
-                response.Data = false;
-                return response;
-            }
+            
         }
         /// <summary>
         /// Removes a Claim from a person

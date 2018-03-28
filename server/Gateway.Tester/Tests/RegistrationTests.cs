@@ -34,8 +34,8 @@ namespace Gateway.Tester
             RegistrationDTO usr = new RegistrationDTO()
             {
                 // Creating User Table Data
-                FirstName = "Test",
-                LastName = "User",
+                FirstName = "Reg",
+                LastName = "UserTest",
                 Email = "Example53@example.com",
                 Gender = "Male",
                 Description = "TestUserDescriptions",
@@ -43,7 +43,7 @@ namespace Gateway.Tester
                 ProfilePicture = null,
 
                 // Creating Credential Table Data
-                UserName = "TestUser55",
+                UserName = "RegUser55",
                 Password = "password123",
                 Type = "General",
 

@@ -17,13 +17,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.WorkoutLogContext context)
         {
-            //context.Workouts.AddOrUpdate(x => x.WorkoutLogID,
-            //    new WorkoutLog() { UserID = 1, Date_Time = new DateTime(2018, 2, 1), WorkoutType= "Cardio"},
-            //  new WorkoutLog() { UserID = 2, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio" },
-            //new WorkoutLog() { UserID = 1, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio" },
-            // new WorkoutLog() { UserID = 3, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio" },
-            //new WorkoutLog() { UserID = 4, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio" }
-            //);
+            /*
             var workouts = new List<WorkoutLog>
             {
                    new WorkoutLog() { UserID = 1, Date_Time = new DateTime(2018, 2, 1), WorkoutType= "Cardio"},
@@ -44,6 +38,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations
                   new WeightLifting() { WorkoutID = 4, LiftingType = "BenchPress", Reps = 12, Sets = 4 },
                   new WeightLifting() { WorkoutID = 4, LiftingType = "Curls", Reps = 12, Sets = 4 }
                );
+            */
         }
     }
 }

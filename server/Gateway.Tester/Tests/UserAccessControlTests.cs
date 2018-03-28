@@ -14,6 +14,7 @@ namespace Gateway.Tester
     public class UserAccessControlTests
     {
         private UserAccessControlGateway uac = new UserAccessControlGateway();
+
         [Fact]
         public void AddUserClaimTest()
         {
@@ -30,6 +31,7 @@ namespace Gateway.Tester
             ResponseDTO<Boolean> found = uac.AddUserClaims(userName);
             Assert.True(found.IsSuccessful);
         }
+
         [Fact]
         public void RemoveUserClaimTest()
         {
@@ -42,6 +44,7 @@ namespace Gateway.Tester
             ResponseDTO<Boolean> found = uac.RemoveUserClaims(username);
             Assert.True(found.IsSuccessful);
         }
+
         [Fact]
         public void GetUserClaims()
         {

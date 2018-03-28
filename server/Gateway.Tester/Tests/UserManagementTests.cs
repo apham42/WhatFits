@@ -57,7 +57,6 @@ namespace Gateway.Tester
                 // Creating UserClaims
                 UserClaims = claims
             };
-
             // Passing DTO to gateway to be processed and stored
             userMan.RegisterFullUser(usr);
             // Finding UserID by Name that is stored
@@ -75,20 +74,18 @@ namespace Gateway.Tester
             ResponseDTO<Boolean> found = userMan.DoesUserNameExists(SearchName);
             Assert.True(found.IsSuccessful);
         }
-
         [Fact]
         public void EnableUserTest()
         {
             // User is already Banned in Database, this will unbanned them
             UserManagementDTO SearchName = new UserManagementDTO()
             {
-                UserName = "amay",
+                UserName = "rstrong",
 
             };
             ResponseDTO<Boolean> found = userMan.EnableUser(SearchName);
             Assert.True(found.IsSuccessful);
         }
-
         [Fact]
         public void DisableUserTest()
         {
@@ -100,7 +97,6 @@ namespace Gateway.Tester
             ResponseDTO<Boolean> found = userMan.DisableUser(SearchName);
             Assert.True(found.IsSuccessful);
         }
-
         [Fact]
         public void EditFirstNameTest()
         {
@@ -114,7 +110,6 @@ namespace Gateway.Tester
             ResponseDTO<Boolean> found = userMan.EditFirstName(nameChange);
             Assert.True(found.IsSuccessful);
         }
-
         [Fact]
         public void EditLastNameTest()
         {
@@ -196,12 +191,12 @@ namespace Gateway.Tester
         public void EditDescriptionTest()
         {
             // User First Name is April, this test will change it to March
-            UserManagementDTO profilePictureChange = new UserManagementDTO()
+            UserManagementDTO descriptionChange = new UserManagementDTO()
             {
                 UserName = "amay",
                 Description = "Edited Description"
             };
-            ResponseDTO<Boolean> found = userMan.EditDescription(profilePictureChange);
+            ResponseDTO<Boolean> found = userMan.EditDescription(descriptionChange);
             Assert.True(found.IsSuccessful);
         }
     }
