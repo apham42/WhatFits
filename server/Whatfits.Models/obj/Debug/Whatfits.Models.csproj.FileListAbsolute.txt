@@ -47,7 +47,6 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\Entity
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csprojResolveAssemblyReference.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.AccountMigrations.init.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.AccountMigrations.init1.resources
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.init.resources

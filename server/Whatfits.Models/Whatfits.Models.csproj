@@ -83,9 +83,9 @@
       <DependentUpon>201803222306517_init1.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AccountMigrations\Configuration.cs" />
-    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803230003176_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803230003176_init.Designer.cs">
-      <DependentUpon>201803230003176_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803282022023_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803282022023_init.Designer.cs">
+      <DependentUpon>201803282022023_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\EventsMigrations\201803222358160_init.cs" />
@@ -148,8 +148,8 @@
     <EmbeddedResource Include="Migrations\AccountMigrations\201803222306517_init1.resx">
       <DependentUpon>201803222306517_init1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803230003176_init.resx">
-      <DependentUpon>201803230003176_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803282022023_init.resx">
+      <DependentUpon>201803282022023_init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\EventsMigrations\201803222358160_init.resx">
       <DependentUpon>201803222358160_init.cs</DependentUpon>

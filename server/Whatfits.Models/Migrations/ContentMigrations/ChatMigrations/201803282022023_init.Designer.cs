@@ -13,7 +13,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ChatMigrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201803230003176_init"; }
+            get { return "201803282022023_init"; }
         }
         
         string IMigrationMetadata.Source
