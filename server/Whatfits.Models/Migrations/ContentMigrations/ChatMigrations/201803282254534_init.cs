@@ -11,13 +11,13 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ChatMigrations
                 "dbo.Messages",
                 c => new
                     {
-                        MessageID = c.Int(nullable: false),
-                        UserID = c.Int(nullable: false),
-                        MessageContent = c.String(),
+                        MessageID = c.Int(nullable: false, identity: true),
+                        MessageContent = c.String(nullable: false),
                         CreatedAt = c.DateTime(nullable: false),
+                        UserID = c.Int(nullable: false),
                         ReceiverID = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => new { t.MessageID, t.UserID })
+                .PrimaryKey(t => t.MessageID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID);   
         }

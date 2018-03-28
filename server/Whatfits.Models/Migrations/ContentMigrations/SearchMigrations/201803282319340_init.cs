@@ -1,9 +1,9 @@
-namespace Whatfits.Models.Migrations.AccountMigrations
+namespace Whatfits.Models.Migrations.ContentMigrations.SearchMigrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class init1 : DbMigration
+    public partial class init : DbMigration
     {
         public override void Up()
         {
@@ -12,7 +12,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
         
         public override void Down()
         {
-
+            
         }
     }
 }

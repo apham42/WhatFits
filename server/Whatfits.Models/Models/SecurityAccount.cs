@@ -10,16 +10,18 @@ namespace Whatfits.Models.Models
     /// </summary>
     public class SecurityAccount : ISecurityAcccount
     {
+        [Key]
+        public int SecurityAccountID { get; set; }
         // Answer Stored to a question 
         [Required]
         public string Answer { get; set; }
 
         // Foreign Key - Maps to the User Table
-        [Key, Column(Order = 1)]
+        [ForeignKey("Credential")]
         public int UserID { get; set; }
 
         // Foreign Key - Maps to the Security Table
-        [Key, Column(Order = 2)]
+        [ForeignKey("SecurityQuestion")]
         public int SecurityQuestionID { get; set; }
 
         // Navigation Property for Security Question

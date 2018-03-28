@@ -10,10 +10,10 @@ namespace Whatfits.Models.Models
     public class Cardio : ICardio
     {
         // Primary Key
-        [Key, Column(Order = 0)]
+        [Key]
         public int CardioID { get; set; }
         // Foreign Key
-        [Key, Column(Order = 1)]
+        [ForeignKey("WorkoutLog")]
         public int WorkoutID { get; set; }
         // Stores the type of cardio done
         [Required]

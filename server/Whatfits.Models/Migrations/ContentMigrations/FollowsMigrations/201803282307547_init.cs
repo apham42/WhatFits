@@ -17,7 +17,9 @@ namespace Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations
                     })
                 .PrimaryKey(t => t.FollowingID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
-                .Index(t => t.UserID);   
+                .Index(t => t.UserID);
+            
+            
         }
         
         public override void Down()

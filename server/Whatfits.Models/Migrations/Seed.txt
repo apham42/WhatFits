@@ -1,4 +1,5 @@
 ﻿// For Registration
+             /*
             var credentials = new List<Credential>
             {
                 new Credential{ UserName = "latmey", Password = "123456" },
@@ -58,7 +59,6 @@
               };
             userClaims.ForEach(uc => context.UserClaims.Add(uc));
             context.SaveChanges();
-
             var questions = new List<SecurityQuestion>
               {
                   new SecurityQuestion{ Question = "Who was the company you first worked for?"},
@@ -73,7 +73,6 @@
               };
             questions.ForEach(q => context.SecurityQuestions.Add(q));
             context.SaveChanges();
-
             var answers = new List<SecurityAccount>
               {
                   new SecurityAccount{ UserID = 0001, SecurityQuestionID = 1, Answer = "Answer to Question 1"},
@@ -94,7 +93,6 @@
               };
             answers.ForEach(a => context.SecurityQandA.Add(a));
             context.SaveChanges();
-
             var tokenBlackList = new List<TokenBlackList>
             {
                 new TokenBlackList { Tokens = "adhlfkjh323hdh93"},
@@ -105,8 +103,23 @@
             };
             tokenBlackList.ForEach(c => context.TokenBlackLists.Add(c));
             context.SaveChanges();
+            //*/
+// For Chat
+ /*
+            var messages = new List<Message>
+            {
+                new Message{ UserID = 1, MessageContent = "This is a message", CreatedAt = new DateTime(2018, 03, 15), ReceiverID = 2 },
+                new Message{ UserID = 2, MessageContent = "This is a message", CreatedAt = new DateTime(2018, 03, 15), ReceiverID = 1 },
+                new Message{ UserID = 3, MessageContent = "This is a message", CreatedAt = new DateTime(2018, 03, 15), ReceiverID = 4 },
+                new Message{ UserID = 5, MessageContent = "This is a message", CreatedAt = new DateTime(2018, 03, 15), ReceiverID = 3 },
+                new Message{ UserID = 4, MessageContent = "This is a message", CreatedAt = new DateTime(2018, 03, 15), ReceiverID = 1 }
+            };
+            messages.ForEach(c => context.Messages.Add(c));
+            context.SaveChanges();
+            //*/
 // For Events            
-			var events = new List<Event>
+			/*
+            var events = new List<Event>
                 {
                     new Event { Title = "Title1", DateAndTime = new DateTime(2018,1,2), CreatedAt = new DateTime(2018,1,2), Description = "Description1", Image = "/Dir/", Latitude = "Lat1", Longitude = "Long1",Location = "312 W. Fake St.", UserID = 1 },
                     new Event { Title = "Title2", DateAndTime = new DateTime(2018,1,2), CreatedAt = new DateTime(2018,1,2), Description = "Description2", Image = "/Dir/", Latitude = "Lat2", Longitude = "Long2",Location = "312 W. Fake St.", UserID = 2 },
@@ -116,6 +129,7 @@
                 };
             events.ForEach(c => context.Events.Add(c));
             context.SaveChanges();
+            //*/
 // For Workouts
 					//context.Workouts.AddOrUpdate(x => x.WorkoutLogID,
 					//new WorkoutLog() { UserID = 1, Date_Time = new DateTime(2018, 2, 1), WorkoutType= "Cardio"},
@@ -154,4 +168,65 @@
                 new Message() { UserID = 5, MessageContent = "This is a message", CreatedAt = new DateTime(2018, 03, 15), ReceiverID = 3 },
                 new Message() { UserID = 4, MessageContent = "This is a message", CreatedAt = new DateTime(2018, 03, 15), ReceiverID = 1 }
             );
+            //*/
+// For Follows
+/*
+               var followingList = new List<Following>
+                {
+                    new Following{ UserID = 0001, PersonFollowing = 0002 },
+                    new Following{ UserID = 0002, PersonFollowing = 0002 },
+                    new Following{ UserID = 0003, PersonFollowing = 0002 },
+                    new Following{ UserID = 0004, PersonFollowing = 0001 },
+                    new Following{ UserID = 0005, PersonFollowing = 0003 }
+                };
+               followingList.ForEach(c => context.Following.Add(c));
+               context.SaveChanges();
+           //*/
+// For Notification
+/*
+               var notifications = new List<Notification>
+               {
+                   new Notification{ Message = "This is a notification message.", UserID=1, NotificationType="Chat"},
+                   new Notification{ Message = "This is a notification message.", UserID=1, NotificationType="Chat"},
+                   new Notification{ Message = "This is a notification message.", UserID=2, NotificationType="System"},
+                   new Notification{ Message = "This is a notification message.", UserID=3, NotificationType="System"},
+                   new Notification{ Message = "This is a notification message.", UserID=4, NotificationType="Chat"}
+               };
+               notifications.ForEach(c => context.Notifications.Add(c));
+               context.SaveChanges();
+           //*/
+// For Reviews
+/*
+              context.Review.AddOrUpdate(x => x.ReviewID,
+                  new Review() { ReviewID = 1, UserID = 1, RevieweeID = 2, Rating = 4, ReviewMessage = "User was great", DateAndTime = new DateTime(2018, 03, 15) },
+                  new Review() { ReviewID = 2, UserID = 2, RevieweeID = 3, Rating = 3, ReviewMessage = "User was great", DateAndTime = new DateTime(2018, 02, 15) },
+                  new Review() { ReviewID = 3, UserID = 3, RevieweeID = 4, Rating = 4, ReviewMessage = "User was great", DateAndTime = new DateTime(2018, 04, 15) },
+                  new Review() { ReviewID = 4, UserID = 1, RevieweeID = 5, Rating = 3, ReviewMessage = "User was great", DateAndTime = new DateTime(2018, 03, 25) },
+                  new Review() { ReviewID = 5, UserID = 4, RevieweeID = 5, Rating = 5, ReviewMessage = "User was great", DateAndTime = new DateTime(2017, 03, 15) }
+               );
+           //*/
+// Search
+N/A
+// WorkoutLog
+ //*
+            var workouts = new List<WorkoutLog>
+            {
+                   new WorkoutLog() { UserID = 1, Date_Time = new DateTime(2018, 2, 1), WorkoutType= "Cardio"},
+                   new WorkoutLog() { UserID = 2, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio" },
+                   new WorkoutLog() { UserID = 3, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Weightlifting" },
+                   new WorkoutLog() { UserID = 4, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio" },
+                   new WorkoutLog() { UserID = 5, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio" }
+            };
+            workouts.ForEach(c => context.Workouts.Add(c));
+            context.SaveChanges();
+            /*
+            context.Cardios.AddOrUpdate(x => x.CardioID,
+                  new Cardio() { WorkoutID = 1, CardioType = "Sprinting", Distance = 2.54, Time = "6:00" },
+                  new Cardio() { WorkoutID = 2, CardioType = "Running", Distance = 2.54, Time = "3:32" }
+               );
+            context.WeightLiftings.AddOrUpdate(x => x.WeightLiftingID,
+                  new WeightLifting() { WorkoutID = 3, LiftingType = "Curls", Reps = 12, Sets = 4 },
+                  new WeightLifting() { WorkoutID = 4, LiftingType = "BenchPress", Reps = 12, Sets = 4 },
+                  new WeightLifting() { WorkoutID = 5, LiftingType = "Curls", Reps = 12, Sets = 4 }
+               );
             //*/

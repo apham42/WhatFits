@@ -13,11 +13,11 @@ namespace Whatfits.Models.Models
     public class WorkoutLog : IWorkoutLog
     {
         // Primary Key
-        [Key, Column(Order = 0)]
+        [Key]
         public int WorkoutLogID { get; set; }
 
         // Foreign Key - Maps to the Security Table
-        [Key, Column(Order = 1)]
+        [ForeignKey("UserProfile")]
         public int UserID { get; set; }
 
         // Stores the workoutype
@@ -25,6 +25,9 @@ namespace Whatfits.Models.Models
 
         // Stores the date and time it was created
         public DateTime Date_Time { get; set; }
+        
+        // Navigation Property 
+        public virtual UserProfile UserProfile { get; set; }
 
         // Workout log can have many Weightlifting Logs and Cardio Logs
         public ICollection<WeightLifting> WeightLifting { get; set; }

@@ -11,6 +11,11 @@ enable-migrations -ContextTypeName Whatfits.Models.Context.Content.ChatContext -
 add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.Configuration
 update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.Configuration -verbose
 
+For Events
+enable-migrations -ContextTypeName Whatfits.Models.Context.Content.EventsContext -MigrationsDirectory:Migrations\ContentMigrations\EventsMigrations
+add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration
+update-database -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration -verbose
+
 For FollowsList
 enable-migrations -ContextTypeName Whatfits.Models.Context.Content.FollowsContext -MigrationsDirectory:Migrations\ContentMigrations\FollowsMigrations
 add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.Configuration
@@ -36,12 +41,10 @@ enable-migrations -ContextTypeName Whatfits.Models.Context.Content.WorkoutLogCon
 add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration
 update-database -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration -verbose
 
-For Events
-enable-migrations -ContextTypeName Whatfits.Models.Context.Content.EventsContext -MigrationsDirectory:Migrations\ContentMigrations\EventsMigrations
-add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration
-update-database -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration -verbose
-
 Speedup:
-enable-migrations -ContextTypeName Whatfits.Models.Context.Content.FollowsContext -MigrationsDirectory:Migrations\ContentMigrations\FollowsMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.NotificationContext -MigrationsDirectory:Migrations\ContentMigrations\NotificationMigrations;  enable-migrations -ContextTypeName Whatfits.Models.Context.Content.ReviewsContext -MigrationsDirectory:Migrations\ContentMigrations\ReviewsMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.SearchContext -MigrationsDirectory:Migrations\ContentMigrations\SearchMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.WorkoutLogContext -MigrationsDirectory:Migrations\ContentMigrations\WorkoutLogMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.EventsContext -MigrationsDirectory:Migrations\ContentMigrations\EventsMigrations
 
+Enable Migrations:
+enable-migrations -ContextTypeName Whatfits.Models.Context.Core.AccountContext -MigrationsDirectory:Migrations\AccountMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.ChatContext -MigrationsDirectory:Migrations\ContentMigrations\ChatMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.EventsContext -MigrationsDirectory:Migrations\ContentMigrations\EventsMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.FollowsContext -MigrationsDirectory:Migrations\ContentMigrations\FollowsMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.NotificationContext -MigrationsDirectory:Migrations\ContentMigrations\NotificationMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.ReviewsContext -MigrationsDirectory:Migrations\ContentMigrations\ReviewsMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.SearchContext -MigrationsDirectory:Migrations\ContentMigrations\SearchMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.WorkoutLogContext -MigrationsDirectory:Migrations\ContentMigrations\WorkoutLogMigrations; 
+
+Update Database:
 update-database -configuration Whatfits.Models.Migrations.AccountMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.SearchMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration -verbose

@@ -11,14 +11,14 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
                 "dbo.Reviews",
                 c => new
                     {
+                        ReviewID = c.Int(nullable: false, identity: true),
                         UserID = c.Int(nullable: false),
-                        ReviewID = c.Int(nullable: false),
                         RevieweeID = c.Int(nullable: false),
                         Rating = c.Int(nullable: false),
                         ReviewMessage = c.String(nullable: false),
                         DateAndTime = c.DateTime(nullable: false),
                     })
-                .PrimaryKey(t => new { t.UserID, t.ReviewID })
+                .PrimaryKey(t => t.ReviewID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID);   
         }

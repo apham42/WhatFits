@@ -6,7 +6,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.EventsMigrations
     public partial class init : DbMigration
     {
         public override void Up()
-        {   
+        {
             CreateTable(
                 "dbo.Events",
                 c => new
@@ -29,8 +29,8 @@ namespace Whatfits.Models.Migrations.ContentMigrations.EventsMigrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Events", "UserID", "dbo.UserProfiles");            
-            DropIndex("dbo.Events", new[] { "UserID" });            
+            DropForeignKey("dbo.Events", "UserID", "dbo.UserProfiles");
+            DropIndex("dbo.Events", new[] { "UserID" });
             DropTable("dbo.Events");
         }
     }

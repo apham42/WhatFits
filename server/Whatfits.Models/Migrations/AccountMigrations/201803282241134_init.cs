@@ -21,11 +21,12 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                 "dbo.SecurityAccounts",
                 c => new
                     {
+                        SecurityAccountID = c.Int(nullable: false, identity: true),
+                        Answer = c.String(nullable: false),
                         UserID = c.Int(nullable: false),
                         SecurityQuestionID = c.Int(nullable: false),
-                        Answer = c.String(nullable: false),
                     })
-                .PrimaryKey(t => new { t.UserID, t.SecurityQuestionID })
+                .PrimaryKey(t => t.SecurityAccountID)
                 .ForeignKey("dbo.Credentials", t => t.UserID, cascadeDelete: true)
                 .ForeignKey("dbo.SecurityQuestions", t => t.SecurityQuestionID, cascadeDelete: true)
                 .Index(t => t.UserID)
@@ -52,6 +53,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                 .PrimaryKey(t => t.ClaimID)
                 .ForeignKey("dbo.Credentials", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID);
+            
             
             CreateTable(
                 "dbo.UserProfiles",
@@ -87,7 +89,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                         Longitude = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.LocationID);
-            
+
             CreateTable(
                 "dbo.Salts",
                 c => new
@@ -128,6 +130,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
             DropForeignKey("dbo.TokenLists", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.Salts", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.UserProfiles", "LocationID", "dbo.Locations");
+            DropForeignKey("dbo.Followings", "UserID", "dbo.UserProfiles");
             DropForeignKey("dbo.UserProfiles", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.UserClaims", "UserID", "dbo.Credentials");
             DropForeignKey("dbo.SecurityAccounts", "SecurityQuestionID", "dbo.SecurityQuestions");

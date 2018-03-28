@@ -11,22 +11,24 @@ namespace Whatfits.Models.Models
     public class Message : IMessage
     {
         //  Primary Key
-        [Key, Column(Order = 0)]
+        [Key]
         public int MessageID { get; set; }
 
         // Stores the message sent by user
+        [Required]
         public string MessageContent { get; set; }
 
         // Time stamps the message
         public DateTime CreatedAt { get; set; }
 
         // Foreign Key, Tracks the User of the Message Sent
-        [Key, Column(Order = 1)]
+        [ForeignKey("UserProfile")]
         public int UserID { get; set; }
 
         // Records the UserID of the person recieving the message
+        [Required]
         public int ReceiverID { get; set; }
         // Navigation Property for User
-        public virtual UserProfile User { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

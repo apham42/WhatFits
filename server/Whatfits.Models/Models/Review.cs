@@ -12,14 +12,13 @@ namespace Whatfits.Models.Models
     /// </summary>
     public class Review : IReview
     {
-        // Foreign Key that maps to the User Leaving the review
-        [Key, Column(Order = 0)]
-        public int UserID { get; set; }
-        
-        
         // This stores the ID of the person reviewing the user
-        [Key, Column(Order = 1)]
+        [Key]
         public int ReviewID { get; set; }
+
+        // Foreign Key that maps to the User Leaving the review
+        [ForeignKey("UserProfile")]
+        public int UserID { get; set; }
         
         // Required ID of the other user being reviewed
         [Required]
@@ -38,6 +37,6 @@ namespace Whatfits.Models.Models
         public DateTime DateAndTime { get; set; }
 
         // Navigation Property back to User model
-        public UserProfile User { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

@@ -10,11 +10,11 @@ namespace Whatfits.Models.Models
     public class WeightLifting : IWeightLifting
     {
         // Primary Key
-        [Key, Column(Order = 0)]
+        [Key]
         public int WeightLiftingID { get; set; }
 
         // Foreign Key to the workoutLog
-        [Key, Column(Order = 1)]
+        [ForeignKey("WorkoutLog")]
         public int WorkoutID { get; set; }
 
         // Stores the type of Resistance Training
