@@ -272,7 +272,8 @@ export default {
             city: this.$data.city,
             state: this.$data.state,
             zipCode: this.$data.zipCode
-          }
+          },
+          UserType: 'General'
         },
         headers: {
           'Access-Control-Allow-Origin': '*',

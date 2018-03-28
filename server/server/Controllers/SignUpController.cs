@@ -30,13 +30,13 @@ namespace server.Controllers
         {
             AccountService service = new AccountService();
             RegInfoResponseDTO response = service.CreateUser(userCred);
-            if(response.isSuccessful)
+            if (response.isSuccessful)
             {
-                return Ok(new { response.Messages });
+                return Ok (new { response.Messages });
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest, new { response.Messages });
+                return Content (HttpStatusCode.BadRequest, new { response.Messages });
             }
         }
     }

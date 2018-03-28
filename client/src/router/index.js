@@ -5,9 +5,7 @@ import Home from '@/components/Home'
 import Chat from '@/components/Chat'
 import Test from '@/components/Test'
 import Registration from '@/components/Registration'
-import Terms from '@/components/Terms'
 
-Vue.component('Terms', Terms)
 Vue.use(Router)
 Vue.use(Vuelidate)
 

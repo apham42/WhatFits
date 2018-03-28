@@ -89,7 +89,7 @@ namespace server.Services
             {
                 UserName = user.UserCredInfo.Username,
                 Password = hashPassword,
-                Type = "General",
+                Type = user.UserType,
                 Address = user.UserLocation.Street,
                 City = user.UserLocation.City,
                 State = user.UserLocation.State,
