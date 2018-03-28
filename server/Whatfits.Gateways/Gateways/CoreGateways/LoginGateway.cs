@@ -137,11 +137,13 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             {
                 // Set to false if not found
                 response.IsSuccessful = false;
+                response.Data = false;
             }
             else
             {
                 // Set to true if found
                 response.IsSuccessful = true;
+                response.Data = true;
             }
             // returns response
             return response;

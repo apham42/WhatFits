@@ -46,9 +46,20 @@ namespace Gateway.Tester
             Assert.True(found.Data);
         }
         [Fact]
-        public void GetUsersSecurityQandAs()
+        public void GetUsersSecurityQandAsTest()
         {
-
+            // This is the security questions and answers for UserID = 1 / UserName = latmey
+            Dictionary<int, string> expectedDictionary = new Dictionary<int, string>();
+            expectedDictionary.Add(1, "Answer to Question 1");
+            expectedDictionary.Add(3, "Answer to Question 3");
+            expectedDictionary.Add(4, "Answer to Question 4");
+            // Creates the request to get security questions and answers
+            LoginDTO request = new LoginDTO()
+            {
+                UserName = "latmey"
+            };
+            ResponseDTO<Dictionary<int, string>> found = auth.GetSecurityQandAs(request);
+            Assert.Equal(expectedDictionary, found.Data);
         }
 
     }
