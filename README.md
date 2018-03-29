@@ -6,19 +6,7 @@ A fitness social media web application. It helps like minded individuals to conn
 
 ## Get Started
 
-Instructions to be added
-
-### Prerequisites
- What things you need to install the software and how to install them
-```sh
-Shell stuff
-```
-Other Stuff
-```
-Notes
-```
-### Installing
-To be added.
+Follow the README.md on the server and client folder for instructions for each.
 
 ## Release History
 
@@ -27,11 +15,11 @@ To be added.
 
 ## Built With
 
-* [Visual Studio Community 2017](https://www.visualstudio.com/downloads/) - The IDE used for backend
-* [Visual Studio Code](https://code.visualstudio.com/) - Dependency Management
-* [Vue.js](https://vuejs.org/) - Front end framework used
-* [Bulma](https://bulma.io/) - Front end CSS framework used
-* [ASP.NET 4.6.1](https://www.microsoft.com/en-us/download/details.aspx?id=49981) - Back end Framework used
+* [Visual Studio Community 2017](https://www.visualstudio.com/downloads/) - used for backend development
+* [Visual Studio Code](https://code.visualstudio.com/) - Used for frontend development
+* [Vue.js](https://vuejs.org/) - Frontend JavaScript framework used
+* [Bulma](https://bulma.io/) - Frontend CSS framework used
+* [ASP.NET 4.6.1](https://www.microsoft.com/en-us/download/details.aspx?id=49981) - Backend Framework used
 
 ## Contributing
 
@@ -52,7 +40,5 @@ See also the list of [contributors](https://github.com/apham42/WhatFits/graphs/c
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-
 * TO BE ADDED
-<!-- Markdown link & img dfn's -->
-[wiki]: https://github.com/yourname/yourproject/wiki
+
