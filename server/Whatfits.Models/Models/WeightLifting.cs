@@ -1,19 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
     /// <summary>
     /// Models to represent Weightlifting Logs
     /// </summary>
-    public class WeightLifting
+    public class WeightLifting : IWeightLifting
     {
         // Primary Key
-        [Key, Column(Order = 0)]
+        [Key]
         public int WeightLiftingID { get; set; }
 
         // Foreign Key to the workoutLog
-        [Key, Column(Order = 1)]
+        [ForeignKey("WorkoutLog")]
         public int WorkoutID { get; set; }
 
         // Stores the type of Resistance Training

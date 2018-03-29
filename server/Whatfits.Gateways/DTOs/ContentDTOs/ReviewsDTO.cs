@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.ContentDTOs
 {
-    public class ReviewsDTO
+    public class ReviewsDTO : IReview
     {
         public int RevieweeID { get; set; }
         public int UserID { get; set; }
