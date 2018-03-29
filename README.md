@@ -6,13 +6,19 @@ A fitness social media web application. It helps like minded individuals to conn
 
 ## Get Started
 
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
+Instructions to be added
+
 ### Prerequisites
- Visual Studio for opening the server component. VS Code for Client portion.
+ What things you need to install the software and how to install them
 ```sh
-make install
-npm test
+Shell stuff
 ```
+Other Stuff
+```
+Notes
+```
+### Installing
+To be added.
 
 ## Release History
 
@@ -21,8 +27,11 @@ npm test
 
 ## Built With
 
-* [Visual Studio Community 2017]https://www.visualstudio.com/downloads/) - The IDE used for backend
+* [Visual Studio Community 2017](https://www.visualstudio.com/downloads/) - The IDE used for backend
 * [Visual Studio Code](https://code.visualstudio.com/) - Dependency Management
+* [Vue.js](https://vuejs.org/) - Front end framework used
+* [Bulma](https://bulma.io/) - Front end CSS framework used
+* [ASP.NET 4.6.1](https://www.microsoft.com/en-us/download/details.aspx?id=49981) - Back end Framework used
 
 ## Contributing
 
@@ -30,17 +39,20 @@ npm test
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Aaron Pham** - *Initial work* - [apham42](https://github.com/apham42)
+* **Abram Villanueva** - *Initial work* - [apvillan](https://github.com/apvillan)
+* **George Cheng** - *Initial work* - [George17688](https://github.com/George17688)
+* **Longcheng Chi** - *Initial work* - [DPmax](https://github.com/DPmax)
+* **Roberto Sanchez** - *Initial work* - [Zyxel-1](https://github.com/Zyxel-1)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/apham42/WhatFits/graphs/contributors) who participated in this project.
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+
+* TO BE ADDED
 <!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
 [wiki]: https://github.com/yourname/yourproject/wiki
