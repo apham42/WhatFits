@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.Models.Context.Content;
 using Whatfits.Models.Models;
 
@@ -16,53 +19,74 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         private ReviewsContext db = new ReviewsContext();
 
         //Add Review into the database
-        public void AddReview(ReviewsDTO b)
+        public bool AddReview(ReviewsDTO b)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
+
                     //creates a new review instance by grabbing object's data
                     Review r = new Review
                     {
-                        ReviewID = b.ReviewID,
                         RevieweeID = b.RevieweeID,
                         UserID = b.UserID,
                         ReviewMessage = b.ReviewMessage,
-                        DateAndTime = b.DateAndTime
+                        Rating = b.Rating,
+                        DateAndTime = b.DateAndTime,
+                        ReviewID = b.ReviewID
                     };
                     //add into database t he new instance and saves
                     db.Review.Add(r);
-                    Save();
+                    db.SaveChanges();
+                    dbTransaction.Commit();
+                    return true;
                 }
-                catch (Exception)
+                catch (SqlException)
                 {
                     dbTransaction.Rollback();
+                    return false;
+                }
+                catch (DataException)
+                {
+                    dbTransaction.Rollback();
+                    return false;
                 }
             }
         }
 
-        //Get:api/Reviews/[userID]
-        public List<Review> GetReviews(ReviewsDTO obj)
+        //Retrieves all reviews based on userID
+        public List<string> GetReviews(int UserID)
         {
-            var target = db.Review.Find(obj.UserID);
-            return (from b in db.Review
-                    where b.UserID == target.UserID
-                    select new Review()
-                    {
-                        ReviewID = b.ReviewID,
-                        RevieweeID = b.RevieweeID,
-                        UserID = b.UserID,
-                        ReviewMessage = b.ReviewMessage,
-                        DateAndTime = b.DateAndTime
-                    }).ToList();
+            List<string> rmsg = (from b in db.Review
+                                 where b.UserID == UserID
+                                 select b.ReviewMessage
+                                  ).ToList();
+            return rmsg;
+        }
+        
+        //See if the review id exists
+        public Boolean ReviewExist(ReviewsDTO r)
+        {
+            var foundReviewID = (from b in db.Review
+                                 where b.ReviewID == r.ReviewID
+                                 select b.ReviewID);
+            if (foundReviewID == null)
+                return false;
+            else
+                return true;
         }
 
-        private void Save()
+        //gets all the reviews in the database
+        public List<int> GetReviewList()
         {
-            // Saves any changes to the database
-            db.SaveChanges();
+            List<int> rlist = (from b in db.Review
+                                  select b.ReviewID
+                                  ).ToList();
+            return rlist;
         }
+
+       
     }
 
 }

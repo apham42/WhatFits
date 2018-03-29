@@ -6,7 +6,6 @@ import Chat from '@/components/Chat'
 import Test from '@/components/Test'
 import Registration from '@/components/Registration'
 import Terms from '@/components/Terms'
-import Review from '@/components/Review'
 
 Vue.component('Terms', Terms)
 Vue.use(Router)
@@ -33,11 +32,6 @@ export default new Router({
       path: '/Test',
       name: 'Test',
       component: Test
-    },
-    {
-      path: '/Review',
-      name: 'Review',
-      component: Review
     }
   ]
 })

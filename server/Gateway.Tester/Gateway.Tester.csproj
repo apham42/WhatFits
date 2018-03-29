@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Tests\ReviewTests.cs" />
     <Compile Include="Tests\LoginTests.cs" />
     <Compile Include="Tests\RegistrationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

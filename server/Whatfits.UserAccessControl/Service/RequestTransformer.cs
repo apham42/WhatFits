@@ -1,31 +1,43 @@
 ﻿using System;
 using System.Linq;
+using System.Net.Http;
 using System.Web.Http.Controllers;
 
 namespace Whatfits.UserAccessControl.Service
 {
     /// <summary>
-    /// Request Transformer gets the token from http request
+    /// Request Transformer gets the principal from http request
     /// </summary>
-    public static class RequestTransformer
+    public class RequestTransformer
     {
-        public static string GetToken(HttpActionContext actionContext)
+        // token
+        private string token = null;
+
+        // constructor
+        public RequestTransformer() { }
+
+        /// <summary>
+        /// get token from request
+        /// </summary>
+        /// <param name="request"> incomming request</param>
+        /// <returns>string token</returns>
+        public string GetToken(HttpRequestMessage request)
         {
-            try
+            // gets header of request
+            var header = request.Headers;
+
+            // gets token from header
+            token = header.GetValues("Token").First();
+
+            // check if null or empty
+            if(!string.IsNullOrEmpty(token))
             {
-                string token = null;
-
-                var request = actionContext.Request;
-                var header = request.Headers;
-
-                token = header.GetValues("Token").First();
-                
+                // returns jwt
                 return token;
             }
-            catch (InvalidOperationException)
-            {
-                return "False";
-            }
+
+            // throws excpetion to be caught in AuthenticateHttpMessageHandler
+            throw new Exception();
         }
     }
 }

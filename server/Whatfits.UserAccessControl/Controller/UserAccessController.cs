@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 
 namespace Whatfits.UserAccessControl.Controller
 {
@@ -47,10 +48,16 @@ namespace Whatfits.UserAccessControl.Controller
          * Get view page claims from db
          * @return: view page claims 
          * */
-        public static List<Claim> GetViewClaims()
+        public static List<Claim> GetClaims(string username)
         {
             List<Claim> ViewClaims = new List<Claim>();
 
+            UserAccessDTO UserName = new UserAccessDTO()
+            {
+
+            };
+
+            
             return ViewClaims;
 
         }

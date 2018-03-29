@@ -5,12 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 
-
 namespace Whatfits.Hash
 {
     public class HMAC256
     {
-
         public string GenerateSalt()
         {
             // Empty salt array

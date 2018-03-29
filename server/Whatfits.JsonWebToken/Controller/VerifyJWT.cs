@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using Whatfits.JsonWebToken.Constant;
 
 namespace Whatfits.JsonWebToken.Controller
@@ -17,7 +18,7 @@ namespace Whatfits.JsonWebToken.Controller
          * @param: byte[] secret, secret in byte[] format
          * @return: true if valid token, false if not
          * */
-        public static bool VerifyToken(string token, byte[] secret)
+        public static ClaimsPrincipal VerifyToken(string token)
         {
             // create handler to verify token
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
@@ -28,7 +29,7 @@ namespace Whatfits.JsonWebToken.Controller
             try
             {
                 // validates users 
-                handler.ValidateToken(token, Verify.validationParameters, out validatedToken);
+                return handler.ValidateToken(token, Verify.validationParameters, out validatedToken);
             }
             /*
              * System.ArgumentNullException
@@ -46,11 +47,9 @@ namespace Whatfits.JsonWebToken.Controller
             * */
             catch (Exception)
             {
-                // return false if fail
-                return false;
+                // will be caught in AuthenticateHttpMessageHandler
+                throw new ArgumentException();
             }
-            // returns true
-            return validatedToken != null;
             
         }
     }
