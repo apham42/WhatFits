@@ -1,9 +1,6 @@
 ﻿using System;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security;
 using System.Security.Claims;
-using System.Threading;
-using Whatfits.UserAccessControl.Controller;
 
 namespace Whatfits.UserAccessControl.Service
 {
