@@ -1,16 +1,14 @@
 # WhatFits Web Application
-> A fitness oriented social media web application
 
-[![Build Status][travis-image]][travis-url]
-
-One to two paragraph statement about your product and what it does.
+A fitness social media web application. It helps like minded individuals to connect based on interest concerning physical activities.
 
 ![](header.png)
 
-## Development setup
+## Get Started
 
 Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
+### Prerequisites
+ Visual Studio for opening the server component. VS Code for Client portion.
 ```sh
 make install
 npm test
@@ -21,18 +19,24 @@ npm test
 * 0.0.1
     * Work in progress
 
-## Meta
+## Built With
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
-
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+* [Visual Studio Community 2017]https://www.visualstudio.com/downloads/) - The IDE used for backend
+* [Visual Studio Code](https://code.visualstudio.com/) - Dependency Management
 
 ## Contributing
 
 1. Not accepting anyone at the moment
 
+## Authors
+
+* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+
+See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 <!-- Markdown link & img dfn's -->
 [npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/datadog-metrics
