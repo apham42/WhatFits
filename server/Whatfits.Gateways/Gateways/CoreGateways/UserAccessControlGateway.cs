@@ -4,6 +4,7 @@ using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
 using System.Security.Claims;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.DTOs;
 using System;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
@@ -31,13 +32,21 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// - TRUE: Succeeds to add UserClaim
         /// - FALSE: Fails to add UserClaim
         /// </returns>
-        public Boolean AddUserClaims(UserAccessDTO obj)
+        public ResponseDTO<Boolean> AddUserClaims(UserAccessDTO obj)
         {
             // Find user based off Username
             var foundUser = (from account in db.Credentials
                              where account.UserName == obj.UserName
                              select account).FirstOrDefault();
-            if (foundUser != null)
+            // Creating Response
+            ResponseDTO<Boolean> response = new ResponseDTO<bool>();
+            if (foundUser == null)
+            {
+                response.IsSuccessful = false;
+                response.Data = false;
+                return response;
+            }
+            else
             {
                 using (var dbTransaction = db.Database.BeginTransaction())
                 {
@@ -55,17 +64,21 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                             db.SaveChanges();
                         }
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        response.Data = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.IsSuccessful = false;
+                        response.Data = false;
+                        response.Messages = new List<string> { "Error occured while adding Claims." };
+                        return response;
                     }
                 }
             }
-            else
-                return false;
+            
         }
         /// <summary>
         /// Removes a Claim from a person
@@ -78,41 +91,49 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// - TRUE: Succeeds to add Claim
         /// - FALSE: Fails to add Claim
         /// </returns>
-        public Boolean RemoveUserClaims(UserAccessDTO obj)
+        public ResponseDTO<Boolean> RemoveUserClaims(UserAccessDTO obj)
         {
             var foundUser = (from account in db.Credentials
                              where account.UserName == obj.UserName
                              select account).FirstOrDefault();
-
-                if (foundUser!=null)
+            ResponseDTO<Boolean> response = new ResponseDTO<bool>();
+            if (foundUser == null)
+            {
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User Not Found." };
+                return response;
+            }
+            else
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
-                    using (var dbTransaction = db.Database.BeginTransaction())
+                    try
                     {
-                        try
-                        {
                         // Finds the User's Claims
-                            var foundUserClaims = (from userClaims in db.UserClaims
-                                                   where userClaims.UserID == foundUser.UserID
-                                                   select userClaims);
-                            // Deletes each UserClaim from user
-                            foreach (var userClaim in foundUserClaims)
-                            {
-                                db.UserClaims.Remove(userClaim);
-                            }
-                            db.SaveChanges();
-                            dbTransaction.Commit();
-                            return true;
-                        }
-                        catch (Exception)
+                        var foundUserClaims = (from userClaims in db.UserClaims
+                                               where userClaims.UserID == foundUser.UserID
+                                               select userClaims);
+                        // Deletes each UserClaim from user
+                        foreach (var userClaim in foundUserClaims)
                         {
-                            dbTransaction.Rollback();
-                            return false;
+                            db.UserClaims.Remove(userClaim);
                         }
+                        db.SaveChanges();
+                        dbTransaction.Commit();
+                        // Returns Response
+                        response.IsSuccessful = true;
+                        return response;
+                    }
+                    catch (Exception)
+                    {
+                        // Failure happened
+                        dbTransaction.Rollback();
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "Error Removing Claims." };
+                        return response;
                     }
                 }
-                else
-                    return false;
-            
+            }
         }
         /// <summary>
         /// Gets a list of Claims that the user has
@@ -123,26 +144,27 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// <returns>
         /// - List<Claim> via UserAcccessDTO
         /// </returns>
-        public UserAccessDTO GetUserClaims(UserAccessDTO obj)
+        public ResponseDTO<List<Claim>> GetUserClaims(UserAccessDTO obj)
         {
             var foundUser = (from account in db.Credentials
                              where account.UserName == obj.UserName
                              select account).FirstOrDefault();
-            if (foundUser != null)
+            ResponseDTO<List<Claim>> response = new ResponseDTO<List<Claim>>();
+            if (foundUser == null)
+            {
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User Not Found." };
+                return response;
+            }
+            else
             {
                 // Should return all the userClaims that match UserID
                 var foundUserClaims = (from userClaims in db.UserClaims
                                        where userClaims.UserID == foundUser.UserID
                                        select userClaims);
-                UserAccessDTO temp = new UserAccessDTO
-                {
-                    UserClaims = QueryToClaims(foundUserClaims)
-                };
-                return temp;
-            }
-            else
-            {
-                return null;
+                response.Data = QueryToClaims(foundUserClaims);
+                response.IsSuccessful = true;
+                return response;
             }
         }
         /// <summary>

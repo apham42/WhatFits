@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
@@ -7,7 +8,7 @@ namespace Whatfits.Models.Models
     /// This model represents the Salt table where each salt 
     /// is mapped to one and only one user.
     /// </summary>
-    public class Salt
+    public class Salt : ISalt
     {
         // Primary and Foreign Key of this Model
         [Key, ForeignKey("Credential")]

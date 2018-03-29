@@ -1,13 +1,14 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-// Create a constructor where it takes in a TokenListDTO or some sort of DTO
+using Whatfits.Models.Interfaces;
+
 namespace Whatfits.Models.Models
 {
     /// <summary>
     /// This model represents a list of tokens for each user
     /// and its corresponding salt.
     /// </summary>
-    public class TokenList
+    public class TokenList : ITokenList
     {
         [Key]
         public int TokenListID { get; set; }

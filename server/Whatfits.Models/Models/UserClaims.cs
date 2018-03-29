@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
@@ -8,7 +9,7 @@ namespace Whatfits.Models.Models
     /// Each user will have a list of claims to determine what 
     /// they can do in this system.
     /// </summary>
-    public class UserClaims
+    public class UserClaims : IUserClaim
     {
         // Primary Key to Claims Model
         [Key]

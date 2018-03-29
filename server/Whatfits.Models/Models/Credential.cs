@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
@@ -8,7 +9,7 @@ namespace Whatfits.Models.Models
     /// This model represents the credentials of the user. Each user is
     /// mapped to one credential object.
     /// </summary>
-    public class Credential
+    public class Credential : ICredential
     {
         // Primary Key
         [Key]
@@ -24,6 +25,6 @@ namespace Whatfits.Models.Models
         
         // A Credential can have many:
         public ICollection<UserClaims> UserClaims { get; set; }
-        public ICollection<SecurityQandA> SecurityQandAs { get; set; }
+        public ICollection<SecurityAccount> SecurityQandAs { get; set; }
     }
 }

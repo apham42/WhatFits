@@ -1,12 +1,13 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
     /// <summary>
     /// This model represents the table of notifications being stored.
     /// </summary>
-    public class Notification
+    public class Notification : INotification
     {
         [Key]
         public int NotificationID { get; set; }
