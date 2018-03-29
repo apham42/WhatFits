@@ -8,7 +8,7 @@ namespace server.Controllers
     public class UACTESTController : ApiController
     {
         [HttpPost]
-        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "DD")]
+        [AuthorizePrincipal(type = "Workout", value = "add workout")]
         public string one()
         {
             return "PASS";
@@ -23,9 +23,9 @@ namespace server.Controllers
         }
 
         //[HttpPost]
-        //public ClaimsPrincipal three()
+        //public string three()
         //{
-        //    return VerifyJWT.VerifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3d3dy5XaGF0Zml0cy5zb2NpYWwvIiwic3ViIjoiYXBoYW00MiIsImF1ZCI6IkdlbmVyYWwiLCJpYXQiOiIxNTIxNDIxMjY3IiwibmJmIjoiMTUyMTQyMTI2NyIsImV4cCI6IjE1MjE0MjQ4NjciLCJXT1JLT1VUX0FERCI6IkFERCIsIldPUktPVVRfVklFVyI6IlZJRVcifQ.J2BJmCDdvsVhYhH5-g-w4wPsjqUSwNoDHWK4AGZL-xw");
+        //    return 
         //}
 
 
