@@ -11,6 +11,9 @@ using Whatfits.UserAccessControl.Service;
 
 namespace Whatfits.UserAccessControl.Controller
 {
+    /// <summary>
+    /// Check is request is authenticated
+    /// </summary>
     public class AuthenticateHttpMessageHandler : DelegatingHandler
     {
         // task for completion
@@ -21,7 +24,7 @@ namespace Whatfits.UserAccessControl.Controller
         /// </summary>
         /// <param name="request">request being sent to server</param>
         /// <param name="cancellationToken">operation </param>
-        /// <returns></returns>
+        /// <returns>success</returns>
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             try
@@ -29,25 +32,19 @@ namespace Whatfits.UserAccessControl.Controller
                 //get token from request
                 string token = new RequestTransformer().GetToken(request);
 
-                //check if token is valid.
+                // check if token is valid.
                 var incommingprincipal = VerifyJWT.VerifyToken(token);
 
+                // Authenticates principals and gets user claims fromd b
                 ClaimsPrincipal AuthenticatedPrincipal = new ClaimsTransformer().Authenticate(incommingprincipal);
 
+                // create IPrincipal
                 IPrincipal principal = AuthenticatedPrincipal;
+
                 // run thread in principal
                 Thread.CurrentPrincipal = principal;
                 HttpContext.Current.User = principal;
-                //request.GetRequestContext().Principal = principal;
 
-
-                // continue task
-                //HttpResponseMessage res = new HttpResponseMessage()
-                //{
-                //    s
-                //};
-                //tsc.SetResult(res);
-                //return Task<HttpResponseMessage>.Factory.StartNew(() => request.CreateResponse());
                 return base.SendAsync(request, cancellationToken);
             }
             catch (Exception)

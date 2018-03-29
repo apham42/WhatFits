@@ -82,3 +82,17 @@ C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.UserAccessControl.T
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.UserAccessControl.Test\obj\Debug\Whatfits.UserAccessControl.Test.csproj.CoreCompileInputs.cache
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.UserAccessControl.Test\obj\Debug\Whatfits.UserAccessControl.Test.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.UserAccessControl.Test\obj\Debug\Whatfits.UserAccessControl.Test.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.DataAccess.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.JsonWebToken.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.Models.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\EntityFramework.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.Hash.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.DataAccess.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.DataAccess.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.JsonWebToken.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.JsonWebToken.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.Models.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.Models.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\EntityFramework.xml
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.Hash.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\Whatfits.Hash.dll.config
