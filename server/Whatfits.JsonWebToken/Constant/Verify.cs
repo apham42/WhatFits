@@ -2,7 +2,7 @@
 
 namespace Whatfits.JsonWebToken.Constant
 {
-    public static class Verify
+    public class Verify
     {
         // create valid parameters for jwt
         public static TokenValidationParameters validationParameters =
@@ -16,7 +16,6 @@ namespace Whatfits.JsonWebToken.Constant
                 ValidateIssuer = true,
                 ValidateIssuerSigningKey = true
             };
-
 
     }
 }

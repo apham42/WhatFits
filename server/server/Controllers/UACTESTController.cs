@@ -1,25 +1,40 @@
-﻿using System.Web.Http;
-using Whatfits.JsonWebToken.Constant;
-using Whatfits.JsonWebToken.Controller;
+﻿using System;
+using System.Web.Http;
 using Whatfits.UserAccessControl.Controller;
+using Whatfits.Hash;
+using System.Collections;
+using Whatfits.DataAccess.Gateways.CoreGateways;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 
 namespace server.Controllers
 {
     public class UACTESTController : ApiController
     {
         [HttpPost]
-        [AuthorizePrincipal(type = "Workout", value = "add workout")]
-        public string one()
+        //[AuthorizePrincipal(type = "Workout", value = "add workout")]
+        public bool one()
         {
-            return "PASS";
+            HMAC256 createnewsecret = new HMAC256();
+            byte[] byt = Convert.FromBase64String(createnewsecret.GenerateSalt());
+            string test = Convert.ToBase64String(byt);
+            byte[] byt2 = Convert.FromBase64String(test);
+
+            return StructuralComparisons.StructuralEqualityComparer.Equals(byt, byt2);
         }
 
 
         [HttpPost]
-        [AllowAnonymous]
-        public string two()
+        public void two()
         {
-            return CreateJWT.CreateToken("apham42");
+            LoginGateway auth = new LoginGateway();
+            LoginDTO newDTO = new LoginDTO()
+            {
+                UserName = "latmey",
+                Token = "TOKEN3",
+                Salt = "Salt3"
+            };
+
+            auth.AddToTokenList(newDTO);
         }
 
         //[HttpPost]

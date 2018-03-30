@@ -14,6 +14,7 @@ C:\Users\George\source\repos\WhatFits8\server\Whatfits.Hash\obj\Debug\Whatfits.H
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll.config
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csprojResolveAssemblyReference.cache
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csproj.CoreCompileInputs.cache
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.pdb

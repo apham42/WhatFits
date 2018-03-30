@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IdentityModel.Tokens.Jwt;
+using Whatfits.JsonWebToken.Constant;
 using Whatfits.JsonWebToken.Service;
 
 namespace Whatfits.JsonWebToken.Controller
@@ -12,20 +13,32 @@ namespace Whatfits.JsonWebToken.Controller
     /// </summary>
     public static class CreateJWT
     {
-        /**
-         * Create tokens from CreateHeader(), and CreatePayload();
-         * @return: Return jwt else return fail
-         * */
+        /// <summary>
+        /// Create tokens from CreateHeader(), and CreatePayload();
+        /// </summary>
+        /// <param name="username">username of user</param>
+        /// <returns>string jwt</returns>
         public static string CreateToken(string username)
         {
-            // creates jwtsecuritytoken
-            var jwt = new JwtSecurityToken(Create.CreateHeader(), Create.CreatePayload(username));
-
-            // converts JwtSecurityToken into serialized format
-            // Signs token with SigningCredentials in WriteToken()
             try
             {
-                return new JwtSecurityTokenHandler().WriteToken(jwt);
+                // generate new secret
+                byte[] secret = Key.GetSecret;
+
+                // constructor for header and payload
+                Create newJwt = new Create();
+
+                // creates jwtsecuritytoken
+                var jwt = new JwtSecurityToken(newJwt.CreateHeader(secret), newJwt.CreatePayload(username));
+
+                // converts JwtSecurityToken into serialized format
+                // Signs token with SigningCredentials in WriteToken()
+                string stringjwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+                // adds token to db(TokenList)
+                newJwt.AddTokenToDB(username, stringjwt, secret);
+
+                return stringjwt;
             }
             /*
              * Catch if
@@ -38,6 +51,8 @@ namespace Whatfits.JsonWebToken.Controller
                 return "Failed";
             }
         }
+
+
 
         
     }

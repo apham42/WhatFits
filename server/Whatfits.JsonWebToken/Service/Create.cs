@@ -2,19 +2,26 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.JsonWebToken.Constant;
 
 namespace Whatfits.JsonWebToken.Service
 {
     public class Create
     {
-        public static JwtHeader CreateHeader()
+
+        /// <summary>
+        /// Create header of jwt
+        /// contains: signingCredentials
+        /// </summary>
+        /// <returns>JwtHeader</returns>
+        public JwtHeader CreateHeader(byte[] secret)
         {
             // algorithm being used 
             const string alg = "HS256";
-            // create header
             // create security key with secret to make it readable for SigingCredentials()
-            var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(Key.ssosecret);
+            var securityKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(secret);
             // sign credentials with security key and hs256
             var signingCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(
                                         securityKey,
@@ -24,8 +31,14 @@ namespace Whatfits.JsonWebToken.Service
             return new JwtHeader(signingCredentials);
         }
 
-
-        public static JwtPayload CreatePayload(string username, int exptime = 1)
+        /// <summary>
+        /// create payload of jwt
+        /// contains: iss, aud, iat, nbf, exp, viewclaims, username
+        /// </summary>
+        /// <param name="username">username of user</param>
+        /// <param name="exptime">experation time of token</param>
+        /// <returns></returns>
+        public JwtPayload CreatePayload(string username, int exptime = 1)
         {
             // get current time
             DateTime currenttime = DateTime.UtcNow;
@@ -37,18 +50,20 @@ namespace Whatfits.JsonWebToken.Service
             long hrunixtime = ((DateTimeOffset)currenttime.AddHours(exptime)).ToUnixTimeSeconds();
 
             // Get view claims
-            List<Claim> ViewClaim = GetViewClaims();
+            List<Claim> ViewClaim = GetViewClaims(username);
 
             // create payload of jwt
             JwtPayload payload = new JwtPayload()
             {
                 { "iss", "https://www.Whatfits.social/" },
-                { "sub", username },
                 { "aud", "General" },
                 { "iat", currentunixTime.ToString() },
                 { "nbf", currentunixTime.ToString() },
                 { "exp", hrunixtime.ToString() }
             };
+
+            // add username to jwt
+            payload.Add("username", username);
 
             // add view claims to payload
             payload.AddClaims(ViewClaim);
@@ -57,7 +72,24 @@ namespace Whatfits.JsonWebToken.Service
             return payload;
         }
 
-        private static List<Claim>  GetViewClaims()
+        public void AddTokenToDB(string username, string jwt, byte[] secret)
+        {
+            LoginGateway loginGateway = new LoginGateway();
+            LoginDTO loginDTO = new LoginDTO()
+            {
+                UserName = username,
+                Token = jwt,
+                Salt = Convert.ToBase64String(secret)
+            };
+
+            loginGateway.AddToTokenList(loginDTO);
+        }
+
+        /// <summary>
+        /// get view claims from db
+        /// </summary>
+        /// <returns>view claims</returns>
+        private List<Claim>  GetViewClaims(string username)
         {
             return new List<Claim>()
             {
