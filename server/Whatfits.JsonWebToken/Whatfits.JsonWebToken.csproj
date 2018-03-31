@@ -66,6 +66,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.DataAccess.csproj">
+      <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
+      <Name>Whatfits.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Whatfits.Hash\Whatfits.Hash.csproj">
       <Project>{8cc680df-550a-4e98-82ec-df265a5869fc}</Project>
       <Name>Whatfits.Hash</Name>

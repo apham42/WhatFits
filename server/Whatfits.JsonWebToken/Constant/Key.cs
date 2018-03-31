@@ -14,7 +14,7 @@ namespace Whatfits.JsonWebToken.Constant
             get { return Convert.FromBase64String(SSOsecret); }
         }
         
-        public static byte[] secret
+        public static byte[] GetSecret
         {
             get
             {

@@ -16,9 +16,6 @@ namespace Whatfits.UserAccessControl.Controller
     /// </summary>
     public class AuthenticateHttpMessageHandler : DelegatingHandler
     {
-        // task for completion
-        private TaskCompletionSource<HttpResponseMessage> tsc = new TaskCompletionSource<HttpResponseMessage>();
-
         /// <summary>
         /// Handles all request comming into server
         /// </summary>
@@ -61,6 +58,9 @@ namespace Whatfits.UserAccessControl.Controller
         /// <returns>returns task with unauthorized response</returns>
         private Task<HttpResponseMessage> UnAuthenticated()
         {
+            //set task completion when fail
+            var tsc = new TaskCompletionSource<HttpResponseMessage>();
+
             // creates response message of unauthorized
             var response = new HttpResponseMessage() { StatusCode = HttpStatusCode.Unauthorized };
             
