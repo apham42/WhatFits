@@ -88,3 +88,11 @@ C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatf
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csproj.CopyComplete
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.DataAccess.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Models.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\EntityFramework.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.DataAccess.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.DataAccess.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Models.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Models.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\EntityFramework.xml

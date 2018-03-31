@@ -242,16 +242,60 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         }
 
         /// <summary>
-        /// Get users salt from that signed the token
+        /// get salt to verify jwt
         /// </summary>
         /// <param name="obj">LoginDTO</param>
-        /// <returns>salt in string</returns>
-        public ResponseDTO<Boolean> GetTokenFromTokenList(LoginDTO obj)
+        /// <returns>jwt salt</returns>
+        public ResponseDTO<string> GetSaltFromTokenList(LoginDTO obj)
         {
             // response
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            ResponseDTO<string> response = new ResponseDTO<string>();
 
-            return response;
+            // find user base of username
+            var foundUser = (from account in db.Credentials
+                             where account.UserName == obj.UserName
+                             select account).FirstOrDefault();
+
+            if (foundUser == null)// if user not found
+            {
+                response.IsSuccessful = false;
+                return response;
+            }
+            else
+            {
+                // find if user already has token
+                var foundToken = (from Token in db.TokenLists
+                                  where Token.UserID == foundUser.UserID
+                                  select Token).FirstOrDefault();
+
+                // connection to db.
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        // if cant find token
+                        if (foundToken == null)
+                        {
+                            response.IsSuccessful = false;
+                            return response;
+                        }
+                        else
+                        {
+                            response.Data = foundToken.Salt;
+                            response.IsSuccessful = true;
+                            return response;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // undo transaction
+                        dbTransaction.Rollback();
+                        response.IsSuccessful = false;
+                        return response;
+                    }
+
+                }
+            }
         }
 
         /// <summary>
@@ -305,7 +349,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                             return response;
                         } else // if token 
                         {
-                            // edit token
+                            // update token
                             foundToken.Token = obj.Token;
                             foundToken.Salt = obj.Salt;
                             db.SaveChanges();
@@ -320,7 +364,6 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         dbTransaction.Rollback();
                         response.IsSuccessful = false;
                         response.Data = false;
-                        response.Messages = new List<string> { "Error occured while adding Claims." };
                         return response;
                     }
                 }

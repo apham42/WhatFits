@@ -5,6 +5,7 @@ using Whatfits.Hash;
 using System.Collections;
 using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.DTOs;
 
 namespace server.Controllers
 {
@@ -30,18 +31,24 @@ namespace server.Controllers
             LoginDTO newDTO = new LoginDTO()
             {
                 UserName = "latmey",
-                Token = "TOKEN3",
-                Salt = "Salt3"
+                Token = "TOKEN4",
+                Salt = "Salt4"
             };
 
             auth.AddToTokenList(newDTO);
         }
 
-        //[HttpPost]
-        //public string three()
-        //{
-        //    return 
-        //}
+        [HttpGet]
+        public string three()
+        {
+            LoginGateway auth = new LoginGateway();
+            LoginDTO dto = new LoginDTO()
+            {
+                UserName = "latmey"
+            };
+            ResponseDTO<string> sup = auth.GetSaltFromTokenList(dto);
+            return sup.Data;
+        }
 
 
         [HttpGet]
