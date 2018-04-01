@@ -1,6 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using Whatfits.JsonWebToken.Constant;
 
@@ -9,8 +10,9 @@ namespace Whatfits.JsonWebToken.Controller
     /// <summary>
     /// Verifies token with valid parameters
     /// VerifyToken(string, byte[]): verifies incomming token
+    /// Exceptions will be caught in the AuthenticatedHttpMessageHandler
     /// </summary>
-    public static class VerifyJWT
+    public class VerifyJWT
     {
         /**
          * Verifies incoming string token
@@ -18,39 +20,23 @@ namespace Whatfits.JsonWebToken.Controller
          * @param: byte[] secret, secret in byte[] format
          * @return: true if valid token, false if not
          * */
-        public static ClaimsPrincipal VerifyToken(string token)
+        public ClaimsPrincipal VerifyToken(string token)
         {
             // create handler to verify token
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
+            // convert string to token
+            var jwt = handler.ReadToken(token) as JwtSecurityToken;
+
+            // get username from token
+            var username = jwt.Claims.First(claim => claim.Type == "UserName").Value;
+
             // if token is validated will set the securitytoken to this.
             SecurityToken validatedToken = null;
 
-            try
-            {
-                // validates users 
-                return handler.ValidateToken(token, Verify.validationParameters, out validatedToken);
-            }
-            /*
-             * System.ArgumentNullException
-             * System.ArgumentException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenDecryptionFailedException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenEncryptionKeyNotFoundException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenInvalidAudienceException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenInvalidLifetimeException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenInvalidSignatureException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenNoExpirationException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenNotYetValidException
-             * Microsoft.IdentityModel.Tokens.SecurityTokenReplayAddFailedException
-            * */
-            catch (Exception)
-            {
-                // will be caught in AuthenticateHttpMessageHandler
-                throw new ArgumentException();
-            }
-            
+
+            // validates users 
+            return handler.ValidateToken(token, new Verify().ValidateToken(username), out validatedToken);
         }
     }
 }
