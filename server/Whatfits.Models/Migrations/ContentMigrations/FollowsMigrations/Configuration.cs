@@ -17,18 +17,16 @@ namespace Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.FollowsContext context)
         {
-            /*
-               var followingList = new List<Following>
+               var sampleFollowingList = new List<Following>
                 {
-                    new Following{ UserID = 0001, PersonFollowing = 0002 },
-                    new Following{ UserID = 0002, PersonFollowing = 0002 },
-                    new Following{ UserID = 0003, PersonFollowing = 0002 },
-                    new Following{ UserID = 0004, PersonFollowing = 0001 },
-                    new Following{ UserID = 0005, PersonFollowing = 0003 }
+                    new Following{ FollowingID = 1, UserID = 0001, PersonFollowing = 0002 },
+                    new Following{ FollowingID = 2, UserID = 0002, PersonFollowing = 0002 },
+                    new Following{ FollowingID = 3, UserID = 0003, PersonFollowing = 0002 },
+                    new Following{ FollowingID = 4, UserID = 0004, PersonFollowing = 0001 },
+                    new Following{ FollowingID = 5, UserID = 0005, PersonFollowing = 0003 }
                 };
-               followingList.ForEach(c => context.Following.Add(c));
+               context.Following.AddOrUpdate(following =>following.FollowingID, sampleFollowingList.ToArray());
                context.SaveChanges();
-           //*/
         }
     }
 }

@@ -13,7 +13,6 @@ namespace server
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-            config.MessageHandlers.Add(new AuthenticateHttpMessageHandler());
 
             // Web API routes
             config.MapHttpAttributeRoutes();
@@ -21,12 +20,14 @@ namespace server
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{action}",
-                defaults: new { id = RouteParameter.Optional },
-                constraints: null,
+                defaults: new { id = RouteParameter.Optional }//,
+                //constraints: null,
+                /*
                 handler:
                    HttpClientFactory.CreatePipeline(
                           new HttpControllerDispatcher(config),
                           new DelegatingHandler[] { new AuthenticateHttpMessageHandler() })
+                          */
             );
         }
     }
