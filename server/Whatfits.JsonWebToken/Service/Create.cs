@@ -8,9 +8,13 @@ using Whatfits.JsonWebToken.Constant;
 
 namespace Whatfits.JsonWebToken.Service
 {
+    /// <summary>
+    /// Create the jwt token
+    /// Header
+    /// payload
+    /// </summary>
     public class Create
     {
-
         /// <summary>
         /// Create header of jwt
         /// contains: signingCredentials
@@ -37,8 +41,9 @@ namespace Whatfits.JsonWebToken.Service
         /// </summary>
         /// <param name="username">username of user</param>
         /// <param name="exptime">experation time of token</param>
+        /// <param name="type">user type, either admin or general</param>
         /// <returns></returns>
-        public JwtPayload CreatePayload(string username, int exptime = 1)
+        public JwtPayload CreatePayload(string username, string type, int exptime = 1)
         {
             // get current time
             DateTime currenttime = DateTime.UtcNow;
@@ -56,14 +61,14 @@ namespace Whatfits.JsonWebToken.Service
             JwtPayload payload = new JwtPayload()
             {
                 { "iss", "https://www.Whatfits.social/" },
-                { "aud", "General" },
+                { "aud", type },
                 { "iat", currentunixTime.ToString() },
                 { "nbf", currentunixTime.ToString() },
                 { "exp", hrunixtime.ToString() }
             };
 
             // add username to jwt
-            payload.Add("username", username);
+            payload.Add("UserName", username);
 
             // add view claims to payload
             payload.AddClaims(ViewClaim);
@@ -72,32 +77,29 @@ namespace Whatfits.JsonWebToken.Service
             return payload;
         }
 
-        public void AddTokenToDB(string username, string jwt, byte[] secret)
-        {
-            LoginGateway loginGateway = new LoginGateway();
-            LoginDTO loginDTO = new LoginDTO()
-            {
-                UserName = username,
-                Token = jwt,
-                Salt = Convert.ToBase64String(secret)
-            };
-
-            loginGateway.AddToTokenList(loginDTO);
-        }
-
         /// <summary>
         /// get view claims from db
         /// </summary>
-        /// <returns>view claims</returns>
+        /// <returns>view page claims</returns>
         private List<Claim>  GetViewClaims(string username)
         {
-            return new List<Claim>()
+            // list a view claims
+            List<Claim> listViewClaims = new List<Claim>();
+
+            // user access dto that stores username, will be passed into gateway
+            UserAccessDTO userAccessDTO = new UserAccessDTO()
             {
-                new Claim("Workout", "add workout"),
-                new Claim("Event", "add event"),
-                new Claim("Friends", "you have friends, congrats."),
-                new Claim("Sup", "yo")
+                UserName = username
             };
+            
+            // gets all user's claims
+            List<Claim> allClaims = new UserAccessControlGateway().GetUserClaims(userAccessDTO).Data;
+
+            // Gets all view claims from list
+            listViewClaims = allClaims.FindAll(claim => claim.Type == "VIEW_PAGE");
+
+            // returns just view page claims
+            return listViewClaims;
         }
     }
 }

@@ -29,10 +29,10 @@ namespace Whatfits.UserAccessControl.Controller
                 //get token from request
                 string token = new RequestTransformer().GetToken(request);
 
-                // check if token is valid.
-                var incommingprincipal = VerifyJWT.VerifyToken(token);
+                // check if token is valid. returns principals
+                var incommingprincipal = new VerifyJWT().VerifyToken(token);
 
-                // Authenticates principals and gets user claims fromd b
+                // Authenticates principals and gets user claims fromd db
                 ClaimsPrincipal AuthenticatedPrincipal = new ClaimsTransformer().Authenticate(incommingprincipal);
 
                 // create IPrincipal

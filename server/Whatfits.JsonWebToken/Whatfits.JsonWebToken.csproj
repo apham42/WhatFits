@@ -60,6 +60,7 @@
     <Compile Include="Controller\VerifyJWT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Create.cs" />
+    <Compile Include="Service\GetSecret.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
