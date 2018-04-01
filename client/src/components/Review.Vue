@@ -44,7 +44,8 @@ export default {
       UserID: '',
       RevieweeID: '',
       DateAndTime: new Date().toLocaleDateString(),
-      ReviewID: ''
+      ReviewID: '',
+      results: ''
     }
   },
   methods: {
@@ -53,7 +54,15 @@ export default {
         this.Rating = this.Rating === star ? star - 1 : star
       }
     },
-
+    isNumber: function (evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+        evt.preventDefault();;
+      } else {
+        return true;
+      }
+    },
     input () {
       axios({
         method: 'POST',
@@ -70,6 +79,12 @@ export default {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json'
         }
+      })
+      .then(response => {
+        this.results = response.data
+        console.log(response)
+      }).catch((error) => {
+        console.log(error);
       })
     }
   }

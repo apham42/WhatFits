@@ -7,6 +7,8 @@ import Test from '@/components/Test'
 import Registration from '@/components/Registration'
 import Terms from '@/components/Terms'
 import Review from '@/components/Review'
+import GetUserReview from '@/components/GetUserReview'
+
 
 Vue.component('Terms', Terms)
 Vue.use(Router)
@@ -38,6 +40,11 @@ export default new Router({
       path: '/Review',
       name: 'Review',
       component: Review
+    },
+    {
+      path: '/GetUserReview',
+      name: 'GetUserReview',
+      component: GetUserReview
     }
   ]
 })

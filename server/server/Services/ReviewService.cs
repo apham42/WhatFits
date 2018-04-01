@@ -61,5 +61,11 @@ namespace server.Services
             var gateway = new ReviewsGateway();
             return gateway.GetReviews(User);
         }
+
+        public List<string> GetUserReview(string Username)
+        {
+            var gateway = new ReviewsGateway();
+            return gateway.GetReview(Username);
+        }
     }
 }
