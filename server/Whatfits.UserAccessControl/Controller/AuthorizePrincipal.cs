@@ -29,7 +29,7 @@ namespace Whatfits.UserAccessControl.Controller
             // if principal is authenticated
             if(IsAuthorized(actionContext))
             {
-                base.IsAuthorized(actionContext); // return true
+                base.IsAuthorized(actionContext); // allows access to feature
             } else // if not authenticated
             {
                 HandleUnauthorizedRequest(actionContext); // return unauthorized status code
