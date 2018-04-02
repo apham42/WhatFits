@@ -31,7 +31,7 @@ namespace server.Controllers
         //Gets reviews of specific userID, *could be changed to username in the future*
         [Route("Review/GetUserReview/{UserName}")]
         [HttpGet]
-        public List<string> GetUserReview(string UserName)
+        public IEnumerable<ReviewDetailDTO> GetUserReview(string UserName)
         {
             ReviewService service = new ReviewService();
             return service.GetUserReview(UserName);

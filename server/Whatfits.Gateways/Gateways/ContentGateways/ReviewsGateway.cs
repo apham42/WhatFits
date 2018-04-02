@@ -65,6 +65,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             return rmsg;
         }
 
+
         //See if the review id exists
         public Boolean ReviewExist(ReviewsDTO r)
         {
@@ -98,7 +99,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         }
 
         //work in progress
-        public ResponseDTO<ReviewDetailDTO> GetUserReviewDetails(string userName)
+        public IEnumerable<ReviewDetailDTO> GetUserReviewDetails(string userName)
         {
             List<int> rating = (from b in db.Review
                                 join cred in db.Credentials
@@ -118,12 +119,17 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                                     where userName == cred.UserName
                                     select b.ReviewMessage
                                   ).ToList();
-            ResponseDTO<ReviewDetailDTO> r = new ResponseDTO<ReviewDetailDTO>
-            {
-                Data = new ReviewDetailDTO(message, rating, time),
-                Messages = null
-            };
-   
+
+            return (from b in db.Review
+                    join cred in db.Credentials
+                    on b.UserID equals cred.UserID
+                    where userName == cred.UserName
+                    select new ReviewDetailDTO()
+                    {
+                        ReviewMessage = b.ReviewMessage,
+                        Rating = b.Rating,
+                        DateAndTime = b.DateAndTime
+                    });
         }
     }
 }

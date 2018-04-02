@@ -10,10 +10,17 @@
         <button @click="displayReviews">Search Button</button>
       </span>
     </form>
-    <div class="ReviewSection">
+    <div class="body">
       <ul id="Review_List">
         <li v-for="value in results">
-          {{ value }}
+          <section id="specificReviews">
+            <div id="messageFormat">
+              User Review: "{{ value.ReviewMessage }}" &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : "{{ value.Rating }}"
+            </div>
+            <div id="dateFormat">
+              {{ value.DateAndTime }}
+            </div>
+          </section>
         </li>
       </ul>
     </div>
@@ -24,11 +31,11 @@
 import axios from 'axios'
 export default {
   name: 'GetUserReview',
-  data: function () {
+  data: function (results) {
     return {
       pageTitle: 'User Review',
       UserName: '',
-      results: []
+      results: [],
     }
   },
   methods: {
@@ -56,5 +63,12 @@ export default {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
       font-size: 22px;
       color: #a7a8a8;
+  }
+  section {
+    border: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+    border-collapse: seperate;
+    border spacing: 15px;
   }
 </style>
