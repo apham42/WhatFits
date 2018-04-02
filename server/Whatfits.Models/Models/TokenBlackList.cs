@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
@@ -11,6 +12,10 @@ namespace Whatfits.Models.Models
         [Key]
         public int TokenBlackListID { get; set; }
         // Stores the token being blocked
-        public string Tokens { get; set; }
+        public string Token { get; set; }
+        [ForeignKey("Credential")]
+        public int UserID { get; set; }
+        // Navigational Property to Credential
+        public virtual Credential Credential { get; set; }
     }
 }

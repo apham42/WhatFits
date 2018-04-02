@@ -99,7 +99,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         SkillLevel = obj.SkillLevel,
                         Type = obj.Type
                     };
-                    db.Users.Add(user);
+                    db.UserProfiles.Add(user);
                     db.SaveChanges();
 
                     // Creating new Salt
@@ -130,7 +130,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     foreach (var account in obj.Answers)
                     {
                         SecurityAccount temp = new SecurityAccount { UserID = newUserID, SecurityQuestionID = account.Key, Answer = account.Value };
-                        db.SecurityQandA.Add(temp);
+                        db.SecurityAccounts.Add(temp);
                         
                     }
                     //db.SaveChanges();
@@ -191,7 +191,8 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// </returns>
         public ResponseDTO<List<string>> GetUserList()
         {
-            List<string> userList = (from x in db.Users join y in db.Credentials
+            List<string> userList = (from x in db.UserProfiles
+                                     join y in db.Credentials
                                     on x.UserID equals y.UserID
                                     select y.UserName).ToList<string>();
             ResponseDTO<List<string>> response = new ResponseDTO<List<string>>();
@@ -226,7 +227,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
             else
             {
-                var foudnQandA = (from answers in db.SecurityQandA
+                var foudnQandA = (from answers in db.SecurityAccounts
                                   where answers.UserID == foundUser.UserID
                                   select answers).ToList();
                 // Passes the query into a dictionary

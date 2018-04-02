@@ -199,5 +199,16 @@ namespace Gateway.Tester
             ResponseDTO<Boolean> found = userMan.EditDescription(descriptionChange);
             Assert.True(found.IsSuccessful);
         }
+        [Fact]
+        public void DeleteUserTest()
+        {
+            UserManagementDTO deleteUser = new UserManagementDTO()
+            {
+                UserName = "amay"
+            };
+            ResponseDTO<Boolean> found = userMan.DeleteUser(deleteUser);
+            ResponseDTO<Boolean> found2 = userMan.DoesUserNameExists(deleteUser);
+            Assert.False(found2.Data);
+        }
     }
 }
