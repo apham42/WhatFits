@@ -1,4 +1,6 @@
-﻿using System.Web.Http.Controllers;
+﻿using System;
+using System.Net.Http;
+using System.Web.Http.Controllers;
 using Whatfits.UserAccessControl.Service;
 using Whatfits.UserAccessControl.Test.Constant;
 using Xunit;
@@ -12,25 +14,29 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
         [Fact]
         public void ValidToken()
         {
-            HttpActionContext context = HttpActionContextMockData.validActionContext();
+            HttpRequestMessage request = HttpRequestMessageMockData.validRequestMessage();
+            RequestTransformer test = new RequestTransformer();
 
-            Assert.Equal(HttpActionContextMockData.VALID_TOKEN, RequestTransformer.GetToken(context));
+            Assert.Equal(HttpRequestMessageMockData.VALID_TOKEN, test.GetToken(request));
         }
 
         [Fact]
         public void TokenInvalid()
         {
-            HttpActionContext context = HttpActionContextMockData.invalidActionContext();
+            HttpRequestMessage request = HttpRequestMessageMockData.InvalidRequestMessage();
+            RequestTransformer test = new RequestTransformer();
 
-            Assert.Equal("False", RequestTransformer.GetToken(context));
+            Assert.Equal(HttpRequestMessageMockData.INVALID_TOKEN, test.GetToken(request));
         }
 
         [Fact]
         public void NoTokenHeader()
         {
-            HttpActionContext context = HttpActionContextMockData.NoTokenHeader();
+            HttpRequestMessage request = HttpRequestMessageMockData.NoTokenInHeader();
+            RequestTransformer test = new RequestTransformer();
+            Action act = () => test.GetToken(request);
 
-            Assert.Equal("False", RequestTransformer.GetToken(context));
+            Assert.Throws<InvalidOperationException>(act);
         }
     }
 }

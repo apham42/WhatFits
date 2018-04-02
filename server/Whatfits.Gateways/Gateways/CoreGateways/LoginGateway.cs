@@ -240,5 +240,134 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 }
             }
         }
+
+        /// <summary>
+        /// get salt to verify jwt
+        /// </summary>
+        /// <param name="obj">LoginDTO</param>
+        /// <returns>jwt salt</returns>
+        public ResponseDTO<string> GetSaltFromTokenList(LoginDTO obj)
+        {
+            // response
+            ResponseDTO<string> response = new ResponseDTO<string>();
+
+            // find user base of username
+            var foundUser = (from account in db.Credentials
+                             where account.UserName == obj.UserName
+                             select account).FirstOrDefault();
+
+            if (foundUser == null)// if user not found
+            {
+                response.IsSuccessful = false;
+                return response;
+            }
+            else
+            {
+                // find if user already has token
+                var foundToken = (from Token in db.TokenLists
+                                  where Token.UserID == foundUser.UserID
+                                  select Token).FirstOrDefault();
+
+                // connection to db.
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        // if cant find token
+                        if (foundToken == null)
+                        {
+                            response.IsSuccessful = false;
+                            return response;
+                        }
+                        else
+                        {
+                            response.Data = foundToken.Salt;
+                            response.IsSuccessful = true;
+                            return response;
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        // undo transaction
+                        dbTransaction.Rollback();
+                        response.IsSuccessful = false;
+                        return response;
+                    }
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// Add token to token list.
+        /// newly created tokens are added to this list.
+        /// </summary>
+        /// <param name="obj">LoginDTO</param>
+        /// <returns>ResponseDTO true if added</returns>
+        public ResponseDTO<Boolean> AddToTokenList(LoginDTO obj)
+        {
+            // response
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+
+            // Find user based off Username
+            var foundUser = (from account in db.Credentials
+                             where account.UserName == obj.UserName
+                             select account).FirstOrDefault();
+
+            if (foundUser == null)// if not found
+            {
+                response.IsSuccessful = false;
+                response.Data = false;
+                return response;
+            }
+            else
+            {
+                // find if user already has token
+                var foundToken = (from Token in db.TokenLists
+                                  where Token.UserID == foundUser.UserID
+                                  select Token).FirstOrDefault();
+                // connection to db.
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        if (foundToken == null) // if not token found
+                        {
+                            TokenList newToken = new TokenList() // new token to be added
+                            {
+                                Token = obj.Token,
+                                Salt = obj.Salt,
+                                UserID = foundUser.UserID
+                            };
+
+                            // add and save token
+                            db.TokenLists.Add(newToken);
+                            db.SaveChanges();
+                            dbTransaction.Commit();
+                            response.IsSuccessful = true;
+                            response.Data = true;
+                            return response;
+                        } else // if token 
+                        {
+                            // update token
+                            foundToken.Token = obj.Token;
+                            foundToken.Salt = obj.Salt;
+                            db.SaveChanges();
+                            dbTransaction.Commit();
+                            response.IsSuccessful = true;
+                            return response;
+                        }
+                    }
+                    catch (Exception) // if fail
+                    {
+                        // undo transaction
+                        dbTransaction.Rollback();
+                        response.IsSuccessful = false;
+                        response.Data = false;
+                        return response;
+                    }
+                }
+            }
+        }
     }
 }

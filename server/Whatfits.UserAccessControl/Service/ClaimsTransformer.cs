@@ -1,9 +1,8 @@
-﻿using System;
-using System.IdentityModel.Tokens.Jwt;
+﻿using System.Collections.Generic;
 using System.Security;
 using System.Security.Claims;
-using System.Threading;
-using Whatfits.UserAccessControl.Controller;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.Gateways.CoreGateways;
 
 namespace Whatfits.UserAccessControl.Service
 {
@@ -17,6 +16,7 @@ namespace Whatfits.UserAccessControl.Service
         /// </summary>
         /// <param name="incommingPrincipal">users principal</param>
         /// <returns>ClaimsPrinciapl with added claims from db</returns>
+        /// <exception>All exceptions will be caught in AuthenticateHttpMessageHandler</exception>"
         public ClaimsPrincipal Authenticate(ClaimsPrincipal incommingPrincipal)
         {
             // check if token exist
@@ -35,29 +35,44 @@ namespace Whatfits.UserAccessControl.Service
         /// </summary>
         /// <param name="incommingPrincipal">principal from authenticateHttpMessageHandler</param>
         /// <returns>incommingPrincipal with new claims</returns>
+        /// <exception>All exceptions will be caught in AuthenticateHttpMessageHandler</exception>"
         private ClaimsPrincipal AddClaimsToPrincipal(ClaimsPrincipal incommingPrincipal)
         {
-            try
-            {
+                string username = incommingPrincipal.FindFirst(claim => claim.Type == "UserName").Value;
+
                 // new identity for principal
                 ClaimsIdentity ci = new ClaimsIdentity();
 
-                // create object to get claims
-                UserAccessDatabaseAccess dbAccess = new UserAccessDatabaseAccess(incommingPrincipal.Identity.Name);
+                // get all claims
+                List<Claim> allClaims = GetClaims(username);
 
-                // get claims from db and store in identity
-                ci.AddClaims(dbAccess.GetClaims());
+                // Add Claims to identity
+                ci.AddClaims(allClaims);
 
-                // store new idenityt in principal
+                // store new identity in principal
                 incommingPrincipal.AddIdentity(ci);
 
                 // return principal with all claims
                 return incommingPrincipal;
-            } catch (Exception)
+        }
+
+        /// <summary>
+        /// get all claims from db
+        /// </summary>
+        /// <returns>all claims</returns>
+        private List<Claim> GetClaims(string username)
+        {
+            // user access dto that stores username, will be passed into gateway
+            UserAccessDTO userAccessDTO = new UserAccessDTO()
             {
-                // throw Exception to be caught in AuthenticateHttpMessageHandler
-                throw new Exception();
-            }
+                UserName = username
+            };
+
+            // gets all user's claims
+            List<Claim> allClaims = new UserAccessControlGateway().GetUserClaims(userAccessDTO).Data;
+            
+            // returns just view page claims
+            return allClaims;
         }
     }
 }

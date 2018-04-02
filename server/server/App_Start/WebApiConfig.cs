@@ -24,12 +24,10 @@ namespace server
                 defaults: new { id = RouteParameter.Optional }
                 //,
                 //constraints: null,
-                /*
-                handler:
-                   HttpClientFactory.CreatePipeline(
-                          new HttpControllerDispatcher(config),
-                          new DelegatingHandler[] { new AuthenticateHttpMessageHandler() })
-                          */
+                //handler:
+                //   HttpClientFactory.CreatePipeline(
+                //          new HttpControllerDispatcher(config),
+                //          new DelegatingHandler[] { new AuthenticateHttpMessageHandler() })
             );
             // Ill be continuing cors from here - Rob
             /*
