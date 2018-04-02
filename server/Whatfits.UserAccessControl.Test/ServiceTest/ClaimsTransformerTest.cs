@@ -2,6 +2,7 @@
 using System.Security;
 using System.Security.Claims;
 using Whatfits.UserAccessControl.Service;
+using Whatfits.UserAccessControl.Test.Constant;
 using Xunit;
 
 namespace Whatfits.UserAccessControl.Test.ServiceTest
@@ -17,6 +18,14 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
             Action act = () => test.Authenticate(nullPrincipal);
 
             Assert.Throws<SecurityException>(act);
+        }
+
+        [Fact]
+        public void PrincipalHasUsername()
+        {
+            ClaimsPrincipal principal = ClaimsPrincipalMockData.HasUsername();
+
+
         }
 
     }
