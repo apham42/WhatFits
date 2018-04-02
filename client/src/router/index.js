@@ -8,8 +8,6 @@ import Registration from '@/components/Registration'
 import Terms from '@/components/Terms'
 import Review from '@/components/Review'
 import GetUserReview from '@/components/GetUserReview'
-
-
 Vue.component('Terms', Terms)
 Vue.use(Router)
 Vue.use(Vuelidate)

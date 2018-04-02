@@ -17,18 +17,16 @@ namespace Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.NotificationContext context)
         {
-            /*
-            var notifications = new List<Notification>
+            var sampleNotifications = new List<Notification>
             {
-                new Notification{ Message = "This is a notification message.", UserID=1, NotificationType="Chat"},
-                new Notification{ Message = "This is a notification message.", UserID=1, NotificationType="Chat"},
-                new Notification{ Message = "This is a notification message.", UserID=2, NotificationType="System"},
-                new Notification{ Message = "This is a notification message.", UserID=3, NotificationType="System"},
-                new Notification{ Message = "This is a notification message.", UserID=4, NotificationType="Chat"}
+                new Notification{ NotificationID = 1, Message = "This is a notification message.", UserID=1, NotificationType="Chat"},
+                new Notification{ NotificationID = 2, Message = "This is a notification message.", UserID=1, NotificationType="Chat"},
+                new Notification{ NotificationID = 3, Message = "This is a notification message.", UserID=2, NotificationType="System"},
+                new Notification{ NotificationID = 4, Message = "This is a notification message.", UserID=3, NotificationType="System"},
+                new Notification{ NotificationID = 5, Message = "This is a notification message.", UserID=4, NotificationType="Chat"}
             };
-            notifications.ForEach(c => context.Notifications.Add(c));
+            context.Notifications.AddOrUpdate(notifications => notifications.NotificationID,sampleNotifications.ToArray());
             context.SaveChanges();
-            //*/
         }
     }
 }

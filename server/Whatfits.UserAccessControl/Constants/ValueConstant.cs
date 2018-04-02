@@ -10,19 +10,21 @@
 
         // SEARCH VALUE
         public const string SEARCH_CLAIM_VALUE = "True";
+        public const string SEACH_CLAIM_VALUE_VIEW = "View Search";
 
         // CHAT VALUE
         public const string CHAT_CLAIM_VALUE = "True";
+        public const string CHAT_CLAIM_VALUE_VIEW = "View Claim";
 
         // FOLLOW VALUE
         public const string FOLLOW_CLAIM_VALUE = "True";
         public const string FOLLOWERSLIST_CLAIM_VALUE = "True";
+        public const string FOLLOWERSLIST_CLAIM_VALUE_VIEW = "View Followerslist";
 
-        // RATE VALUE
+        // RATE and REVIEW VALUE
         public const string RATE_CLAIM_VALUE = "True";
-
-        // REVIEW VALUE
         public const string REVIEW_CLAIM_VALUE = "True";
+        public const string RATINGE_REVIEW_CLAIM_VALUE_VIEW = "View Rating and Reviews";
 
         // EVENT VALUE
         public const string EVENT_CLAIM_VALUE_ADD = "Add";
@@ -32,18 +34,6 @@
 
         // VIEW PAGE VALUE
         // VIEW PROFILE AND EDIT PROFILE PAGE
-        public const string VIEW_PAGE_CLAIM_VALUE_PROFILE = "True";
-
-        // VIEW CHAT PAGE
-        public const string VIEW_PAGE_CLAIM_VALUE_CHAT = "True";
-
-        // VIEW EVENTS PAGE
-        public const string VIEW_PAGE_CLAIM_VALUE_EVENTS = "True";
-
-        // VIEW SEARCH PAGE
-        public const string VIEW_PAGE_CLAIM_VALUE_SEARCH = "True";
-
-        // VIEW RATINGS AND REVIEW PAGE
-        public const string VIEW_PAGE_CLAIM_VALUE_RATINGS_REVIEW = "True";
+        public const string VIEW_PAGE_CLAIM_VALUE_PROFILE = "View Profile";
     }
 }

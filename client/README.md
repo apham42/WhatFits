@@ -1,8 +1,11 @@
-# client
+# WhatFits Web Application (Client)
 
-> WhatFits' Client
-
-## Build Setup
+This is the client components of Whatfits.
+## Get Started
+### Prerequisites
+* NPM
+* Node
+### Build Setup
 
 ``` bash
 # install dependencies

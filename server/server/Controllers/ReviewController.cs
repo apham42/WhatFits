@@ -33,9 +33,9 @@ namespace server.Controllers
         [HttpGet]
         public List<string> GetUserReview(string UserName)
         {
-            ReviewService service = new ReviewService();           
+            ReviewService service = new ReviewService();
             return service.GetUserReview(UserName);
         }
-        
+
     }
 }

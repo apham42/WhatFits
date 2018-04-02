@@ -1,35 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
     /// <summary>
     /// Models the message being sent
     /// </summary>
-    public class Message
+    public class Message : IMessage
     {
         //  Primary Key
-        [Key, Column(Order = 0)]
+        [Key]
         public int MessageID { get; set; }
 
         // Stores the message sent by user
+        [Required]
         public string MessageContent { get; set; }
 
         // Time stamps the message
-        public string CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         // Foreign Key, Tracks the User of the Message Sent
-        [Key, Column(Order = 1)]
+        [ForeignKey("UserProfile")]
         public int UserID { get; set; }
 
-        // Records the ChatroomID
-        [Key, Column(Order = 2)]
-        public int ChatroomID { get; set; }
-
-        // Navigation Property for Chatroom
-        public virtual Chatroom Chatroom { get; set; }
-
+        // Records the UserID of the person recieving the message
+        [Required]
+        public int ReceiverID { get; set; }
         // Navigation Property for User
-        public virtual UserProfile User { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
     }
 }

@@ -42,7 +42,6 @@ namespace server.Controllers
             {
                 return Content(HttpStatusCode.BadRequest, new { userCred.Username });
             }
-            
         }
 
         [HttpPost]

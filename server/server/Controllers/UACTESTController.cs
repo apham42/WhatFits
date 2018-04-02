@@ -1,36 +1,58 @@
-﻿using System.Web.Http;
-using Whatfits.JsonWebToken.Constant;
-using Whatfits.JsonWebToken.Controller;
-using Whatfits.UserAccessControl.Auth;
+﻿using System;
+using System.Web.Http;
+using Whatfits.UserAccessControl.Controller;
+using Whatfits.Hash;
+using System.Collections;
+using Whatfits.DataAccess.Gateways.CoreGateways;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.DTOs;
 
 namespace server.Controllers
 {
     public class UACTESTController : ApiController
     {
-
         [HttpPost]
-        [TokenAuthorize(claimType = "WORKOUT_ADD", claimValue = "ADD")]
-        public string one()
+        //[AuthorizePrincipal(type = "Workout", value = "add workout")]
+        public bool one()
         {
-            return "PASS";
+            HMAC256 createnewsecret = new HMAC256();
+            byte[] byt = Convert.FromBase64String(createnewsecret.GenerateSalt());
+            string test = Convert.ToBase64String(byt);
+            byte[] byt2 = Convert.FromBase64String(test);
+
+            return StructuralComparisons.StructuralEqualityComparer.Equals(byt, byt2);
         }
 
 
         [HttpPost]
-        public string two()
+        public void two()
         {
-            return CreateJWT.CreateToken("apham42");
+            LoginGateway auth = new LoginGateway();
+            LoginDTO newDTO = new LoginDTO()
+            {
+                UserName = "latmey",
+                Token = "TOKEN4",
+                Salt = "Salt4"
+            };
+
+            auth.AddToTokenList(newDTO);
         }
 
-        [HttpPost]
-        public bool three()
+        [HttpGet]
+        public string three()
         {
-            return VerifyJWT.VerifyToken("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3d3dy5XaGF0Zml0cy5zb2NpYWwvIiwic3ViIjoiYXBoYW00MiIsImF1ZCI6IkdlbmVyYWwiLCJpYXQiOiIxNTIxNDIxMjY3IiwibmJmIjoiMTUyMTQyMTI2NyIsImV4cCI6IjE1MjE0MjQ4NjciLCJXT1JLT1VUX0FERCI6IkFERCIsIldPUktPVVRfVklFVyI6IlZJRVcifQ.J2BJmCDdvsVhYhH5-g-w4wPsjqUSwNoDHWK4AGZL-xw", Key.secret);
+            LoginGateway auth = new LoginGateway();
+            LoginDTO dto = new LoginDTO()
+            {
+                UserName = "latmey"
+            };
+            ResponseDTO<string> sup = auth.GetSaltFromTokenList(dto);
+            return sup.Data;
         }
 
 
         [HttpGet]
-        [TokenAuthorize(claimType = "WORKOUT_ADD", claimValue = "EE")]
+        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "EE")]
         public string four()
         {
             return "FAIL";

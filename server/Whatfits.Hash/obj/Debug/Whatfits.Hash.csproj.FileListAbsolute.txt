@@ -11,3 +11,17 @@ C:\Users\George\source\repos\WhatFits8\server\Whatfits.Hash\obj\Debug\Whatfits.H
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csproj.CoreCompileInputs.cache
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.dll
 C:\Users\George\source\repos\WhatFits8\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll.config
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csprojResolveAssemblyReference.cache
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csproj.CoreCompileInputs.cache
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.pdb
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll.config
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.pdb
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csprojResolveAssemblyReference.cache
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csproj.CoreCompileInputs.cache
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.dll
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.pdb

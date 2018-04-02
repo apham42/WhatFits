@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
@@ -7,14 +8,14 @@ namespace Whatfits.Models.Models
     /// This model tracks who is following who for 
     /// following's list.
     /// </summary>
-    public class Following
+    public class Following : IFollowing
     {
         // Primary Key
-        [Key, Column(Order = 0)]
+        [Key]
         public int FollowingID { get; set; }
 
         // Foreign Key to User Table
-        [Key, Column(Order = 1)]
+        [ForeignKey("UserProfile")]
         public int UserID { get; set; }
 
         // Tracks the UserID of the person your following
@@ -22,7 +23,7 @@ namespace Whatfits.Models.Models
         public int PersonFollowing { get; set; }
 
         // Navigation Property for Workoutlog
-        public virtual UserProfile User { get; set; }
+        public virtual UserProfile UserProfile { get; set; }
         
     }
 }

@@ -10,14 +10,14 @@ namespace Whatfits.Models.Context.Core
     {
         public AccountContext() : base("WhatfitsDb"){}
         public DbSet<Credential> Credentials { get; set; }
-        public DbSet<UserProfile> Users { get; set; }
         public DbSet<Salt> Salts { get; set; }
         public DbSet<UserClaims> UserClaims { get; set; }
-        public DbSet<SecurityQandA> SecurityQandA { get; set; }
+        public DbSet<SecurityAccount> SecurityQandA { get; set; }
         public DbSet<SecurityQuestion> SecurityQuestions { get; set; }
         public DbSet<Location> Locations { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<TokenBlackList> TokenBlackLists { get; set; }
         public DbSet<TokenList> TokenLists { get; set; }
+        public DbSet<UserProfile> Users { get; set; }
     }
 }

@@ -56,12 +56,6 @@ namespace server.Services
             return gateway.AddReview(rev);
         }
 
-        public List<string> GetUserReviews(int User)
-        {
-            var gateway = new ReviewsGateway();
-            return gateway.GetReviews(User);
-        }
-
         public List<string> GetUserReview(string Username)
         {
             var gateway = new ReviewsGateway();

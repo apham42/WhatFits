@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <div id="content">
     <h1>{{pageTitle}}</h1>
     <form>
       <div>
         <label for="UserName">UserName</label>
-        <input v-model="UserName" placeholder="'abcd'"/>
+        <input v-model="UserName" placeholder="'abcd'" />
       </div>
       <span>
         <button @click="displayReviews">Search Button</button>
       </span>
     </form>
     <div class="ReviewSection">
-      <ul>
+      <ul id="Review_List">
         <li v-for="value in results">
           {{ value }}
         </li>
@@ -24,15 +24,15 @@
 import axios from 'axios'
 export default {
   name: 'GetUserReview',
-    data: function () {
-      return {
-        pageTitle: 'User Review',
-        UserName: '',
-        results: []
-      }
+  data: function () {
+    return {
+      pageTitle: 'User Review',
+      UserName: '',
+      results: []
+    }
   },
   methods: {
-    displayReviews() {
+    displayReviews () {
       axios({
         method: 'GET',
         url: 'http://localhost/server/review/getuserreview/' + this.UserName,
@@ -45,9 +45,16 @@ export default {
           this.results = response.data
           console.log(response)
         }).catch((error) => {
-          console.log(error);
+          console.log(error)
         })
     }
   }
 }
 </script>
+<style>
+  .content{
+    font-family: 'Avenir', Helvetica, Arial, sans-serif;
+      font-size: 22px;
+      color: #a7a8a8;
+  }
+</style>
