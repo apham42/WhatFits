@@ -7,99 +7,102 @@ using server.Constants;
 using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using server.Interfaces;
 using server.Model.Account;
-using server.Model.Validators;
-using FluentValidation.Results;
+using server.Model.Validators.Account_Validator;
 using Whatfits.Hash;
+using server.Model.Location;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.Gateways.CoreGateways;
+using Whatfits.UserAccessControl.Service;
 
 namespace server.Services
 {
-    public class AccountService :ICreation<UserCredInfo>
+    /// <summary>
+    /// Handles all request that revolves around user accounts
+    /// </summary>
+    public class AccountService
     {
-        public UserCredResponseDTO CreateUser(UserCredInfo creds)
+        public AccountService()
         {
-            var response = ValidateCredentials(creds);
-            if(!response.isSuccessful)
+
+        }
+
+        /// <summary>
+        /// Tries to create the user based on registration information
+        /// </summary>
+        /// <param name="creds"> Registeration Information </param>
+        /// <returns> A DTO that contains status and any messages </returns>
+        public RegInfoResponseDTO CreateUser(RegInfo creds)
+        {
+            var validator = new RegInfoValidator();
+            List<string> messages = new List<string>();
+            var response = validator.Validate(creds);
+            if (!response.isSuccessful)
             {
                 return response;
             }
 
-            if (Create(creds))
+            if (Create(creds, validator.ValidatedLocation))
             {
                 response.isSuccessful = true;
-                response.Messages.Add(AccountConstants.USER_CREATED);
+                messages.Add(AccountConstants.USER_CREATED);
+                response.Messages = messages;
             }
             else
             {
                 response.isSuccessful = false;
-                response.Messages.Add(AccountConstants.USER_CREATE_FAIL);
+                messages.Add(AccountConstants.USER_CREATE_FAIL);
+                response.Messages = messages;
             }
             return response;
         }
 
-        public UserCredResponseDTO ValidateCredentials(UserCredInfo userCreds)
+        /// <summary>
+        /// Creates user based on validated information
+        /// </summary>
+        /// <param name="user"> Validated registeration information </param>
+        /// <param name="geoCoordinates"> Validated Geocoordinates based on the location of registration information </param>
+        /// <returns> status of the creation of the user </returns>
+        public bool Create(RegInfo user, WebAPIGeocode geoCoordinates)
         {
-            UserCredResponseDTO validationResult = new UserCredResponseDTO();
-            List<string> messages = new List<string>();
-
-            if (userCreds == null)
-            {
-                validationResult.isSuccessful = false;
-                validationResult.Messages = messages;
-                validationResult.Messages.Add("EMPTY");
-                return validationResult;
-            }
-
-            UserCredentialValidator validator = new UserCredentialValidator();
-            ValidationResult results = validator.Validate(userCreds);
-            IList<ValidationFailure> failures = results.Errors;
-
-            if (!failures.Any())
-            {
-                validationResult.isSuccessful = true;
-            }
-            else
-            {
-                foreach(ValidationFailure failure in failures)
-                {
-                    messages.Add(failure.ErrorMessage);
-                }
-                validationResult.isSuccessful = false;
-            }
-
-            validationResult.Messages = messages;
-            return validationResult;
-        }
-
-
-
-        public bool Create(UserCredInfo user)
-        {
-            HMAC256 hmac = new HMAC256();
+            var hmac = new HMAC256();
             var salt = hmac.GenerateSalt();
-
-            if (salt != null || salt.Equals(""))
-            {
-                return false;
-            }
 
             var original = new HashDTO()
             {
-                Original = user.Password
+                Original = user.UserCredInfo.Password,
+                Salt = salt
             };
 
             var hashPassword = hmac.Hash(original);
-            if (hashPassword != null || hashPassword.Equals(""))
+
+            var questions = new List<string>();
+            var answers = new List<string>();
+
+            foreach (SecurityQuestion QandA in user.SecurityQandAs)
             {
-                return false;
+                questions.Add(QandA.Question);
+                answers.Add(QandA.Answer);
             }
 
-            var userCredentials = new UserCredentialDTO()
+            var gatewayDTO = new RegGatewayDTO()
             {
-                Username = user.Username
-
+                UserName = user.UserCredInfo.Username,
+                Password = hashPassword,
+                Type = user.UserType,
+                Address = user.UserLocation.Street,
+                City = user.UserLocation.City,
+                State = user.UserLocation.State,
+                Zipcode = user.UserLocation.ZipCode,
+                Longitude = geoCoordinates.Longitude,
+                Latitude = geoCoordinates.Latitude,
+                UserClaims = SetDefaultClaims.GetDefaultClaims(),
+                Salt = salt,
+                Questions = questions,
+                Answers = answers
             };
 
-            return true;
+            var gateway = new RegistrationGateway();
+            return gateway.Create(gatewayDTO);
         }
 
     }

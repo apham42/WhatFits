@@ -6,7 +6,10 @@ using server.Interfaces;
 
 namespace server.Model.Data_Transfer_Objects.AccountDTO_s
 {
-    public class UserCredResponseDTO: IResponseDTO
+    /// <summary>
+    ///  Contains validation information when creating a user
+    /// </summary>
+    public class RegInfoResponseDTO : IResponseDTO
     {
         public List<string> Messages { get; set; }
         public bool isSuccessful { get; set; }

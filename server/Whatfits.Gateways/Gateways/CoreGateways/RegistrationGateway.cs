@@ -3,9 +3,11 @@ using System.Linq;
 using System.Data;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
-using Whatfits.DataAccess.DTOs.CoreDTOs;
-using Whatfits.DataAccess.DTOs;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -16,257 +18,195 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     {
         private AccountContext db = new AccountContext();
         /// <summary>
-        /// Used for Users who registered on the Registration page in app.
+        /// Creates a user based on registration information
         /// </summary>
-        public ResponseDTO<Boolean> RegisterFullUser(RegistrationDTO obj)
+        /// <param name="dto"> Registeration Information </param>
+
+        public bool Create(RegGatewayDTO dto)
         {
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            RegisterPartialUser(obj);
-            ContinueRegistration(obj);
-            return response;
-        }
-        /// <summary>
-        /// Used for Users who registered on the homepage or from SSO
-        /// </summary>
-        public ResponseDTO<Boolean> RegisterPartialUser(RegistrationDTO obj)
-        {
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
-                    Credential newCredential = new Credential()
+                    // Saving Location and finding ID
+                    bool doesLocationExist = (from x in db.Locations
+                                              where x.Address == dto.Address &&
+                                              x.Latitude == dto.Latitude && x.Longitude == x.Longitude
+                                              select x.Address).Any();
+                    if (!doesLocationExist)
                     {
-                        UserName = obj.UserName,
-                        Password = obj.Password,
-                    };
-                    db.Credentials.Add(newCredential);
-                    db.SaveChanges();
-                    dbTransaction.Commit();
-                    response.IsSuccessful = true;
-                    return response;
-                }
-                catch (Exception)
-                {
-                    dbTransaction.Rollback();
-                    response.IsSuccessful = false;
-                    return response;
-                }
-            }
-        }
-        /// <summary>
-        /// Continues the registration process for users who partially registered from 
-        /// the homepage or SSO when they login for first time.
-        /// </summary>
-        public ResponseDTO<Boolean> ContinueRegistration(RegistrationDTO obj)
-        {
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            using (var dbTransaction = db.Database.BeginTransaction())
-            {
-                try
-                {
-                    int newUserID = (from u in db.Credentials
-                                     where u.UserName == obj.UserName
-                                     select u.UserID).FirstOrDefault();
-                    // Creating Location
-                    Location location = new Location
-                    {
-                        Address = obj.Address,
-                        City = obj.City,
-                        State = obj.State,
-                        Zipcode = obj.Zipcode,
-                        Latitude = obj.Latitude,
-                        Longitude = obj.Longitude
-                    };
-                    // Saving Data for new user
-                    db.Locations.Add(location);
-                    db.SaveChanges();
-                    // Getting Location ID for creating User
-                    int newLocationID = (from u in db.Locations
-                                     where u.Address == obj.Address && u.City == obj.City && u.State == obj.State && u.Zipcode == obj.Zipcode
-                                     select u.LocationID).FirstOrDefault();
-                    // Creating new User
-                    UserProfile user = new UserProfile
-                    {
-                        UserID = newUserID,
-                        LocationID = newLocationID,
-                        FirstName = obj.FirstName,
-                        LastName = obj.LastName,
-                        Email = obj.Email,
-                        Gender = obj.Gender,
-                        Description = obj.Description,
-                        ProfilePicture = obj.ProfilePicture,
-                        SkillLevel = obj.SkillLevel,
-                        Type = obj.Type
-                    };
-                    db.Users.Add(user);
-                    db.SaveChanges();
-
-                    // Creating new Salt
-                    Salt salt = new Salt
-                    {
-                        UserID = newUserID,
-                        SaltValue = obj.Salt
-                    };
-                    db.Salts.Add(salt);
-                    //db.SaveChanges();
-                    foreach(var claims in obj.UserClaims)
-                    {
-                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType = claims.Value, ClaimValue = claims.Type };
-                        db.UserClaims.Add(temp);
-                        
-                    }
-
-                    // Add UserClaims
-                    /*
-                    for (int i = 0; i < obj.UserClaims.Count; i++)
-                    {
-                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType= obj.UserClaims[i].Value, ClaimValue=obj.UserClaims[i].Value };
-                        db.UserClaims.Add(temp);
-                    }
-                    */
-                    //db.SaveChanges();
-                    // Add Security QandAs
-                    foreach (var account in obj.Answers)
-                    {
-                        SecurityAccount temp = new SecurityAccount { UserID = newUserID, SecurityQuestionID = account.Key, Answer = account.Value };
-                        db.SecurityQandA.Add(temp);
-                        
-                    }
-                    //db.SaveChanges();
-                    /*
-                    for (int i = 0; i < obj.QuestionIDs.Count; i++)
-                    {
-                        SecurityAccount temp = new SecurityAccount { UserID = newUserID, SecurityQuestionID = obj.QuestionIDs[i], Answer = obj.Answers[i] };
-                        db.SecurityQandA.Add(temp);
+                        Location location = new Location()
+                        {
+                            Address = dto.Address,
+                            City = dto.City,
+                            State = dto.State,
+                            Zipcode = dto.Zipcode,
+                            Latitude = dto.Latitude,
+                            Longitude = dto.Longitude
+                        };
+                        db.Locations.Add(location);
                         db.SaveChanges();
                     }
-                    */
-                    // Commits changes in database
+
+                    int locationID = (from x in db.Locations
+                                      where x.Address == dto.Address &&
+                                      x.Latitude == dto.Latitude && x.Longitude == x.Longitude
+                                      select x.LocationID).FirstOrDefault();
+
+                    // Saving Credentials
+                    Credential credential = new Credential()
+                    {
+                        UserName = dto.UserName,
+                        Password = dto.Password,
+                    };
+                    db.Credentials.Add(credential);
                     db.SaveChanges();
+
+                    int userID = (from u in db.Credentials
+                                  where u.UserName == dto.UserName
+                                  select u.UserID).FirstOrDefault();
+
+                    // Saving Salt
+                    Salt userSalt = new Salt()
+                    {
+                        UserID = userID,
+                        SaltValue = dto.Salt
+                    };
+                    db.Salts.Add(userSalt);
+                    db.SaveChanges();
+
+                    // Saving Security Question and user's Answers
+                    int answerCounter = 0;
+                    foreach (string question in dto.Questions)
+                    {
+                        if (answerCounter < 3)
+                        {
+                            int secQuesID = (from x in db.SecurityQuestions
+                                             where x.Question == question
+                                             select x.SecurityQuestionID).FirstOrDefault();
+                            SecurityAccount userQandA = new SecurityAccount()
+                            {
+                                UserID = userID,
+                                SecurityQuestionID = secQuesID,
+                                Answer = dto.Answers[answerCounter]
+                            };
+                            db.SecurityQandA.Add(userQandA);
+                            db.SaveChanges();
+                            answerCounter++;
+                        }
+                    }
+
+                    // Saving User info
+                    UserProfile userInfo = new UserProfile()
+                    {
+                        UserID = userID,
+                        LocationID = locationID,
+                        Type = dto.Type
+                    };
+                    db.Users.Add(userInfo);
+                    db.SaveChanges();
+
+                    // TODO: Add default claims.
+
                     dbTransaction.Commit();
-                    response.IsSuccessful = true;
-                    return response;
+                    return true;
                 }
-                catch (Exception)
+                catch (SqlException)
                 {
-                    // Rolls back any changed tables
                     dbTransaction.Rollback();
-                    response.IsSuccessful = false;
-                    return response;
+                    return false;
+                }
+                catch (DataException)
+                {
+                    dbTransaction.Rollback();
+                    return false;
+                }
+                catch (InvalidOperationException)
+                {
+                    dbTransaction.Rollback();
+                    return false;
                 }
             }
         }
+
         /// <summary>
         /// This function checks if the incoming username exists in the database
         /// </summary>
-        /// <returns>
-        ///     True : When UserName exists in database
-        ///     False: When UserName does NOT exists in database
-        /// </returns>
-        public ResponseDTO<Boolean> DoesUserNameExists(RegistrationDTO obj)
-        {
-            var foundUserName = (from credentials in db.Credentials
-                                 where credentials.UserName == obj.UserName
-                                 select credentials.UserName);
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+        /// <param name="dto"> Username dto from Business layer to Data Access Layer </param>
 
-            if (foundUserName == null)
-            {
-                response.IsSuccessful = false;
-                response.Messages = new List<string> { "User was not found." };
-                return response;
-            }
-            else
-            {
-                response.IsSuccessful = true;
-                return response;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns>
-        /// 
-        /// </returns>
-        public ResponseDTO<List<string>> GetUserList()
+        public UsernameResponseDTO CheckUserName(UsernameDTO dto)
         {
-            List<string> userList = (from x in db.Users join y in db.Credentials
-                                    on x.UserID equals y.UserID
-                                    select y.UserName).ToList<string>();
-            ResponseDTO<List<string>> response = new ResponseDTO<List<string>>();
-            if (userList == null)
+            UsernameResponseDTO response = new UsernameResponseDTO();
+            List<string> messages = new List<string>();
+            try
             {
-                response.IsSuccessful = false;
-                response.Messages = new List<string> { "No users were found."};
+                string username = (from x in db.Credentials
+                                   where x.UserName == dto.Username
+                                   select x.UserName).FirstOrDefault();
+                if (dto.Username == username)
+                {
+                    response.isSuccessful = false;
+                    messages.Add("Username already exists. Please try again");
+                    response.Messages = messages;
+                }
+                else
+                {
+                    response.isSuccessful = true;
+                }
             }
-            else
+            catch (SqlException)
             {
-                response.Data = userList;
-                response.IsSuccessful = true;
+                response.isSuccessful = false;
+                messages.Add("Your request could not be made. Please try again.");
+                response.Messages = messages;
+            }
+            catch (DataException)
+            {
+                response.isSuccessful = false;
+                messages.Add("Your request could not be made. Please try again.");
+                response.Messages = messages;
             }
             return response;
         }
+
         /// <summary>
-        /// 
+        /// Gets all the security questions in the database
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        public ResponseDTO<Dictionary<int, string>> GetSecurityQandAs(RegistrationDTO obj)
+        /// <returns> list of security questions in the database</returns>
+        public SecurityQuestionResponseDTO GetQuestions()
         {
-            var foundUser = (from credential in db.Credentials
-                             where credential.UserName == obj.UserName
-                             select credential).FirstOrDefault();
-            ResponseDTO<Dictionary<int, string>> response = new ResponseDTO<Dictionary<int, string>>();
-            if (foundUser == null)
+            SecurityQuestionResponseDTO response = new SecurityQuestionResponseDTO();
+            List<string> messages = new List<string>();
+            try
             {
-                response.IsSuccessful = false;
-                // Returns Response
-                return response;
-            }
-            else
-            {
-                var foudnQandA = (from answers in db.SecurityQandA
-                                  where answers.UserID == foundUser.UserID
-                                  select answers).ToList();
-                // Passes the query into a dictionary
-                Dictionary<int, String> temp = new Dictionary<int, string>();
-                for (int i = 0; i < foudnQandA.Count(); i++)
+                List<string> questions = (from x in db.SecurityQuestions
+                                          select x.Question).ToList<string>();
+                if (!questions.Any())
                 {
-                    temp.Add(foudnQandA[i].SecurityQuestionID, foudnQandA[i].Answer);
+                    response.isSuccessful = false;
+                    messages.Add("Your request could not be made. Please try again.");
+                    response.Messages = messages;
                 }
-                // Creates the response
-                response.Data = temp;
-                response.IsSuccessful = true;
-                // Returns Response
-                return response;
-            }
-        }
-        /// <summary>
-        /// Gets list of SecurityQuestions from Database
-        /// </summary>
-        /// <returns>
-        /// Dictionary of Questions and QuestionIDs via LoginDTO
-        /// </returns>
-        public ResponseDTO<Dictionary<int, string>> GetSecurityQuestions()
-        {
-            var query = db.SecurityQuestions.ToList();
-            ResponseDTO<Dictionary<int, string>> response = new ResponseDTO<Dictionary<int, string>> { };
-            if (query == null)
-            {
-                response.IsSuccessful = false;
-            }
-            else
-            {
-                Dictionary<int, String> temp = new Dictionary<int, string>();
-                foreach (var question in query)
+                else
                 {
-                    temp.Add(question.SecurityQuestionID, question.Question);
+                    response.isSuccessful = true;
+                    response.Questions = questions;
                 }
-                response.Data = temp;
-                response.IsSuccessful = true;
+            }
+            catch (SqlException)
+            {
+                response.isSuccessful = false;
+                messages.Add("Your request could not be made. Please try again.");
+                response.Messages = messages;
+            }
+            catch (DataException)
+            {
+                response.isSuccessful = false;
+                messages.Add("Your request could not be made. Please try again.");
+                response.Messages = messages;
             }
             return response;
+
         }
     }
 }
