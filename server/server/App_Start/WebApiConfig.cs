@@ -29,16 +29,8 @@ namespace server
                 //          new HttpControllerDispatcher(config),
                 //          new DelegatingHandler[] { new AuthenticateHttpMessageHandler() })
             );
-            // Ill be continuing cors from here - Rob
-            /*
-             * First Attribute is domain that is supported, have local host and our server's domain
-             * Second Attribute are headers to support
-             * Third is the what are supported in methods
-             */
-            //config.SuppressDefaultHostAuthentication();
-            //config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
-
-            
+            // Enables cors in entire application
+            config.EnableCors();
         }
     }
 }
