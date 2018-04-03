@@ -14,29 +14,29 @@ namespace server.Services
 {
     public class ReviewService
     {
-        
-        public bool ValidateCharacters(string credential)
-        {
-            var rgxCheck = new Regex(AccountConstants.CREDCHARACTERS);
-            if (rgxCheck.IsMatch(credential))
-            {
-                return true;
-            }
-            return false;
-        }
+        //Going to change validation to only front end
+        //public bool ValidateCharacters(string credential)
+        //{
+        //    var rgxCheck = new Regex(AccountConstants.CREDCHARACTERS);
+        //    if (rgxCheck.IsMatch(credential))
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
 
+        //Returns true or false on if review has been created
         public bool Create(ReviewsDTO rev)
         {
             var gateway = new ReviewsGateway();
             return gateway.AddReview(rev);
         }
 
+        //Returns Review objects to front end, ReviewMessage, Rating, and Datetime
         public IEnumerable<ReviewDetailDTO> GetUserReview(string Username)
         {
             var gateway = new ReviewsGateway();
             return gateway.GetUserReviewDetails(Username);
         }
-
-
     }
 }

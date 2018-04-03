@@ -18,7 +18,7 @@
               User Review: "{{ value.ReviewMessage }}" &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : "{{ value.Rating }}"
             </div>
             <div id="dateFormat">
-              {{ value.DateAndTime }}
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: "{{ value.DateAndTime }}"
             </div>
           </section>
         </li>
@@ -35,7 +35,7 @@ export default {
     return {
       pageTitle: 'User Review',
       UserName: '',
-      results: [],
+      results: []
     }
   },
   methods: {

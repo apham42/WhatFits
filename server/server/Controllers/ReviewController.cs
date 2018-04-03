@@ -12,7 +12,7 @@ namespace server.Controllers
 {
     public class ReviewController : ApiController
     {
-        //Needs a response and promise in client side
+        //Generic response from server
         [HttpPost]
         public IHttpActionResult CreateReview(ReviewsDTO review)
         {
@@ -28,7 +28,7 @@ namespace server.Controllers
             }
         }
 
-        //Gets reviews of specific userID, *could be changed to username in the future*
+        //Gets reviews of specific userName
         [Route("Review/GetUserReview/{UserName}")]
         [HttpGet]
         public IEnumerable<ReviewDetailDTO> GetUserReview(string UserName)

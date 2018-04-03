@@ -10,6 +10,5 @@ namespace Whatfits.DataAccess.DTOs.ContentDTOs
         public string ReviewMessage { get; set; }
         public int Rating { get; set; }
         public DateTime DateAndTime { get; set; }
-        public int ReviewID { get; set; }
     }
 }

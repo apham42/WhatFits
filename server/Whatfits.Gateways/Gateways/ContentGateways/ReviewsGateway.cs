@@ -13,7 +13,8 @@ using Whatfits.Models.Models;
 namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
     /// <summary>
-    /// 
+    /// Reviews gateway will include adding and reading
+    /// Deleting and updating will be added as an extra feature if theres time
     /// </summary>
     public class ReviewsGateway
     {
@@ -26,7 +27,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             {
                 try
                 {
-
+                    //ReviewID is a key and will be automatically incremented
                     //creates a new review instance by grabbing object's data
                     Review r = new Review
                     {
@@ -56,29 +57,30 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         }
 
         //Retrieves all reviews based on userID
-        public List<string> GetReviews(int UserID)
-        {
-            List<string> rmsg = (from b in db.Review
-                                 where b.UserID == UserID
-                                 select b.ReviewMessage
-                                  ).ToList();
-            return rmsg;
-        }
+        //Refactored to usernames
+        //public List<string> GetReviews(int UserID)
+        //{
+        //    List<string> rmsg = (from b in db.Review
+        //                         where b.UserID == UserID
+        //                         select b.ReviewMessage
+        //                          ).ToList();
+        //    return rmsg;
+        //}
 
 
-        //See if the review id exists
-        public Boolean ReviewExist(ReviewsDTO r)
-        {
-            var foundReviewID = (from b in db.Review
-                                 where b.ReviewID == r.ReviewID
-                                 select b.ReviewID);
-            if (foundReviewID == null)
-                return false;
-            else
-                return true;
-        }
+        ////See if the review id exists (only needed if we are editing)
+        //public Boolean ReviewExist(ReviewsDTO r)
+        //{
+        //    var foundReviewID = (from b in db.Review
+        //                         where b.ReviewID == r.ReviewID
+        //                         select b.ReviewID);
+        //    if (foundReviewID == null)
+        //        return false;
+        //    else
+        //        return true;
+        //}
 
-        //gets all the reviews in the database
+        //gets all the reviewID'S in the database
         public List<int> GetReviewList()
         {
             List<int> rlist = (from b in db.Review
@@ -86,7 +88,8 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                                   ).ToList();
             return rlist;
         }
-        //Gets reviews for specific username
+
+        //Gets only reviews for specific username
         public List<string> GetReview(string userName)
         {
             List<string> rmsg = (from b in db.Review
@@ -98,28 +101,28 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             return rmsg;
         }
 
-        //work in progress
+        //Return ReviewDetailDTO 
         public IEnumerable<ReviewDetailDTO> GetUserReviewDetails(string userName)
         {
-            List<int> rating = (from b in db.Review
-                                join cred in db.Credentials
-                                on b.UserID equals cred.UserID
-                                where userName == cred.UserName
-                                select b.Rating
-                                  ).ToList();
-            List<DateTime> time = (from b in db.Review
-                                   join cred in db.Credentials
-                                   on b.UserID equals cred.UserID
-                                   where userName == cred.UserName
-                                   select b.DateAndTime
-                                  ).ToList();
-            List<string> message = (from b in db.Review
-                                    join cred in db.Credentials
-                                    on b.UserID equals cred.UserID
-                                    where userName == cred.UserName
-                                    select b.ReviewMessage
-                                  ).ToList();
-
+            //Changed from listing to IEnuerable
+            //List<int> rating = (from b in db.Review
+            //                    join cred in db.Credentials
+            //                    on b.UserID equals cred.UserID
+            //                    where userName == cred.UserName
+            //                    select b.Rating
+            //                      ).ToList();
+            //List<DateTime> time = (from b in db.Review
+            //                       join cred in db.Credentials
+            //                       on b.UserID equals cred.UserID
+            //                       where userName == cred.UserName
+            //                       select b.DateAndTime
+            //                      ).ToList();
+            //List<string> message = (from b in db.Review
+            //                        join cred in db.Credentials
+            //                        on b.UserID equals cred.UserID
+            //                        where userName == cred.UserName
+            //                        select b.ReviewMessage
+            //                      ).ToList();
             return (from b in db.Review
                     join cred in db.Credentials
                     on b.UserID equals cred.UserID
