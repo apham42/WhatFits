@@ -31,16 +31,19 @@ namespace server.Services
         /// </summary>
         /// <param name="creds"> Registeration Information </param>
         /// <returns> A DTO that contains status and any messages </returns>
-        public RegInfoResponseDTO CreateUser(RegInfo creds)
+        public RegInfoResponseDTO RegisterUser(RegInfo creds)
         {
             var validator = new RegInfoValidator();
             List<string> messages = new List<string>();
+
+            // validates Register info
             var response = validator.Validate(creds);
             if (!response.isSuccessful)
             {
                 return response;
             }
 
+            // Save user into the database and returns the status
             if (Create(creds, validator.ValidatedLocation))
             {
                 response.isSuccessful = true;
@@ -67,6 +70,12 @@ namespace server.Services
             var hmac = new HMAC256();
             var salt = hmac.GenerateSalt();
 
+            // Returns false if salt was not generated (empty string)
+            if (salt.Equals(""))
+            {
+                return false;
+            }
+
             var original = new HashDTO()
             {
                 Original = user.UserCredInfo.Password,
@@ -74,6 +83,12 @@ namespace server.Services
             };
 
             var hashPassword = hmac.Hash(original);
+
+            // Return false if hash was not generated (empty string)
+            if (hashPassword.Equals(""))
+            {
+                return false;
+            }
 
             var questions = new List<string>();
             var answers = new List<string>();
@@ -84,6 +99,7 @@ namespace server.Services
                 answers.Add(QandA.Answer);
             }
 
+            // Maps data to the dto for the gateway
             var gatewayDTO = new RegGatewayDTO()
             {
                 UserName = user.UserCredInfo.Username,
@@ -102,6 +118,7 @@ namespace server.Services
             };
 
             var gateway = new RegistrationGateway();
+
             return gateway.Create(gatewayDTO);
         }
 

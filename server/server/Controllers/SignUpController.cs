@@ -21,7 +21,7 @@ namespace server.Controllers
         public IHttpActionResult Register(RegInfo userCred)
         {
             AccountService service = new AccountService();
-            RegInfoResponseDTO response = service.CreateUser(userCred);
+            RegInfoResponseDTO response = service.RegisterUser(userCred);
             if (response.isSuccessful)
             {
                 return Ok(new { response.Messages });

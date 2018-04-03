@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Security.Claims;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -33,6 +34,8 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                                               where x.Address == dto.Address &&
                                               x.Latitude == dto.Latitude && x.Longitude == x.Longitude
                                               select x.Address).Any();
+
+                    // if location doesnt exist, create a new location data
                     if (!doesLocationExist)
                     {
                         Location location = new Location()
@@ -75,25 +78,23 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     db.Salts.Add(userSalt);
                     db.SaveChanges();
 
-                    // Saving Security Question and user's Answers
                     int answerCounter = 0;
+                    // Saving Security Question and user's Answers
                     foreach (string question in dto.Questions)
                     {
-                        if (answerCounter < 3)
+                        
+                        int secQuesID = (from x in db.SecurityQuestions
+                                         where x.Question == question
+                                         select x.SecurityQuestionID).FirstOrDefault();
+                        SecurityAccount userQandA = new SecurityAccount()
                         {
-                            int secQuesID = (from x in db.SecurityQuestions
-                                             where x.Question == question
-                                             select x.SecurityQuestionID).FirstOrDefault();
-                            SecurityAccount userQandA = new SecurityAccount()
-                            {
-                                UserID = userID,
-                                SecurityQuestionID = secQuesID,
-                                Answer = dto.Answers[answerCounter]
-                            };
-                            db.SecurityQandA.Add(userQandA);
-                            db.SaveChanges();
-                            answerCounter++;
-                        }
+                            UserID = userID,
+                            SecurityQuestionID = secQuesID,
+                            Answer = dto.Answers[answerCounter]
+                         };
+                        db.SecurityQandA.Add(userQandA);
+                        db.SaveChanges();
+                        answerCounter++;
                     }
 
                     // Saving User info
@@ -106,7 +107,18 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     db.Users.Add(userInfo);
                     db.SaveChanges();
 
-                    // TODO: Add default claims.
+                    // Adding each claims
+                    foreach (Claim userclaim  in dto.UserClaims)
+                    {
+                        UserClaims claim = new UserClaims()
+                        {
+                            UserID = userID,
+                            ClaimValue = userclaim.Value,
+                            ClaimType = userclaim.Type
+                        };
+                        db.UserClaims.Add(claim);
+                        db.SaveChanges();
+                    }
 
                     dbTransaction.Commit();
                     return true;

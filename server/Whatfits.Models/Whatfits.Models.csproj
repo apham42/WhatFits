@@ -78,40 +78,76 @@
     <Compile Include="Migrations\AccountMigrations\201803282241134_init.Designer.cs">
       <DependentUpon>201803282241134_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\AccountMigrations\201804032020196_Registration.cs" />
+    <Compile Include="Migrations\AccountMigrations\201804032020196_Registration.Designer.cs">
+      <DependentUpon>201804032020196_Registration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AccountMigrations\201804032021520_Registration1.cs" />
+    <Compile Include="Migrations\AccountMigrations\201804032021520_Registration1.Designer.cs">
+      <DependentUpon>201804032021520_Registration1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\AccountMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803282254534_init.cs" />
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803282254534_init.Designer.cs">
       <DependentUpon>201803282254534_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201804032022177_Registration.cs" />
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201804032022177_Registration.Designer.cs">
+      <DependentUpon>201804032022177_Registration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\EventsMigrations\201803282306286_init.cs" />
     <Compile Include="Migrations\ContentMigrations\EventsMigrations\201803282306286_init.Designer.cs">
       <DependentUpon>201803282306286_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\ContentMigrations\EventsMigrations\201804032022462_Registration.cs" />
+    <Compile Include="Migrations\ContentMigrations\EventsMigrations\201804032022462_Registration.Designer.cs">
+      <DependentUpon>201804032022462_Registration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ContentMigrations\EventsMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\FollowsMigrations\201803282307547_init.cs" />
     <Compile Include="Migrations\ContentMigrations\FollowsMigrations\201803282307547_init.Designer.cs">
       <DependentUpon>201803282307547_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ContentMigrations\FollowsMigrations\201804032023171_Registration.cs" />
+    <Compile Include="Migrations\ContentMigrations\FollowsMigrations\201804032023171_Registration.Designer.cs">
+      <DependentUpon>201804032023171_Registration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\FollowsMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\NotificationMigrations\201803282309298_init.cs" />
     <Compile Include="Migrations\ContentMigrations\NotificationMigrations\201803282309298_init.Designer.cs">
       <DependentUpon>201803282309298_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\ContentMigrations\NotificationMigrations\201804032023427_Registration.cs" />
+    <Compile Include="Migrations\ContentMigrations\NotificationMigrations\201804032023427_Registration.Designer.cs">
+      <DependentUpon>201804032023427_Registration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ContentMigrations\NotificationMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201803282314308_init.cs" />
     <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201803282314308_init.Designer.cs">
       <DependentUpon>201803282314308_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201804032024165_Registration.cs" />
+    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201804032024165_Registration.Designer.cs">
+      <DependentUpon>201804032024165_Registration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\SearchMigrations\201803282319340_init.cs" />
     <Compile Include="Migrations\ContentMigrations\SearchMigrations\201803282319340_init.Designer.cs">
       <DependentUpon>201803282319340_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\ContentMigrations\SearchMigrations\201804032024381_Registration.cs" />
+    <Compile Include="Migrations\ContentMigrations\SearchMigrations\201804032024381_Registration.Designer.cs">
+      <DependentUpon>201804032024381_Registration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\ContentMigrations\SearchMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\201803282320376_init.cs" />
     <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\201803282320376_init.Designer.cs">
       <DependentUpon>201803282320376_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\201804032024574_Registration.cs" />
+    <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\201804032024574_Registration.Designer.cs">
+      <DependentUpon>201804032024574_Registration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\Configuration.cs" />
     <Compile Include="Models\Event.cs" />
@@ -145,26 +181,53 @@
     <EmbeddedResource Include="Migrations\AccountMigrations\201803282241134_init.resx">
       <DependentUpon>201803282241134_init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AccountMigrations\201804032020196_Registration.resx">
+      <DependentUpon>201804032020196_Registration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\AccountMigrations\201804032021520_Registration1.resx">
+      <DependentUpon>201804032021520_Registration1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803282254534_init.resx">
       <DependentUpon>201803282254534_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201804032022177_Registration.resx">
+      <DependentUpon>201804032022177_Registration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\EventsMigrations\201803282306286_init.resx">
       <DependentUpon>201803282306286_init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContentMigrations\EventsMigrations\201804032022462_Registration.resx">
+      <DependentUpon>201804032022462_Registration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\FollowsMigrations\201803282307547_init.resx">
       <DependentUpon>201803282307547_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContentMigrations\FollowsMigrations\201804032023171_Registration.resx">
+      <DependentUpon>201804032023171_Registration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\NotificationMigrations\201803282309298_init.resx">
       <DependentUpon>201803282309298_init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContentMigrations\NotificationMigrations\201804032023427_Registration.resx">
+      <DependentUpon>201804032023427_Registration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\ReviewsMigrations\201803282314308_init.resx">
       <DependentUpon>201803282314308_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContentMigrations\ReviewsMigrations\201804032024165_Registration.resx">
+      <DependentUpon>201804032024165_Registration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\SearchMigrations\201803282319340_init.resx">
       <DependentUpon>201803282319340_init.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContentMigrations\SearchMigrations\201804032024381_Registration.resx">
+      <DependentUpon>201804032024381_Registration.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\WorkoutLogMigrations\201803282320376_init.resx">
       <DependentUpon>201803282320376_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\ContentMigrations\WorkoutLogMigrations\201804032024574_Registration.resx">
+      <DependentUpon>201804032024574_Registration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

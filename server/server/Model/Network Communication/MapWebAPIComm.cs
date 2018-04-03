@@ -31,7 +31,7 @@ namespace server.Model.Network_Communication
         /// Sends a request to the Map Web API
         /// </summary>
         /// <param name="dto">DTO that contains the data that will be used in the request </param>
-        /// <returns> A response DTO that contains the data that was received from the request </returns>
+        /// <returns> A async Task response DTO that contains the data that was received from the request </returns>
         public async Task<NetworkLocationResponseDTO> Request(NetworkLocationDTO dto)
         {
             NetworkLocationResponseDTO responseDTO;

@@ -28,6 +28,5 @@ namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
         // Security Q&A
         public List<string> Questions { get; set; }
         public List<string> Answers { get; set; }
-
     }
 }

@@ -40,6 +40,7 @@ namespace server.Model.Network_Communication
             int addressComponentsLength = convertedData.Count;
             for (int i = 0; i < convertedData.Count; i++)
             {
+                // Finding the County information in the JSON data from the web api
                 if (data["results"][0]["address_components"][i]["types"][0].ToString().Equals("administrative_area_level_2"))
                 {
                     mappedData.County = data["results"][0]["address_components"][i]["long_name"].ToString();

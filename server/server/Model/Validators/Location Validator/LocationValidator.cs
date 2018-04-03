@@ -53,11 +53,15 @@ namespace server.Model.Validators.Location_Validator
             {
                 Location = location
             };
+
+            // Waits for the request to finish
             var test = Task.Run(async () => { return await network.Request(requestDTO); }).Result;
 
+            // Converts the data from the web api
             MapDataAdapter dataMapper = new MapDataAdapter();
             var mappedData = dataMapper.Convert(test.Response);
 
+            // Validating County based on the scope 
             if (mappedData.County.Equals("Los Angeles County") || !mappedData.County.Equals("Orange County"))
             {
                 ValidatedLocation = mappedData;

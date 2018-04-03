@@ -18,7 +18,7 @@ namespace server.Model.Validators.Account_Validator
             When(SecurityQuestions => SecurityQuestions != null, () =>
             {
                 RuleFor(SecurityQuestions => SecurityQuestions.Count).Must(SecurityQuestionCount => SecurityQuestionCount == 3).WithMessage(AccountConstants.QUESTION_AMOUNT_ERROR);
-                RuleFor(SecurityQuestions => SecurityQuestions).Must(checkAnswers).WithMessage(AccountConstants.ANSWER_INVALID_ERROR);
+                RuleFor(SecurityQuestions => SecurityQuestions).Must(CheckAnswers).WithMessage(AccountConstants.ANSWER_INVALID_ERROR);
             });
         }
 
@@ -27,7 +27,7 @@ namespace server.Model.Validators.Account_Validator
         /// </summary>
         /// <param name="securityQuestions"></param>
         /// <returns> status of the validation of the answers </returns>
-        public bool checkAnswers(List<SecurityQuestion> securityQuestions)
+        public bool CheckAnswers(List<SecurityQuestion> securityQuestions)
         {
             foreach (SecurityQuestion question in securityQuestions)
             {

@@ -59,6 +59,8 @@ namespace server.Model.Validators.Account_Validator
         public bool ValidateUserCred(UserCredential userCred, RegInfoResponseDTO validationResult)
         {
             var messages = new List<string>();
+
+            // Returns error if user credentials are null
             if (userCred == null)
             {
                 validationResult.isSuccessful = false;
@@ -71,6 +73,7 @@ namespace server.Model.Validators.Account_Validator
 
             IList<ValidationFailure> failures = results.Errors;
 
+            // Returns any error messages if there was any when validating
             if (failures.Any())
             {
                 foreach (ValidationFailure failure in failures)
@@ -91,6 +94,7 @@ namespace server.Model.Validators.Account_Validator
             var gateway = new RegistrationGateway();
             var gatewayResponse = gateway.CheckUserName(dto);
 
+            // Return error if theres any error messages
             if (!gatewayResponse.isSuccessful)
             {
                 validationResult.isSuccessful = false;
@@ -110,6 +114,8 @@ namespace server.Model.Validators.Account_Validator
         public bool ValidateQandAs(List<SecurityQuestion> questions, RegInfoResponseDTO validationResult)
         {
             var messages = new List<string>();
+
+            // Returns error if questions if null
             if (questions == null)
             {
                 validationResult.isSuccessful = false;
@@ -117,6 +123,7 @@ namespace server.Model.Validators.Account_Validator
                 validationResult.Messages = messages;
                 return false;
             }
+
             var validator = new SecurityQuestionValidator();
             var results = validator.Validate(questions);
 
@@ -174,6 +181,8 @@ namespace server.Model.Validators.Account_Validator
         public bool ValidateLocation(Address userLocation, RegInfoResponseDTO validationResult)
         {
             var messages = new List<string>();
+
+            // Returns error if userLocation is null
             if (userLocation == null)
             {
                 validationResult.isSuccessful = false;
@@ -187,6 +196,7 @@ namespace server.Model.Validators.Account_Validator
 
             IList<ValidationFailure> failures = results.Errors;
 
+            // Returns error messages if there is any
             if (failures.Any())
             {
                 foreach (ValidationFailure failure in failures)
@@ -197,6 +207,7 @@ namespace server.Model.Validators.Account_Validator
                 validationResult.Messages = messages;
                 return false;
             }
+
             ValidatedLocation = validator.ValidatedLocation;
             return true;
         }
