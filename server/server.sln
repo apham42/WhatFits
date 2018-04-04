@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Whatfits.Hash", "Whatfits.H
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{EB7DF5E4-4981-4F17-83FF-DC941B46B6A7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RegistrationTest", "RegistrationTest\RegistrationTest.csproj", "{0CEE0018-8A64-42A4-92B6-9931F0B7D340}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +65,10 @@ Global
 		{8CC680DF-550A-4E98-82EC-DF265A5869FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CC680DF-550A-4E98-82EC-DF265A5869FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CC680DF-550A-4E98-82EC-DF265A5869FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CEE0018-8A64-42A4-92B6-9931F0B7D340}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CEE0018-8A64-42A4-92B6-9931F0B7D340}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CEE0018-8A64-42A4-92B6-9931F0B7D340}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CEE0018-8A64-42A4-92B6-9931F0B7D340}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{0CE3E9E9-95E4-449E-ABDB-7AB4F8D72243} = {67765B86-DD0F-400A-98A1-4F4AC7CDEE7D}
 		{71F0B26F-A8D9-497A-A9E7-ED33286F5CAD} = {EB7DF5E4-4981-4F17-83FF-DC941B46B6A7}
 		{8CC680DF-550A-4E98-82EC-DF265A5869FC} = {67765B86-DD0F-400A-98A1-4F4AC7CDEE7D}
+		{0CEE0018-8A64-42A4-92B6-9931F0B7D340} = {EB7DF5E4-4981-4F17-83FF-DC941B46B6A7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4D62435F-1FCA-4597-96A4-AF90635654A6}
