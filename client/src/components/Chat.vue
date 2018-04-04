@@ -43,12 +43,18 @@ export default {
       receivestring: ''
     }
   },
+  created() {
+    // whenever the browser about to close, close webocket connection as well
+    document.addEventListener('beforeunload', this.Disconnection)
+  },
   mounted () {
+    // ask for username when chat webapi gets called and request websocket connection to server
     this.onlineUser = prompt('Enter your name')
     this.ws = new WebSocket('ws://localhost/server/chat' + '?username=' + this.onlineUser)
     this.Connection()
   },
   watch: {
+    // detects online users changes
     chatusers: function () {
       console.log('chatusers changed')
     }
@@ -73,13 +79,13 @@ export default {
         } else {
           vm.chatusers = JSON.parse(event.data).split(',')
           console.log(vm.chatusers)
-          // get iv
+          // get iv from first 16 elements
           for (var i = 0; i < 16; i++) {
             newiv.push(window.parseInt(vm.chatusers.pop()))
           }
           console.log(newiv)
           vm.iv = newiv
-          // get key
+          // get key from next 16 elements
           for (var j = 0; j < 16; j++) {
             newkey.push(window.parseInt(vm.chatusers.pop()))
           }
@@ -94,7 +100,7 @@ export default {
       }
     },
     SendMessage: function () {
-      console.log('send message???')
+      // check if user is still connected  before send
       if (this.ws.readyState === WebSocket.OPEN) {
         this.Encryption()
         var jmsg = {
@@ -107,12 +113,14 @@ export default {
         this.messages = ''
       }
     },
+    // set visability of the messagebox
     SpanBox: function (index) {
       this.clickeduser = this.chatusers[index]
       this.msgshow = !this.msgshow
     },
-    Disconnection: function () {
+    Disconnection: function (event) {
       if (this.ws.readyState === WebSocket.OPEN) {
+        console.log(event)
         this.ws.onclose()
       }
     },
@@ -121,22 +129,22 @@ export default {
         window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
       }
     },
+    // AES 128 CBC Encryption
     Encryption: function () {
-      // var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
-      // var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
       console.log('encryption called')
       var AesJS = require('aes-js')
+      // padding message to 16 bytes
       var StringtoBytes = AesJS.utils.utf8.toBytes(this.Padding(this.messages))
       // eslint-disable-next-line
       var AesCBC = new AesJS.ModeOfOperation.cbc(this.key, this.iv)
       var EncryptedBytes = AesCBC.encrypt(StringtoBytes)
+      // convert to hex for eaiser transfer
       var EncryptedHex = AesJS.utils.hex.fromBytes(EncryptedBytes)
       this.ciphertext = EncryptedHex
       console.log(this.ciphertext)
     },
+    // AES 128 CBC Decryption
     Decryption: function (data) {
-      // var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ]
-      // var iv = [ 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
       var AesJS = require('aes-js')
       console.log('decryption called')
       console.log(data)
@@ -152,6 +160,7 @@ export default {
       this.receivestring = res.join(' ')
       console.log(this.receivestring)
     },
+    // padding user's sending message to 16 bytes base
     Padding: function (source) {
       var paddchar = ' '
       console.log(source.length)
