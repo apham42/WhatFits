@@ -9,7 +9,7 @@ namespace Whatfits.UserAccessControl.Test.Constant
 {
     public class ClaimsPrincipalMockData
     {
-        public static ClaimsPrincipal NotNullPrincipal()
+        public static ClaimsPrincipal NoUserName()
         {
             ClaimsPrincipal principal = new ClaimsPrincipal();
 

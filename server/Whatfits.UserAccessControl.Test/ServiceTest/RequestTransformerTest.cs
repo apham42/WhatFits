@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Web.Http.Controllers;
 using Whatfits.UserAccessControl.Service;
 using Whatfits.UserAccessControl.Test.Constant;
 using Xunit;
@@ -11,32 +10,35 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
 {
     public class RequestTransformerTest
     {
+        HttpRequestMessageMockData mockData = new HttpRequestMessageMockData();
+
         [Fact]
         public void ValidToken()
         {
-            HttpRequestMessage request = HttpRequestMessageMockData.validRequestMessage();
+            HttpRequestMessage request = mockData.validRequestMessage();
             RequestTransformer test = new RequestTransformer();
 
-            Assert.Equal(HttpRequestMessageMockData.VALID_TOKEN, test.GetToken(request));
+            Assert.Equal(mockData.VALID_TOKEN, test.GetToken(request));
         }
 
         [Fact]
-        public void TokenInvalid()
+        public void ValidTokenWithoutScheme()
         {
-            HttpRequestMessage request = HttpRequestMessageMockData.InvalidRequestMessage();
-            RequestTransformer test = new RequestTransformer();
-
-            Assert.Equal(HttpRequestMessageMockData.INVALID_TOKEN, test.GetToken(request));
-        }
-
-        [Fact]
-        public void NoTokenHeader()
-        {
-            HttpRequestMessage request = HttpRequestMessageMockData.NoTokenInHeader();
+            HttpRequestMessage request = mockData.NoSchemeValidTokenRequestMessage();
             RequestTransformer test = new RequestTransformer();
             Action act = () => test.GetToken(request);
 
-            Assert.Throws<InvalidOperationException>(act);
+            Assert.Throws<Exception>(act);
+        }
+
+        [Fact]
+        public void NoTokenInParam()
+        {
+            HttpRequestMessage request = mockData.EmptyAuthorizationParam();
+            RequestTransformer test = new RequestTransformer();
+            Action act = () => test.GetToken(request);
+
+            Assert.Throws<Exception>(act);
         }
     }
 }

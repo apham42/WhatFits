@@ -25,6 +25,7 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
         {
             ClaimsPrincipal principal = ClaimsPrincipalMockData.HasUsername();
 
+            principal = new ClaimsTransformer().Authenticate(principal);
 
         }
 

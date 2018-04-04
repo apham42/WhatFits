@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using Whatfits.UserAccessControl.Controller;
+using System.Web.Http.Cors;
 
 namespace server
 {
@@ -20,13 +21,16 @@ namespace server
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{action}",
-                defaults: new { id = RouteParameter.Optional }//,
-                //constraints: null,
-                //handler:
-                //   HttpClientFactory.CreatePipeline(
-                //          new HttpControllerDispatcher(config),
-                //          new DelegatingHandler[] { new AuthenticateHttpMessageHandler() })
+                defaults: new { id = RouteParameter.Optional }
+                ,
+                constraints: null,
+                handler:
+                   HttpClientFactory.CreatePipeline(
+                          new HttpControllerDispatcher(config),
+                          new DelegatingHandler[] { new AuthenticateHandler() })
             );
+
+            config.EnableCors();
         }
     }
 }
