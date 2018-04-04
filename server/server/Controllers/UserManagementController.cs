@@ -12,14 +12,13 @@ namespace server.Controllers
     /// <summary>
     /// Provides APIs for UserManagement for Clientside
     /// </summary>
-    /// NOTE: Change 
+    /// NOTE: Change headers to appropriate 
     [EnableCors("http://localhost:8081", "*","GET,POST,PUT")]
     public class UserManagementController : ApiController
     {
-        // Demo Code TO BE REMOVED - Rob
         int[] ints = { 1, 2, 3, 4 };
         [HttpGet]
-        [Route("/morenums")]
+        //[Route("morenums")]
         //[DisableCors]
         public IHttpActionResult GetInt()
         {
