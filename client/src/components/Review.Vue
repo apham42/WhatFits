@@ -2,7 +2,7 @@
   <div class="review">
     <form>
       <ul class="list">
-        <li v-for="star in maxRating" :class="{ 'active': star <= Rating }" @click="rate(star)" class="star">
+        <li v-for="star in maxRating" :key="star" :class="{ 'active': star <= Rating }" @click="rate(star)" class="star">
           <icon scale="2" :name="star <= Rating ? 'star' : 'star-o'" />
         </li>
         <span v-if="hasCounter">{{ Rating }} of {{ maxRating }}</span>

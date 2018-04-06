@@ -12,7 +12,7 @@
     </form>
     <div class="body">
       <ul id="Review_List">
-        <li v-for="value in results">
+        <li v-for="value in results" :key="value">
           <section id="specificReviews">
             <div id="messageFormat">
               User Review: "{{ value.ReviewMessage }}" &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : "{{ value.Rating }}"
