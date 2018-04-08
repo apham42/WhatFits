@@ -42,7 +42,7 @@ Follow the README.md on the server and client folder for instructions for each.
 
 | <a href="https://github.com/DPmax" target="_blank">**Longcheng Chi**</a> | <a href="https://github.com/Zyxel-1" target="_blank">**Roberto Sanchez**</a> | <a href="https://github.com/" target="_blank">**Empty**</a> |
 | :---: |:---:| :---:|
-| [![LongCheng Chi](https://avatars2.githubusercontent.com/u/22940124?v=3&s=200)](http://fvcproductions.com)    | [![Roberto Sanchez](https://avatars3.githubusercontent.com/u/13144652?v=3&s=200)](http://fvcproductions.com) | [![Empty](https://avatars3.githubusercontent.com/u/10609893?v=3&s=200)](http://fvcproductions.com)  |
+| [![LongCheng Chi](https://avatars2.githubusercontent.com/u/22940124?v=3&s=200)](http://fvcproductions.com)    | [![Roberto Sanchez](https://avatars3.githubusercontent.com/u/13144652?v=3&s=200)](http://fvcproductions.com) | [![Empty](https://avatars3.githubusercontent.com/u/1060983?v=3&s=200)](http://fvcproductions.com)  |
 | <a href="https://github.com/DPmax" target="_blank">`github.com/DPmax`</a> | <a href="http://github.com/Zyxel-1" target="_blank">`github.com/Zyxel-1`</a> | <a href="http://github.com/" target="_blank">`github.com/`</a> |
 
 
