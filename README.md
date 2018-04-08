@@ -40,8 +40,12 @@ Follow the README.md on the server and client folder for instructions for each.
 | [![Aaron Pham](https://avatars2.githubusercontent.com/u/17376192?v=3&s=200)](http://fvcproductions.com)    | [![Abram Villanueva](https://avatars0.githubusercontent.com/u/9088588?v=3&s=200)](http://fvcproductions.com) | [![George Cheng](https://avatars3.githubusercontent.com/u/10609893?v=3&s=200)](http://fvcproductions.com)  |
 | <a href="https://github.com/apham42" target="_blank">`github.com/apham42`</a> | <a href="http://github.com/apvillan" target="_blank">`github.com/apvillan`</a> | <a href="http://github.com/George17688" target="_blank">`github.com/George17688`</a> |
 
-- You can just grab their GitHub profile image URL
-- You should probably resize their picture using `?s=200` at the end of the image URL.
+| <a href="https://github.com/DPmax" target="_blank">**Longcheng Chi**</a> | <a href="https://github.com/Zyxel-1" target="_blank">**Roberto Sanchez**</a> | <a href="https://github.com/" target="_blank">**Empty**</a> |
+| :---: |:---:| :---:|
+| [![LongCheng Chi](https://avatars2.githubusercontent.com/u/22940124?v=3&s=200)](http://fvcproductions.com)    | [![Roberto Sanchez](https://avatars0.githubusercontent.com/u/9088588?v=3&s=200)](http://fvcproductions.com) | [![Empty](https://avatars3.githubusercontent.com/u/10609893?v=3&s=200)](http://fvcproductions.com)  |
+| <a href="https://github.com/DPmax" target="_blank">`github.com/DPmax`</a> | <a href="http://github.com/Zyxel-1" target="_blank">`github.com/Zyxel-1`</a> | <a href="http://github.com/" target="_blank">`github.com/`</a> |
+
+
 * **Aaron Pham** - *Initial work* - [apham42](https://github.com/apham42)
 * **Abram Villanueva** - *Initial work* - [apvillan](https://github.com/apvillan)
 * **George Cheng** - *Initial work* - [George17688](https://github.com/George17688)
