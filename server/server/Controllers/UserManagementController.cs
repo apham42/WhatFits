@@ -16,15 +16,6 @@ namespace server.Controllers
     [EnableCors("http://localhost:8081", "*","GET,POST,PUT")]
     public class UserManagementController : ApiController
     {
-        int[] ints = { 1, 2, 3, 4 };
-        [HttpGet]
-        //[Route("morenums")]
-        //[DisableCors]
-        public IHttpActionResult GetInt()
-        {
-            return Ok(ints);
-        }
-        //-------------------------------------------
         [HttpPut]
         //[Authorize]
         public IHttpActionResult ChangeStatus(UserManagementDTO obj)
