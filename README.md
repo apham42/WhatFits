@@ -24,7 +24,7 @@ Follow the README.md on the server and client folder for instructions for each.
 * [Visual Studio Community 2017](https://www.visualstudio.com/downloads/) - used for backend development
 * [Visual Studio Code](https://code.visualstudio.com/) - Used for frontend development
 
-# Frameworks
+## Frameworks
 
 * [Vue.js](https://vuejs.org/) - Frontend JavaScript framework used
 * [Bulma](https://bulma.io/) - Frontend CSS framework used
