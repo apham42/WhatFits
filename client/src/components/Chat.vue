@@ -43,7 +43,7 @@ export default {
       receivestring: ''
     }
   },
-  created() {
+  created () {
     // whenever the browser about to close, close webocket connection as well
     document.addEventListener('beforeunload', this.Disconnection)
   },
