@@ -43,8 +43,8 @@ export default new Router({
     {
       // Catch All Error Page
       path: '*',
-      name: 'ErrorPage',
-      component: () => import('@/components/ErrorPage/ErrorPage')
+      name: '404NotFound',
+      component: () => import('@/components/ErrorPage/404NotFound')
 
     }
   ]
