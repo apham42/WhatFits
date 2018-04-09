@@ -85,6 +85,8 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.JsonWebToken\bin\Deb
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Models.pdb
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Models.dll.config
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\EntityFramework.xml
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Newtonsoft.Json.xml
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Models.pdb
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.JsonWebToken.pdb
@@ -102,9 +104,7 @@ C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\De
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Hash.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Logging.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Microsoft.IdentityModel.Tokens.xml
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Newtonsoft.Json.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\System.IdentityModel.Tokens.Jwt.xml
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Models.pdb
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\Whatfits.Models.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\bin\Debug\EntityFramework.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.JsonWebToken\obj\Debug\Whatfits.JsonWebToken.csprojResolveAssemblyReference.cache
