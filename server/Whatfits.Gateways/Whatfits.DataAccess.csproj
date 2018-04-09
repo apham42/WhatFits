@@ -47,17 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataTransferObjects\ContentDTOs\ChatDTO.cs" />
-    <Compile Include="DataTransferObjects\ContentDTOs\EventDTO.cs" />
-    <Compile Include="DataTransferObjects\ContentDTOs\FollowsDTO.cs" />
-    <Compile Include="DataTransferObjects\ContentDTOs\NotificationDTO.cs" />
-    <Compile Include="DataTransferObjects\ContentDTOs\ReviewsDTO.cs" />
-    <Compile Include="DataTransferObjects\ContentDTOs\SearchDTO.cs" />
-    <Compile Include="DataTransferObjects\ContentDTOs\WorkoutLogDTO.cs" />
-    <Compile Include="DataTransferObjects\CoreDTOs\LoginDTO.cs" />
-    <Compile Include="DataTransferObjects\CoreDTOs\RegistrationDTO.cs" />
-    <Compile Include="DataTransferObjects\CoreDTOs\UserAccessDTO.cs" />
-    <Compile Include="DataTransferObjects\CoreDTOs\UserManagementDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\ChatDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\ReviewMessageDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\EventDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\FollowsDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\NotificationDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\ReviewsDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\SearchDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\WorkoutLogDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\LoginDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\RegGatewayDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\SecurityQuestionResponseDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\UserAccessDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\UserManagementDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\UsernameDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\UsernameResponseDTO.cs" />
+    <Compile Include="DTOs\ResponseDTO.cs" />
     <Compile Include="GatewayInterfaces\IDataGateway.cs" />
     <Compile Include="Gateways\ContentGateways\ChatGateway.cs" />
     <Compile Include="Gateways\ContentGateways\EventGateway.cs" />
@@ -70,6 +75,7 @@
     <Compile Include="Gateways\CoreGateways\RegistrationGateway.cs" />
     <Compile Include="Gateways\CoreGateways\UserAccessControlGateway.cs" />
     <Compile Include="Gateways\CoreGateways\UserManagementGateway.cs" />
+    <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

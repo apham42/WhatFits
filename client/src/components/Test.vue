@@ -1,7 +1,6 @@
 <template>
-    <div>
-        <button v-on:click="TestPOST">{{ testingdata }}</button>
-    </div>
+  <div>
+  </div>
 </template>
 
 <script>
@@ -11,22 +10,20 @@ export default {
   data () {
     return {
       testingdata: 'Test Button',
-      jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFwaGFtNDIiLCJ3ZWJzaXRlIjoiV2hhdGZpdHMuc29jaWFsIiwiV09SS09VVF9BREQiOiJBREQiLCJuYmYiOjE1MjA1NjUxMjEsImV4cCI6MTUyMDU2ODcyMSwiaWF0IjoxNTIwNTY1MTIxfQ.HFFQr8QtI6efVh2kqbbVDShUXyaHQM72sbj5cxAJs-U'}
+      jwt: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJodHRwczovL3d3dy5XaGF0Zml0cy5zb2NpYWwvIiwic3ViIjoiYXBoYW00MiIsImF1ZCI6IkdlbmVyYWwiLCJpYXQiOiIxNTIxNTA5NTUyIiwibmJmIjoiMTUyMTUwOTU1MiIsImV4cCI6IjE1MjE1MTMxNTIifQ.Ez2eYtv1NwkzZ3aAeoJQkYJW2_fqRnn0qKDBzYlnOok'}
   },
   methods: {
     TestingMethod () {
       this.$data.testingdata = 'buttonworks'
     },
     TestPOST () {
-      var token = ('input[name="__RequestVerificationToken"]').val()
       axios({
         method: 'POST',
         url: 'http://localhost/server/UACTEST/one',
         headers: {
           'contentType': 'application/json; charset=utf-8',
           'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Token': this.$data.jwt,
-          '__RequestVerificationToken': token
+          'Token': this.$data.jwt
         }
       }).then((response) => {
         this.$data.testingdata = response.data

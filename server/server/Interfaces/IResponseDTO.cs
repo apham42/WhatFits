@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    interface IResponseDTO
+    public interface IResponseDTO
     {
-        string message { get; set; }
-        bool status { get; set; }
+        List<string> Messages { get; set; }
+        bool isSuccessful { get; set; }
     }
 }

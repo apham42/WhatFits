@@ -4,87 +4,123 @@ using System.Linq;
 using System.Web;
 using System.Text.RegularExpressions;
 using server.Constants;
-using server.Data_Transfer_Objects.AccountDTO_s;
+using server.Model.Data_Transfer_Objects.AccountDTO_s;
+using server.Interfaces;
+using server.Model.Account;
+using server.Model.Validators.Account_Validator;
+using Whatfits.Hash;
+using server.Model.Location;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.Gateways.CoreGateways;
+using Whatfits.UserAccessControl.Service;
 
 namespace server.Services
 {
+    /// <summary>
+    /// Handles all request that revolves around user accounts
+    /// </summary>
     public class AccountService
     {
-        private string user = "Abram";
-
-        public UserCredResponseDTO RegisterCredentials(UserCredentialDTO creds)
+        public AccountService()
         {
-            UserCredResponseDTO response = ValidateCredentials(creds);
-            return response;
+
         }
 
-        public UserCredResponseDTO ValidateCredentials (UserCredentialDTO creds)
+        /// <summary>
+        /// Tries to create the user based on registration information
+        /// </summary>
+        /// <param name="creds"> Registeration Information </param>
+        /// <returns> A DTO that contains status and any messages </returns>
+        public RegInfoResponseDTO RegisterUser(RegInfo creds)
         {
-            UserCredResponseDTO response = new UserCredResponseDTO();
-            if (!ValidateUserName(creds.userName, response))
+            var validator = new RegInfoValidator();
+            List<string> messages = new List<string>();
+
+            // validates Register info
+            var response = validator.Validate(creds);
+            if (!response.isSuccessful)
             {
                 return response;
             }
-            ValidatePassword(creds.password, response);
 
+            // Save user into the database and returns the status
+            if (Create(creds, validator.ValidatedLocation))
+            {
+                response.isSuccessful = true;
+                messages.Add(AccountConstants.USER_CREATED);
+                response.Messages = messages;
+            }
+            else
+            {
+                response.isSuccessful = false;
+                messages.Add(AccountConstants.USER_CREATE_FAIL);
+                response.Messages = messages;
+            }
             return response;
         }
 
-        public bool ValidateUserName(string userName, UserCredResponseDTO response)
+        /// <summary>
+        /// Creates user based on validated information
+        /// </summary>
+        /// <param name="user"> Validated registeration information </param>
+        /// <param name="geoCoordinates"> Validated Geocoordinates based on the location of registration information </param>
+        /// <returns> status of the creation of the user </returns>
+        public bool Create(RegInfo user, WebAPIGeocode geoCoordinates)
         {
-            if (!ValidateCharacters(userName))
+            var hmac = new HMAC256();
+            var salt = hmac.GenerateSalt();
+
+            // Returns false if salt was not generated (empty string)
+            if (salt.Equals(""))
             {
-                response.message = AccountConstants.USERNAME_INVALID_CHARACTERS_ERROR;
-                response.status = false;
                 return false;
             }
 
-            // Checks username if its unique using gateway
-            response.message = AccountConstants.USERNAME_VALID;
-            response.status = true;
-            return true;
+            var original = new HashDTO()
+            {
+                Original = user.UserCredInfo.Password,
+                Salt = salt
+            };
+
+            var hashPassword = hmac.Hash(original);
+
+            // Return false if hash was not generated (empty string)
+            if (hashPassword.Equals(""))
+            {
+                return false;
+            }
+
+            var questions = new List<string>();
+            var answers = new List<string>();
+
+            foreach (SecurityQuestion QandA in user.SecurityQandAs)
+            {
+                questions.Add(QandA.Question);
+                answers.Add(QandA.Answer);
+            }
+
+            // Maps data to the dto for the gateway
+            var gatewayDTO = new RegGatewayDTO()
+            {
+                UserName = user.UserCredInfo.Username,
+                Password = hashPassword,
+                Type = user.UserType,
+                Address = user.UserLocation.Street,
+                City = user.UserLocation.City,
+                State = user.UserLocation.State,
+                Zipcode = user.UserLocation.ZipCode,
+                Longitude = geoCoordinates.Longitude,
+                Latitude = geoCoordinates.Latitude,
+                UserClaims = SetDefaultClaims.GetDefaultClaims(),
+                Salt = salt,
+                Questions = questions,
+                Answers = answers
+            };
+
+            var gateway = new RegistrationGateway();
+
+            return gateway.Create(gatewayDTO);
         }
 
-        //public bool ValidateUserNameCharacters( string userName)
-
-        public bool ValidatePassword(string password, UserCredResponseDTO response)
-        {
-            if (password.Length < 8)
-            {
-                response.message = AccountConstants.PASSWORD_SHORT_ERROR;
-                response.status = false;
-                return false;
-            }
-
-            if (password.Length > 64)
-            {
-                response.message = AccountConstants.PASSWORD_LONG_ERROR;
-                response.status = false;
-                return false;
-            }
-
-            if (!ValidateCharacters(password))
-            {
-                response.message = AccountConstants.PASSWORD_INVALID_CHARACTERS_ERROR;
-                response.status = false;
-                return false;
-            }
-
-            response.message = AccountConstants.USER_AND_PASSWORD_VALID;
-            response.status = true;
-            return true;
-        }
-
-        public bool ValidateCharacters(string credential)
-        {
-            var rgxCheck = new Regex(AccountConstants.CREDCHARACTERS);
-            if (rgxCheck.IsMatch(credential))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        
     }
 }

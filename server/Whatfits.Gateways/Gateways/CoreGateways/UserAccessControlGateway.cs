@@ -1,96 +1,190 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Data;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using System.Security.Claims;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.DTOs;
+using System;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 { 
+    /// <summary>
+    /// Provides the following functions for UserAcccess Control
+    /// - Add new Claim to ClaimsList
+    /// - Remove Claim from ClaimsList
+    /// - Get ClaimsList
+    /// - Add new UserClaim to User
+    /// - Remove UserClaim from User
+    /// - Get UserClaims
+    /// </summary>
     public class UserAccessControlGateway
     {
-        private RegistrationContext db = new RegistrationContext();
-        public void AddToClaimsList(UserAccessDTO obj)
-        {
-            // Create new Claim object with the information from the DTO
-            Claim newClaim = new Claim()
-            {
-                ClaimValue = obj.ClaimValue,
-                ClaimType = obj.ClaimType
-            };
-            // Add claim to database
-            db.Claims.Add(newClaim);
-            // Saves changes made
-            Save();
-        }
-
-        public void RemoveFromClaimsList(UserAccessDTO obj)
-        {
-            // Creates a temporary claim with the id
-            var removeClaim = new Claim { ClaimID = obj.ClaimID };
-            // Attaches claim to be removed
-            db.Claims.Attach(removeClaim);
-            // Removes claim
-            db.Claims.Remove(removeClaim);
-            // Saves changes
-            Save();
-        }
-
-        public void AddUserClaims(UserAccessDTO obj)
+        private AccountContext db = new AccountContext();
+        /// <summary>
+        /// Adds a claim to the user
+        /// </summary>
+        /// <param name="obj">
+        /// - UserName
+        /// - ClaimID
+        /// </param>
+        /// <returns>
+        /// - TRUE: Succeeds to add UserClaim
+        /// - FALSE: Fails to add UserClaim
+        /// </returns>
+        public ResponseDTO<Boolean> AddUserClaims(UserAccessDTO obj)
         {
             // Find user based off Username
-            var foundUser = db.Credentials.Find(obj.UserName);
-            // Create new userclaim with userID and ClaimID
-            UserClaims newUserClaim = new UserClaims()
+            var foundUser = (from account in db.Credentials
+                             where account.UserName == obj.UserName
+                             select account).FirstOrDefault();
+            // Creating Response
+            ResponseDTO<Boolean> response = new ResponseDTO<bool>();
+            if (foundUser == null)
             {
-                ClaimID = obj.ClaimID,
-                UserID = foundUser.UserID
-            };
-            // Add UserClaim to database
-            db.UserClaims.Add(newUserClaim);
-            Save();
-        }
-
-        public void RemoveUserClaims(UserAccessDTO obj)
-        {
-            // Find UserId by Username
-            var foundUser = db.Credentials.Find(obj.UserName);
-            // Create object to be removed from database
-            UserClaims removeUserClaim = new UserClaims()
+                response.IsSuccessful = false;
+                response.Data = false;
+                return response;
+            }
+            else
             {
-                ClaimID = obj.ClaimID,
-                UserID = foundUser.UserID
-            };
-            // Attaches object to be removed
-            db.UserClaims.Attach(removeUserClaim);
-            // Removes object from database
-            db.UserClaims.Remove(removeUserClaim);
-            // Saves changes
-            Save();
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        for (int i = 0; i < obj.UserClaims.Count; i++)
+                        {
+                            UserClaims newUserClaim = new UserClaims()
+                            {
+                                ClaimType = obj.UserClaims[i].Type,
+                                ClaimValue = obj.UserClaims[i].Value,
+                                UserID = foundUser.UserID
+                            };
+                            db.UserClaims.Add(newUserClaim);
+                            db.SaveChanges();
+                        }
+                        dbTransaction.Commit();
+                        response.IsSuccessful = true;
+                        response.Data = true;
+                        return response;
+                    }
+                    catch (Exception)
+                    {
+                        dbTransaction.Rollback();
+                        response.IsSuccessful = false;
+                        response.Data = false;
+                        response.Messages = new List<string> { "Error occured while adding Claims." };
+                        return response;
+                    }
+                }
+            }
+            
         }
-
-        public List<Claim> GetReferenceClaims()
+        /// <summary>
+        /// Removes a Claim from a person
+        /// </summary>
+        /// <param name="obj">
+        /// - UserName
+        /// - ClaimID
+        /// </param>
+        /// <returns>
+        /// - TRUE: Succeeds to add Claim
+        /// - FALSE: Fails to add Claim
+        /// </returns>
+        public ResponseDTO<Boolean> RemoveUserClaims(UserAccessDTO obj)
         {
-            IEnumerable<int> temp = Enumerable.Empty<int>();
-            var claims = db.Claims.ToList();
-
-            return claims;
+            var foundUser = (from account in db.Credentials
+                             where account.UserName == obj.UserName
+                             select account).FirstOrDefault();
+            ResponseDTO<Boolean> response = new ResponseDTO<bool>();
+            if (foundUser == null)
+            {
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User Not Found." };
+                return response;
+            }
+            else
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        // Finds the User's Claims
+                        var foundUserClaims = (from userClaims in db.UserClaims
+                                               where userClaims.UserID == foundUser.UserID
+                                               select userClaims);
+                        // Deletes each UserClaim from user
+                        foreach (var userClaim in foundUserClaims)
+                        {
+                            db.UserClaims.Remove(userClaim);
+                        }
+                        db.SaveChanges();
+                        dbTransaction.Commit();
+                        // Returns Response
+                        response.IsSuccessful = true;
+                        return response;
+                    }
+                    catch (Exception)
+                    {
+                        // Failure happened
+                        dbTransaction.Rollback();
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "Error Removing Claims." };
+                        return response;
+                    }
+                }
+            }
         }
-        public List<int> GetUserClaims(UserAccessDTO obj)
+        /// <summary>
+        /// Gets a list of Claims that the user has
+        /// </summary>
+        /// <param name="obj">
+        /// - UserName(string)
+        /// </param>
+        /// <returns>
+        /// - List<Claim> via UserAcccessDTO
+        /// </returns>
+        public ResponseDTO<List<Claim>> GetUserClaims(UserAccessDTO obj)
         {
-            // Find UserId by Username
-            var foundUser = db.Credentials.Find(obj.UserName);
-            // Find all records of that userID and return all claimIds
-            // as a list.
-            var ClaimsList = (from p in db.UserClaims
-                              where p.UserID == foundUser.UserID
-                              select p.ClaimID).ToList();
-            // Returns list of claims
-            return ClaimsList;
+            var foundUser = (from account in db.Credentials
+                             where account.UserName == obj.UserName
+                             select account).FirstOrDefault();
+            ResponseDTO<List<Claim>> response = new ResponseDTO<List<Claim>>();
+            if (foundUser == null)
+            {
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User Not Found." };
+                return response;
+            }
+            else
+            {
+                // Should return all the userClaims that match UserID
+                var foundUserClaims = (from userClaims in db.UserClaims
+                                       where userClaims.UserID == foundUser.UserID
+                                       select userClaims);
+                response.Data = QueryToClaims(foundUserClaims);
+                response.IsSuccessful = true;
+                return response;
+            }
         }
-        private void Save()
+        /// <summary>
+        /// Converts a query into a list of claims
+        /// </summary>
+        /// <param name="obj">
+        /// IQueryable<UserClaims>
+        /// </param>
+        /// <returns>
+        /// List of Claim objects
+        /// </returns>
+        private List<Claim> QueryToClaims(IQueryable<UserClaims> obj)
         {
-            db.SaveChanges();
+            List<Claim> temp = new List<Claim>();
+            
+            foreach (var userClaim in obj )
+            {
+                temp.Add(new Claim(userClaim.ClaimType,userClaim.ClaimValue));
+            }
+            return temp;
         }
     }
 }

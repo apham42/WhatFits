@@ -1,25 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
-    public class Following
+    /// <summary>
+    /// This model tracks who is following who for 
+    /// following's list.
+    /// </summary>
+    public class Following : IFollowing
     {
-        public Following()
-        {
-
-        }
-        // Foreign Key
-        public int UserID { get; set; }
-        public User User { get; set; }
         // Primary Key
         [Key]
         public int FollowingID { get; set; }
 
+        // Foreign Key to User Table
+        [ForeignKey("UserProfile")]
+        public int UserID { get; set; }
+
+        // Tracks the UserID of the person your following
+        [Required]
         public int PersonFollowing { get; set; }
+
+        // Navigation Property for Workoutlog
+        public virtual UserProfile UserProfile { get; set; }
+        
     }
 }

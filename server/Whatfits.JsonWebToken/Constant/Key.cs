@@ -1,29 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Whatfits.DataAccess.DTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.Gateways.CoreGateways;
+using Whatfits.Hash;
 
 namespace Whatfits.JsonWebToken.Constant
 {
-    class Key
+    public class Key
     {
         // JWT secret key
-        private const string Secret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
-
-        // getter for secret key
-        public static string secret
+        private const string SSOsecret = "db3OIsj+BXE9NZDy0t8W3TcNekrF+2d/1sFnWG4HnV8TZY30iTOdtVWJG8abWvB1GlOgJuQZdcF2Luqm/hccMw==";
+        
+        // getter for secret key in bytes
+        public byte[] ssosecret
         {
-            get { return Secret; }
+            get { return Convert.FromBase64String(SSOsecret); }
         }
-
-        // create string into base 64
-        public static byte[] getBytes(string input)
+        
+        public byte[] CreateSecret
         {
-            var bytes = new byte[input.Length * sizeof(char)];
-            Buffer.BlockCopy(input.ToCharArray(), 0, bytes, 0, bytes.Length);
-
-            return bytes;
+            get
+            {
+                HMAC256 createnewsecret = new HMAC256();
+                return Convert.FromBase64String(createnewsecret.GenerateSalt());
+            }
         }
     }
 }

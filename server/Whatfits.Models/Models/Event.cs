@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
@@ -11,36 +9,42 @@ namespace Whatfits.Models.Models
     /// This model represents the table where all events
     /// are stored.
     /// </summary>
-    public class Event
+    public class Event : IEvent
     {
-        // Foreign Key - Maps to the User Table
-        [Key, Column(Order = 0)]
+        [Key]
+        public int EventID { get; set; }
+         // Foreign Key - Maps to the User Table
+        [ForeignKey("User")]
         public int UserID { get; set; }
 
-        // The place where the event will take place
-        [Required]
+        // Stores the Location of the event takening place
         public string Location { get; set; }
-
+        
         // Title for the event
         [Required]
         public string Title { get; set; }
 
         // Time stamp when the event was created
         [Required]
-        public string CreatedAt { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         // Time when the event will take place
         [Required]
-        public string DateTime { get; set; }
+        public DateTime DateAndTime { get; set; }
 
         // A general description of the event
         [Required]
         public string Description { get; set; }
 
         // OPTIONAL: An image for the event
-        public byte[] Image { get; set; }
+        public string Image { get; set; }
+
+        // Stores the latitude  of the event
+        public string Latitude { get; set; }
+        // Stores the Longitude of the event
+        public string Longitude { get; set; }
 
         // Navigation Property
-        public User User { get; set; }
+        public virtual UserProfile User { get; set; }
     }
 }

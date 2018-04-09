@@ -3,14 +3,14 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using Microsoft.Web.WebSockets;
-using Whatfits.Models.Models;
 using System;
+using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
-using Whatfits.DataAccess.DataTransferObjects.ContentDTOs;
 using System.Collections.Generic;
-using Newtonsoft.Json;
 using System.Web.Script.Serialization;
 using System.Linq;
+using Whatfits.Models.Models;
+using Newtonsoft.Json;
 
 namespace server.Controllers
 {
@@ -18,20 +18,20 @@ namespace server.Controllers
     {
         ChatDTO chatuser = new ChatDTO();
         ChatGateway mychat = new ChatGateway();
-        private  byte[] key = new byte[16];
-        private  byte[] iv = new byte[16];
-        private  Random randomkey = new Random();
-        private  Random randomiv = new Random();
+        private byte[] key = new byte[16];
+        private byte[] iv = new byte[16];
+        private Random randomkey = new Random();
+        private Random randomiv = new Random();
 
         public byte[] Getkey()
         {
-           randomkey.NextBytes(key);
-           return key;
+            randomkey.NextBytes(key);
+            return key;
         }
 
         public byte[] Getiv()
         {
-           randomiv.NextBytes(iv);
+            randomiv.NextBytes(iv);
             return iv;
         }
 
@@ -43,7 +43,7 @@ namespace server.Controllers
                 return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
             if (mychat.DoesUserNameExists(chatuser))
             {
-                HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username,Getkey(),Getiv()));
+                HttpContext.Current.AcceptWebSocketRequest(new ChatHandler(username, Getkey(), Getiv()));
                 return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
             }
             return new HttpResponseMessage(HttpStatusCode.BadRequest);
@@ -61,7 +61,7 @@ namespace server.Controllers
             public ChatHandler(string username, byte[] key, byte[] iv)
             {
                 connectedUser = username;
-                if(!users.Contains(connectedUser))
+                if (!users.Contains(connectedUser))
                     users.Add(connectedUser);
                 _key = key;
                 _iv = iv;
@@ -69,8 +69,8 @@ namespace server.Controllers
 
             public override void OnOpen()
             {
-                
-                if(!_chatUser.Contains(this))
+
+                if (!_chatUser.Contains(this))
                     _chatUser.Add(this);
                 var userlist = "";
                 int length = users.Count;
@@ -84,14 +84,14 @@ namespace server.Controllers
                 // for sending key
                 for (int j = 0; j < _key.Length; j++)
                 {
-                        userlist += "," + _key[j];
+                    userlist += "," + _key[j];
                 }
                 // for sending iv
                 for (int k = 0; k < _iv.Length; k++)
                 {
-                        userlist += "," + _iv[k];
+                    userlist += "," + _iv[k];
                 }
-                
+
                 _chatUser.Broadcast(JsonConvert.SerializeObject(userlist));
             }
 
@@ -103,7 +103,7 @@ namespace server.Controllers
                 var index = users.IndexOf(deser.UserName);
                 // send to receiver
                 _chatUser.ElementAtOrDefault(index).Send(JsonConvert.SerializeObject(connectedUser + " said: " + deser.MessageContent + " \n" + DateTime.Now.ToLocalTime()));
-                
+
             }
 
             public override void OnError()

@@ -1,53 +1,81 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using System.IdentityModel.Tokens.Jwt;
-using System.IdentityModel.Tokens;
-using System.Security.Claims;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.JsonWebToken.Constant;
+using Whatfits.JsonWebToken.Service;
 
 namespace Whatfits.JsonWebToken.Controller
 {
-    public static class CreateJWT
+    /// <summary>
+    /// Create jwt
+    /// CreateToken(): combines header and payload to make token
+    /// CreateHeader(): creates header of token
+    /// CreatePayload(): creates payload of token
+    /// </summary>
+    public class CreateJWT
     {
-        public static string CreateJsonWebToken()
+        /// <summary>
+        /// Create tokens from CreateHeader(), and CreatePayload();
+        /// </summary>
+        /// <param name="username">username of user</param>
+        /// <returns>string jwt</returns>
+        public string CreateToken(string username, string type)
         {
-            // convert to base 64
-            var symmetricKey = Convert.FromBase64String(Key.secret);
-
-            // create jwt handler
-            var tokenHandler = new JwtSecurityTokenHandler();
-
-            
-            var now = DateTime.UtcNow;
-
-            // in token
-            var tokenDescriptor = new Microsoft.IdentityModel.Tokens.SecurityTokenDescriptor
+            try
             {
-                //identity in token
-                Subject = new ClaimsIdentity(new[]
-                {
-                    new Claim(ClaimTypes.Name, "apham42"),
-                    new Claim(ClaimTypes.Webpage, "Whatfits.social"),
-                    new Claim("WORKOUT_ADD", "ADD")
-                }),
+                // generate new secret
+                byte[] secret = new Key().CreateSecret;
 
-                //Expires = now.AddMinutes(Convert.ToInt32(expireMinutes)),
+                // constructor for header and payload
+                Create newJwt = new Create();
 
-                //signing credentials
-                SigningCredentials = new Microsoft.IdentityModel.Tokens.SigningCredentials(new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(symmetricKey), SecurityAlgorithms.HmacSha256Signature)
+                // creates jwtsecuritytoken
+                var jwt = new JwtSecurityToken(newJwt.CreateHeader(secret), newJwt.CreatePayload(username, type));
+
+                // converts JwtSecurityToken into serialized format
+                // Signs token with SigningCredentials in WriteToken()
+                string stringjwt = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+                // adds token to db(TokenList)
+                AddTokenToDB(username, stringjwt, secret);
+
+                return stringjwt;
+            }
+            /*
+             * Catch if
+             *      System.ArgumentNullException
+             *      System.ArgumentException
+             *      Microsoft.IdentityModel.Tokens.SecurityTokenEncryptionFailedException
+             * */
+            catch (Exception) 
+            {
+                return "Failed";
+            }
+        }
+
+
+        /// <summary>
+        /// adds token and secret to db
+        /// </summary>
+        /// <param name="username">user to get new token</param>
+        /// <param name="jwt">token created</param>
+        /// <param name="secret">secret that has signed token</param>
+        private void AddTokenToDB(string username, string jwt, byte[] secret)
+        {
+            // login gateway use to connect to db
+            LoginGateway loginGateway = new LoginGateway();
+
+            // dto that is sent to gateway
+            LoginDTO loginDTO = new LoginDTO()
+            {
+                UserName = username,
+                Token = jwt,
+                Salt = Convert.ToBase64String(secret)
             };
 
-            // create the token from handler
-            var stoken = tokenHandler.CreateToken(tokenDescriptor);
-            // convert to string
-            var token = tokenHandler.WriteToken(stoken);
-
-            // return string jwt
-            return token;
+            // adds token to db
+            loginGateway.AddToTokenList(loginDTO);
         }
     }
 }

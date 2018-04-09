@@ -55,13 +55,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constant\Key.cs" />
+    <Compile Include="Constant\Verify.cs" />
     <Compile Include="Controller\CreateJWT.cs" />
     <Compile Include="Controller\VerifyJWT.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Create.cs" />
+    <Compile Include="Service\GetSecret.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Whatfits.Gateways\Whatfits.DataAccess.csproj">
+      <Project>{7e234319-0927-48b6-b3f2-0c96d169c55d}</Project>
+      <Name>Whatfits.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Whatfits.Hash\Whatfits.Hash.csproj">
+      <Project>{8cc680df-550a-4e98-82ec-df265a5869fc}</Project>
+      <Name>Whatfits.Hash</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,42 +1,53 @@
 # WhatFits Web Application
-> A fitness oriented social media web application
 
-[![Build Status][travis-image]][travis-url]
-
-One to two paragraph statement about your product and what it does.
+A fitness social media web application. It helps like minded individuals to connect based on interest concerning physical activities.
 
 ![](header.png)
 
-## Development setup
+## Get Started
 
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
+Follow the README.md on the server and client folder for instructions for each.
 
-```sh
-make install
-npm test
-```
+* client
+  * This directory contains a Vue project for the client side of the project.
+
+* server
+  * This directory constains a Web API project used for the server side of this project.
 
 ## Release History
 
 * 0.0.1
-    * Work in progress
+    * Base deployment of Homepage, Registration, Login, and UserProfile
 
-## Meta
+## Built With
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
+* [Visual Studio Community 2017](https://www.visualstudio.com/downloads/) - used for backend development
+* [Visual Studio Code](https://code.visualstudio.com/) - Used for frontend development
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
+## Frameworks
 
-[https://github.com/yourname/github-link](https://github.com/dbader/)
+* [Vue.js](https://vuejs.org/) - Frontend JavaScript framework used
+* [Bulma](https://bulma.io/) - Frontend CSS framework used
+* [ASP.NET 4.6.1](https://www.microsoft.com/en-us/download/details.aspx?id=49981) - Backend Framework used
 
 ## Contributing
 
 1. Not accepting anyone at the moment
 
-<!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki
+## Authors
+
+* **Aaron Pham** - *Initial work* - [apham42](https://github.com/apham42)
+* **Abram Villanueva** - *Initial work* - [apvillan](https://github.com/apvillan)
+* **George Cheng** - *Initial work* - [George17688](https://github.com/George17688)
+* **Longcheng Chi** - *Initial work* - [DPmax](https://github.com/DPmax)
+* **Roberto Sanchez** - *Initial work* - [Zyxel-1](https://github.com/Zyxel-1)
+
+See also the list of [contributors](https://github.com/apham42/WhatFits/graphs/contributors) who participated in this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+
+## Acknowledgments
+* To be included by first deployment
+

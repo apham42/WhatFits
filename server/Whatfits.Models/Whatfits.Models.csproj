@@ -52,86 +52,82 @@
     <Compile Include="Context\Content\NotificationContext.cs" />
     <Compile Include="Context\Content\ReviewsContext.cs" />
     <Compile Include="Context\Content\SearchContext.cs" />
-    <Compile Include="Context\Core\LoginContext.cs" />
-    <Compile Include="Context\Core\UserAccessControlContext.cs" />
-    <Compile Include="Context\Core\RegistrationContext.cs" />
-    <Compile Include="Context\Core\UserManagementContext.cs" />
+    <Compile Include="Context\Core\AccountContext.cs" />
     <Compile Include="Context\Content\ChatContext.cs" />
     <Compile Include="Context\Content\WorkoutLogContext.cs" />
-    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803141825086_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803141825086_init.Designer.cs">
-      <DependentUpon>201803141825086_init.cs</DependentUpon>
+    <Compile Include="Interfaces\Model Interfaces\ICardio.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IChatRoom.cs" />
+    <Compile Include="Interfaces\Model Interfaces\ICredential.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IEvent.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IFollowing.cs" />
+    <Compile Include="Interfaces\Model Interfaces\ILocation.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IMessage.cs" />
+    <Compile Include="Interfaces\Model Interfaces\INotification.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IReview.cs" />
+    <Compile Include="Interfaces\Model Interfaces\ISalt.cs" />
+    <Compile Include="Interfaces\Model Interfaces\ISecurityAcccount.cs" />
+    <Compile Include="Interfaces\Model Interfaces\ISecurityQuestions.cs" />
+    <Compile Include="Interfaces\Model Interfaces\ITokenBlackList.cs" />
+    <Compile Include="Interfaces\Model Interfaces\ITokenList.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IUserClaim.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IUserProfile.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IWeightLifting.cs" />
+    <Compile Include="Interfaces\Model Interfaces\IWorkoutLog.cs" />
+    <Compile Include="Interfaces\IResponseDTO.cs" />
+    <Compile Include="Migrations\AccountMigrations\201804082359476_init.cs" />
+    <Compile Include="Migrations\AccountMigrations\201804082359476_init.Designer.cs">
+      <DependentUpon>201804082359476_init.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803160122231_addcredential.cs" />
-    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201803160122231_addcredential.Designer.cs">
-      <DependentUpon>201803160122231_addcredential.cs</DependentUpon>
+    <Compile Include="Migrations\AccountMigrations\201804090013145_init1.cs" />
+    <Compile Include="Migrations\AccountMigrations\201804090013145_init1.Designer.cs">
+      <DependentUpon>201804090013145_init1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\AccountMigrations\Configuration.cs" />
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201804090015060_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\ChatMigrations\201804090015060_init.Designer.cs">
+      <DependentUpon>201804090015060_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\Configuration.cs" />
-    <Compile Include="Migrations\ContentMigrations\EventsMigrations\201803061853141_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\EventsMigrations\201803061853141_init.Designer.cs">
-      <DependentUpon>201803061853141_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\EventsMigrations\201804090018175_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\EventsMigrations\201804090018175_init.Designer.cs">
+      <DependentUpon>201804090018175_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\EventsMigrations\Configuration.cs" />
-    <Compile Include="Migrations\ContentMigrations\FollowsMigrations\201803061855205_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\FollowsMigrations\201803061855205_init.Designer.cs">
-      <DependentUpon>201803061855205_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\FollowsMigrations\201804090020459_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\FollowsMigrations\201804090020459_init.Designer.cs">
+      <DependentUpon>201804090020459_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\FollowsMigrations\Configuration.cs" />
-    <Compile Include="Migrations\ContentMigrations\NotificationMigrations\201803061858310_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\NotificationMigrations\201803061858310_init.Designer.cs">
-      <DependentUpon>201803061858310_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\NotificationMigrations\201804090022381_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\NotificationMigrations\201804090022381_init.Designer.cs">
+      <DependentUpon>201804090022381_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\NotificationMigrations\Configuration.cs" />
-    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201803141826112_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201803141826112_init.Designer.cs">
-      <DependentUpon>201803141826112_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201804090024360_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\201804090024360_init.Designer.cs">
+      <DependentUpon>201804090024360_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\ReviewsMigrations\Configuration.cs" />
-    <Compile Include="Migrations\ContentMigrations\SearchMigrations\201803061851473_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\SearchMigrations\201803061851473_init.Designer.cs">
-      <DependentUpon>201803061851473_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\SearchMigrations\201804090026108_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\SearchMigrations\201804090026108_init.Designer.cs">
+      <DependentUpon>201804090026108_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\SearchMigrations\Configuration.cs" />
-    <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\201803061849398_init.cs" />
-    <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\201803061849398_init.Designer.cs">
-      <DependentUpon>201803061849398_init.cs</DependentUpon>
+    <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\201804090027363_init.cs" />
+    <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\201804090027363_init.Designer.cs">
+      <DependentUpon>201804090027363_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CoreMigrations\LoginMigrations\201803132247157_init.cs" />
-    <Compile Include="Migrations\CoreMigrations\LoginMigrations\201803132247157_init.Designer.cs">
-      <DependentUpon>201803132247157_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\CoreMigrations\LoginMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803132237481_init.cs" />
-    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803132237481_init.Designer.cs">
-      <DependentUpon>201803132237481_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803141820070_enabledChatandReviews.cs" />
-    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\201803141820070_enabledChatandReviews.Designer.cs">
-      <DependentUpon>201803141820070_enabledChatandReviews.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\CoreMigrations\RegistrationMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803132250279_init.cs" />
-    <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803132250279_init.Designer.cs">
-      <DependentUpon>201803132250279_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\CoreMigrations\UserAccessControlMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CoreMigrations\UserManagementMigrations\201803132251350_init.cs" />
-    <Compile Include="Migrations\CoreMigrations\UserManagementMigrations\201803132251350_init.Designer.cs">
-      <DependentUpon>201803132251350_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\CoreMigrations\UserManagementMigrations\Configuration.cs" />
-    <Compile Include="Models\Chatroom.cs" />
-    <Compile Include="Models\Claim.cs" />
     <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\Follower.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Credential.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Notification.cs" />
     <Compile Include="Models\Salt.cs" />
-    <Compile Include="Models\SecurityQandA.cs" />
-    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\SecurityAccount.cs" />
+    <Compile Include="Models\TokenBlackList.cs" />
+    <Compile Include="Models\TokenList.cs" />
+    <Compile Include="Models\UserProfile.cs" />
     <Compile Include="Models\UserClaims.cs" />
     <Compile Include="Models\WeightLifting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,46 +141,33 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803141825086_init.resx">
-      <DependentUpon>201803141825086_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\AccountMigrations\201804082359476_init.resx">
+      <DependentUpon>201804082359476_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201803160122231_addcredential.resx">
-      <DependentUpon>201803160122231_addcredential.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\AccountMigrations\201804090013145_init1.resx">
+      <DependentUpon>201804090013145_init1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\EventsMigrations\201803061853141_init.resx">
-      <DependentUpon>201803061853141_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201804090015060_init.resx">
+      <DependentUpon>201804090015060_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\FollowsMigrations\201803061855205_init.resx">
-      <DependentUpon>201803061855205_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\EventsMigrations\201804090018175_init.resx">
+      <DependentUpon>201804090018175_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\NotificationMigrations\201803061858310_init.resx">
-      <DependentUpon>201803061858310_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\FollowsMigrations\201804090020459_init.resx">
+      <DependentUpon>201804090020459_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\ReviewsMigrations\201803141826112_init.resx">
-      <DependentUpon>201803141826112_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\NotificationMigrations\201804090022381_init.resx">
+      <DependentUpon>201804090022381_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\SearchMigrations\201803061851473_init.resx">
-      <DependentUpon>201803061851473_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\ReviewsMigrations\201804090024360_init.resx">
+      <DependentUpon>201804090024360_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ContentMigrations\WorkoutLogMigrations\201803061849398_init.resx">
-      <DependentUpon>201803061849398_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\SearchMigrations\201804090026108_init.resx">
+      <DependentUpon>201804090026108_init.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\LoginMigrations\201803132247157_init.resx">
-      <DependentUpon>201803132247157_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\RegistrationMigrations\201803132237481_init.resx">
-      <DependentUpon>201803132237481_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\RegistrationMigrations\201803141820070_enabledChatandReviews.resx">
-      <DependentUpon>201803141820070_enabledChatandReviews.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\UserAccessControlMigrations\201803132250279_init.resx">
-      <DependentUpon>201803132250279_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\CoreMigrations\UserManagementMigrations\201803132251350_init.resx">
-      <DependentUpon>201803132251350_init.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ContentMigrations\WorkoutLogMigrations\201804090027363_init.resx">
+      <DependentUpon>201804090027363_init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

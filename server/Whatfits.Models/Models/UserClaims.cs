@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
+using Whatfits.Models.Interfaces;
 
 namespace Whatfits.Models.Models
 {
@@ -11,20 +9,23 @@ namespace Whatfits.Models.Models
     /// Each user will have a list of claims to determine what 
     /// they can do in this system.
     /// </summary>
-    public class UserClaims
+    public class UserClaims : IUserClaim
     {
-        // Foreign Key to Claims Model
-        [Key, Column(Order = 0)]
+        // Primary Key to Claims Model
+        [Key]
         public int ClaimID { get; set; }
 
         // Foreign Key to User Model
-        [Key, Column(Order = 1)]
+        [ForeignKey("Credential")]
         public int UserID { get; set; }
+
+        // Stores the Claim Value
+        public string ClaimValue { get; set; }
+
+        // Stores the Claim Type
+        public string ClaimType { get; set; }
 
         // Navigation Property to User Model
         public virtual Credential Credential { get; set; }
-
-        // Navigation Property to Claims Model
-        public virtual Claim Claims { get; set; }
     }
 }

@@ -1,9 +1,7 @@
 ﻿using System.Data;
 using System.Linq;
 using Whatfits.Models.Context.Content;
-using System;
-using Whatfits.DataAccess.DataTransferObjects.ContentDTOs;
-using System.Collections.Generic;
+using Whatfits.DataAccess.DTOs.ContentDTOs;
 
 namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
@@ -55,6 +53,20 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         bool CleanChatRoom()
         {
             return false;
+        }
+        public bool DoesUserNameExists(ChatDTO obj)
+        {
+            // Find username inside database based on obj.UserName
+            var foundUserName = (from credentials in db.Credentials
+                                 where credentials.UserName == obj.UserName
+                                 select credentials.UserName).FirstOrDefault();
+            // Checking if it found a user
+            if (foundUserName == null)
+                // returns false if passed username does not exists in database
+                return false;
+            else
+                // returns true if passed username does exists in database
+                return true;
         }
     }
 }

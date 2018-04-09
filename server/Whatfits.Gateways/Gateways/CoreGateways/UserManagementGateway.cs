@@ -3,7 +3,9 @@ using System.Linq;
 using System.Data;
 using Whatfits.Models.Models;
 using Whatfits.Models.Context.Core;
-using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.DTOs;
+using System.Collections.Generic;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -13,265 +15,451 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     /// </summary>
     public class UserManagementGateway
     {
-        private UserManagementContext db = new UserManagementContext();
-
-        public void CreateUser(UserManagementDTO obj)
+        private AccountContext db = new AccountContext();
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public ResponseDTO<Boolean> RegisterFullUser(UserManagementDTO obj)
         {
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            RegisterPartialUser(obj);
+            ContinueRegistration(obj);
+            return response;
+        }
+        /// <summary>
+        /// Used for Users who registered on the homepage or from SSO
+        /// </summary>
+        public ResponseDTO<Boolean> RegisterPartialUser(UserManagementDTO obj)
+        {
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
-                    // Createing new Credential
-                    Credential credential = new Credential
+                    Credential newCredential = new Credential()
                     {
                         UserName = obj.UserName,
                         Password = obj.Password,
-                        IsFullyRegistered = obj.IsFullyRegistered,
-                        IsBanned = obj.IsBanned
                     };
-                    db.Credentials.Add(credential);
-                    Save();
-                    int newUserID = (from u in db.Credentials
-                                     where u.UserName == obj.UserName
-                                     select u.UserID).FirstOrDefault();
+                    db.Credentials.Add(newCredential);
+                    db.SaveChanges();
+                    dbTransaction.Commit();
+                    response.IsSuccessful = true;
+                    response.Data = true;
+                    return response;
+                }
+                catch (Exception)
+                {
+                    dbTransaction.Rollback();
+                    response.IsSuccessful = false;
+                    response.Data = false;
+                    return response;
+                }
+            }
+        }
+        /// <summary>
+        /// Continues the registration process for users who partially registered from 
+        /// the homepage or SSO when they login for first time.
+        /// </summary>
+        public ResponseDTO<Boolean> ContinueRegistration(UserManagementDTO obj)
+        {
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            using (var dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    int newUserID = (from credential in db.Credentials
+                                     where credential.UserName == obj.UserName
+                                     select credential.UserID).FirstOrDefault();
+                    // Creating Location
+                    Location location = new Location
+                    {
+                        Address = obj.Address,
+                        City = obj.City,
+                        State = obj.State,
+                        Zipcode = obj.Zipcode,
+                        Latitude = obj.Latitude,
+                        Longitude = obj.Longitude
+                    };
+                    // Saving Data for new user
+                    db.Locations.Add(location);
+                    db.SaveChanges();
+                    // Getting Location ID for creating User
+                    int newLocationID = (from u in db.Locations
+                                         where u.Address == obj.Address && u.City == obj.City && u.State == obj.State && u.Zipcode == obj.Zipcode
+                                         select u.LocationID).FirstOrDefault();
                     // Creating new User
-                    User user = new User
+                    UserProfile user = new UserProfile
                     {
                         UserID = newUserID,
+                        LocationID = newLocationID,
                         FirstName = obj.FirstName,
                         LastName = obj.LastName,
                         Email = obj.Email,
                         Gender = obj.Gender,
                         Description = obj.Description,
                         ProfilePicture = obj.ProfilePicture,
-                        SkillLevel = obj.SkillLevel
+                        SkillLevel = obj.SkillLevel,
+                        Type = obj.Type
                     };
-                    db.Users.Add(user);
-                    Save();
+                    db.UserProfiles.Add(user);
+                    db.SaveChanges();
+
                     // Creating new Salt
                     Salt salt = new Salt
                     {
                         UserID = newUserID,
-                        SaltValue = obj.Salt
+                        SaltValue = obj.SaltValue
                     };
                     db.Salts.Add(salt);
-                    Save();
-
-                    // Creating location for User
-                    Location location = new Location
+                    //db.SaveChanges();
+                    foreach (var claims in obj.UserClaims)
                     {
-                        UserID = newUserID,
-                        Address = obj.Address,
-                        City = obj.City,
-                        State = obj.State,
-                        Zipcode = obj.Zipcode,
-                    };
-                    // Saving Data for new user
-                    db.Locations.Add(location);
-                    Save();
+                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType = claims.Value, ClaimValue = claims.Type };
+                        db.UserClaims.Add(temp);
+
+                    }
 
                     // Add UserClaims
-                    for (int i = 0; i < obj.ClaimIDs.Count; i++)
+                    /*
+                    for (int i = 0; i < obj.UserClaims.Count; i++)
                     {
-                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimID = obj.ClaimIDs[i] };
+                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType= obj.UserClaims[i].Value, ClaimValue=obj.UserClaims[i].Value };
                         db.UserClaims.Add(temp);
-                        Save();
                     }
+                    */
+                    //db.SaveChanges();
                     // Add Security QandAs
+                    foreach (var account in obj.Answers)
+                    {
+                        SecurityAccount temp = new SecurityAccount { UserID = newUserID, SecurityQuestionID = account.Key, Answer = account.Value };
+                        db.SecurityAccounts.Add(temp);
+
+                    }
+                    //db.SaveChanges();
+                    /*
                     for (int i = 0; i < obj.QuestionIDs.Count; i++)
                     {
-                        SecurityQandA temp = new SecurityQandA { UserID = newUserID, SecurityQuestionID = obj.QuestionIDs[i], Answer = obj.Answers[i] };
+                        SecurityAccount temp = new SecurityAccount { UserID = newUserID, SecurityQuestionID = obj.QuestionIDs[i], Answer = obj.Answers[i] };
                         db.SecurityQandA.Add(temp);
-                        Save();
+                        db.SaveChanges();
                     }
+                    */
                     // Commits changes in database
+                    db.SaveChanges();
                     dbTransaction.Commit();
+                    response.IsSuccessful = true;
+                    response.Data = true;
+                    return response;
                 }
                 catch (Exception)
                 {
                     // Rolls back any changed tables
                     dbTransaction.Rollback();
+                    response.IsSuccessful = false;
+                    response.Data = false;
+                    return response;
                 }
             }
         }
-
-        public Boolean DisableUser(UserManagementDTO obj)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public ResponseDTO<Boolean> DisableUser(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            // Find User based off UserName
+            // NOTE: Does this even work??? -ROB
+            var foundUser = (from u in db.Credentials
+                             join y in db.UserProfiles
+                             on u.UserID equals y.UserID
+                             where u.UserName == obj.UserName
+                             select y).FirstOrDefault();
+            // Was user found?
+            if (foundUser == null)
             {
-                // Find User based off UserName
-                var foundUser = (from u in db.Credentials
-                                 where u.UserName == obj.UserName
-                                 select u).FirstOrDefault();
-                // Was user found?
-                if (foundUser != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
                         // Edit Value for User
-                        foundUser.IsBanned = true;
+                        foundUser.Type = "Disabled";
                         // Saves changes
-                        Save();
+                        db.SaveChanges();
                         // Commits if works
                         dbTransaction.Commit();
                         // Inform other layer that it succeeded
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         // undo any changes if errors
                         dbTransaction.Rollback();
                         // Inform other layer about failure
-                        return false;
+                        response.IsSuccessful = false;
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-
-        public Boolean EnableUser(UserManagementDTO obj)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public ResponseDTO<Boolean> EnableUser(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            // Find User based off UserName
+            // NOTE: Does this even work??? -ROB
+            var foundUser = (from u in db.Credentials
+                             join y in db.UserProfiles
+                                on u.UserID equals y.UserID
+                             where u.UserName == obj.UserName
+                             select y).FirstOrDefault();
+            // Was user found?
+            if (foundUser == null)
             {
-                var foundUser = (from u in db.Credentials
-                                 where u.UserName == obj.UserName
-                                 select u).FirstOrDefault();
-                if (foundUser != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
-                        foundUser.IsBanned = false;
-                        Save();
+                        // Edit Value for User
+                        foundUser.Type = "Enable";
+                        // Saves changes
+                        db.SaveChanges();
+                        // Commits if works
                         dbTransaction.Commit();
-                        return true;
+                        // Inform other layer that it succeeded
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
+                        // undo any changes if errors
                         dbTransaction.Rollback();
-                        return false;
+                        // Inform other layer about failure
+                        response.IsSuccessful = false;
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
+        /// <summary>
+        /// Checks if the username exists
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(string) via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessfull = true if name exits in database
+        /// IsSuccessfull = false if name exits in database
+        /// </returns>
+        public ResponseDTO<Boolean> DoesUserNameExists(UserManagementDTO obj)
+        {
+            var foundUserName = (from credentials in db.Credentials
+                                 where credentials.UserName == obj.UserName
+                                 select credentials.UserName);
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
 
-        public void DeleteUser(UserManagementDTO obj)
-        {
-            // Not Implementing according to Business Requirements Document
-        }
-
-        public Boolean DoesUserNameExists(UserManagementDTO obj)
-        {
-            // Searches through database if username matches with any usernames already in db
-            string foundUserName = (from credentials in db.Credentials
-                                    where credentials.UserName == obj.UserName
-                                    select credentials.UserName).FirstOrDefault();
-            // Sees if there is a username found
-            if (foundUserName == obj.UserName)
-                // Returns false if username does not exists in database
-                return true;
-            else
-                // Return true if username does exists in database
-                return false;
-        }
-        public Boolean EditFirstName(UserManagementDTO obj)
-        {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            if (foundUserName == null)
             {
-                var foundCredentials = (from u in db.Credentials
-                                        where u.UserName == obj.UserName
-                                        select u).FirstOrDefault();
-                if (foundCredentials != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User was not found." };
+                return response;
+            }
+            else
+            {
+                response.IsSuccessful = true;
+                return response;
+            }
+        }
+        /// <summary>
+        /// Edits the First Name of a user
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String) via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessful - True if successfully edited
+        /// IsSuccessful - False if failed to edited
+        /// </returns>
+        public ResponseDTO<Boolean> EditFirstName(UserManagementDTO obj)
+        {
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            var foundCredentials = (from credentials in db.Credentials
+                                    where credentials.UserName == obj.UserName
+                                    select credentials).FirstOrDefault();
+            if (foundCredentials == null)
+            {
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                var foundUser = (from user in db.UserProfiles
+                                 where user.UserID == foundCredentials.UserID
+                                 select user).FirstOrDefault();
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
-                    var foundUser = (from user in db.Users
-                                     where user.UserID == foundCredentials.UserID
-                                     select user).FirstOrDefault();
                     try
                     {
                         foundUser.FirstName = obj.FirstName;
-                        Save();
+                        db.SaveChanges();
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "An error occured while editing First Name" };
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-        public Boolean EditLastname(UserManagementDTO obj)
+        /// <summary>
+        /// Edits the Last Name of a user
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String) via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessful - True if successfully edited
+        /// IsSuccessful - False if failed to edited
+        /// </returns>
+        public ResponseDTO<Boolean> EditLastname(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            var foundCredentials = (from credentials in db.Credentials
+                                    where credentials.UserName == obj.UserName
+                                    select credentials).FirstOrDefault();
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            if (foundCredentials == null)
             {
-                var foundCredentials = (from u in db.Credentials
-                                        where u.UserName == obj.UserName
-                                        select u).FirstOrDefault();
-                if (foundCredentials != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                var foundUser = (from user in db.UserProfiles
+                                 where user.UserID == foundCredentials.UserID
+                                 select user).FirstOrDefault();
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
-                    var foundUser = (from user in db.Users
-                                     where user.UserID == foundCredentials.UserID
-                                     select user).FirstOrDefault();
                     try
                     {
                         foundUser.LastName = obj.LastName;
-                        Save();
+                        db.SaveChanges();
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "An error occured while editing Last Name" };
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-        public Boolean EditPassword(UserManagementDTO obj)
+        /// <summary>
+        /// Edits the Password of a user
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String) and Password(string) via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessful - True if successfully edited
+        /// IsSuccessful - False if failed to edited
+        /// </returns>
+        public ResponseDTO<Boolean> EditPassword(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+
+            var foundCredentials = (from u in db.Credentials
+                                    where u.UserName == obj.UserName
+                                    select u).FirstOrDefault();
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            if (foundCredentials == null)
             {
-                var foundCredentials = (from u in db.Credentials
-                                        where u.UserName == obj.UserName
-                                        select u).FirstOrDefault();
-                if (foundCredentials != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
                     try
                     {
                         foundCredentials.Password = obj.Password;
-                        Save();
+                        db.SaveChanges();
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.Messages = new List<string> { "An error occured while editing Password." };
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-        public Boolean EditLocation(UserManagementDTO obj)
+        /// <summary>
+        /// Edits the Location of a user
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String) and Location data via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessful - True if successfully edited
+        /// IsSuccessful - False if failed to edited
+        /// </returns>
+        public ResponseDTO<Boolean> EditLocation(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            var foundUser = (from u in db.Credentials
+                             join y in db.UserProfiles
+       on u.UserID equals y.UserID
+                             where u.UserName == obj.UserName
+                             select y).FirstOrDefault();
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            if (foundUser == null)
             {
-                var foundCredentials = (from u in db.Credentials
-                                        where u.UserName == obj.UserName
-                                        select u).FirstOrDefault();
-                if (foundCredentials != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                var foundlocation = (from location in db.Locations
+                                     where location.LocationID == foundUser.LocationID
+                                     select location).FirstOrDefault();
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
-                    var foundlocation = (from location in db.Locations
-                                         where location.UserID == foundCredentials.UserID
-                                         select location).FirstOrDefault();
                     try
                     {
                         foundlocation.Address = obj.Address;
@@ -279,141 +467,215 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         foundlocation.State = obj.State;
                         foundlocation.Zipcode = obj.Zipcode;
                         foundlocation.Address = obj.Address;
-                        Save();
+                        db.SaveChanges();
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.Messages = new List<string> { "An error occured while editing Location." };
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-        public Boolean EditSkillLevel(UserManagementDTO obj)
+        /// <summary>
+        /// Edits the skill level of a user
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String) via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessful - True if successfully edited
+        /// IsSuccessful - False if failed to edited
+        /// </returns>
+        public ResponseDTO<Boolean> EditSkillLevel(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            // Searching by UserName
+            var foundCredentials = (from credentials in db.Credentials
+                                    where credentials.UserName == obj.UserName
+                                    select credentials).FirstOrDefault();
+            // Creating Response DTO
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            if (foundCredentials == null)
             {
-                var foundCredentials = (from u in db.Credentials
-                                        where u.UserName == obj.UserName
-                                        select u).FirstOrDefault();
-                if (foundCredentials != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                var foundUser = (from user in db.UserProfiles
+                                 where user.UserID == foundCredentials.UserID
+                                 select user).FirstOrDefault();
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
-                    var foundUser = (from user in db.Users
-                                     where user.UserID == foundCredentials.UserID
-                                     select user).FirstOrDefault();
                     try
                     {
                         foundUser.SkillLevel = obj.SkillLevel;
-                        Save();
+                        db.SaveChanges();
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "An error occured while editing skill level" };
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-        public Boolean EditGender(UserManagementDTO obj)
+        /// <summary>
+        /// Edits the gender of a user
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String) and Gender(String) via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessful - True if successfully edited
+        /// IsSuccessful - False if failed to edited
+        /// </returns>
+        public ResponseDTO<Boolean> EditGender(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            // Searching by UserName
+            var foundCredentials = (from credentials in db.Credentials
+                                    where credentials.UserName == obj.UserName
+                                    select credentials).FirstOrDefault();
+            // Creating Response DTO
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            if (foundCredentials == null)
             {
-                var foundCredentials = (from u in db.Credentials
-                                        where u.UserName == obj.UserName
-                                        select u).FirstOrDefault();
-                if (foundCredentials != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                var foundUser = (from user in db.UserProfiles
+                                 where user.UserID == foundCredentials.UserID
+                                 select user).FirstOrDefault();
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
-                    var foundUser = (from user in db.Users
-                                     where user.UserID == foundCredentials.UserID
-                                     select user).FirstOrDefault();
                     try
                     {
                         foundUser.Gender = obj.Gender;
-                        Save();
+                        db.SaveChanges();
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "An error occured while editing gender." };
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-        public Boolean EditProfilePicture(UserManagementDTO obj)
+        /// <summary>
+        /// Edits the Profile picture of a user
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String) and Profile picture via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessful - True if successfully edited
+        /// IsSuccessful - False if failed to edited
+        /// </returns>
+        public ResponseDTO<Boolean> EditProfilePicture(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            // Searching by UserName
+            var foundCredentials = (from credentials in db.Credentials
+                                    where credentials.UserName == obj.UserName
+                                    select credentials).FirstOrDefault();
+            // Creating Response DTO
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            if (foundCredentials == null)
             {
-                var foundCredentials = (from u in db.Credentials
-                                        where u.UserName == obj.UserName
-                                        select u).FirstOrDefault();
-                if (foundCredentials != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                var foundUser = (from user in db.UserProfiles
+                                 where user.UserID == foundCredentials.UserID
+                                 select user).FirstOrDefault();
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
-                    var foundUser = (from user in db.Users
-                                     where user.UserID == foundCredentials.UserID
-                                     select user).FirstOrDefault();
                     try
                     {
                         foundUser.ProfilePicture = obj.ProfilePicture;
-                        Save();
+                        db.SaveChanges();
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "An error occured while editing Profile Picture." };
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-        public Boolean EditDescription(UserManagementDTO obj)
+        /// <summary>
+        /// Edits the description of a user
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String) via UserManagementDTO
+        /// </param>
+        /// <returns>
+        /// IsSuccessful - True if successfully edited
+        /// IsSuccessful - False if failed to edited
+        /// </returns>
+        public ResponseDTO<Boolean> EditDescription(UserManagementDTO obj)
         {
-            using (var dbTransaction = db.Database.BeginTransaction())
+            // Searching by UserName
+            var foundCredentials = (from credentials in db.Credentials
+                                    where credentials.UserName == obj.UserName
+                                    select credentials).FirstOrDefault();
+            // Creating Response DTO
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            if (foundCredentials == null)
             {
-                var foundCredentials = (from u in db.Credentials
-                                        where u.UserName == obj.UserName
-                                        select u).FirstOrDefault();
-                if (foundCredentials != null)
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                var foundUser = (from user in db.UserProfiles
+                                 where user.UserID == foundCredentials.UserID
+                                 select user).FirstOrDefault();
+                using (var dbTransaction = db.Database.BeginTransaction())
                 {
-                    var foundUser = (from user in db.Users
-                                     where user.UserID == foundCredentials.UserID
-                                     select user).FirstOrDefault();
                     try
                     {
                         foundUser.Description = obj.Description;
-                        Save();
+                        db.SaveChanges();
                         dbTransaction.Commit();
-                        return true;
+                        response.IsSuccessful = true;
+                        return response;
                     }
                     catch (Exception)
                     {
                         dbTransaction.Rollback();
-                        return false;
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "An error occured while editing description." };
+                        return response;
                     }
                 }
-                else
-                    return false;
             }
         }
-        private void Save()
-        {
-            // Saves any changes in Database
-            db.SaveChanges();
-        }
     }
-
 }
