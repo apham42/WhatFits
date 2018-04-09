@@ -74,13 +74,9 @@
     <Compile Include="Interfaces\Model Interfaces\IWeightLifting.cs" />
     <Compile Include="Interfaces\Model Interfaces\IWorkoutLog.cs" />
     <Compile Include="Interfaces\IResponseDTO.cs" />
-    <Compile Include="Migrations\AccountMigrations\201804082359476_init.cs" />
-    <Compile Include="Migrations\AccountMigrations\201804082359476_init.Designer.cs">
-      <DependentUpon>201804082359476_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\AccountMigrations\201804090013145_init1.cs" />
-    <Compile Include="Migrations\AccountMigrations\201804090013145_init1.Designer.cs">
-      <DependentUpon>201804090013145_init1.cs</DependentUpon>
+    <Compile Include="Migrations\AccountMigrations\201804092026301_init.cs" />
+    <Compile Include="Migrations\AccountMigrations\201804092026301_init.Designer.cs">
+      <DependentUpon>201804092026301_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\AccountMigrations\Configuration.cs" />
     <Compile Include="Migrations\ContentMigrations\ChatMigrations\201804090015060_init.cs" />
@@ -142,11 +138,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\AccountMigrations\201804082359476_init.resx">
-      <DependentUpon>201804082359476_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\AccountMigrations\201804090013145_init1.resx">
-      <DependentUpon>201804090013145_init1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\AccountMigrations\201804092026301_init.resx">
+      <DependentUpon>201804092026301_init.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\ContentMigrations\ChatMigrations\201804090015060_init.resx">
       <DependentUpon>201804090015060_init.cs</DependentUpon>
@@ -169,6 +162,9 @@
     <EmbeddedResource Include="Migrations\ContentMigrations\WorkoutLogMigrations\201804090027363_init.resx">
       <DependentUpon>201804090027363_init.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Migrations\MigrationsList.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

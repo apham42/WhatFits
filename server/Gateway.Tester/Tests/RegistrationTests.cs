@@ -17,7 +17,7 @@ namespace Gateway.Tester
     {
         // Creating Registration Gateway for testing
         public RegistrationGateway reg = new RegistrationGateway();
-
+        /*
         [Fact]
         public void RegisterFullUser()
         {
@@ -71,7 +71,7 @@ namespace Gateway.Tester
             ResponseDTO<Boolean> found = reg.DoesUserNameExists(usr);
             Assert.True(found.IsSuccessful);
         }
-
+        
         [Fact]
         public void DoesUserNameExistsTest()
         {
@@ -126,5 +126,6 @@ namespace Gateway.Tester
             ResponseDTO<Dictionary<int, string>> found = reg.GetSecurityQandAs(request);
             Assert.Equal(expectedDictionary, found.Data);
         }
+        */
     }
 }

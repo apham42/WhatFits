@@ -7,7 +7,6 @@ namespace Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations
     {
         public override void Up()
         {
-            
             CreateTable(
                 "dbo.Followings",
                 c => new
@@ -19,19 +18,13 @@ namespace Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations
                 .PrimaryKey(t => t.FollowingID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID);
-            
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.Followings", "UserID", "dbo.UserProfiles");
-            
-            
+            DropForeignKey("dbo.Followings", "UserID", "dbo.UserProfiles");   
             DropIndex("dbo.Followings", new[] { "UserID" });
-            
             DropTable("dbo.Followings");
-            
         }
     }
 }
