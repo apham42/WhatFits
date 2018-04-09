@@ -104,7 +104,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         SkillLevel = obj.SkillLevel,
                         Type = obj.Type
                     };
-                    db.Users.Add(user);
+                    db.UserProfiles.Add(user);
                     db.SaveChanges();
 
                     // Creating new Salt
@@ -135,7 +135,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     foreach (var account in obj.Answers)
                     {
                         SecurityAccount temp = new SecurityAccount { UserID = newUserID, SecurityQuestionID = account.Key, Answer = account.Value };
-                        db.SecurityQandA.Add(temp);
+                        db.SecurityAccounts.Add(temp);
 
                     }
                     //db.SaveChanges();
@@ -175,7 +175,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             // Find User based off UserName
             // NOTE: Does this even work??? -ROB
             var foundUser = (from u in db.Credentials
-                             join y in db.Users
+                             join y in db.UserProfiles
                              on u.UserID equals y.UserID
                              where u.UserName == obj.UserName
                              select y).FirstOrDefault();
@@ -224,7 +224,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             // Find User based off UserName
             // NOTE: Does this even work??? -ROB
             var foundUser = (from u in db.Credentials
-                             join y in db.Users
+                             join y in db.UserProfiles
                                 on u.UserID equals y.UserID
                              where u.UserName == obj.UserName
                              select y).FirstOrDefault();
@@ -315,7 +315,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
             else
             {
-                var foundUser = (from user in db.Users
+                var foundUser = (from user in db.UserProfiles
                                  where user.UserID == foundCredentials.UserID
                                  select user).FirstOrDefault();
                 using (var dbTransaction = db.Database.BeginTransaction())
@@ -362,7 +362,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
             else
             {
-                var foundUser = (from user in db.Users
+                var foundUser = (from user in db.UserProfiles
                                  where user.UserID == foundCredentials.UserID
                                  select user).FirstOrDefault();
                 using (var dbTransaction = db.Database.BeginTransaction())
@@ -442,7 +442,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         public ResponseDTO<Boolean> EditLocation(UserManagementDTO obj)
         {
             var foundUser = (from u in db.Credentials
-                             join y in db.Users
+                             join y in db.UserProfiles
        on u.UserID equals y.UserID
                              where u.UserName == obj.UserName
                              select y).FirstOrDefault();
@@ -507,7 +507,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
             else
             {
-                var foundUser = (from user in db.Users
+                var foundUser = (from user in db.UserProfiles
                                  where user.UserID == foundCredentials.UserID
                                  select user).FirstOrDefault();
                 using (var dbTransaction = db.Database.BeginTransaction())
@@ -556,7 +556,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
             else
             {
-                var foundUser = (from user in db.Users
+                var foundUser = (from user in db.UserProfiles
                                  where user.UserID == foundCredentials.UserID
                                  select user).FirstOrDefault();
                 using (var dbTransaction = db.Database.BeginTransaction())
@@ -605,7 +605,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
             else
             {
-                var foundUser = (from user in db.Users
+                var foundUser = (from user in db.UserProfiles
                                  where user.UserID == foundCredentials.UserID
                                  select user).FirstOrDefault();
                 using (var dbTransaction = db.Database.BeginTransaction())
@@ -654,7 +654,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
             else
             {
-                var foundUser = (from user in db.Users
+                var foundUser = (from user in db.UserProfiles
                                  where user.UserID == foundCredentials.UserID
                                  select user).FirstOrDefault();
                 using (var dbTransaction = db.Database.BeginTransaction())

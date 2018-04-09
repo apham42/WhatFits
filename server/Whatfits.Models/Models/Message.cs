@@ -14,6 +14,9 @@ namespace Whatfits.Models.Models
         [Key]
         public int MessageID { get; set; }
 
+        // Receiver
+        public string UserName { get; set; }
+
         // Stores the message sent by user
         [Required]
         public string MessageContent { get; set; }

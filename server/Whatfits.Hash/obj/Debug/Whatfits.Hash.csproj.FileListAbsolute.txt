@@ -18,3 +18,9 @@ C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csproj.CoreCompileInputs.cache
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll.config
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Hash\bin\Debug\Whatfits.Hash.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csproj.CoreCompileInputs.cache
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.pdb

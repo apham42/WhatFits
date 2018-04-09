@@ -92,7 +92,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                             SecurityQuestionID = secQuesID,
                             Answer = dto.Answers[answerCounter]
                          };
-                        db.SecurityQandA.Add(userQandA);
+                        db.SecurityAccounts.Add(userQandA);
                         db.SaveChanges();
                         answerCounter++;
                     }
@@ -104,7 +104,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         LocationID = locationID,
                         Type = dto.Type
                     };
-                    db.Users.Add(userInfo);
+                    db.UserProfiles.Add(userInfo);
                     db.SaveChanges();
 
                     // Adding each claims

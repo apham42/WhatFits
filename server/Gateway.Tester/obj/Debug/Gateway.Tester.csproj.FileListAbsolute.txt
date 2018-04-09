@@ -81,3 +81,7 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csprojResolveAssemblyReference.cache
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csproj.CoreCompileInputs.cache
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.pdb
