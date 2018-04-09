@@ -31,6 +31,7 @@ namespace server.Controllers
             }    
             return Ok("Success: "+obj.UserName +"'s account was "+obj.Type+"d.");
         }
+
         [HttpPost]
         //[Route("temp/so")]
         public IHttpActionResult TestPost(UserManagementDTO obj)

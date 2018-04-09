@@ -56,9 +56,12 @@
     <Compile Include="DTOs\ContentDTOs\SearchDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\WorkoutLogDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\LoginDTO.cs" />
-    <Compile Include="DTOs\CoreDTOs\RegistrationDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\RegGatewayDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\SecurityQuestionResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UserAccessDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UserManagementDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\UsernameDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\UsernameResponseDTO.cs" />
     <Compile Include="DTOs\ResponseDTO.cs" />
     <Compile Include="GatewayInterfaces\IDataGateway.cs" />
     <Compile Include="Gateways\ContentGateways\ChatGateway.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Gateways\CoreGateways\RegistrationGateway.cs" />
     <Compile Include="Gateways\CoreGateways\UserAccessControlGateway.cs" />
     <Compile Include="Gateways\CoreGateways\UserManagementGateway.cs" />
+    <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

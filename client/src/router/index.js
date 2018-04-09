@@ -1,9 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Vuelidate from 'vuelidate'
-import Terms from '@/components/Terms'
+// import Terms from '@/components/Terms'
 
-Vue.component('Terms', Terms)
 Vue.use(Router)
 Vue.use(Vuelidate)
 

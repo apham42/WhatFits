@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    public interface INetworkCommunication: IRequest
+    public interface INetworkCommunication<ResponseDTO, RequestDTO>
     {
-        
+        Task<ResponseDTO> Request(RequestDTO req);
     }
 }

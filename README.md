@@ -8,15 +8,24 @@ A fitness social media web application. It helps like minded individuals to conn
 
 Follow the README.md on the server and client folder for instructions for each.
 
+* client
+  * This directory contains a Vue project for the client side of the project.
+
+* server
+  * This directory constains a Web API project used for the server side of this project.
+
 ## Release History
 
 * 0.0.1
-    * Work in progress
+    * Base deployment of Homepage, Registration, Login, and UserProfile
 
 ## Built With
 
 * [Visual Studio Community 2017](https://www.visualstudio.com/downloads/) - used for backend development
 * [Visual Studio Code](https://code.visualstudio.com/) - Used for frontend development
+
+## Frameworks
+
 * [Vue.js](https://vuejs.org/) - Frontend JavaScript framework used
 * [Bulma](https://bulma.io/) - Frontend CSS framework used
 * [ASP.NET 4.6.1](https://www.microsoft.com/en-us/download/details.aspx?id=49981) - Backend Framework used
@@ -40,5 +49,5 @@ See also the list of [contributors](https://github.com/apham42/WhatFits/graphs/c
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-* TO BE ADDED
+* To be included by first deployment
 

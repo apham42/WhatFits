@@ -115,17 +115,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dist\index.html" />
-    <Content Include="dist\static\css\app.c4c09502dae3d0f1c929d166d9f878ba.css" />
-    <Content Include="dist\static\img\404NatureBackground.9f573ce.jpg" />
-    <Content Include="dist\static\js\0.3ea6606b6c5433f7155c.js" />
-    <Content Include="dist\static\js\1.cdeba41beb9c7352117f.js" />
-    <Content Include="dist\static\js\2.f0502c8c419b01f745e6.js" />
-    <Content Include="dist\static\js\3.2d4bda108555d096eb60.js" />
-    <Content Include="dist\static\js\4.ca73cb37029ad5ba04ac.js" />
-    <Content Include="dist\static\js\app.68de60a20ad1cb5cbd52.js" />
-    <Content Include="dist\static\js\manifest.4fbbbc79485f56e0a54d.js" />
-    <Content Include="dist\static\js\vendor.cfc4c1d0ad2bb53c3c77.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -134,49 +123,52 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Constants\AccountConstants.cs" />
+    <Compile Include="Constants\LocationConstants.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
     <Compile Include="Controllers\UACTESTController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Interfaces\ICreation.cs" />
+    <Compile Include="Interfaces\IDataAdapter.cs" />
     <Compile Include="Interfaces\IDeletion.cs" />
+    <Compile Include="Interfaces\IGeoCoordinates.cs" />
+    <Compile Include="Interfaces\ILocation.cs" />
     <Compile Include="Interfaces\INetworkCommunication.cs" />
     <Compile Include="Interfaces\IRequest.cs" />
     <Compile Include="Interfaces\IRetrieval.cs" />
     <Compile Include="Interfaces\IRevision.cs" />
     <Compile Include="Interfaces\IValidation.cs" />
+    <Compile Include="Model\Account\RegInfo.cs" />
     <Compile Include="Model\Account\SecurityQuestion.cs" />
-    <Compile Include="Model\Account\UserCredInfo.cs" />
-    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoDTO.cs" />
+    <Compile Include="Model\Account\UserCredential.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
-    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredResponseDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IResponseDTO.cs" />
-    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UsernameDTO.cs" />
-    <Compile Include="Model\Address\Location.cs" />
+    <Compile Include="Model\Data Transfer Objects\Network Communication DTO%27s\NetworkLocationDTO.cs" />
+    <Compile Include="Model\Data Transfer Objects\Network Communication DTO%27s\NetworkLocationResponseDTO.cs" />
+    <Compile Include="Model\Location\Geocode.cs" />
+    <Compile Include="Model\Location\Address.cs" />
     <Compile Include="Model\Data Transfer Objects\ReviewDTO%27s\ReviewResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\ReviewDTO%27s\ReviewDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\UserManagementDTO%27s\ResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\UserManagementDTO%27s\UserManagementDTO.cs" />
-    <Compile Include="Model\Validators\UserCredentialValidator.cs" />
+    <Compile Include="Model\Location\WebAPIGeocode.cs" />
+    <Compile Include="Model\Network Communication\MapDataAdapter.cs" />
+    <Compile Include="Model\Network Communication\MapWebAPIComm.cs" />
+    <Compile Include="Model\Validators\Account Validator\RegInfoValidator.cs" />
+    <Compile Include="Model\Validators\Account Validator\SecurityQuestionValidator.cs" />
+    <Compile Include="Model\Validators\Account Validator\UserCredValidator.cs" />
+    <Compile Include="Model\Validators\Location Validator\LocationValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\UserManagementService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dist\static\css\app.c4c09502dae3d0f1c929d166d9f878ba.css.map" />
-    <Content Include="dist\static\js\0.3ea6606b6c5433f7155c.js.map" />
-    <Content Include="dist\static\js\1.cdeba41beb9c7352117f.js.map" />
-    <Content Include="dist\static\js\2.f0502c8c419b01f745e6.js.map" />
-    <Content Include="dist\static\js\3.2d4bda108555d096eb60.js.map" />
-    <Content Include="dist\static\js\4.ca73cb37029ad5ba04ac.js.map" />
-    <Content Include="dist\static\js\app.68de60a20ad1cb5cbd52.js.map" />
-    <Content Include="dist\static\js\manifest.4fbbbc79485f56e0a54d.js.map" />
-    <Content Include="dist\static\js\vendor.cfc4c1d0ad2bb53c3c77.js.map" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">

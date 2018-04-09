@@ -25,7 +25,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
                 new Review() { ReviewID = 4, UserID = 1, RevieweeID = 5, Rating = 3, ReviewMessage = "User was great", DateAndTime = new DateTime(2018, 03, 25) },
                 new Review() { ReviewID = 5, UserID = 4, RevieweeID = 5, Rating = 5, ReviewMessage = "User was great", DateAndTime = new DateTime(2017, 03, 15) }
             };
-            context.Review.AddOrUpdate(reviews => reviews.ReviewID,sampleReviews.ToArray());
+            context.Review.AddOrUpdate(reviews => reviews.ReviewID, sampleReviews.ToArray());
             context.SaveChanges();
         }
     }
