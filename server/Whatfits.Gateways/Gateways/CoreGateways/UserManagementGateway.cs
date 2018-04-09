@@ -17,9 +17,11 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     {
         private AccountContext db = new AccountContext();
         /// <summary>
-        /// 
+        /// Registers a full user
         /// </summary>
-        /// <param name="obj"></param>
+        /// <param name="obj">
+        /// 
+        /// </param>
         /// <returns></returns>
         public ResponseDTO<Boolean> RegisterFullUser(UserManagementDTO obj)
         {
@@ -63,6 +65,15 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// Continues the registration process for users who partially registered from 
         /// the homepage or SSO when they login for first time.
         /// </summary>
+        /// <param name="obj">
+        /// Address(String),City(String),State(String),Zipcode(String),Latitude(String),
+        /// Longitude(String),FirstName(String), LastName(String), Email(String), Gender(String),
+        /// Description(String), ProfilePicture(String), SkillLevel(String), Type(String)
+        /// </param>
+        /// <returns>
+        /// True - If successfully inserted into models
+        /// False - An error occured inserting into models
+        /// </returns>
         public ResponseDTO<Boolean> ContinueRegistration(UserManagementDTO obj)
         {
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
@@ -121,16 +132,6 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         db.UserClaims.Add(temp);
 
                     }
-
-                    // Add UserClaims
-                    /*
-                    for (int i = 0; i < obj.UserClaims.Count; i++)
-                    {
-                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType= obj.UserClaims[i].Value, ClaimValue=obj.UserClaims[i].Value };
-                        db.UserClaims.Add(temp);
-                    }
-                    */
-                    //db.SaveChanges();
                     // Add Security QandAs
                     foreach (var account in obj.Answers)
                     {
@@ -138,15 +139,6 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         db.SecurityAccounts.Add(temp);
 
                     }
-                    //db.SaveChanges();
-                    /*
-                    for (int i = 0; i < obj.QuestionIDs.Count; i++)
-                    {
-                        SecurityAccount temp = new SecurityAccount { UserID = newUserID, SecurityQuestionID = obj.QuestionIDs[i], Answer = obj.Answers[i] };
-                        db.SecurityQandA.Add(temp);
-                        db.SaveChanges();
-                    }
-                    */
                     // Commits changes in database
                     db.SaveChanges();
                     dbTransaction.Commit();
@@ -165,15 +157,18 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
         }
         /// <summary>
-        /// 
+        /// Disables a user
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">
+        /// UserName(String)
+        /// </param>
+        /// <returns>
+        /// True - Successfully disable a user
+        /// False - Disabling user was unsuccessful
+        /// </returns>
         public ResponseDTO<Boolean> DisableUser(UserManagementDTO obj)
         {
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            // Find User based off UserName
-            // NOTE: Does this even work??? -ROB
             var foundUser = (from u in db.Credentials
                              join y in db.UserProfiles
                              on u.UserID equals y.UserID
@@ -214,15 +209,19 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
         }
         /// <summary>
-        /// 
+        /// Enables a user
         /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
+        /// <param name="obj">
+        /// UserName(String)
+        /// </param>
+        /// <returns>
+        /// True - Successfully enable a user
+        /// False - Ennabling user was unsuccessful
+        /// </returns>
         public ResponseDTO<Boolean> EnableUser(UserManagementDTO obj)
         {
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            // Find User based off UserName
-            // NOTE: Does this even work??? -ROB
+
             var foundUser = (from u in db.Credentials
                              join y in db.UserProfiles
                                 on u.UserID equals y.UserID
@@ -627,6 +626,70 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     }
                 }
             }
+        }
+        /// <summary>
+        /// Deletes every entry of a user throughout the database.
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String)
+        /// </param>
+        /// <returns>
+        /// True - Deletion of user was successful
+        /// False - Deletion was not successful
+        /// </returns>
+        public ResponseDTO<Boolean> DeleteUser(UserManagementDTO obj)
+        {
+            // Creating Response DTO
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            // Find the user to be deleted
+            var foundCredentials = (from credentials in db.Credentials
+                                    where credentials.UserName == obj.UserName
+                                    select credentials).FirstOrDefault();
+            if (foundCredentials == null)
+            {
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                // Deleting UserClaims
+                var foundUserClaims = (from userClaims in db.UserClaims
+                                       where userClaims.UserID == foundCredentials.UserID
+                                       select userClaims);
+                // Deletes each UserClaim from user
+                foreach (var userClaim in foundUserClaims)
+                {
+                    db.UserClaims.Remove(userClaim);
+                }
+                //db.SaveChanges();
+                // Deleting Salt
+                var foundSalt = (from salts in db.Salts
+                                 where salts.UserID == foundCredentials.UserID
+                                 select salts).First();
+                db.Salts.Remove(foundSalt);
+                // Deleting Security Answers
+                var foundAnswers = (from answers in db.SecurityAccounts
+                                    where answers.UserID == foundCredentials.UserID
+                                    select answers);
+                foreach(var answer in foundAnswers)
+                {
+                    db.SecurityAccounts.Remove(answer);
+                }
+                // Delete Location
+                // NOTE: I don't think we should delete locations because others might share
+                // the same location with others. -ROB
+
+                // Delete UserProfile
+                var foundProfile = (from profiles in db.UserProfiles
+                                    where profiles.UserID == foundCredentials.UserID
+                                    select profiles).First();
+                db.UserProfiles.Remove(foundProfile);
+                // Delete Credential Table
+                db.Credentials.Remove(foundCredentials);
+                db.SaveChanges();
+            }
+            return response;
         }
         /// <summary>
         /// Edits the description of a user
