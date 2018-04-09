@@ -115,6 +115,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dist\index.html" />
+    <Content Include="dist\static\css\app.c4c09502dae3d0f1c929d166d9f878ba.css" />
+    <Content Include="dist\static\img\404NatureBackground.9f573ce.jpg" />
+    <Content Include="dist\static\js\0.3ea6606b6c5433f7155c.js" />
+    <Content Include="dist\static\js\1.cdeba41beb9c7352117f.js" />
+    <Content Include="dist\static\js\2.f0502c8c419b01f745e6.js" />
+    <Content Include="dist\static\js\3.2d4bda108555d096eb60.js" />
+    <Content Include="dist\static\js\4.ca73cb37029ad5ba04ac.js" />
+    <Content Include="dist\static\js\app.68de60a20ad1cb5cbd52.js" />
+    <Content Include="dist\static\js\manifest.4fbbbc79485f56e0a54d.js" />
+    <Content Include="dist\static\js\vendor.cfc4c1d0ad2bb53c3c77.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -157,7 +168,17 @@
     <Compile Include="Services\UserManagementService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="dist\static\css\app.c4c09502dae3d0f1c929d166d9f878ba.css.map" />
+    <Content Include="dist\static\js\0.3ea6606b6c5433f7155c.js.map" />
+    <Content Include="dist\static\js\1.cdeba41beb9c7352117f.js.map" />
+    <Content Include="dist\static\js\2.f0502c8c419b01f745e6.js.map" />
+    <Content Include="dist\static\js\3.2d4bda108555d096eb60.js.map" />
+    <Content Include="dist\static\js\4.ca73cb37029ad5ba04ac.js.map" />
+    <Content Include="dist\static\js\app.68de60a20ad1cb5cbd52.js.map" />
+    <Content Include="dist\static\js\manifest.4fbbbc79485f56e0a54d.js.map" />
+    <Content Include="dist\static\js\vendor.cfc4c1d0ad2bb53c3c77.js.map" />
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,10 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Vuelidate from 'vuelidate'
-// import Home from '@/components/Home'
-// import Chat from '@/components/Chat'
-// import Test from '@/components/Test'
-// import Registration from '@/components/Registration'
 import Terms from '@/components/Terms'
 
 Vue.component('Terms', Terms)
@@ -18,21 +14,18 @@ export default new Router({
       // HomePage
       path: '/',
       name: 'Home',
-      // component: Home
       component: () => import('@/components/Home')
     },
     {
       // Registration Page
-      path: '/SignUp',
+      path: '/signup',
       name: 'Registration',
-      // component: Registration
       component: () => import('@/components/Registration')
     },
     {
       // Chat Page
-      path: '/Chat',
+      path: '/chat',
       name: 'Chat',
-      // component: Chat
       component: () => import('@/components/Chat')
     },
     {
@@ -42,11 +35,10 @@ export default new Router({
       component: () => import('@/components/UserManagement/UserManagement')
     },
     {
-      // ????? -Rob
-      path: '/Test',
-      name: 'Test',
-      // component: Test
-      component: () => import('@/components/Test')
+      // UserProfile Page
+      path: '/profile',
+      name: 'UserProfile',
+      component: () => import('@/components/UserProfile/ProfilePage')
     },
     {
       // Catch All Error Page

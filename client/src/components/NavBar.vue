@@ -20,8 +20,11 @@ export default {
     'MainNavBar': MainNavBar
   },
   computed: {
+  },
+  methods: {
   }
 }
+
 </script>
 
 <style>
