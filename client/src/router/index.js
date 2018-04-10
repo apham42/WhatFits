@@ -34,6 +34,16 @@ export default new Router({
       component: () => import('@/components/UserManagement/UserManagement')
     },
     {
+      path: '/Review',
+      name: 'Review',
+      component: () => import('@/components/Review')
+    },
+    {
+      path: '/GetUserReview',
+      name: 'GetUserReview',
+      component: () => import('@/components/GetUserReview')
+    },
+    {
       // UserProfile Page
       path: '/profile',
       name: 'UserProfile',

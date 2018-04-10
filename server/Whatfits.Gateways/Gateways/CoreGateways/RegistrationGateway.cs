@@ -82,7 +82,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     // Saving Security Question and user's Answers
                     foreach (string question in dto.Questions)
                     {
-                        
+
                         int secQuesID = (from x in db.SecurityQuestions
                                          where x.Question == question
                                          select x.SecurityQuestionID).FirstOrDefault();
@@ -91,7 +91,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                             UserID = userID,
                             SecurityQuestionID = secQuesID,
                             Answer = dto.Answers[answerCounter]
-                         };
+                        };
                         db.SecurityAccounts.Add(userQandA);
                         db.SaveChanges();
                         answerCounter++;
@@ -108,7 +108,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     db.SaveChanges();
 
                     // Adding each claims
-                    foreach (Claim userclaim  in dto.UserClaims)
+                    foreach (Claim userclaim in dto.UserClaims)
                     {
                         UserClaims claim = new UserClaims()
                         {
