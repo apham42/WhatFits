@@ -2,7 +2,7 @@
   <div class="review">
     <form>
       <ul class="list">
-        <li v-for="star in maxRating" :class="{ 'active': star <= Rating }" @click="rate(star)" class="star">
+        <li v-for="star in maxRating" :key="star" :class="{ 'active': star <= Rating }" @click="rate(star)" class="star">
           <icon scale="2" :name="star <= Rating ? 'star' : 'star-o'" />
         </li>
         <span v-if="hasCounter">{{ Rating }} of {{ maxRating }}</span>
@@ -11,9 +11,10 @@
         <br />
         <textarea v-model="ReviewMessage" class="form-control" placeholder="Input Review"></textarea>
       </div>
-      <input type="number" id="UserID" size="8" placeholder="UserID" />
-      <input type="number" id="RevieweeID" size="8" placeholder="RevieweeID" />
-      <input type="number" id="ReviewID" size="8" placeholder="ReviewID"/>
+      <label for="UserID">UserID</label>
+      <input v-model="UserID" placeholder="'1'"/>
+      <label for="RevieweeID">RevieweeID</label>
+      <input v-model="RevieweeID" placeholder="'1'" />
       <button type="submit" @click="input">Submit</button>
     </form>
   </div>
@@ -43,8 +44,7 @@ export default {
       ReviewMessage: '',
       UserID: '',
       RevieweeID: '',
-      DateAndTime: new Date().toLocaleDateString(),
-      ReviewID: ''
+      DateAndTime: new Date().toLocaleDateString()
     }
   },
   methods: {
@@ -59,17 +59,20 @@ export default {
         method: 'POST',
         url: 'http://localhost/server/Review/CreateReview',
         data: {
-          Rating: this.$data.Rating,
-          ReviewMessage: this.$data.ReviewMessage,
-          UserID: this.$data.UserID,
-          RevieweeID: this.$data.RevieeID,
-          DateAndTime: this.$data.DateAndTime,
-          ReviewID: this.$data.ReviewID
+          Rating: this.Rating,
+          ReviewMessage: this.ReviewMessage,
+          UserID: this.UserID,
+          RevieweeID: this.RevieweeID,
+          DateAndTime: this.DateAndTime
         },
         headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json'
         }
+      }).then(response => {
+        console.log(response)
+      }).catch((error) => {
+        console.log(error.response)
       })
     }
   }
@@ -90,7 +93,7 @@ export default {
       {
         .star
           {
-            color: $active-color;
+            color: #FAFF5C;
           }
       }
   }
@@ -109,7 +112,7 @@ export default {
         }
   }
   .active {
-    color: $active-color;
+    color: #FAFF5C;
   }
   textarea {
     width: 500px;
