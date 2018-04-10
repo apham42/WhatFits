@@ -220,5 +220,66 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             return response;
 
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public ResponseDTO<Dictionary<int, string>> GetSecurityQandAs(RegistrationDTO obj)
+        {
+            var foundUser = (from credential in db.Credentials
+                             where credential.UserName == obj.UserName
+                             select credential).FirstOrDefault();
+            ResponseDTO<Dictionary<int, string>> response = new ResponseDTO<Dictionary<int, string>>();
+            if (foundUser == null)
+            {
+                response.IsSuccessful = false;
+                // Returns Response
+                return response;
+            }
+            else
+            {
+                var foudnQandA = (from answers in db.SecurityQandA
+                                  where answers.UserID == foundUser.UserID
+                                  select answers).ToList();
+                // Passes the query into a dictionary
+                Dictionary<int, String> temp = new Dictionary<int, string>();
+                for (int i = 0; i < foudnQandA.Count(); i++)
+                {
+                    temp.Add(foudnQandA[i].SecurityQuestionID, foudnQandA[i].Answer);
+                }
+                // Creates the response
+                response.Data = temp;
+                response.IsSuccessful = true;
+                // Returns Response
+                return response;
+            }
+        }
+        /// <summary>
+        /// Gets list of SecurityQuestions from Database
+        /// </summary>
+        /// <returns>
+        /// Dictionary of Questions and QuestionIDs via LoginDTO
+        /// </returns>
+        public ResponseDTO<Dictionary<int, string>> GetSecurityQuestions()
+        {
+            var query = db.SecurityQuestions.ToList();
+            ResponseDTO<Dictionary<int, string>> response = new ResponseDTO<Dictionary<int, string>> { };
+            if (query == null)
+            {
+                response.IsSuccessful = false;
+            }
+            else
+            {
+                Dictionary<int, String> temp = new Dictionary<int, string>();
+                foreach (var question in query)
+                {
+                    temp.Add(question.SecurityQuestionID, question.Question);
+                }
+                response.Data = temp;
+                response.IsSuccessful = true;
+            }
+            return response;
+        }
     }
 }

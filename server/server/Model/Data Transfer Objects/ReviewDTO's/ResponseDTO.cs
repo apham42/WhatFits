@@ -5,9 +5,9 @@ using System.Web;
 
 namespace server.Model.Data_Transfer_Objects.ReviewDTO_s
 {
-    public class ReviewResponseDTO
+    public class ResponseDTO<T>
     {
         public List<string> Messages { get; set; }
-        public bool isSuccessful { get; set; }
+        public T isSuccessful { get; set; }
     }
 }

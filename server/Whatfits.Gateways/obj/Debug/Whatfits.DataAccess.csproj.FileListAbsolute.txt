@@ -84,3 +84,7 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Debug\What
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.pdb
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.dll
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.pdb

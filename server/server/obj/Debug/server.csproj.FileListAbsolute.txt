@@ -493,3 +493,7 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csprojRe
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.pdb
+C:\Users\George\source\repos\WhatFits9\server\server\obj\Debug\server.csprojResolveAssemblyReference.cache
+C:\Users\George\source\repos\WhatFits9\server\server\obj\Debug\server.csproj.CoreCompileInputs.cache
+C:\Users\George\source\repos\WhatFits9\server\server\obj\Debug\server.dll
+C:\Users\George\source\repos\WhatFits9\server\server\obj\Debug\server.pdb
