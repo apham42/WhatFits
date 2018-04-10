@@ -256,7 +256,7 @@ export default {
       }
       axios({
         method: 'PUT',
-        url: 'http://localhost/server/UserManagement/ChangeStatus',
+        url: 'http://localhost/server/v1/management/disable',
         data: {'UserName': this.$data.userName, 'Type': this.$data.status},
         headers: {
           'Access-Control-Allow-Origin': 'http://localhost:8081'

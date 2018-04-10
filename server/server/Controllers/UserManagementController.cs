@@ -22,7 +22,7 @@ namespace server.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("create")]
-        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "Post")]
+        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult CreateUser(UserManagementDTO obj)
         {
             return Ok("To be completed");
@@ -98,7 +98,7 @@ namespace server.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("samplePost")]
-        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "Post")]
+        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult TestPost(UserManagementDTO obj)
         {
             if (obj == null)
@@ -116,7 +116,7 @@ namespace server.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("sampleGet")]
-        [EnableCors("http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "Post")]
+        [EnableCors("http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult getTest()
         {
             return Ok( 
