@@ -1,8 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Vuelidate from 'vuelidate'
-import Review from '@/components/Review'
-import GetUserReview from '@/components/GetUserReview'
 // import Terms from '@/components/Terms'
 
 Vue.use(Router)
@@ -38,12 +36,14 @@ export default new Router({
     {
       path: '/Review',
       name: 'Review',
-      component: Review
+      component: () => import('@/components/Review')
     },
     {
       path: '/GetUserReview',
       name: 'GetUserReview',
-      component: GetUserReview
+      component: () => import('@/components/GetUserReview')
+    },
+    {
       // UserProfile Page
       path: '/profile',
       name: 'UserProfile',
