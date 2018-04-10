@@ -154,8 +154,6 @@
     <Compile Include="Model\Location\Address.cs" />
     <Compile Include="Model\Data Transfer Objects\ReviewDTO%27s\ReviewResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\ReviewDTO%27s\ReviewDTO.cs" />
-    <Compile Include="Model\Data Transfer Objects\UserManagementDTO%27s\ResponseDTO.cs" />
-    <Compile Include="Model\Data Transfer Objects\UserManagementDTO%27s\UserManagementDTO.cs" />
     <Compile Include="Model\Location\WebAPIGeocode.cs" />
     <Compile Include="Model\Network Communication\MapDataAdapter.cs" />
     <Compile Include="Model\Network Communication\MapWebAPIComm.cs" />

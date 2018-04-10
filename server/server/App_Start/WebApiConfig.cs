@@ -16,10 +16,10 @@ namespace server
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-            //
+            // Creates routing for the application
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "{controller}/{action}",
+                routeTemplate: "v1/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
                 // Commented out for ignoring tokens during develpment - Rob
                 /*,
@@ -30,7 +30,6 @@ namespace server
                         new DelegatingHandler[] { new AuthenticateHttpMessageHandler() })
                 //*/
             );
-
             // Enables cors in entire application
             config.EnableCors();
         }
