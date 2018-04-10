@@ -491,3 +491,6 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csprojRe
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\server\obj\Debug\server.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Web.Cors.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Web.Http.Cors.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Web.Http.Cors.xml
