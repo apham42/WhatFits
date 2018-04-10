@@ -16,6 +16,9 @@ namespace server
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+            // Enables cors in entire application
+            config.EnableCors();
+
             // Creates routing for the application
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
@@ -30,8 +33,6 @@ namespace server
                         new DelegatingHandler[] { new AuthenticateHttpMessageHandler() })
                 //*/
             );
-            // Enables cors in entire application
-            config.EnableCors();
         }
     }
 }
