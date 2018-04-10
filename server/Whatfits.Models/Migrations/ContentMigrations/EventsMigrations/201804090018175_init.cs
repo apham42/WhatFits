@@ -7,7 +7,6 @@ namespace Whatfits.Models.Migrations.ContentMigrations.EventsMigrations
     {
         public override void Up()
         {
-            
             CreateTable(
                 "dbo.Events",
                 c => new
@@ -25,19 +24,14 @@ namespace Whatfits.Models.Migrations.ContentMigrations.EventsMigrations
                     })
                 .PrimaryKey(t => t.EventID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
-                .Index(t => t.UserID);
-            
-            
+                .Index(t => t.UserID);   
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Events", "UserID", "dbo.UserProfiles");
-            
             DropIndex("dbo.Events", new[] { "UserID" });
-            
             DropTable("dbo.Events");
-            
         }
     }
 }

@@ -50,7 +50,7 @@ export default {
   mounted () {
     // ask for username when chat webapi gets called and request websocket connection to server
     this.onlineUser = prompt('Enter your name')
-    this.ws = new WebSocket('ws://localhost/server/chat/connect' + '?username=' + this.onlineUser)
+    this.ws = new WebSocket('ws://localhost/server/v1/chat/connect' + '?username=' + this.onlineUser)
     this.Connection()
   },
   watch: {

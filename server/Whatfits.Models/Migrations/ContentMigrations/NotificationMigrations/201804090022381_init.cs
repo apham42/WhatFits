@@ -7,7 +7,6 @@ namespace Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations
     {
         public override void Up()
         {
-            
             CreateTable(
                 "dbo.Notifications",
                 c => new
@@ -20,18 +19,13 @@ namespace Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations
                 .PrimaryKey(t => t.NotificationID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID);
-            
-            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Notifications", "UserID", "dbo.UserProfiles");
-            
             DropIndex("dbo.Notifications", new[] { "UserID" });
-            
             DropTable("dbo.Notifications");
-            
         }
     }
 }

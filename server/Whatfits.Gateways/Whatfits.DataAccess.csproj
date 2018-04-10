@@ -63,7 +63,6 @@
     <Compile Include="DTOs\CoreDTOs\UsernameDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UsernameResponseDTO.cs" />
     <Compile Include="DTOs\ResponseDTO.cs" />
-    <Compile Include="GatewayInterfaces\IDataGateway.cs" />
     <Compile Include="Gateways\ContentGateways\ChatGateway.cs" />
     <Compile Include="Gateways\ContentGateways\EventGateway.cs" />
     <Compile Include="Gateways\ContentGateways\FollowsGateway.cs" />

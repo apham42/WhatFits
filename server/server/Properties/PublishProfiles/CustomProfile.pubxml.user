@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\Users\rsanc\Downloads\WEBAPI PROJECT</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.SqlServer.dll">
+      <publishTime>03/21/2018 16:11:00</publishTime>
+    </File>
+    <File Include="bin/FluentValidation.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/FluentValidation.WebApi.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Logging.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/Microsoft.IdentityModel.Tokens.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/Microsoft.WebSockets.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/Newtonsoft.Json.dll">
+      <publishTime>03/21/2018 16:11:03</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.exe.config">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/csc.rsp">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.exe.config">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/csi.rsp">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Build.Tasks.CodeAnalysis.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.CSharp.Scripting.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.Scripting.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CodeAnalysis.VisualBasic.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.CSharp.Core.targets">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.amd64.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.DiaSymReader.Native.x86.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.VisualBasic.Core.targets">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/Microsoft.Win32.Primitives.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.AppContext.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Collections.Immutable.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Console.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.FileVersionInfo.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.Process.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Diagnostics.StackTrace.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Compression.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.DriveInfo.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.FileSystem.Primitives.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Pipes.AccessControl.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.IO.Pipes.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Reflection.Metadata.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.AccessControl.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Claims.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Algorithms.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Encoding.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.Primitives.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Cryptography.X509Certificates.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Security.Principal.Windows.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Text.Encoding.CodePages.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Threading.Thread.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.ValueTuple.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.ReaderWriter.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XmlDocument.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/System.Xml.XPath.XDocument.dll">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.exe.config">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/vbc.rsp">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/roslyn/VBCSCompiler.exe.config">
+      <publishTime>03/21/2018 16:11:02</publishTime>
+    </File>
+    <File Include="bin/server.dll">
+      <publishTime>04/08/2018 14:33:38</publishTime>
+    </File>
+    <File Include="bin/server.pdb">
+      <publishTime>04/08/2018 14:33:38</publishTime>
+    </File>
+    <File Include="bin/System.ComponentModel.Annotations.dll">
+      <publishTime>03/21/2018 16:11:03</publishTime>
+    </File>
+    <File Include="bin/System.ComponentModel.Primitives.dll">
+      <publishTime>03/21/2018 16:11:04</publishTime>
+    </File>
+    <File Include="bin/System.IdentityModel.Tokens.Jwt.dll">
+      <publishTime>03/21/2018 16:11:04</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.Formatting.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/System.Web.Cors.dll">
+      <publishTime>02/01/2018 12:15:30</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.Cors.dll">
+      <publishTime>02/01/2018 12:18:02</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/System.Web.Http.WebHost.dll">
+      <publishTime>03/21/2018 16:11:01</publishTime>
+    </File>
+    <File Include="bin/Whatfits.DataAccess.dll">
+      <publishTime>04/08/2018 13:45:36</publishTime>
+    </File>
+    <File Include="bin/Whatfits.DataAccess.dll.config">
+      <publishTime>03/21/2018 16:11:06</publishTime>
+    </File>
+    <File Include="bin/Whatfits.DataAccess.pdb">
+      <publishTime>04/08/2018 13:45:36</publishTime>
+    </File>
+    <File Include="bin/Whatfits.Hash.dll">
+      <publishTime>04/08/2018 13:45:36</publishTime>
+    </File>
+    <File Include="bin/Whatfits.Hash.dll.config">
+      <publishTime>03/21/2018 16:11:07</publishTime>
+    </File>
+    <File Include="bin/Whatfits.Hash.pdb">
+      <publishTime>04/08/2018 13:45:36</publishTime>
+    </File>
+    <File Include="bin/Whatfits.JsonWebToken.dll">
+      <publishTime>04/08/2018 13:45:37</publishTime>
+    </File>
+    <File Include="bin/Whatfits.JsonWebToken.dll.config">
+      <publishTime>03/21/2018 16:11:07</publishTime>
+    </File>
+    <File Include="bin/Whatfits.JsonWebToken.pdb">
+      <publishTime>04/08/2018 13:45:37</publishTime>
+    </File>
+    <File Include="bin/Whatfits.Models.dll">
+      <publishTime>04/08/2018 13:45:36</publishTime>
+    </File>
+    <File Include="bin/Whatfits.Models.dll.config">
+      <publishTime>03/21/2018 16:11:07</publishTime>
+    </File>
+    <File Include="bin/Whatfits.Models.pdb">
+      <publishTime>04/08/2018 13:45:36</publishTime>
+    </File>
+    <File Include="bin/Whatfits.UserAccessControl.dll">
+      <publishTime>04/08/2018 13:45:37</publishTime>
+    </File>
+    <File Include="bin/Whatfits.UserAccessControl.dll.config">
+      <publishTime>03/21/2018 16:11:08</publishTime>
+    </File>
+    <File Include="bin/Whatfits.UserAccessControl.pdb">
+      <publishTime>04/08/2018 13:45:37</publishTime>
+    </File>
+    <File Include="Dist/index.html">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/css/app.c4c09502dae3d0f1c929d166d9f878ba.css">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/css/app.c4c09502dae3d0f1c929d166d9f878ba.css.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/img/404NatureBackground.9f573ce.jpg">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/0.3ea6606b6c5433f7155c.js">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/0.3ea6606b6c5433f7155c.js.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/1.cdeba41beb9c7352117f.js">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/1.cdeba41beb9c7352117f.js.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/2.f0502c8c419b01f745e6.js">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/2.f0502c8c419b01f745e6.js.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/3.2d4bda108555d096eb60.js">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/3.2d4bda108555d096eb60.js.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/4.ca73cb37029ad5ba04ac.js">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/4.ca73cb37029ad5ba04ac.js.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/app.68de60a20ad1cb5cbd52.js">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/app.68de60a20ad1cb5cbd52.js.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/manifest.4fbbbc79485f56e0a54d.js">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/manifest.4fbbbc79485f56e0a54d.js.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/vendor.cfc4c1d0ad2bb53c3c77.js">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Dist/static/js/vendor.cfc4c1d0ad2bb53c3c77.js.map">
+      <publishTime>04/08/2018 14:21:35</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>03/21/2018 16:11:06</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/08/2018 13:45:44</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

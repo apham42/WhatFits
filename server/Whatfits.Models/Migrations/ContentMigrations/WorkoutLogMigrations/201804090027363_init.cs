@@ -33,9 +33,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations
                 .PrimaryKey(t => t.WorkoutLogID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID);
-            
-            
-            
+
             CreateTable(
                 "dbo.WeightLiftings",
                 c => new
@@ -57,13 +55,9 @@ namespace Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations
             DropForeignKey("dbo.Cardios", "WorkoutID", "dbo.WorkoutLogs");
             DropForeignKey("dbo.WeightLiftings", "WorkoutID", "dbo.WorkoutLogs");
             DropForeignKey("dbo.WorkoutLogs", "UserID", "dbo.UserProfiles");
-            
-            DropIndex("dbo.WeightLiftings", new[] { "WorkoutID" });
-            
+            DropIndex("dbo.WeightLiftings", new[] { "WorkoutID" });            
             DropIndex("dbo.WorkoutLogs", new[] { "UserID" });
-            
-            DropTable("dbo.WeightLiftings");
-            
+            DropTable("dbo.WeightLiftings");            
             DropTable("dbo.WorkoutLogs");
             DropTable("dbo.Cardios");
         }

@@ -7,7 +7,6 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ChatMigrations
     {
         public override void Up()
         {
-            
             CreateTable(
                 "dbo.Messages",
                 c => new
@@ -22,19 +21,13 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ChatMigrations
                 .PrimaryKey(t => t.MessageID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
                 .Index(t => t.UserID);
-            
-            
-            
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Messages", "UserID", "dbo.UserProfiles");
-           
             DropIndex("dbo.Messages", new[] { "UserID" });
-            
             DropTable("dbo.Messages");
-            
         }
     }
 }

@@ -54,6 +54,12 @@ C:\Users\George\source\repos\WhatFits8\server\Gateway.Tester\obj\Debug\Gateway.T
 C:\Users\George\source\repos\WhatFits8\server\Gateway.Tester\obj\Debug\Gateway.Tester.csproj.CopyComplete
 C:\Users\George\source\repos\WhatFits8\server\Gateway.Tester\obj\Debug\Gateway.Tester.dll
 C:\Users\George\source\repos\WhatFits8\server\Gateway.Tester\obj\Debug\Gateway.Tester.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csprojResolveAssemblyReference.cache
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csproj.CoreCompileInputs.cache
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.dll
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csprojResolveAssemblyReference.cache
+C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\bin\Debug\xunit.abstractions.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\bin\Debug\xunit.runner.visualstudio.testadapter.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\bin\Debug\xunit.runner.reporters.net452.dll
@@ -77,8 +83,6 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\bin\Debug\xunit.c
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\bin\Debug\xunit.execution.desktop.xml
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\bin\Debug\Whatfits.Models.pdb
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\bin\Debug\Whatfits.Models.dll.config
-C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csprojResolveAssemblyReference.cache
-C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.pdb
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Gateway.Tester\obj\Debug\Gateway.Tester.csprojResolveAssemblyReference.cache

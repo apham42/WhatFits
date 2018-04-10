@@ -7,7 +7,6 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
     {
         public override void Up()
         {
-            
             CreateTable(
                 "dbo.Reviews",
                 c => new
@@ -21,19 +20,13 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
                     })
                 .PrimaryKey(t => t.ReviewID)
                 .ForeignKey("dbo.UserProfiles", t => t.UserID, cascadeDelete: true)
-                .Index(t => t.UserID);
-            
-            
-        }
-        
+                .Index(t => t.UserID);   
+        }       
         public override void Down()
         {
             DropForeignKey("dbo.Reviews", "UserID", "dbo.UserProfiles");
-            
             DropIndex("dbo.Reviews", new[] { "UserID" });
-            
-            DropTable("dbo.Reviews");
-            
+            DropTable("dbo.Reviews");   
         }
     }
 }
