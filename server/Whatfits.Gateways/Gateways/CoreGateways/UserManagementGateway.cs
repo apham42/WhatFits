@@ -169,11 +169,11 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         public ResponseDTO<Boolean> DisableUser(UserManagementDTO obj)
         {
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            var foundUser = (from u in db.Credentials
-                             join y in db.UserProfiles
-                             on u.UserID equals y.UserID
-                             where u.UserName == obj.UserName
-                             select y).FirstOrDefault();
+            var foundUser = (from user in db.Credentials
+                             join profile in db.UserProfiles
+                                on user.UserID equals profile.UserID
+                             where user.UserName == obj.UserName
+                             select profile).FirstOrDefault();
             // Was user found?
             if (foundUser == null)
             {
@@ -222,14 +222,15 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         {
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
 
-            var foundUser = (from u in db.Credentials
-                             join y in db.UserProfiles
-                                on u.UserID equals y.UserID
-                             where u.UserName == obj.UserName
-                             select y).FirstOrDefault();
+            var foundUser = (from user in db.Credentials
+                             join profile in db.UserProfiles
+                                on user.UserID equals profile.UserID
+                             where user.UserName == obj.UserName
+                             select profile).FirstOrDefault();
             // Was user found?
             if (foundUser == null)
             {
+                // Sending error in responseDTO
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
                 return response;
@@ -273,9 +274,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// </returns>
         public ResponseDTO<Boolean> DoesUserNameExists(UserManagementDTO obj)
         {
-            var foundUserName = (from credentials in db.Credentials
-                                 where credentials.UserName == obj.UserName
-                                 select credentials.UserName);
+            var foundUserName = (from user in db.Credentials
+                                 where user.UserName == obj.UserName
+                                 select user.UserName);
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
 
             if (foundUserName == null)
@@ -303,9 +304,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         public ResponseDTO<Boolean> EditFirstName(UserManagementDTO obj)
         {
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            var foundCredentials = (from credentials in db.Credentials
-                                    where credentials.UserName == obj.UserName
-                                    select credentials).FirstOrDefault();
+            var foundCredentials = (from user in db.Credentials
+                                    where user.UserName == obj.UserName
+                                    select user).FirstOrDefault();
             if (foundCredentials == null)
             {
                 response.IsSuccessful = false;
@@ -349,9 +350,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// </returns>
         public ResponseDTO<Boolean> EditLastname(UserManagementDTO obj)
         {
-            var foundCredentials = (from credentials in db.Credentials
-                                    where credentials.UserName == obj.UserName
-                                    select credentials).FirstOrDefault();
+            var foundCredentials = (from user in db.Credentials
+                                    where user.UserName == obj.UserName
+                                    select user).FirstOrDefault();
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
             if (foundCredentials == null)
             {
@@ -397,9 +398,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         public ResponseDTO<Boolean> EditPassword(UserManagementDTO obj)
         {
 
-            var foundCredentials = (from u in db.Credentials
-                                    where u.UserName == obj.UserName
-                                    select u).FirstOrDefault();
+            var foundCredentials = (from user in db.Credentials
+                                    where user.UserName == obj.UserName
+                                    select user).FirstOrDefault();
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
             if (foundCredentials == null)
             {
@@ -627,70 +628,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 }
             }
         }
-        /// <summary>
-        /// Deletes every entry of a user throughout the database.
-        /// </summary>
-        /// <param name="obj">
-        /// UserName(String)
-        /// </param>
-        /// <returns>
-        /// True - Deletion of user was successful
-        /// False - Deletion was not successful
-        /// </returns>
-        public ResponseDTO<Boolean> DeleteUser(UserManagementDTO obj)
-        {
-            // Creating Response DTO
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            // Find the user to be deleted
-            var foundCredentials = (from credentials in db.Credentials
-                                    where credentials.UserName == obj.UserName
-                                    select credentials).FirstOrDefault();
-            if (foundCredentials == null)
-            {
-                response.IsSuccessful = false;
-                response.Messages = new List<string> { "User not found." };
-                return response;
-            }
-            else
-            {
-                // Deleting UserClaims
-                var foundUserClaims = (from userClaims in db.UserClaims
-                                       where userClaims.UserID == foundCredentials.UserID
-                                       select userClaims);
-                // Deletes each UserClaim from user
-                foreach (var userClaim in foundUserClaims)
-                {
-                    db.UserClaims.Remove(userClaim);
-                }
-                //db.SaveChanges();
-                // Deleting Salt
-                var foundSalt = (from salts in db.Salts
-                                 where salts.UserID == foundCredentials.UserID
-                                 select salts).First();
-                db.Salts.Remove(foundSalt);
-                // Deleting Security Answers
-                var foundAnswers = (from answers in db.SecurityAccounts
-                                    where answers.UserID == foundCredentials.UserID
-                                    select answers);
-                foreach(var answer in foundAnswers)
-                {
-                    db.SecurityAccounts.Remove(answer);
-                }
-                // Delete Location
-                // NOTE: I don't think we should delete locations because others might share
-                // the same location with others. -ROB
-
-                // Delete UserProfile
-                var foundProfile = (from profiles in db.UserProfiles
-                                    where profiles.UserID == foundCredentials.UserID
-                                    select profiles).First();
-                db.UserProfiles.Remove(foundProfile);
-                // Delete Credential Table
-                db.Credentials.Remove(foundCredentials);
-                db.SaveChanges();
-            }
-            return response;
-        }
+        
         /// <summary>
         /// Edits the description of a user
         /// </summary>
@@ -704,9 +642,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         public ResponseDTO<Boolean> EditDescription(UserManagementDTO obj)
         {
             // Searching by UserName
-            var foundCredentials = (from credentials in db.Credentials
-                                    where credentials.UserName == obj.UserName
-                                    select credentials).FirstOrDefault();
+            var foundCredentials = (from user in db.Credentials
+                                    where user.UserName == obj.UserName
+                                    select user).FirstOrDefault();
             // Creating Response DTO
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
             if (foundCredentials == null)
@@ -739,6 +677,88 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     }
                 }
             }
+        }
+        /// <summary>
+        /// Deletes every entry of a user throughout the database.
+        /// </summary>
+        /// <param name="obj">
+        /// UserName(String)
+        /// </param>
+        /// <returns>
+        /// True - Deletion of user was successful
+        /// False - Deletion was not successful
+        /// </returns>
+        public ResponseDTO<Boolean> DeleteUser(UserManagementDTO obj)
+        {
+            // Creating Response DTO
+            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
+            // Find the user to be deleted
+            var foundCredentials = (from credentials in db.Credentials
+                                    where credentials.UserName == obj.UserName
+                                    select credentials).FirstOrDefault();
+            // Does user exists?
+            if (foundCredentials == null)
+            {
+                // Return responseDTO with error
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else
+            {
+                // Start deleting user's data
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        // Deleting UserClaims
+                        var foundUserClaims = (from userClaims in db.UserClaims
+                                               where userClaims.UserID == foundCredentials.UserID
+                                               select userClaims);
+                        // Deletes each UserClaim from user
+                        foreach (var userClaim in foundUserClaims)
+                        {
+                            db.UserClaims.Remove(userClaim);
+                        }
+                        //db.SaveChanges();
+                        // Deleting Salt
+                        var foundSalt = (from salts in db.Salts
+                                         where salts.UserID == foundCredentials.UserID
+                                         select salts).First();
+                        db.Salts.Remove(foundSalt);
+                        // Deleting Security Answers
+                        var foundAnswers = (from answers in db.SecurityAccounts
+                                            where answers.UserID == foundCredentials.UserID
+                                            select answers);
+                        foreach (var answer in foundAnswers)
+                        {
+                            db.SecurityAccounts.Remove(answer);
+                        }
+                        // Delete Location
+                        // NOTE: I don't think we should delete locations because others might share
+                        // the same location with others. -ROB
+
+                        // Delete UserProfile
+                        var foundProfile = (from profiles in db.UserProfiles
+                                            where profiles.UserID == foundCredentials.UserID
+                                            select profiles).First();
+                        db.UserProfiles.Remove(foundProfile);
+                        // Delete Credential Table
+                        db.Credentials.Remove(foundCredentials);
+                        db.SaveChanges();
+                        response.IsSuccessful = true;
+                        return response;
+                    }
+                    catch
+                    {
+                        // An error occured while deleting, sending responseDTO with error
+                        dbTransaction.Rollback();
+                        response.IsSuccessful = false;
+                        response.Messages = new List<string> { "An error occured while deleting user." };
+                        return response;
+                    }
+                }
+            }  
         }
     }
 }
