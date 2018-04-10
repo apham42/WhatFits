@@ -11,22 +11,30 @@ namespace server.Controllers
 {
     /// <summary>
     /// Provides APIs for UserManagement for Clientside
-    /// </summary>
-    /// NOTE: Change headers to appropriate 
-    
+    /// </summary> 
     [RoutePrefix("v1/management")]
     public class UserManagementController : ApiController
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("create")]
-        [EnableCors("http://localhost:8081", "*", "Post")]
+        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "Post")]
         public IHttpActionResult CreateUser(UserManagementDTO obj)
         {
             return Ok("To be completed");
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("enable")]
-        [EnableCors("http://localhost:8081", "*", "PUT")]
+        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult EnableUser(UserManagementDTO obj)
         {
             UserManagementService service = new UserManagementService();
@@ -40,10 +48,14 @@ namespace server.Controllers
             }    
             return Ok("Success: "+obj.UserName +"'s account was enabled.");
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("disable")]
-        [EnableCors("http://localhost:8081", "*", "PUT")]
+        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult DisableUser(UserManagementDTO obj)
         {
             UserManagementService service = new UserManagementService();
@@ -57,9 +69,14 @@ namespace server.Controllers
             }
             return Ok("Success: " + obj.UserName + "'s account was disabled.");
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("delete")]
-        [EnableCors("http://localhost:8081", "*", "PUT")]
+        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult DeleteUser (UserManagementDTO obj)
         {
             UserManagementService service = new UserManagementService();
@@ -74,9 +91,14 @@ namespace server.Controllers
             return Ok("Success: " + obj.UserName+" was deleted.");
         }
         // Note: Used for testing Purposes, will be deleted once done -Rob
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("samplePost")]
-        [EnableCors("http://localhost:8081", "*", "Post")]
+        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "Post")]
         public IHttpActionResult TestPost(UserManagementDTO obj)
         {
             if (obj == null)
@@ -88,9 +110,13 @@ namespace server.Controllers
                 return Ok("This has executed Correctly." + obj.FirstName +" "+obj.LastName);
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("sampleGet")]
-        [EnableCors("http://localhost:8081", "*", "Post")]
+        [EnableCors("http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "Post")]
         public IHttpActionResult getTest()
         {
             return Ok( 
