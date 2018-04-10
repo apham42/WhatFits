@@ -132,7 +132,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         db.UserClaims.Add(temp);
 
                     }
-                    */
+                    /*
                     //db.SaveChanges();
                     // Add Security QandAs
                     foreach (var account in obj.Answers)

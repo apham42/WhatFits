@@ -88,3 +88,14 @@ C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfi
 C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.csproj.CoreCompileInputs.cache
 C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.dll
 C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.pdb
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\Whatfits.DataAccess.dll.config
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\Whatfits.DataAccess.dll
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\Whatfits.DataAccess.pdb
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\EntityFramework.dll
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\Whatfits.Models.dll
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\Whatfits.Models.pdb
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\Whatfits.Models.dll.config
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\EntityFramework.xml
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\George\source\repos\WhatFits9\server\Whatfits.Gateways\obj\Debug\Whatfits.DataAccess.csproj.CopyComplete
