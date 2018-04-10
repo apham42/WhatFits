@@ -355,8 +355,6 @@ C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.Identit
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Microsoft.WebSockets.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Newtonsoft.Json.dll
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.ComponentModel.Annotations.dll
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.ComponentModel.Primitives.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Net.Http.Formatting.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Web.Http.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Web.Http.WebHost.dll
@@ -368,14 +366,14 @@ C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.UserAcce
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.DataAccess.pdb
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.DataAccess.dll.config
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Hash.pdb
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Hash.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.JsonWebToken.pdb
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.JsonWebToken.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Models.pdb
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Models.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.UserAccessControl.pdb
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.UserAccessControl.dll.config
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Hash.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\Whatfits.Hash.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\EntityFramework.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\EntityFramework.SqlServer.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\FluentValidation.xml

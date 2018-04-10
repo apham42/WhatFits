@@ -49,7 +49,7 @@ namespace server.Controllers
             return new HttpResponseMessage(HttpStatusCode.BadRequest);
         }
         
-        class ChatHandler : WebSocketHandler
+        class ChatHandler : WebSocketHandler , IDisposable
         {
             private ChatGateway mychat = new ChatGateway();
             private static WebSocketCollection _chatUser = new WebSocketCollection();
@@ -115,6 +115,11 @@ namespace server.Controllers
             {
                 _chatUser.Remove(this);
                 users.Remove(connectedUser);
+            }
+
+            public void Dispose()
+            {
+                _chatUser.Clear();
             }
         }
     }
