@@ -59,8 +59,6 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Microsoft.Identity
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Microsoft.IdentityModel.Tokens.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Microsoft.WebSockets.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\Newtonsoft.Json.dll
-C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.ComponentModel.Annotations.dll
-C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.ComponentModel.Primitives.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.Net.Http.Formatting.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.Web.Http.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.Web.Http.WebHost.dll
@@ -596,3 +594,6 @@ C:\Users\George\source\repos\WhatFits9\server\server\obj\Debug\server.csproj.Cop
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Web.Cors.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Web.Http.Cors.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\System.Web.Http.Cors.xml
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.Web.Cors.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.Web.Http.Cors.dll
+C:\Users\abramvillanueva\Documents\WhatFits\server\server\bin\System.Web.Http.Cors.xml
