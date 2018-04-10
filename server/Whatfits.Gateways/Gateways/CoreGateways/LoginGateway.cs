@@ -72,7 +72,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             }
             else
             {
-                var foudnQandA = (from answers in db.SecurityQandA
+                var foudnQandA = (from answers in db.SecurityAccounts
                                   where answers.UserID == foundUser.UserID
                                   select answers).ToList();
                 // Passes the query into a dictionary
@@ -128,7 +128,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         {
             // Queries to see if token exists in database
             var query = (from x in db.TokenBlackLists
-                         where x.Tokens == obj.Token
+                         where x.Token == obj.Token
                          select x).FirstOrDefault();
             // Creates response DTO
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean> { };
@@ -159,7 +159,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean> { };
             // Find user based off Username
             var foundToken = (from token in db.TokenBlackLists
-                             where token.Tokens == obj.Token
+                             where token.Token == obj.Token
                              select token).FirstOrDefault();
             
             // If token already exists in database
@@ -173,7 +173,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         // Creates temporary token to store in database
                         TokenBlackList temp = new TokenBlackList
                         {
-                            Tokens = obj.Token
+                            Token = obj.Token
                         };
                         db.TokenBlackLists.Add(temp);
                         db.SaveChanges();
@@ -208,7 +208,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             // Creates response DTO
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean> { };
             var foundToken = (from token in db.TokenBlackLists
-                              where token.Tokens == obj.Token
+                              where token.Token == obj.Token
                               select token).FirstOrDefault();
 
             if (foundToken == null)

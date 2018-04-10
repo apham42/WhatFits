@@ -38,6 +38,7 @@ namespace Whatfits.UserAccessControl.Service
         /// <exception>All exceptions will be caught in AuthenticateHttpMessageHandler</exception>"
         private ClaimsPrincipal AddClaimsToPrincipal(ClaimsPrincipal incommingPrincipal)
         {
+                // get username from claims
                 string username = incommingPrincipal.FindFirst(claim => claim.Type == "UserName").Value;
 
                 // new identity for principal

@@ -1,9 +1,9 @@
 <template>
   <nav class="navbar is-primary">
     <div class="navbar-brand">
-      <a class="navbar-item" href="http://localhost:8080">
-        <img src="https://bulma.io/images/bulma-logo.png" alt="WhatFits" width="112" height="28">
-      </a>
+      <h1>
+        WHAT FITS
+      </h1>
     </div>
     <HomeNavBar v-if="this.$route.name == 'Home'"></HomeNavBar>
     <MainNavBar v-else></MainNavBar>
@@ -20,8 +20,11 @@ export default {
     'MainNavBar': MainNavBar
   },
   computed: {
+  },
+  methods: {
   }
 }
+
 </script>
 
 <style>

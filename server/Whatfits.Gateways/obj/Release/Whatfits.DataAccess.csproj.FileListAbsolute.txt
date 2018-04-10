@@ -1,0 +1,14 @@
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\Whatfits.DataAccess.dll.config
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\Whatfits.DataAccess.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\Whatfits.DataAccess.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\EntityFramework.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\Whatfits.Models.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\Whatfits.Models.pdb
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\Whatfits.Models.dll.config
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\EntityFramework.xml
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Release\Whatfits.DataAccess.csprojResolveAssemblyReference.cache
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Release\Whatfits.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Release\Whatfits.DataAccess.dll
+C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Gateways\obj\Release\Whatfits.DataAccess.pdb

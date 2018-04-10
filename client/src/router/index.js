@@ -1,48 +1,60 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Vuelidate from 'vuelidate'
-import Home from '@/components/Home'
-import Chat from '@/components/Chat'
-import Test from '@/components/Test'
-import Registration from '@/components/Registration'
-import Terms from '@/components/Terms'
-import Review from '@/components/Review'
-import GetUserReview from '@/components/GetUserReview'
-Vue.component('Terms', Terms)
+// import Terms from '@/components/Terms'
+
 Vue.use(Router)
 Vue.use(Vuelidate)
 
+// Defining routes for web application
 export default new Router({
   routes: [
     {
+      // HomePage
       path: '/',
       name: 'Home',
-      component: Home
+      component: () => import('@/components/Home')
     },
     {
-      path: '/SignUp',
+      // Registration Page
+      path: '/signup',
       name: 'Registration',
-      component: Registration
+      component: () => import('@/components/Registration')
     },
     {
-      path: '/Chat',
+      // Chat Page
+      path: '/chat',
       name: 'Chat',
-      component: Chat
+      component: () => import('@/components/Chat')
     },
     {
-      path: '/Test',
-      name: 'Test',
-      component: Test
+      // UserManagement Page
+      path: '/usermanagement',
+      name: 'UserManagement',
+      component: () => import('@/components/UserManagement/UserManagement')
     },
     {
       path: '/Review',
       name: 'Review',
-      component: Review
+      component: () => import('@/components/Review')
     },
     {
       path: '/GetUserReview',
       name: 'GetUserReview',
-      component: GetUserReview
+      component: () => import('@/components/GetUserReview')
+    },
+    {
+      // UserProfile Page
+      path: '/profile',
+      name: 'UserProfile',
+      component: () => import('@/components/UserProfile/ProfilePage')
+    },
+    {
+      // Catch All Error Page
+      path: '*',
+      name: '404NotFound',
+      component: () => import('@/components/ErrorPage/404NotFound')
+
     }
   ]
 })

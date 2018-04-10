@@ -16,5 +16,19 @@ namespace Whatfits.UserAccessControl.Test.Constant
 
             return principal;
         }
+
+        public static ClaimsPrincipal HasUsername()
+        {
+            ClaimsPrincipal principal = new ClaimsPrincipal();
+
+            Claim username = new Claim("UserName", "latmey");
+
+            ClaimsIdentity ci = new ClaimsIdentity();
+            ci.AddClaim(username);
+
+            principal.AddIdentity(ci);
+
+            return principal;
+        }
     }
 }
