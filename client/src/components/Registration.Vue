@@ -246,7 +246,7 @@ export default {
     registerUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/SignUp/Register',
+        url: 'http://localhost/server/v1/SignUp/Register',
         data: {
           UserCredInfo: {
             username: this.$data.username,
@@ -275,7 +275,7 @@ export default {
           UserType: 'General'
         },
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
           'Content-Type': 'application/json'
         }
       })

@@ -19,7 +19,7 @@ namespace server.Services
     /// <summary>
     /// Handles all request that revolves around user accounts
     /// </summary>
-    public class AccountService
+    public class AccountService: ICreation<RegGatewayDTO>
     {
         public AccountService()
         {
@@ -42,9 +42,11 @@ namespace server.Services
             {
                 return response;
             }
+            
+            var gatewayDTO = CreateGatewayDTO(creds, validator.ValidatedLocation);
 
             // Save user into the database and returns the status
-            if (Create(creds, validator.ValidatedLocation))
+            if (Create(gatewayDTO))
             {
                 response.isSuccessful = true;
                 messages.Add(AccountConstants.USER_CREATED);
@@ -60,34 +62,33 @@ namespace server.Services
         }
 
         /// <summary>
-        /// Creates user based on validated information
+        /// Creates dto based on validated information
         /// </summary>
         /// <param name="user"> Validated registeration information </param>
         /// <param name="geoCoordinates"> Validated Geocoordinates based on the location of registration information </param>
-        /// <returns> status of the creation of the user </returns>
-        public bool Create(RegInfo user, WebAPIGeocode geoCoordinates)
+        /// <returns> The gateway DTO needed to create the user in the database </returns>
+        public RegGatewayDTO CreateGatewayDTO(RegInfo user, WebAPIGeocode geoCoordinates)
         {
             var hmac = new HMAC256();
             var salt = hmac.GenerateSalt();
 
-            // Returns false if salt was not generated (empty string)
+            // Returns null if salt was not generated (empty string)
             if (salt.Equals(""))
             {
-                return false;
+                return null;
             }
 
-            var original = new HashDTO()
+            var hashDTO = new HashDTO()
             {
-                Original = user.UserCredInfo.Password,
-                Salt = salt
+                Original = user.UserCredInfo.Password + salt
             };
 
-            var hashPassword = hmac.Hash(original);
+            var hashPassword = hmac.Hash(hashDTO);
 
-            // Return false if hash was not generated (empty string)
+            // Return null if hash was not generated (empty string)
             if (hashPassword.Equals(""))
             {
-                return false;
+                return null;
             }
 
             var questions = new List<string>();
@@ -96,11 +97,25 @@ namespace server.Services
             foreach (SecurityQuestion QandA in user.SecurityQandAs)
             {
                 questions.Add(QandA.Question);
-                answers.Add(QandA.Answer);
+
+                // hashes the answer to the security question
+                var hmacDTO = new HashDTO()
+                {
+                    Original = QandA.Answer
+                };
+                var hashAnswer = hmac.Hash(hmacDTO);
+
+                // returns null if hash was not generated
+                if (hashAnswer.Equals(""))
+                {
+                    return null;
+                }
+
+                answers.Add(hashAnswer);
             }
 
             // Maps data to the dto for the gateway
-            var gatewayDTO = new RegGatewayDTO()
+            var mappedDTO = new RegGatewayDTO()
             {
                 UserName = user.UserCredInfo.Username,
                 Password = hashPassword,
@@ -116,6 +131,21 @@ namespace server.Services
                 Questions = questions,
                 Answers = answers
             };
+
+            return mappedDTO;
+        }
+
+        /// <summary>
+        /// Creates the user into the database
+        /// </summary>
+        /// <param name="gatewayDTO"> contains the info to create a user </param>
+        /// <returns>status of the creation</returns>
+        public bool Create(RegGatewayDTO gatewayDTO)
+        {
+            if (gatewayDTO == null)
+            {
+                return false;
+            }
 
             var gateway = new RegistrationGateway();
 
