@@ -6,6 +6,7 @@ using System.Collections;
 using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.DTOs;
+using Whatfits.JsonWebToken.Controller;
 
 namespace server.Controllers
 {
@@ -52,10 +53,34 @@ namespace server.Controllers
 
 
         [HttpGet]
-        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "EE")]
-        public string four()
+        //[AuthorizePrincipal(type = "WORKOUT_ADD", value = "EE")]
+        public bool four()
         {
-            return "FAIL";
+            UserAccessDTO userAccessDTO = new UserAccessDTO()
+            {
+                UserName = "amay",
+                UserClaims = UserAccessController.SetDefaultClaims()
+            };
+            UserAccessControlGateway uac = new UserAccessControlGateway();
+
+            ResponseDTO<Boolean> found = uac.AddUserClaims(userAccessDTO);
+            return found.IsSuccessful;
+        }
+
+        [HttpGet]
+        public string five()
+        {
+            CreateJWT createJWT = new CreateJWT();
+
+            return createJWT.CreateToken("amay", "general");
+
+        }
+
+        [HttpGet]
+        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "Add")]
+        public string six()
+        {
+            return "Pass";
         }
 
     }
