@@ -1,28 +1,29 @@
 <template>
-  <div id="Chat">
+<div id="Chat">
     <div id="ChatBox">
-      <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
-      <div id="chatbody" v-if="chatshow">
-        <div id="username" v-for ="(value, index) in chatusers" :key="index" list-style:none>
-          <div id="user" v-on:click="SpanBox(index)">
-            {{value}}
-          </div>
+        <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
+        <div id="chatbody" v-if="chatshow">
+            <div id="username" v-for="(value, index) in chatusers" :key="index" list-style:none>
+                <div id="user" v-on:click="SpanBox(index)">
+                    {{value}}
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <div id="MsgBox" style="right:290px" v-if="msgshow">
-      <div id="msghead">
-        {{clickeduser}}
-      </div>
-      <div id="msgbody">
-        <textarea id="receives" rows="10"/>
-      </div>
-      <div id="msgfoot">
-        <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message"></textarea>
-        <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
-      </div>
+        <div id="msghead">
+            {{clickeduser}}
+        </div>
+        <div id="msgbody">
+            <textarea id="receives" rows="10" />
+        </div>
+        <div id="msgfoot">
+            <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message"></textarea>
+            <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
+        </div>
     </div>
-  </div>
+</div>
+
 </template>
 
 <script>

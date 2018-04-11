@@ -79,7 +79,10 @@ export default {
   }
 }
 </script>
-
+<!--
+Note: Scoped the Style tags. For Some reason when clicking on the terms
+and agreements it doesn't show any text unless you scoped them. -Rob
+-->
 <style>
   .modal {
     background: #FFFFFF;

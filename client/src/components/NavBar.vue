@@ -1,9 +1,7 @@
 <template>
   <nav class="navbar is-primary">
     <div class="navbar-brand">
-      <h1>
-        WHAT FITS
-      </h1>
+       <img id="navImage" src="../assets/NavbarLogo/navbarLogo.png" alt="Bulma: a modern CSS framework based on Flexbox">
     </div>
     <HomeNavBar v-if="this.$route.name == 'Home'"></HomeNavBar>
     <MainNavBar v-else></MainNavBar>
@@ -28,5 +26,9 @@ export default {
 </script>
 
 <style>
-
+#navImage {
+  height: 50px;
+  padding-left: 20px;
+  padding-top: 5px;
+}
 </style>
