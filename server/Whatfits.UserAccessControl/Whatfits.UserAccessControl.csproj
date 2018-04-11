@@ -65,7 +65,7 @@
   <ItemGroup>
     <Compile Include="Constants\TypeConstant.cs" />
     <Compile Include="Constants\ValueConstant.cs" />
-    <Compile Include="Controller\AuthenticateHttpMessageHandler.cs" />
+    <Compile Include="Controller\AuthenticateHandler.cs" />
     <Compile Include="Controller\AuthorizePrincipal.cs" />
     <Compile Include="Controller\UserAccessController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

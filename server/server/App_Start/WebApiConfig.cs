@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Http.Dispatcher;
 using Whatfits.UserAccessControl.Controller;
+using System.Web.Http.Cors;
 
 namespace server
 {
@@ -33,6 +34,8 @@ namespace server
                         new DelegatingHandler[] { new AuthenticateHttpMessageHandler() })
                 //*/
             );
+
+            config.EnableCors();
         }
     }
 }

@@ -292,6 +292,9 @@ C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.csproj.CoreCo
 C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.csproj.CopyComplete
 C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\server\obj\Debug\server.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\System.Web.Cors.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\System.Web.Http.Cors.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\server\bin\System.Web.Http.Cors.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\server.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\server.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\server\bin\server.pdb
