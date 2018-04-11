@@ -1,10 +1,10 @@
 <template>
  <div id="navbarExampleTransparentExample" class="navbar-menu">
-    <div class="navbar-start">
-        <a class="navbar-item" href="http://localhost:8081">
+    <div class="navbar-item is-hoverable ">
+        <a class="navbar-link" href="http://localhost:8081" >
         Home
       </a>
-        <a class="navbar-item" href="http://localhost:8081">
+        <a class="navbar-link" href="http://localhost:8081">
         About
       </a>
     </div>
