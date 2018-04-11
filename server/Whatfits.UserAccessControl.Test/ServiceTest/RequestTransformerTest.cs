@@ -18,7 +18,10 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
             HttpRequestMessage request = mockData.validRequestMessage();
             RequestTransformer test = new RequestTransformer();
 
-            Assert.Equal(mockData.VALID_TOKEN, test.GetToken(request));
+            string mockToken = mockData.VALID_TOKEN_WITHOUT_SCHEME;
+            string tokenFromRequest = test.GetToken(request);
+
+            Assert.Equal(mockToken, tokenFromRequest);
         }
 
         [Fact]

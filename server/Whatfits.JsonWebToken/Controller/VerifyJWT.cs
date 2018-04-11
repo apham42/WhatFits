@@ -24,13 +24,16 @@ namespace Whatfits.JsonWebToken.Controller
         /// <returns>principal of jwt</returns>
         public ClaimsPrincipal VerifyToken(string token)
         {
+            // create dto with dto
             LoginDTO loginDTO = new LoginDTO()
             {
                 Token = token
             };
 
+            // check if token is in blacklist
             ResponseDTO<Boolean> responseDTO = new LoginGateway().CheckIfTokenOnBlackList(loginDTO);
 
+            // if not in blacklist
             if (responseDTO.IsSuccessful == false)
             {
                 // create handler to verify token

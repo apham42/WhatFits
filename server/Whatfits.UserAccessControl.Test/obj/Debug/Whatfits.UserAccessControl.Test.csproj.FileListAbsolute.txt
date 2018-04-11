@@ -96,3 +96,5 @@ C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\obj\D
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\obj\Debug\Whatfits.UserAccessControl.Test.csproj.CopyComplete
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\obj\Debug\Whatfits.UserAccessControl.Test.dll
 C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\obj\Debug\Whatfits.UserAccessControl.Test.pdb
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\aaronpham\Desktop\WhatFits\server\Whatfits.UserAccessControl.Test\bin\Debug\EntityFramework.SqlServer.xml
