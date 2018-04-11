@@ -3,18 +3,15 @@
     <div class="navbar-brand">
        <img id="navImage" src="../assets/NavbarLogo/navbarLogo.png" alt="Bulma: a modern CSS framework based on Flexbox">
     </div>
-    <HomeNavBar v-if="this.$route.name == 'Home'"></HomeNavBar>
-    <MainNavBar v-else></MainNavBar>
+    <MainNavBar v-if="this.$route.name != 'Home'"></MainNavBar>
   </nav>
 </template>
 
 <script>
-import HomeNavBar from '@/components/NavBar/HomeNavBar.vue'
 import MainNavBar from '@/components/NavBar/MainNavBar.vue'
 export default {
   name: 'NavBar',
   components: {
-    'HomeNavBar': HomeNavBar,
     'MainNavBar': MainNavBar
   },
   computed: {
