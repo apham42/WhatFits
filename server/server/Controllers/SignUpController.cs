@@ -6,50 +6,35 @@ using System.Net.Http;
 using System.Web.Http;
 using server.Services;
 using server.Model.Account;
-using server.Model.Validators;
-using FluentValidation.Results;
 using server.Model.Data_Transfer_Objects.AccountDTO_s;
+using System.Web.Http.Cors;
+
 
 namespace server.Controllers
 {
+    [RoutePrefix("v1/Signup")]
     public class SignUpController : ApiController
     {
+        /// <summary>
+        /// Handles Register requests
+        /// </summary>
+        /// <param name="userCred"> Registeration Information </param>
+        /// <returns> Status of the request with a list of messages </returns>
         [HttpPost]
-        public IHttpActionResult Register(UserCredInfo userCred)
+        [Route("Register")]
+        [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        public IHttpActionResult Register(RegInfo userCred)
         {
             AccountService service = new AccountService();
-            //UserCredentials userCred = new UserCredentials(username, password);
-            UserCredentialValidator validator = new UserCredentialValidator();
-            if (userCred == null)
+            RegInfoResponseDTO response = service.RegisterUser(userCred);
+            if (response.isSuccessful)
             {
-                return Content(HttpStatusCode.BadRequest, "ASD");
-
-            }
-            ValidationResult results = validator.Validate(userCred);
-            IList<ValidationFailure> failures = results.Errors;
-            List<string> messages = new List<string>();
-
-            foreach (ValidationFailure fail in failures)
-            {
-                messages.Add(fail.ErrorMessage);
-            }
-
-            if(!messages.Any())
-            {
-                return Ok("Works");
+                return Ok(new { response.Messages });
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest, new { userCred.Username });
+                return Content(HttpStatusCode.BadRequest, new { response.Messages });
             }
         }
-
-        [HttpPost]
-        public IHttpActionResult Finish(RegInfoDTO userCred)
-        {
-            return Ok(userCred.UserLocation);
-        }
-
-
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface ITokenBlackList
     {
-        string Tokens { get; set; }
+        string Token { get; set; }
     }
 }

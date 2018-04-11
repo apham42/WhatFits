@@ -20,12 +20,11 @@ namespace Gateway.Tester.Tests
         {
             ReviewsDTO rev = new ReviewsDTO()
             {
-                RevieweeID = 3,
                 UserID = 5,
-                ReviewMessage = "Here's the test",
+                RevieweeID = 3,
                 Rating = 4,
+                ReviewMessage = "Here's the test",
                 DateAndTime = new DateTime(2017, 05, 15),
-                ReviewID = 9
             };
 
             // Passing DTO to gateway to be processed and stored

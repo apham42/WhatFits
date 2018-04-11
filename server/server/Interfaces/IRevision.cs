@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace server.Interfaces
 {
-    public interface IRevision
+    public interface IRevision <T>
     {
-        bool Update<T>(T obj);
+        bool Update(T obj);
     }
 }

@@ -13,8 +13,8 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    addUser: function (state, payload) {
-      state.username.push = payload
+    addUser: function (payload) {
+      this.username.push(payload)
     }
   }
 })

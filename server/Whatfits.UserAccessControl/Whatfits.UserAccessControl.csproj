@@ -72,6 +72,7 @@
     <Compile Include="Service\ClaimsTransformer.cs" />
     <Compile Include="Service\RequestTransformer.cs" />
     <Compile Include="Service\SetDefaultClaims.cs" />
+    <Compile Include="Service\UserAccessDatabaseAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -25,7 +25,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations
                 new Notification{ NotificationID = 4, Message = "This is a notification message.", UserID=3, NotificationType="System"},
                 new Notification{ NotificationID = 5, Message = "This is a notification message.", UserID=4, NotificationType="Chat"}
             };
-            context.Notifications.AddOrUpdate(notifications => notifications.NotificationID,sampleNotifications.ToArray());
+            context.Notifications.AddOrUpdate(notifications => notifications.NotificationID, sampleNotifications.ToArray());
             context.SaveChanges();
         }
     }

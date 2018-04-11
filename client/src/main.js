@@ -10,8 +10,11 @@ Vue.config.productionTip = true
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  data: {
+    showNav: false
+  },
   router,
   components: { App },
-  store,
+  store: store,
   template: '<App/>'
 })
