@@ -2,7 +2,7 @@
 
 A fitness social media web application. It helps like minded individuals to connect based on interest concerning physical activities.
 
-![](header.png)
+![](header.PNG)
 
 ## Get Started
 
