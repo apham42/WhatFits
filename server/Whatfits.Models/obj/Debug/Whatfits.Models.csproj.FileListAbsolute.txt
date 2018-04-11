@@ -77,7 +77,6 @@ C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\bin\Debug\En
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.AccountMigrations.init.resources
-C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.AccountMigrations.init1.resources
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.init.resources
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.init.resources
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.init.resources
@@ -130,3 +129,4 @@ C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Wh
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csproj.CoreCompileInputs.cache
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csprojResolveAssemblyReference.cache
