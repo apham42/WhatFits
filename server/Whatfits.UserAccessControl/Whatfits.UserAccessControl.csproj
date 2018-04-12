@@ -65,14 +65,13 @@
   <ItemGroup>
     <Compile Include="Constants\TypeConstant.cs" />
     <Compile Include="Constants\ValueConstant.cs" />
-    <Compile Include="Controller\AuthenticateHttpMessageHandler.cs" />
+    <Compile Include="Controller\AuthenticateHandler.cs" />
     <Compile Include="Controller\AuthorizePrincipal.cs" />
     <Compile Include="Controller\UserAccessController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\ClaimsTransformer.cs" />
     <Compile Include="Service\RequestTransformer.cs" />
     <Compile Include="Service\SetDefaultClaims.cs" />
-    <Compile Include="Service\UserAccessDatabaseAccess.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

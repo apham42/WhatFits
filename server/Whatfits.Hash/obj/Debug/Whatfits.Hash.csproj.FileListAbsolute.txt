@@ -31,3 +31,5 @@ C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csproj.CoreCompileInputs.cache
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.dll
 C:\Users\rsanc\Documents\Github\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.pdb
+C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csprojResolveAssemblyReference.cache
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Hash\obj\Debug\Whatfits.Hash.csprojResolveAssemblyReference.cache

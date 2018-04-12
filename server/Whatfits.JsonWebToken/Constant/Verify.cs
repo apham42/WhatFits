@@ -24,7 +24,7 @@ namespace Whatfits.JsonWebToken.Constant
             TokenValidationParameters validationParameters = new TokenValidationParameters
                 {
                     ValidIssuers = new[] { "https://www.Whatfits.social/" },
-                    ValidAudiences = new[] { "Admin", "General" },
+                    ValidAudiences = new[] { "admin", "general" },
                     IssuerSigningKey = new SymmetricSecurityKey(SecurityKey),
                     ValidateLifetime = true,
                     ValidateAudience = true,

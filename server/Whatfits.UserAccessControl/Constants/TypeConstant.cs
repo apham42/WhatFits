@@ -26,9 +26,15 @@
         public const string EVENT_CLAIM_TYPE_EDIT = "EVENT_EDIT";
         public const string EVENT_CLAIM_TYPE_DELETE = "EVENT_DELETE";
 
-        // VIEW PAGE TYPE
+        // VIEW PAGE TYPE (pages that can be viewed by user)
         // VIEW PAGE
         public const string VIEW_PAGE = "VIEW_PAGE";
+
+        // ADMIN
+        public const string USER_MANAGMENT_CLAIM_TYPE_CREATE = "USERMAN_CREATE";
+        public const string USER_MANAGMENT_CLAIM_TYPE_READ = "USERMAN_READ";
+        public const string USER_MANAGMENT_CLAIM_TYPE_UPDATE = "USERMAN_UPDATE";
+        public const string USER_MANAGMENT_CLAIM_TYPE_DELETE = "USERMAN_DELETE";
 
     }
 }
