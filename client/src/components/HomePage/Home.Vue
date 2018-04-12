@@ -69,10 +69,10 @@
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title">
-                Title
+                Whatfits Homepage
             </h1>
             <h2 class="subtitle">
-                Subtitle
+                Clearly underconstruction
             </h2>
         </div>
     </div>
@@ -106,7 +106,7 @@
 </section>
 <div class="box cta">
       <p class="has-text-centered">
-         <span class="tag is-primary">New</span> Login Still Doesn't Work
+         <span class="tag is-primary">New</span> New Features Announced
       </p>
    </div>
    <section class="container">
@@ -132,7 +132,7 @@
                </div>
                <div class="card-content">
                   <div class="content">
-                     <h4>Potential Ad Revenue Machine</h4>
+                     <h4>Coming Soon</h4>
                      <p>Ut venenatis tellus in metus vulputate. Amet consectetur adipiscing elit pellentesque. Sed arcu non odio euismod lacinia at quis risus. Faucibus turpis in eu mi bibendum neque egestas cmonsu songue. Phasellus vestibulum lorem sed risus.</p>
                      <p><a href="#">Learn more</a></p>
                   </div>
