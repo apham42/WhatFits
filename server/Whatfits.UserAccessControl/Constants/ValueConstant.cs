@@ -4,7 +4,7 @@
     {
         // WORKOUTLOG VALUE
         public const string WORKOUTLOG_CLAIM_VALUE_ADD = "Add";
-        public const string WORKOUTLOG_CLAIM_VALUE_VIEW = "View Wokoutlog";
+        public const string WORKOUTLOG_CLAIM_VALUE_VIEW = "View Workoutlog";
         public const string WORKOUTLOG_CLAIM_VALUE_EDIT = "Edit";
         public const string WORKOUTLOG_CLAIM_VALUE_DELETE = "Delete";
 
