@@ -12,7 +12,7 @@ namespace Whatfits.UserAccessControl.Test.Constant
 {
     public class ClaimsPrincipalMockData
     {
-        public static ClaimsPrincipal NoUserName()
+        public ClaimsPrincipal NoUserName()
         {
             ClaimsPrincipal principal = new ClaimsPrincipal();
 
@@ -20,7 +20,7 @@ namespace Whatfits.UserAccessControl.Test.Constant
             return principal;
         }
 
-        public static ClaimsPrincipal HasUsername()
+        public ClaimsPrincipal HasUsername()
         {
             ClaimsPrincipal principal = new ClaimsPrincipal();
 
@@ -34,7 +34,7 @@ namespace Whatfits.UserAccessControl.Test.Constant
             return principal;
         }
 
-        public static List<Claim> ClaimsInPrincipal()
+        public List<Claim> ClaimsInPrincipal()
         {
             List<Claim> claims = new List<Claim>()
             {
@@ -42,7 +42,7 @@ namespace Whatfits.UserAccessControl.Test.Constant
                 new Claim("AmayClaimType1", "AmayClaimValue1"),
                 new Claim("AmayClaimType1", "AmayClaimValue1"),
                 new Claim("WORKOUT_ADD", "Add"),
-                new Claim("VIEW_PAGE", "View Wokoutlog"),
+                new Claim("VIEW_PAGE", "View Workoutlog"),
                 new Claim("WORKOUT_EDIT", "Edit"),
                 new Claim("WORKOUT_DELETE", "Delete"),
                 new Claim("SEARCH", "True"),
@@ -60,9 +60,7 @@ namespace Whatfits.UserAccessControl.Test.Constant
                 new Claim("EVENT_EDIT", "Edit"),
                 new Claim("VIEW_PAGE", "View Event")
             };
-
             
-
             return claims;
         }
 
@@ -70,7 +68,7 @@ namespace Whatfits.UserAccessControl.Test.Constant
         /// get all claims from db
         /// </summary>
         /// <returns>all claims</returns>
-        public static List<Claim> GetClaims(string username)
+        public List<Claim> GetClaims(string username)
         {
             // user access dto that stores username, will be passed into gateway
             UserAccessDTO userAccessDTO = new UserAccessDTO()
@@ -83,6 +81,18 @@ namespace Whatfits.UserAccessControl.Test.Constant
 
             // returns just view page claims
             return allClaims;
+        }
+
+        public ClaimsPrincipal PrincipalHasClaim()
+        {
+            ClaimsPrincipal claimsPrincipal = new ClaimsPrincipal();
+
+            ClaimsIdentity ci = new ClaimsIdentity();
+            ci.AddClaim(new Claim("Not Valid", "Claim"));
+
+            claimsPrincipal.AddIdentity(ci);
+
+            return claimsPrincipal;
         }
     }
 }
