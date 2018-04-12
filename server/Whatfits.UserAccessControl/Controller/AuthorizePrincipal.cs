@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 
@@ -26,13 +22,22 @@ namespace Whatfits.UserAccessControl.Controller
         /// <param name="actionContext">context of request</param>
         public override void OnAuthorization(HttpActionContext actionContext)
         {
-            // if principal is authenticated
-            if(IsAuthorized(actionContext))
+            try
             {
-                base.IsAuthorized(actionContext); // allows access to feature
-            } else // if not authenticated
+                // if principal is authenticated
+                if (IsAuthorized())
+                {
+                    // actionContext.Response = new HttpResponseMessage(HttpStatusCode.Accepted);   
+                    return; // allows access to feature
+                }
+                else // if not authenticated
+                {
+                    HandleUnauthorizedRequest(actionContext); // return unauthorized status code
+                }
+            }
+            catch (Exception) // catch any exception thrown by IsAuthorized()
             {
-                HandleUnauthorizedRequest(actionContext); // return unauthorized status code
+                HandleUnauthorizedRequest(actionContext);
             }
         }
         
@@ -50,16 +55,17 @@ namespace Whatfits.UserAccessControl.Controller
         /// </summary>
         /// <param name="actionContext">request context. where the claims principal is stored</param>
         /// <returns>true if authorized else false</returns>
-        protected override bool IsAuthorized(HttpActionContext actionContext)
+        protected bool IsAuthorized()
         {
-            // get claims principal from action context
-            ClaimsPrincipal incommingPrincipal = (ClaimsPrincipal) System.Web.HttpContext.Current.User;//(ClaimsPrincipal) actionContext.RequestContext.Principal;
+            // get claims principal from current thread
+            ClaimsPrincipal incommingPrincipal = (ClaimsPrincipal) System.Web.HttpContext.Current.User;
 
             // check if principal has claims
             if(incommingPrincipal.HasClaim(type, value))
             {
                 return true;
-            } else
+            }
+            else
             {
                 return false;
             }

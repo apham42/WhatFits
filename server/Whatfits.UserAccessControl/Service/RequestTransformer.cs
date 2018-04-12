@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Http;
-using System.Web.Http.Controllers;
 
 namespace Whatfits.UserAccessControl.Service
 {
@@ -27,12 +26,10 @@ namespace Whatfits.UserAccessControl.Service
             var header = request.Headers;
 
             // gets token from header
-            token = header.GetValues("Token").First();
+            token = header.Authorization.Parameter;
 
-            // check if null or empty
-            if(!string.IsNullOrEmpty(token))
+            if (header.Authorization.Scheme == "Bearer" && !string.IsNullOrEmpty(token))
             {
-                // returns jwt
                 return token;
             }
 

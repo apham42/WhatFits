@@ -13,19 +13,19 @@ export default new Router({
       // HomePage
       path: '/',
       name: 'Home',
-      component: () => import('@/components/Home')
+      component: () => import('@/components/HomePage/Home')
     },
     {
       // Registration Page
       path: '/signup',
       name: 'Registration',
-      component: () => import('@/components/Registration')
+      component: () => import('@/components/Registration/Registration')
     },
     {
       // Chat Page
       path: '/chat',
       name: 'Chat',
-      component: () => import('@/components/Chat')
+      component: () => import('@/components/UserProfile/Chat')
     },
     {
       // UserManagement Page
@@ -36,18 +36,24 @@ export default new Router({
     {
       path: '/Review',
       name: 'Review',
-      component: () => import('@/components/Review')
+      component: () => import('@/components/Reviews/Review')
     },
     {
       path: '/GetUserReview',
       name: 'GetUserReview',
-      component: () => import('@/components/GetUserReview')
+      component: () => import('@/components/Reviews/GetUserReview')
     },
     {
       // UserProfile Page
       path: '/profile',
       name: 'UserProfile',
       component: () => import('@/components/UserProfile/ProfilePage')
+    },
+    {
+      // Temporary Nav bar page
+      path: '/temp',
+      name: 'TempNav',
+      component: () => import('@/components/TempNav')
     },
     {
       // Catch All Error Page

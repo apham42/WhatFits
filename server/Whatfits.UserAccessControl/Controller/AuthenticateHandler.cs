@@ -14,7 +14,7 @@ namespace Whatfits.UserAccessControl.Controller
     /// <summary>
     /// Check is request is authenticated
     /// </summary>
-    public class AuthenticateHttpMessageHandler : DelegatingHandler
+    public class AuthenticateHandler : DelegatingHandler
     {
         /// <summary>
         /// Handles all request comming into server
@@ -55,7 +55,7 @@ namespace Whatfits.UserAccessControl.Controller
         /// <summary>
         /// catches any exceptions that are thrown
         /// </summary>
-        /// <returns>returns task with unauthorized response</returns>
+        /// <returns>returns task with unauthorized(401) response</returns>
         private Task<HttpResponseMessage> UnAuthenticated()
         {
             //set task completion when fail

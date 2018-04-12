@@ -62,7 +62,7 @@ namespace Whatfits.Hash
 
             try
             {
-                byte[] convertedOriginal = Encoding.ASCII.GetBytes(dto.Original + dto.Salt);
+                byte[] convertedOriginal = Encoding.ASCII.GetBytes(dto.Original);
 
 
                 // creates the hash in bytes based on the converted original
