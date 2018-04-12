@@ -131,10 +131,17 @@ namespace server.Controllers
                 var ser = new JavaScriptSerializer();
                 var deser = ser.Deserialize<Message>(message);
                 // get the index of receiver 
-                var index = friends.IndexOf(deser.UserName);
+                //var index = friends.IndexOf(deser.UserName);
                 // send to receiver
-                _chatUser.ElementAtOrDefault(index).Send(JsonConvert.SerializeObject(connectedUser + " said: " + deser.MessageContent + " \n" + DateTime.Now.ToLocalTime()));
-
+                if(!friends.Contains(deser.UserName))
+                {
+                    Send(JsonConvert.SerializeObject("server"+ " said: " + "user-is-offline" + "  " + DateTime.Now.ToLocalTime()));
+                }
+                else
+                {
+                    // type cast fine receiver's username in the websocket collection
+                    _chatUser.SingleOrDefault(r => ((ChatHandler)r).connectedUser == deser.UserName).Send(JsonConvert.SerializeObject(connectedUser + " said: " + deser.MessageContent + "  " + DateTime.Now.ToLocalTime()));
+                }
             }
             /// <summary>
             /// Error handler
@@ -150,7 +157,7 @@ namespace server.Controllers
             public override void OnClose()
             {
                 _chatUser.Remove(this);
-                friends.Remove(connectedUser);
+                friends.Remove(this.connectedUser);
             }
         }
     }

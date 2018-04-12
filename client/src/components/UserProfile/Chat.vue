@@ -75,8 +75,15 @@ export default {
         var newkey = []
         if (vm.chatusers.length > 0) {
           console.log('receive')
-          vm.Decryption(event.data)
-          window.document.getElementById('receives').prepend(vm.receivestring + '\n')
+          try {
+            vm.Decryption(event.data)
+            // if decryption successed
+            // show decypted messaged on the receiver side
+            window.document.getElementById('receives').prepend(vm.receivestring + '\n')
+          } catch (error) {
+            // server message cannot decrypted, since it is not encypted
+            window.document.getElementById('receives').prepend('User is offline' + '\n')
+          }
         } else {
           vm.chatusers = JSON.parse(event.data).split(',')
           console.log(vm.chatusers)
@@ -198,6 +205,7 @@ export default {
   padding: 5px;
   color:white;
   border-radius: 5px 5px 0px 0px;
+  text-align: center;
 }
 #chatbody{
   height: 400px;
@@ -241,7 +249,7 @@ export default {
   background:#2ecc71;
   width:10px;
   height:10px;
-  left:35px;
+  left:10px;
   top: 12px;
 }
 #messagesent{
