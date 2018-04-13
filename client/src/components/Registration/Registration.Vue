@@ -103,7 +103,7 @@
             </div>
         </div>
 
-        <input type="checkbox" name="terms" v-model=t ermsChecked>
+        <input type="checkbox" name="terms" v-model= termsChecked>
 
         <div class="errorResponse">
             <p v-for="error in errors[0]" :key="error"> {{error}} </p>
