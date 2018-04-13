@@ -11,6 +11,8 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
 {
     public class ClaimsTransformerTest
     {
+        ClaimsTransformer test = new ClaimsTransformer();
+        ClaimsPrincipalMockData mockData = new ClaimsPrincipalMockData();
         /// <summary>
         /// if claims principal is null throws SecurityException
         /// </summary>
@@ -18,7 +20,6 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
         public void IsNull()
         {
             ClaimsPrincipal nullPrincipal = null;
-            ClaimsTransformer test = new ClaimsTransformer();
 
             Action act = () => test.Authenticate(nullPrincipal);
 
@@ -31,13 +32,13 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
         [Fact]
         public void PrincipalHasUsername()
         {
-            ClaimsPrincipal principal = ClaimsPrincipalMockData.HasUsername();
+            ClaimsPrincipal principal = mockData.HasUsername();
 
             // principal that will contain all claims from db
-            principal = new ClaimsTransformer().Authenticate(principal);
+            principal = test.Authenticate(principal);
             
             // list of claims that should be in the principal
-            List<Claim> listofClaims = ClaimsPrincipalMockData.ClaimsInPrincipal();
+            List<Claim> listofClaims = mockData.ClaimsInPrincipal();
 
             // check if all principal has all the claims in the list
             bool IfPrincipalHasClaim = listofClaims.TrueForAll(claim => principal.HasClaim(claim.Type, claim.Value));
@@ -50,8 +51,6 @@ namespace Whatfits.UserAccessControl.Test.ServiceTest
         public void NoUserName()
         {
             ClaimsPrincipal princpal = new ClaimsPrincipal();
-
-            ClaimsTransformer test = new ClaimsTransformer();
 
             Action act = () => test.Authenticate(princpal);
 
