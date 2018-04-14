@@ -60,6 +60,15 @@ C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Wha
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.csproj.CoreCompileInputs.cache
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.dll
 C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.pdb
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.AccountMigrations.Registration.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.AccountMigrations.Registration1.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.Registration.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Registration.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.Registration.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations.Registration.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations.Registration.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.SearchMigrations.Registration.resources
+C:\Users\abramvillanueva\Documents\WhatFits\server\Whatfits.Models\obj\Debug\Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Registration.resources
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\bin\Debug\Whatfits.Models.dll.config
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\bin\Debug\Whatfits.Models.dll
 C:\Users\LONGCHENG\Documents\GitHub\WhatFits\server\Whatfits.Models\bin\Debug\Whatfits.Models.pdb

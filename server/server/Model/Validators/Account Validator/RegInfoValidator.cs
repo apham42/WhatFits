@@ -44,7 +44,6 @@ namespace server.Model.Validators.Account_Validator
 
             if (ValidateUserCred(user.UserCredInfo, validationResult) && ValidateQandAs(user.SecurityQandAs, validationResult) && ValidateLocation(user.UserLocation, validationResult))
             {
-                // RegInfoResponseDTO contains error messages because of pass by reference.
                 validationResult.isSuccessful = true;
             }
 
@@ -55,7 +54,7 @@ namespace server.Model.Validators.Account_Validator
         /// Validates the user credentials of the registraion information
         /// </summary>
         /// <param name="userCred"></param>
-        /// <param name="validationResult">The response DTO that the Validate method will be referencing to</param>
+        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
         /// <returns>status if the credentials are valid based on business rules</returns>
         public bool ValidateUserCred(UserCredential userCred, RegInfoResponseDTO validationResult)
         {
@@ -110,7 +109,7 @@ namespace server.Model.Validators.Account_Validator
         /// Validates the Security Questions and Answers of the Registration Information
         /// </summary>
         /// <param name="questions">List of Security questions with answers</param>
-        /// <param name="validationResult">The response DTO that the Validate method will be referencing to</param>
+        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
         /// <returns> status if the security questions and answers are valid based on business rules </returns>
         public bool ValidateQandAs(List<SecurityQuestion> questions, RegInfoResponseDTO validationResult)
         {
@@ -177,7 +176,7 @@ namespace server.Model.Validators.Account_Validator
         /// Validates the User Location of the Registration Information
         /// </summary>
         /// <param name="userLocation"></param>
-        /// <param name="validationResult">The response DTO that the Validate method will be referencing to</param>
+        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
         /// <returns>status if the location is valid based on business rules</returns>
         public bool ValidateLocation(Address userLocation, RegInfoResponseDTO validationResult)
         {

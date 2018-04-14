@@ -158,7 +158,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountService.cs" />
     <Compile Include="Services\ReviewService.cs" />
-    <Compile Include="Services\SearchService.cs" />
     <Compile Include="Services\UserManagementService.cs" />
   </ItemGroup>
   <ItemGroup>
