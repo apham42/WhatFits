@@ -56,6 +56,12 @@ export default new Router({
       component: () => import('@/components/TempNav')
     },
     {
+      // Temporary Search bar page
+      path: '/SearchBar',
+      name: 'SearchBar',
+      component: () => import('@/components/Search/SearchBar')
+    },
+    {
       // Catch All Error Page
       path: '*',
       name: '404NotFound',
