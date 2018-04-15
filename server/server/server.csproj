@@ -117,6 +117,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business Logic\Search\SearchResult.cs" />
+    <Compile Include="Business Logic\Services\ChatService.cs" />
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Constants\AccountConstants.cs" />
     <Compile Include="Constants\LocationConstants.cs" />
