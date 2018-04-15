@@ -17,149 +17,6 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
     {
         private AccountContext db = new AccountContext();
         /// <summary>
-        /// Registers a full user
-        /// </summary>
-        /// <param name="obj">
-        /// 
-        /// </param>
-        /// <returns></returns>
-        public ResponseDTO<Boolean> RegisterFullUser(UserManagementDTO obj)
-        {
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            RegisterPartialUser(obj);
-            ContinueRegistration(obj);
-            return response;
-        }
-        /// <summary>
-        /// Used for Users who registered on the homepage or from SSO
-        /// </summary>
-        public ResponseDTO<Boolean> RegisterPartialUser(UserManagementDTO obj)
-        {
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            using (var dbTransaction = db.Database.BeginTransaction())
-            {
-                try
-                {
-                    Credential newCredential = new Credential()
-                    {
-                        UserName = obj.UserName,
-                        Password = obj.Password,
-                    };
-                    db.Credentials.Add(newCredential);
-                    db.SaveChanges();
-                    dbTransaction.Commit();
-                    response.IsSuccessful = true;
-                    response.Data = true;
-                    return response;
-                }
-                catch (Exception)
-                {
-                    dbTransaction.Rollback();
-                    response.IsSuccessful = false;
-                    response.Data = false;
-                    return response;
-                }
-            }
-        }
-        /// <summary>
-        /// Continues the registration process for users who partially registered from 
-        /// the homepage or SSO when they login for first time.
-        /// </summary>
-        /// <param name="obj">
-        /// Address(String),City(String),State(String),Zipcode(String),Latitude(String),
-        /// Longitude(String),FirstName(String), LastName(String), Email(String), Gender(String),
-        /// Description(String), ProfilePicture(String), SkillLevel(String), Type(String)
-        /// </param>
-        /// <returns>
-        /// True - If successfully inserted into models
-        /// False - An error occured inserting into models
-        /// </returns>
-        public ResponseDTO<Boolean> ContinueRegistration(UserManagementDTO obj)
-        {
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean>();
-            using (var dbTransaction = db.Database.BeginTransaction())
-            {
-                try
-                {
-                    int newUserID = (from credential in db.Credentials
-                                     where credential.UserName == obj.UserName
-                                     select credential.UserID).FirstOrDefault();
-                    // Creating Location
-                    Location location = new Location
-                    {
-                        Address = obj.Address,
-                        City = obj.City,
-                        State = obj.State,
-                        Zipcode = obj.Zipcode,
-                        Latitude = obj.Latitude,
-                        Longitude = obj.Longitude
-                    };
-                    // Saving Data for new user
-                    db.Locations.Add(location);
-                    db.SaveChanges();
-                    // Getting Location ID for creating User
-                    int newLocationID = (from u in db.Locations
-                                         where u.Address == obj.Address && u.City == obj.City && u.State == obj.State && u.Zipcode == obj.Zipcode
-                                         select u.LocationID).FirstOrDefault();
-                    // Creating new User
-                    UserProfile user = new UserProfile
-                    {
-                        UserID = newUserID,
-                        LocationID = newLocationID,
-                        FirstName = obj.FirstName,
-                        LastName = obj.LastName,
-                        Email = obj.Email,
-                        Gender = obj.Gender,
-                        Description = obj.Description,
-                        ProfilePicture = obj.ProfilePicture,
-                        SkillLevel = obj.SkillLevel,
-                        Type = obj.Type
-                    };
-                    db.UserProfiles.Add(user);
-                    db.SaveChanges();
-
-                    // Creating new Salt
-                    Salt salt = new Salt
-                    {
-                        UserID = newUserID,
-                        SaltValue = obj.SaltValue
-                    };
-                    db.Salts.Add(salt);
-                    //db.SaveChanges();
-                    foreach (var claims in obj.UserClaims)
-                    {
-                        UserClaims temp = new UserClaims { UserID = newUserID, ClaimType = claims.Value, ClaimValue = claims.Type };
-                        db.UserClaims.Add(temp);
-
-                    }
-                    /*
-                    //db.SaveChanges();
-                    // Add Security QandAs
-                    foreach (var account in obj.Answers)
-                    {
-                        SecurityAccount temp = new SecurityAccount { UserID = newUserID, SecurityQuestionID = account.Key, Answer = account.Value };
-                        db.SecurityAccounts.Add(temp);
-
-                    }
-                    */
-                    // Commits changes in database
-                    db.SaveChanges();
-                    dbTransaction.Commit();
-                    response.IsSuccessful = true;
-                    response.Data = true;
-                    return response;
-                }
-                catch (Exception)
-                {
-                    // Rolls back any changed tables
-                    dbTransaction.Rollback();
-                    response.IsSuccessful = false;
-                    response.Data = false;
-                    return response;
-                }
-            }
-        }
-        /// <summary>
         /// Disables a user
         /// </summary>
         /// <param name="obj">
@@ -182,6 +39,12 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             {
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else if (foundUser.Type == obj.Type)
+            {
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User is already"+obj.Type };
                 return response;
             }
             else
@@ -236,6 +99,12 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 // Sending error in responseDTO
                 response.IsSuccessful = false;
                 response.Messages = new List<string> { "User not found." };
+                return response;
+            }
+            else if (foundUser.Type == obj.Type)
+            {
+                response.IsSuccessful = false;
+                response.Messages = new List<string> { "User is already" + obj.Type };
                 return response;
             }
             else
