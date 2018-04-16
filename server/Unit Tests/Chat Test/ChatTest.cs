@@ -1,15 +1,9 @@
-﻿using System.Collections.Generic;
-using Xunit;
-using server.Model.Account;
-using server.Model.Location;
-using server.Services;
+﻿using Xunit;
 using server.Controllers;
-using System.Web;
 using Microsoft.Web.WebSockets;
-using Whatfits.DataAccess.DTOs.ContentDTOs;
-using System.Net.Http;
-using System.IO;
-using System;
+using server.Business_Logic.Services;
+using System.Web.Script.Serialization;
+using Whatfits.Models.Models;
 
 namespace ChatTest
 {
@@ -33,36 +27,34 @@ namespace ChatTest
         public void SendMessage()
         {
             // Arrange
+            ChatController chatController = new ChatController();
             WebSocketCollection chatUser = new WebSocketCollection();
-            WebSocketHandler chatHandler = new WebSocketHandler();
+            ChatService chatHandler = new ChatService("amay", chatController.Getkey(), chatController.Getiv());
+            var serialization = new JavaScriptSerializer();
             chatUser.Add(chatHandler);
+            var Jmsg = "{\"Username\":\"rblue\",\"MessageContent\":\"this is send test\"}";
 
             // Action
-            chatHandler.Send("this is send test");
+            chatHandler.OnMessage(Jmsg);
 
             // Result
-
-        }
-
-        [Fact]
-        public void ReceiveMessage()
-        {
-            // Arrange
-            WebSocketCollection chatUser = new WebSocketCollection();
-            WebSocketHandler chatHandler = new WebSocketHandler();
-            chatUser.Add(chatHandler);
-
-            // Action
-            chatHandler.Send("this is receive test");
-
-            // Result
-
+            Assert.True(chatHandler.GetSendStatus());
         }
 
         [Fact]
         public void Disconnect()
         {
+            // Arrange
+            ChatController chatController = new ChatController();
+            WebSocketCollection chatUser = new WebSocketCollection();
+            ChatService chatHandler = new ChatService("amay", chatController.Getkey(), chatController.Getiv());
+            chatUser.Add(chatHandler);
 
+            // Action
+            chatHandler.OnClose();
+
+            // Result
+            Assert.True(chatHandler.GetDisconnectStatus());
         }
 
     }

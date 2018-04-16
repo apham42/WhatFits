@@ -19,8 +19,13 @@ namespace server.Business_Logic.Services
         // user list for feature friends list
         private static List<string> friends = new List<string>();
         private string connectedUser;
+        // public key and initial value for user to encrypt and decrypt
         private byte[] _key;
         private byte[] _iv;
+        // check the success status of the Connect, Send and Disconnect method
+        private bool connectSuccess = false;
+        private bool sendSuccess = false;
+        private bool disconnectSuccess = false;
         /// <summary>
         /// ChatHandler initialization
         /// </summary>
@@ -65,7 +70,16 @@ namespace server.Business_Logic.Services
                 friends_info += "," + _iv[k];
             }
             // send friends information, key and initial value to connected user via websocket
-            _chatUser.Broadcast(JsonConvert.SerializeObject(friends_info));
+            try
+            {
+                _chatUser.Broadcast(JsonConvert.SerializeObject(friends_info));
+                connectSuccess = true;
+            }
+            catch (Exception)
+            {
+                connectSuccess = false;
+            }
+            
         }
         /// <summary>
         /// Provides receive message from server
@@ -75,17 +89,32 @@ namespace server.Business_Logic.Services
         {
             var ser = new JavaScriptSerializer();
             var deser = ser.Deserialize<Message>(message);
-            // get the index of receiver 
-            //var index = friends.IndexOf(deser.UserName);
+
             // send to receiver
             if (!friends.Contains(deser.UserName))
             {
-                Send(JsonConvert.SerializeObject("server" + " said: " + "user-is-offline" + "  " + DateTime.Now.ToLocalTime()));
+                try
+                {
+                    Send(JsonConvert.SerializeObject("server" + " said: " + "user-is-offline" + "  " + DateTime.Now.ToLocalTime()));
+                    sendSuccess = true;
+                }
+                catch(Exception)
+                {
+                    sendSuccess = false;
+                }
             }
             else
             {
                 // type cast fine receiver's username in the websocket collection
-                _chatUser.SingleOrDefault(r => ((ChatService)r).connectedUser == deser.UserName).Send(JsonConvert.SerializeObject(connectedUser + " said: " + deser.MessageContent + "  " + DateTime.Now.ToLocalTime()));
+                try
+                {
+                    _chatUser.SingleOrDefault(r => ((ChatService)r).connectedUser == deser.UserName).Send(JsonConvert.SerializeObject(connectedUser + " said: " + deser.MessageContent + "  " + DateTime.Now.ToLocalTime()));
+                    sendSuccess = true;
+                }
+                catch(Exception)
+                {
+                    sendSuccess = false;
+                }
             }
         }
         /// <summary>
@@ -101,8 +130,32 @@ namespace server.Business_Logic.Services
         /// </summary>
         public override void OnClose()
         {
-            _chatUser.Remove(this);
-            friends.Remove(this.connectedUser);
+            try
+            {
+                _chatUser.Remove(this);
+                friends.Remove(this.connectedUser);
+                disconnectSuccess = true;
+            }
+            catch(Exception)
+            {
+                disconnectSuccess = false;
+            }
+            
+        }
+
+        public bool GetConnectStatus()
+        {
+            return connectSuccess;
+        }
+
+        public bool GetSendStatus()
+        {
+            return sendSuccess;
+        }
+
+        public bool GetDisconnectStatus()
+        {
+            return disconnectSuccess;
         }
     }
 }
