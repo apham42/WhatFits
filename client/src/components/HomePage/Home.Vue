@@ -1,78 +1,15 @@
 <template>
  <div>
 <section class="hero ">
-    <div class="hero-head">
-        <nav class="navbar">
-            <div class="container">
-                <div class="navbar-brand">
-                    <a>
-              <img id="navImage" src="../../assets/NavbarLogo/navbarLogo.png" alt="Logo">
-            </a>
-                    <span class="navbar-burger burger" data-target="navbarMenuHero1">
-              <span></span>
-                    <span></span>
-                    <span></span>
-                    </span>
-                </div>
-                <div id="navbarMenuHero1" class="navbar-menu">
-                    <div class="navbar-end">
-                        <a class="navbar-item">
-                Home
-              </a>
-                        <a class="navbar-item">
-                Examples
-              </a>
-                        <a class="navbar-item">
-                Documentation
-              </a>
-                        <div class="navbar-item has-dropdown is-hoverable">
-                            <div class="navbar-link">
-                                More
-                            </div>
-                            <div id="moreDropdown" class="navbar-dropdown ">
-                                <a class="navbar-item " href="#">
-                                    <div class="level is-mobile">
-                                        <div class="level-left">
-                                            <div class="level-item">
-                                                <p>
-                                                    <strong>Extensions</strong>
-                                                    <br>
-                                                    <small>Side projects to enhance Bulma</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <span class="navbar-item">
-                          <a class="button is-primary is-primary">
-                  <span class="icon">
-                   <i class="fas fa-plus-circle"></i>
-                  </span>
-                        <span>Register</span>
-                        </a>
-                <a class="button is-primary is-inverted">
-                  <span class="icon">
-                   <i class="fas fa-sign-in-alt"></i>
-                  </span>
-                        <span>Login</span>
-                        </a>
 
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
         <div class="container has-text-centered">
             <h1 class="title">
-                Title
+                Whatfits Homepage
             </h1>
             <h2 class="subtitle">
-                Subtitle
+                Clearly underconstruction
             </h2>
         </div>
     </div>
@@ -106,7 +43,7 @@
 </section>
 <div class="box cta">
       <p class="has-text-centered">
-         <span class="tag is-primary">New</span> Login Still Doesn't Work
+         <span class="tag is-primary">New</span> New Features Announced
       </p>
    </div>
    <section class="container">
@@ -132,7 +69,7 @@
                </div>
                <div class="card-content">
                   <div class="content">
-                     <h4>Potential Ad Revenue Machine</h4>
+                     <h4>Coming Soon</h4>
                      <p>Ut venenatis tellus in metus vulputate. Amet consectetur adipiscing elit pellentesque. Sed arcu non odio euismod lacinia at quis risus. Faucibus turpis in eu mi bibendum neque egestas cmonsu songue. Phasellus vestibulum lorem sed risus.</p>
                      <p><a href="#">Learn more</a></p>
                   </div>

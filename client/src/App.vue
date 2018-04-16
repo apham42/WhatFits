@@ -7,7 +7,6 @@
 
 <script>
 import NavBar from '@/components/NavBar.vue'
-import 'bulma/css/bulma.css'
 export default {
   name: 'App',
   components: {
@@ -16,7 +15,7 @@ export default {
 }
 </script>
 
-<style>
+<style src="./assets/CSS/Globaltheme/bulmaTheme.css">
 #app {
 
 }

@@ -25,12 +25,12 @@ namespace server
                 routeTemplate: "v1/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
                 // Commented out for ignoring tokens during develpment - Rob
-                ,
-                constraints: null,
-                handler:
-                    HttpClientFactory.CreatePipeline(
-                        new HttpControllerDispatcher(config),
-                        new DelegatingHandler[] { new AuthenticateHandler() })
+                //,
+                //constraints: null,
+                //handler:
+                //    HttpClientFactory.CreatePipeline(
+                //        new HttpControllerDispatcher(config),
+                //        new DelegatingHandler[] { new AuthenticateHandler() })
             );
         }
     }
