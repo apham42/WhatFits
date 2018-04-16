@@ -3,7 +3,7 @@ using System.Security.Claims;
 using Whatfits.UserAccessControl.Controller;
 using Xunit;
 
-namespace Whatfits.UserAccessControl.Test.ServiceTest
+namespace UserAccessControl.ServiceTest
 {
     public class SetDefaultClaimsTest
     {

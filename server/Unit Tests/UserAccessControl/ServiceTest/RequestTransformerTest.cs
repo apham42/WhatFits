@@ -6,7 +6,7 @@ using Xunit;
 
 
 
-namespace Whatfits.UserAccessControl.Test.ServiceTest
+namespace UserAccessControl.ServiceTest
 {
     public class RequestTransformerTest
     {
