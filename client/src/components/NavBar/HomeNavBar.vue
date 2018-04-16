@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="navbar-brand">
                     <a>
-              <img id="navImage" src="../../assets/NavbarLogo/navbarLogo.png" alt="Logo">
+              <img id="navImage" src="../../assets/Images/LogoNavbarLogo/navbarLogo.png" alt="Logo">
             </a>
                     <span class="navbar-burger burger" data-target="navbarMenuHero1">
               <span></span>

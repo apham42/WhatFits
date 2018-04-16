@@ -618,6 +618,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         // Delete Credential Table
                         db.Credentials.Remove(foundCredentials);
                         db.SaveChanges();
+                        dbTransaction.Commit();
                         response.IsSuccessful = true;
                         return response;
                     }

@@ -156,7 +156,7 @@ namespace server.Controllers
         [HttpGet]
         [Route("sampleGet")]
         [EnableCors("http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public IHttpActionResult getTest()
+        public IHttpActionResult GetTest()
         {
             return Ok( 
                 new UserManagementDTO {
