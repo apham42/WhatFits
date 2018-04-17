@@ -7,7 +7,7 @@
       <div class="field">
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input " v-model="createUser.userName" type="text" placeholder="UserName" value="">
+          <input class="input " v-model="userName" type="text" placeholder="UserName" value="">
           <span class="icon is-small is-left">
           <i class="fas fa-user"></i>
           </span>
@@ -20,7 +20,7 @@
       <div class="field">
         <label class="label">Password</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" v-model="createUser.password" type="password" placeholder="Password" value="">
+          <input class="input" v-model="password" type="password" placeholder="Password" value="">
           <span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
           </span>
@@ -33,19 +33,19 @@
       <div class="field">
         <label class="label">Address</label>
         <div class="control">
-          <input class="input" v-model="createUser.address" type="text" placeholder="Address">
+          <input class="input" v-model="address" type="text" placeholder="Address">
         </div>
         <label class="label">City</label>
         <div class="control">
-          <input class="input" v-model="createUser.city" type="text" placeholder="City Name">
+          <input class="input" v-model="city" type="text" placeholder="City Name">
         </div>
         <label class="label">Zipcode</label>
         <div class="control">
-          <input class="input" v-model="createUser.zipcode" type="text" placeholder="Zipcode">
+          <input class="input" v-model="zipcode" type="text" placeholder="Zipcode">
         </div>
         <label class="label">State</label>
         <div class="control">
-          <input class="input" v-model="createUser.state" type="text" placeholder="State">
+          <input class="input" v-model="state" type="text" placeholder="State">
         </div>
       </div>
       <div class="field">
@@ -55,9 +55,7 @@
           <div class="select is-fullwidth" >
             <select>
               <option selected disabled>Select Question</option>
-              <option>q1</option>
-              <option>q2</option>
-              <option>q3</option>
+              <option v-for="securityQuestion1 in securityQuestionsSet1" :key="securityQuestion1"> {{securityQuestion1}} </option>
             </select>
           </div>
         </div>
@@ -72,9 +70,8 @@
           <div class="select is-fullwidth" >
             <select>
               <option selected disabled>Select Question</option>
-              <option>q1</option>
-              <option>q2</option>
-              <option>q3</option>
+              <option v-for="securityQuestion2 in securityQuestionsSet2" :key="securityQuestion2"> {{securityQuestion2}} </option>
+
             </select>
           </div>
         </div>
@@ -89,9 +86,7 @@
           <div class="select is-fullwidth" >
             <select>
               <option selected disabled>Select Question</option>
-              <option>q1</option>
-              <option>q2</option>
-              <option>q3</option>
+              <option v-for="securityQuestion3 in securityQuestionsSet3" :key="securityQuestion3"> {{securityQuestion3}} </option>
             </select>
           </div>
         </div>
@@ -104,10 +99,10 @@
         <label class="label">User Type</label>
         <div class="control">
           <div class="select" >
-            <select>
-              <option selected disabled>Select dropdown</option>
-              <option>Administrator</option>
-              <option>General</option>
+            <select v-model="userType">
+              <option  disabled >Select dropdown</option>
+              <option disabled>Administrator</option>
+              <option selected>General</option>
             </select>
           </div>
         </div>
@@ -115,19 +110,25 @@
       <div class="field">
         <div class="control">
           <label class="checkbox">
-          <input type="checkbox" v-model="createUser.terms">
+          <input type="checkbox" v-model="terms">
           I agree to the <a href="#">terms and conditions</a>
           </label>
         </div>
       </div>
       <div class="field is-grouped">
         <div class="control">
-          <button class="button is-primary">Submit</button>
+          <button class="button is-primary"  @click.prevent="createNewUser">Create {{userType}}</button>
         </div>
         <div class="control">
           <button class="button is-secondary">Cancel</button>
         </div>
       </div>
+      <div v-if="this.errorFlags.createUserFlag == true" class="errorMessage">
+            <span class = "help">{{this.statusMessages.createUserResponse}}</span>
+        </div>
+        <div v-if="this.errorFlags.createUserFlag == false" class="successMessage">
+            <span>{{this.statusMessages.createUserResponse}}</span>
+        </div>
     </form>
     <!--*********************************************************************************************************** -->
     <br>
@@ -150,11 +151,11 @@
                 <button type="submit" class="button is-primary" @click.prevent="changeStatus">Apply {{changeStatusUser.status}}</button>
             </div>
         </div>
-        <div v-if="this.$data.errorFlags.changeStatusFlag == true" class="errorMessage">
-            <span>{{this.$data.statusMessages.changeStatusResponse}}</span>
+        <div v-if="this.errorFlags.changeStatusFlag == true" class="errorMessage">
+            <span>{{this.statusMessages.changeStatusResponse}}</span>
         </div>
-        <div v-if="this.$data.errorFlags.changeStatusFlag == false" class="successMessage">
-            <span>{{this.$data.statusMessages.changeStatusResponse}}</span>
+        <div v-if="this.errorFlags.changeStatusFlag == false" class="successMessage">
+            <span>{{this.statusMessages.changeStatusResponse}}</span>
         </div>
         <br />
     </form>
@@ -170,11 +171,11 @@
                 <button type="submit" class="button is-primary" @click.prevent="deleteUser">Delete</button>
             </div>
         </div>
-        <div v-if="this.$data.errorFlags.deleteUserFlag == true" class="errorMessage">
-            <span>{{this.$data.statusMessages.deleteResponse}}</span>
+        <div v-if="this.errorFlags.deleteUserFlag == true" class="errorMessage">
+            <span>{{this.statusMessages.deleteResponse}}</span>
         </div>
-        <div v-if="this.$data.errorFlags.deleteUserFlag == false" class="successMessage">
-            <span>{{this.$data.statusMessages.deleteResponse}}</span>
+        <div v-if="this.errorFlags.deleteUserFlag == false" class="successMessage">
+            <span>{{this.statusMessages.deleteResponse}}</span>
         </div>
         <br />
         <span class="control backButton is-dark">
@@ -187,7 +188,7 @@
 
 <script>
 import axios from 'axios'
-
+import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 export default {
   name: 'UserManagement',
   computed: {
@@ -198,43 +199,52 @@ export default {
   data () {
     return {
       pageTitle: 'UserManagement Page',
-      createUser: {
-        userName: '',
-        password: '',
-        address: '',
-        city: '',
-        zipcode: '',
-        state: '',
-        terms: true
-      },
-      a: '',
+      // Create User Data
+      username: '',
+      password: '',
+      confirmPassword: '',
+      address: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      answerToSecQues1: '',
+      answerToSecQues2: '',
+      answerToSecQues3: '',
+      securityQues1: '',
+      securityQues2: '',
+      securityQues3: '',
       securityQuestionsSet1: [
         'Who was the company you first worked for?',
         'Where did you go to highschool or college?',
         'What was the name of the teacher who gave you your first failing grade?'
       ],
-      securityQuestionSet2: [
+      securityQuestionsSet2: [
         'What is your favorite song?',
         'What is your mother\'s maiden name?',
         'What is your favorite sports team?'
       ],
-      securityQuestionSet3: [
+      securityQuestionsSet3: [
         'What was the name of your first crush?',
         'What is the first name of the person you first kissed?',
         'In what city or town does your nearest sibling live?'
       ],
+      // Change Status Data
       changeStatusUser: {
         userName: '',
         status: ''
       },
+      // Delete User Data
       deleteCurrentUser: {
         userName: ''
       },
+      // Status Messages, displays a message on the status of the request
+      // such as validation errors, request successses, and request failures.
       statusMessages: {
-        createUserResponse: '',
+        createUserResponse: 'PlaceHolder',
         changeStatusResponse: '',
         deleteResponse: ''
       },
+      // Error Flags, controls what is being displayed undernieth each
       errorFlags: {
         createUserFlag: false,
         changeStatusFlag: false,
@@ -242,16 +252,157 @@ export default {
       }
     }
   },
+  // validations based on business rules
+  validations: {
+    username: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(64)
+    },
+    password: {
+      required,
+      maxLength: maxLength(64),
+      minLength: minLength(8)
+    },
+    confirmPassword: {
+      required,
+      sameAsPassword: sameAs('password')
+    },
+    address: {
+      required,
+      maxLength: maxLength(200)
+    },
+    city: {
+      required,
+      maxLength: maxLength(150)
+    },
+    state: {
+      required,
+      maxLength: maxLength(150)
+    },
+    zipCode: {
+      required,
+      minLength: minLength(5),
+      maxLength: maxLength(16)
+    },
+    securityQues1: {
+      required
+    },
+    securityQues2: {
+      required
+    },
+    securityQues3: {
+      required
+    },
+    answerToSecQues1: {
+      required,
+      maxLength: maxLength(150)
+    },
+    answerToSecQues2: {
+      required,
+      maxLength: maxLength(150)
+    },
+    answerToSecQues3: {
+      required,
+      maxLength: maxLength(150)
+    }
+  },
   methods: {
+    // Registration methods
+    // Checks the characters of userInput
+    validateCharacters (userInput) {
+      var regexPattern = /[^ 0-9a-zA-Z!@#$%^&*()-_=+{}[;:"'<,>.?|`~]/i
+      if (userInput.match(regexPattern) == null) {
+        return true
+      } else {
+        return false
+      }
+    },
     createNewUser: function () {
-      console.log('Not implemented yet. - Rob')
+      // Validate incoming data
+
+      if (this.userType === 'General') {
+        axios({
+          method: 'POST',
+          url: 'http://localhost/server/v1/SignUp/Register',
+          data: {
+            UserCredInfo: {
+              // username: thisusername,
+              // password: this.password
+              username: 'asdfasdf',
+              password: 'hajiafdasekdiek'
+            },
+            SecurityQandAs: [
+              {
+              // question: this.securityQues1,
+              // answer: this.answerToSecQues1
+                question: 'Who was the company you first worked for?',
+                answer: 'TEST'
+              },
+              {
+              // question: this.securityQues2,
+              // answer: this.answerToSecQues2
+                question: 'What is your favorite song?',
+                answer: 'TEST'
+              },
+              {
+              // question: this.securityQues3,
+              // answer: this.answerToSecQues3
+                question: 'In what city or town does your nearest sibling live?',
+                answer: 'TEST'
+              }
+            ],
+            UserLocation: {
+            // street: this.address,
+            // city: this.city,
+            // state: this.state,
+            // zipCode: this.zipCode
+              street: '321 W. 119th St',
+              city: 'Los Angeles',
+              state: 'California',
+              zipCode: 90061
+            },
+            UserType: 'General'
+          },
+          headers: {
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
+            'Content-Type': 'application/json'
+          }
+        })
+          // redirect to Home page
+          .then(response => {
+          // NOTE: CHANGE THIS BEFORE PRODUCTION
+            console.log(response)
+            this.statusMessages.createUserResponse = 'Success: Created user.'
+            this.errorFlags.createUserFlag = false
+          }).catch((error) => {
+          // Pushes the error messages into error to display
+            if (error.response) {
+              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
+              this.errorFlags.createUserFlag = true
+              console.log(error.response)
+            } else if (error.request) {
+              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
+              this.errorFlags.createUserFlag = true
+              console.log(error.request)
+            } else {
+              this.statusMessages.createUserResponse = 'An error occured while setting up request.'
+              this.errorFlags.createUserFlag = true
+            }
+          })
+      } else if (this.userType === 'Administrator') {
+        console.log('Error: Can not make admins yet - Rob')
+      } else {
+        this.statusMessages.createUserResponse = 'Error: Must choose a valid User Type.'
+        this.errorFlags.createUserFlag = true
+      }
     },
     deleteUser: function () {
       // Validate userName before making request
-      if (!validateUserName(this.$data.deleteCurrentUser.userName)) {
+      if (!validateUserName(this.deleteCurrentUser.userName)) {
         // Give error message to page
-        this.$data.statusMessages.deleteResponse = 'Error: Not a valid UserName'
-        this.$data.errorFlags.deleteUserFlag = true
+        this.statusMessages.deleteResponse = 'Error: Not a valid UserName'
+        this.errorFlags.deleteUserFlag = true
         return false
       } else {
         // Valide userName at this point
@@ -259,105 +410,105 @@ export default {
           method: 'PUT',
           url: 'http://localhost/server/v1/management/delete',
           data: {
-            'UserName': this.$data.deleteCurrentUser.userName
+            'UserName': this.deleteCurrentUser.userName
           },
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081'
           }
         })
-          .then(function (response) {
-            // Got a 200 response from the server
+          .then(response => {
+            // Got a 2xx response from the server
             // Printing response.data
             console.log(response.data)
             // Set up success message
-            this.$data.statusMessages.deleteResponse = 'This was a success!'
-            this.$data.errorFlags.deleteUserFlag = false
+            this.statusMessages.deleteResponse = response.data
+            this.errorFlags.deleteUserFlag = false
           })
           .catch(error => {
             // An error has occured, filtering error types.
             if (error.response) {
-              this.$data.statusMessages.deleteResponse = 'An error occured, server response was bad.'
-              this.$data.errorFlags.deleteUserFlag = true
+              this.statusMessages.deleteResponse = 'Error: ' + error.response.data
+              this.errorFlags.deleteUserFlag = true
               console.log(error.response)
             } else if (error.request) {
-              this.$data.statusMessages.deleteResponse = 'An error occured, no response from server.'
-              this.$data.errorFlags.deleteUserFlag = true
+              this.statusMessages.deleteResponse = 'Error: ' + error.response.data
+              this.errorFlags.deleteUserFlag = true
               console.log(error.request)
-              console.log(this.$data.statusMessages.deleteResponse, this.$data.errorFlags.deleteUserFlag)
             } else {
-              this.$data.statusMessages.deleteResponse = 'An error occured while setting up request.'
-              this.$data.errorFlags.deleteUserFlag = true
+              this.statusMessages.deleteResponse = 'An error occured while setting up request.'
+              this.errorFlags.deleteUserFlag = true
             }
           })
       }
     },
     changeStatus: function () {
-      if (!validateUserName(this.$data.changeStatusUser.userName) || this.$data.changeStatusUser.status === '') {
+      if (!validateUserName(this.changeStatusUser.userName) || this.changeStatusUser.status === '') {
         // Give error message to page
-        this.$data.statusMessages.changeStatusResponse = 'Error: Not a valid UserName / status'
-        this.$data.errorFlags.changeStatusFlag = true
+        this.statusMessages.changeStatusResponse = 'Error: Not a valid UserName / status'
+        this.errorFlags.changeStatusFlag = true
         return false
       }
-      if (this.$data.changeStatusUser.status === 'enable') {
+      if (this.changeStatusUser.status === 'enable') {
         axios({
           method: 'PUT',
           url: 'http://localhost/server/v1/management/enable',
-          data: {'UserName': this.$data.changeStatusUser.userName},
+          data: {'UserName': this.changeStatusUser.userName},
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081'
           }
         })
-          .then(function (response) {
+          .then(response => {
             console.log(response.data)
             // NOTE: The following line does not work. - Rob
             // this.statusMessages.changeStatusResponse = response.data
-            this.$data.errorFlags.changeStatusFlag = false
+            this.statusMessages.changeStatusResponse = response.data
+            this.errorFlags.changeStatusFlag = false
           })
           .catch(error => {
             if (error.response) {
               // Server responded with a status code outside of 2xx
-              this.$data.statusMessages.changeStatusResponse = 'An error occured, server response was bad.'
-              this.$data.changeStatusFlag = true
+              this.statusMessages.changeStatusResponse = 'Error: ' + error.response.data
+              this.changeStatusFlag = true
               console.log(error.response)
             } else if (error.request) {
               // Request was made but no response
-              this.$data.statusMessages.changeStatusResponse = 'An error occured, no response from server.'
-              this.$data.changeStatusFlag = true
+              this.statusMessages.changeStatusResponse = 'Error: ' + error.response.data
+              this.changeStatusFlag = true
               console.log(error.request)
             } else {
               // Something happened when setting up request
-              this.$data.statusMessages.changeStatusResponse = 'An error occured while setting up request.'
-              this.$data.changeStatusFlag = true
+              this.statusMessages.changeStatusResponse = 'An error occured while setting up request.'
+              this.changeStatusFlag = true
               console.log('Error: ', error.message)
             }
           })
-      } else if (this.$data.changeStatusUser.status === 'disable') {
+      } else if (this.changeStatusUser.status === 'disable') {
         axios({
           method: 'PUT',
           url: 'http://localhost/server/v1/management/disable',
-          data: {'UserName': this.$data.changeStatusUser.userName},
+          data: {'UserName': this.changeStatusUser.userName},
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081'
           }
         })
-          .then(function (response) {
+          .then(response => {
             console.log(response.data)
             // NOTE: The following line does not work. - Rob
-            // this.statusMessages.changeStatusResponse = response.data
-            this.$data.errorFlags.changeStatusFlag = false
+            this.statusMessages.changeStatusResponse = response.data
+            this.errorFlags.changeStatusFlag = false
           })
           .catch(error => {
             if (error.response) {
-              this.$data.statusMessages.changeStatusResponse = 'An error occured, server response was bad.'
-              this.$data.errorFlags.changeStatusFlag = true
+              this.statusMessages.changeStatusResponse = 'Error: ' + error.response.data
+              this.errorFlags.changeStatusFlag = true
               console.log(error.response)
             } else if (error.request) {
-              this.$data.statusMessages.changeStatusResponse = 'An error occured, no response from server.'
-              this.$data.errorFlags.changeStatusFlag = true
+              this.statusMessages.changeStatusResponse = 'Error: ' + error.response.data
+              this.errorFlags.changeStatusFlag = true
               console.log(error.request)
             } else {
-              this.$data.statusMessages.changeStatusResponse = 'An error occured while setting up request.'
-              this.$data.errorFlags.changeStatusFlag = true
+              this.statusMessages.changeStatusResponse = 'An error occured while setting up request.'
+              this.errorFlags.changeStatusFlag = true
               console.log('Error: ', error.message)
             }
           })
@@ -379,40 +530,48 @@ function validateUserName (userName) {
 }
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-button:hover {
-    cursor: pointer;
-}
-.SectionTitle {
-  text-align: left;
-  font-size: 2em;
-  padding-left:5%;
-}
-.PageTitle {
-font-size: 2.5em;
-text-align: center;
-}
-.SubLabel {
-font-size: 4em;
-text-align: left;
-}
-.CenteredBody{
-  padding-left: 12em;
+<style scoped >
+  button:hover {
+      cursor: pointer;
+  }
 
-}
-#createUser {
-  padding-left: 5%;
-  padding-right:5%;
-}
-.successMessage {
-  color: Green;
-  text-align: center;
-}
-.errorMessage {
-  color: red;
-  text-align: center;
-}
-.backButton {
-  padding-left: 50%;
-}
-</style>
+  .SectionTitle {
+      text-align: left;
+      font-size: 2em;
+      padding-left: 5%;
+  }
+
+  .PageTitle {
+      font-size: 2.5em;
+      text-align: center;
+  }
+
+  .SubLabel {
+      font-size: 4em;
+      text-align: left;
+  }
+
+  .CenteredBody {
+      padding-left: 12em;
+
+  }
+
+  #createUser {
+      padding-left: 5%;
+      padding-right: 5%;
+  }
+
+  .successMessage {
+      color: Green;
+      text-align: center;
+  }
+
+  .errorMessage {
+      color: red;
+      text-align: center;
+  }
+
+  .backButton {
+      padding-left: 50%;
+  }
+</style >
