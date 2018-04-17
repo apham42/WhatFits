@@ -4,7 +4,6 @@ using Whatfits.DataAccess.DTOs.CoreDTOs;
 using server.Services;
 using System.Web.Http.Cors;
 using server.Model.Validators.Account_Validator;
-using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using server.Model.Account;
 
 namespace server.Controllers
@@ -25,18 +24,19 @@ namespace server.Controllers
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult CreateAdmin(RegInfo obj)
         {
-            AccountService service = new AccountService();
-            // Filter if no data was passed
-            if (obj == null)
+            UserManagementService service = new UserManagementService();
+            if (obj != null || !ModelState.IsValid)
             {
-                return Content(HttpStatusCode.BadRequest, "Failure: No valid data.");
+                return Content(HttpStatusCode.BadRequest, "Failure: Invalid Data being received.");
             }
-            // Pass input through busines rules to see if data is valid}
-            
-            // TODO: [ ] Validate incoming information with Abram's validations
-            // TODO: [ ] Create Service to add user
-            // TODO: [ ] Handle Errors if bad information
-            return Ok("NOT FUNCTIONAL - STILL IN DEVELOPMENT ");
+            if (service.CreateAdmin(obj).IsSuccessful)
+            {
+                return Created("Success: Created account for: ", obj.UserCredInfo.Username);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, "Failure: Failed to create user.");
+            }
         }
         /// <summary>
         /// Enables a user to use the system.
@@ -50,7 +50,7 @@ namespace server.Controllers
         {
             UserManagementService service = new UserManagementService();
             // Filter if no username was passed
-            if(obj.UserName == null)
+            if(obj.UserName == null || !ModelState.IsValid)
             {
                 return Content(HttpStatusCode.BadRequest, "Failure: No valid data.");
 
@@ -62,12 +62,13 @@ namespace server.Controllers
                 return Content(HttpStatusCode.BadRequest, "Failure: No valid data.");
             }
             // Implement the actual status change of that user
-            if (!service.EnableUser(obj).IsSuccessful)
+            var response = service.EnableUser(obj);
+            if (!response.IsSuccessful)
             {
-                return Content(HttpStatusCode.BadRequest, "Failure: Failed to change status.");
+                return Content(HttpStatusCode.BadRequest, response.Messages);
             }
             // Everything was successful, returning message
-            return Ok("Success: "+obj.UserName +"'s account was enabled.");
+            return Content(HttpStatusCode.OK, "Success: Account was enabled for " + obj.UserName);
         }
         /// <summary>
         /// Disables a user from the system
@@ -81,7 +82,7 @@ namespace server.Controllers
         {
             UserManagementService service = new UserManagementService();
             // Filter if no username was passed
-            if (obj.UserName == null)
+            if (obj.UserName == null || !ModelState.IsValid)
             {
                 return Content(HttpStatusCode.BadRequest, "Failure: Bad Request");
             }
@@ -92,12 +93,13 @@ namespace server.Controllers
                 return Content(HttpStatusCode.BadRequest, "Failure: No valid data.");
             }
             // Implement the actual status change of that user
-            if (!service.DisableUser(obj).IsSuccessful)
+            var response = service.DisableUser(obj);
+            if (!response.IsSuccessful)
             {
-                return Content(HttpStatusCode.BadRequest, "Failure: Failed to change status.");
+                return Content(HttpStatusCode.BadRequest, response.Messages);
             }
             // Everything was successful, returning message
-            return Ok("Success: " + obj.UserName + "'s account was disabled.");
+            return Content(HttpStatusCode.OK, "Success: Account was disabled for " + obj.UserName);
         }
         /// <summary>
         /// Deletes the user credential information in the database.
@@ -110,7 +112,7 @@ namespace server.Controllers
         public IHttpActionResult DeleteUser (UserManagementDTO obj)
         {
             UserManagementService service = new UserManagementService();
-            if(obj.UserName == null)
+            if(obj.UserName == null || !ModelState.IsValid)
             {
                 return Content(HttpStatusCode.BadRequest, "Failure: Bad Request");
             }
@@ -121,49 +123,13 @@ namespace server.Controllers
                 return Content(HttpStatusCode.BadRequest, "Failure: No valid data.");
             }
             // Implement the actual deletion of that uesr
-            if (!service.DeleteUser(obj).IsSuccessful)
+            var response = service.DeleteUser(obj);
+            if (!response.IsSuccessful)
             {
-                return Content(HttpStatusCode.BadRequest, "Failure: Failed to delete user.");
+                return Content(HttpStatusCode.BadRequest, response.Messages);
             }
             // Everything was successful, returning message
-            return Ok("Success: " + obj.UserName+" was deleted.");
-        }
-        // NOTE: Used for testing Purposes, will be deleted once done -Rob
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("samplePost")]
-        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public IHttpActionResult TestPost(UserManagementDTO obj)
-        {
-            if (obj == null)
-            {
-                return Content(HttpStatusCode.BadRequest,"Forgot to add data.");
-            }
-            else
-            {
-                return Ok("This has executed Correctly." + obj.FirstName +" "+obj.LastName);
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        [Route("sampleGet")]
-        [EnableCors("http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public IHttpActionResult GetTest()
-        {
-            return Ok( 
-                new UserManagementDTO {
-                    FirstName = "Adam",
-                    LastName = "West"
-                }
-            );
+            return Content(HttpStatusCode.OK, "Success: Account was deleted for " + obj.UserName);
         }
     }
 }

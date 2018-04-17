@@ -11,58 +11,7 @@ namespace Gateway.Tester
     public class UserManagementTests
     {
         private UserManagementGateway userMan = new UserManagementGateway();
-        [Fact]
-        public void RegisterFullUser()
-        {
-            Dictionary<int, string> temp = new Dictionary<int, string>();
-            temp.Add(1, "Answer to Q1");
-            temp.Add(2, "Answer to Q2");
-            temp.Add(3, "Answer to Q3");
-            List<Claim> claims = new List<Claim>()
-            {
-                    new Claim("NewClaimType1", "NewClaimValue1"),
-                    new Claim("NewClaimType2", "NewClaimValue2"),
-                    new Claim("NewClaimType3", "NewClaimValue3"),
-            };
-            UserManagementDTO usr = new UserManagementDTO()
-            {
-                // Creating User Table Data
-                FirstName = "Test",
-                LastName = "User",
-                Email = "Example53@example.com",
-                Gender = "Male",
-                Description = "TestUserDescriptions",
-                SkillLevel = "Noob",
-                ProfilePicture = null,
 
-                // Creating Credential Table Data
-                UserName = "TestUser55",
-                Password = "password123",
-                Type = "General",
-
-                // Creating Location Data
-                Address = "123 Fake St.",
-                City = "Los Angeles",
-                State = "California",
-                Zipcode = "90012",
-                Longitude = "NULL",
-                Latitude = "NULL",
-
-                // Creating Salt Data
-                SaltValue = "asdfasfasdfa",
-
-                // Creating Security Questions and Answers
-                Answers = temp,
-
-                // Creating UserClaims
-                UserClaims = claims
-            };
-            // Passing DTO to gateway to be processed and stored
-            userMan.RegisterFullUser(usr);
-            // Finding UserID by Name that is stored
-            ResponseDTO<Boolean> found = userMan.DoesUserNameExists(usr);
-            Assert.True(found.IsSuccessful);
-        }
         [Fact]
         public void DoesUserNameExistsTest()
         {
