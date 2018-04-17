@@ -211,6 +211,22 @@ namespace server.Model.Validators.Account_Validator
             ValidatedLocation = validator.ValidatedLocation;
             return true;
         }
-
+        /// <summary>
+        /// Validates Username according to the BRD - Rob
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        public bool ValidateUserName(string userName)
+        {
+            if(userName.Length > 64 || userName.Length < 2)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            
+        }
     }
 }
