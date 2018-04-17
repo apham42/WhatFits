@@ -40,7 +40,7 @@ namespace Gateway.Tester.Tests
             // Checks if the review does exist
             ReviewsDTO SearchReview = new ReviewsDTO()
             {
-                ReviewID = 1
+                UserID = 1
             };
             Boolean result = r.ReviewExist(SearchReview);
             Assert.True(result);

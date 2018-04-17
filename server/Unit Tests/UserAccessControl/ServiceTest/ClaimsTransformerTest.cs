@@ -7,7 +7,7 @@ using Whatfits.UserAccessControl.Service;
 using Whatfits.UserAccessControl.Test.Constant;
 using Xunit;
 
-namespace Whatfits.UserAccessControl.Test.ServiceTest
+namespace UserAccessControl.ServiceTest
 {
     public class ClaimsTransformerTest
     {
