@@ -19,7 +19,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations
         {
             var sampleWorkouts = new List<WorkoutLog>
             {
-                new WorkoutLog() { WorkoutLogID = 1, UserID = 1, Date_Time = new DateTime(2018, 2, 1), WorkoutType= "Cardio"},
+                new WorkoutLog() { WorkoutLogID = 1, UserID = 1, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio"},
                 new WorkoutLog() { WorkoutLogID = 2, UserID = 2, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio" },
                 new WorkoutLog() { WorkoutLogID = 3, UserID = 3, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Weightlifting" },
                 new WorkoutLog() { WorkoutLogID = 4, UserID = 4, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Weightlifting" },

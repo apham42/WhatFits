@@ -1,6 +1,14 @@
-﻿Description: List for creating, adding, and updating migrations.
+﻿
+Description: List for creating, adding, and updating migrations.
 Author: Roberto Sanchez
 
+//--------------------------------------------------------------
+//	THIS IS THE ONLY LINE YOU NEED TO CREATE DATABASE - Rob
+//--------------------------------------------------------------
+Update Database:
+update-database -configuration Whatfits.Models.Migrations.AccountMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.SearchMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration -verbose
+
+//-------------------------------------------------------------
 For Account
 enable-migrations -ContextTypeName Whatfits.Models.Context.Core.AccountContext -MigrationsDirectory:Migrations\AccountMigrations
 add-migration -configuration Whatfits.Models.Migrations.AccountMigrations.Configuration
@@ -33,8 +41,8 @@ For Workout Logger
 enable-migrations -ContextTypeName Whatfits.Models.Context.Content.WorkoutLogContext -MigrationsDirectory:Migrations\ContentMigrations\WorkoutLogMigrations
 add-migration -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration
 update-database -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration -verbose
+
 Speedup:
 Enable Migrations:
 enable-migrations -ContextTypeName Whatfits.Models.Context.Core.AccountContext -MigrationsDirectory:Migrations\AccountMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.ChatContext -MigrationsDirectory:Migrations\ContentMigrations\ChatMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.EventsContext -MigrationsDirectory:Migrations\ContentMigrations\EventsMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.FollowsContext -MigrationsDirectory:Migrations\ContentMigrations\FollowsMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.NotificationContext -MigrationsDirectory:Migrations\ContentMigrations\NotificationMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.ReviewsContext -MigrationsDirectory:Migrations\ContentMigrations\ReviewsMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.SearchContext -MigrationsDirectory:Migrations\ContentMigrations\SearchMigrations; enable-migrations -ContextTypeName Whatfits.Models.Context.Content.WorkoutLogContext -MigrationsDirectory:Migrations\ContentMigrations\WorkoutLogMigrations; 
-Update Database:
-update-database -configuration Whatfits.Models.Migrations.AccountMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ChatMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.SearchMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations.Configuration -verbose; update-database -configuration Whatfits.Models.Migrations.ContentMigrations.EventsMigrations.Configuration -verbose
+

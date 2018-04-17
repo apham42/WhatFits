@@ -58,27 +58,28 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
 
         //Retrieves all reviews based on userID
         //Refactored to usernames
-        //public List<string> GetReviews(int UserID)
-        //{
-        //    List<string> rmsg = (from b in db.Review
-        //                         where b.UserID == UserID
-        //                         select b.ReviewMessage
-        //                          ).ToList();
-        //    return rmsg;
-        //}
+        public List<string> GetReviews(int UserID)
+        {
+            List<string> rmsg = (from b in db.Review
+                                 where b.UserID == UserID
+                                 select b.ReviewMessage
+                                  ).ToList();
+            return rmsg;
+        }
 
 
         ////See if the review id exists (only needed if we are editing)
-        //public Boolean ReviewExist(ReviewsDTO r)
-        //{
-        //    var foundReviewID = (from b in db.Review
-        //                         where b.ReviewID == r.ReviewID
-        //                         select b.ReviewID);
-        //    if (foundReviewID == null)
-        //        return false;
-        //    else
-        //        return true;
-        //}
+        public Boolean ReviewExist(ReviewsDTO r)
+        {
+            var foundReviewID = (from b in db.Review
+                                 join cred in db.Credentials
+                                 on b.UserID equals cred.UserID
+                                 select b.ReviewID);
+            if (foundReviewID == null)
+                return false;
+            else
+                return true;
+        }
 
         //gets all the reviewID'S in the database
         public List<int> GetReviewList()
