@@ -45,7 +45,4 @@ export default {
 </script>
 
 <style>
-box {
-  position: absolute;
-}
 </style>

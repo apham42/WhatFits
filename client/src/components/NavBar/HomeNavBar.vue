@@ -38,11 +38,11 @@
                     </div>
                 <span class="navbar-item">
                     <button class="button is-primary is-inverted" @click="openModal">
-                    <span class="icon">
-                        <i class="fa fa-sign-in-alt"></i>
-                    </span>
-                    <span>Login</span>
-                    <LoginModal v-show='showLogin'></LoginModal>
+                        <span class="icon">
+                            <i class="fa fa-sign-in-alt"></i>
+                        </span>
+                        <span>Login</span>
+                        <LoginModal v-show='showLogin'></LoginModal>
                     </button>
                 </span>
                 </div>
