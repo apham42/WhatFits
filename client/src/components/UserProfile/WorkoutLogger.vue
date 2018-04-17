@@ -22,10 +22,8 @@
                     <input v-model="WorkoutLogger.Distance" placeholder="'0.00'" />
                     <label for="Time">Time</label>
                     <input v-model="WorkoutLogger.Time" placeholder="'0:00'" />
-                </div>    
+                </div>
             </p1>
-
-            
           <button v-on:click.prevent="submit">Add Workout</button>
         </form>
         <div id="preview">
@@ -34,18 +32,16 @@
           <p v-if = "WorkoutLogger.WorkoutType === 'Lifting'">
               {{WorkoutLogger.LiftingType}}
               {{WorkoutLogger.Sets}}
-              {{WorkoutLoggers.Reps}}
+              {{WorkoutLogger.Reps}}
           </p>
           <p v-if = "WorkoutLogger.WorkoutType === 'Cardio'">
               {{WorkoutLogger.CardioType}}
               {{WorkoutLogger.Distance}}
               {{WorkoutLogger.Time}}
-          </p>   
+          </p>
         </div>
-
         <ul>
             <transition-group name ="list" enter-active-class="animated bounceInUp">
-                
             </transition-group>
         </ul>
     </div>
@@ -54,56 +50,56 @@
 <script>
 import axios from 'axios'
 export default {
-    name: 'WorkoutLogger',
-    computed: {
-      isAuthenticated: function () {
-        return this.$store.getters.isAuthenticated
-        }
-    },
-    data: function () {
-        return {
-            WorkoutLogger:{
-              WorkoutType: '',
-              CardioType: '',
-              LiftingType: '',
-              Reps: '',
-              Sets: '',
-              Time: '',
-              Distance: '',
-              Date_Time: new Date().toLocaleDateString(),
-            },
-            pageTitle: 'Workout Logger',
-            hasErrored: false,
-            container: '',
-            containerHeight: '',
-            WorkoutOptions: ['Cardio','Lifting'],
-            CardioOptions: ['Sprinting', 'Running', 'Swimming'],
-            LiftingOptions: ['BenchPress', 'Curls', 'PullUps']
-        }
-    },
-    methods:{
-      AddLog:function(){
-        
-      }
-    },
-    submit () {
-        axios({
-            method: 'POST',
-            url: 'http://localhost/server/WorkoutLog/CreateWorkout',
-            data: {
-                WorkoutType: this.WorkoutLogger.WorkoutType,
-                Date_Time: this.WorkoutLogger.Date_Time
-            },
-            headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/json'
-            }
-        }).then(response => {
-            console.log(response)
-        }).catch((error) => {
-            console.log(error.response)
-        })
+  name: 'WorkoutLogger',
+  computed: {
+    isAuthenticated: function () {
+      return this.$store.getters.isAuthenticated
     }
+  },
+  data: function () {
+    return {
+      WorkoutLogger: {
+        WorkoutType: '',
+        CardioType: '',
+        LiftingType: '',
+        Reps: '',
+        Sets: '',
+        Time: '',
+        Distance: '',
+        Date_Time: new Date().toLocaleDateString()
+      },
+      pageTitle: 'Workout Logger',
+      hasErrored: false,
+      container: '',
+      containerHeight: '',
+      WorkoutOptions: ['Cardio', 'Lifting'],
+      CardioOptions: ['Sprinting', 'Running', 'Swimming'],
+      LiftingOptions: ['BenchPress', 'Curls', 'PullUps']
+    }
+  },
+  methods: {
+    AddLog: function () {}
+  },
+  submit () {
+    axios({
+      method: 'POST',
+      url: 'http://localhost/server/WorkoutLog/CreateWorkout',
+      data: {
+        WorkoutType: this.WorkoutLogger.WorkoutType,
+        Date_Time: this.WorkoutLogger.Date_Time
+      },
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
+  }
 }
 </script>
 
