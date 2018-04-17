@@ -1,9 +1,6 @@
 <template>
   <nav class="navbar is-primary">
-    <div class="navbar-brand">
-       <img id="navImage" src="../assets/NavbarLogo/navbarLogo.png" alt="Bulma: a modern CSS framework based on Flexbox">
-    </div>
-    <MainNavBar v-if="this.$route.name != 'Home'"></MainNavBar>
+    <HomeNavBar v-if="this.$route.name == 'Home'"></HomeNavBar>
   </nav>
 </template>
 
@@ -19,7 +16,6 @@ export default {
   methods: {
   }
 }
-
 </script>
 
 <style>

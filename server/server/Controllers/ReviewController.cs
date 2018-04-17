@@ -9,9 +9,16 @@ using Whatfits.DataAccess.DTOs.ContentDTOs;
 
 namespace server.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class ReviewController : ApiController
     {
-        //Generic response from server
+        /// <summary>
+        /// Creates Review
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
         [HttpPost]
         public IHttpActionResult CreateReview(ReviewsDTO review)
         {
@@ -27,7 +34,11 @@ namespace server.Controllers
             }
         }
 
-        //Gets reviews of specific userName
+        /// <summary>
+        /// Gets reviews of specific userName
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <returns></returns>
         [Route("Review/GetUserReview/{UserName}")]
         [HttpGet]
         public IEnumerable<ReviewDetailDTO> GetUserReview(string UserName)
