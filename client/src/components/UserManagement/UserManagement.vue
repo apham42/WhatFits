@@ -322,7 +322,6 @@ export default {
     },
     createNewUser: function () {
       // Validate incoming data
-
       if (this.userType === 'General') {
         console.log('Inside createUser Method')
         axios({
@@ -364,16 +363,16 @@ export default {
           .then(response => {
           // NOTE: CHANGE THIS BEFORE PRODUCTION
             console.log(response)
-            this.statusMessages.createUserResponse = response.data
+            this.statusMessages.createUserResponse = response.data.Messages
             this.errorFlags.createUserFlag = false
           }).catch((error) => {
           // Pushes the error messages into error to display
             if (error.response) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
+              this.statusMessages.createUserResponse = 'Error: ' + error.response.data.Messages
               this.errorFlags.createUserFlag = true
               console.log(error.response)
             } else if (error.request) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
+              this.statusMessages.createUserResponse = 'Error: ' + error.response.data.Messages
               this.errorFlags.createUserFlag = true
               console.log(error.request)
             } else {
