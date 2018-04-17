@@ -1,42 +1,68 @@
 <template>
- <div id="navbarExampleTransparentExample" class="navbar-menu">
-    <div class="navbar-item is-hoverable ">
-        <a class="navbar-link" href="http://localhost:8081" >
-        Home
-      </a>
-        <a class="navbar-link" href="http://localhost:8081">
-        About
-      </a>
-    </div>
-    <div class="navbar-end">
-        <div class="navbar-item">
-            <div class="field is-grouped">
-                <p class="control">
-                    <a class="button" @click="showLogin = true">
-              <span class="icon">
-                <i class="fas fa-sign-in-alt"></i>
-              </span>
-              <span>Login</span>
+ <div class="hero-head">
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a>
+              <img id="navImage" src="../../assets/Images/LogoNavbarLogo/navbarLogo.png" alt="Logo">
             </a>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div v-if="showLogin">
-        <div class="modal is-active">
-            <div class="modal-background" @click="showLogin = false"></div>
-            <div class="modal-content">
-                <div class="box">
-                    <Login></Login>
-                    <div class="level-left">
-                        <a id="cancel" class="button is-danger" @click="showLogin = false">Cancel</a>
+                    <span class="navbar-burger burger" data-target="navbarMenuHero1">
+              <span></span>
+                    <span></span>
+                    <span></span>
+                    </span>
+                </div>
+                <div id="navbarMenuHero1" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a class="navbar-item">
+                Home
+              </a>
+                        <a class="navbar-item">
+                Examples
+              </a>
+                        <a class="navbar-item">
+                Documentation
+              </a>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <div class="navbar-link">
+                                More
+                            </div>
+                            <div id="moreDropdown" class="navbar-dropdown ">
+                                <a class="navbar-item " href="#">
+                                    <div class="level is-mobile">
+                                        <div class="level-left">
+                                            <div class="level-item">
+                                                <p>
+                                                    <strong>Extensions</strong>
+                                                    <br>
+                                                    <small>Side projects to enhance Bulma</small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <span class="navbar-item">
+                          <a class="button is-primary is-primary">
+                  <span class="icon">
+                   <i class="fas fa-plus-circle"></i>
+                  </span>
+                        <span>Register</span>
+                        </a>
+                <a class="button is-primary is-inverted">
+                  <span class="icon">
+                   <i class="fas fa-sign-in-alt"></i>
+                  </span>
+                        <span>Login</span>
+                        </a>
+
+                        </span>
                     </div>
                 </div>
             </div>
-            <button id="closebutton" class="modal-close is-large" aria-label="close" @click="showLogin = false"></button>
-        </div>
+        </nav>
     </div>
-</div>
 </template>
 
 <script>

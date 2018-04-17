@@ -10,8 +10,15 @@ using Whatfits.JsonWebToken.Controller;
 
 namespace server.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class UACTESTController : ApiController
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         //[AuthorizePrincipal(type = "Workout", value = "add workout")]
         public bool one()
@@ -24,7 +31,9 @@ namespace server.Controllers
             return StructuralComparisons.StructuralEqualityComparer.Equals(byt, byt2);
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
         [HttpPost]
         public void two()
         {
@@ -38,7 +47,10 @@ namespace server.Controllers
 
             auth.AddToTokenList(newDTO);
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public string three()
         {
@@ -51,7 +63,10 @@ namespace server.Controllers
             return sup.Data;
         }
 
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         //[AuthorizePrincipal(type = "WORKOUT_ADD", value = "EE")]
         public bool four()
@@ -66,7 +81,10 @@ namespace server.Controllers
             ResponseDTO<Boolean> found = uac.AddUserClaims(userAccessDTO);
             return found.IsSuccessful;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public string five()
         {
@@ -75,7 +93,10 @@ namespace server.Controllers
             return createJWT.CreateToken("amay", "general");
 
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [AuthorizePrincipal(type = "WORKOUT_ADD", value = "Add")]
         public string six()

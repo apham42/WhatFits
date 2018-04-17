@@ -7,7 +7,7 @@ using Whatfits.UserAccessControl.Controller;
 using Whatfits.UserAccessControl.Test.Constant;
 using Xunit;
 
-namespace Whatfits.UserAccessControl.Test.ControllerTest
+namespace UserAccessControl.ControllerTest
 {
     public class AuthorizeTest : AuthorizePrincipal
     {

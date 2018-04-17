@@ -8,6 +8,7 @@ Vue.use(Vuelidate)
 
 // Defining routes for web application
 export default new Router({
+  mode: 'history',
   routes: [
     {
       // HomePage
@@ -60,6 +61,12 @@ export default new Router({
       path: '/SearchBar',
       name: 'SearchBar',
       component: () => import('@/components/Search/SearchBar')
+    },
+    {
+      // Workout Logger component
+      path: '/WorkoutLogger',
+      name: 'WorkoutLogger',
+      component: () => import('@/components/UserProfile/WorkoutLogger')
     },
     {
       // Catch All Error Page
