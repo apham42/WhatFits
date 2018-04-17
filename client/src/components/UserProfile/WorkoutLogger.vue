@@ -7,21 +7,21 @@
             <p1>
                 <div v-if = "WorkoutLogger.WorkoutType === 'Lifting'">
                     <select v-model = WorkoutLogger.LiftingType>
-                      <option v-for="type in LiftingOptions" :key="type">{{ type }}</option>
+                      <option v-for="liftingtype in LiftingOptions" :key="liftingtype">{{ liftingtype }}</option>
                     </select>
                     <label for="Reps">Reps</label>
-                    <input v-model="WorkoutLogger.Reps" placeholder="'0'" />
+                    <input v-model="WorkoutLogger.Reps" v-on:keypress="isInteger(event)" placeholder="0" />
                     <label for="Sets">Sets</label>
-                    <input v-model="WorkoutLogger.Sets" placeholder="'0'" />
+                    <input v-model="WorkoutLogger.Sets" v-on:keypress="isInteger(event)" placeholder="0" />
                 </div>
                 <div v-if = "WorkoutLogger.WorkoutType === 'Cardio'">
                     <select v-model = WorkoutLogger.CardioType>
-                      <option v-for="type in CardioOptions" :key="type">{{ type }}</option>
+                      <option v-for="cardiotype in CardioOptions" :key="cardiotype">{{ cardiotype }}</option>
                     </select>
                     <label for="Distance">Distance</label>
-                    <input v-model="WorkoutLogger.Distance" placeholder="'0.00'" />
+                    <input v-model="WorkoutLogger.Distance" v-on:keypress="isFloat(event)" placeholder="0.00" />
                     <label for="Time">Time</label>
-                    <input v-model="WorkoutLogger.Time" placeholder="'0:00'" />
+                    <input v-model="WorkoutLogger.Time" v-on:keypress="isTime(event)" placeholder="0:00" />
                 </div>    
             </p1>
 
@@ -31,12 +31,13 @@
         <div id="preview">
           <h3> Preview Log </h3>
           <p> {{WorkoutLogger.WorkoutType}} </p>
+          <!--error is here for some reason-->
           <p v-if = "WorkoutLogger.WorkoutType === 'Lifting'">
               {{WorkoutLogger.LiftingType}}
+              {{WorkoutLogger.Reps}}
               {{WorkoutLogger.Sets}}
-              {{WorkoutLoggers.Reps}}
           </p>
-          <p v-if = "WorkoutLogger.WorkoutType === 'Cardio'">
+          <p v-else-if = "WorkoutLogger.WorkoutType === 'Cardio'">
               {{WorkoutLogger.CardioType}}
               {{WorkoutLogger.Distance}}
               {{WorkoutLogger.Time}}
@@ -76,20 +77,47 @@ export default {
             hasErrored: false,
             container: '',
             containerHeight: '',
-            WorkoutOptions: ['Cardio','Lifting'],
-            CardioOptions: ['Sprinting', 'Running', 'Swimming'],
-            LiftingOptions: ['BenchPress', 'Curls', 'PullUps']
+            WorkoutOptions: ['Lifting','Cardio'],
+            LiftingOptions: ['BenchPress', 'Curls', 'PullUps'],
+            CardioOptions: ['Sprinting', 'Running', 'Swimming']
         }
     },
     methods:{
-      AddLog:function(){
-        
-      }
+        AddLog:function(){
+            
+        },
+        isFloat: function(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 46) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        },
+        isTime: function(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57)) && charCode !== 58) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        },
+        isInteger: function(evt) {
+            evt = (evt) ? evt : window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+            if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
+                evt.preventDefault();;
+            } else {
+                return true;
+            }
+        }
     },
     submit () {
         axios({
             method: 'POST',
-            url: 'http://localhost/server/WorkoutLog/CreateWorkout',
+            url: 'http://localhost/server/WorkoutLogger/CreateWorkout',
             data: {
                 WorkoutType: this.WorkoutLogger.WorkoutType,
                 Date_Time: this.WorkoutLogger.Date_Time
@@ -107,6 +135,6 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 
 </style>
