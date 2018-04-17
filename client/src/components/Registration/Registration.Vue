@@ -245,7 +245,9 @@ export default {
     },
 
     testtttttttttt () {
-      this.$router.push('/chat')
+      this.$router.push({
+        name: 'Home'
+      })
     },
 
     // Sends the request to the server
