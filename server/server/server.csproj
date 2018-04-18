@@ -124,6 +124,7 @@
     <Compile Include="Constants\LocationConstants.cs" />
     <Compile Include="Controllers\BadPasswordController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="Model\Account\RegInfo.cs" />
     <Compile Include="Model\Account\SecurityQuestion.cs" />
     <Compile Include="Model\Account\UserCredential.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\LoginResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
     <Compile Include="Global.asax.cs">

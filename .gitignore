@@ -34,3 +34,5 @@ server/Whatfits\.UserAccessControl\.Test/obj/
 server/server/bin/
 
 server/server/obj/
+
+server/\.vs/server/v15/Server/sqlite3/storage\.ide
