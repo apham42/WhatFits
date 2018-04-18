@@ -22,19 +22,25 @@ namespace Whatfits.UserAccessControl.Service
         /// <returns>string token</returns>
         public string GetToken(HttpRequestMessage request)
         {
-            // gets header of request
-            var header = request.Headers;
+            try
+            {
+                // gets header of request
+                var header = request.Headers;
 
-            // gets token from header
-            token = header.Authorization.Parameter;
+                // gets token from header
+                token = header.Authorization.Parameter;
 
-            if (header.Authorization.Scheme == "Bearer" && !string.IsNullOrEmpty(token))
+                if (header.Authorization.Scheme == "Bearer" && !string.IsNullOrEmpty(token))
+                {
+                    return token;
+                }
+
+                return token;
+            }
+            catch (NullReferenceException)
             {
                 return token;
             }
-
-            // throws excpetion to be caught in AuthenticateHttpMessageHandler
-            throw new Exception();
         }
     }
 }

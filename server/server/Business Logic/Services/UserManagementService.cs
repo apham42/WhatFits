@@ -24,33 +24,36 @@ namespace server.Services
         /// <returns></returns>
         public ResponseDTO<Boolean> CreateAdmin(RegInfo obj)
         {
-            var validator = new RegInfoValidator();
             List<string> messages = new List<string>();
-            ResponseDTO<bool> response = new ResponseDTO<bool>();
-            // validates Register info
-            if (!validator.Validate(obj).isSuccessful)
+
+            // Validates user credentials and returns response dto if it fails validation
+            if (!ValidateCredentials(creds))
             {
-                response.IsSuccessful = false;
-                response.Messages.Add("Failure: Did not pass validation");
-                return response;
+                return Response;
             }
 
-            var gatewayDTO = CreateUserDTO(obj, validator.ValidatedLocation);
+            var gatewayDTO = CreateGatewayDTO(creds, UserLocation);
+
+            /*************************************************************************/
+            // Roberto create a similar method to Register User but you
+            // add the admin claims to the gatewayDTO.UserClaims after CreateGatewayDTO method
+            // since gatewayDTO.UserClaims will have the claims of a general user already.
+            /*************************************************************************/
 
             // Save user into the database and returns the status
             if (Create(gatewayDTO))
             {
-                response.IsSuccessful = true;
+                Response.isSuccessful = true;
                 messages.Add(AccountConstants.USER_CREATED);
-                response.Messages = messages;
+                Response.Messages = messages;
             }
             else
             {
-                response.IsSuccessful = false;
+                Response.isSuccessful = false;
                 messages.Add(AccountConstants.USER_CREATE_FAIL);
-                response.Messages = messages;
+                Response.Messages = messages;
             }
-            return response;
+            return Response;
         }
         /// <summary>
         /// Creates dto based on validated information
@@ -117,7 +120,7 @@ namespace server.Services
                 Zipcode = user.UserLocation.ZipCode,
                 Longitude = geoCoordinates.Longitude,
                 Latitude = geoCoordinates.Latitude,
-                UserClaims = SetDefaultClaims.GetDefaultClaims(),
+                //UserClaims = SetDefaultClaims.GetDefaultClaims(),
                 Salt = salt,
                 Questions = questions,
                 Answers = answers

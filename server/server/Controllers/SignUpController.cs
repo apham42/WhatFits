@@ -23,7 +23,7 @@ namespace server.Controllers
         [HttpPost]
         [Route("Register")]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult Register(RegInfo userCred)
+        public IHttpActionResult Register([FromBody] RegInfo userCred)
         {
             AccountService service = new AccountService();
             RegInfoResponseDTO response = service.RegisterUser(userCred);
