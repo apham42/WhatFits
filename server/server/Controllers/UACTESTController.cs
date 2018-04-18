@@ -7,6 +7,7 @@ using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.DTOs;
 using Whatfits.JsonWebToken.Controller;
+using System.Collections.Generic;
 
 namespace server.Controllers
 {
@@ -23,6 +24,8 @@ namespace server.Controllers
         //[AuthorizePrincipal(type = "Workout", value = "add workout")]
         public bool one()
         {
+            ICollection<int> hey = new List<int>();
+
             HMAC256 createnewsecret = new HMAC256();
             byte[] byt = Convert.FromBase64String(createnewsecret.GenerateSalt());
             string test = Convert.ToBase64String(byt);
