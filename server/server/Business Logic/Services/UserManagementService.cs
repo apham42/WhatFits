@@ -25,35 +25,9 @@ namespace server.Services
         public ResponseDTO<Boolean> CreateAdmin(RegInfo obj)
         {
             List<string> messages = new List<string>();
-
-            // Validates user credentials and returns response dto if it fails validation
-            if (!ValidateCredentials(creds))
-            {
-                return Response;
-            }
-
-            var gatewayDTO = CreateGatewayDTO(creds, UserLocation);
-
-            /*************************************************************************/
-            // Roberto create a similar method to Register User but you
-            // add the admin claims to the gatewayDTO.UserClaims after CreateGatewayDTO method
-            // since gatewayDTO.UserClaims will have the claims of a general user already.
-            /*************************************************************************/
-
-            // Save user into the database and returns the status
-            if (Create(gatewayDTO))
-            {
-                Response.isSuccessful = true;
-                messages.Add(AccountConstants.USER_CREATED);
-                Response.Messages = messages;
-            }
-            else
-            {
-                Response.isSuccessful = false;
-                messages.Add(AccountConstants.USER_CREATE_FAIL);
-                Response.Messages = messages;
-            }
-            return Response;
+            ResponseDTO<Boolean> temp = new ResponseDTO<bool>();
+            return temp;
+            
         }
         /// <summary>
         /// Creates dto based on validated information
