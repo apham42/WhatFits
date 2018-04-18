@@ -106,11 +106,12 @@
         <input type="checkbox" name="terms" v-model = termsChecked>
 
         <div class="errorResponse">
-            <p v-for="error in errors[0]" :key="error"> {{error}} </p>
+            <p v-for="message in messages[0]" :key="message"> {{message}} </p>
         </div>
 
         <div class="registerButton">
             <button type="submit" class="register-button" :disabled="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.password)" @click="registerUser">Register</button>
+            <button @click="testtttttttttt">test</button>
         </div>
     </form>
 </div>
@@ -162,7 +163,7 @@ export default {
         'In what city or town does your nearest sibling live?'
       ],
       termsChecked: false,
-      errors: [],
+      messages: [],
       showTerms: false
     }
   }, // data
@@ -243,6 +244,12 @@ export default {
       }
     },
 
+    testtttttttttt () {
+      this.$router.push({
+        name: 'Home'
+      })
+    },
+
     // Sends the request to the server
     registerUser () {
       axios({
@@ -282,14 +289,16 @@ export default {
       })
         // redirect to Home page
         .then((response) => {
+          this.$data.messages = []
           this.$router.push('/')
         }).catch((error) => {
           // Pushes the error messages into error to display
-          this.$data.errors = []
-          this.$data.errors.push(error.response.data.Messages)
+          this.$data.messages = []
+          this.$data.messages.push(error.response.data.Messages)
         })
     }
   }
+
 }
 
 </script>
