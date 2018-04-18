@@ -148,7 +148,7 @@ namespace server.Services
                 Zipcode = user.UserLocation.ZipCode,
                 Longitude = geoCoordinates.Longitude,
                 Latitude = geoCoordinates.Latitude,
-                //UserClaims = SetDefaultClaims.GetDefaultClaims(),
+                UserClaims = new SetDefaultClaims().GetDefaultClaims(),
                 Salt = salt,
                 Questions = questions,
                 Answers = answers

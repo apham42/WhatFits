@@ -105,7 +105,7 @@
 
         <input type="checkbox" name="terms" v-model = termsChecked>
 
-        <div class="errorResponse">
+        <div class="response">
             <p v-for="message in messages[0]" :key="message"> {{message}} </p>
         </div>
 
@@ -289,8 +289,8 @@ export default {
       })
         // redirect to Home page
         .then((response) => {
-          this.$data.messages = []
-          this.$router.push('/')
+          this.$data.messages.push(response.data.Messages)
+          // this.$router.push('/')
         }).catch((error) => {
           // Pushes the error messages into error to display
           this.$data.messages = []
