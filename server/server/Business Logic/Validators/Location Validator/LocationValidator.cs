@@ -62,7 +62,7 @@ namespace server.Model.Validators.Location_Validator
             var mappedData = dataMapper.Convert(test.Response);
 
             // Validating County based on the scope 
-            if (mappedData.County.Equals("Los Angeles County") || !mappedData.County.Equals("Orange County"))
+            if (mappedData.County.Equals("Los Angeles County") || mappedData.County.Equals("Orange County"))
             {
                 ValidatedLocation = mappedData;
                 return true;

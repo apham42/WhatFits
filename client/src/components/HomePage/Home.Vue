@@ -1,7 +1,6 @@
 <template>
  <div>
 <section class="hero ">
-
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
         <div class="container has-text-centered">
@@ -239,7 +238,7 @@ export default {
     padding-top: 2em;
 }
 #bodySection {
-background-color:#34495E;
+    background-color:#34495E;
 }
 
 </style>
