@@ -1,27 +1,26 @@
 <template>
-  <nav class="navbar is-primary">
-    <HomeNavBar v-if="this.$route.name == 'Home'"></HomeNavBar>
-  </nav>
+  <div>
+    <HomeNavBar v-if="showNavBar"></HomeNavBar>
+  </div>
 </template>
 
 <script>
-import MainNavBar from '@/components/NavBar/MainNavBar.vue'
+import HomeNavBar from '@/components/NavBar/HomeNavBar.vue'
 export default {
   name: 'NavBar',
   components: {
-    'MainNavBar': MainNavBar
+    'HomeNavBar': HomeNavBar
   },
   computed: {
+    showNavBar: function () {
+      return this.$route.name === 'Home' || this.$route.name === 'Registration'
+    }
   },
   methods: {
+
   }
 }
 </script>
 
 <style>
-#navImage {
-  height: 50px;
-  padding-left: 20px;
-  padding-top: 5px;
-}
 </style>

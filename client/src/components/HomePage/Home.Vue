@@ -1,7 +1,6 @@
 <template>
  <div>
 <section class="hero ">
-
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
         <div class="container has-text-centered">
@@ -19,22 +18,22 @@
             <div class="container">
                 <ul>
                     <li class="is-active">
-                        <a>Overview</a>
+                        <router-link to="/signup">Register</router-link>
                     </li>
                     <li>
-                        <a>Modifiers</a>
+                        <router-link to="/usermanagement">UserManagement</router-link>
                     </li>
                     <li>
-                        <a>Grid</a>
+                        <router-link to="/Review">Review</router-link>
                     </li>
                     <li>
-                        <a>Elements</a>
+                        <router-link to="/profile">Profile</router-link>
                     </li>
                     <li>
-                        <a>Components</a>
+                        <router-link to="/SearchBar">Search</router-link>
                     </li>
                     <li>
-                        <a>Layout</a>
+                        <router-link to="/chat">Chat</router-link>
                     </li>
                 </ul>
             </div>
@@ -206,7 +205,6 @@ export default {
       response: ''
     }
   },
-
   // validations based on business rules
   validations: {
     username: {
@@ -240,7 +238,7 @@ export default {
     padding-top: 2em;
 }
 #bodySection {
-background-color:#34495E;
+    background-color:#34495E;
 }
 
 </style>
