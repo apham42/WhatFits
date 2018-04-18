@@ -16,7 +16,7 @@ namespace server.Controllers
         [HttpPost]
         [Route("User")]
         [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult SearchUser(string username)
+        public IHttpActionResult SearchUser([FromBody] string username)
         {
             SearchService service = new SearchService();
             UsernameDTO userCred = new UsernameDTO()
