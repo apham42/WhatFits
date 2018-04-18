@@ -1,81 +1,85 @@
 <template>
-        <nav class="navbar is-radiusless">
+ <div class="hero-head">
+        <nav class="navbar">
             <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item">
-                <img src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home" @click="toHome">
-                </a>
-                <span class="navbar-burger burger" data-target="navbarMenuHero1">
+                <div class="navbar-brand">
+                    <a>
+              <img id="navImage" src="../../assets/Images/LogoNavbarLogo/navbarLogo.png" alt="Logo">
+            </a>
+                    <span class="navbar-burger burger" data-target="navbarMenuHero1">
+              <span></span>
                     <span></span>
                     <span></span>
-                    <span></span>
-                </span>
-            </div>
-            <div id="navbarMenuHero1" class="navbar-menu">
-                <div class="navbar-end">
-                <a class="navbar-item" @click="toRegistration">
-                    Registration
-                </a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <div class="navbar-link">
-                        More
-                    </div>
-                    <div id="moreDropdown" class="navbar-dropdown ">
-                        <a class="navbar-item " href="#">
-                        <div class="level is-mobile">
-                            <div class="level-left">
-                            <div class="level-item">
-                                <p>
-                                <strong>Extensions</strong>
-                                <br>
-                                <small>Side projects to enhance Bulma</small>
-                                </p>
+                    </span>
+                </div>
+                <div id="navbarMenuHero1" class="navbar-menu">
+                    <div class="navbar-end">
+                        <a class="navbar-item">
+                Home
+              </a>
+                        <a class="navbar-item">
+                Examples
+              </a>
+                        <a class="navbar-item">
+                Documentation
+              </a>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <div class="navbar-link">
+                                More
                             </div>
+                            <div id="moreDropdown" class="navbar-dropdown ">
+                                <a class="navbar-item " href="#">
+                                    <div class="level is-mobile">
+                                        <div class="level-left">
+                                            <div class="level-item">
+                                                <p>
+                                                    <strong>Extensions</strong>
+                                                    <br>
+                                                    <small>Side projects to enhance Bulma</small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
+                        <span class="navbar-item">
+                          <a class="button is-primary is-primary">
+                  <span class="icon">
+                   <i class="fas fa-plus-circle"></i>
+                  </span>
+                        <span>Register</span>
                         </a>
-                    </div>
-                    </div>
-                <span class="navbar-item">
-                    <button class="button is-primary is-inverted" @click="openModal">
-                        <span class="icon">
-                            <i class="fa fa-sign-in-alt"></i>
-                        </span>
+                <a class="button is-primary is-inverted">
+                  <span class="icon">
+                   <i class="fas fa-sign-in-alt"></i>
+                  </span>
                         <span>Login</span>
-                        <LoginModal v-show='showLogin'></LoginModal>
-                    </button>
-                </span>
+                        </a>
+
+                        </span>
+                    </div>
                 </div>
             </div>
-            </div>
         </nav>
+    </div>
 </template>
 
 <script>
-import LoginModal from '@/components/Auth/LoginModal.vue'
+import Login from '@/components/Auth/Login.vue'
 export default {
   name: 'HomeNavBar',
   components: {
-    'LoginModal': LoginModal
-  },
-  computed: {
-    showLogin: function () {
-      return this.$store.getters.popupStatus
-    }
+    'Login': Login
   },
   data () {
     return {
+      showLogin: false
     }
   },
   methods: {
-    toRegistration: function () {
-      this.$router.push('signup')
-    },
-    toHome: function () {
-      this.$router.push('/')
-    },
-    openModal: function () {
-      this.$store.dispatch('controlPopup', {modalStatus: true})
+    closeLog: function () {
+      this.showLogin = false
     }
   }
 }

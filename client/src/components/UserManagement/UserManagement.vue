@@ -41,7 +41,7 @@
         </div>
         <label class="label">Zipcode</label>
         <div class="control">
-          <input class="input" v-model="zipCode" type="text" placeholder="Zipcode">
+          <input class="input" v-model="zipcode" type="text" placeholder="Zipcode">
         </div>
         <label class="label">State</label>
         <div class="control">
@@ -53,7 +53,7 @@
         <label class="label">Question #1</label>
         <div class="control">
           <div class="select is-fullwidth" >
-            <select v-model="securityQues1">
+            <select>
               <option selected disabled>Select Question</option>
               <option v-for="securityQuestion1 in securityQuestionsSet1" :key="securityQuestion1"> {{securityQuestion1}} </option>
             </select>
@@ -61,14 +61,14 @@
         </div>
         <br>
          <div class="control">
-          <input class="input" v-model="answerToSecQues1" type="text" placeholder="Answer">
+          <input class="input" v-model="a" type="text" placeholder="Answer">
         </div>
       </div>
       <div class="field">
         <label class="label">Question #2</label>
         <div class="control">
           <div class="select is-fullwidth" >
-            <select v-model="securityQues2">
+            <select>
               <option selected disabled>Select Question</option>
               <option v-for="securityQuestion2 in securityQuestionsSet2" :key="securityQuestion2"> {{securityQuestion2}} </option>
 
@@ -77,14 +77,14 @@
         </div>
         <br>
          <div class="control">
-          <input class="input" v-model="answerToSecQues2" type="text" placeholder="Answer">
+          <input class="input" v-model="a" type="text" placeholder="Answer">
         </div>
       </div>
       <div class="field">
         <label class="label">Question #3</label>
         <div class="control">
           <div class="select is-fullwidth" >
-            <select v-model="securityQues3">
+            <select>
               <option selected disabled>Select Question</option>
               <option v-for="securityQuestion3 in securityQuestionsSet3" :key="securityQuestion3"> {{securityQuestion3}} </option>
             </select>
@@ -92,7 +92,7 @@
         </div>
         <br>
          <div class="control">
-          <input class="input" v-model="answerToSecQues3" type="text" placeholder="Answer">
+          <input class="input" v-model="a" type="text" placeholder="Answer">
         </div>
       </div>
       <div class="field">
@@ -200,19 +200,19 @@ export default {
     return {
       pageTitle: 'UserManagement Page',
       // Create User Data
-      userName: 'TestUser',
-      password: '12345610987134',
-      confirmPassword: '123456',
-      address: '321 W. 119th St.',
-      city: 'Los Angeles',
-      state: 'California',
-      zipCode: '90061',
-      answerToSecQues1: 'TEST',
-      answerToSecQues2: 'TEST',
-      answerToSecQues3: 'TEST',
-      securityQues1: 'Who was the company you first worked for?',
-      securityQues2: 'What is your favorite song?',
-      securityQues3: 'What was the name of your first crush?',
+      username: '',
+      password: '',
+      confirmPassword: '',
+      address: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      answerToSecQues1: '',
+      answerToSecQues2: '',
+      answerToSecQues3: '',
+      securityQues1: '',
+      securityQues2: '',
+      securityQues3: '',
       securityQuestionsSet1: [
         'Who was the company you first worked for?',
         'Where did you go to highschool or college?',
@@ -228,8 +228,6 @@ export default {
         'What is the first name of the person you first kissed?',
         'In what city or town does your nearest sibling live?'
       ],
-      userType: '',
-      terms: '',
       // Change Status Data
       changeStatusUser: {
         userName: '',
@@ -322,40 +320,52 @@ export default {
     },
     createNewUser: function () {
       // Validate incoming data
+
       if (this.userType === 'General') {
-        console.log('Inside createUser Method')
         axios({
           method: 'POST',
           url: 'http://localhost/server/v1/SignUp/Register',
           data: {
             UserCredInfo: {
-              username: this.userName,
-              password: this.password
+              // username: thisusername,
+              // password: this.password
+              username: 'asdfasdf',
+              password: 'hajiafdasekdiek'
             },
             SecurityQandAs: [
               {
-                question: this.securityQues1,
-                answer: this.answerToSecQues1
+              // question: this.securityQues1,
+              // answer: this.answerToSecQues1
+                question: 'Who was the company you first worked for?',
+                answer: 'TEST'
               },
               {
-                question: this.securityQues2,
-                answer: this.answerToSecQues2
+              // question: this.securityQues2,
+              // answer: this.answerToSecQues2
+                question: 'What is your favorite song?',
+                answer: 'TEST'
               },
               {
-                question: this.securityQues3,
-                answer: this.answerToSecQues3
+              // question: this.securityQues3,
+              // answer: this.answerToSecQues3
+                question: 'In what city or town does your nearest sibling live?',
+                answer: 'TEST'
               }
             ],
             UserLocation: {
-              street: this.address,
-              city: this.city,
-              state: this.state,
-              zipCode: this.zipCode
+            // street: this.address,
+            // city: this.city,
+            // state: this.state,
+            // zipCode: this.zipCode
+              street: '321 W. 119th St',
+              city: 'Los Angeles',
+              state: 'California',
+              zipCode: 90061
             },
             UserType: 'General'
           },
           headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8081',
+            'Access-Control-Allow-Origin': 'http://localhost:8080',
             'Content-Type': 'application/json'
           }
         })
@@ -363,16 +373,16 @@ export default {
           .then(response => {
           // NOTE: CHANGE THIS BEFORE PRODUCTION
             console.log(response)
-            this.statusMessages.createUserResponse = response.data.Messages
+            this.statusMessages.createUserResponse = 'Success: Created user.'
             this.errorFlags.createUserFlag = false
           }).catch((error) => {
           // Pushes the error messages into error to display
             if (error.response) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data.Messages
+              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
               this.errorFlags.createUserFlag = true
               console.log(error.response)
             } else if (error.request) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data.Messages
+              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
               this.errorFlags.createUserFlag = true
               console.log(error.request)
             } else {
@@ -382,62 +392,6 @@ export default {
           })
       } else if (this.userType === 'Administrator') {
         console.log('Error: Can not make admins yet - Rob')
-        axios({
-          method: 'POST',
-          url: 'http://localhost/server/v1/SignUp/Register',
-          data: {
-            UserCredInfo: {
-              username: this.userName,
-              password: this.password
-            },
-            SecurityQandAs: [
-              {
-                question: this.securityQues1,
-                answer: this.answerToSecQues1
-              },
-              {
-                question: this.securityQues2,
-                answer: this.answerToSecQues2
-              },
-              {
-                question: this.securityQues3,
-                answer: this.answerToSecQues3
-              }
-            ],
-            UserLocation: {
-              street: this.address,
-              city: this.city,
-              state: this.state,
-              zipCode: this.zipCode
-            },
-            UserType: 'General'
-          },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8081',
-            'Content-Type': 'application/json'
-          }
-        })
-          // redirect to Home page
-          .then(response => {
-          // NOTE: CHANGE THIS BEFORE PRODUCTION
-            console.log(response)
-            this.statusMessages.createUserResponse = response.data
-            this.errorFlags.createUserFlag = false
-          }).catch((error) => {
-          // Pushes the error messages into error to display
-            if (error.response) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
-              this.errorFlags.createUserFlag = true
-              console.log(error.response)
-            } else if (error.request) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
-              this.errorFlags.createUserFlag = true
-              console.log(error.request)
-            } else {
-              this.statusMessages.createUserResponse = 'An error occured while setting up request.'
-              this.errorFlags.createUserFlag = true
-            }
-          })
       } else {
         this.statusMessages.createUserResponse = 'Error: Must choose a valid User Type.'
         this.errorFlags.createUserFlag = true
