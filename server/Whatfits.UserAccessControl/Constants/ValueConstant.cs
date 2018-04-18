@@ -38,7 +38,7 @@
 
         // ADMIN
         // USER MANAGMENT
-        public const string USER_MANAGMENT_CLAIM_VALUE_VIEW = "View User Man";
+        public const string USER_MANAGMENT_CLAIM_VALUE_VIEW = "View User Managment";
         public const string USER_MANAGMENT_CLAIM_VALUE_CREATE = "Create";
         public const string USER_MANAGMENT_CLAIM_VALUE_READ = "Read";
         public const string USER_MANAGMENT_CLAIM_VALUE_UPDATE = "Update";

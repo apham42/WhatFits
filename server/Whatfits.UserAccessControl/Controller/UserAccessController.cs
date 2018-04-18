@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Security.Claims;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.UserAccessControl.Service;
 
 namespace Whatfits.UserAccessControl.Controller
 {
@@ -19,47 +20,28 @@ namespace Whatfits.UserAccessControl.Controller
             // create list
             List<Claim> DefaultClaims = new List<Claim>();
 
+            SetDefaultClaims defaultclaims = new SetDefaultClaims();
+
             // add default claims to new user
-            DefaultClaims.AddRange(Service.SetDefaultClaims.GetDefaultClaims());
+            DefaultClaims.AddRange(defaultclaims.GetDefaultClaims());
 
             // return default claims for new user
             return DefaultClaims;
         }
-
-        /*
-         * Add new claim for user
-         * @param Claim claim, new claim to be added
-         * */
-        public static void AddClaim(Claim claim)
-        {
-
-        }
-
-        /*
-         * Remove new claim for user
-         * @param Claim claim, claim to removed
-         * */
-        public static void RemoveClaim(Claim claim)
-        {
-
-        }
         
-        /*
-         * Get view page claims from db
-         * @return: view page claims 
-         * */
-        public static List<Claim> GetClaims(string username)
+        /// <summary>
+        /// Give admin claims
+        /// </summary>
+        /// <returns>admin claims</returns>
+        public static List<Claim> SetAdminClaims()
         {
-            List<Claim> ViewClaims = new List<Claim>();
+            List<Claim> AdminClaims = new List<Claim>();
 
-            UserAccessDTO UserName = new UserAccessDTO()
-            {
+            SetDefaultClaims adminclaims = new SetDefaultClaims();
 
-            };
+            AdminClaims.AddRange(adminclaims.GetAdminClaims());
 
-            
-            return ViewClaims;
-
+            return AdminClaims;
         }
     }
 }
