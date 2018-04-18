@@ -2,8 +2,8 @@
         <nav class="navbar is-radiusless">
             <div class="container">
             <div class="navbar-brand">
-                <a class="navbar-item">
-                <img src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home" @click="toHome">
+                <a>
+                <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home" @click="toHome">
                 </a>
                 <span class="navbar-burger burger" data-target="navbarMenuHero1">
                     <span></span>
@@ -87,5 +87,15 @@ export default {
 }
 #cancel {
   margin-top: -36px;
+}
+#navImage {
+  height: 50px;
+  padding-left: 20px;
+  padding-top: 5px;
+}
+#homeIcons{
+    height: 10em;
+    width: 10em;
+    padding-top: 2em;
 }
 </style>

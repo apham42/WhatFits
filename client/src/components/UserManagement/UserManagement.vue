@@ -7,7 +7,13 @@
       <div class="field">
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input " v-model="userName" type="text" placeholder="UserName" value="">
+          <input class="input " v-model.trim="userName" @input="delayTouch($v.username)" type="text" placeholder="UserName" value="">
+          <div class="usernameValidations">
+                <span v-show="!$v.userName.required && $v.userName.$dirty">Field is required</span>
+                <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
+                <span v-show="!$v.userName.maxLength && $v.userName.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
+                <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
+            </div>
           <span class="icon is-small is-left">
           <i class="fas fa-user"></i>
           </span>
@@ -20,7 +26,13 @@
       <div class="field">
         <label class="label">Password</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" v-model="password" type="password" placeholder="Password" value="">
+          <input class="input" v-model.trim="password" @input="delayTouch($v.password)" type="password" placeholder="Password" value="">
+          <div class="passwordValidations">
+                <span v-show="!$v.password.minLength && $v.password.$dirty">Minimum length is {{$v.password.$params.minLength.min}}</span>
+                <span v-show="!$v.password.maxLength && $v.password.$dirty">Maximum length is {{$v.password.$params.maxLength.max}}</span>
+                <span v-show="!$v.password.required && $v.password.$dirty">Field is required</span>
+                <span v-show="!validateCharacters(this.$data.password) && $v.password.$dirty && $v.password.maxLength && $v.password.minLength">Password has invalid characters</span>
+            </div>
           <span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
           </span>
@@ -189,6 +201,8 @@
 <script>
 import axios from 'axios'
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
+const touchMap = new WeakMap()
+
 export default {
   name: 'UserManagement',
   computed: {
@@ -312,6 +326,15 @@ export default {
   methods: {
     // Registration methods
     // Checks the characters of userInput
+    delayTouch ($v) {
+      $v.$reset()
+      if (touchMap.has($v)) {
+        clearTimeout(touchMap.get($v))
+      }
+      touchMap.set($v, setTimeout($v.$touch, 2000))
+    },
+
+    // Checks the characters of userInput
     validateCharacters (userInput) {
       var regexPattern = /[^ 0-9a-zA-Z!@#$%^&*()-_=+{}[;:"'<,>.?|`~]/i
       if (userInput.match(regexPattern) == null) {
@@ -410,7 +433,7 @@ export default {
               state: this.state,
               zipCode: this.zipCode
             },
-            UserType: 'General'
+            UserType: 'Administrator'
           },
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081',
