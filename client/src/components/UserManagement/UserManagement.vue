@@ -161,9 +161,9 @@
         <div class="control">
           <div class="select" >
             <select v-model="userType">
-              <option  disabled >Select dropdown</option>
-              <option disabled>Administrator</option>
-              <option selected>General</option>
+              <option  disabled selected >Select dropdown</option>
+              <option>Administrator</option>
+              <option >General</option>
             </select>
           </div>
         </div>
@@ -459,11 +459,10 @@ export default {
         })
           // redirect to Home page
           .then(response => {
-          // NOTE: CHANGE THIS BEFORE PRODUCTION
+            console.log(response.data.Messages)
             console.log(response)
-            this.statusMessages.createUserResponse = response.data.Messages
+            this.statusMessages.createUserResponse = 'User has been created'
             this.errorFlags.createUserFlag = false
-            event.target.reset()
           }).catch((error) => {
           // Pushes the error messages into error to display
             if (error.response) {
@@ -480,10 +479,9 @@ export default {
             }
           })
       } else if (this.userType === 'Administrator') {
-        console.log('Error: Can not make admins yet - Rob')
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/SignUp/Register',
+          url: 'http://localhost/server/v1/management/create',
           data: {
             UserCredInfo: {
               username: this.userName,
@@ -518,17 +516,16 @@ export default {
         })
           .then(response => {
             console.log(response)
-            this.statusMessages.createUserResponse = response.data
+            this.statusMessages.createUserResponse = response.data.Messages
             this.errorFlags.createUserFlag = false
-            event.target.reset()
           }).catch((error) => {
           // Pushes the error messages into error to display
             if (error.response) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
+              this.statusMessages.createUserResponse = error.response.data.Messages
               this.errorFlags.createUserFlag = true
               console.log(error.response)
             } else if (error.request) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
+              this.statusMessages.createUserResponse = error.response.data.Messages
               this.errorFlags.createUserFlag = true
               console.log(error.request)
             } else {

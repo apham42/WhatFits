@@ -17,25 +17,32 @@ namespace server.Controllers
         /// <summary>
         /// Creates an admin for the system from the usermanagement console.
         /// </summary>
-        /// <param name="obj"> A userName, password, location, and security questions and anwsers.</param>
+        /// <param name="obj"> A userName(string), password(string), address(string), city(string), zipcode(string), state(string), and security questions and anwsers.(string)</param>
         /// <returns>A success or failure message</returns>
         [HttpPost]
         [Route("create")]
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public IHttpActionResult CreateAdmin(RegInfo obj)
+        public IHttpActionResult CreateAdmin([FromBody] RegInfo obj)
         {
-            UserManagementService service = new UserManagementService();
-            if (obj != null || !ModelState.IsValid)
+            // Verify if object is not null or invalid
+            if (obj == null || !ModelState.IsValid)
             {
                 return Content(HttpStatusCode.BadRequest, "Failure: Invalid Data being received.");
             }
-            if (service.CreateAdmin(obj).IsSuccessful)
+            // Create service to handle request
+            AccountService service = new AccountService();
+            // Send DTO to service to be processed
+            var response = service.RegisterAdmin(obj);
+            // Was processing successful?
+            if (!response.isSuccessful)
             {
-                return Created("Success: Created account for: ", obj.UserCredInfo.Username);
+                // Return bad request, something went wrong in the service
+                return Content(HttpStatusCode.BadRequest, new { response.Messages});
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest, "Failure: Failed to create user.");
+                // Return Created status, user was created
+                return Content(HttpStatusCode.Created, new { response.Messages});
             }
         }
         /// <summary>
@@ -46,7 +53,7 @@ namespace server.Controllers
         [HttpPut]
         [Route("enable")]
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
-        public IHttpActionResult EnableUser (UserManagementDTO obj)
+        public IHttpActionResult EnableUser ([FromBody] UserManagementDTO obj)
         {
             UserManagementService service = new UserManagementService();
             // Filter if no username was passed
@@ -78,7 +85,7 @@ namespace server.Controllers
         [HttpPut]
         [Route("disable")]
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
-        public IHttpActionResult DisableUser(UserManagementDTO obj)
+        public IHttpActionResult DisableUser([FromBody] UserManagementDTO obj)
         {
             UserManagementService service = new UserManagementService();
             // Filter if no username was passed
@@ -109,7 +116,7 @@ namespace server.Controllers
         [HttpPut]
         [Route("delete")]
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
-        public IHttpActionResult DeleteUser (UserManagementDTO obj)
+        public IHttpActionResult DeleteUser ([FromBody] UserManagementDTO obj)
         {
             UserManagementService service = new UserManagementService();
             if(obj.UserName == null || !ModelState.IsValid)
@@ -126,7 +133,7 @@ namespace server.Controllers
             var response = service.DeleteUser(obj);
             if (!response.IsSuccessful)
             {
-                return Content(HttpStatusCode.BadRequest, response.Messages);
+                return Content(HttpStatusCode.InternalServerError, response.Messages);
             }
             // Everything was successful, returning message
             return Content(HttpStatusCode.OK, "Success: Account was deleted for " + obj.UserName);
