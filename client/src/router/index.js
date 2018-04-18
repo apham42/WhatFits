@@ -8,8 +8,14 @@ Vue.use(Vuelidate)
 
 // Defining routes for web application
 export default new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
+    {
+      // HomePage
+      path: '/home',
+      name: 'Home',
+      component: () => import('@/components/HomePage/Home')
+    },
     {
       // HomePage
       path: '/',
