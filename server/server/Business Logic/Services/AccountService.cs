@@ -26,6 +26,9 @@ namespace server.Services
 
         }
 
+        public RegInfoResponseDTO Response { get; private set; }
+        public WebAPIGeocode UserLocation { get; private set; }
+
         /// <summary>
         /// Tries to create the user based on registration information
         /// </summary>
@@ -33,32 +36,51 @@ namespace server.Services
         /// <returns> A DTO that contains status and any messages </returns>
         public RegInfoResponseDTO RegisterUser(RegInfo creds)
         {
-            var validator = new RegInfoValidator();
             List<string> messages = new List<string>();
 
-            // validates Register info
-            var response = validator.Validate(creds);
-            if (!response.isSuccessful)
+            // Validates user credentials and returns response dto if it fails validation
+            if (!ValidateCredentials(creds))
             {
-                return response;
+                return Response;
             }
-            
-            var gatewayDTO = CreateGatewayDTO(creds, validator.ValidatedLocation);
+
+            var gatewayDTO = CreateGatewayDTO(creds, UserLocation);
+
+            /*************************************************************************/
+            // Roberto create a similar method to Register User but you
+            // add the admin claims to the gatewayDTO.UserClaims after CreateGatewayDTO method
+            // since gatewayDTO.UserClaims will have the claims of a general user already.
+            /*************************************************************************/
 
             // Save user into the database and returns the status
             if (Create(gatewayDTO))
             {
-                response.isSuccessful = true;
+                Response.isSuccessful = true;
                 messages.Add(AccountConstants.USER_CREATED);
-                response.Messages = messages;
+                Response.Messages = messages;
             }
             else
             {
-                response.isSuccessful = false;
+                Response.isSuccessful = false;
                 messages.Add(AccountConstants.USER_CREATE_FAIL);
-                response.Messages = messages;
+                Response.Messages = messages;
             }
-            return response;
+            return Response;
+        }
+
+        /// <summary>
+        /// Validates Registration Information
+        /// </summary>
+        /// <param name="creds"> Registration Information </param>
+        /// <returns> status of the validation </returns>
+        public bool ValidateCredentials(RegInfo creds)
+        {
+            var validator = new RegInfoValidator();
+
+            // validates Register info
+            Response = validator.Validate(creds);
+            UserLocation = validator.ValidatedLocation;
+            return Response.isSuccessful;
         }
 
         /// <summary>
@@ -126,7 +148,7 @@ namespace server.Services
                 Zipcode = user.UserLocation.ZipCode,
                 Longitude = geoCoordinates.Longitude,
                 Latitude = geoCoordinates.Latitude,
-                UserClaims = SetDefaultClaims.GetDefaultClaims(),
+                //UserClaims = SetDefaultClaims.GetDefaultClaims(),
                 Salt = salt,
                 Questions = questions,
                 Answers = answers
