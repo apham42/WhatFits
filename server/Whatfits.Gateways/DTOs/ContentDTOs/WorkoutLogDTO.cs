@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Whatfits.Models.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.ContentDTOs
@@ -16,6 +15,5 @@ namespace Whatfits.DataAccess.DTOs.ContentDTOs
         public string LiftingType { get; set; }
         public int Sets { get; set; }
         public int Reps { get; set; }
-        public List<int> collection { get; set; }
     }
 }

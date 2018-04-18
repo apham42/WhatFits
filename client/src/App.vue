@@ -17,5 +17,6 @@ export default {
 
 <style src="./assets/CSS/Globaltheme/bulmaTheme.css">
 #app {
+
 }
 </style>
