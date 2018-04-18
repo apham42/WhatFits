@@ -11,12 +11,14 @@
           <span class="icon is-small is-left">
           <i class="fas fa-user"></i>
           </span>
+          <!--
           <span class="icon is-small is-right">
           <i class="fas fa-check"></i>
           </span>
+          -->
         </div>
         <div class="errorMessage">
-                <span v-show="!$v.userName.required && $v.userName.$dirty">Field is required</span>
+                <span v-show="!$v.userName.required && $v.userName.$dirty">A UserName is required</span>
                 <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
                 <span v-show="!$v.userName.maxLength && $v.username.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
                 <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
@@ -30,14 +32,11 @@
           <span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
           </span>
-          <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
-          </span>
         </div>
         <div class="errorMessage">
           <span v-show="!$v.password.minLength && $v.password.$dirty">Minimum length is {{$v.password.$params.minLength.min}}</span>
           <span v-show="!$v.password.maxLength && $v.password.$dirty">Maximum length is {{$v.password.$params.maxLength.max}}</span>
-          <span v-show="!$v.password.required && $v.password.$dirty">Field is required</span>
+          <span v-show="!$v.password.required && $v.password.$dirty">A password is required</span>
           <span v-show="!validateCharacters(this.$data.password) && $v.password.$dirty && $v.password.maxLength && $v.password.minLength">Password has invalid characters</span>
         </div>
         <!--<p class="help is-danger">This email is invalid</p>-->
@@ -45,12 +44,9 @@
       <div class="field">
         <label class="label">Confirm Password</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" v-model.trim="confirmPassword" @input="delayTouch($v.password)" type="password" placeholder="Password" value="">
+          <input class="input" v-model.trim="confirmPassword" @input="delayTouch($v.confirmPassword)" type="password" placeholder="Password" value="">
           <span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
-          </span>
-          <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
           </span>
         </div>
         <div class="errorMessage">
@@ -60,8 +56,11 @@
       </div>
       <div class="field">
         <label class="label">Address</label>
-        <div class="control">
+        <div class="control has-icons-left">
           <input class="input" v-model.trim="address" @input="delayTouch($v.address)" type="text" placeholder="Address">
+          <span class="icon is-small is-left">
+          <i class="fas fa-home"></i>
+          </span>
         </div>
         <div class="errorMessage">
           <span v-show="!$v.address.maxLength && $v.address.$dirty">Maximum length is {{$v.address.$params.maxLength.max}}</span>
@@ -187,6 +186,7 @@
           <button class="button is-secondary" @click.prevent="clearForm">Clear</button>
         </div>
       </div>
+
       <div v-if="this.errorFlags.createUserFlag == true" class="errorMessage">
             <span class = "help">{{this.statusMessages.createUserResponse}}</span>
         </div>
@@ -229,12 +229,20 @@
     <form name="DeleteUser">
         <div class="field has-addons has-addons-centered">
             <div class="control">
-                <input v-model="deleteCurrentUser.userName" class="input" type="text" placeholder="UserName">
+                <input v-model.trim="deleteCurrentUser.userName" @input="delayTouch($v.deleteCurrentUser.userName)" class="input" type="text" placeholder="UserName">
             </div>
             <div class="control">
                 <button type="submit" class="button is-primary" @click.prevent="deleteUser">Delete</button>
             </div>
         </div>
+        <!--
+        <div class="errorMessage">
+                <span v-show="!$v.userName.required && $v.userName.$dirty">A UserName is required</span>
+                <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
+                <span v-show="!$v.userName.maxLength && $v.userName.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
+                <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
+        </div>
+        -->
         <div v-if="this.errorFlags.deleteUserFlag == true" class="errorMessage">
             <span>{{this.statusMessages.deleteResponse}}</span>
         </div>
@@ -267,7 +275,7 @@ export default {
       pageTitle: 'UserManagement Page',
       // Create User Data
       userName: 'TestUser',
-      password: '12345610987134',
+      password: 'asdfasdf',
       confirmPassword: '',
       address: '321 W. 119th St.',
       city: 'Los Angeles',
@@ -383,7 +391,7 @@ export default {
       if (touchMap.has($v)) {
         clearTimeout(touchMap.get($v))
       }
-      touchMap.set($v, setTimeout($v.$touch, 2000))
+      touchMap.set($v, setTimeout($v.$touch, 1000))
     },
 
     // Checks the characters of userInput
