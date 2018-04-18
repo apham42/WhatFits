@@ -12,7 +12,7 @@ namespace UnitTests.UserManagementTest
     /// <summary>
     /// Tests the controller actions inside UserManagementController
     /// </summary>
-    public class UserManagementTest
+    public class UserManagementControllerTest
     {
         /// <summary>
         /// Tests if DeleteUser works.
