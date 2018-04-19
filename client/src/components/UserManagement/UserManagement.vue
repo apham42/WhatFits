@@ -194,84 +194,10 @@
             <span>{{this.statusMessages.createUserResponse}}</span>
         </div>
     </form>
-    <!--*********************************************************************************************************** -->
     <br>
-    <!--
-    <h3 class="SectionTitle">Change Status of User</h3>
-    <form name="ChangeStatus" action="http://localhost/server/v1/management/*" method="PUT" @click.prevent="changeStatus">
-        <div class="field has-addons has-addons-centered">
-            <div class="control">
-                <span class="select">
-                    <select v-model="changeStatusUser.status">
-                      <option selected="selected" disabled value="">Select Status</option>
-                      <option value="enable">Enable</option>
-                      <option value="disable">Disable</option>
-                    </select>
-                </span>
-            </div>
-            <div class="control">
-                <input v-model="changeStatusUser.userName" class="input" type="text" placeholder="UserName">
-            </div>
-            <div class="control">
-                <button type="submit" class="button is-primary">Apply {{changeStatusUser.status}}</button>
-            </div>
-        </div>
-        <div class="errorMessage">
-                <span v-show="!$v.userName.required && $v.userName.$dirty">A UserName is required</span>
-                <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
-                <span v-show="!$v.userName.maxLength && $v.userName.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
-                <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
-        </div>
-        <div v-if="this.errorFlags.changeStatusFlag == true" class="errorMessage">
-            <span>{{this.statusMessages.changeStatusResponse}}</span>
-        </div>
-        <div v-if="this.errorFlags.changeStatusFlag == false" class="successMessage">
-            <span>{{this.statusMessages.changeStatusResponse}}</span>
-        </div>
-        <br />
-    </form>
-    -->
     <change-status></change-status>
     <br>
-    <!--*********************************************************************************************************** -->
-    <!--
-    <form name="DeleteUser" @click.prevent="deleteUser">
-        <div class="field has-addons has-addons-centered">
-            <div class="control">
-                <input v-model.trim="deleteCurrentUser.userName" @input="delayTouch($v.deleteCurrentUser.userName)" class="input" type="text" placeholder="UserName">
-            </div>
-            <div class="control">
-                <button type="submit" class="button is-primary" @click.prevent="deleteUser">Delete</button>
-            </div>
-        </div>
-
-        <div class="errorMessage">
-                <span v-show="!$v.userName.required && $v.userName.$dirty">A UserName is required</span>
-                <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
-                <span v-show="!$v.userName.maxLength && $v.userName.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
-                <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
-        </div>
-
-        <div v-if="this.errorFlags.deleteUserFlag == true" class="errorMessage">
-            <span>{{this.statusMessages.deleteResponse}}</span>
-        </div>
-        <div v-if="this.errorFlags.deleteUserFlag == false" class="successMessage">
-            <span>{{this.statusMessages.deleteResponse}}</span>
-        </div>
-        <br />
-        <span class="control backButton is-dark">
-            <a class="button is-link " @click="goBack" >Back</a>
-            </span>
-        <br>
-    </form>
-    -->
     <delete-User></delete-User>
-    <br>
-    <!--
-    <span class="control backButton is-dark">
-      <a class="button is-link " @click="goBack" >Back</a>
-    </span>
-    -->
     <br>
     <back-button></back-button>
 </div>
