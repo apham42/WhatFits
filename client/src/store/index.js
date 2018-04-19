@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 const persistedstate = new CreatePersistedState({
   key: 'WhatFitsStore',
-  storage: window.localStorage,
+  storage: window.sessionStorage,
   reducer: state => ({
     User: state.User
   })
