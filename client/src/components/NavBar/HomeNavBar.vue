@@ -1,54 +1,56 @@
 <template>
-        <nav class="navbar is-radiusless">
-            <div class="container">
-            <div class="navbar-brand">
-                <a class="navbar-item">
-                <img src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home" @click="toHome">
-                </a>
-                <span class="navbar-burger burger" data-target="navbarMenuHero1">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </span>
-            </div>
-            <div id="navbarMenuHero1" class="navbar-menu">
-                <div class="navbar-end">
-                <a class="navbar-item" @click="toRegistration">
-                    Registration
-                </a>
-                <div class="navbar-item has-dropdown is-hoverable">
-                    <div class="navbar-link">
-                        More
-                    </div>
-                    <div id="moreDropdown" class="navbar-dropdown ">
-                        <a class="navbar-item " href="#">
-                        <div class="level is-mobile">
-                            <div class="level-left">
-                            <div class="level-item">
-                                <p>
-                                <strong>Extensions</strong>
-                                <br>
-                                <small>Side projects to enhance Bulma</small>
-                                </p>
-                            </div>
-                            </div>
-                        </div>
-                        </a>
-                    </div>
-                    </div>
-                <span class="navbar-item">
-                    <button class="button is-primary is-inverted" @click="openModal">
-                        <span class="icon">
-                            <i class="fa fa-sign-in-alt"></i>
-                        </span>
-                        <span>Login</span>
-                        <LoginModal v-show='showLogin'></LoginModal>
-                    </button>
-                </span>
+  <div>
+    <nav class="navbar is-radiusless">
+        <div class="container">
+        <div class="navbar-brand">
+            <a>
+            <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home" @click="toHome">
+            </a>
+            <span class="navbar-burger burger" data-target="navbarMenuHero1">
+                <span></span>
+                <span></span>
+                <span></span>
+            </span>
+        </div>
+        <div id="navbarMenuHero1" class="navbar-menu">
+            <div class="navbar-end">
+            <a class="navbar-item" @click="toRegistration">
+                Registration
+            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <div class="navbar-link">
+                    More
                 </div>
+                <div id="moreDropdown" class="navbar-dropdown ">
+                    <a class="navbar-item " href="#">
+                    <div class="level is-mobile">
+                        <div class="level-left">
+                        <div class="level-item">
+                            <p>
+                            <strong>Extensions</strong>
+                            <br>
+                            <small>Side projects to enhance Bulma</small>
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                </div>
+            <span class="navbar-item">
+                <button id="button" class="button is-primary is-inverted" @click="openModal">
+                    <span class="icon">
+                        <i class="fa fa-sign-in-alt"></i>
+                    </span>
+                    <span>Login</span>
+                </button>
+            </span>
             </div>
-            </div>
-        </nav>
+        </div>
+        </div>
+    </nav>
+    <LoginModal v-if="showLogin"></LoginModal>
+  </div>
 </template>
 
 <script>
@@ -75,7 +77,7 @@ export default {
       this.$router.push('/')
     },
     openModal: function () {
-      this.$store.dispatch('controlPopup', {modalStatus: true})
+      this.$store.dispatch('openAction')
     }
   }
 }
@@ -87,5 +89,15 @@ export default {
 }
 #cancel {
   margin-top: -36px;
+}
+#navImage {
+  height: 50px;
+  padding-left: 20px;
+  padding-top: 5px;
+}
+#homeIcons{
+    height: 10em;
+    width: 10em;
+    padding-top: 2em;
 }
 </style>
