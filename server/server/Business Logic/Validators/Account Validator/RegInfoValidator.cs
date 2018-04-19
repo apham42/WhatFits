@@ -25,7 +25,8 @@ namespace server.Model.Validators.Account_Validator
         /// <summary>
         /// Validated Geocoordinates from Google Map Web API based on user location
         /// </summary>
-        public WebAPIGeocode ValidatedLocation { get; set; }
+        public WebAPIGeocode ValidatedLocation { get; private set; }
+        public RegInfoResponseDTO Response { get; private set; }
 
         public RegInfoValidator()
         {
@@ -39,33 +40,30 @@ namespace server.Model.Validators.Account_Validator
         /// <returns>A DTO that contains status and any messages</returns>
         public RegInfoResponseDTO Validate(RegInfo user)
         {
-            var validationResult = new RegInfoResponseDTO();
-            var messages = new List<string>();
-
-            if (ValidateUserCred(user.UserCredInfo, validationResult) && ValidateQandAs(user.SecurityQandAs, validationResult) && ValidateLocation(user.UserLocation, validationResult))
+            Response = new RegInfoResponseDTO();
+            if (ValidateUserCred(user.UserCredInfo) && ValidateQandAs(user.SecurityQandAs) && ValidateLocation(user.UserLocation))
             {
-                validationResult.isSuccessful = true;
+                Response.isSuccessful = true;
             }
 
-            return validationResult;
+            return Response;
         }
 
         /// <summary>
         /// Validates the user credentials of the registraion information
         /// </summary>
-        /// <param name="userCred"></param>
-        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
-        /// <returns>status if the credentials are valid based on business rules</returns>
-        public bool ValidateUserCred(UserCredential userCred, RegInfoResponseDTO validationResult)
+        /// <param name="userCred"> User Credentials of the registration information </param>
+        /// <returns> status if the credentials are valid based on business rules </returns>
+        public bool ValidateUserCred(UserCredential userCred)
         {
             var messages = new List<string>();
 
             // Returns error if user credentials are null
             if (userCred == null)
             {
-                validationResult.isSuccessful = false;
+                Response.isSuccessful = false;
                 messages.Add(AccountConstants.REGISTRATION_INVALID);
-                validationResult.Messages = messages;
+                Response.Messages = messages;
                 return false;
             }
             var validator = new UserCredValidator();
@@ -80,8 +78,8 @@ namespace server.Model.Validators.Account_Validator
                 {
                     messages.Add(failure.ErrorMessage);
                 }
-                validationResult.isSuccessful = false;
-                validationResult.Messages = messages;
+                Response.isSuccessful = false;
+                Response.Messages = messages;
                 return false;
             }
 
@@ -97,8 +95,8 @@ namespace server.Model.Validators.Account_Validator
             // Return error if theres any error messages
             if (!gatewayResponse.isSuccessful)
             {
-                validationResult.isSuccessful = false;
-                validationResult.Messages = gatewayResponse.Messages;
+                Response.isSuccessful = false;
+                Response.Messages = gatewayResponse.Messages;
                 return false;
             }
 
@@ -108,19 +106,18 @@ namespace server.Model.Validators.Account_Validator
         /// <summary>
         /// Validates the Security Questions and Answers of the Registration Information
         /// </summary>
-        /// <param name="questions">List of Security questions with answers</param>
-        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
+        /// <param name="questions"> List of Security questions with answers </param>
         /// <returns> status if the security questions and answers are valid based on business rules </returns>
-        public bool ValidateQandAs(List<SecurityQuestion> questions, RegInfoResponseDTO validationResult)
+        public bool ValidateQandAs(List<SecurityQuestion> questions)
         {
             var messages = new List<string>();
 
             // Returns error if questions if null
             if (questions == null)
             {
-                validationResult.isSuccessful = false;
+                Response.isSuccessful = false;
                 messages.Add(AccountConstants.QUESTION_INVALID_ERROR);
-                validationResult.Messages = messages;
+                Response.Messages = messages;
                 return false;
             }
 
@@ -135,8 +132,8 @@ namespace server.Model.Validators.Account_Validator
                 {
                     messages.Add(failure.ErrorMessage);
                 }
-                validationResult.isSuccessful = false;
-                validationResult.Messages = messages;
+                Response.isSuccessful = false;
+                Response.Messages = messages;
                 return false;
             }
 
@@ -145,8 +142,8 @@ namespace server.Model.Validators.Account_Validator
             var gatewayResponse = gateway.GetQuestions();
             if (!gatewayResponse.isSuccessful)
             {
-                validationResult.isSuccessful = false;
-                validationResult.Messages = gatewayResponse.Messages;
+                Response.isSuccessful = false;
+                Response.Messages = gatewayResponse.Messages;
                 return false;
             }
             else
@@ -157,9 +154,9 @@ namespace server.Model.Validators.Account_Validator
                 {
                     if (!retrievedQuestions.Contains(question.Question))
                     {
-                        validationResult.isSuccessful = false;
+                        Response.isSuccessful = false;
                         messages.Add(AccountConstants.QUESTION_INVALID_ERROR);
-                        validationResult.Messages = messages;
+                        Response.Messages = messages;
                         return false;
                     }
                     else
@@ -175,19 +172,18 @@ namespace server.Model.Validators.Account_Validator
         /// <summary>
         /// Validates the User Location of the Registration Information
         /// </summary>
-        /// <param name="userLocation"></param>
-        /// <param name="validationResult">The response DTO that the Validate method will be returning</param>
-        /// <returns>status if the location is valid based on business rules</returns>
-        public bool ValidateLocation(Address userLocation, RegInfoResponseDTO validationResult)
+        /// <param name="userLocation"> The location that the user entered in registration </param>
+        /// <returns> status if the location is valid based on business rules </returns>
+        public bool ValidateLocation(Address userLocation)
         {
             var messages = new List<string>();
 
             // Returns error if userLocation is null
             if (userLocation == null)
             {
-                validationResult.isSuccessful = false;
+                Response.isSuccessful = false;
                 messages.Add(LocationConstants.ADDRESS_DOESNT_EXIST_ERROR);
-                validationResult.Messages = messages;
+                Response.Messages = messages;
                 return false;
             }
 
@@ -203,8 +199,8 @@ namespace server.Model.Validators.Account_Validator
                 {
                     messages.Add(failure.ErrorMessage);
                 }
-                validationResult.isSuccessful = false;
-                validationResult.Messages = messages;
+                Response.isSuccessful = false;
+                Response.Messages = messages;
                 return false;
             }
 
