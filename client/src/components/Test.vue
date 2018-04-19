@@ -1,7 +1,7 @@
 <template>
   <div>
     <button @click='openModal'>button</button>
-    <LoginModal v-show='showLogin'></LoginModal>
+    <LoginModal v-if='showLogin'></LoginModal>
   </div>
 </template>
 
