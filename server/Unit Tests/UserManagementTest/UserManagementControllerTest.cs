@@ -42,7 +42,13 @@ namespace UnitTests.UserManagementTest
         public void EnableUser()
         {
             // Arrange
+            var controller = new UserManagementController();
+            UserManagementDTO temp = new UserManagementDTO()
+            {
+                UserName = "amay"
+            };
             // Act
+            IHttpActionResult actionresult = controller.EnableUser(temp);
             // Assert
         }
         /// <summary>

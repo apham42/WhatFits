@@ -55,7 +55,6 @@ namespace server.Controllers
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult EnableUser ([FromBody] UserManagementDTO obj)
         {
-            UserManagementService service = new UserManagementService();
             // Filter if no username was passed
             if(obj.UserName == null || !ModelState.IsValid)
             {
@@ -69,6 +68,7 @@ namespace server.Controllers
                 return Content(HttpStatusCode.BadRequest, "Failure: No valid data.");
             }
             // Implement the actual status change of that user
+            UserManagementService service = new UserManagementService();
             var response = service.EnableUser(obj);
             if (!response.IsSuccessful)
             {
@@ -87,7 +87,6 @@ namespace server.Controllers
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult DisableUser([FromBody] UserManagementDTO obj)
         {
-            UserManagementService service = new UserManagementService();
             // Filter if no username was passed
             if (obj.UserName == null || !ModelState.IsValid)
             {
@@ -100,6 +99,7 @@ namespace server.Controllers
                 return Content(HttpStatusCode.BadRequest, "Failure: No valid data.");
             }
             // Implement the actual status change of that user
+            UserManagementService service = new UserManagementService();
             var response = service.DisableUser(obj);
             if (!response.IsSuccessful)
             {
@@ -118,7 +118,6 @@ namespace server.Controllers
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult DeleteUser ([FromBody] UserManagementDTO obj)
         {
-            UserManagementService service = new UserManagementService();
             if(obj.UserName == null || !ModelState.IsValid)
             {
                 return Content(HttpStatusCode.BadRequest, "Failure: Bad Request");
@@ -130,6 +129,7 @@ namespace server.Controllers
                 return Content(HttpStatusCode.BadRequest, "Failure: No valid data.");
             }
             // Implement the actual deletion of that uesr
+            UserManagementService service = new UserManagementService();
             var response = service.DeleteUser(obj);
             if (!response.IsSuccessful)
             {

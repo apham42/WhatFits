@@ -98,7 +98,7 @@
         <div class="control">
           <div class="select is-fullwidth" >
             <select v-model="securityQues1">
-              <option selected disabled>Select Question</option>
+              <option selected="selected" disabled value="">Select Question</option>
               <option v-for="securityQuestion1 in securityQuestionsSet1" :key="securityQuestion1"> {{securityQuestion1}} </option>
             </select>
           </div>
@@ -118,7 +118,7 @@
         <div class="control">
           <div class="select is-fullwidth" >
             <select v-model="securityQues2">
-              <option selected disabled>Select Question</option>
+              <option selected="selected" disabled value="">Select Question</option>
               <option v-for="securityQuestion2 in securityQuestionsSet2" :key="securityQuestion2"> {{securityQuestion2}} </option>
             </select>
           </div>
@@ -139,7 +139,7 @@
         <div class="control">
           <div class="select is-fullwidth" >
             <select v-model="securityQues3">
-              <option selected disabled>Select Question</option>
+              <option selected="selected" disabled value="">Select Question</option>
               <option v-for="securityQuestion3 in securityQuestionsSet3" :key="securityQuestion3"> {{securityQuestion3}} </option>
             </select>
           </div>
@@ -161,7 +161,7 @@
         <div class="control">
           <div class="select" >
             <select v-model="userType">
-              <option  disabled selected >Select dropdown</option>
+              <option  selected="selected" disabled value="" >Select dropdown</option>
               <option>Administrator</option>
               <option >General</option>
             </select>
@@ -196,8 +196,9 @@
     </form>
     <!--*********************************************************************************************************** -->
     <br>
+    <!--
     <h3 class="SectionTitle">Change Status of User</h3>
-    <form name="ChangeStatus" action="http://localhost/server/v1/management/*" method="PUT">
+    <form name="ChangeStatus" action="http://localhost/server/v1/management/*" method="PUT" @click.prevent="changeStatus">
         <div class="field has-addons has-addons-centered">
             <div class="control">
                 <span class="select">
@@ -212,8 +213,14 @@
                 <input v-model="changeStatusUser.userName" class="input" type="text" placeholder="UserName">
             </div>
             <div class="control">
-                <button type="submit" class="button is-primary" @click.prevent="changeStatus">Apply {{changeStatusUser.status}}</button>
+                <button type="submit" class="button is-primary">Apply {{changeStatusUser.status}}</button>
             </div>
+        </div>
+        <div class="errorMessage">
+                <span v-show="!$v.userName.required && $v.userName.$dirty">A UserName is required</span>
+                <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
+                <span v-show="!$v.userName.maxLength && $v.userName.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
+                <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
         </div>
         <div v-if="this.errorFlags.changeStatusFlag == true" class="errorMessage">
             <span>{{this.statusMessages.changeStatusResponse}}</span>
@@ -223,10 +230,12 @@
         </div>
         <br />
     </form>
+    -->
+    <change-status></change-status>
     <br>
     <!--*********************************************************************************************************** -->
-    <h3 class="SectionTitle">Delete User</h3>
-    <form name="DeleteUser">
+    <!--
+    <form name="DeleteUser" @click.prevent="deleteUser">
         <div class="field has-addons has-addons-centered">
             <div class="control">
                 <input v-model.trim="deleteCurrentUser.userName" @input="delayTouch($v.deleteCurrentUser.userName)" class="input" type="text" placeholder="UserName">
@@ -235,14 +244,14 @@
                 <button type="submit" class="button is-primary" @click.prevent="deleteUser">Delete</button>
             </div>
         </div>
-        <!--
+
         <div class="errorMessage">
                 <span v-show="!$v.userName.required && $v.userName.$dirty">A UserName is required</span>
                 <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
                 <span v-show="!$v.userName.maxLength && $v.userName.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
                 <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
         </div>
-        -->
+
         <div v-if="this.errorFlags.deleteUserFlag == true" class="errorMessage">
             <span>{{this.statusMessages.deleteResponse}}</span>
         </div>
@@ -255,16 +264,34 @@
             </span>
         <br>
     </form>
+    -->
+    <delete-User></delete-User>
+    <br>
+    <!--
+    <span class="control backButton is-dark">
+      <a class="button is-link " @click="goBack" >Back</a>
+    </span>
+    -->
+    <br>
+    <back-button></back-button>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
+import DeleteUser from '@/components/UserManagement/DeleteUser'
+import ChangeStatus from '@/components/UserManagement/ChangeStatus'
+import BackButton from '@/components/common/Backbutton'
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 const touchMap = new WeakMap()
 
 export default {
   name: 'UserManagement',
+  components: {
+    'delete-User': DeleteUser,
+    'changeStatus': ChangeStatus,
+    'back-button': BackButton
+  },
   computed: {
     isAuthenticated: function () {
       return this.$store.getters.isAuthenticated
@@ -306,8 +333,7 @@ export default {
       terms: '',
       // Change Status Data
       changeStatusUser: {
-        userName: '',
-        status: ''
+        userName: ''
       },
       // Delete User Data
       deleteCurrentUser: {
@@ -537,7 +563,8 @@ export default {
         this.statusMessages.createUserResponse = 'Error: Must choose a valid User Type.'
         this.errorFlags.createUserFlag = true
       }
-    },
+    }
+    /*
     deleteUser: function () {
       // Validate userName before making request
       if (!validateUserName(this.deleteCurrentUser.userName)) {
@@ -583,6 +610,8 @@ export default {
           })
       }
     },
+    */
+    /*
     changeStatus: function () {
       if (!validateUserName(this.changeStatusUser.userName) || this.changeStatusUser.status === '') {
         // Give error message to page
@@ -627,7 +656,10 @@ export default {
         axios({
           method: 'PUT',
           url: 'http://localhost/server/v1/management/disable',
-          data: {'UserName': this.changeStatusUser.userName},
+          data: {
+            deleteCurrentUser: {
+              'UserName': this.changeStatusUser.userName}
+          },
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081'
           }
@@ -657,16 +689,12 @@ export default {
         console.log('Error: Invalid Status')
       }
     },
+     */
+    /*
     goBack: function () {
       this.$router.go(-1)
     }
-  }
-}
-function validateUserName (userName) {
-  if (userName.length < 2 || userName.length > 64 || userName === '') {
-    return false
-  } else {
-    return true
+     */
   }
 }
 </script>
@@ -710,9 +738,5 @@ function validateUserName (userName) {
   .errorMessage {
       color: red;
       text-align: center;
-  }
-
-  .backButton {
-      padding-left: 50%;
   }
 </style >
