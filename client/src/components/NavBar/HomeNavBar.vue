@@ -49,7 +49,7 @@
         </div>
         </div>
     </nav>
-    <LoginModal v-show="showLogin"></LoginModal>
+    <LoginModal v-if="showLogin"></LoginModal>
   </div>
 </template>
 
