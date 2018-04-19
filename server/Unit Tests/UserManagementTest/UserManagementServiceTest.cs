@@ -48,7 +48,7 @@ namespace UnitTests.UserManagementTest
             UserManagementService service = new UserManagementService();
             UserManagementDTO obj = new UserManagementDTO()
             {
-                UserName = "latmey"
+                UserName = "TestUser2"
             };
             // Act
             var response = service.DeleteUser(obj);

@@ -178,7 +178,7 @@ namespace UnitTests.UserManagementTest
             // Arrange
             UserManagementDTO deleteUser = new UserManagementDTO()
             {
-                UserName = "chackins"
+                UserName = "TestUser1"
             };
             // Act
             var response = userMan.DeleteUser(deleteUser);
