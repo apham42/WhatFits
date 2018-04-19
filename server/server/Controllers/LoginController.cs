@@ -18,8 +18,11 @@ namespace server.Controllers
             LoginResponseDTO response = new LoginResponseDTO();
             string username = userCredential.Username;
             response.username = username;
+
+
+
             CreateJWT createJWT = new CreateJWT();
-            response.token = createJWT.CreateToken(username, "general");
+            response.token = createJWT.CreateToken(username); //, "general");
             return Ok(new { response });
         }
     }

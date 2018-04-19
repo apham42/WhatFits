@@ -37,7 +37,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     UserID = foundCredential.UserID,
                     Password = foundCredential.Password,
                     Salt = db.Salts.Find(foundCredential.UserID).SaltValue,
-                    Type = "General"
+                    Type = db.UserProfiles.Find(foundCredential.UserID).Type
                 };
                 response.IsSuccessful = true;
                 // Returns data
