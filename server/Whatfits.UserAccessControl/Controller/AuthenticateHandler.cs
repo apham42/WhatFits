@@ -29,6 +29,11 @@ namespace Whatfits.UserAccessControl.Controller
                 //get token from request
                 string token = new RequestTransformer().GetToken(request);
 
+                if(token == null)
+                {
+                    return base.SendAsync(request, cancellationToken);
+                }
+
                 // check if token is valid. returns principals
                 var incommingprincipal = new VerifyJWT().VerifyToken(token);
 
