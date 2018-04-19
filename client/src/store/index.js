@@ -4,6 +4,8 @@ import CreatePersistedState from 'vuex-persistedstate'
 import loginpopup from './modules/LoginPopup'
 import User from './modules/User'
 
+Vue.use(Vuex)
+
 const persistedstate = new CreatePersistedState({
   key: 'WhatFitsStore',
   storage: window.localStorage,
@@ -11,8 +13,6 @@ const persistedstate = new CreatePersistedState({
     User: state.User
   })
 })
-
-Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {

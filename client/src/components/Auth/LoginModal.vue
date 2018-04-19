@@ -22,7 +22,7 @@
             </span>
           </p>
         </div>
-        <button id="loginbutton" class="button is-primary">Login</button>
+        <button id="loginbutton" class="button is-primary" @click="sendUserCredential">Login</button>
         <button id="cancelbutton" class="button" @click="closeModal">Cancel</button>
       </div>
     </div>
@@ -31,6 +31,7 @@
 
 <script>
 import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+import axios from 'axios'
 export default {
   name: 'LoginModal',
   components: {
@@ -44,6 +45,24 @@ export default {
   methods: {
     closeModal: function () {
       this.$store.dispatch('closeAction')
+    },
+    sendUserCredential: function () {
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/v1/login/Login',
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
+          'Content-Type': 'application/json'
+        },
+        data: {
+          Username: this.$data.username,
+          Password: this.$data.password
+        }
+      })
+        .then((response) => {
+        })
+        // .catch((error) => {
+        // })
     }
   },
   validations: {
