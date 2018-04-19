@@ -3,6 +3,7 @@ using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using System;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Whatfits.JsonWebToken.Controller;
 
 namespace server.Controllers
 {
@@ -14,7 +15,12 @@ namespace server.Controllers
         [AllowAnonymous]
         public IHttpActionResult Login([FromBody] UserCredential userCredential)
         {
-            throw new NotImplementedException();
+            LoginResponseDTO response = new LoginResponseDTO();
+            string username = userCredential.Username;
+            response.username = username;
+            CreateJWT createJWT = new CreateJWT();
+            response.token = createJWT.CreateToken(username, "general");
+            return Ok(new { response });
         }
     }
 }
