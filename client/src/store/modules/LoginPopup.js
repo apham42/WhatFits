@@ -9,14 +9,20 @@ const getters = {
 }
 
 const actions = {
-  controlPopup (context, payload) {
-    context.commit('controlPopup', payload)
+  openAction (context) {
+    context.commit('openPopup')
+  },
+  closeAction (context) {
+    context.commit('closePopup')
   }
 }
 
 const mutations = {
-  controlPopup (state, payload) {
-    state.loginpopup = payload.modalStatus
+  openPopup (state) {
+    state.loginpopup = true
+  },
+  closePopup (state) {
+    state.loginpopup = false
   }
 }
 
