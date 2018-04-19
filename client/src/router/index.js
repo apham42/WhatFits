@@ -10,6 +10,17 @@ Vue.use(Vuelidate)
 export default new Router({
   // mode: 'history',
   routes: [
+    // {
+    //   // HomePage
+    //   path: '/home',
+    //   name: 'Home',
+    //   component: () => import('@/components/HomePage/Home')
+    // },
+    {
+      path: '/test',
+      name: 'test',
+      component: () => import('@/components/Test')
+    },
     {
       // HomePage
       path: '/',
@@ -49,12 +60,6 @@ export default new Router({
       path: '/profile',
       name: 'UserProfile',
       component: () => import('@/components/UserProfile/ProfilePage')
-    },
-    {
-      // Temporary Nav bar page
-      path: '/temp',
-      name: 'TempNav',
-      component: () => import('@/components/TempNav')
     },
     {
       // Temporary Search bar page

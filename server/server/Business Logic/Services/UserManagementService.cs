@@ -24,33 +24,10 @@ namespace server.Services
         /// <returns></returns>
         public ResponseDTO<Boolean> CreateAdmin(RegInfo obj)
         {
-            var validator = new RegInfoValidator();
             List<string> messages = new List<string>();
-            ResponseDTO<bool> response = new ResponseDTO<bool>();
-            // validates Register info
-            if (!validator.Validate(obj).isSuccessful)
-            {
-                response.IsSuccessful = false;
-                response.Messages.Add("Failure: Did not pass validation");
-                return response;
-            }
-
-            var gatewayDTO = CreateUserDTO(obj, validator.ValidatedLocation);
-
-            // Save user into the database and returns the status
-            if (Create(gatewayDTO))
-            {
-                response.IsSuccessful = true;
-                messages.Add(AccountConstants.USER_CREATED);
-                response.Messages = messages;
-            }
-            else
-            {
-                response.IsSuccessful = false;
-                messages.Add(AccountConstants.USER_CREATE_FAIL);
-                response.Messages = messages;
-            }
-            return response;
+            ResponseDTO<Boolean> temp = new ResponseDTO<bool>();
+            return temp;
+            
         }
         /// <summary>
         /// Creates dto based on validated information
@@ -117,7 +94,7 @@ namespace server.Services
                 Zipcode = user.UserLocation.ZipCode,
                 Longitude = geoCoordinates.Longitude,
                 Latitude = geoCoordinates.Latitude,
-                UserClaims = SetDefaultClaims.GetDefaultClaims(),
+                //UserClaims = SetDefaultClaims.GetDefaultClaims(),
                 Salt = salt,
                 Questions = questions,
                 Answers = answers
