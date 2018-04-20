@@ -6,12 +6,22 @@
                <a>
                <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home" @click="toHome">
                </a>
-               <span class="navbar-burger burger" data-target="navbarMenuHero1">
+               <span class="navbar-burger burger" data-target="navbarMenuHero2">
                <span></span>
                <span></span>
                <span></span>
                </span>
             </div>
+            <div v-show="showLogin" id="navbarMenuHero2" class="navbar-menu is-active is-radiusless">
+            <div class="navbar-end">
+              <a class="navbar-item" @click="openModal">
+                Login
+              </a>
+              <a class="navbar-item" @click="toRegistration">
+                Registration
+              </a>
+            </div>
+          </div>
             <div id="navbarMenuHero1" class="navbar-menu">
                <div class="navbar-end">
                   <a class="navbar-item" @click="toRegistration">
