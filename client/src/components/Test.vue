@@ -1,7 +1,8 @@
 <template>
   <div>
-    <button @click='openModal'>button</button>
-    <LoginModal v-show='showLogin'></LoginModal>
+    <button @click="storeusername">button</button>
+    <input class="input" v-model="username" id="username" type="text" placeholder="Username">
+    {{ username }}
   </div>
 </template>
 
@@ -12,6 +13,12 @@ export default {
   components: {
     'LoginModal': LoginModal
   },
+  data () {
+    return {
+      username: '',
+      persistedusername: ''
+    }
+  },
   computed: {
     showLogin: function () {
       return this.$store.getters.popupStatus
@@ -20,6 +27,10 @@ export default {
   methods: {
     openModal: function () {
       this.$store.dispatch('openAction')
+    },
+    storeusername: function () {
+      this.$store.dispatch('openAction')
+      this.$store.dispatch('actusername', {Username: this.username})
     }
   }
 }

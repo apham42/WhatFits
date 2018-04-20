@@ -55,7 +55,7 @@
         <div class="Security Questions">
             <h3>Security Question 1</h3>
             <select v-model="securityQues1">
-                  <option disabled value =""></option>
+                  <option disabled value ="">Select A Question</option>
                   <option v-for="securityQuestion1 in securityQuestionSet1" :key="securityQuestion1"> {{securityQuestion1}} </option>
                 </select>
             <input id="firstAnswer" placeholder="Answer" v-model.trim="answerToSecQues1" @input="delayTouch($v.answerToSecQues1)">
@@ -66,7 +66,7 @@
             </div>
             <h3>Security Question 2</h3>
             <select v-model="securityQues2">
-                  <option disabled value=""></option>
+                  <option disabled value="">Select A Question</option>
                   <option v-for ="securityQuestion2 in securityQuestionSet2" :key ="securityQuestion2"> {{securityQuestion2}} </option>
                 </select>
             <input id="secondAnswer" placeholder="Answer" v-model.trim="answerToSecQues2" @input="delayTouch($v.answerToSecQues2)">
@@ -77,7 +77,7 @@
             </div>
             <h3>Security Question 3</h3>
             <select v-model="securityQues3">
-                    <option disabled value=""></option>
+                    <option disabled value="">Select A Question</option>
                     <option v-for="securityQuestion3 in securityQuestionSet3" :key="securityQuestion3"> {{securityQuestion3}} </option>
                 </select>
             <input id="ThirdAnswer" placeholder="Answer" v-model.trim="answerToSecQues3" @input="delayTouch($v.answerToSecQues3)">
@@ -90,28 +90,34 @@
 
         <div class="termsAndCondition">
             <button @click="showTerms = true">Agree To Terms and Conditions</button>
-            <div v-show="showTerms">
-                <div class="modal is-active">
-                    <div class="modal-background" @click="showTerms = false"></div>
-                    <div class="modal-content">
-                        <Terms></Terms>
-                        <div class="closeModal">
-                            <a id="cancel" class="button is-danger" @click="showTerms = false">Cancel</a>
-                        </div>
-                    </div>
+            <div v-if="showTerms">
+              <div class="modal is-active">
+                <div class="modal-background" @click="showTerms = false" ></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                    <p class="modal-card-title">Terms and Agreement</p>
+                    </header>
+                    <section class="modal-card-body">
+                      <Terms></Terms>
+                    </section>
+                    <footer class="modal-card-foot">
+                      <div class="closeModal">
+                        <button class="button" @click="showTerms = false">Cancel</button>
+                      </div>
+                    </footer>
                 </div>
+              </div>
             </div>
         </div>
 
         <input type="checkbox" name="terms" v-model = termsChecked>
 
-        <div class="response">
+        <div class="errorResponse">
             <p v-for="message in messages[0]" :key="message"> {{message}} </p>
         </div>
 
         <div class="registerButton">
             <button type="submit" class="register-button" :disabled="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.password)" @click="registerUser">Register</button>
-            <button @click="testtttttttttt">test</button>
         </div>
     </form>
 </div>
@@ -236,18 +242,12 @@ export default {
 
     // Checks the characters of userInput
     validateCharacters (userInput) {
-      var regexPattern = /[^ 0-9a-zA-Z!@#$%^&*()-_=+{}[;:"'<,>.?|`~]/i
+      var regexPattern = /[^ 0-9a-zA-Z!@#$%^/&*()-_=+{}[;:"'<,>.?|`~\\]]/i
       if (userInput.match(regexPattern) == null) {
         return true
       } else {
         return false
       }
-    },
-
-    testtttttttttt () {
-      this.$router.push({
-        name: 'Home'
-      })
     },
 
     // Sends the request to the server
@@ -280,7 +280,7 @@ export default {
             state: this.$data.state,
             zipCode: this.$data.zipCode
           },
-          UserType: 'General'
+          UserType: 'Enable'
         },
         headers: {
           'Access-Control-Allow-Origin': 'http://localhost:8080',
@@ -290,7 +290,9 @@ export default {
         // redirect to Home page
         .then((response) => {
           this.$data.messages.push(response.data.Messages)
-          // this.$router.push('/')
+          window.setTimeout(() => {
+            this.$router.push('/')
+          }, 3000)
         }).catch((error) => {
           // Pushes the error messages into error to display
           this.$data.messages = []

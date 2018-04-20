@@ -1,29 +1,28 @@
 <template>
 <div id="Chat">
-    <div id="ChatBox">
-        <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
-        <div id="chatbody" v-if="chatshow">
-            <div id="username" v-for="(value, index) in chatusers" :key="index" list-style:none>
-                <div id="user" v-on:click="SpanBox(index)">
-                    {{value}}
-                </div>
+   <div id="ChatBox">
+      <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
+      <div id="chatbody" v-if="chatshow">
+         <div id="username" v-for="(value, index) in chatusers" :key="index" list-style:none>
+            <div id="user" v-on:click="SpanBox(index)">
+               {{value}}
             </div>
-        </div>
-    </div>
-    <div id="MsgBox" style="right:290px" v-if="msgshow">
-        <div id="msghead">
-            {{clickeduser}}
-        </div>
-        <div id="msgbody">
-            <textarea id="receives" rows="10" />
-        </div>
-        <div id="msgfoot">
-            <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message"></textarea>
-            <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
+   <div id="MsgBox" style="right:290px" v-if="msgshow">
+      <div id="msghead">
+         {{clickeduser}}
+      </div>
+      <div id="msgbody">
+         <textarea id="receives" rows="10" />
+      </div>
+      <div id="msgfoot">
+      <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message"></textarea>
+      <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
+      </div>
+   </div>
 </div>
-
 </template>
 
 <script>
@@ -73,6 +72,7 @@ export default {
       this.ws.onmessage = function (event) {
         var newiv = []
         var newkey = []
+        // if not first time connected receive message from other user
         if (vm.chatusers.length > 0) {
           console.log('receive')
           try {
@@ -82,9 +82,10 @@ export default {
             window.document.getElementById('receives').prepend(vm.receivestring + '\n')
           } catch (error) {
             // server message cannot decrypted, since it is not encypted
+            // show server message
             window.document.getElementById('receives').prepend('User is offline' + '\n')
           }
-        } else {
+        } else { // first time connected, get initial value and secret key from server
           vm.chatusers = JSON.parse(event.data).split(',')
           console.log(vm.chatusers)
           // get iv from first 16 elements
