@@ -60,6 +60,8 @@ export default {
         }
       })
         .then((response) => {
+          this.$store.dispatch('actusername', {Username: response.data.username})
+          this.$store.dispatch('acttoken', {Token: response.data.token})
         })
         // .catch((error) => {
         // })
