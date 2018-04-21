@@ -1,7 +1,6 @@
 <template>
-  <div class="modal-backdrop">
-    <div class="modal">
-        <h2 style="text-align: center;">TERMS AND CONDITIONS</h2>
+  <div class="termModal">
+    <div class="terms">
         <ol>
             <li><strong>Introduction</strong></li>
         </ol>
@@ -84,7 +83,7 @@ Note: Scoped the Style tags. For Some reason when clicking on the terms
 and agreements it doesn't show any text unless you scoped them. -Rob
 -->
 <style>
-  .modal {
+  .terms {
     background: #FFFFFF;
     overflow-x: auto;
     display: flex;

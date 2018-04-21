@@ -94,7 +94,7 @@ namespace server.Controllers
         {
             CreateJWT createJWT = new CreateJWT();
 
-            return createJWT.CreateToken("amay", "general");
+            return createJWT.CreateToken("amay");//, "general");
 
         }
         /// <summary>
