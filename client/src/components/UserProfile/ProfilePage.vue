@@ -3,6 +3,7 @@
       <p>Hello</p>
       <p> {{ ShowUsername }} </p>
       <p> {{ GetToken }} </p>
+      <p> {{ GetViewClaims }} </p>
     </div>
 </template>
 
@@ -15,6 +16,9 @@ export default {
     // remove get token function just for testing
     GetToken: function () {
       return this.$store.getters.gettoken
+    },
+    GetViewClaims: function () {
+      return this.$store.getters.getviewclaims
     }
   }
 }

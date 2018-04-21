@@ -34,6 +34,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 // credential infromation
                 response.Data = new LoginDTO
                 {
+                    UserName = foundCredential.UserName,
                     UserID = foundCredential.UserID,
                     Password = foundCredential.Password,
                     Salt = db.Salts.Find(foundCredential.UserID).SaltValue,

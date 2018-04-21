@@ -1,6 +1,9 @@
-﻿using server.Model.Account;
+﻿using server.Business_Logic.Services;
+using server.Interfaces;
+using server.Model.Account;
 using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using System;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Whatfits.DataAccess.DTOs;
@@ -19,25 +22,28 @@ namespace server.Controllers
         public IHttpActionResult Login([FromBody] UserCredential userCredential)
         {
             LoginResponseDTO response = new LoginResponseDTO();
-            string username = userCredential.Username;
-            response.username = username;
+            ILogin login = new LoginService();
 
-            LoginDTO loginDTO = new LoginDTO()
+            LoginDTO loginDTO = login.UserCredentialTransformer(userCredential);
+
+            ResponseDTO<LoginDTO> loginResponseDTO = login.GetUsersCredentails(loginDTO);
+
+            if(loginResponseDTO.IsSuccessful == false)
             {
-                UserName = username
-            };
-
-            LoginGateway loginGateway = new LoginGateway();
-
-            ResponseDTO<LoginDTO> loginResponseDTO = loginGateway.GetCredentials(loginDTO);
-
-
-            if(loginResponseDTO.Data.Type == "Enable")
-            {
-                CreateJWT createJWT = new CreateJWT();
-                response.token = createJWT.CreateToken(username); //, "general");
+                //response.Messages.Add("User does not exist");
+                return Content(HttpStatusCode.NotFound, response.Messages);
             }
-            
+
+
+
+
+            response = login.GetLoginToken(loginResponseDTO);
+
+            if(response.isSuccessful == false)
+            {
+                return Content(HttpStatusCode.NotFound, response.Messages);
+            }
+
             return Ok(response);
         }
     }
