@@ -1,9 +1,5 @@
 <template>
     <div>
-      <p>Hello</p>
-      <p> {{ ShowUsername }} </p>
-      <p> {{ GetToken }} </p>
-      <p> {{ GetViewClaims }} </p>
       <div v-if="this.errorFlag == true">
         <div>
           <error-page404></error-page404>
@@ -42,7 +38,7 @@ export default {
         skillLevel: '',
         gender: '',
         profileImage: '../../assets/Images/ProfileDummy/backgroundImage.jpg',
-        myProfile: 'true'
+        myProfile: false
       }
     }
   },
