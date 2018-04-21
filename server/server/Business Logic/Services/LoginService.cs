@@ -8,6 +8,7 @@ using System.Web;
 using Whatfits.DataAccess.DTOs;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.Gateways.CoreGateways;
+using Whatfits.Hash;
 using Whatfits.JsonWebToken.Controller;
 
 namespace server.Business_Logic.Services
@@ -20,9 +21,27 @@ namespace server.Business_Logic.Services
         public string password { get; set; }
         public LoginResponseDTO response { get; set; }
 
-        public ResponseDTO<LoginDTO> ValidateCredentials(ResponseDTO<LoginDTO> responseDTO)
+        public bool ValidateCredentials(LoginDTO loginDTO, ResponseDTO<LoginDTO> responseDTO)
         {
-            throw new NotImplementedException();
+            HashDTO hashDTO = new HashDTO()
+            {
+                Original = loginDTO.Password + responseDTO.Data.Salt
+            };
+
+            string hashedincommingpassword = new HMAC256().Hash(hashDTO);
+
+            
+
+            return checkIfEqual(hashedincommingpassword, responseDTO.Data.Password);
+        }
+
+        private bool checkIfEqual(string incommingpassword, string dbpassword)
+        {
+            if(incommingpassword == dbpassword)
+            {
+                return true;
+            }
+            return false;
         }
 
         public ResponseDTO<LoginDTO> GetUsersCredentails(LoginDTO loginDTO)

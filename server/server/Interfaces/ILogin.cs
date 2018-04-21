@@ -11,7 +11,7 @@ namespace server.Interfaces
 {
     public interface ILogin
     {
-        ResponseDTO<LoginDTO> ValidateCredentials(ResponseDTO<LoginDTO> responseDTO);
+        bool ValidateCredentials(LoginDTO loginDTO, ResponseDTO<LoginDTO> responseDTO);
         ResponseDTO<LoginDTO> GetUsersCredentails(LoginDTO loginDTO);
         LoginDTO UserCredentialTransformer(UserCredential userCredential);
         LoginResponseDTO GetLoginToken(ResponseDTO<LoginDTO> responseDTO);
