@@ -46,12 +46,6 @@ namespace server.Services
 
             var gatewayDTO = CreateGatewayDTO(creds, UserLocation);
 
-            /*************************************************************************/
-            // Roberto create a similar method to Register User but you
-            // add the admin claims to the gatewayDTO.UserClaims after CreateGatewayDTO method
-            // since gatewayDTO.UserClaims will have the claims of a general user already.
-            /*************************************************************************/
-
             // Save user into the database and returns the status
             if (Create(gatewayDTO))
             {

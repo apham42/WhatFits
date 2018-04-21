@@ -7,6 +7,7 @@ using Whatfits.Models.Context.Content;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using System.Data.SqlClient;
 using System.Data;
+using Whatfits.DataAccess.Constants;
 
 namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
@@ -30,20 +31,20 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 else
                 {
                     response.isSuccessful = false;
-                    messages.Add("Username does not exist. Please try again");
+                    messages.Add(AccountGatewayConstants.USER_DNE_ERROR);
                     response.Messages = messages;
                 }
             }
             catch (SqlException)
             {
                 response.isSuccessful = false;
-                messages.Add("Your request could not be made. Please try again.");
+                messages.Add(ServerConstants.SERVER_ERROR);
                 response.Messages = messages;
             }
             catch (DataException)
             {
                 response.isSuccessful = false;
-                messages.Add("Your request could not be made. Please try again.");
+                messages.Add(ServerConstants.SERVER_ERROR);
                 response.Messages = messages;
             }
             return response;
