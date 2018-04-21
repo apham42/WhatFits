@@ -58,7 +58,7 @@ namespace Whatfits.Hash
         public string Hash(HashDTO dto)
         {
             // changes the hashDTO original to bytes
-            string result;
+            string result = "";
 
             try
             {
@@ -71,7 +71,7 @@ namespace Whatfits.Hash
                     byte[] hash = sha256.ComputeHash(convertedOriginal);
 
                     //converts back to string
-                    result = Encoding.ASCII.GetString(hash);
+                    result += Convert.ToBase64String(hash);
                 }
                 return result;
             }
