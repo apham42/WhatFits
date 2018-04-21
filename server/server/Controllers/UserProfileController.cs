@@ -5,28 +5,39 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Whatfits.DataAccess.DTOs.ContentDTOs;
 
 namespace server.Controllers
 {
     /// <summary>
-    /// 
+    /// Returns user Data to be displayed
     /// </summary>
     [RoutePrefix("v1/profile")]
     public class UserProfileController : ApiController  
     {
         /// <summary>
-        /// 
+        /// Retrieves the user information from the database to the frontend.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// A Profile
+        /// </returns>
         [HttpGet]
-        [Route("{username}")]
         [EnableCors("http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "GET")]
-        public IHttpActionResult GetProfileData(string userName)
+        public IHttpActionResult GetProfileData()
         {
             // TODO: Validate incoming username to see if it exists in the database
             // TODO: Create a service that gets the required data from the database
             // TODO: Send data back to client side.
-            return Ok("NOT FUNCTIONAL - STILL IN DEVELOPMENT ");
+            ProfileDTO profile = new ProfileDTO()
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Description = "This is a description, asd;fwefoasdajefasdoasdofhasoi;ejoaisjeosifnasfasuivbasivuabseivuasbv",
+                SkillLevel = "Beginner",
+                Gender = "Male",
+                ProfilePictureDirectory = "../../assets/Images/ProfileDummy/profilePicture.jpg"
+            };
+            return Content(HttpStatusCode.OK, profile);
         }
     }
 }
