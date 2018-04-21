@@ -14,6 +14,7 @@ namespace server.Controllers
     [RoutePrefix("v1/management")]
     public class UserManagementController : ApiController
     {
+  
         /// <summary>
         /// Creates an admin for the system from the usermanagement console.
         /// </summary>
@@ -39,11 +40,8 @@ namespace server.Controllers
                 // Return bad request, something went wrong in the service
                 return Content(HttpStatusCode.BadRequest, new { response.Messages});
             }
-            else
-            {
-                // Return Created status, user was created
-                return Content(HttpStatusCode.Created, new { response.Messages});
-            }
+            // Return Created status, user was created
+            return Content(HttpStatusCode.Created, new { response.Messages});
         }
         /// <summary>
         /// Enables a user to use the system.

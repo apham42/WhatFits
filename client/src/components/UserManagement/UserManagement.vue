@@ -98,7 +98,7 @@
         <div class="control">
           <div class="select is-fullwidth" >
             <select v-model="securityQues1">
-              <option selected="selected" disabled value="">Select Question</option>
+              <option selected disabled>Select Question</option>
               <option v-for="securityQuestion1 in securityQuestionsSet1" :key="securityQuestion1"> {{securityQuestion1}} </option>
             </select>
           </div>
@@ -118,7 +118,7 @@
         <div class="control">
           <div class="select is-fullwidth" >
             <select v-model="securityQues2">
-              <option selected="selected" disabled value="">Select Question</option>
+              <option selected disabled>Select Question</option>
               <option v-for="securityQuestion2 in securityQuestionsSet2" :key="securityQuestion2"> {{securityQuestion2}} </option>
             </select>
           </div>
@@ -139,7 +139,7 @@
         <div class="control">
           <div class="select is-fullwidth" >
             <select v-model="securityQues3">
-              <option selected="selected" disabled value="">Select Question</option>
+              <option selected disabled>Select Question</option>
               <option v-for="securityQuestion3 in securityQuestionsSet3" :key="securityQuestion3"> {{securityQuestion3}} </option>
             </select>
           </div>
@@ -161,7 +161,7 @@
         <div class="control">
           <div class="select" >
             <select v-model="userType">
-              <option  selected="selected" disabled value="" >Select dropdown</option>
+              <option  disabled selected >Select dropdown</option>
               <option>Administrator</option>
               <option >General</option>
             </select>
@@ -207,7 +207,7 @@
 import axios from 'axios'
 import DeleteUser from '@/components/UserManagement/DeleteUser'
 import ChangeStatus from '@/components/UserManagement/ChangeStatus'
-import BackButton from '@/components/common/Backbutton'
+import BackButton from '@/components/Common/Backbutton'
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 const touchMap = new WeakMap()
 
@@ -413,7 +413,7 @@ export default {
           .then(response => {
             console.log(response.data.Messages)
             console.log(response)
-            this.statusMessages.createUserResponse = 'User has been created'
+            this.statusMessages.createUserResponse = 'User ' + this.userName + ' has been created.'
             this.errorFlags.createUserFlag = false
           }).catch((error) => {
           // Pushes the error messages into error to display
@@ -468,7 +468,7 @@ export default {
         })
           .then(response => {
             console.log(response)
-            this.statusMessages.createUserResponse = response.data.Messages
+            this.statusMessages.createUserResponse = 'User ' + this.userName + ' has been created.'
             this.errorFlags.createUserFlag = false
           }).catch((error) => {
           // Pushes the error messages into error to display

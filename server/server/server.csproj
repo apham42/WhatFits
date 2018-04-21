@@ -123,7 +123,6 @@
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Constants\AccountConstants.cs" />
     <Compile Include="Constants\LocationConstants.cs" />
-    <Compile Include="Controllers\BadPasswordController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\FollowsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
