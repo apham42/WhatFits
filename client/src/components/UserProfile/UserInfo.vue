@@ -6,13 +6,11 @@
             <div class="card " >
                <div class="card-image" id="imageBackground">
                   <!-- NOTE: This is a temporary image used as a profile picture-->
-                  <!-- <figure class="image"> <img v-bind:src="profileImage"> </figure> -->
-                  <figure class="image" >
-                    <img  id="circle-ProfileImage" class="center" src="../../assets/Images/ProfileDummy/profilePicture.jpg">
-                  </figure>
+                  <!-- <figure class="image"> <img v-bind:src="this.userData.profileImage"> </figure> -->
+                  <figure class="image" ><img  id="circle-ProfileImage" class="center" src="../../assets/Images/ProfileDummy/profilePicture.jpg"></figure>
                </div>
                <div class="card-content" align="center">
-                  <span class="title is-1">{{this.firstName}} {{this.lastName}}</span>
+                  <span class="title is-1">{{this.userData.firstName}} {{this.userData.lastName}}</span>
                   <hr>
                   <span v-if="myProfile == true" >
                       <button class="button is-primary is-rounded" id="buttonGap">Edit Profile</button>
@@ -26,12 +24,12 @@
                <div class="card-content" id="NoUpperBorders">
                   <div class="content">
                     <p class="title is-3">About Me: </p>
-                     <span class="subtitle is-4">{{this.description}}</span>
+                     <span class="subtitle is-4">{{this.userData.description}}</span>
                      <br>
                   </div>
                   <div class="content">
-                      <p class="subtitle is-5">Gender: {{this.gender}}</p>
-                      <p class="subtitle is-5">SkillLevel: {{this.skillLevel}}</p>
+                      <p class="subtitle is-5">Gender: {{this.userData.gender}}</p>
+                      <p class="subtitle is-5">SkillLevel: {{this.userData.skillLevel}}</p>
                      <br>
                   </div>
                </div>
@@ -45,15 +43,10 @@
 <script>
 export default {
   name: 'UserInfo',
+  props: ['userData'],
   data () {
     return {
-      firstName: '',
-      lastName: '',
-      description: '',
-      skillLevel: '',
-      gender: '',
-      profileImage: '../../assets/Images/ProfileDummy/profilePicture.jpg',
-      myProfile: 'true'
+
     }
   },
   methods: {
@@ -65,10 +58,6 @@ export default {
 #profileCard {
   height: auto;
   width: 32em;
-}
-#error {
-  color: red;
-
 }
 #buttonGap{
   padding-left: 2.5em;
@@ -85,7 +74,5 @@ export default {
 }
 #imageBackground {
   background-image: url("../../assets/Images/ProfileDummy/backgroundImage.jpg");
-}
-#NoUpperBorders {
 }
 </style>
