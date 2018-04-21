@@ -23,7 +23,7 @@
 </template>
 <script>
 export default {
-  name: '503ServerIssues',
+  name: 'ServerIssues',
   computed: {
     isAuthenticated: function () {
       return this.$store.getters.isAuthenticated

@@ -11,12 +11,14 @@
           <span class="icon is-small is-left">
           <i class="fas fa-user"></i>
           </span>
+          <!--
           <span class="icon is-small is-right">
           <i class="fas fa-check"></i>
           </span>
+          -->
         </div>
         <div class="errorMessage">
-                <span v-show="!$v.userName.required && $v.userName.$dirty">Field is required</span>
+                <span v-show="!$v.userName.required && $v.userName.$dirty">A UserName is required</span>
                 <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
                 <span v-show="!$v.userName.maxLength && $v.username.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
                 <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
@@ -30,14 +32,11 @@
           <span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
           </span>
-          <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
-          </span>
         </div>
         <div class="errorMessage">
           <span v-show="!$v.password.minLength && $v.password.$dirty">Minimum length is {{$v.password.$params.minLength.min}}</span>
           <span v-show="!$v.password.maxLength && $v.password.$dirty">Maximum length is {{$v.password.$params.maxLength.max}}</span>
-          <span v-show="!$v.password.required && $v.password.$dirty">Field is required</span>
+          <span v-show="!$v.password.required && $v.password.$dirty">A password is required</span>
           <span v-show="!validateCharacters(this.$data.password) && $v.password.$dirty && $v.password.maxLength && $v.password.minLength">Password has invalid characters</span>
         </div>
         <!--<p class="help is-danger">This email is invalid</p>-->
@@ -45,12 +44,9 @@
       <div class="field">
         <label class="label">Confirm Password</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input" v-model.trim="confirmPassword" @input="delayTouch($v.password)" type="password" placeholder="Password" value="">
+          <input class="input" v-model.trim="confirmPassword" @input="delayTouch($v.confirmPassword)" type="password" placeholder="Password" value="">
           <span class="icon is-small is-left">
           <i class="fas fa-lock"></i>
-          </span>
-          <span class="icon is-small is-right">
-          <i class="fas fa-exclamation-triangle"></i>
           </span>
         </div>
         <div class="errorMessage">
@@ -60,8 +56,11 @@
       </div>
       <div class="field">
         <label class="label">Address</label>
-        <div class="control">
+        <div class="control has-icons-left">
           <input class="input" v-model.trim="address" @input="delayTouch($v.address)" type="text" placeholder="Address">
+          <span class="icon is-small is-left">
+          <i class="fas fa-home"></i>
+          </span>
         </div>
         <div class="errorMessage">
           <span v-show="!$v.address.maxLength && $v.address.$dirty">Maximum length is {{$v.address.$params.maxLength.max}}</span>
@@ -162,9 +161,9 @@
         <div class="control">
           <div class="select" >
             <select v-model="userType">
-              <option  disabled >Select dropdown</option>
-              <option disabled>Administrator</option>
-              <option selected>General</option>
+              <option  disabled selected >Select dropdown</option>
+              <option>Administrator</option>
+              <option >General</option>
             </select>
           </div>
         </div>
@@ -187,6 +186,7 @@
           <button class="button is-secondary" @click.prevent="clearForm">Clear</button>
         </div>
       </div>
+
       <div v-if="this.errorFlags.createUserFlag == true" class="errorMessage">
             <span class = "help">{{this.statusMessages.createUserResponse}}</span>
         </div>
@@ -194,69 +194,30 @@
             <span>{{this.statusMessages.createUserResponse}}</span>
         </div>
     </form>
-    <!--*********************************************************************************************************** -->
     <br>
-    <h3 class="SectionTitle">Change Status of User</h3>
-    <form name="ChangeStatus" action="http://localhost/server/v1/management/*" method="PUT">
-        <div class="field has-addons has-addons-centered">
-            <div class="control">
-                <span class="select">
-                    <select v-model="changeStatusUser.status">
-                      <option selected="selected" disabled value="">Select Status</option>
-                      <option value="enable">Enable</option>
-                      <option value="disable">Disable</option>
-                    </select>
-                </span>
-            </div>
-            <div class="control">
-                <input v-model="changeStatusUser.userName" class="input" type="text" placeholder="UserName">
-            </div>
-            <div class="control">
-                <button type="submit" class="button is-primary" @click.prevent="changeStatus">Apply {{changeStatusUser.status}}</button>
-            </div>
-        </div>
-        <div v-if="this.errorFlags.changeStatusFlag == true" class="errorMessage">
-            <span>{{this.statusMessages.changeStatusResponse}}</span>
-        </div>
-        <div v-if="this.errorFlags.changeStatusFlag == false" class="successMessage">
-            <span>{{this.statusMessages.changeStatusResponse}}</span>
-        </div>
-        <br />
-    </form>
+    <change-status></change-status>
     <br>
-    <!--*********************************************************************************************************** -->
-    <h3 class="SectionTitle">Delete User</h3>
-    <form name="DeleteUser">
-        <div class="field has-addons has-addons-centered">
-            <div class="control">
-                <input v-model="deleteCurrentUser.userName" class="input" type="text" placeholder="UserName">
-            </div>
-            <div class="control">
-                <button type="submit" class="button is-primary" @click.prevent="deleteUser">Delete</button>
-            </div>
-        </div>
-        <div v-if="this.errorFlags.deleteUserFlag == true" class="errorMessage">
-            <span>{{this.statusMessages.deleteResponse}}</span>
-        </div>
-        <div v-if="this.errorFlags.deleteUserFlag == false" class="successMessage">
-            <span>{{this.statusMessages.deleteResponse}}</span>
-        </div>
-        <br />
-        <span class="control backButton is-dark">
-            <a class="button is-link " @click="goBack" >Back</a>
-            </span>
-        <br>
-    </form>
+    <delete-User></delete-User>
+    <br>
+    <back-button></back-button>
 </div>
 </template>
 
 <script>
 import axios from 'axios'
+import DeleteUser from '@/components/UserManagement/DeleteUser'
+import ChangeStatus from '@/components/UserManagement/ChangeStatus'
+import BackButton from '@/components/Common/Backbutton'
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 const touchMap = new WeakMap()
 
 export default {
   name: 'UserManagement',
+  components: {
+    'delete-User': DeleteUser,
+    'changeStatus': ChangeStatus,
+    'back-button': BackButton
+  },
   computed: {
     isAuthenticated: function () {
       return this.$store.getters.isAuthenticated
@@ -267,7 +228,7 @@ export default {
       pageTitle: 'UserManagement Page',
       // Create User Data
       userName: 'TestUser',
-      password: '12345610987134',
+      password: 'asdfasdf',
       confirmPassword: '',
       address: '321 W. 119th St.',
       city: 'Los Angeles',
@@ -298,8 +259,7 @@ export default {
       terms: '',
       // Change Status Data
       changeStatusUser: {
-        userName: '',
-        status: ''
+        userName: ''
       },
       // Delete User Data
       deleteCurrentUser: {
@@ -383,7 +343,7 @@ export default {
       if (touchMap.has($v)) {
         clearTimeout(touchMap.get($v))
       }
-      touchMap.set($v, setTimeout($v.$touch, 2000))
+      touchMap.set($v, setTimeout($v.$touch, 1000))
     },
 
     // Checks the characters of userInput
@@ -451,11 +411,10 @@ export default {
         })
           // redirect to Home page
           .then(response => {
-          // NOTE: CHANGE THIS BEFORE PRODUCTION
+            console.log(response.data.Messages)
             console.log(response)
-            this.statusMessages.createUserResponse = response.data.Messages
+            this.statusMessages.createUserResponse = 'User ' + this.userName + ' has been created.'
             this.errorFlags.createUserFlag = false
-            event.target.reset()
           }).catch((error) => {
           // Pushes the error messages into error to display
             if (error.response) {
@@ -472,10 +431,9 @@ export default {
             }
           })
       } else if (this.userType === 'Administrator') {
-        console.log('Error: Can not make admins yet - Rob')
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/SignUp/Register',
+          url: 'http://localhost/server/v1/management/create',
           data: {
             UserCredInfo: {
               username: this.userName,
@@ -510,17 +468,16 @@ export default {
         })
           .then(response => {
             console.log(response)
-            this.statusMessages.createUserResponse = response.data
+            this.statusMessages.createUserResponse = 'User ' + this.userName + ' has been created.'
             this.errorFlags.createUserFlag = false
-            event.target.reset()
           }).catch((error) => {
           // Pushes the error messages into error to display
             if (error.response) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
+              this.statusMessages.createUserResponse = error.response.data.Messages
               this.errorFlags.createUserFlag = true
               console.log(error.response)
             } else if (error.request) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data
+              this.statusMessages.createUserResponse = error.response.data.Messages
               this.errorFlags.createUserFlag = true
               console.log(error.request)
             } else {
@@ -532,7 +489,8 @@ export default {
         this.statusMessages.createUserResponse = 'Error: Must choose a valid User Type.'
         this.errorFlags.createUserFlag = true
       }
-    },
+    }
+    /*
     deleteUser: function () {
       // Validate userName before making request
       if (!validateUserName(this.deleteCurrentUser.userName)) {
@@ -578,6 +536,8 @@ export default {
           })
       }
     },
+    */
+    /*
     changeStatus: function () {
       if (!validateUserName(this.changeStatusUser.userName) || this.changeStatusUser.status === '') {
         // Give error message to page
@@ -622,7 +582,10 @@ export default {
         axios({
           method: 'PUT',
           url: 'http://localhost/server/v1/management/disable',
-          data: {'UserName': this.changeStatusUser.userName},
+          data: {
+            deleteCurrentUser: {
+              'UserName': this.changeStatusUser.userName}
+          },
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081'
           }
@@ -652,16 +615,12 @@ export default {
         console.log('Error: Invalid Status')
       }
     },
+     */
+    /*
     goBack: function () {
       this.$router.go(-1)
     }
-  }
-}
-function validateUserName (userName) {
-  if (userName.length < 2 || userName.length > 64 || userName === '') {
-    return false
-  } else {
-    return true
+     */
   }
 }
 </script>
@@ -705,9 +664,5 @@ function validateUserName (userName) {
   .errorMessage {
       color: red;
       text-align: center;
-  }
-
-  .backButton {
-      padding-left: 50%;
   }
 </style >
