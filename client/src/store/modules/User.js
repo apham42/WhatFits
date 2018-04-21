@@ -1,6 +1,7 @@
 const state = {
   username: '',
-  token: ''
+  token: '',
+  viewclaims: null
 }
 
 const getters = {
@@ -9,6 +10,9 @@ const getters = {
   },
   gettoken: function (state) {
     return state.token
+  },
+  getviewclaims: function (state) {
+    return state.viewclaims
   }
 }
 
@@ -18,6 +22,9 @@ const actions = {
   },
   acttoken (context, payload) {
     context.commit('mutatetoken', payload)
+  },
+  actviewclaims (context, payload) {
+    context.commit('mutateclaims', payload)
   }
 }
 
@@ -27,6 +34,9 @@ const mutations = {
   },
   mutatetoken (state, payload) {
     state.token = payload.Token
+  },
+  mutateclaims (state, payload) {
+    state.viewclaims = Object.freeze(payload.Viewclaims)
   }
 }
 

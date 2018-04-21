@@ -12,7 +12,7 @@
                <span></span>
                </span>
             </div>
-            <div v-show="showLogin" id="navbarMenuHero2" class="navbar-menu is-active is-radiusless">
+            <!-- <div id="navbarMenuHero2" class="navbar-menu is-active is-radiusless">
             <div class="navbar-end">
               <a class="navbar-item" @click="openModal">
                 Login
@@ -21,7 +21,7 @@
                 Registration
               </a>
             </div>
-          </div>
+          </div> -->
             <div id="navbarMenuHero1" class="navbar-menu">
                <div class="navbar-end">
                   <a class="navbar-item" @click="toRegistration">

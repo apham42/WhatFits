@@ -22,6 +22,7 @@
                   </span>
                </p>
             </div>
+            <p v-show="invalid" class="help is-danger">Invalid Credentials</p>
             <button id="loginbutton" class="button is-primary" @click="sendUserCredential">Login</button>
             <button id="cancelbutton" class="button" @click="closeModal">Cancel</button>
          </div>
@@ -39,7 +40,8 @@ export default {
   data () {
     return {
       username: '',
-      password: ''
+      password: '',
+      invalid: false
     }
   },
   methods: {
@@ -62,9 +64,18 @@ export default {
         .then((response) => {
           this.$store.dispatch('actusername', {Username: response.data.username})
           this.$store.dispatch('acttoken', {Token: response.data.token})
+          this.$store.dispatch('actviewclaims', {Viewclaims: response.data.viewclaims})
+          this.$router.push('/profile')
+          this.$store.dispatch('closeAction')
+          console.log(response)
         })
-        // .catch((error) => {
-        // })
+        .catch((error) => {
+          console.log(error)
+          // console.log('error')
+          this.invalid = true
+          this.username = ''
+          this.password = ''
+        })
     }
   },
   validations: {
