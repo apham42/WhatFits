@@ -14,6 +14,7 @@ namespace server.Controllers
     /// <summary>
     /// 
     /// </summary>
+    [RoutePrefix("v1/UACTEST")]
     public class UACTESTController : ApiController
     {
         /// <summary>
@@ -93,7 +94,7 @@ namespace server.Controllers
         {
             CreateJWT createJWT = new CreateJWT();
 
-            return createJWT.CreateToken("amay", "general");
+            return createJWT.CreateToken("amay");//, "general");
 
         }
         /// <summary>
@@ -103,6 +104,14 @@ namespace server.Controllers
         [HttpGet]
         [AuthorizePrincipal(type = "WORKOUT_ADD", value = "Add")]
         public string six()
+        {
+            return "Pass";
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("seven")]
+        public string seven()
         {
             return "Pass";
         }

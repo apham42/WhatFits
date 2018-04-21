@@ -23,14 +23,11 @@ namespace server
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "v1/{controller}/{action}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-                // Commented out for ignoring tokens during develpment - Rob
-                //,
-                //constraints: null,
-                //handler:
-                //    HttpClientFactory.CreatePipeline(
-                //        new HttpControllerDispatcher(config),
-                //        new DelegatingHandler[] { new AuthenticateHandler() })
+                defaults: new { id = RouteParameter.Optional },
+                constraints: null,
+                handler: HttpClientFactory.CreatePipeline(
+                        new HttpControllerDispatcher(config),
+                        new DelegatingHandler[] { new AuthenticateHandler() })
             );
         }
     }

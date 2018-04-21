@@ -118,12 +118,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Business Logic\Search\SearchResult.cs" />
     <Compile Include="Business Logic\Services\ChatService.cs" />
+    <Compile Include="Business Logic\Services\FollowsService.cs" />
+    <Compile Include="Business Logic\Services\LoginService.cs" />
     <Compile Include="Business Logic\Services\WorkoutLoggerService.cs" />
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Constants\AccountConstants.cs" />
     <Compile Include="Constants\LocationConstants.cs" />
-    <Compile Include="Controllers\BadPasswordController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
+    <Compile Include="Controllers\FollowsController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
@@ -136,6 +139,7 @@
     <Compile Include="Interfaces\IDeletion.cs" />
     <Compile Include="Interfaces\IGeoCoordinates.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
+    <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\INetworkCommunication.cs" />
     <Compile Include="Interfaces\IRequest.cs" />
     <Compile Include="Interfaces\IRetrieval.cs" />
@@ -144,6 +148,7 @@
     <Compile Include="Model\Account\RegInfo.cs" />
     <Compile Include="Model\Account\SecurityQuestion.cs" />
     <Compile Include="Model\Account\UserCredential.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\LoginResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
     <Compile Include="Global.asax.cs">

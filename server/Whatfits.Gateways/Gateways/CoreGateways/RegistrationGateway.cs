@@ -25,16 +25,16 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
 
         public bool Create(RegGatewayDTO dto)
         {
+            // Saving Location and finding ID
+            bool doesLocationExist = (from x in db.Locations
+                                      where x.Address == dto.Address &&
+                                      x.Latitude == dto.Latitude && x.Longitude == x.Longitude
+                                      select x.Address).Any();
+
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
-                {
-                    // Saving Location and finding ID
-                    bool doesLocationExist = (from x in db.Locations
-                                              where x.Address == dto.Address &&
-                                              x.Latitude == dto.Latitude && x.Longitude == x.Longitude
-                                              select x.Address).Any();
-
+                { 
                     // if location doesnt exist, create a new location data
                     if (!doesLocationExist)
                     {

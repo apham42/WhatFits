@@ -4,9 +4,9 @@ using Whatfits.UserAccessControl.Constants;
 
 namespace Whatfits.UserAccessControl.Service
 {
-    public static class SetDefaultClaims
+    public class SetDefaultClaims
     {
-        public static List<Claim> GetDefaultClaims()
+        public List<Claim> GetDefaultClaims()
         {
             return new List<Claim>() {
                 // WORKOUTLOG CLAIMS
@@ -39,6 +39,16 @@ namespace Whatfits.UserAccessControl.Service
                 new Claim(TypeConstant.EVENT_CLAIM_TYPE_EDIT, ValueConstant.EVENT_CLAIM_VALUE_EDIT),
                 new Claim(TypeConstant.VIEW_PAGE, ValueConstant.EVENT_CLAIM_VALUE_VIEW)
                 };
+        }
+
+        public  List<Claim> GetAdminClaims()
+        {
+            return new List<Claim>() {
+                new Claim(TypeConstant.USER_MANAGMENT_CLAIM_TYPE_CREATE, ValueConstant.USER_MANAGMENT_CLAIM_VALUE_CREATE),
+                new Claim(TypeConstant.USER_MANAGMENT_CLAIM_TYPE_UPDATE, ValueConstant.USER_MANAGMENT_CLAIM_VALUE_UPDATE),
+                new Claim(TypeConstant.USER_MANAGMENT_CLAIM_TYPE_DELETE, ValueConstant.USER_MANAGMENT_CLAIM_VALUE_DELETE),
+                new Claim(TypeConstant.VIEW_PAGE, ValueConstant.USER_MANAGMENT_CLAIM_VALUE_VIEW)
+            };
         }
     }
 }

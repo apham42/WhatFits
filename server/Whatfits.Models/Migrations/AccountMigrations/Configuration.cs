@@ -23,7 +23,9 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                new Credential{ UserName = "amay", Password = "123456" },
                new Credential{ UserName = "rstrong", Password = "123456" },
                new Credential{ UserName = "rblue", Password = "123456" },
-               new Credential{ UserName = "chackins", Password = "123456" }
+               new Credential{ UserName = "chackins", Password = "123456" },
+               new Credential{ UserName = "TestUser1", Password = "123456" },
+               new Credential{ UserName = "TestUser2", Password = "123456" },
            };
             context.Credentials.AddOrUpdate(credentials => credentials.UserName, (sampleCredentials.ToArray()));
             context.SaveChanges();
@@ -34,7 +36,9 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                    new Location{ LocationID = 2, Address = "4358 Maple Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
                    new Location{ LocationID = 3, Address = "2962 Sharon Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
                    new Location{ LocationID = 4, Address = "3782 Jennifer Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 5, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"}
+                   new Location{ LocationID = 5, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
+                   new Location{ LocationID = 6, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
+                   new Location{ LocationID = 7, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"}
                };
             context.Locations.AddOrUpdate(locations => locations.LocationID, (sampleLocations.ToArray()));
             context.SaveChanges();
@@ -46,6 +50,8 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                  new UserProfile{ UserID = 0003, LocationID = 3, FirstName = "Rock", LastName = "Strong", Email = "asdf@live.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Beginner" , Type = "Enable"},
                  new UserProfile{ UserID = 0004, LocationID = 4, FirstName = "Red", LastName = "Blue", Email = "asdf@yahoo.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "Enable"},
                  new UserProfile{ UserID = 0005, LocationID = 5, FirstName = "Cody", LastName = "Hackins", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "Enable"},
+                 new UserProfile{ UserID = 0006, LocationID = 5, FirstName = "Test", LastName = "User", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "Enable"},
+                 new UserProfile{ UserID = 0007, LocationID = 5, FirstName = "Test", LastName = "User", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "Enable"}
              };
             context.UserProfiles.AddOrUpdate(users => users.UserID, (sampleProfiles.ToArray()));
             context.SaveChanges();
@@ -56,7 +62,9 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                  new Salt{ UserID = 0002, SaltValue = "fdsaf"},
                  new Salt{ UserID = 0003, SaltValue = "asdewaf"},
                  new Salt{ UserID = 0004, SaltValue = "ase2df"},
-                 new Salt{ UserID = 0005, SaltValue = "as32eddf"}
+                 new Salt{ UserID = 0005, SaltValue = "as32eddf"},
+                 new Salt{ UserID = 0006, SaltValue = "dfadfadfa"},
+                 new Salt{ UserID = 0007, SaltValue = "adsfasdfad"},
              };
             context.Salts.AddOrUpdate(salts => salts.UserID, (sampleSalts.ToArray()));
             context.SaveChanges();
@@ -73,6 +81,8 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                  new UserClaims{ ClaimID = 8, UserID = 0004, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
                  new UserClaims{ ClaimID = 9, UserID = 0005, ClaimType="ClaimType", ClaimValue="ClaimValue3"},
                  new UserClaims{ ClaimID = 10,UserID = 0005, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
+                 new UserClaims{ ClaimID = 11,UserID = 0006, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
+                 new UserClaims{ ClaimID = 12,UserID = 0007, ClaimType="ClaimType", ClaimValue="ClaimValue1"},
              };
             context.UserClaims.AddOrUpdate(userclaims => userclaims.ClaimID, (sampleClaims.ToArray()));
             context.SaveChanges();
@@ -109,6 +119,12 @@ namespace Whatfits.Models.Migrations.AccountMigrations
                  new SecurityAccount{ SecurityAccountID = 13, UserID = 0005, SecurityQuestionID = 1, Answer = "Answer to Question 1" },
                  new SecurityAccount{ SecurityAccountID = 14, UserID = 0005, SecurityQuestionID = 3, Answer = "Answer to Question 3" },
                  new SecurityAccount{ SecurityAccountID = 15, UserID = 0005, SecurityQuestionID = 4, Answer = "Answer to Question 4" },
+                 new SecurityAccount{ SecurityAccountID = 16, UserID = 0006, SecurityQuestionID = 1, Answer = "Answer to Question 1" },
+                 new SecurityAccount{ SecurityAccountID = 17, UserID = 0006, SecurityQuestionID = 3, Answer = "Answer to Question 3" },
+                 new SecurityAccount{ SecurityAccountID = 18, UserID = 0006, SecurityQuestionID = 4, Answer = "Answer to Question 4" },
+                 new SecurityAccount{ SecurityAccountID = 19, UserID = 0007, SecurityQuestionID = 1, Answer = "Answer to Question 1" },
+                 new SecurityAccount{ SecurityAccountID = 20, UserID = 0007, SecurityQuestionID = 3, Answer = "Answer to Question 3" },
+                 new SecurityAccount{ SecurityAccountID = 21, UserID = 0007, SecurityQuestionID = 4, Answer = "Answer to Question 4" }
              };
             context.SecurityAccounts.AddOrUpdate(securityAccount => securityAccount.SecurityAccountID, (sampleAnswers.ToArray()));
             context.SaveChanges();
