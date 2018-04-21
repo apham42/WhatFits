@@ -34,8 +34,12 @@ namespace server.Controllers
                 return Content(HttpStatusCode.NotFound, response.Messages);
             }
 
+            bool validated = login.ValidateCredentials(loginDTO, loginResponseDTO);
 
-
+            if(validated == false)
+            {
+                return Content(HttpStatusCode.Unauthorized, response.Messages);
+            }
 
             response = login.GetLoginToken(loginResponseDTO);
 
