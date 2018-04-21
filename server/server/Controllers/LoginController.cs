@@ -1,8 +1,14 @@
-﻿using server.Model.Account;
+﻿using server.Business_Logic.Services;
+using server.Interfaces;
+using server.Model.Account;
 using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using System;
+using System.Net;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Whatfits.DataAccess.DTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
+using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.JsonWebToken.Controller;
 
 namespace server.Controllers
@@ -16,11 +22,33 @@ namespace server.Controllers
         public IHttpActionResult Login([FromBody] UserCredential userCredential)
         {
             LoginResponseDTO response = new LoginResponseDTO();
-            string username = userCredential.Username;
-            response.username = username;
-            CreateJWT createJWT = new CreateJWT();
-            response.token = createJWT.CreateToken(username, "general");
-            return Ok(new { response });
+            ILogin login = new LoginService();
+
+            LoginDTO loginDTO = login.UserCredentialTransformer(userCredential);
+
+            ResponseDTO<LoginDTO> loginResponseDTO = login.GetUsersCredentails(loginDTO);
+
+            if(loginResponseDTO.IsSuccessful == false)
+            {
+                //response.Messages.Add("User does not exist");
+                return Content(HttpStatusCode.NotFound, response.Messages);
+            }
+
+            bool validated = login.ValidateCredentials(loginDTO, loginResponseDTO);
+
+            if(validated == false)
+            {
+                return Content(HttpStatusCode.Unauthorized, response.Messages);
+            }
+
+            response = login.GetLoginToken(loginResponseDTO);
+
+            if(response.isSuccessful == false)
+            {
+                return Content(HttpStatusCode.NotFound, response.Messages);
+            }
+
+            return Ok(response);
         }
     }
 }

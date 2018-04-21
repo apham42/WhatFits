@@ -140,6 +140,7 @@
     <Compile Include="Interfaces\IDeletion.cs" />
     <Compile Include="Interfaces\IGeoCoordinates.cs" />
     <Compile Include="Interfaces\ILocation.cs" />
+    <Compile Include="Interfaces\ILogin.cs" />
     <Compile Include="Interfaces\INetworkCommunication.cs" />
     <Compile Include="Interfaces\IRequest.cs" />
     <Compile Include="Interfaces\IRetrieval.cs" />
