@@ -3,19 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Whatfits.DataAccess.DTOs.ContentDTOs;
+using Whatfits.DataAccess.Gateways.ContentGateways;
 using Whatfits.Models.Models;
 
 namespace server.Business_Logic.Services
 {
-    public class FollowsService : ICollection<Credential>
+    public class FollowsService : ICollection<FollowsDTO>
     {
+        private bool addstatus = false;
         public int Count => throw new NotImplementedException();
 
         public bool IsReadOnly => throw new NotImplementedException();
 
-        public void Add(Credential item)
+        public void Add(FollowsDTO follo)
         {
-            throw new NotImplementedException();
+            var gateway = new FollowsGateway();
+            gateway.AddtoFollow(follo);
+            addstatus = true;
         }
 
         public void Clear()
@@ -23,22 +28,22 @@ namespace server.Business_Logic.Services
             throw new NotImplementedException();
         }
 
-        public bool Contains(Credential item)
+        public bool Contains(FollowsDTO item)
         {
             throw new NotImplementedException();
         }
 
-        public void CopyTo(Credential[] array, int arrayIndex)
+        public void CopyTo(FollowsDTO[] array, int arrayIndex)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerator<Credential> GetEnumerator()
+        public IEnumerator<FollowsDTO> GetEnumerator()
         {
             throw new NotImplementedException();
         }
 
-        public bool Remove(Credential item)
+        public bool Remove(FollowsDTO item)
         {
             throw new NotImplementedException();
         }

@@ -1,29 +1,28 @@
 <template>
 <div id="Chat">
-    <div id="ChatBox">
-        <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
-        <div id="chatbody" v-if="chatshow">
-            <div id="username" v-for="(value, index) in chatusers" :key="index" list-style:none>
-                <div id="user" v-on:click="SpanBox(index)">
-                    {{value}}
-                </div>
+   <div id="ChatBox">
+      <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
+      <div id="chatbody" v-if="chatshow">
+         <div id="username" v-for="(value, index) in chatusers" :key="index" list-style:none>
+            <div id="user" v-on:click="SpanBox(index)">
+               {{value}}
             </div>
-        </div>
-    </div>
-    <div id="MsgBox" style="right:290px" v-if="msgshow">
-        <div id="msghead">
-            {{clickeduser}}
-        </div>
-        <div id="msgbody">
-            <textarea id="receives" rows="10" />
-        </div>
-        <div id="msgfoot">
-            <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message"></textarea>
-            <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
+   <div id="MsgBox" style="right:290px" v-if="msgshow">
+      <div id="msghead">
+         {{clickeduser}}
+      </div>
+      <div id="msgbody">
+         <textarea id="receives" rows="10" />
+      </div>
+      <div id="msgfoot">
+      <textarea id="messagesent" v-model="messages" v-on:keyup.enter="SendMessage" rows="4" placeholder="Enter the message"></textarea>
+      <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
+      </div>
+   </div>
 </div>
-
 </template>
 
 <script>
@@ -50,7 +49,8 @@ export default {
   },
   mounted () {
     // ask for username when chat webapi gets called and request websocket connection to server
-    this.onlineUser = prompt('Enter your name')
+    // this.onlineUser = prompt('Enter your name')
+    this.onlineUser = this.$store.getters.getusername
     this.ws = new WebSocket('ws://localhost/server/v1/chat/connect' + '?username=' + this.onlineUser)
     this.Connection()
   },
@@ -73,6 +73,7 @@ export default {
       this.ws.onmessage = function (event) {
         var newiv = []
         var newkey = []
+        // if not first time connected receive message from other user
         if (vm.chatusers.length > 0) {
           console.log('receive')
           try {
@@ -81,10 +82,34 @@ export default {
             // show decypted messaged on the receiver side
             window.document.getElementById('receives').prepend(vm.receivestring + '\n')
           } catch (error) {
-            // server message cannot decrypted, since it is not encypted
-            window.document.getElementById('receives').prepend('User is offline' + '\n')
+            // if new user connected
+            if (vm.messages === '') {
+              // server message cannot decrypted, since it is not encypted
+              // show server message
+              vm.chatusers = JSON.parse(event.data).split(',')
+              console.log(vm.chatusers)
+              // get iv from first 16 elements
+              for (var p = 0; p < 16; p++) {
+                newiv.push(window.parseInt(vm.chatusers.pop()))
+              }
+              console.log(newiv)
+              vm.iv = newiv
+              // get key from next 16 elements
+              for (var q = 0; q < 16; q++) {
+                newkey.push(window.parseInt(vm.chatusers.pop()))
+              }
+              console.log(newkey)
+              vm.key = newkey
+              // get users
+              if (vm.chatusers.includes(vm.onlineUser)) {
+                var indexy = vm.chatusers.indexOf(vm.onlineUser)
+                vm.chatusers.splice(indexy, 1)
+              }
+            } else { // send message to offline user
+              window.document.getElementById('receives').prepend('User is offline' + '\n')
+            }
           }
-        } else {
+        } else { // first time connected, get initial value and secret key from server
           vm.chatusers = JSON.parse(event.data).split(',')
           console.log(vm.chatusers)
           // get iv from first 16 elements
@@ -118,6 +143,7 @@ export default {
         this.ws.send(JSON.stringify(jmsg))
         window.document.getElementById('receives').prepend('You said: ' + this.messages)
         console.log('sent')
+        // clear the message input area
         this.messages = ''
       }
     },

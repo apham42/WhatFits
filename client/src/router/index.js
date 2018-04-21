@@ -74,6 +74,11 @@ export default new Router({
       component: () => import('@/components/UserProfile/WorkoutLogger')
     },
     {
+      path: '/serverIssues',
+      name: 'ServerIssues',
+      component: () => import('@/components/ErrorPage/ServerIssues')
+    },
+    {
       // Catch All Error Page
       path: '*',
       name: '404NotFound',

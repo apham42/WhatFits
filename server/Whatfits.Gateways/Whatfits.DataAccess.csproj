@@ -50,6 +50,7 @@
     <Compile Include="Constants\AccountGatewayConstants.cs" />
     <Compile Include="Constants\ServerConstants.cs" />
     <Compile Include="DTOs\ContentDTOs\ChatDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\ProfileDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewDetailDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewMessageDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\EventDTO.cs" />

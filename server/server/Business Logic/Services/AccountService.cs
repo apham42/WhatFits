@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Text.RegularExpressions;
+﻿using System.Collections.Generic;
 using server.Constants;
 using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using server.Interfaces;
@@ -13,6 +9,11 @@ using server.Model.Location;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.UserAccessControl.Service;
+using System.Security.Claims;
+using System.Linq;
+using System.Web;
+using System.Text.RegularExpressions;
+using System;
 
 namespace server.Services
 {
@@ -61,7 +62,41 @@ namespace server.Services
             }
             return Response;
         }
+        /// <summary>
+        /// Creates an Admin user with additional claims
+        /// </summary>
+        /// <param name="creds">Registration Information</param>
+        /// <returns> A DTO that contains status and any messages </returns>
+        public RegInfoResponseDTO RegisterAdmin(RegInfo creds)
+        {
+            List<string> messages = new List<string>();
 
+            // Validates user credentials and returns response dto if it fails validation
+            if (!ValidateCredentials(creds))
+            {
+                return Response;
+            }
+
+            var gatewayDTO = CreateGatewayDTO(creds, UserLocation);
+
+            // Appending Admin Claims
+            gatewayDTO.UserClaims.AddRange(new SetDefaultClaims().GetAdminClaims());
+
+            // Save user into the database and returns the status
+            if (Create(gatewayDTO))
+            {
+                Response.isSuccessful = true;
+                messages.Add(AccountConstants.USER_CREATED);
+                Response.Messages = messages;
+            }
+            else
+            {
+                Response.isSuccessful = false;
+                messages.Add(AccountConstants.USER_CREATE_FAIL);
+                Response.Messages = messages;
+            }
+            return Response;
+        }
         /// <summary>
         /// Validates Registration Information
         /// </summary>
