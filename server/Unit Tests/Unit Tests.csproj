@@ -106,6 +106,7 @@
     <Compile Include="UserAccessControl\ServiceTest\ClaimsTransformerTest.cs" />
     <Compile Include="UserAccessControl\ServiceTest\RequestTransformerTest.cs" />
     <Compile Include="UserAccessControl\ServiceTest\SetDefaultClaimsTest.cs" />
+    <Compile Include="Workout Test\GetWorkoutTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

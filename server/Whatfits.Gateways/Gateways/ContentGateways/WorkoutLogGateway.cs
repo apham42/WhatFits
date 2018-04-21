@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -14,6 +15,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
     public class WorkoutLogGateway
     {
         private WorkoutLogContext db = new WorkoutLogContext();
+
         public bool CreateWorkoutLog(WorkoutLogDTO w)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
@@ -67,6 +69,62 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     dbTransaction.Rollback();
                     return false;
                 }
+            }
+        }
+
+        public IEnumerable<WorkoutLogDTO> GetWorkouts(string userName)
+        {
+            var getType = (from b in db.Workouts
+                           join cred in db.Credentials
+                           on b.UserID equals cred.UserID
+                           where userName == cred.UserName
+                           select new WorkoutLogDTO()
+                           {
+                               WorkoutType = b.WorkoutType
+                           });
+            if (getType.toString.Equals("Cardio"))
+            {
+                return (from b in db.Workouts
+                        join cred in db.Credentials
+                        on b.UserID equals cred.UserID
+                        where userName == cred.UserName
+                        //join weight in db.WeightLiftings
+                        //on b.WorkoutLogID equals weight.WorkoutID
+                        join card in db.Cardios
+                        on b.WorkoutLogID equals card.WorkoutID
+                        select new WorkoutLogDTO()
+                        {
+                            WorkoutType = b.WorkoutType,
+                            Date_Time = b.Date_Time,
+                            CardioType = card.CardioType,
+                            Distance = card.Distance,
+                            Time = card.Time
+                            //LiftingType = weight.LiftingType,
+                            //Reps = weight.Reps,
+                            //Sets = weight.Sets
+                        });
+            }
+            else
+            {
+                return (from b in db.Workouts
+                        join cred in db.Credentials
+                        on b.UserID equals cred.UserID
+                        where userName == cred.UserName
+                        join weight in db.WeightLiftings
+                        on b.WorkoutLogID equals weight.WorkoutID
+                        //join card in db.Cardios
+                        //on b.WorkoutLogID equals card.WorkoutID
+                        select new WorkoutLogDTO()
+                        {
+                            WorkoutType = b.WorkoutType,
+                            Date_Time = b.Date_Time,
+                            //CardioType = card.CardioType,
+                            //Distance = card.Distance,
+                            //Time = card.Time
+                            LiftingType = weight.LiftingType,
+                            Reps = weight.Reps,
+                            Sets = weight.Sets
+                        });
             }
         }
     }
