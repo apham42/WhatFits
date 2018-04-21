@@ -38,7 +38,7 @@ export default {
         skillLevel: '',
         gender: '',
         profileImage: '../../assets/Images/ProfileDummy/backgroundImage.jpg',
-        myProfile: 'true'
+        myProfile: false
       }
     }
   },

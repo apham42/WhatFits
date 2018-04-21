@@ -34,10 +34,11 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                 // credential infromation
                 response.Data = new LoginDTO
                 {
+                    UserName = foundCredential.UserName,
                     UserID = foundCredential.UserID,
                     Password = foundCredential.Password,
                     Salt = db.Salts.Find(foundCredential.UserID).SaltValue,
-                    Type = "General"
+                    Type = db.UserProfiles.Find(foundCredential.UserID).Type
                 };
                 response.IsSuccessful = true;
                 // Returns data

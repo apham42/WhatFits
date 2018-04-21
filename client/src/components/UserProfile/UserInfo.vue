@@ -12,7 +12,7 @@
                <div class="card-content" align="center">
                   <span class="title is-1">{{this.userData.firstName}} {{this.userData.lastName}}</span>
                   <hr>
-                  <span v-if="myProfile == true" >
+                  <span v-if="this.userData.myProfile == true" >
                       <button class="button is-primary is-rounded" id="buttonGap">Edit Profile</button>
                   </span>
                   <span v-else>

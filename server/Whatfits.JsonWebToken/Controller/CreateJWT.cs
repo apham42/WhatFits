@@ -20,7 +20,7 @@ namespace Whatfits.JsonWebToken.Controller
         /// </summary>
         /// <param name="username">username of user</param>
         /// <returns>string jwt</returns>
-        public string CreateToken(string username, string type)
+        public string CreateToken(string username)//, string type)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Whatfits.JsonWebToken.Controller
                 Create newJwt = new Create();
 
                 // creates jwtsecuritytoken
-                var jwt = new JwtSecurityToken(newJwt.CreateHeader(secret), newJwt.CreatePayload(username, type));
+                var jwt = new JwtSecurityToken(newJwt.CreateHeader(secret), newJwt.CreatePayload(username));//, type));
 
                 // converts JwtSecurityToken into serialized format
                 // Signs token with SigningCredentials in WriteToken()
