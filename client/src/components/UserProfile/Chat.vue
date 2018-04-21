@@ -49,7 +49,8 @@ export default {
   },
   mounted () {
     // ask for username when chat webapi gets called and request websocket connection to server
-    this.onlineUser = prompt('Enter your name')
+    // this.onlineUser = prompt('Enter your name')
+    this.onlineUser = this.$store.getters.getusername
     this.ws = new WebSocket('ws://localhost/server/v1/chat/connect' + '?username=' + this.onlineUser)
     this.Connection()
   },
@@ -81,6 +82,7 @@ export default {
             // show decypted messaged on the receiver side
             window.document.getElementById('receives').prepend(vm.receivestring + '\n')
           } catch (error) {
+            // if new user connected
             if (vm.messages === '') {
               // server message cannot decrypted, since it is not encypted
               // show server message
@@ -103,7 +105,7 @@ export default {
                 var indexy = vm.chatusers.indexOf(vm.onlineUser)
                 vm.chatusers.splice(indexy, 1)
               }
-            } else {
+            } else { // send message to offline user
               window.document.getElementById('receives').prepend('User is offline' + '\n')
             }
           }
