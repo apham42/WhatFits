@@ -7,10 +7,9 @@
         </div>
       </div>
       <div v-else>
-        <user-info id="ProfileInfo"></user-info>
+        <user-info id="ProfileInfo" :userData="userData"></user-info>
         <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
       </div>
-
     </div>
 </template>
 
@@ -31,7 +30,16 @@ export default {
     return {
       userName: '',
       errorFlag: '',
-      errorMessage: 'Page Failed to load.'
+      errorMessage: 'Page Failed to load.',
+      userData: {
+        firstName: '',
+        lastName: '',
+        description: '',
+        skillLevel: '',
+        gender: '',
+        profileImage: '../../assets/Images/ProfileDummy/backgroundImage.jpg',
+        myProfile: 'true'
+      }
     }
   },
   beforeCreate () {
@@ -47,14 +55,12 @@ export default {
       .then(response => {
         console.log(response.data)
         // NOTE: Is there a better way to store data?
-        /*
-        this.firstName = response.data.FirstName
-        this.lastName = response.data.LastName
-        this.description = response.data.Description
-        this.skillLevel = response.data.SkillLevel
-        this.gender = response.data.Gender
-        this.profileImage = response.data.ProfilePictureDirectory
-        */
+        this.userData.firstName = response.data.FirstName
+        this.userData.lastName = response.data.LastName
+        this.userData.description = response.data.Description
+        this.userData.skillLevel = response.data.SkillLevel
+        this.userData.gender = response.data.Gender
+        // this.userData.profileImage = response.data.ProfilePictureDirectory
         this.errorFlag = false
       }).catch((error) => {
       // Pushes the error messages into error to display
