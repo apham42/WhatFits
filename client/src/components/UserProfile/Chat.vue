@@ -81,9 +81,31 @@ export default {
             // show decypted messaged on the receiver side
             window.document.getElementById('receives').prepend(vm.receivestring + '\n')
           } catch (error) {
-            // server message cannot decrypted, since it is not encypted
-            // show server message
-            window.document.getElementById('receives').prepend('User is offline' + '\n')
+            if (vm.messages === '') {
+              // server message cannot decrypted, since it is not encypted
+              // show server message
+              vm.chatusers = JSON.parse(event.data).split(',')
+              console.log(vm.chatusers)
+              // get iv from first 16 elements
+              for (var p = 0; p < 16; p++) {
+                newiv.push(window.parseInt(vm.chatusers.pop()))
+              }
+              console.log(newiv)
+              vm.iv = newiv
+              // get key from next 16 elements
+              for (var q = 0; q < 16; q++) {
+                newkey.push(window.parseInt(vm.chatusers.pop()))
+              }
+              console.log(newkey)
+              vm.key = newkey
+              // get users
+              if (vm.chatusers.includes(vm.onlineUser)) {
+                var indexy = vm.chatusers.indexOf(vm.onlineUser)
+                vm.chatusers.splice(indexy, 1)
+              }
+            } else {
+              window.document.getElementById('receives').prepend('User is offline' + '\n')
+            }
           }
         } else { // first time connected, get initial value and secret key from server
           vm.chatusers = JSON.parse(event.data).split(',')
@@ -119,6 +141,7 @@ export default {
         this.ws.send(JSON.stringify(jmsg))
         window.document.getElementById('receives').prepend('You said: ' + this.messages)
         console.log('sent')
+        // clear the message input area
         this.messages = ''
       }
     },
