@@ -62,7 +62,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             {
                 var results = (from x in db.Locations
                                                     select new { x.LocationID, x.Longitude, x.Latitude })
-                                                    .AsEnumerable().Select(x => new GeoCoordinates() 
+                                                    .AsEnumerable().Select(x => new GeoCoordinate() 
                     { 
                         ID = x.LocationID, 
                         Longitude = x.Longitude,

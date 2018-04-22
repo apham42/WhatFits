@@ -11,6 +11,6 @@ namespace Whatfits.DataAccess.DTOs.ContentDTOs
     {
         public bool IsSuccessful { get; set; }
         public List<string> Messages { get; set; }
-        public List<GeoCoordinates> LocationResults { get; set; }
+        public List<GeoCoordinate> LocationResults { get; set; }
     }
 }

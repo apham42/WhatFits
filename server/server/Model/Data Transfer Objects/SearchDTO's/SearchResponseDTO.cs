@@ -12,6 +12,6 @@ namespace server.Model.Data_Transfer_Objects.SearchDTO_s
         public List<string> Messages { get; set; }
         public bool IsSuccessful { get; set; }
         public List<SearchResult> SearchResults { get; set; }
-        public List<GeoCoordinates> GeoList { get; set; }
+        public List<GeoCoordinate> GeoList { get; set; }
     }
 }

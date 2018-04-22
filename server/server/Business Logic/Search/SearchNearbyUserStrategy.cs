@@ -49,9 +49,7 @@ namespace server.Business_Logic.Search
             }
 
             // Retrieve all locations from database
-            // searchResponse.GeoList = new SearchGateway().RetrieveLocations().LocationResults;
-            searchResponse.IsSuccessful = true;
-            response.Result = searchResponse;
+            
 
             return response;
         }

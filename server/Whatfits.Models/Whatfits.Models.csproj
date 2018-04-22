@@ -115,7 +115,7 @@
     </Compile>
     <Compile Include="Migrations\ContentMigrations\WorkoutLogMigrations\Configuration.cs" />
     <Compile Include="Models\Event.cs" />
-    <Compile Include="Models\GeoCoordinates.cs" />
+    <Compile Include="Models\GeoCoordinate.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Credential.cs" />
     <Compile Include="Models\Message.cs" />
