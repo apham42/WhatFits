@@ -1,60 +1,63 @@
 <template>
-  <div id="navbarExampleTransparentExample" class="navbar-menu">
-    <div class="navbar-start">
-      <a class="navbar-item" href="https://bulma.io/">
-        HOME
-      </a>
-      <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link" href="/documentation/overview/start/">
-          Docs
-        </a>
-        <div class="navbar-dropdown is-boxed">
-          <a class="navbar-item" href="/documentation/overview/start/">
-            Overview
-          </a>
-          <a class="navbar-item" href="https://bulma.io/documentation/modifiers/syntax/">
-            Modifiers
-          </a>
-          <a class="navbar-item" href="https://bulma.io/documentation/columns/basics/">
-            Columns
-          </a>
-          <a class="navbar-item" href="https://bulma.io/documentation/layout/container/">
-            Layout
-          </a>
-          <a class="navbar-item" href="https://bulma.io/documentation/form/general/">
-            Form
-          </a>
-          <hr class="navbar-divider">
-          <a class="navbar-item" href="https://bulma.io/documentation/elements/box/">
-            Elements
-          </a>
-          <a class="navbar-item is-active" href="https://bulma.io/documentation/components/breadcrumb/">
-            Components
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <div class="navbar-end">
-      <div class="navbar-item">
-        <div class="field is-grouped">
-          <p class="control">
-            <a class="button">
-              <span class="icon">
-                <i class="fas fa-sign-out-alt"></i>
-              </span>
-              <span>Logout</span>
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div>
+      <nav class="navbar is-radiusless">
+         <div class="container">
+            <div class="navbar-brand">
+               <a>
+               <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home">
+               </a>
+               <span class="navbar-burger burger" data-target="navbarMenuHero2">
+               <span></span>
+               <span></span>
+               <span></span>
+               </span>
+            </div>
+            <div id="navbarMenuHero1" class="navbar-menu">
+               <div class="navbar-end">
+                  <span class="navbar-item">
+                  <button id="button" class="button is-primary is-inverted" @click="logout">
+                  <span class="icon">
+                  <i class="fa fa-sign-out-alt"></i>
+                  </span>
+                  <span>Logout</span>
+                  </button>
+                  </span>
+               </div>
+            </div>
+         </div>
+      </nav>
+   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
-
+  name: 'MainNavBar',
+  methods: {
+    logout: function () {
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/v1/logout/logout',
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
+          'Content-Type': 'application/json'
+        },
+        data: {
+          Username: this.$store.getters.getusername,
+          Token: this.$store.getters.gettoken
+        }
+      })
+        .then((response) => {
+          this.$store.dispatch('actusername', {Username: ''})
+          this.$store.dispatch('acttoken', {Token: ''})
+          this.$store.dispatch('actviewclaims', {Viewclaims: null})
+          this.$router.push('/')
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
+  }
 }
 </script>
 

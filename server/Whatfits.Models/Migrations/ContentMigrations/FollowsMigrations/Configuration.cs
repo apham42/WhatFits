@@ -17,6 +17,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.FollowsContext context)
         {
+            /**
             var sampleFollowingList = new List<Following>
                 {
                     new Following{ FollowingID = 1, UserID = 0001, PersonFollowing = 0002 },
@@ -27,6 +28,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.FollowsMigrations
                 };
             context.Following.AddOrUpdate(following => following.FollowingID, sampleFollowingList.ToArray());
             context.SaveChanges();
+            **/
         }
     }
 }

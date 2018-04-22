@@ -17,7 +17,8 @@ const persistedstate = new CreatePersistedState({
 export default new Vuex.Store({
   modules: {
     loginpopup,
-    User
+    User,
+    Request
   },
   plugins: [persistedstate]
 })

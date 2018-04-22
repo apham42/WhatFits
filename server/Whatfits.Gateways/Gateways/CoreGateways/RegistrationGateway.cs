@@ -102,7 +102,12 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     {
                         UserID = userID,
                         LocationID = locationID,
-                        Type = dto.Type
+                        Type = dto.Type,
+                        FirstName = "First Name",
+                        LastName = "Last Name",
+                        Description = "Example Description",
+                        Gender = "",
+                        SkillLevel = ""
                     };
                     db.UserProfiles.Add(userInfo);
                     db.SaveChanges();

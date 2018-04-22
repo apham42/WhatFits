@@ -36,7 +36,7 @@ namespace server.Model.Validators.Location_Validator
             RuleFor(locationInfo => locationInfo.ZipCode).MinimumLength(5).WithMessage(LocationConstants.ZIP_DOESNT_EXIST_ERROR);
             RuleFor(locationInfo => locationInfo.ZipCode).MaximumLength(16).WithMessage(LocationConstants.ZIP_DOESNT_EXIST_ERROR);
 
-            RuleFor(locationInfo => locationInfo.getLocation()).Must(CheckAddress).WithMessage(LocationConstants.COUNTY_NOT_VALID_ERROR);
+            RuleFor(locationInfo => locationInfo.getLocation()).Must(CheckAddress).WithMessage(LocationConstants.ADDRESS_NOT_VALID_ERROR);
 
         }
 
