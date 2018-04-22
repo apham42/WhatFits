@@ -30,7 +30,7 @@ namespace Whatfits.Models.Models
         public virtual UserProfile UserProfile { get; set; }
 
         // Workout log can have many Weightlifting Logs and Cardio Logs
-        public WeightLifting WeightLifting { get; set; }
-        public Cardio Cardio { get; set; }
+        public ICollection<WeightLifting> WeightLifting { get; set; }
+        public ICollection<Cardio> Cardio { get; set; }
     }
 }
