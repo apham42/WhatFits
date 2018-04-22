@@ -15,7 +15,7 @@ namespace server.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [RoutePrefix("v1/UACTEST")]
+    [RoutePrefix("v1/uactest")]
     public class UACTESTController : ApiController
     {
         /// <summary>
@@ -104,7 +104,8 @@ namespace server.Controllers
         /// <returns></returns>
         [HttpPost]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "Add")]
+        //[Route("six")]
+        //[AuthorizePrincipal(type = "WORKOUT_ADD", value = "Add")]
         public string six()
         {
             return "Pass";
