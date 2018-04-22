@@ -17,6 +17,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.WorkoutLogContext context)
         {
+            /**
             var sampleWorkouts = new List<WorkoutLog>
             {
                 new WorkoutLog() { WorkoutLogID = 1, UserID = 1, Date_Time = new DateTime(2018, 2, 1), WorkoutType = "Cardio"},
@@ -44,6 +45,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.WorkoutLogMigrations
             };
             context.WeightLiftings.AddOrUpdate(WeightLifting => WeightLifting.WeightLiftingID, sampleWeightLifting.ToArray());
             context.SaveChanges();
+            **/
         }
     }
 }
