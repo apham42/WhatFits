@@ -9,6 +9,7 @@
       <div v-else>
         <user-info id="ProfileInfo" :userData="userData"></user-info>
         <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
+        <chat-bar></chat-bar>
       </div>
     </div>
 </template>
@@ -18,13 +19,15 @@ import axios from 'axios'
 import UserInfo from '@/components/UserProfile/UserInfo'
 import ErrorPage from '@/components/ErrorPage/NotFound'
 import HomeButton from '@/components/Common/HomeButton'
+import Chat from '@/components/UserProfile/Chat'
 
 export default {
   name: 'ProfilePage',
   components: {
     'user-info': UserInfo,
     'error-page404': ErrorPage,
-    'home-button': HomeButton
+    'home-button': HomeButton,
+    'chat-bar': Chat
   },
   data () {
     return {
