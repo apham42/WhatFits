@@ -6,8 +6,8 @@
             <div class="card " >
                <div class="card-image" id="imageBackground">
                   <!-- NOTE: This is a temporary image used as a profile picture-->
-                  <!-- <figure class="image"> <img v-bind:src="this.userData.profileImage"> </figure> -->
-                  <figure class="image" ><img  id="circle-ProfileImage" class="center" src="../../assets/Images/ProfileDummy/profilePicture.jpg"></figure>
+                   <figure class="image"> <img  id="circle-ProfileImage" v-bind:src=this.userData.profileImage> </figure>
+
                </div>
                <div class="card-content" align="center">
                   <span class="title is-1">{{this.userData.firstName}} {{this.userData.lastName}}</span>
@@ -46,7 +46,6 @@ export default {
   props: ['userData'],
   data () {
     return {
-
     }
   },
   methods: {

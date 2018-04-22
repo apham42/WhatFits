@@ -37,18 +37,21 @@ export default {
         description: '',
         skillLevel: '',
         gender: '',
-        profileImage: '../../assets/Images/ProfileDummy/backgroundImage.jpg',
+        profileImage: '../../../static/genericProfileImage.jpg',
         myProfile: false
       }
     }
   },
   beforeCreate () {
     axios({
-      method: 'GET',
-      url: 'http://localhost/server/v1/UserProfile/GetProfileData',
+      method: 'POST',
+      url: 'http://localhost/server/v1/UserProfile/ProfileData',
       headers: {
         'Access-Control-Allow-Origin': 'http://localhost:8081',
         'Content-Type': 'application/json'
+      },
+      data: {
+        'Username': this.$store.getters.getusername
       }
     })
       // redirect to Home page
