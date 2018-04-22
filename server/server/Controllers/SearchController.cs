@@ -16,7 +16,6 @@ namespace server.Controllers
     public class SearchController : ApiController
     {
         [HttpPost]
-        [Route("User")]
         [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult SearchUser([FromBody] UsernameDTO user)
         {
@@ -46,7 +45,7 @@ namespace server.Controllers
             var response = (SearchResponseDTO)(service.Execute().Result);
             if (response.IsSuccessful)
             {
-                return Ok(new { response.GeoList });
+                return Ok(new { response.Messages });
             }
             else
             {

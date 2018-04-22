@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Data;
 using Whatfits.DataAccess.Constants;
 using Whatfits.Models.Models;
+using System.Device.Location;
 
 namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
@@ -61,10 +62,9 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             try
             {
                 var results = (from x in db.Locations
-                                                    select new { x.LocationID, x.Longitude, x.Latitude })
+                                                    select new { x.Longitude, x.Latitude })
                                                     .AsEnumerable().Select(x => new GeoCoordinate() 
                     { 
-                        ID = x.LocationID, 
                         Longitude = x.Longitude,
                         Latitude = x.Latitude 
                     }).ToList();

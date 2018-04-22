@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using server.Model.Search;
 using Whatfits.Models.Models;
+using System.Device.Location;
 
 namespace server.Model.Data_Transfer_Objects.SearchDTO_s
 {

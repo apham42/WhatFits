@@ -29,7 +29,7 @@ export default {
     searchUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/Test',
+        url: 'http://localhost/server/v1/Search/' + this.$data.searchType,
         data: {
           username: this.$data.userInput
         },
