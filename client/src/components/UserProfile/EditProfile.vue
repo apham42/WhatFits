@@ -137,8 +137,8 @@ export default {
         },
         data: {
           'UserName': this.$store.getters.getusername,
-          'FirstName': 'Felix',
-          'LastName': 'Huang',
+          'FirstName': 'Abram',
+          'LastName': 'Villanueva',
           'Description': 'This is a request to controller. It worked!!!',
           'SkillLevel': 'Missing',
           'Gender': 'Male',

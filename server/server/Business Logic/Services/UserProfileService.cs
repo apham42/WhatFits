@@ -33,6 +33,15 @@ namespace server.Business_Logic.Services
             UserProfileGateway userProfileDb = new UserProfileGateway();
             // sending data from Gateway back to response object
             response = userProfileDb.GetProfile(obj);
+            if(response.Data.FirstName == null&& response.Data.LastName == null && response.Data.Description == null)
+            {
+                response.Data.FirstName = "FirstName";
+                response.Data.LastName = "LastName";
+                response.Data.Description = "This is a description about me. What I'm into and what I like to do.";
+                response.Data.Gender = "My Gender";
+                response.Data.SkillLevel = "Beginner";
+                response.Data.ProfilePicture = "../../../static/genericProfileImage.jpg";
+            }
             return response;
         }
         /// <summary>
