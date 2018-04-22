@@ -8,6 +8,7 @@ using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.DTOs;
 using Whatfits.JsonWebToken.Controller;
 using System.Collections.Generic;
+using System.Web.Http.Cors;
 
 namespace server.Controllers
 {
@@ -101,7 +102,8 @@ namespace server.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpPost]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         [AuthorizePrincipal(type = "WORKOUT_ADD", value = "Add")]
         public string six()
         {

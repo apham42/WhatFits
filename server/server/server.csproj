@@ -127,6 +127,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\FollowsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
