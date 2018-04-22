@@ -16,7 +16,7 @@
 <script>
 import axios from 'axios'
 import UserInfo from '@/components/UserProfile/UserInfo'
-import ErrorPage from '@/components/ErrorPage/404NotFound'
+import ErrorPage from '@/components/ErrorPage/NotFound'
 import HomeButton from '@/components/Common/HomeButton'
 
 export default {
@@ -37,8 +37,8 @@ export default {
         description: '',
         skillLevel: '',
         gender: '',
-        profileImage: '../../../static/genericProfileImage.jpg',
-        myProfile: false
+        profileImage: '',
+        myProfile: true
       }
     }
   },
@@ -63,12 +63,13 @@ export default {
         this.userData.description = response.data.Description
         this.userData.skillLevel = response.data.SkillLevel
         this.userData.gender = response.data.Gender
-        // this.userData.profileImage = response.data.ProfilePictureDirectory
+        this.userData.profileImage = response.data.ProfilePicture
         this.errorFlag = false
       }).catch((error) => {
       // Pushes the error messages into error to display
         if (error.response) {
           this.errorMessage = 'Error: An Error Occurd.'
+          console.log('An Error Occured')
           this.errorFlag = true
           console.log(error.response)
         } else if (error.request) {

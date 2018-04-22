@@ -79,10 +79,15 @@ export default new Router({
       component: () => import('@/components/ErrorPage/ServerIssues')
     },
     {
+      path: '/editprofile',
+      name: 'EditProfile',
+      component: () => import('@/components/UserProfile/EditProfile')
+    },
+    {
       // Catch All Error Page
       path: '*',
       name: '404NotFound',
-      component: () => import('@/components/ErrorPage/404NotFound')
+      component: () => import('@/components/ErrorPage/NotFound')
 
     }
   ]

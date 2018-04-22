@@ -13,7 +13,7 @@
                   <span class="title is-1">{{this.userData.firstName}} {{this.userData.lastName}}</span>
                   <hr>
                   <span v-if="this.userData.myProfile == true" >
-                      <button class="button is-primary is-rounded" id="buttonGap">Edit Profile</button>
+                      <button class="button is-primary is-rounded" id="buttonGap" @click="goEditProfile">Edit Profile</button>
                   </span>
                   <span v-else>
                         <button class="button is-info is-rounded " id="buttonGap">Follow</button>
@@ -49,6 +49,9 @@ export default {
     }
   },
   methods: {
+    goEditProfile: function () {
+      this.$router.push('/editprofile')
+    }
   }
 }
 </script>
@@ -72,6 +75,9 @@ export default {
   margin-right: auto;
 }
 #imageBackground {
-  background-image: url("../../assets/Images/ProfileDummy/backgroundImage.jpg");
+  background-image: url("../../../static/ProfileDummy/backgroundImage.jpg");
+}
+#NoUpperBorders {
+  margin-top: -10%;
 }
 </style>

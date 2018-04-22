@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text.RegularExpressions;
+using System.Web.Http;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
@@ -39,7 +40,7 @@ namespace server.Business_Logic.Services
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public ResponseDTO<Boolean> EditProfile(ProfileDTO obj)
+        public ResponseDTO<Boolean> EditProfile([FromBody]ProfileDTO obj)
         {
             ResponseDTO<bool> response = new ResponseDTO<bool>();
             if (!ValidateProfileData(obj))
