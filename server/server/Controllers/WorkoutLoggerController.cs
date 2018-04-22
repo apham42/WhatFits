@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 
@@ -15,6 +16,7 @@ namespace server.Controllers
     /// <summary>
     /// 
     /// </summary>
+    [RoutePrefix("v1/WorkoutLogger")]
     public class WorkoutLoggerController : ApiController
     {
         //        /// <summary>
@@ -37,13 +39,14 @@ namespace server.Controllers
             }
         }
 
-        //[Route("WorkoutLogger/GetWorkout/{UserName}")]
-        //[HttpGet]
-        //public IEnumerable<WorkoutLogDTO> GetWorkout(string UserName)
-        //{
-        //    WorkoutLogGateway service = new WorkoutLogGateway();
-        //    return service.GetWorkouts(UserName);
-        //}
+        [HttpGet]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        public IHttpActionResult GetWorkout()
+        {
+            WorkoutLogGateway service = new WorkoutLogGateway();
+            //return service.GetWorkouts("Latmay");
+            return Ok();
+        }
 
     }
 }

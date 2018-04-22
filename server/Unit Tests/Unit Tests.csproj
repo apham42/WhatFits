@@ -100,6 +100,7 @@
     <Compile Include="Gateway Test\UserAccessControlTests.cs" />
     <Compile Include="Gateway Test\UserManagementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Review Test\ReviewTest.cs" />
     <Compile Include="UserAccessControl\Constant\ClaimsPrincipalMockData.cs" />
     <Compile Include="UserAccessControl\Constant\HttpRequestMessageMockData.cs" />
     <Compile Include="UserAccessControl\ControllerTest\AuthorizeTest.cs" />
@@ -153,7 +154,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Registration Test\" />
-    <Folder Include="Review Test\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

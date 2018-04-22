@@ -27,7 +27,7 @@ namespace Unit_Tests.Workout_Test
                     WorkoutLog w = new WorkoutLog
                     {
                         UserID = 1,
-                        WorkoutType = "Cardio",
+                        WorkoutType = "WeightLifting",
                         Date_Time = new DateTime(2015, 12, 12)
                     };
                     db.Workouts.Add(w);
@@ -35,7 +35,7 @@ namespace Unit_Tests.Workout_Test
                     {
                         Cardio card = new Cardio
                         {
-                            CardioType = "Sprinting",
+                            CardioType = "sprinting",
                             Distance = 12.21,
                             Time = "12:32"
                         };
@@ -45,9 +45,9 @@ namespace Unit_Tests.Workout_Test
                     {
                         WeightLifting weight = new WeightLifting
                         {
-                            LiftingType = "",
-                            Reps = 0,
-                            Sets = 0
+                            LiftingType = "Curls",
+                            Reps = 12,
+                            Sets = 11
                         };
                         db.WeightLiftings.Add(weight);
                     }

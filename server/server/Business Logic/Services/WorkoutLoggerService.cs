@@ -21,10 +21,10 @@ namespace server.Services
         }
 
         //Returns Review objects to front end, ReviewMessage, Rating, and Datetime
-        public IEnumerable<ReviewDetailDTO> GetUserReview(string Username)
+        public IEnumerable<WorkoutLogDTO> GetUserWorkouts(string Username)
         {
-            var gateway = new ReviewsGateway();
-            return gateway.GetUserReviewDetails(Username);
+            var gateway = new WorkoutLogGateway();
+            return gateway.GetWorkouts(Username);
         }
     }
 }

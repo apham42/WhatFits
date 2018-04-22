@@ -40,6 +40,7 @@ export default {
   },
   data: function () {
     return {
+      Username: this.$store.getters.getusername,
       Rating: this.Rating,
       ReviewMessage: '',
       UserID: '',
@@ -53,20 +54,19 @@ export default {
         this.Rating = this.Rating === star ? star - 1 : star
       }
     },
-
-    input () {
+    input: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/Review/CreateReview',
+        url: 'http://localhost/server/v1/Review/CreateReview',
         data: {
-          Rating: this.Rating,
-          ReviewMessage: this.ReviewMessage,
-          UserID: this.UserID,
-          RevieweeID: this.RevieweeID,
-          DateAndTime: this.DateAndTime
+          Rating: this.$data.Rating,
+          ReviewMessage: this.$data.ReviewMessage,
+          UserID: this.$data.UserID,
+          RevieweeID: this.$data.RevieweeID,
+          DateAndTime: this.$data.DateAndTime
         },
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
           'Content-Type': 'application/json'
         }
       }).then(response => {

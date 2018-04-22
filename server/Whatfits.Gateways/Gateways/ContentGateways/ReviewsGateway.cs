@@ -102,25 +102,6 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         //Return ReviewDetailDTO 
         public IEnumerable<ReviewDetailDTO> GetUserReviewDetails(string userName)
         {
-            //Changed from listing to IEnuerable
-            //List<int> rating = (from b in db.Review
-            //                    join cred in db.Credentials
-            //                    on b.UserID equals cred.UserID
-            //                    where userName == cred.UserName
-            //                    select b.Rating
-            //                      ).ToList();
-            //List<DateTime> time = (from b in db.Review
-            //                       join cred in db.Credentials
-            //                       on b.UserID equals cred.UserID
-            //                       where userName == cred.UserName
-            //                       select b.DateAndTime
-            //                      ).ToList();
-            //List<string> message = (from b in db.Review
-            //                        join cred in db.Credentials
-            //                        on b.UserID equals cred.UserID
-            //                        where userName == cred.UserName
-            //                        select b.ReviewMessage
-            //                      ).ToList();
             return (from b in db.Review
                     join cred in db.Credentials
                     on b.UserID equals cred.UserID
