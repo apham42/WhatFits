@@ -35,11 +35,11 @@ namespace Whatfits.UserAccessControl.Service
                     return token;
                 }
 
-                return token;
+                return null;
             }
-            catch (NullReferenceException)
+            catch (Exception)
             {
-                return token;
+                return null;
             }
         }
     }
