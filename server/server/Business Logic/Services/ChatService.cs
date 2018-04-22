@@ -96,8 +96,7 @@ namespace server.Business_Logic.Services
                 try
                 {
                     // if receiver is not online
-                    Send(JsonConvert.SerializeObject("server" + " said: " + "user-is-offline" + "  " + DateTime.Now.ToLocalTime()));
-                    sendSuccess = true;
+                    sendSuccess = false;
                 }
                 catch(Exception)
                 {
