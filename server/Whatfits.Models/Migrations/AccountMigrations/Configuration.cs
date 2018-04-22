@@ -17,6 +17,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
 
         protected override void Seed(Whatfits.Models.Context.Core.AccountContext context)
         {
+            /**
             var sampleCredentials = new List<Credential>
            {
                new Credential{ UserName = "latmey", Password = "123456" },
@@ -86,7 +87,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
              };
             context.UserClaims.AddOrUpdate(userclaims => userclaims.ClaimID, (sampleClaims.ToArray()));
             context.SaveChanges();
-
+            **/
             var sampleQuestions = new List<SecurityQuestion>
              {
                  new SecurityQuestion{ Question = "Who was the company you first worked for?"},
@@ -101,7 +102,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
              };
             context.SecurityQuestions.AddOrUpdate(securityQuestions => securityQuestions.Question, (sampleQuestions.ToArray()));
             context.SaveChanges();
-
+            /**
             var sampleAnswers = new List<SecurityAccount>
              {
                  new SecurityAccount{ SecurityAccountID = 1, UserID = 0001, SecurityQuestionID = 1, Answer = "Answer to Question 1" },
@@ -136,6 +137,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
            };
             context.TokenBlackLists.AddOrUpdate(tokenblacklist => tokenblacklist.UserID, (sampleBlackList.ToArray()));
             context.SaveChanges();
+            **/
         }
     }
 }

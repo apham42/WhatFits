@@ -17,6 +17,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ChatMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.ChatContext context)
         {
+            /**
             var sampleMessages = new List<Message>
            {
                new Message{ MessageID = 1, UserID = 1, MessageContent = "This is a message", CreatedAt = new DateTime(2018, 03, 15), ReceiverID = 2 },
@@ -27,6 +28,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ChatMigrations
            };
             context.Messages.AddOrUpdate(messages => messages.MessageID, (sampleMessages.ToArray()));
             context.SaveChanges();
+            **/
         }
     }
 }
