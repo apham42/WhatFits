@@ -40,6 +40,12 @@ export default new Router({
       component: () => import('@/components/UserProfile/Chat')
     },
     {
+      // Follow Page
+      path: '/follows',
+      name: 'Follows',
+      component: () => import('@/components/UserProfile/Follows')
+    },
+    {
       // UserManagement Page
       path: '/usermanagement',
       name: 'UserManagement',
