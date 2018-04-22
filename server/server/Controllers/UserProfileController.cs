@@ -62,8 +62,8 @@ namespace server.Controllers
             return Content(HttpStatusCode.OK, "Operation was: "+response.IsSuccessful);
         }
         [HttpGet]
-        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "GET")]
-        public IHttpActionResult GetDummy()
+        [EnableCors("http://localhost:8080 , http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "GET")]
+        public IHttpActionResult GetProfileData()
         {
             ProfileDTO profile = new ProfileDTO()
             {

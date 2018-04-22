@@ -43,7 +43,7 @@ namespace Whatfits.JsonWebToken.Service
         /// <param name="exptime">experation time of token</param>
         /// <param name="type">user type, either admin or general</param>
         /// <returns></returns>
-        public JwtPayload CreatePayload(string username, int exptime = 1)//, string type, int exptime = 1)
+        public JwtPayload CreatePayload(string username) // , int exptime = 1)//, string type, int exptime = 1)
         {
             // get current time
             DateTime currenttime = DateTime.UtcNow;
@@ -52,7 +52,7 @@ namespace Whatfits.JsonWebToken.Service
             long currentunixTime = ((DateTimeOffset)currenttime).ToUnixTimeSeconds();
 
             // get 1 hour from current time
-            long hrunixtime = ((DateTimeOffset)currenttime.AddHours(exptime)).ToUnixTimeSeconds();
+            // long hrunixtime = ((DateTimeOffset)currenttime.AddHours(exptime)).ToUnixTimeSeconds();
 
             // Get view claims
             List<Claim> ViewClaim = GetViewClaims(username);
@@ -61,10 +61,10 @@ namespace Whatfits.JsonWebToken.Service
             JwtPayload payload = new JwtPayload()
             {
                 { "iss", "https://www.Whatfits.social/" },
-                //{ "aud", type },
+                // { "aud", type },
                 { "iat", currentunixTime.ToString() },
                 { "nbf", currentunixTime.ToString() },
-                { "exp", hrunixtime.ToString() }
+                // { "exp", hrunixtime.ToString() }
             };
 
             // add username to jwt
