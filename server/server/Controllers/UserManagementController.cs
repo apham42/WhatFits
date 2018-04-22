@@ -81,7 +81,7 @@ namespace server.Controllers
         /// <param name="obj">A username to be disabled.</param>
         /// <returns>A success or failure message.</returns>
         [HttpPut]
-        [Route("disable")]
+        //[Route("disable")]
         [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult DisableUser([FromBody] UserManagementDTO obj)
         {
