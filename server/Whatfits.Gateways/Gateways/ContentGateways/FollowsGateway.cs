@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.Models.Context.Content;
 using Whatfits.Models.Models;
 
@@ -26,5 +29,35 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 // returns true if passed username does exists in database
                 return true;
         }
+
+        public bool AddtoFollow(FollowsDTO fdto)
+        {
+            using (var dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    Following fllo = new Following
+                    {
+                        PersonFollowing = fdto.PersonFollowing
+                    };
+                    db.Following.Add(fllo);
+                    db.SaveChanges();
+                    dbTransaction.Commit();
+                    return true;
+                }
+                catch(SqlException)
+                {
+                    dbTransaction.Rollback();
+                    return false;
+                }
+                catch(DataException)
+                {
+                    dbTransaction.Rollback();
+                    return false;
+                }
+            }
+        }
+
+
     }
 }

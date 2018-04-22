@@ -1,100 +1,143 @@
 <template>
-<form name="ChangeStatus" action="http://localhost/server/v1/management/*" method="PUT">
-        <div class="field has-addons has-addons-centered">
-            <div class="control">
-                <span class="select">
-                    <select v-model="status">
-                      <option selected="selected" disabled value="">Select Status</option>
-                      <option value="enable">Enable</option>
-                      <option value="disable">Disable</option>
-                    </select>
-                </span>
-            </div>
-            <div class="control">
-                <input v-model="userNameStatus" class="input" type="text" placeholder="UserName">
-            </div>
-            <div class="control">
-                <button type="submit" class="button is-primary" @click.prevent="changeStatus">Apply {{status}}</button>
-            </div>
+<div>
+  <h3 class="SectionTitle">Change Status of User</h3>
+  <form name="ChangeStatus" action="http://localhost/server/v1/management/*" method="PUT">
+      <div class="field has-addons has-addons-centered">
+        <div class="control">
+          <span class="select">
+            <select v-model="status">
+              <option selected="selected" disabled value="">Select Status</option>
+              <option value="enable">Enable</option>
+              <option value="disable">Disable</option>
+            </select>
+          </span>
         </div>
-        <div v-if="this.$data.changeStatusError == true" class="errorMessage">
-            <span>{{this.$data.response.changeStatus}}</span>
+        <div class="control">
+          <input v-model.trim="userName" @input="delayTouch($v.userName)" class="input" type="text" placeholder="UserName">
         </div>
-        <div v-if="this.$data.changeStatusError == false" class="successMessage">
-            <span>{{this.$data.response.changeStatus}}</span>
+        <div class="control">
+          <button type="submit" class="button is-primary" @click.prevent="changeStatus">Apply {{status}}</button>
         </div>
-        <br />
-    </form>
+      </div>
+      <div class="errorMessage">
+        <span v-show="!$v.userName.required && $v.userName.$dirty">A UserName is required</span>
+        <span v-show="!$v.userName.minLength && $v.userName.$dirty">Username must have at least {{$v.userName.$params.minLength.min}} letters</span>
+        <span v-show="!$v.userName.maxLength && $v.userName.$dirty">Username must have at most {{$v.userName.$params.maxLength.max}} letters</span>
+        <span v-show="!validateCharacters(this.$data.userName) && $v.userName.$dirty && $v.userName.maxLength && $v.userName.minLength">Username has invalid characters</span>
+      </div>
+      <div v-if="this.errorFlag == true" class="errorMessage">
+          <span>{{this.responseMessage}}</span>
+      </div>
+      <div v-if="this.errorFlag == false" class="successMessage">
+          <span>{{this.responseMessage}}</span>
+      </div>
+      <br />
+  </form>
+</div>
 </template>
 <script>
 import axios from 'axios'
-module.exports = {
+import { required, minLength, maxLength } from 'vuelidate/lib/validators'
+const touchMap = new WeakMap()
+
+export default {
   name: 'ChangeStatus',
   data () {
     return {
-      selected: '',
-      userName: ''
+      userName: '',
+      status: '',
+      responseMessage: '',
+      errorFlag: ''
+    }
+  },
+  validations: {
+    userName: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(64)
     }
   },
   methods: {
-    changeStatus: function () {
-      if (!validateUserName(this.$data.userNameStatus) || this.$data.status === '') {
-        this.$data.response.changeStatus = 'Invalid username and/or status'
-        this.$data.changeStatusError = true
+    // Registration methods
+    // Checks the characters of userInput
+    delayTouch ($v) {
+      $v.$reset()
+      if (touchMap.has($v)) {
+        clearTimeout(touchMap.get($v))
+      }
+      touchMap.set($v, setTimeout($v.$touch, 1000))
+    },
+
+    // Checks the characters of userInput
+    validateCharacters (userInput) {
+      var regexPattern = /[^ 0-9a-zA-Z!@#$%^&*()-_=+{}[;:"'<,>.?|`~]/i
+      if (userInput.match(regexPattern) == null) {
+        return true
+      } else {
         return false
       }
-      if (this.$data.status === 'enable') {
+    },
+    changeStatus: function () {
+      if (this.status === 'enable') {
         axios({
           method: 'PUT',
           url: 'http://localhost/server/v1/management/enable',
-          data: {'UserName': this.$data.userNameStatus},
+          data: {'UserName': this.userName},
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081'
           }
         })
-          .then(function (response) {
+          .then(response => {
             console.log(response.data)
+            this.responseMessage = response.data
+            this.errorFlag = false
           })
           .catch(error => {
             if (error.response) {
-              this.$data.response.changeStatus = 'An error occured, server response was bad.'
-              this.$data.changeStatusError = true
+              // Server responded with a status code outside of 2xx
+              this.responseMessage = 'Error: ' + error.response.data
+              this.errorFlag = true
               console.log(error.response)
             } else if (error.request) {
-              this.$data.response.changeStatus = 'An error occured, no response from server.'
-              this.$data.changeStatusError = true
+              // Request was made but no response
+              this.responseMessage = 'Error: ' + error.response.data
+              this.errorFlag = true
               console.log(error.request)
             } else {
-              this.$data.response.changeStatus = 'An error occured while setting up request.'
-              this.$data.changeStatusError = true
+              // Something happened when setting up request
+              this.responseMessage = 'An error occured while setting up request.'
+              this.errorFlag = true
               console.log('Error: ', error.message)
             }
           })
-      } else if (this.$data.status === 'disable') {
+      } else if (this.status === 'disable') {
         axios({
           method: 'PUT',
           url: 'http://localhost/server/v1/management/disable',
-          data: {'UserName': this.$data.userNameStatus},
+          data: {
+            'UserName': this.userName
+          },
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081'
           }
         })
-          .then(function (response) {
+          .then(response => {
             console.log(response.data)
-            this.$data.changeStatusError = false
+            this.responseMessage = response.data
+            this.errorFlag = false
           })
           .catch(error => {
             if (error.response) {
-              this.$data.response.changeStatus = 'An error occured, server response was bad.'
-              this.$data.changeStatusError = true
+              this.responseMessage = 'Error: ' + error.response.data
+              this.errorFlag = true
               console.log(error.response)
             } else if (error.request) {
-              this.$data.response.changeStatus = 'An error occured, no response from server.'
-              this.$data.changeStatusError = true
+              this.responseMessage = 'Error: ' + error.response.data
+              this.errorFlag = true
               console.log(error.request)
             } else {
-              this.$data.response.changeStatus = 'An error occured while setting up request.'
-              this.$data.changeStatusError = true
+              this.responseMessage = 'An error occured while setting up request.'
+              this.errorFlag = true
               console.log('Error: ', error.message)
             }
           })
@@ -104,16 +147,21 @@ module.exports = {
     }
   }
 }
-function validateUserName (userName) {
-  if (userName.length < 2 || userName.length > 64) {
-    return false
-  } else {
-    return true
-  }
-}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+  .SectionTitle {
+      text-align: left;
+      font-size: 2em;
+      padding-left: 5%;
+  }
+  .successMessage {
+      color: Green;
+      text-align: center;
+  }
+  .errorMessage {
+      color: red;
+      text-align: center;
+  }
 </style>

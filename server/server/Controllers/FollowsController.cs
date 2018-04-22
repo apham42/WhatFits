@@ -64,7 +64,7 @@ namespace server.Controllers
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
-                    followService.Add(requestedUser);
+                    followService.Add(followsDTO);
                     return new HttpResponseMessage(HttpStatusCode.Accepted);
                 }
                 else
@@ -92,7 +92,7 @@ namespace server.Controllers
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
-                    followService.Remove(requestedUser);
+                    followService.Remove(followsDTO);
                     return new HttpResponseMessage(HttpStatusCode.Accepted);
                 }
                 else
@@ -121,7 +121,7 @@ namespace server.Controllers
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
-                    followService.Contains(requestedUser);
+                    followService.Contains(followsDTO);
                     return new HttpResponseMessage(HttpStatusCode.Accepted);
                 }
                 else

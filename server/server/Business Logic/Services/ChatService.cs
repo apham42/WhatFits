@@ -95,6 +95,7 @@ namespace server.Business_Logic.Services
             {
                 try
                 {
+                    // if receiver is not online
                     Send(JsonConvert.SerializeObject("server" + " said: " + "user-is-offline" + "  " + DateTime.Now.ToLocalTime()));
                     sendSuccess = true;
                 }
@@ -103,7 +104,7 @@ namespace server.Business_Logic.Services
                     sendSuccess = false;
                 }
             }
-            else
+            else // receiver is online
             {
                 // type cast fine receiver's username in the websocket collection
                 try
@@ -142,17 +143,26 @@ namespace server.Business_Logic.Services
             }
             
         }
-
+        /// <summary>
+        /// return connection status
+        /// </summary>
+        /// <returns>connection status</returns>
         public bool GetConnectStatus()
         {
             return connectSuccess;
         }
-
+        /// <summary>
+        /// return send success status
+        /// </summary>
+        /// <returns>send success status</returns>
         public bool GetSendStatus()
         {
             return sendSuccess;
         }
-
+        /// <summary>
+        /// return disconnection status
+        /// </summary>
+        /// <returns>disconnection status</returns>
         public bool GetDisconnectStatus()
         {
             return disconnectSuccess;
