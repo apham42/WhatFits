@@ -54,8 +54,8 @@ namespace server.Model.Network_Communication
             }
 
             // Gets the latitude and longitude from the web api data
-            mappedData.Latitude = data["results"][0]["geometry"]["location"]["lat"].ToString();
-            mappedData.Longitude = data["results"][0]["geometry"]["location"]["lng"].ToString();
+            mappedData.Latitude = Double.Parse(data["results"][0]["geometry"]["location"]["lat"].ToString());
+            mappedData.Longitude = Double.Parse(data["results"][0]["geometry"]["location"]["lng"].ToString());
             mappedData.IsValid = true;
             return mappedData;
         }

@@ -22,7 +22,7 @@ namespace server.Controllers
         /// A Profile
         /// </returns>
         [HttpGet]
-        [EnableCors("http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "GET")]
+        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "GET")]
         public IHttpActionResult GetProfileData()
         {
             // TODO: Validate incoming username to see if it exists in the database

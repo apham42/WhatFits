@@ -53,7 +53,12 @@
 </template>
 
 <script>
+import SearchBar from '@/components/Search/SearchBar'
 export default {
+
+  components: {
+    'SearchBar' : SearchBar
+  }
 
 }
 </script>

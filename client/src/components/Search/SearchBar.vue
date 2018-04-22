@@ -10,7 +10,7 @@
         <option value = 'searchNearby'>Search Nearby Users</option>
         <option value = 'searchUser'>Search User</option>
       </select>
-      <button type="submit" class="register-button" @click="searchUser">Search</button>
+      <button type="submit" class="register-button" @click.prevent="searchUser">Search</button>
     </div>
 </template>
 
@@ -22,14 +22,14 @@ export default {
     return {
       userInput: '',
       searchType: 'searchNearby',
-      errors: []
+      messages: []
     }
   },
   methods: {
     searchUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/User',
+        url: 'http://localhost/server/v1/Search/Test',
         data: {
           username: this.$data.userInput
         },
@@ -40,11 +40,12 @@ export default {
       })
         // redirect to Home page
         .then((response) => {
-          this.$data.errors.push(response.data.Messages)
+          this.$data.messages = []
+          this.$data.messages.push(response.data.Messages)
         }).catch((error) => {
           // Pushes the error messages into error to display
-          this.$data.errors = []
-          this.$data.errors.push(error.response.data.Messages)
+          this.$data.messages = []
+          this.$data.messages.push(error.response.data.Messages)
         })
     }
   }

@@ -32,13 +32,13 @@ namespace Whatfits.Models.Migrations.AccountMigrations
 
             var sampleLocations = new List<Location>
                {
-                   new Location{ LocationID = 1, Address = "1865 Locust Court", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 2, Address = "4358 Maple Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 3, Address = "2962 Sharon Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 4, Address = "3782 Jennifer Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 5, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 6, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 7, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"}
+                   new Location{ LocationID = 1, Address = "1865 Locust Court", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 2, Address = "4358 Maple Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 3, Address = "2962 Sharon Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 4, Address = "3782 Jennifer Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 5, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 6, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 7, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = 0, Longitude= 0}
                };
             context.Locations.AddOrUpdate(locations => locations.LocationID, (sampleLocations.ToArray()));
             context.SaveChanges();
