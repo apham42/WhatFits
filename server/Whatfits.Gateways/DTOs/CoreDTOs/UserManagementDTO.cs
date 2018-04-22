@@ -5,7 +5,7 @@ using Whatfits.Models.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.CoreDTOs
 {
-    public class UserManagementDTO: IUserProfile, ILocation, ICredential,ISalt
+    public class UserManagementDTO
     {
         // UserData
         public int UserID { get; set; }

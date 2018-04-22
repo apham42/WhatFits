@@ -44,7 +44,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             else if (foundUser.Type == obj.Type)
             {
                 response.IsSuccessful = false;
-                response.Messages = new List<string> { "User is already"+obj.Type };
+                response.Messages = new List<string> { "User is already" + obj.Type };
                 return response;
             }
             else
@@ -586,7 +586,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         // Deleting UserClaims
                         var foundUserClaims = (from userClaims in db.UserClaims
                                                where userClaims.UserID == foundCredentials.UserID
-                                               select userClaims);
+                                               select userClaims).ToList<UserClaims>();
                         // Deletes each UserClaim from user
                         foreach (var userClaim in foundUserClaims)
                         {
