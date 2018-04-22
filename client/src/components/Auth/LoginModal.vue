@@ -15,7 +15,7 @@
             </div>
             <div class="field">
                <p class="control has-icons-left">
-                  <input class="input" v-model="password" id="password" type="password" placeholder="Password">
+                  <input class="input" v-model="password" id="password" type="password" placeholder="Password" @keyup.enter="sendUserCredential">
                   <span v-show="!$v.password.required && $v.password.$dirty">Field is required</span>
                   <span class="icon is-small is-left">
                   <i class="fa fa-lock"></i>
