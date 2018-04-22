@@ -17,6 +17,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
 
         protected override void Seed(Whatfits.Models.Context.Core.AccountContext context)
         {
+            /**
             var sampleCredentials = new List<Credential>
            {
                new Credential{ UserName = "latmey", Password = "123456" },
@@ -32,13 +33,13 @@ namespace Whatfits.Models.Migrations.AccountMigrations
 
             var sampleLocations = new List<Location>
                {
-                   new Location{ LocationID = 1, Address = "1865 Locust Court", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 2, Address = "4358 Maple Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 3, Address = "2962 Sharon Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 4, Address = "3782 Jennifer Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 5, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 6, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"},
-                   new Location{ LocationID = 7, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = "Null", Longitude="Null"}
+                   new Location{ LocationID = 1, Address = "1865 Locust Court", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 2, Address = "4358 Maple Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 3, Address = "2962 Sharon Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 4, Address = "3782 Jennifer Lane", City = "Long Beach", State = "California", Zipcode = "90840" , Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 5, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 6, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = 0, Longitude= 0},
+                   new Location{ LocationID = 7, Address = "7059 Roehampton Ave. ", City = "Long Beach", State = "California", Zipcode = "90840", Latitude = 0, Longitude= 0}
                };
             context.Locations.AddOrUpdate(locations => locations.LocationID, (sampleLocations.ToArray()));
             context.SaveChanges();
@@ -86,7 +87,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
              };
             context.UserClaims.AddOrUpdate(userclaims => userclaims.ClaimID, (sampleClaims.ToArray()));
             context.SaveChanges();
-
+            **/
             var sampleQuestions = new List<SecurityQuestion>
              {
                  new SecurityQuestion{ Question = "Who was the company you first worked for?"},
@@ -101,7 +102,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
              };
             context.SecurityQuestions.AddOrUpdate(securityQuestions => securityQuestions.Question, (sampleQuestions.ToArray()));
             context.SaveChanges();
-
+            /**
             var sampleAnswers = new List<SecurityAccount>
              {
                  new SecurityAccount{ SecurityAccountID = 1, UserID = 0001, SecurityQuestionID = 1, Answer = "Answer to Question 1" },
@@ -136,6 +137,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
            };
             context.TokenBlackLists.AddOrUpdate(tokenblacklist => tokenblacklist.UserID, (sampleBlackList.ToArray()));
             context.SaveChanges();
+            **/
         }
     }
 }
