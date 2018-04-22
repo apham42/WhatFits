@@ -159,12 +159,12 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             // Creates response DTO
             ResponseDTO<Boolean> response = new ResponseDTO<Boolean> { };
             // Find user based off Username
-            var foundToken = (from token in db.TokenBlackLists
-                             where token.Token == obj.Token
-                             select token).FirstOrDefault();
-            
+            var foundCredential = (from u in db.Credentials
+                                   where u.UserName == obj.UserName
+                                   select u).FirstOrDefault();
+
             // If token already exists in database
-            if (foundToken == null)
+            if (foundCredential != null)
             {
                 // Token does not exists in database
                 using (var dbTransaction = db.Database.BeginTransaction())
@@ -174,6 +174,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         // Creates temporary token to store in database
                         TokenBlackList temp = new TokenBlackList
                         {
+                            UserID = foundCredential.UserID,
                             Token = obj.Token
                         };
                         db.TokenBlackLists.Add(temp);
@@ -183,7 +184,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         response.IsSuccessful = true;
                         return response;
                     }
-                    catch (Exception)
+                    catch (NullReferenceException)
                     {
                         dbTransaction.Rollback();
                         response.IsSuccessful = false;

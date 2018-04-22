@@ -1,15 +1,18 @@
 <template>
   <div>
     <HomeNavBar v-if="showNavBar"></HomeNavBar>
+    <MainNavBar v-else></MainNavBar>
   </div>
 </template>
 
 <script>
 import HomeNavBar from '@/components/NavBar/HomeNavBar.vue'
+import MainNavBar from '@/components/NavBar/MainNavBar.vue'
 export default {
   name: 'NavBar',
   components: {
-    'HomeNavBar': HomeNavBar
+    'HomeNavBar': HomeNavBar,
+    'MainNavBar': MainNavBar
   },
   computed: {
     showNavBar: function () {
