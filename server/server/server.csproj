@@ -125,6 +125,7 @@
     <Compile Include="Business Logic\Services\ChatService.cs" />
     <Compile Include="Business Logic\Services\FollowsService.cs" />
     <Compile Include="Business Logic\Services\LoginService.cs" />
+    <Compile Include="Business Logic\Services\LogoutService.cs" />
     <Compile Include="Business Logic\Services\WorkoutLoggerService.cs" />
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Business Logic\Validators\Location Validator\WebAPILocationValidator.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\FollowsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
