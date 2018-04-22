@@ -30,7 +30,6 @@ export default {
     return {
       userName: '',
       errorFlag: '',
-      errorMessage: 'Page Failed to load.',
       userData: {
         firstName: '',
         lastName: '',
