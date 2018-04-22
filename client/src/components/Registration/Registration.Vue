@@ -117,7 +117,7 @@
         </div>
 
         <div class="registerButton">
-            <button type="submit" class="register-button" :disabled="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.password)" @click="registerUser">Register</button>
+            <button type="submit" class="register-button" :disabled="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.password)" @click.prevent="registerUser">Register</button>
         </div>
     </form>
 </div>

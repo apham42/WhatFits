@@ -29,9 +29,9 @@ namespace UserAccessControl.ServiceTest
         {
             HttpRequestMessage request = mockData.NoSchemeValidTokenRequestMessage();
             RequestTransformer test = new RequestTransformer();
-            Action act = () => test.GetToken(request);
+            string token = test.GetToken(request);
 
-            Assert.Throws<Exception>(act);
+            Assert.Null(token);
         }
 
         [Fact]
