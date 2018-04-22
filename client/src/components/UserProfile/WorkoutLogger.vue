@@ -5,7 +5,7 @@
                 <option v-for="type in WorkoutOptions" :key="type">{{ type }}</option>
             </select>
             <p1>
-                <div v-if = "WorkoutLogger.WorkoutType === 'Lifting'">
+                <div v-if = "WorkoutLogger.WorkoutType === 'WeightLifting'">
                     <select v-model = WorkoutLogger.LiftingType>
                       <option v-for="type in LiftingOptions" :key="type">{{ type }}</option>
                     </select>
@@ -29,7 +29,7 @@
         <div id="preview">
           <h3> Preview Log </h3>
           <p> {{WorkoutLogger.WorkoutType}} </p>
-          <p v-if = "WorkoutLogger.WorkoutType === 'Lifting'">
+          <p v-if = "WorkoutLogger.WorkoutType === 'WeightLifting'">
               {{WorkoutLogger.LiftingType}}
               {{WorkoutLogger.Sets}}
               {{WorkoutLogger.Reps}}
@@ -59,6 +59,7 @@ export default {
   data: function () {
     return {
       WorkoutLogger: {
+        userName: this.$store.getters.getusername,
         WorkoutType: '',
         CardioType: '',
         LiftingType: '',
@@ -81,24 +82,54 @@ export default {
     AddLog: function () {}
   },
   submit () {
-    axios({
-      method: 'POST',
-      url: 'http://localhost/server/WorkoutLog/CreateWorkout',
-      data: {
-        WorkoutType: this.WorkoutLogger.WorkoutType,
-        Date_Time: this.WorkoutLogger.Date_Time
-      },
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(response => {
-        console.log(response)
+    if(this.WorkoutType === 'Cardio'){
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/WorkoutLog/CreateWorkout',
+        data: {
+          userName: this.WorkoutLogger.userName,
+          WorkoutType: this.WorkoutLogger.WorkoutType,
+          Date_Time: this.WorkoutLogger.Date_Time,
+          CardioType: this.CardioType,
+          Distance: this.Distance,
+          Time: this.Time
+        },
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
       })
-      .catch(error => {
-        console.log(error.response)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
+    }
+    else if(this.WorkoutType === 'WeightLifting'){
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/WorkoutLog/CreateWorkout',
+        data: {
+          userName:  this.WorkoutLogger.userName,
+          WorkoutType: this.WorkoutLogger.WorkoutType,
+          Date_Time: this.WorkoutLogger.Date_Time,
+          LiftingType: this.LiftingType,
+          Reps: this.Reps,
+          Sets: this.Sets
+        },
+        headers: {
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json'
+        }
       })
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
+    }
   }
 }
 </script>

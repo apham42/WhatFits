@@ -1,6 +1,7 @@
 ﻿//using server.Services;
 //using System;
 //using System.Collections.Generic;
+using server.Services;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -21,29 +22,28 @@ namespace server.Controllers
         //        /// </summary>
         //        /// <param name="review"></param>
         //        /// <returns></returns>
-        //        [HttpPost]
-        //        public IHttpActionResult CreateReview(WorkoutLogDTO workout)
-        //        {
-        //            WorkoutLoggerService service = new WorkoutLoggerService();
-        //            bool response = service.Create(workout);
-        //            if (response)
-        //            {
-        //                return Ok("Workout has been added");
-        //            }
-        //            else
-        //            {
-        //                return Content(HttpStatusCode.BadRequest, "Workout addition has failed");
-        //            }
-        //        }
-
-
-        [Route("WorkoutLogger/GetWorkout/{UserName}")]
-        [HttpGet]
-        public IEnumerable<WorkoutLogDTO> GetWorkout(string UserName)
+        [HttpPost]
+        public IHttpActionResult CreateWorkout(WorkoutLogDTO workout)
         {
-            WorkoutLogGateway service = new WorkoutLogGateway();
-            return service.GetWorkouts(UserName);
+            WorkoutLoggerService service = new WorkoutLoggerService();
+            bool response = service.Create(workout);
+            if (response)
+            {
+                return Ok("Workout has been added");
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, "Workout addition has failed");
+            }
         }
+
+        //[Route("WorkoutLogger/GetWorkout/{UserName}")]
+        //[HttpGet]
+        //public IEnumerable<WorkoutLogDTO> GetWorkout(string UserName)
+        //{
+        //    WorkoutLogGateway service = new WorkoutLogGateway();
+        //    return service.GetWorkouts(UserName);
+        //}
 
     }
 }

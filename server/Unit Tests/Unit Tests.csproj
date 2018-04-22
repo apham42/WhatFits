@@ -106,6 +106,7 @@
     <Compile Include="UserAccessControl\ServiceTest\ClaimsTransformerTest.cs" />
     <Compile Include="UserAccessControl\ServiceTest\RequestTransformerTest.cs" />
     <Compile Include="UserAccessControl\ServiceTest\SetDefaultClaimsTest.cs" />
+    <Compile Include="Workout Test\CreateWorkoutTest.cs" />
     <Compile Include="Workout Test\GetWorkoutTest.cs" />
     <Compile Include="UserManagementTest\UserManagementControllerTest.cs" />
     <Compile Include="UserManagementTest\UserManagementGatewayTests.cs" />
