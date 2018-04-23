@@ -62,5 +62,9 @@ export default {
 </script>
 
 <style>
-
+#navImage {
+  height: 50px;
+  padding-left: 20px;
+  padding-top: 5px;
+}
 </style>

@@ -27,21 +27,17 @@ namespace server.Controllers
         public IHttpActionResult logout([FromBody] UserCredential userCredential)
         {
             LogoutService logoutService = new LogoutService();
-            List<string> message = new List<string>();
 
-            ResponseDTO<bool> responseDTO = logoutService.logout(userCredential);
+            LogoutResponseDTO response = logoutService.logout(userCredential);
 
-            if(responseDTO.IsSuccessful == true)
+            if(response.isSuccessful == true)
             {
-                message.Add("Success!");
-                responseDTO.Messages = message;
-                return Ok(responseDTO.Messages);
+                return Ok(response.Messages);
             }
 
-            message.Add("Failed To Logout");
-            responseDTO.Messages = message;
+            return Content(HttpStatusCode.NotFound, response.Messages);
 
-            return Content(HttpStatusCode.NotFound, responseDTO.Messages);
+
 
         }
     }
