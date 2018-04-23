@@ -130,8 +130,8 @@
     <Compile Include="Business Logic\Services\WorkoutLoggerService.cs" />
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Business Logic\Validators\Location Validator\WebAPILocationValidator.cs" />
-    <Compile Include="Constants\AccountConstants.cs" />
-    <Compile Include="Constants\LocationConstants.cs" />
+    <Compile Include="Controllers\Constants\AccountConstants.cs" />
+    <Compile Include="Controllers\Constants\LocationConstants.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\FollowsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />

@@ -25,6 +25,7 @@ namespace server.Controllers
         //        /// <param name="review"></param>
         //        /// <returns></returns>
         [HttpPost]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult CreateWorkout(WorkoutLogDTO workout)
         {
             WorkoutLoggerService service = new WorkoutLoggerService();
@@ -39,7 +40,7 @@ namespace server.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IEnumerable<WorkoutLogDTO> GetWorkout()
         {

@@ -22,9 +22,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             {
                 try
                 {
-                    int getUserID = (from b in db.Workouts
-                                  join cred in db.Credentials
-                                  on b.UserID equals cred.UserID
+                    int getUserID = (from cred in db.Credentials
                                   where w.userName == cred.UserName
                                   select cred.UserID).FirstOrDefault();
                     WorkoutLog work = new WorkoutLog

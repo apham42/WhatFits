@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 
 namespace server.Controllers
@@ -44,15 +45,15 @@ namespace server.Controllers
         /// <returns></returns>
         [HttpPost]
         [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult GetUserReview(string UserName)
+        public IEnumerable<ReviewDetailDTO> GetUserReview(UsernameDTO obj)
         {
-            ReviewDetailDTO response = new ReviewDetailDTO();
-            return Ok(response);
+            ReviewService service = new ReviewService();
+            return service.GetUserReview(obj);
         }
-        //public IEnumerable<ReviewDetailDTO> GetUserReview(string UserName)
+        //public IHttpActionResult GetUserReview(string UserName)
         //{
-        //    ReviewService service = new ReviewService();
-        //    return service.GetUserReview(UserName);
+        //    ReviewDetailDTO response = new ReviewDetailDTO();
+        //    return Ok(response);
         //}
 
     }

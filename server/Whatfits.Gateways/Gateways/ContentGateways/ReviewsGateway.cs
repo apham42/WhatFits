@@ -4,6 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
@@ -100,12 +101,12 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         }
 
         //Return ReviewDetailDTO 
-        public IEnumerable<ReviewDetailDTO> GetUserReviewDetails(string userName)
+        public IEnumerable<ReviewDetailDTO> GetUserReviewDetails(UsernameDTO obj)
         {
             return (from b in db.Review
                     join cred in db.Credentials
                     on b.UserID equals cred.UserID
-                    where userName == cred.UserName
+                    where obj.Username == cred.UserName
                     select new ReviewDetailDTO()
                     {
                         ReviewMessage = b.ReviewMessage,
