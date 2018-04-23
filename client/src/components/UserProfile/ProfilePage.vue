@@ -95,11 +95,14 @@ export default {
 <style scoped>
 
 #ProfileInfo{
-  padding-left: 0em;
+  padding-left: 10em;
+  width:auto;
+  max-width:450px;
 }
-@media only screen and (min-width: 400px){
+@media only screen and (min-width: 300px){
   #ProfileInfo{
-    padding-left: 5em;
+    padding-left: 0em;
+    width: auto;
   }
 }
 </style>

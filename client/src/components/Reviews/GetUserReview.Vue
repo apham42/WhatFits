@@ -3,8 +3,8 @@
     <h1>{{pageTitle}}</h1>
     <form>
       <div>
-        <label for="UserName">UserName</label>
-        <input v-model="UserName" placeholder="'abcd'" />
+        <label for="Username">Username</label>
+        <input v-model="Username" placeholder= "abcd" />
       </div>
       <span>
         <button @click="displayReviews">Search Button</button>
@@ -15,10 +15,10 @@
         <li v-for="value in results" :key="value">
           <section id="specificReviews">
             <div id="messageFormat">
-              User Review: "{{ value.ReviewMessage }}" &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : "{{ value.Rating }}"
+              User Review: '{{ value.ReviewMessage }}' &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : '{{ value.Rating }}'
             </div>
             <div id="dateFormat">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: "{{ value.DateAndTime }}"
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: '{{ value.DateAndTime }}'
             </div>
           </section>
         </li>
@@ -26,7 +26,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import axios from 'axios'
 export default {
@@ -34,41 +33,45 @@ export default {
   data: function (results) {
     return {
       pageTitle: 'User Review',
-      UserName: '',
+      Username: '',
       results: []
     }
   },
   methods: {
-    displayReviews () {
+    displayReviews: function () {
       axios({
-        method: 'GET',
-        url: 'http://localhost/server/review/getuserreview/' + this.UserName,
+        method: 'POST',
+        url: 'http://localhost/server/v1/review/getuserreview/',
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
           'Content-Type': 'application/json'
+        },
+        data: {
+          Username: this.$data.Username
         }
       })
         .then(response => {
           this.results = response.data
           console.log(response)
-        }).catch((error) => {
-          console.log(error)
+        })
+        .catch(error => {
+          console.log(error.response)
         })
     }
   }
 }
 </script>
 <style>
-  .content{
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-      font-size: 22px;
-      color: #a7a8a8;
-  }
-  section {
-    border: 1px solid gray;
-    padding: 1em;
-    overflow: hidden;
-    border-collapse: seperate;
-    border spacing: 15px;
-  }
+.content {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-size: 22px;
+  color: #a7a8a8;
+}
+section {
+  border: 1px solid gray;
+  padding: 1em;
+  overflow: hidden;
+  border-collapse: seperate;
+  border-spacing: 15px;
+}
 </style>

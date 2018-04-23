@@ -34,7 +34,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 return response;
             }
             // Found user, sending data back to frontend
-            response.Data = new ProfileDTO(foundProfile.FirstName,foundProfile.LastName,foundProfile.Description,foundProfile.SkillLevel,foundProfile.Gender,foundProfile.ProfilePicture);
+            response.Data = new ProfileDTO(foundProfile.FirstName,foundProfile.LastName,foundProfile.Description,foundProfile.SkillLevel, foundProfile.Email, foundProfile.Gender,foundProfile.ProfilePicture);
             response.IsSuccessful = true;
             response.Messages.Add("User Found, retrieving data.");
             return response;
@@ -62,6 +62,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     foundProfile.LastName = obj.LastName;
                     foundProfile.Description = obj.Description;
                     foundProfile.Gender = obj.Gender;
+                    foundProfile.Email = obj.Email;
                     foundProfile.SkillLevel = obj.SkillLevel;
                     foundProfile.ProfilePicture = obj.ProfilePicture;
                     // Saves changes
