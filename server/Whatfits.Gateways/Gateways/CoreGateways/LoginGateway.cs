@@ -28,6 +28,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                              where u.UserName == obj.UserName
                              select u).FirstOrDefault();
             ResponseDTO<LoginDTO> response = new ResponseDTO<LoginDTO>();
+            response.Messages = new List<string>();
             if (foundCredential != null)
             {
                 // Found user in database, creating LoginDTO to send 
@@ -154,10 +155,10 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public ResponseDTO<Boolean> AddTokenToBlackList(LoginDTO obj)
+        public LogoutResponseDTO AddTokenToBlackList(LoginDTO obj)
         {
             // Creates response DTO
-            ResponseDTO<Boolean> response = new ResponseDTO<Boolean> { };
+            LogoutResponseDTO response = new LogoutResponseDTO { };
             // Find user based off Username
             var foundCredential = (from u in db.Credentials
                                    where u.UserName == obj.UserName
@@ -181,13 +182,13 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         db.SaveChanges();
                         dbTransaction.Commit();
                         // Sends response
-                        response.IsSuccessful = true;
+                        response.isSuccessful = true;
                         return response;
                     }
                     catch (NullReferenceException)
                     {
                         dbTransaction.Rollback();
-                        response.IsSuccessful = false;
+                        response.isSuccessful = false;
                         return response;
                     }
                 }
@@ -195,7 +196,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
             else
             {
                 // Token already exists in database
-                response.IsSuccessful = false;
+                response.isSuccessful = false;
                 response.Messages = new List<string> { "Error: Token already Exists in Database." };
                 return response;
             }  

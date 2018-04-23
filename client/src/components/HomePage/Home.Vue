@@ -1,48 +1,12 @@
 <template>
  <div>
 <section class="hero ">
+  <hero-body></hero-body>
     <!-- Hero content: will be in the middle -->
-    <div class="hero-body">
-        <div class="container has-text-centered">
-            <h1 class="title">
-                Whatfits Homepage
-            </h1>
-            <h2 class="subtitle">
-                Clearly underconstruction
-            </h2>
-        </div>
-    </div>
-    <!-- Hero footer: will stick at the bottom -->
-    <div class="hero-foot">
-        <nav class="tabs">
-            <div class="container">
-                <ul>
-                    <li class="is-active">
-                        <router-link to="/signup">Register</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/usermanagement">UserManagement</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/Review">Review</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/profile">Profile</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/SearchBar">Search</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/chat">Chat</router-link>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
 </section>
 <div class="box cta">
       <p class="has-text-centered">
-         <span class="tag is-primary">New</span> New Features Announced
+         <span class="tag is-info">L O L</span> Login FINALLY works
       </p>
    </div>
    <section class="container">
@@ -187,15 +151,22 @@
             </div>
          </div>
       </div>
+
    </section>
+   <footer-bar></footer-bar>
    </div>
 </template>
 
 <script>
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
+import Footer from '@/components/HomePage/Footer'
+import HeroBody from '@/components/HomePage/HeroBody'
 export default {
   name: 'Home',
-
+  components: {
+    'footer-bar': Footer,
+    'hero-body': HeroBody
+  },
   data: function () {
     return {
       username: '',
@@ -240,5 +211,15 @@ export default {
 #bodySection {
     background-color:#34495E;
 }
-
+.hero-body {
+  height: 30em;
+  background-image: url("../../../static/ProfileDummy/backgroundImage2.jpg");
+}
+.homeBody {
+padding-top: 9em;
+color: white;
+}
+.body-text {
+  color:white;
+}
 </style>

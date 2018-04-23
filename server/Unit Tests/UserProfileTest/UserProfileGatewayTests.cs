@@ -37,7 +37,7 @@ namespace UnitTests.UserProfileTest
         {
             // Arrange
             UserProfileGateway temp = new UserProfileGateway();
-            /*
+            
             ProfileDTO obj = new ProfileDTO()
             {
                 UserName = "rsanchez92",
@@ -47,7 +47,7 @@ namespace UnitTests.UserProfileTest
                 SkillLevel = "Advance",
                 Gender = "Male",
                 ProfilePicture = "../../assets/Images/ProfileDummy/profilePicture.jpg"            
-            };*/
+            };
             // Act
            // var response = temp.EditProfile(obj);
             // Assert

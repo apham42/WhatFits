@@ -64,6 +64,7 @@
     <Compile Include="DTOs\ContentDTOs\SearchGatewayDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\WorkoutLogDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\LoginDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\LogoutResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\RegGatewayDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\SecurityQuestionResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UserAccessDTO.cs" />

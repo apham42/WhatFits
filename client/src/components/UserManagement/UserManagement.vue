@@ -3,7 +3,7 @@
     <h1 class="PageTitle">{{pageTitle}}</h1>
     <br>
     <h3 class="SectionTitle">Create User</h3>
-    <form name="CreateUser" id="createUser" action="http://localhost/server/v1/management/CreateAdmin" method="POST">
+    <form name="CreateUser" id="createUser">
       <div class="field">
         <label class="label">Username</label>
         <div class="control has-icons-left has-icons-right">
@@ -212,7 +212,7 @@ import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators
 const touchMap = new WeakMap()
 
 export default {
-  name: 'UserManagement',
+  name: 'UserManagement Console',
   components: {
     'delete-User': DeleteUser,
     'changeStatus': ChangeStatus,
