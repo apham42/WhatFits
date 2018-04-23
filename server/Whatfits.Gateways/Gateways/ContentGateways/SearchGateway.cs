@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Whatfits.Models.Context.Content;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
@@ -62,29 +62,13 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             try
             {
                 var results = (from x in db.Locations
-                                                    select new { x.Longitude, x.Latitude })
+                                                    select new { x.City, x.Longitude, x.Latitude })
                                                     .AsEnumerable().Select(x => new GeoCoordinate() 
                     { 
                         Longitude = x.Longitude,
                         Latitude = x.Latitude 
                     }).ToList();
 
-
-
-                /**
-                var results = (from x in db.Locations
-                               select x);
-                var geoCoordinates = new List<GeoCoordinates>();
-                foreach (Location result in results)
-                {
-                    geoCoordinates.Add(new GeoCoordinates()
-                    {
-                        ID = result.LocationID,
-                        Longitude = result.Longitude,
-                        Latitude = result.Latitude
-                    });
-                }
-                **/
                 if (results.Any())
                 {
                     response.LocationResults = results;
@@ -106,6 +90,48 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 response.IsSuccessful = false;
                 messages.Add(ServerConstants.SERVER_ERROR);
             }
+
+            response.Messages = messages;
+            return response;
+        }
+
+        public LocationResponseDTO FilterSearch(SearchGatewayDTO dto)
+        {
+            LocationResponseDTO response = new LocationResponseDTO();
+            List<string> messages = new List<string>();
+            var regex = "Long Beach";
+            try
+            {
+                var rx = new Regex(regex);
+                var results = (from x in db.Locations
+                               select new { x.City, x.Longitude, x.Latitude })
+                                                    .AsEnumerable().Where(x => rx.IsMatch(x.City)).Select(x => new GeoCoordinate()
+                                                    {
+                                                        Longitude = x.Longitude,
+                                                        Latitude = x.Latitude
+                                                    }).ToList();
+                if (results.Any())
+                {
+                    response.LocationResults = results;
+                    response.IsSuccessful = true;
+                }
+                else
+                {
+                    response.IsSuccessful = false;
+                    messages.Add(LocationGatewayConstants.NO_LOCATION_FOUND_ERROR);
+                }
+            }
+            catch (SqlException)
+            {
+                response.IsSuccessful = false;
+                messages.Add(ServerConstants.SERVER_ERROR);
+            }
+            catch (DataException)
+            {
+                response.IsSuccessful = false;
+                messages.Add(ServerConstants.SERVER_ERROR);
+            }
+
             response.Messages = messages;
             return response;
         }

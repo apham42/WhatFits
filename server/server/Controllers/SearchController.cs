@@ -9,6 +9,7 @@ using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using server.Business_Logic.Search;
 using server.Model.Data_Transfer_Objects.SearchDTO_s;
 using Whatfits.DataAccess.Gateways.ContentGateways;
+using Newtonsoft.Json;
 
 namespace server.Controllers
 {
@@ -57,8 +58,23 @@ namespace server.Controllers
         public IHttpActionResult Test ([FromBody] UsernameDTO dto)
         {
             var gateway = new SearchGateway();
-            return Ok(new { gateway.RetrieveLocations().Messages });
+            var locations = gateway.RetrieveLocations().LocationResults;
+            var filter = new FilterGeoCoordinates()
+            {
+                Distance = 25,
+                GeoCoordinates = locations,
+                UserLocation = new System.Device.Location.GeoCoordinate(33.7830608, -118.1148909)
+            };
+            var dictionary = (Dictionary<System.Device.Location.GeoCoordinate, double>) filter.Execute().Result;
+            return Ok(new { dictionary });
+
         }
 
+        public static Dictionary<TKey, double> ToDictionary<TKey>(object obj)
+        {
+            var json = JsonConvert.SerializeObject(obj);
+            var dictionary = JsonConvert.DeserializeObject<Dictionary<TKey, double>>(json);
+            return dictionary;
+        }
     }
 }
