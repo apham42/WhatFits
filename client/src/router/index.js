@@ -17,9 +17,9 @@ export default new Router({
     //   component: () => import('@/components/HomePage/Home')
     // },
     {
-      path: '/test',
-      name: 'test',
-      component: () => import('@/components/Test')
+      path: '/resetpassword',
+      name: 'ResetPassword',
+      component: () => import('@/components/Auth/ResetPassword')
     },
     {
       // HomePage
