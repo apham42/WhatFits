@@ -4,10 +4,10 @@
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
         <div class="container has-text-centered homeBody">
-            <h1 class="title">
+            <h1 class="title body-text">
                 Whatfits Homepage
             </h1>
-            <h2 class="subtitle">
+            <h2 class="subtitle body-text">
                 Clearly under construction
             </h2>
         </div>
@@ -187,15 +187,20 @@
             </div>
          </div>
       </div>
+
    </section>
+   <footer-bar></footer-bar>
    </div>
 </template>
 
 <script>
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
+import Footer from '@/components/HomePage/Footer'
 export default {
   name: 'Home',
-
+  components: {
+    'footer-bar': Footer
+  },
   data: function () {
     return {
       username: '',
@@ -241,9 +246,14 @@ export default {
     background-color:#34495E;
 }
 .hero-body {
-  height: 20em;
+  height: 30em;
+  background-image: url("../../../static/ProfileDummy/backgroundImage2.jpg");
 }
 .homeBody {
-padding-top: 6em;
+padding-top: 9em;
+color: white;
+}
+.body-text {
+  color:white;
 }
 </style>
