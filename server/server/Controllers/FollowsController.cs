@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 using Whatfits.Models.Models;
@@ -26,27 +27,26 @@ namespace server.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <returns>Users' followers</returns>
-        [HttpGet]
+        [HttpPost]
         [Route("getfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "Get")]
-        public HttpResponseMessage Getfollows(string username)
+        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        public IHttpActionResult Getfollows([FromBody]UsernameDTO userDTO)
         {
-            requestedUser.UserName = username;
-            if (HttpContext.Current.Request.HttpMethod == "Get")
+            if (HttpContext.Current.Request.HttpMethod == "POST")
             {
+                requestedUser.UserName = userDTO.Username;
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
-                    followService.GetEnumerator();
-                    return new HttpResponseMessage(HttpStatusCode.Accepted);
+                    return Ok(followService.GetEnumerator(userDTO.Username));
                 }
                 else
                 {
-                    return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+                    return Content(HttpStatusCode.NotAcceptable, new { });
                 }
             }
             else
             {
-                return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
+                return Content(HttpStatusCode.MethodNotAllowed,new { });
             }
         }
 
@@ -56,11 +56,11 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         [Route("addfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "Post")]
+        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
         public HttpResponseMessage Addfollows(string username)
         {
             requestedUser.UserName = username;
-            if (HttpContext.Current.Request.HttpMethod == "Post")
+            if (HttpContext.Current.Request.HttpMethod == "POST")
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
@@ -84,11 +84,11 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         [Route("deletefollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "Post")]
+        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
         public HttpResponseMessage Deletefollows(string username)
         {
             requestedUser.UserName = username;
-            if (HttpContext.Current.Request.HttpMethod == "Post")
+            if (HttpContext.Current.Request.HttpMethod == "POST")
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
@@ -113,11 +113,11 @@ namespace server.Controllers
         /// <returns>True of False</returns>
         [HttpGet]
         [Route("isfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "Get")]
+        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "GET")]
         public HttpResponseMessage Isfollows(string username)
         {
             requestedUser.UserName = username;
-            if (HttpContext.Current.Request.HttpMethod == "Get")
+            if (HttpContext.Current.Request.HttpMethod == "GET")
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
