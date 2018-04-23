@@ -8,7 +8,7 @@ namespace Whatfits.Models.Models
     /// <summary>
     /// This model represents the model for location
     /// </summary>
-    public class Location : ILocation
+    public class Location
     {
         // Primary Key
         [Key]
@@ -32,10 +32,10 @@ namespace Whatfits.Models.Models
 
         // Stores the Latitude coordinate
         [Required]
-        public string Latitude { get; set; }
+        public double Latitude { get; set; }
         // Stores the Longitude coordinate
         [Required]
-        public string Longitude { get; set; }
+        public double Longitude { get; set; }
 
         // Location can have many users
         ICollection<UserProfile> Users { get; set; }

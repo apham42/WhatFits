@@ -22,7 +22,7 @@ namespace server.Controllers
         /// <returns>A success or failure message</returns>
         [HttpPost]
         [Route("create")]
-        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult CreateAdmin([FromBody] RegInfo obj)
         {
             // Verify if object is not null or invalid
@@ -50,7 +50,7 @@ namespace server.Controllers
         /// <returns>A success or failure message.</returns>
         [HttpPut]
         [Route("enable")]
-        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
+        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult EnableUser ([FromBody] UserManagementDTO obj)
         {
             // Filter if no username was passed
@@ -82,7 +82,7 @@ namespace server.Controllers
         /// <returns>A success or failure message.</returns>
         [HttpPut]
         [Route("disable")]
-        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
+        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult DisableUser([FromBody] UserManagementDTO obj)
         {
             // Filter if no username was passed
@@ -113,7 +113,7 @@ namespace server.Controllers
         /// <returns>A success or failure message.</returns>
         [HttpPut]
         [Route("delete")]
-        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "PUT")]
+        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "PUT")]
         public IHttpActionResult DeleteUser ([FromBody] UserManagementDTO obj)
         {
             if(obj.UserName == null || !ModelState.IsValid)
