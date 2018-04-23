@@ -3,12 +3,12 @@
 <section class="hero ">
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
-        <div class="container has-text-centered">
+        <div class="container has-text-centered homeBody">
             <h1 class="title">
                 Whatfits Homepage
             </h1>
             <h2 class="subtitle">
-                Clearly underconstruction
+                Clearly under construction
             </h2>
         </div>
     </div>
@@ -42,7 +42,7 @@
 </section>
 <div class="box cta">
       <p class="has-text-centered">
-         <span class="tag is-primary">New</span> New Features Announced
+         <span class="tag is-warning">lol</span> Login FINALLY works
       </p>
    </div>
    <section class="container">
@@ -240,5 +240,10 @@ export default {
 #bodySection {
     background-color:#34495E;
 }
-
+.hero-body {
+  height: 20em;
+}
+.homeBody {
+padding-top: 6em;
+}
 </style>

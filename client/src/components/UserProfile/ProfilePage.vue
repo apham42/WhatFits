@@ -9,6 +9,7 @@
       <div v-else>
         <user-info id="ProfileInfo" :userData="userData"></user-info>
         <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
+        <chat-bar></chat-bar>
       </div>
     </div>
 </template>
@@ -16,39 +17,43 @@
 <script>
 import axios from 'axios'
 import UserInfo from '@/components/UserProfile/UserInfo'
-import ErrorPage from '@/components/ErrorPage/404NotFound'
+import ErrorPage from '@/components/ErrorPage/NotFound'
 import HomeButton from '@/components/Common/HomeButton'
+import Chat from '@/components/UserProfile/Chat'
 
 export default {
   name: 'ProfilePage',
   components: {
     'user-info': UserInfo,
     'error-page404': ErrorPage,
-    'home-button': HomeButton
+    'home-button': HomeButton,
+    'chat-bar': Chat
   },
   data () {
     return {
       userName: '',
       errorFlag: '',
-      errorMessage: 'Page Failed to load.',
       userData: {
         firstName: '',
         lastName: '',
         description: '',
         skillLevel: '',
         gender: '',
-        profileImage: '../../assets/Images/ProfileDummy/backgroundImage.jpg',
-        myProfile: false
+        profileImage: '',
+        myProfile: true
       }
     }
   },
   beforeCreate () {
     axios({
-      method: 'GET',
-      url: 'http://localhost/server/v1/UserProfile/GetProfileData',
+      method: 'POST',
+      url: 'http://localhost/server/v1/UserProfile/ProfileData',
       headers: {
         'Access-Control-Allow-Origin': 'http://localhost:8081',
         'Content-Type': 'application/json'
+      },
+      data: {
+        'Username': this.$store.getters.getusername
       }
     })
       // redirect to Home page
@@ -56,16 +61,19 @@ export default {
         console.log(response.data)
         // NOTE: Is there a better way to store data?
         this.userData.firstName = response.data.FirstName
+        // this.$store.mutations.mutateFirstName = 'Test'
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description
         this.userData.skillLevel = response.data.SkillLevel
         this.userData.gender = response.data.Gender
-        // this.userData.profileImage = response.data.ProfilePictureDirectory
+        this.userData.profileImage = response.data.ProfilePicture
+        console.log(this.$store.getters.getusername)
         this.errorFlag = false
       }).catch((error) => {
       // Pushes the error messages into error to display
         if (error.response) {
           this.errorMessage = 'Error: An Error Occurd.'
+          console.log('An Error Occured')
           this.errorFlag = true
           console.log(error.response)
         } else if (error.request) {

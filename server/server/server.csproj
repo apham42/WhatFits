@@ -117,6 +117,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Business Logic\Login\GetLoginToken.cs" />
+    <Compile Include="Business Logic\Login\GetUsersCredentials.cs" />
+    <Compile Include="Business Logic\Login\UserCredentialTransformer.cs" />
+    <Compile Include="Business Logic\Login\ValidateCredentials.cs" />
     <Compile Include="Business Logic\Search\FilterGeoCoordinates.cs" />
     <Compile Include="Business Logic\Search\FilterSearchResults.cs" />
     <Compile Include="Business Logic\Search\SearchNearbyUserStrategy.cs" />
@@ -126,6 +130,7 @@
     <Compile Include="Business Logic\Services\FollowsService.cs" />
     <Compile Include="Business Logic\Services\LoginService.cs" />
     <Compile Include="Business Logic\Services\LogoutService.cs" />
+    <Compile Include="Business Logic\Services\UserProfileService.cs" />
     <Compile Include="Business Logic\Services\WorkoutLoggerService.cs" />
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Business Logic\Validators\Location Validator\WebAPILocationValidator.cs" />
