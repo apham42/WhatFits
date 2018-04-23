@@ -76,6 +76,7 @@
     <Compile Include="Gateways\ContentGateways\NotificationGateway.cs" />
     <Compile Include="Gateways\ContentGateways\ReviewsGateway.cs" />
     <Compile Include="Gateways\ContentGateways\SearchGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\UserProfileGateway.cs" />
     <Compile Include="Gateways\ContentGateways\WorkoutLogGateway.cs" />
     <Compile Include="Gateways\CoreGateways\LoginGateway.cs" />
     <Compile Include="Gateways\CoreGateways\RegistrationGateway.cs" />

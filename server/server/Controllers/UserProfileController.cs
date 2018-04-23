@@ -1,18 +1,21 @@
-﻿using System;
+﻿using server.Business_Logic.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
+using Whatfits.DataAccess.DTOs.CoreDTOs;
 
 namespace server.Controllers
 {
     /// <summary>
     /// Returns user Data to be displayed
     /// </summary>
-    [RoutePrefix("v1/profile")]
+    [RoutePrefix("v1/UserProfile")]
     public class UserProfileController : ApiController  
     {
         /// <summary>
@@ -21,21 +24,47 @@ namespace server.Controllers
         /// <returns>
         /// A Profile
         /// </returns>
+        [HttpPost]
+        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        public IHttpActionResult ProfileData([FromBody]UsernameDTO obj)
+        {
+            // Creates service to handle request
+            UserProfileService temp = new UserProfileService();
+            var response = temp.GetProfile(obj);
+            // Was the request handled?
+            if (!response.IsSuccessful)
+            {
+                // Return failure notice to front end
+                return Content(HttpStatusCode.NotFound,"Error: " + response.Messages);
+            }
+            // Request was handled, sending success to front end with data
+            return Content(HttpStatusCode.OK, response.Data);
+        }
+        [HttpPost]
+        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        public IHttpActionResult EditProfile(ProfileDTO obj)
+        {
+            // Creates service to handle request
+            UserProfileService temp = new UserProfileService();
+            var response = temp.EditProfile(obj);
+            if (!response.IsSuccessful)
+            {
+                return Content(HttpStatusCode.BadRequest,"Error: " + response.Messages);
+            }
+            return Content(HttpStatusCode.OK, "Operation was successful? "+response.IsSuccessful);
+        }
         [HttpGet]
         [EnableCors("http://localhost:8080 , http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "GET")]
         public IHttpActionResult GetProfileData()
         {
-            // TODO: Validate incoming username to see if it exists in the database
-            // TODO: Create a service that gets the required data from the database
-            // TODO: Send data back to client side.
             ProfileDTO profile = new ProfileDTO()
             {
                 FirstName = "John",
                 LastName = "Smith",
-                Description = "This is a description, asd;fwefoasdajefasdoasdofhasoi;ejoaisjeosifnasfasuivbasivuabseivuasbv",
+                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis nunc ac arcu congue luctus. Nulla ligula sapien, sodales fringilla ligula sit amet, gravida sagittis turpis. Nunc tincidunt est vel risus lobortis laoreet. Suspendisse feugiat metus ac egestas tempor.",
                 SkillLevel = "Beginner",
                 Gender = "Male",
-                ProfilePictureDirectory = "../../assets/Images/ProfileDummy/profilePicture.jpg"
+                ProfilePicture = "../../assets/Images/ProfileDummy/profilePicture.jpg"
             };
             return Content(HttpStatusCode.OK, profile);
         }
