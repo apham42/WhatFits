@@ -28,6 +28,7 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                              where u.UserName == obj.UserName
                              select u).FirstOrDefault();
             ResponseDTO<LoginDTO> response = new ResponseDTO<LoginDTO>();
+            response.Messages = new List<string>();
             if (foundCredential != null)
             {
                 // Found user in database, creating LoginDTO to send 
