@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Whatfits.Models.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.ContentDTOs
 {
-    public class WorkoutLogDTO : IWorkoutLog, ICardio, IWeightLifting
+    public class WorkoutLogDetailDTO : IWorkoutLog, ICardio, IWeightLifting
     {
-        public string userName { get; set; }
-
         public string WorkoutType { get; set; }
         public DateTime Date_Time { get; set; }
 
