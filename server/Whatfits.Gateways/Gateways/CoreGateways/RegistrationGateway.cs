@@ -105,8 +105,9 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         Type = dto.Type,
                         FirstName = "FirstName",
                         LastName = "LastName",
+                        Email = "example@domain.com",
                         Description = "Hi, this is a brief description of me. To customize your profile page, select \"Edit Profile\" to remove these default messages.",
-                        Gender = "",
+                        Gender = "This is a placeholder for you",
                         SkillLevel = "Beginner",
                         ProfilePicture = "../../../static/genericProfileImage.jpg"
                     };

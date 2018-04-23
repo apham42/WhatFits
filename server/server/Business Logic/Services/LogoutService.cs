@@ -1,4 +1,5 @@
-﻿using server.Model.Account;
+﻿using server.Business_Logic.Logout;
+using server.Model.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace server.Business_Logic.Services
         /// </summary>
         /// <param name="loginDTO">username and token</param>
         /// <returns>responseDTO with true or false</returns>
-        public ResponseDTO<bool> logout(UserCredential userCredential)
+        public LogoutResponseDTO logout(UserCredential userCredential)
         {
             LoginDTO loginDTO = new LoginDTO()
             {
@@ -28,7 +29,22 @@ namespace server.Business_Logic.Services
             
             LoginGateway logoutGateway = new LoginGateway();
 
-            return logoutGateway.AddTokenToBlackList(loginDTO);
+            var addToBlackList = new AddToBlackList()
+            {
+                userCredentia = userCredential
+            };
+
+            var response = (LogoutResponseDTO) addToBlackList.Execute().Result;
+            response.Messages = new List<string>();
+
+            if(response.isSuccessful == false)
+            {
+                response.Messages.Add("Failed To Logout");
+                return response;
+            }
+
+            response.Messages.Add("Success!");
+            return response;
         }
     }
 }

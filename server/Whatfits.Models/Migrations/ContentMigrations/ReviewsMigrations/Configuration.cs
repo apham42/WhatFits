@@ -17,7 +17,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.ReviewsContext context)
         {
-            /**
+            
             var sampleReviews = new List<Review>
             {
                 new Review() { ReviewID = 1, UserID = 1, RevieweeID = 2, Rating = 4, ReviewMessage = "User was great", DateAndTime = new DateTime(2018, 03, 15) },
@@ -28,7 +28,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.ReviewsMigrations
             };
             context.Review.AddOrUpdate(reviews => reviews.ReviewID,sampleReviews.ToArray());
             context.SaveChanges();
-            **/
+            
         }
     }
 }

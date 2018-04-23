@@ -1,22 +1,8 @@
 <template>
-<div class="plain error-page-wrapper background-color background-image">
-    <div class="content-container">
-        <div class="head-line secondary-text-color">404</div>
-        <div class="subheader primary-text-color">
-            Oops, the page you're
-            <br> looking for does not exist.
-        </div>
-        <hr>
-        <div class="clearfix"></div>
-        <div class="context primary-text-color">
-            <p>
-                You may want to head back to the homepage.<br /> If you think something is broken, report a problem.
-            </p>
-        </div>
-        <div class="buttons-container">
-            <a class="border-button" href="http://localhost:8081/#/" target="_blank">Go To Homepage</a>
-        </div>
-    </div>
+<div class="error-container">
+<h1 is-1>There's been a glitch</h1>
+<P is-small>its a 404 error</P>
+<p>Don't know what happend or how you got here. This will take you <router-link to="/home">home</router-link>.</p>
 </div>
 </template>
 <script>
@@ -29,10 +15,7 @@ export default {
   },
   data () {
     return {
-      pageTitle: '404 Page Not Found',
-      hasErrored: true,
-      container: '',
-      containerHeight: ''
+      pageTitle: '404 Page Not Found'
     }
   },
   methods: {
@@ -42,41 +25,19 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+  .NotFound {
+    background-color: lightblue;
+    width: auto;
+    height: auto;
+    text-align: center;
+  }
+  .is-small {
+    text-align: center;
+  }
+  /* Google Docs Dark UI by UGoBoom         */
+/* Version 1.0                            */
+/* Published Oct 26 2015                  */
+/* Aesthetic inspired by Vertex-gtk theme */
 
-    .background-color {
-      background-color: rgba(0, 0, 0, 1) !important;
-    }
-
-    .primary-text-color {
-      color: #FFFFFF !important;
-    }
-
-    .secondary-text-color {
-      color: rgb(0, 110, 255) !important;
-    }
-
-    .sign-text-color {
-      color: #FFBA00 !important;
-    }
-
-    .sign-frame-color {
-      color: #343C3F;
-    }
-
-    .pane {
-      background-color: #FFFFFF !important;
-    }
-
-    .border-button {
-      color: #FFFFFF !important;
-      border-color: #FFFFFF !important;
-    }
-    .button {
-      background-color: #FFFFFF !important;
-      color: #FFFFFF !important;
-    }
-
-    .shadow {
-      box-shadow: 0 0 60px #000000;
-    }
+@namespace url(http://www.w3.org/1999/xhtml);
 </style>
