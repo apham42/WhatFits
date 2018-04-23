@@ -89,27 +89,10 @@ export default {
     margin: 0 0 5px 0;
     padding: 0;
     list-style-type: none;
-    &:hover
-      {
-        .star
-          {
-            color: #FAFF5C;
-          }
-      }
   }
   .star {
     display: inline-block;
     cursor: pointer;
-    &:hover
-      {
-        &~.star
-          {
-            &:not(.active)
-            {
-              color: inherit;
-            }
-          }
-        }
   }
   .active {
     color: #FAFF5C;

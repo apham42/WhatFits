@@ -41,11 +41,14 @@ export default {
   methods: {
     displayReviews () {
       axios({
-        method: 'GET',
-        url: 'http://localhost/server/review/getuserreview/' + this.UserName,
+        method: 'POST',
+        url: 'http://localhost/server/v1/review/getuserreview/',
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
           'Content-Type': 'application/json'
+        },
+        data: {
+          UserName: this.$data.UserName
         }
       })
         .then(response => {
@@ -69,6 +72,6 @@ export default {
     padding: 1em;
     overflow: hidden;
     border-collapse: seperate;
-    border spacing: 15px;
+    border-spacing: 15px;
   }
 </style>

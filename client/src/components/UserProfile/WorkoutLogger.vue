@@ -82,7 +82,7 @@ export default {
     AddLog: function () {}
   },
   submit () {
-    if(this.WorkoutType === 'Cardio'){
+    if (this.WorkoutType === 'Cardio') {
       axios({
         method: 'POST',
         url: 'http://localhost/server/WorkoutLog/CreateWorkout',
@@ -105,13 +105,12 @@ export default {
         .catch(error => {
           console.log(error.response)
         })
-    }
-    else if(this.WorkoutType === 'WeightLifting'){
+    } else if (this.WorkoutType === 'WeightLifting') {
       axios({
         method: 'POST',
         url: 'http://localhost/server/WorkoutLog/CreateWorkout',
         data: {
-          userName:  this.WorkoutLogger.userName,
+          userName: this.WorkoutLogger.userName,
           WorkoutType: this.WorkoutLogger.WorkoutType,
           Date_Time: this.WorkoutLogger.Date_Time,
           LiftingType: this.LiftingType,

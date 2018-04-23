@@ -42,14 +42,18 @@ namespace server.Controllers
         /// </summary>
         /// <param name="UserName"></param>
         /// <returns></returns>
-        [HttpGet]
-        [Route("get/{UserName}")]
-        [EnableCors("http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public IEnumerable<ReviewDetailDTO> GetUserReview(string UserName)
+        [HttpPost]
+        [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        public IHttpActionResult GetUserReview(string UserName)
         {
-            ReviewService service = new ReviewService();
-            return service.GetUserReview(UserName);
+            ReviewDetailDTO response = new ReviewDetailDTO();
+            return Ok(response);
         }
+        //public IEnumerable<ReviewDetailDTO> GetUserReview(string UserName)
+        //{
+        //    ReviewService service = new ReviewService();
+        //    return service.GetUserReview(UserName);
+        //}
 
     }
 }

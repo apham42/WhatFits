@@ -41,11 +41,11 @@ namespace server.Controllers
 
         [HttpGet]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult GetWorkout()
+        public IEnumerable<WorkoutLogDTO> GetWorkout()
         {
             WorkoutLogGateway service = new WorkoutLogGateway();
-            //return service.GetWorkouts("Latmay");
-            return Ok();
+            return service.GetWorkouts("Latmay");
+            
         }
 
     }
