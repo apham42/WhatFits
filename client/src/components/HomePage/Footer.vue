@@ -18,7 +18,7 @@
         </div>
         <div class="footer-right">
             <p class="footer-company-about"> <span>About the company</span> Vong rejected our previous project so here we are... </p>
-            <div class="footer-icons"> <a href="#"><i class="fa fa-facebook"></i></a> <a href="#"><i class="fa fa-twitter"></i></a> <a href="#"><i class="fa fa-linkedin"></i></a> <a href="#"><i class="fa fa-github"></i></a> </div>
+            <div class="footer-icons"> <a href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i class="fab fa-twitter-square"></i></a> <a href="#"><i class="fab fa-linkedin"></i></a> <a href="#"><i class="fab fa-github-square"></i></a> </div>
         </div>
     </footer>
 
