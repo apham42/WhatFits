@@ -17,6 +17,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.NotificationContext context)
         {
+            /**
             var sampleNotifications = new List<Notification>
             {
                 new Notification{ NotificationID = 1, Message = "This is a notification message.", UserID=1, NotificationType="Chat"},
@@ -27,6 +28,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.NotificationMigrations
             };
             context.Notifications.AddOrUpdate(notifications => notifications.NotificationID, sampleNotifications.ToArray());
             context.SaveChanges();
+            **/
         }
     }
 }

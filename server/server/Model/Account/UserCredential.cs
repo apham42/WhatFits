@@ -10,7 +10,7 @@ namespace server.Model.Account
     /// </summary>
     public class UserCredential
     {
-        public UserCredential(string username, string password, string token)
+        public UserCredential(string username, string password, string token = "")
         {
             Username = username;
             Password = password;

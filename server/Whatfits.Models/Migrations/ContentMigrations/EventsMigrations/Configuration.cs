@@ -17,6 +17,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.EventsMigrations
 
         protected override void Seed(Whatfits.Models.Context.Content.EventsContext context)
         {
+            /**
             var sampleEvents = new List<Event>
                 {
                     new Event { EventID = 1, Title = "Title1", DateAndTime = new DateTime(2018,1,2), CreatedAt = new DateTime(2018,1,2), Description = "Description1", Image = "/Dir/", Latitude = "Lat1", Longitude = "Long1",Location = "312 W. Fake St.", UserID = 1 },
@@ -27,6 +28,7 @@ namespace Whatfits.Models.Migrations.ContentMigrations.EventsMigrations
                 };
             context.Events.AddOrUpdate(events => events.EventID, sampleEvents.ToArray());
             context.SaveChanges();
+            **/
         }
     }
 }

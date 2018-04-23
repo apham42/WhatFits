@@ -39,6 +39,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Device" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,7 +48,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\AccountGatewayConstants.cs" />
+    <Compile Include="Constants\LocationGatewayConstants.cs" />
+    <Compile Include="Constants\ServerConstants.cs" />
     <Compile Include="DTOs\ContentDTOs\ChatDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\LocationResponseDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ProfileDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewDetailDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewMessageDTO.cs" />
@@ -55,7 +60,7 @@
     <Compile Include="DTOs\ContentDTOs\FollowsDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\NotificationDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewsDTO.cs" />
-    <Compile Include="DTOs\ContentDTOs\SearchDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\SearchGatewayDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\WorkoutLogDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\LoginDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\RegGatewayDTO.cs" />
@@ -71,6 +76,7 @@
     <Compile Include="Gateways\ContentGateways\NotificationGateway.cs" />
     <Compile Include="Gateways\ContentGateways\ReviewsGateway.cs" />
     <Compile Include="Gateways\ContentGateways\SearchGateway.cs" />
+    <Compile Include="Gateways\ContentGateways\UserProfileGateway.cs" />
     <Compile Include="Gateways\ContentGateways\WorkoutLogGateway.cs" />
     <Compile Include="Gateways\CoreGateways\LoginGateway.cs" />
     <Compile Include="Gateways\CoreGateways\RegistrationGateway.cs" />

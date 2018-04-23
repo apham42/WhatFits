@@ -1,19 +1,19 @@
 <template>
-<div id="profile ">
+<div id="profile">
    <div class="columns is-fullwidth">
       <div>
          <div class="column" id= "profileCard">
             <div class="card " >
                <div class="card-image" id="imageBackground">
                   <!-- NOTE: This is a temporary image used as a profile picture-->
-                  <!-- <figure class="image"> <img v-bind:src="this.userData.profileImage"> </figure> -->
-                  <figure class="image" ><img  id="circle-ProfileImage" class="center" src="../../assets/Images/ProfileDummy/profilePicture.jpg"></figure>
+                   <figure class="image"> <img  id="circle-ProfileImage" v-bind:src=this.userData.profileImage> </figure>
+
                </div>
                <div class="card-content" align="center">
                   <span class="title is-1">{{this.userData.firstName}} {{this.userData.lastName}}</span>
                   <hr>
                   <span v-if="this.userData.myProfile == true" >
-                      <button class="button is-primary is-rounded" id="buttonGap">Edit Profile</button>
+                      <button class="button is-primary is-rounded" id="buttonGap" @click="goEditProfile">Edit Profile</button>
                   </span>
                   <span v-else>
                         <button class="button is-info is-rounded " id="buttonGap">Follow</button>
@@ -29,7 +29,7 @@
                   </div>
                   <div class="content">
                       <p class="subtitle is-5">Gender: {{this.userData.gender}}</p>
-                      <p class="subtitle is-5">SkillLevel: {{this.userData.skillLevel}}</p>
+                      <p class="subtitle is-5">Skill Level: {{this.userData.skillLevel}}</p>
                      <br>
                   </div>
                </div>
@@ -46,18 +46,23 @@ export default {
   props: ['userData'],
   data () {
     return {
-
     }
   },
   methods: {
+    goEditProfile: function () {
+      this.$router.push('/editprofile')
+    }
   }
 }
 </script>
 
 <style>
-#profileCard {
+.Profile {
   height: auto;
   width: 32em;
+}
+#profileCard {
+
 }
 #buttonGap{
   padding-left: 2.5em;
@@ -73,6 +78,9 @@ export default {
   margin-right: auto;
 }
 #imageBackground {
-  background-image: url("../../assets/Images/ProfileDummy/backgroundImage.jpg");
+  background-image: url("../../../static/ProfileDummy/backgroundImage.jpg");
+}
+#NoUpperBorders {
+  margin-top: -12%;
 }
 </style>
