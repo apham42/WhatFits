@@ -5,21 +5,19 @@ using System.Linq;
 using System.Web;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
+using Whatfits.Models.Context.Content;
 using Whatfits.Models.Models;
 
 namespace server.Business_Logic.Services
 {
-    public class FollowsService : ICollection<FollowsDTO>
+    public class FollowsService
     {
         private bool addstatus = false;
-        public int Count => throw new NotImplementedException();
 
-        public bool IsReadOnly => throw new NotImplementedException();
-
-        public void Add(FollowsDTO follo)
+        public void Add(FollowsDTO item)
         {
             var gateway = new FollowsGateway();
-            gateway.AddtoFollow(follo);
+            gateway.AddtoFollow(item);
             addstatus = true;
         }
 
@@ -33,12 +31,15 @@ namespace server.Business_Logic.Services
             throw new NotImplementedException();
         }
 
-        public void CopyTo(FollowsDTO[] array, int arrayIndex)
-        {
-            throw new NotImplementedException();
-        }
 
-        public IEnumerator<FollowsDTO> GetEnumerator()
+        public IEnumerable<FollowsDTO> GetEnumerator(string userName)
+        {
+            var gateway = new FollowsGateway();
+            return gateway.GetFollowers(userName);
+        }
+        
+
+        public void Insert(int index, FollowsDTO item)
         {
             throw new NotImplementedException();
         }
@@ -48,9 +49,14 @@ namespace server.Business_Logic.Services
             throw new NotImplementedException();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public void RemoveAt(int index)
         {
             throw new NotImplementedException();
+        }
+
+        public bool GetAddStatus()
+        {
+            return this.addstatus;
         }
     }
 }

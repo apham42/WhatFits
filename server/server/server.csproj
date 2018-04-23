@@ -126,6 +126,7 @@
     <Compile Include="Business Logic\Services\FollowsService.cs" />
     <Compile Include="Business Logic\Services\LoginService.cs" />
     <Compile Include="Business Logic\Services\LogoutService.cs" />
+    <Compile Include="Business Logic\Services\UserProfileService.cs" />
     <Compile Include="Business Logic\Services\WorkoutLoggerService.cs" />
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Business Logic\Validators\Location Validator\WebAPILocationValidator.cs" />

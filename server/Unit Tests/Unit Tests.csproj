@@ -112,6 +112,8 @@
     <Compile Include="UserManagementTest\UserManagementControllerTest.cs" />
     <Compile Include="UserManagementTest\UserManagementGatewayTests.cs" />
     <Compile Include="UserManagementTest\UserManagementServiceTest.cs" />
+    <Compile Include="UserProfileTest\UserProfileGatewayTests.cs" />
+    <Compile Include="UserProfileTest\UserProfileServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
