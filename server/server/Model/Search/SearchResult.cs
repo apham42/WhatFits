@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Whatfits.Models.Models;
 
 namespace server.Model.Search
 {

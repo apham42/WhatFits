@@ -9,7 +9,7 @@ namespace server.Model.Location
     /// <summary>
     /// Contains the information that Whatfits need from the Web API.
     /// </summary>
-    public class WebAPIGeocode : IGeoCoordinates
+    public class WebAPIGeocode
     {
         public WebAPIGeocode()
         {
@@ -17,8 +17,8 @@ namespace server.Model.Location
         }
 
         public string County { get; set; }
-        public string Latitude { get; set; }
-        public string Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
         public bool IsValid { get; set; }
     }
 }

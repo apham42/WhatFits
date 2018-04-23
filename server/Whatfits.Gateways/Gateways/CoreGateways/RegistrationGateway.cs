@@ -102,7 +102,13 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     {
                         UserID = userID,
                         LocationID = locationID,
-                        Type = dto.Type
+                        Type = dto.Type,
+                        FirstName = "FirstName",
+                        LastName = "LastName",
+                        Description = "Hi, this is a brief description of me. To customize your profile page, select \"Edit Profile\" to remove these default messages.",
+                        Gender = "",
+                        SkillLevel = "Beginner",
+                        ProfilePicture = "../../../static/genericProfileImage.jpg"
                     };
                     db.UserProfiles.Add(userInfo);
                     db.SaveChanges();

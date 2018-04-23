@@ -21,7 +21,7 @@ namespace server.Controllers
         /// <param name="userCred"> Registeration Information </param>
         /// <returns> Status of the request with a list of messages </returns>
         [HttpPost]
-        [Route("Register")]
+        [AllowAnonymous]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult Register([FromBody] RegInfo userCred)
         {
