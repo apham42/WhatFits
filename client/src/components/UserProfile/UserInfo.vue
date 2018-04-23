@@ -1,7 +1,6 @@
 <template>
 <div id="profile">
-   <div class="columns is-fullwidth">
-      <div>
+   <div class="column">
          <div class="column" id= "profileCard">
             <div class="card " >
                <div class="card-image" id="imageBackground">
@@ -35,7 +34,6 @@
                </div>
             </div>
          </div>
-      </div>
    </div>
 </div>
 </template>
@@ -57,13 +55,7 @@ export default {
 </script>
 
 <style>
-.Profile {
-  height: auto;
-  width: 32em;
-}
-#profileCard {
 
-}
 #buttonGap{
   padding-left: 2.5em;
   padding-right: 2.5em;
