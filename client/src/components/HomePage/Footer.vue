@@ -13,11 +13,11 @@
                 <p>+1 123 123456</p>
             </div>
             <div> <i class="fa fa-envelope"></i>
-                <p><a href="/cdn-cgi/l/email-protection#65161015150a171125060a0815040b1c4b060a08"><span class="__cf_email__" data-cfemail="a0d3d5d0d0cfd2d4e0c3cfcdd0c1ced98ec3cfcd">[email&#160;protected]</span></a></p>
+                <p><a href="/cdn-cgi/l/email-protection#65161015150a171125060a0815040b1c4b060a08"><span class="__cf_email__" data-cfemail="a0d3d5d0d0cfd2d4e0c3cfcdd0c1ced98ec3cfcd">contact@whatfits.social</span></a></p>
             </div>
         </div>
         <div class="footer-right">
-            <p class="footer-company-about"> <span>About the company</span> Vong rejected our previous project so here we are... </p>
+            <p class="footer-company-about"> <span>About the company</span> This is a fitness social media application. Need something to fill this space in. </p>
             <div class="footer-icons"> <a href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i class="fab fa-twitter-square"></i></a> <a href="#"><i class="fab fa-linkedin"></i></a> <a href="#"><i class="fab fa-github-square"></i></a> </div>
         </div>
     </footer>

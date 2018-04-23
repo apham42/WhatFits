@@ -1,48 +1,12 @@
 <template>
  <div>
 <section class="hero ">
+  <hero-body></hero-body>
     <!-- Hero content: will be in the middle -->
-    <div class="hero-body">
-        <div class="container has-text-centered homeBody">
-            <h1 class="title body-text">
-                Whatfits Homepage
-            </h1>
-            <h2 class="subtitle body-text">
-                Clearly under construction
-            </h2>
-        </div>
-    </div>
-    <!-- Hero footer: will stick at the bottom -->
-    <div class="hero-foot">
-        <nav class="tabs">
-            <div class="container">
-                <ul>
-                    <li class="is-active">
-                        <router-link to="/signup">Register</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/usermanagement">UserManagement</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/Review">Review</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/profile">Profile</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/SearchBar">Search</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/chat">Chat</router-link>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
 </section>
 <div class="box cta">
       <p class="has-text-centered">
-         <span class="tag is-warning">lol</span> Login FINALLY works
+         <span class="tag is-info">L O L</span> Login FINALLY works
       </p>
    </div>
    <section class="container">
@@ -196,10 +160,12 @@
 <script>
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 import Footer from '@/components/HomePage/Footer'
+import HeroBody from '@/components/HomePage/HeroBody'
 export default {
   name: 'Home',
   components: {
-    'footer-bar': Footer
+    'footer-bar': Footer,
+    'hero-body': HeroBody
   },
   data: function () {
     return {
