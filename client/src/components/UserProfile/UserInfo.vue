@@ -1,5 +1,5 @@
 <template>
-<div id="profile ">
+<div id="profile">
    <div class="columns is-fullwidth">
       <div>
          <div class="column" id= "profileCard">
@@ -29,7 +29,7 @@
                   </div>
                   <div class="content">
                       <p class="subtitle is-5">Gender: {{this.userData.gender}}</p>
-                      <p class="subtitle is-5">SkillLevel: {{this.userData.skillLevel}}</p>
+                      <p class="subtitle is-5">Skill Level: {{this.userData.skillLevel}}</p>
                      <br>
                   </div>
                </div>
@@ -57,9 +57,12 @@ export default {
 </script>
 
 <style>
-#profileCard {
+.Profile {
   height: auto;
   width: 32em;
+}
+#profileCard {
+
 }
 #buttonGap{
   padding-left: 2.5em;
@@ -78,6 +81,6 @@ export default {
   background-image: url("../../../static/ProfileDummy/backgroundImage.jpg");
 }
 #NoUpperBorders {
-  margin-top: -10%;
+  margin-top: -12%;
 }
 </style>
