@@ -25,7 +25,7 @@ namespace Whatfits.JsonWebToken.Constant
                 {
                     ValidIssuers = new[] { "https://www.Whatfits.social/" },
                     IssuerSigningKey = new SymmetricSecurityKey(SecurityKey),
-                    // ValidateLifetime = true,
+                    ValidateLifetime = false,
                     ValidateAudience = false,
                     ValidateIssuer = true,
                     ValidateIssuerSigningKey = true

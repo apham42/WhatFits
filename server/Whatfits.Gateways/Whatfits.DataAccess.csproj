@@ -55,6 +55,7 @@
     <Compile Include="DTOs\ContentDTOs\ImageDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\LocationResponseDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ProfileDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\WorkoutLogDetailDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewDetailDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewMessageDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\EventDTO.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="DTOs\CoreDTOs\LoginDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\LogoutResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\RegGatewayDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\ResetPasswordResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\SecurityQuestionResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UserAccessDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UserManagementDTO.cs" />

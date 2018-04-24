@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web.Http;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 
@@ -32,10 +33,10 @@ namespace server.Services
         }
 
         //Returns Review objects to front end, ReviewMessage, Rating, and Datetime
-        public IEnumerable<ReviewDetailDTO> GetUserReview(string Username)
+        public IEnumerable<ReviewDetailDTO> GetUserReview(UsernameDTO obj)
         {
             var gateway = new ReviewsGateway();
-            return gateway.GetUserReviewDetails(Username);
+            return gateway.GetUserReviewDetails(obj);
         }
     }
 }

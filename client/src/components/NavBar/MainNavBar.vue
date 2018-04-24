@@ -38,10 +38,7 @@ export default {
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/logout/logout',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        },
+        headers: this.$store.getters.getheader,
         data: {
           Username: this.$store.getters.getusername,
           Token: this.$store.getters.gettoken
@@ -52,6 +49,7 @@ export default {
           this.$store.dispatch('acttoken', {Token: ''})
           this.$store.dispatch('actviewclaims', {Viewclaims: null})
           this.$router.push('/')
+          this.$store.dispatch('actheader')
         })
         .catch((error) => {
           console.log(error)

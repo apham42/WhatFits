@@ -11,11 +11,9 @@
         <br />
         <textarea v-model="ReviewMessage" class="form-control" placeholder="Input Review"></textarea>
       </div>
-      <label for="UserID">UserID</label>
-      <input v-model="UserID" placeholder="'1'"/>
       <label for="RevieweeID">RevieweeID</label>
-      <input v-model="RevieweeID" placeholder="'1'" />
-      <button type="submit" @click="input">Submit</button>
+      <input v-model="RevieweeID" placeholder="'1'"/>
+      <button type="submit" @click.prevent="input">Submit</button>
     </form>
   </div>
 </template>
@@ -40,9 +38,9 @@ export default {
   },
   data: function () {
     return {
+      Username: this.$store.getters.getusername,
       Rating: this.Rating,
       ReviewMessage: '',
-      UserID: '',
       RevieweeID: '',
       DateAndTime: new Date().toLocaleDateString()
     }
@@ -53,20 +51,19 @@ export default {
         this.Rating = this.Rating === star ? star - 1 : star
       }
     },
-
-    input () {
+    input: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/Review/CreateReview',
+        url: 'http://localhost/server/v1/Review/CreateReview',
         data: {
-          Rating: this.Rating,
-          ReviewMessage: this.ReviewMessage,
-          UserID: this.UserID,
-          RevieweeID: this.RevieweeID,
-          DateAndTime: this.DateAndTime
+          Rating: this.$data.Rating,
+          ReviewMessage: this.$data.ReviewMessage,
+          RevieweeID: this.$data.RevieweeID,
+          Username: this.$data.Username,
+          DateAndTime: this.$data.DateAndTime
         },
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
           'Content-Type': 'application/json'
         }
       }).then(response => {
@@ -89,27 +86,10 @@ export default {
     margin: 0 0 5px 0;
     padding: 0;
     list-style-type: none;
-    &:hover
-      {
-        .star
-          {
-            color: #FAFF5C;
-          }
-      }
   }
   .star {
     display: inline-block;
     cursor: pointer;
-    &:hover
-      {
-        &~.star
-          {
-            &:not(.active)
-            {
-              color: inherit;
-            }
-          }
-        }
   }
   .active {
     color: #FAFF5C;
