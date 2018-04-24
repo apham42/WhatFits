@@ -17,9 +17,10 @@
                 <span class="file-icon"><i class="fa fa-upload"></i></span>
                 <span class="file-label">Choose an Image</span>
               </span>
-              <span class="file-name">{{profileImage}}</span>
+              <span class="file-name">{{userData.profileImage}}</span>
           </label>
         </div>
+        <span class="errorMessage">DO NOT USE</span>
     </div>
     <br>
     <div class="field is-horizontal">
@@ -29,22 +30,22 @@
         <div class="field-body">
           <div class="field">
             <p class="control is-expanded">
-              <input class="input" type="text" placeholder="First Name" v-model.trim="firstName" @input="delayTouch($v.firstName)" v-bind:class="{error: $v.firstName.$error, valid: $v.firstName.$dirty && !$v.firstName.$invalid}">
+              <input class="input" type="text" placeholder="First Name" v-model.trim="userData.firstName" @input="delayTouch($v.userData.firstName)" v-bind:class="{error: $v.userData.firstName.$error, valid: $v.userData.firstName.$dirty && !$v.userData.firstName.$invalid}">
             </p>
             <div class="errorMessage">
-                <span v-show="!$v.firstName.required && $v.firstName.$dirty">First name is required</span>
-                <span v-show="!$v.firstName.minLength && $v.firstName.$dirty">First name must have at least {{$v.firstName.$params.minLength.min}} letters</span>
-                <span v-show="!$v.firstName.maxLength && $v.firstName.$dirty">First name can't be this long {{$v.firstName.$params.maxLength.max}} letters</span>
+                <span v-show="!$v.userData.firstName.required && $v.userData.firstName.$dirty">First name is required</span>
+                <span v-show="!$v.userData.firstName.minLength && $v.userData.firstName.$dirty">First name must have at least {{$v.userData.firstName.$params.minLength.min}} letters</span>
+                <span v-show="!$v.userData.firstName.maxLength && $v.userData.firstName.$dirty">First name can't be this long {{$v.userData.firstName.$params.maxLength.max}} letters</span>
             </div>
             </div>
           <div class="field">
             <p class="control is-expanded">
-              <input class="input" type="text" placeholder="Last Name" v-model.trim="lastName" @input="delayTouch($v.lastName)" v-bind:class="{error: $v.lastName.$error, valid: $v.lastName.$dirty && !$v.lastName.$invalid}">
+              <input class="input" type="text" placeholder="Last Name" v-model.trim="userData.lastName" @input="delayTouch($v.userData.lastName)" v-bind:class="{error: $v.userData.lastName.$error, valid: $v.userData.lastName.$dirty && !$v.userData.lastName.$invalid}">
             </p>
             <div class="errorMessage">
-                <span v-show="!$v.lastName.required && $v.lastName.$dirty">First name is required</span>
-                <span v-show="!$v.lastName.minLength && $v.lastName.$dirty">Last name must have at least {{$v.lastName.$params.minLength.min}} letters</span>
-                <span v-show="!$v.lastName.maxLength && $v.lastName.$dirty">Last name can't be this long {{$v.lastName.$params.maxLength.max}} letters</span>
+                <span v-show="!$v.userData.lastName.required && $v.userData.lastName.$dirty">First name is required</span>
+                <span v-show="!$v.userData.lastName.minLength && $v.userData.lastName.$dirty">Last name must have at least {{$v.userData.lastName.$params.minLength.min}} letters</span>
+                <span v-show="!$v.userData.lastName.maxLength && $v.userData.lastName.$dirty">Last name can't be this long {{$v.userData.lastName.$params.maxLength.max}} letters</span>
             </div>
           </div>
         </div>
@@ -60,7 +61,7 @@
               <!--NOTE: Create lookup table of skill levels -->
               <div class="select is-fullwidth">
 
-                <select v-model="skillLevel">
+                <select v-model="userData.skillLevel">
               <option value="Beginner">Beginner</option>
               <option value="Intermediate">Intermediate</option>
               <option value="Advance">Advance</option>
@@ -78,12 +79,12 @@
         <div class="field-body">
           <div class="field">
             <div class="control">
-              <input class="input" type="text" placeholder="example@domain.com" v-model.trim="email" @input="delayTouch($v.email)" v-bind:class="{error: $v.email.$error, valid: $v.email.$dirty && !$v.email.$invalid}">
+              <input class="input" type="text" placeholder="example@domain.com" v-model.trim="userData.email" @input="delayTouch($v.userData.email)" v-bind:class="{error: $v.userData.email.$error, valid: $v.userData.email.$dirty && !$v.userData.email.$invalid}">
             </div>
             <div class="errorMessage">
-                <span v-show="!$v.email.required && $v.email.$dirty">Email is required</span>
-                <span v-show="!$v.email.maxLength && $v.email.$dirty">Last name can't be this long {{$v.email.$params.maxLength.max}} letters</span>
-                <span v-show="!$v.email.email && $v.email.$dirty"> This is not a valid email format</span>
+                <span v-show="!$v.userData.email.required && $v.userData.email.$dirty">Email is required</span>
+                <span v-show="!$v.userData.email.maxLength && $v.userData.email.$dirty">Last name can't be this long {{$v.userData.email.$params.maxLength.max}} letters</span>
+                <span v-show="!$v.userData.email.email && $v.userData.email.$dirty"> This is not a valid email format</span>
             </div>
           </div>
         </div>
@@ -96,12 +97,12 @@
         <div class="field-body">
             <div class="field">
                 <div class="control">
-                    <input class="input" type="text" placeholder="Male/Female/etc." v-model.trim="gender" @input="delayTouch($v.gender)" v-bind:class="{error: $v.gender.$error, valid: $v.gender.$dirty && !$v.gender.$invalid}">
+                    <input class="input" type="text" placeholder="Male/Female/etc." v-model.trim="userData.gender" @input="delayTouch($v.userData.gender)" v-bind:class="{error: $v.userData.gender.$error, valid: $v.userData.gender.$dirty && !$v.userData.gender.$invalid}">
                 </div>
                 <div class="errorMessage">
-                  <span v-show="!$v.gender.required && $v.gender.$dirty">Gender is required</span>
-                  <span v-show="!$v.gender.minLength && $v.gender.$dirty">Gender must have at least {{$v.gender.$params.minLength.min}} letters</span>
-                  <span v-show="!$v.gender.maxLength && $v.gender.$dirty">Gender can't be this long {{$v.gender.$params.maxLength.max}} letters</span>
+                  <span v-show="!$v.userData.gender.required && $v.userData.gender.$dirty">Gender is required</span>
+                  <span v-show="!$v.userData.gender.minLength && $v.userData.gender.$dirty">Gender must have at least {{$v.userData.gender.$params.minLength.min}} letters</span>
+                  <span v-show="!$v.userData.gender.maxLength && $v.userData.gender.$dirty">Gender can't be this long {{$v.userData.gender.$params.maxLength.max}} letters</span>
             </div>
             </div>
         </div>
@@ -114,13 +115,13 @@
         <div class="field-body">
             <div class="field">
                 <div class="control">
-                    <textarea class="textarea" placeholder="Explain how we can help you" v-model.trim="description" @input="delayTouch($v.description)" v-bind:class="{error: $v.description.$error, valid: $v.description.$dirty && !$v.description.$invalid}"></textarea>
+                    <textarea class="textarea" placeholder="Explain how we can help you" v-model.trim="userData.description" @input="delayTouch($v.userData.description)" v-bind:class="{error: $v.userData.description.$error, valid: $v.userData.description.$dirty && !$v.userData.description.$invalid}"></textarea>
                 </div>
                 <div class="errorMessage">
-                  <span v-show="!$v.description.required && $v.description.$dirty">Description is required</span>
-                  <span v-show="!$v.description.minLength && $v.description.$dirty">Description must have at least {{$v.description.$params.minLength.min}} letters</span>
-                  <span v-show="!$v.description.maxLength && $v.description.$dirty">Description can't be this long {{$v.description.$params.maxLength.max}} letters</span>
-            </div>
+                  <span v-show="!$v.userData.description.required && $v.userData.description.$dirty">Description is required</span>
+                  <span v-show="!$v.userData.description.minLength && $v.userData.description.$dirty">Description must have at least {{$v.userData.description.$params.minLength.min}} letters</span>
+                  <span v-show="!$v.userData.description.maxLength && $v.userData.description.$dirty">Description can't be this long {{$v.userData.description.$params.maxLength.max}} letters</span>
+                </div>
             </div>
         </div>
     </div>
@@ -156,42 +157,46 @@ export default {
   data () {
     return {
       pageTitle: 'Edit Profile Console',
-      firstName: '',
-      lastName: '',
-      description: '',
-      skillLevel: '',
-      gender: '',
-      profileImage: null,
-      email: '',
+      userData: {
+        firstName: '',
+        lastName: '',
+        description: '',
+        skillLevel: '',
+        gender: '',
+        profileImage: '',
+        email: ''
+      },
       errorFlag: true,
       statusMessages: ''
     }
   },
   validations: {
-    firstName: {
-      required,
-      minLength: minLength(2),
-      maxLength: maxLength(35)
-    },
-    lastName: {
-      required,
-      minLength: minLength(2),
-      maxLength: maxLength(35)
-    },
-    email: {
-      email,
-      required,
-      maxLength: maxLength(128)
-    },
-    gender: {
-      required,
-      minLength: minLength(1),
-      maxLength: maxLength(64)
-    },
-    description: {
-      required,
-      minLength: minLength(0),
-      maxLength: maxLength(256)
+    userData: {
+      firstName: {
+        required,
+        minLength: minLength(2),
+        maxLength: maxLength(35)
+      },
+      lastName: {
+        required,
+        minLength: minLength(2),
+        maxLength: maxLength(35)
+      },
+      email: {
+        email,
+        required,
+        maxLength: maxLength(128)
+      },
+      gender: {
+        required,
+        minLength: minLength(1),
+        maxLength: maxLength(64)
+      },
+      description: {
+        required,
+        minLength: minLength(0),
+        maxLength: maxLength(256)
+      }
     }
   },
   beforeCreate () {
@@ -210,13 +215,13 @@ export default {
       .then(response => {
         console.log(response.data)
         // NOTE: Is there a better way to store data?
-        this.firstName = response.data.FirstName
-        this.lastName = response.data.LastName
-        this.description = response.data.Description
-        this.email = response.data.Email
-        this.skillLevel = response.data.SkillLevel
-        this.gender = response.data.Gender
-        this.profileImage = response.data.ProfilePicture
+        this.userData.firstName = response.data.FirstName
+        this.userData.lastName = response.data.LastName
+        this.userData.description = response.data.Description
+        this.userData.email = response.data.Email
+        this.userData.skillLevel = response.data.SkillLevel
+        this.userData.gender = response.data.Gender
+        this.userData.profileImage = response.data.ProfilePicture
       }).catch((error) => {
       // Pushes the error messages into error to display
         if (error.response) {
@@ -237,7 +242,7 @@ export default {
   methods: {
     onFileSelected (event) {
       console.log(event)
-      this.profileImage = event.target.files[0]
+      this.userData.profileImage = event.target.files[0]
     },
     onUpload () {
 
@@ -253,8 +258,9 @@ export default {
       this.$router.push('/profile')
     },
     pushProfile: function () {
+      /*
       const fd = new FormData()
-      fd.append('image', this.profileImage, this.profileImage.name)
+      fd.append('image', this.userData.profileImage, this.userData.profileImage.name)
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/UserProfile/StoreImage',
@@ -285,6 +291,7 @@ export default {
             this.errorFlag = true
           }
         })
+         */
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/UserProfile/EditProfile',
@@ -294,13 +301,14 @@ export default {
         },
         data: {
           'UserName': this.$store.getters.getusername,
-          'FirstName': this.firstName,
-          'LastName': this.lastName,
-          'Email': this.email,
-          'Description': this.description,
-          'SkillLevel': this.skillLevel,
-          'Gender': this.gender,
-          'ProfilePicture': this.profileImage.name
+          'FirstName': this.userData.firstName,
+          'LastName': this.userData.lastName,
+          'Email': this.userData.email,
+          'Description': this.userData.description,
+          'SkillLevel': this.userData.skillLevel,
+          'Gender': this.userData.gender,
+          // 'ProfilePicture': this.userData.profileImage
+          'ProfilePicture': '../../../static/genericProfileImage.jpg'
         }
       })
       // redirect to Home page

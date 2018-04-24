@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Configuration;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
@@ -97,12 +98,12 @@ namespace server.Controllers
 
                         int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
 
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
+                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png" };
                         var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
                         var extension = ext.ToLower();
                         if (!AllowedFileExtensions.Contains(extension))
                         {
-                            var message = string.Format("Please Upload image of type .jpg,.gif,.png.");
+                            var message = string.Format("Please Upload image of type .jpg,.png.");
                             dict.Add("error", message);
                             return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
                         }
@@ -114,10 +115,12 @@ namespace server.Controllers
                         }
                         else
                         {
-                            //string path = @"C:\Users\rsanc\Documents\Github\WhatFits\server\server";
+                            string path = ConfigurationManager.AppSettings["imagePath"];
                             //string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\"));
-                            //var filePath = HttpContext.Current.Server.MapPath(newPath + postedFile.FileName + extension);
-                            var filePath = HttpContext.Current.Server.MapPath("~/Data/" + postedFile.FileName);
+                            string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\")); 
+                            //var filePath = HttpContext.Current.Server.MapPath(newPath + postedFile.FileName + extension); 
+                            var filePath = HttpContext.Current.Server.MapPath(path + postedFile.FileName);
+                            //var filePath = path + postedFile.FileName;                            
                             postedFile.SaveAs(filePath);
                         }
                     }
@@ -128,7 +131,7 @@ namespace server.Controllers
                 dict.Add("error", res);
                 return Request.CreateResponse(HttpStatusCode.NotFound, dict);
             }
-            catch (NullReferenceException ex)
+            catch (Exception e)
             {
                 var res = string.Format("some Message");
                 dict.Add("error", res);
