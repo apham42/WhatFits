@@ -6,6 +6,8 @@ namespace Whatfits.DataAccess.DTOs.ContentDTOs
 {
     public class WorkoutLogDTO : IWorkoutLog, ICardio, IWeightLifting
     {
+        public string userName { get; set; }
+
         public string WorkoutType { get; set; }
         public DateTime Date_Time { get; set; }
 
@@ -16,6 +18,5 @@ namespace Whatfits.DataAccess.DTOs.ContentDTOs
         public string LiftingType { get; set; }
         public int Sets { get; set; }
         public int Reps { get; set; }
-        public List<int> collection { get; set; }
     }
 }
