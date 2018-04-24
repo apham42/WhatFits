@@ -14,10 +14,21 @@ const getters = {
 }
 
 const actions = {
-
+  actheadertoken (context, payload) {
+    context.commit('mutateheadertoken', payload)
+  },
+  actheader (context) {
+    context.commit('mutateheader')
+  }
 }
 
 const mutations = {
+  mutateheadertoken: function (state, payload) {
+    state.headers.Authorization = 'Bearer ' + payload.TokenHeader
+  },
+  mutateheader: function (state) {
+    state.headers.Authorization = null
+  }
 }
 
 export default {

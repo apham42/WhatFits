@@ -17,7 +17,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
 
         protected override void Seed(Whatfits.Models.Context.Core.AccountContext context)
         {
-            /**
+            
             var sampleCredentials = new List<Credential>
            {
                new Credential{ UserName = "latmey", Password = "123456" },
@@ -46,13 +46,13 @@ namespace Whatfits.Models.Migrations.AccountMigrations
 
             var sampleProfiles = new List<UserProfile>
              {
-                 new UserProfile{ UserID = 0001, LocationID = 1, FirstName = "Luke",  LastName = "Atmey", Email = "asdf@gmail.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Beginner" , Type = "Enable"},
-                 new UserProfile{ UserID = 0002, LocationID = 1, FirstName = "April", LastName = "May", Email = "asdf@facebook.com", Description = "SomeDescription", Gender = "Female", ProfilePicture = null, SkillLevel = "Beginner", Type = "Enable"},
-                 new UserProfile{ UserID = 0003, LocationID = 3, FirstName = "Rock", LastName = "Strong", Email = "asdf@live.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Beginner" , Type = "Enable"},
-                 new UserProfile{ UserID = 0004, LocationID = 4, FirstName = "Red", LastName = "Blue", Email = "asdf@yahoo.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "Enable"},
-                 new UserProfile{ UserID = 0005, LocationID = 5, FirstName = "Cody", LastName = "Hackins", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "Enable"},
-                 new UserProfile{ UserID = 0006, LocationID = 5, FirstName = "Test", LastName = "User", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "Enable"},
-                 new UserProfile{ UserID = 0007, LocationID = 5, FirstName = "Test", LastName = "User", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = null, SkillLevel = "Advanced", Type = "Enable"}
+                 new UserProfile{ UserID = 0001, LocationID = 1, FirstName = "Luke",  LastName = "Atmey", Email = "asdf@gmail.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = "../../../static/genericProfileImage.jpg", SkillLevel = "Beginner" , Type = "Enable"},
+                 new UserProfile{ UserID = 0002, LocationID = 1, FirstName = "April", LastName = "May", Email = "asdf@facebook.com", Description = "SomeDescription", Gender = "Female", ProfilePicture = "../../../static/genericProfileImage.jpg", SkillLevel = "Beginner", Type = "Enable"},
+                 new UserProfile{ UserID = 0003, LocationID = 3, FirstName = "Rock", LastName = "Strong", Email = "asdf@live.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = "../../../static/genericProfileImage.jpg", SkillLevel = "Beginner" , Type = "Enable"},
+                 new UserProfile{ UserID = 0004, LocationID = 4, FirstName = "Red", LastName = "Blue", Email = "asdf@yahoo.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = "../../../static/genericProfileImage.jpg", SkillLevel = "Advanced", Type = "Enable"},
+                 new UserProfile{ UserID = 0005, LocationID = 5, FirstName = "Cody", LastName = "Hackins", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = "../../../static/genericProfileImage.jpg", SkillLevel = "Advanced", Type = "Enable"},
+                 new UserProfile{ UserID = 0006, LocationID = 5, FirstName = "Test", LastName = "User", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = "../../../static/genericProfileImage.jpg", SkillLevel = "Advanced", Type = "Enable"},
+                 new UserProfile{ UserID = 0007, LocationID = 5, FirstName = "Test", LastName = "User", Email = "zzz@channel.com", Description = "SomeDescription", Gender = "Male", ProfilePicture = "../../../static/genericProfileImage.jpg", SkillLevel = "Advanced", Type = "Enable"}
              };
             context.UserProfiles.AddOrUpdate(users => users.UserID, (sampleProfiles.ToArray()));
             context.SaveChanges();
@@ -87,7 +87,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
              };
             context.UserClaims.AddOrUpdate(userclaims => userclaims.ClaimID, (sampleClaims.ToArray()));
             context.SaveChanges();
-            **/
+            
             var sampleQuestions = new List<SecurityQuestion>
              {
                  new SecurityQuestion{ Question = "Who was the company you first worked for?"},
@@ -102,7 +102,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
              };
             context.SecurityQuestions.AddOrUpdate(securityQuestions => securityQuestions.Question, (sampleQuestions.ToArray()));
             context.SaveChanges();
-            /**
+           
             var sampleAnswers = new List<SecurityAccount>
              {
                  new SecurityAccount{ SecurityAccountID = 1, UserID = 0001, SecurityQuestionID = 1, Answer = "Answer to Question 1" },
@@ -137,7 +137,7 @@ namespace Whatfits.Models.Migrations.AccountMigrations
            };
             context.TokenBlackLists.AddOrUpdate(tokenblacklist => tokenblacklist.UserID, (sampleBlackList.ToArray()));
             context.SaveChanges();
-            **/
+            
         }
     }
 }
