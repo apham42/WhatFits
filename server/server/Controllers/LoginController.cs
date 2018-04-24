@@ -39,17 +39,14 @@ namespace server.Controllers
 
             loginResponse = login.loginService();
 
-            if (loginResponse.Messages.Contains("User does not exist"))
+            if (loginResponse.Messages.Contains("User does not exist")
+                || loginResponse.Messages.Contains("Could not Create Token"))
             {
                 return Content(HttpStatusCode.NotFound, loginResponse.Messages);
             } 
             else if(loginResponse.Messages.Contains("Incorrect Credentials"))
             {
                 return Content(HttpStatusCode.Unauthorized, loginResponse.Messages);
-            }
-            else if(loginResponse.Messages.Contains("Could not Create Token"))
-            {
-                return Content(HttpStatusCode.NotFound, loginResponse.Messages);
             }
 
             return Ok(loginResponse);
