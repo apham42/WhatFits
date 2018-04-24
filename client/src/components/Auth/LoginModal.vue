@@ -2,8 +2,11 @@
    <div id="loginModal" class="modal is-active">
       <div id="background" class="modal-background" @click="closeModal"></div>
       <div class="modal-content">
-         <div class="box has-text-centered">
-            <img id="loginImage" src="../../assets/Images/NavbarLogo/navbarLogo.png">
+         <div id="modalbox" class="box">
+            <div class="level-item has-text-centered">
+              <img id="loginImage" src="../../assets/Images/NavbarLogo/navbarLogo.png">
+            </div>
+            <br>
             <div class="field">
                <p class="control has-icons-left">
                   <input class="input" v-model="username" id="username" type="text" placeholder="Username">
@@ -22,9 +25,16 @@
                   </span>
                </p>
             </div>
-            <p v-show="invalid" class="help is-danger">Invalid Credentials</p>
-            <button id="loginbutton" class="button is-primary" @click="sendUserCredential">Login</button>
-            <button id="cancelbutton" class="button" @click="closeModal">Cancel</button>
+            <div class="level-left">
+              <router-link class="md-accent" to="/resetpassword" @click.native="closeModal"> Forgot Password?</router-link>
+            </div>
+            <div class="level-item has-text-centered">
+              <p v-show="invalid" class="help is-danger">Invalid Credentials</p>
+            </div>
+            <div class="level-item has-text-centered is-grouped">
+              <button id="loginbutton" class="button is-primary is-inverted is-outlined is-grouped" @click="sendUserCredential">Login</button>
+              <button id="cancelbutton" class="button is-danger is-inverted is-grouped" @click="closeModal">Cancel</button>
+            </div>
          </div>
       </div>
    </div>
@@ -52,10 +62,7 @@ export default {
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/login/Login',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        },
+        headers: this.$store.getters.getheader,
         data: {
           Username: this.$data.username,
           Password: this.$data.password
@@ -67,6 +74,7 @@ export default {
           this.$store.dispatch('actviewclaims', {Viewclaims: response.data.viewclaims})
           this.$router.push('/profile')
           this.$store.dispatch('closeAction')
+          this.$store.dispatch('actheadertoken', {TokenHeader: response.data.token})
           console.log(response)
         })
         .catch((error) => {
@@ -93,11 +101,21 @@ export default {
 
 <style>
 #loginImage {
+  align-items: center;
   height: 70px;
   padding-left: 20px;
   padding-top: 5px;
 }
 #loginModal {
   background: none;
+}
+#forgotpass {
+  position: left
+}
+#modalbox {
+  background-color:#34495E;
+}
+#loginbutton {
+  margin-right: 15px;
 }
 </style>
