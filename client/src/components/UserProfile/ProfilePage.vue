@@ -16,6 +16,7 @@
 
 <script>
 import axios from 'axios'
+import GetWorkouts from '@/components/UserProfile/GetWorkouts'
 import UserInfo from '@/components/UserProfile/UserInfo'
 import ErrorPage from '@/components/ErrorPage/NotFound'
 import HomeButton from '@/components/Common/HomeButton'
@@ -27,7 +28,8 @@ export default {
     'user-info': UserInfo,
     'error-page404': ErrorPage,
     'home-button': HomeButton,
-    'chat-bar': Chat
+    'chat-bar': Chat,
+    'workout-log': GetWorkouts
   },
   data () {
     return {
