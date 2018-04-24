@@ -60,35 +60,30 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// <returns>
         /// Dictionary of Answers and thier corresponding QuestionIDs via LoginDTO
         /// </returns>
-        public ResponseDTO<Dictionary<int, string>> GetSecurityQandAs(LoginDTO obj)
+        public ResetPasswordResponseDTO GetSecurityQandAs(LoginDTO loginDTO)
         {
-            var foundUser = (from credential in db.Credentials
-                             where credential.UserName == obj.UserName
-                             select credential).FirstOrDefault();
-            ResponseDTO<Dictionary<int, string>> response = new ResponseDTO<Dictionary<int, string>>();
-            if (foundUser == null)
+            var foundanswers = (from credential in db.Credentials
+                                  where credential.UserName == loginDTO.UserName
+                                  join answers in db.SecurityAccounts on credential.UserID equals answers.UserID
+                                  select answers).ToDictionary(answers => answers.SecurityQuestionID,
+                                                                 answers => answers.Answer);
+            ResetPasswordResponseDTO response = new ResetPasswordResponseDTO();
+            response.Messages = new List<string>();
+
+            if (foundanswers == null)
             {
-                response.IsSuccessful = false;
-                // Returns Response
-                return response;
+                // fail response
+                response.Messages.Add("Could not find Answers");
+                response.isSuccessful = false;
             }
             else
             {
-                var foudnQandA = (from answers in db.SecurityAccounts
-                                  where answers.UserID == foundUser.UserID
-                                  select answers).ToList();
-                // Passes the query into a dictionary
-                Dictionary<int, String> temp = new Dictionary<int, string>();
-                for (int i = 0; i < foudnQandA.Count(); i++)
-                {
-                    temp.Add(foudnQandA[i].SecurityQuestionID, foudnQandA[i].Answer);
-                }
                 // Creates the response
-                response.Data = temp;
-                response.IsSuccessful = true;
-                // Returns Response
-                return response;
+                response.Messages.Add("Success!");
+                response.Answers = foundanswers;
+                response.isSuccessful = true;
             }
+            return response;
         }
         /// <summary>
         /// Gets list of SecurityQuestions from Database
@@ -96,23 +91,30 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// <returns>
         /// Dictionary of Questions and QuestionIDs via LoginDTO
         /// </returns>
-        public ResponseDTO<Dictionary<int, string>> GetSecurityQuestions()
+        public ResetPasswordResponseDTO GetSecurityQuestions(LoginDTO loginDTO)
         {
-            var query = db.SecurityQuestions.ToList();
-            ResponseDTO<Dictionary<int, string>> response = new ResponseDTO<Dictionary<int, string>> { };
-            if (query == null)
+            var foundquestions = (from credential in db.Credentials
+                                  where credential.UserName == loginDTO.UserName
+                                  join answers in db.SecurityAccounts on credential.UserID equals answers.UserID
+                                  join questions in db.SecurityQuestions on answers.SecurityQuestionID equals questions.SecurityQuestionID
+                                  select questions).ToDictionary(questions => questions.SecurityQuestionID,
+                                                                 questions => questions.Question);
+
+            ResetPasswordResponseDTO response = new ResetPasswordResponseDTO();
+            response.Messages = new List<string>();
+
+            if (foundquestions == null)
             {
-                response.IsSuccessful = false;
+                // faile response
+                response.Messages.Add("Fail to find Questions");
+                response.isSuccessful = false;
             }
             else
             {
-                Dictionary<int, String> temp = new Dictionary<int, string>();
-                foreach (var question in query)
-                {
-                    temp.Add(question.SecurityQuestionID, question.Question);
-                }
-                response.Data = temp;
-                response.IsSuccessful = true;
+                // Creates the response
+                response.Messages.Add("Success!");
+                response.Questions = foundquestions;
+                response.isSuccessful = true;
             }
             return response;
         }
