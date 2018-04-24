@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.Models.Context.Content;
 using Whatfits.Models.Models;
@@ -70,19 +71,19 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             }
         }
 
-        public IEnumerable<WorkoutLogDTO> GetWorkouts(string userName)
+        public IEnumerable<WorkoutLogDTO> GetWorkouts(UsernameDTO obj)
         {
             var getType = (from b in db.Workouts
                            join cred in db.Credentials
                            on b.UserID equals cred.UserID
-                           where userName == cred.UserName
+                           where obj.Username == cred.UserName
                            select b.WorkoutType);
             if (getType.Equals("Cardio"))
             {
                 return (from b in db.Workouts
                         join cred in db.Credentials
                         on b.UserID equals cred.UserID
-                        where userName == cred.UserName
+                        where obj.Username == cred.UserName
                         //join weight in db.WeightLiftings
                         //on b.WorkoutLogID equals weight.WorkoutID
                         join card in db.Cardios
@@ -104,7 +105,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 return (from b in db.Workouts
                         join cred in db.Credentials
                         on b.UserID equals cred.UserID
-                        where userName == cred.UserName
+                        where obj.Username == cred.UserName
                         join weight in db.WeightLiftings
                         on b.WorkoutLogID equals weight.WorkoutID
                         //join card in db.Cardios
