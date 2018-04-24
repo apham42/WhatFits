@@ -66,6 +66,7 @@
     <Compile Include="DTOs\CoreDTOs\LoginDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\LogoutResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\RegGatewayDTO.cs" />
+    <Compile Include="DTOs\CoreDTOs\ResetPasswordResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\SecurityQuestionResponseDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UserAccessDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UserManagementDTO.cs" />
