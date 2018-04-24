@@ -4,11 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
+using System.IO;
 
 namespace server.Controllers
 {
@@ -67,6 +70,70 @@ namespace server.Controllers
                 ProfilePicture = "../../assets/Images/ProfileDummy/profilePicture.jpg"
             };
             return Content(HttpStatusCode.OK, profile);
+        }
+        [HttpPost]
+        [EnableCors("http://localhost:8080 , http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        public async Task<HttpResponseMessage> StoreImage()
+        {
+            /*
+            if (obj.ProfilePicture == null)
+            {
+                return Content(HttpStatusCode.BadRequest, "This is null");
+            }
+            return Content(HttpStatusCode.OK, "This filename was passed through:" + obj.ProfilePicture);
+            */
+            Dictionary<string, object> dict = new Dictionary<string, object>();
+            try
+            {
+                var httpRequest = HttpContext.Current.Request;
+
+                foreach (string file in httpRequest.Files)
+                {
+                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
+
+                    var postedFile = httpRequest.Files[file];
+                    if (postedFile != null && postedFile.ContentLength > 0)
+                    {
+
+                        int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
+
+                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".gif", ".png" };
+                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
+                        var extension = ext.ToLower();
+                        if (!AllowedFileExtensions.Contains(extension))
+                        {
+                            var message = string.Format("Please Upload image of type .jpg,.gif,.png.");
+                            dict.Add("error", message);
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                        }
+                        else if (postedFile.ContentLength > MaxContentLength)
+                        {
+                            var message = string.Format("Please Upload a file upto 1 mb.");
+                            dict.Add("error", message);
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                        }
+                        else
+                        {
+                            //string path = @"C:\Users\rsanc\Documents\Github\WhatFits\server\server";
+                            //string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\"));
+                            //var filePath = HttpContext.Current.Server.MapPath(newPath + postedFile.FileName + extension);
+                            var filePath = HttpContext.Current.Server.MapPath("~/Data/" + postedFile.FileName);
+                            postedFile.SaveAs(filePath);
+                        }
+                    }
+                    var message1 = string.Format("Image Updated Successfully.");
+                    return Request.CreateErrorResponse(HttpStatusCode.Created, message1); ;
+                }
+                var res = string.Format("Please Upload a image.");
+                dict.Add("error", res);
+                return Request.CreateResponse(HttpStatusCode.NotFound, dict);
+            }
+            catch (NullReferenceException ex)
+            {
+                var res = string.Format("some Message");
+                dict.Add("error", res);
+                return Request.CreateResponse(HttpStatusCode.NotFound, dict);
+            }
         }
     }
 }

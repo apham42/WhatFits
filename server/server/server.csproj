@@ -210,6 +210,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Business Logic\Validators\Search Validator\" />
+    <Folder Include="Data\" />
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>

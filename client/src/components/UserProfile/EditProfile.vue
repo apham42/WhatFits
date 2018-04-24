@@ -4,18 +4,20 @@
     <h1 class="PageTitle">{{pageTitle}}</h1>
     <br>
     <!-- -->
+
     <div class="field is-horizontal">
         <div class="field-label is-normal">
           <label class="label">Upload Profile Image</label>
         </div>
         <div class="field-body">
           <label>
-              <input class="file-input" type="file" name="resume">
+
+              <input class="file-input" type="file" @change="onFileSelected" name="iamge">
               <span class="file-cta">
                 <span class="file-icon"><i class="fa fa-upload"></i></span>
-                <span class="file-label">Choose a file…</span>
+                <span class="file-label">Choose an Image</span>
               </span>
-              <span class="file-name">sample.jpg</span>
+              <span class="file-name">{{profileImage}}</span>
           </label>
         </div>
     </div>
@@ -159,7 +161,7 @@ export default {
       description: '',
       skillLevel: '',
       gender: '',
-      profileImage: '',
+      profileImage: null,
       email: '',
       errorFlag: true,
       statusMessages: ''
@@ -233,6 +235,13 @@ export default {
       })
   },
   methods: {
+    onFileSelected (event) {
+      console.log(event)
+      this.profileImage = event.target.files[0]
+    },
+    onUpload () {
+
+    },
     delayTouch ($v) {
       $v.$reset()
       if (touchMap.has($v)) {
@@ -244,6 +253,38 @@ export default {
       this.$router.push('/profile')
     },
     pushProfile: function () {
+      const fd = new FormData()
+      fd.append('image', this.profileImage, this.profileImage.name)
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/v1/UserProfile/StoreImage',
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:8081'
+        },
+        data: {
+          fd
+        }
+      })
+      // redirect to Home page
+        .then(response => {
+          console.log(response.data)
+          this.statusMessages = 'ImageUpdated'
+          this.errorFlag = false
+        }).catch((error) => {
+        // Pushes the error messages into error to display
+          if (error.response) {
+            this.statusMessages = 'An error occured while Processing your request.'
+            this.errorFlag = true
+            console.log(error.response)
+          } else if (error.request) {
+            this.statusMessages = 'A'
+            this.errorFlag = true
+            console.log(error.request)
+          } else {
+            this.statusMessages = 'An error occured while setting up request.'
+            this.errorFlag = true
+          }
+        })
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/UserProfile/EditProfile',
@@ -259,7 +300,7 @@ export default {
           'Description': this.description,
           'SkillLevel': this.skillLevel,
           'Gender': this.gender,
-          'ProfilePicture': '../../../static/ProfileDummy/profilePicture.jpg'
+          'ProfilePicture': this.profileImage.name
         }
       })
       // redirect to Home page
