@@ -200,6 +200,7 @@ export default {
     }
   },
   beforeCreate () {
+    console.log(this.$store.getters.getviewprofile)
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/UserProfile/ProfileData',
@@ -214,6 +215,7 @@ export default {
       // redirect to Home page
       .then(response => {
         console.log(response.data)
+
         // NOTE: Is there a better way to store data?
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
@@ -255,6 +257,7 @@ export default {
       touchMap.set($v, setTimeout($v.$touch, 1000))
     },
     goBackToProfile: function () {
+      this.$store.dispatch('actviewprofile', {ViewProfile: this.$store.getters.getusername})
       this.$router.push('/profile')
     },
     pushProfile: function () {
