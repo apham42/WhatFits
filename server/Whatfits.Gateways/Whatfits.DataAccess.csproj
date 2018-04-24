@@ -52,6 +52,7 @@
     <Compile Include="Constants\LocationGatewayConstants.cs" />
     <Compile Include="Constants\ServerConstants.cs" />
     <Compile Include="DTOs\ContentDTOs\ChatDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\ImageDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\LocationResponseDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ProfileDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewDetailDTO.cs" />
