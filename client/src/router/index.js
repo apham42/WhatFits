@@ -80,6 +80,12 @@ export default new Router({
       component: () => import('@/components/UserProfile/WorkoutLogger')
     },
     {
+      // Workout Logger component
+      path: '/GetWorkouts',
+      name: 'GetWorkouts',
+      component: () => import('@/components/UserProfile/GetWorkouts')
+    },
+    {
       path: '/serverIssues',
       name: 'ServerIssues',
       component: () => import('@/components/ErrorPage/ServerIssues')
@@ -92,7 +98,7 @@ export default new Router({
     {
       // Catch All Error Page
       path: '*',
-      name: '404NotFound',
+      name: 'NotFound',
       component: () => import('@/components/ErrorPage/NotFound')
 
     }

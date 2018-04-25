@@ -24,7 +24,7 @@
                     <input v-model="WorkoutLogger.Time" placeholder="'0:00'" />
                 </div>
             </div>
-          <button type="submit" @click="submit">Add Workout</button>
+          <button type="submit" @click.prevent="submit">Add Workout</button>
         </form>
         <div id="preview">
           <h3> Preview Log </h3>
@@ -55,7 +55,7 @@ export default {
   data: function () {
     return {
       WorkoutLogger: {
-        userName: 'amay',
+        userName: this.$store.getters.getusername,
         WorkoutType: '',
         CardioType: '',
         LiftingType: '',
@@ -104,7 +104,7 @@ export default {
           method: 'POST',
           url: 'http://localhost/server/v1/WorkoutLogger/CreateWorkout',
           data: {
-            userName: 'amay',
+            userName: this.$data.WorkoutLogger.userName,
             WorkoutType: this.$data.WorkoutLogger.WorkoutType,
             Date_Time: this.$data.WorkoutLogger.Date_Time,
             LiftingType: this.$data.WorkoutLogger.LiftingType,

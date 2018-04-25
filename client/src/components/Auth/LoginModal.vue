@@ -70,6 +70,7 @@ export default {
       })
         .then((response) => {
           this.$store.dispatch('actusername', {Username: response.data.username})
+          this.$store.dispatch('actviewprofile', {ViewProfile: response.data.username})
           this.$store.dispatch('acttoken', {Token: response.data.token})
           this.$store.dispatch('actviewclaims', {Viewclaims: response.data.viewclaims})
           this.$router.push('/profile')
