@@ -94,6 +94,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BadPasswordTest\BadPasswordTest.cs" />
     <Compile Include="Chat Test\ChatTest.cs" />
     <Compile Include="Gateway Test\LoginTests.cs" />
     <Compile Include="Gateway Test\RegistrationTests.cs" />
