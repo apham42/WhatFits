@@ -53,7 +53,7 @@ namespace server.Model.Network_Communication
                 }
                 else if (foundStreet & data["results"][0]["address_components"][i]["types"][0].ToString().Equals("route"))
                 {
-                    mappedData.Street += data["results"][0]["address_components"][i]["long_name"].ToString();
+                    mappedData.Street += " " + data["results"][0]["address_components"][i]["long_name"].ToString();
                 }
                 else if (data["results"][0]["address_components"][i]["types"][0].ToString().Equals("locality"))
                 {

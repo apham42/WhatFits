@@ -30,7 +30,7 @@ namespace server.Business_Logic.Search
             foreach(GeoCoordinate coordinate in GeoCoordinates)
             {
                 double calcDistance = (UserLocation.GetDistanceTo(coordinate) / 1609.344);
-                if (Distance >= calcDistance)
+                if (Distance >= calcDistance && !coordDictionary.ContainsKey(coordinate))
                 {
                     coordDictionary.Add(coordinate, calcDistance);
                 }

@@ -67,14 +67,14 @@ namespace server.Business_Logic.Search
             }
 
             // Filtering the locations based on the distance
-            var filter = new FilterGeoCoordinates()
+            var filterLocation = new FilterGeoCoordinates()
             {
                 UserLocation = new GeoCoordinate(validatedLocation.Latitude, validatedLocation.Longitude),
                 GeoCoordinates = locations,
                 Distance = Search.Criteria.Distance,
             };
-            var filterGeocoordinates = (Dictionary<GeoCoordinate, double>) filter.Execute().Result;
-            if (!filterGeocoordinates.Any())
+            var filteredGeocoordinates = (Dictionary<GeoCoordinate, double>) filterLocation.Execute().Result;
+            if (!filteredGeocoordinates.Any())
             {
                 response.Result = Error(SearchConstants.NO_USERS_ERROR);
                 return response;
@@ -82,6 +82,14 @@ namespace server.Business_Logic.Search
 
 
 
+            var filterSearch = new FilterSearchResults ()
+            {
+                Criteria = Search.Criteria,
+                User = Search.User,
+                ValidatedLocations = filteredGeocoordinates
+            };
+
+            response.Result =  (SearchResponseDTO) filterSearch.Execute().Result;
 
             return response;
         }

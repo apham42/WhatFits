@@ -11,6 +11,7 @@ using System.Data;
 using Whatfits.DataAccess.Constants;
 using Whatfits.Models.Models;
 using System.Device.Location;
+using Whatfits.DataAccess.DTOs;
 
 namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
@@ -95,30 +96,56 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             return response;
         }
 
-        public LocationResponseDTO FilterSearch(SearchGatewayDTO dto)
+        public SearchGatewayResponseDTO RetrieveUsers(SearchGatewayDTO dto)
         {
-            LocationResponseDTO response = new LocationResponseDTO();
+            SearchGatewayResponseDTO response = new SearchGatewayResponseDTO();
             List<string> messages = new List<string>();
-            var regex = "Long Beach";
             try
             {
-                var rx = new Regex(regex);
-                var results = (from x in db.Locations
-                               select new { x.City, x.Longitude, x.Latitude })
-                                                    .AsEnumerable().Where(x => rx.IsMatch(x.City)).Select(x => new GeoCoordinate()
-                                                    {
-                                                        Longitude = x.Longitude,
-                                                        Latitude = x.Latitude
-                                                    }).ToList();
+                // Retrieving users information based on validated Location
+                /**
+                var results = (from u in db.Users
+                              select new SearchResult
+                              {
+                                User = u.Credential.UserName,
+                                SkillLevel = u.SkillLevel,
+                                Longitude = u.Location.Longitude,
+                                Latitude = u.Location.Latitude
+                              }).AsEnumerable()
+                              .Where(x => validatedLocations.Contains( x.UserCoordinate = new GeoCoordinate(x.Latitude, x.Longitude)) && x.SkillLevel.Contains(dto.SkillCriteria) && !x.User.Equals(dto.RequestedUser))
+                              .ToList();
+                 **/
+                var results = (from u in db.Users
+                               where u.Credential.UserName != dto.RequestedUser
+                               select new UserSearch
+                               {
+                                   User = u.Credential.UserName,
+                                   SkillLevel = u.SkillLevel,
+                                   Longitude = u.Location.Longitude,
+                                   Latitude = u.Location.Latitude
+                               }).ToList();
+                               /**
+                               .Select(x => new UserSearch()
+                               {
+                                   User = x.UserName,
+                                   SkillLevel = x.SkillLevel,
+                                   UserCoordinate = new GeoCoordinate(x.Latitude, x.Longitude),
+                               })
+                                .Where(x => validatedLocations.Contains(x.UserCoordinate) && x.SkillLevel.Contains(dto.SkillCriteria) && !x.User.Equals(dto.RequestedUser))
+                                .AsEnumerable();
+
+                results = results.Select(x => { x.Distance = Math.Round(dto.geoCoordinates[x.UserCoordinate], 2); return x; });
+                results = results.OrderBy(x => x.Distance).ThenBy(x => x.SkillLevel);
+                **/
                 if (results.Any())
                 {
-                    response.LocationResults = results;
+                    response.Results = results.ToList();
                     response.IsSuccessful = true;
                 }
                 else
                 {
                     response.IsSuccessful = false;
-                    messages.Add(LocationGatewayConstants.NO_LOCATION_FOUND_ERROR);
+                    messages.Add(SearchGatewayConstants.NO_USERS);
                 }
             }
             catch (SqlException)

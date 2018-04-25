@@ -128,7 +128,8 @@
     <Compile Include="Business Logic\Search\FilterGeoCoordinates.cs" />
     <Compile Include="Business Logic\Search\FilterSearchResults.cs" />
     <Compile Include="Business Logic\Search\SearchNearbyUserStrategy.cs" />
-    <Compile Include="Business Logic\Search\SearchResult.cs" />
+    <Compile Include="Model\Account\UserProfile.cs" />
+    <Compile Include="Model\Search\SearchResult.cs" />
     <Compile Include="Business Logic\Search\SearchUser.cs" />
     <Compile Include="Business Logic\Services\ChatService.cs" />
     <Compile Include="Business Logic\Services\FollowsService.cs" />
@@ -191,7 +192,6 @@
     <Compile Include="Model\Outcome.cs" />
     <Compile Include="Model\Search\SearchCriteria.cs" />
     <Compile Include="Model\Data Transfer Objects\SearchDTO%27s\SearchDTO.cs" />
-    <Compile Include="Model\Search\SearchResult.cs" />
     <Compile Include="Model\Search\SearchType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Business Logic\Services\AccountService.cs" />

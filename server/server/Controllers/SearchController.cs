@@ -10,6 +10,7 @@ using server.Business_Logic.Search;
 using server.Model.Data_Transfer_Objects.SearchDTO_s;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 using Newtonsoft.Json;
+using Whatfits.DataAccess.DTOs.ContentDTOs;
 
 namespace server.Controllers
 {
@@ -43,30 +44,33 @@ namespace server.Controllers
             {
                 Search = dto
             };
-            var response = (SearchResponseDTO)(service.Execute().Result);
+            var response = (SearchResponseDTO) (service.Execute().Result);
             if (response.IsSuccessful)
             {
-                return Ok(new { response.Messages });
+                return Ok(new { response.SearchResults });
             }
             else
             {
                 return Content(HttpStatusCode.BadRequest, new { response.Messages });
             }
         }
+
+
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult Test ([FromBody] UsernameDTO dto)
+        // [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        public IHttpActionResult Testinb([FromBody] UsernameDTO dto)
         {
             var gateway = new SearchGateway();
             var locations = gateway.RetrieveLocations().LocationResults;
             var filter = new FilterGeoCoordinates()
             {
-                Distance = 25,
+                Distance = 5,
                 GeoCoordinates = locations,
                 UserLocation = new System.Device.Location.GeoCoordinate(33.7830608, -118.1148909)
             };
-            var dictionary = (Dictionary<System.Device.Location.GeoCoordinate, double>) filter.Execute().Result;
-            return Ok(new { dictionary });
+
+
+            return Ok(filter.Execute().Result);
 
         }
 
