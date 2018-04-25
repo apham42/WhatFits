@@ -1,26 +1,33 @@
 <template>
     <div>
+      <div class = "result"> 
+        <p></p>
+      </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
 export default {
-  name: 'SearchBar',
+  name: 'Search',
   data: function () {
     return {
-      userInput: '',
-      searchType: 'searchNearby',
-      errors: []
+      Search: {
+        requestedUser: '',
+        skill: '',
+        distance: 25,
+      },
+      messages: [],
+      searchResults: []
     }
   },
   methods: {
-    searchUser () {
+    searchNearbyUsers () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/Test',
+        url: 'http://localhost/server/v1/Search/SearchNearby',
         data: {
-          username: this.$data.userInput
+          SearchCriteria: this.$data.Search
         },
         headers: {
           'Access-Control-Allow-Origin': 'http://localhost:8080',
@@ -29,11 +36,12 @@ export default {
       })
         // redirect to Home page
         .then((response) => {
-          this.$data.errors.push(response.data)
+          this.$data.messages.push(response.data.Messages)
+          this.$data.searchResults.push(response.data.SearchResults)
         }).catch((error) => {
           // Pushes the error messages into error to display
-          this.$data.errors = []
-          this.$data.errors.push(error.response.data.Messages)
+          this.$data.messages = []
+          this.$data.messages.push(error.response.data.Messages)
         })
     }
   }

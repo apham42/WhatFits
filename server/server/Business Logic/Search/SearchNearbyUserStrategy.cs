@@ -80,15 +80,12 @@ namespace server.Business_Logic.Search
                 return response;
             }
 
-
-
-            var filterSearch = new FilterSearchResults ()
+            // Generates the search results
+            var filterSearch = new GenerateSearchResults()
             {
                 Criteria = Search.Criteria,
-                User = Search.User,
                 ValidatedLocations = filteredGeocoordinates
             };
-
             response.Result =  (SearchResponseDTO) filterSearch.Execute().Result;
 
             return response;

@@ -120,6 +120,8 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                                select new UserSearch
                                {
                                    User = u.Credential.UserName,
+                                   FirstName = u.FirstName,
+                                   LastName = u.LastName,
                                    SkillLevel = u.SkillLevel,
                                    Longitude = u.Location.Longitude,
                                    Latitude = u.Location.Latitude

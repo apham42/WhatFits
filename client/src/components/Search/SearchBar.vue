@@ -43,9 +43,9 @@ export default {
       })
         // redirect to Home page
         .then((response) => {
-          this.$data.messages = []
-          this.$data.messages.push(response.data.Messages)
-          // imma push into Vuex
+          // this.$data.messages = []
+          // this.$data.messages.push(response.data.Messages)
+          this.$store.dispatch('actviewprofile', {ViewProfile: this.$data.userInput})
           this.$router.push('/profile')
         })
         .catch((error) => {

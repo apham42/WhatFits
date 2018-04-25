@@ -126,7 +126,7 @@
     <Compile Include="Business Logic\Reset Password\GetQuestions.cs" />
     <Compile Include="Business Logic\Reset Password\SetNewPassword.cs" />
     <Compile Include="Business Logic\Search\FilterGeoCoordinates.cs" />
-    <Compile Include="Business Logic\Search\FilterSearchResults.cs" />
+    <Compile Include="Business Logic\Search\GenerateSearchResults.cs" />
     <Compile Include="Business Logic\Search\SearchNearbyUserStrategy.cs" />
     <Compile Include="Model\Account\UserProfile.cs" />
     <Compile Include="Model\Search\SearchResult.cs" />

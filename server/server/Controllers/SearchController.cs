@@ -28,7 +28,7 @@ namespace server.Controllers
             var response = (UsernameResponseDTO) (service.Execute().Result);
             if (response.isSuccessful)
             {
-                return Ok(new { response.Messages });
+                return Ok(new { response });
             }
             else
             {
@@ -47,38 +47,12 @@ namespace server.Controllers
             var response = (SearchResponseDTO) (service.Execute().Result);
             if (response.IsSuccessful)
             {
-                return Ok(new { response.SearchResults });
+                return Ok(new { response });
             }
             else
             {
                 return Content(HttpStatusCode.BadRequest, new { response.Messages });
             }
-        }
-
-
-        [HttpPost]
-        // [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult Testinb([FromBody] UsernameDTO dto)
-        {
-            var gateway = new SearchGateway();
-            var locations = gateway.RetrieveLocations().LocationResults;
-            var filter = new FilterGeoCoordinates()
-            {
-                Distance = 5,
-                GeoCoordinates = locations,
-                UserLocation = new System.Device.Location.GeoCoordinate(33.7830608, -118.1148909)
-            };
-
-
-            return Ok(filter.Execute().Result);
-
-        }
-
-        public static Dictionary<TKey, double> ToDictionary<TKey>(object obj)
-        {
-            var json = JsonConvert.SerializeObject(obj);
-            var dictionary = JsonConvert.DeserializeObject<Dictionary<TKey, double>>(json);
-            return dictionary;
         }
     }
 }
