@@ -48,5 +48,6 @@ namespace Whatfits.DataAccess.DTOs.ContentDTOs
         public string Description { get; set; }
         public string SkillLevel { get; set; }
         public string Gender { get; set; }
+        public string IsUpdatingProfileImage { get; set; }
     }
 }
