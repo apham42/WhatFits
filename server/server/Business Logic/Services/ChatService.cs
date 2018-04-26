@@ -19,9 +19,7 @@ namespace server.Business_Logic.Services
         // user list for feature friends list
         private static List<string> friends = new List<string>();
         private string connectedUser;
-        // public key and initial value for user to encrypt and decrypt
-        private byte[] _key;
-        private byte[] _iv;
+
         // check the success status of the Connect, Send and Disconnect method
         private bool connectSuccess = false;
         private bool sendSuccess = false;
@@ -29,14 +27,12 @@ namespace server.Business_Logic.Services
         /// <summary>
         /// ChatHandler initialization
         /// </summary>
-        public ChatService(string username, byte[] key, byte[] iv)
+        public ChatService(string username)
         {
             connectedUser = username;
             if (!friends.Contains(connectedUser))
                 // add new user to user list
                 friends.Add(connectedUser);
-            _key = key;
-            _iv = iv;
         }
         /// <summary>
         /// Provides connection functionality
@@ -46,34 +42,14 @@ namespace server.Business_Logic.Services
         {
             // check duplicate username
             if (!_chatUser.Contains(this))
+            {
                 _chatUser.Add(this);
-            // prepare send back string message
-            var key_info = "";
-
-            // for sending key
-            for (int j = 0; j < _key.Length; j++)
-            {
-                if (j == 0)
-                    key_info += _key[j];
-                else
-                    key_info += "," + _key[j];
-            }
-            // for sending iv
-            for (int k = 0; k < _iv.Length; k++)
-            {
-                key_info += "," + _iv[k];
-            }
-            // send friends information, key and initial value to connected user via websocket
-            try
-            {
-                _chatUser.Broadcast(JsonConvert.SerializeObject(key_info));
                 connectSuccess = true;
             }
-            catch (Exception)
+            else
             {
                 connectSuccess = false;
             }
-            
         }
         /// <summary>
         /// Provides receive message from server

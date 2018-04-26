@@ -40,6 +40,7 @@ export default {
       messages: '',
       onlineUser: '',
       clickeduser: '',
+      clickedid: 0,
       chatusers: [],
       chatshow: false,
       msgshow: false,
@@ -70,6 +71,8 @@ export default {
   methods: {
     Connection: function () {
       var vm = this
+      // get secret key and initial value from server
+      vm.GetIV()
       this.ws.onopen = function (event) {
         console.log('connected')
         vm.ReceiveMessage()
@@ -78,8 +81,6 @@ export default {
     ReceiveMessage: function () {
       var vm = this
       this.ws.onmessage = function (event) {
-        var newiv = []
-        var newkey = []
         console.log('receive')
         try {
           vm.Decryption(event.data)
@@ -90,22 +91,6 @@ export default {
           // send message to offline user
           if (event.data === ' ') {
             window.document.getElementById('receives').prepend('User is offline' + '\n')
-          } else { // first time connected, get initial value and secret key from server
-            // vm.chatusers = JSON.parse(event.data).split(',')
-            // console.log(vm.chatusers)
-            // get iv from first 16 elements
-            var IvKey = JSON.parse(event.data).split(',')
-            for (var i = 0; i < 16; i++) {
-              newiv.push(window.parseInt(IvKey.pop()))
-            }
-            console.log(newiv)
-            vm.iv = newiv
-            // get key from next 16 elements
-            for (var j = 0; j < 16; j++) {
-              newkey.push(window.parseInt(IvKey.pop()))
-            }
-            console.log(newkey)
-            vm.key = newkey
           }
         }
       }
@@ -128,6 +113,7 @@ export default {
     // set visability of the messagebox
     SpanBox: function (index) {
       this.clickeduser = this.chatusers[index].UserName
+      this.clickedid = this.chatusers[index].PersonFollowing
       this.msgshow = !this.msgshow
     },
     SpanList: function () {
@@ -153,6 +139,7 @@ export default {
     },
     // AES 128 CBC Encryption
     Encryption: function () {
+      // get initial value from server
       console.log('encryption called')
       var AesJS = require('aes-js')
       // padding message to 16 bytes
@@ -179,8 +166,10 @@ export default {
       var DecryptedBytes = AesCBC.decrypt(EncryptedBytes)
       var Decryptedtext = AesJS.utils.utf8.fromBytes(DecryptedBytes)
       res[2] = Decryptedtext
+      // save message in client side when message box closed
       this.messageArray.push([res[0], res[2]])
       console.log(this.messageArray)
+      // prepare message to be show in the message box
       this.receivestring = res.join(' ')
       console.log(this.receivestring)
     },
@@ -216,6 +205,41 @@ export default {
         .then(response => {
           console.log(response.data)
           vm.chatusers = response.data
+        }).catch((error) => {
+          // Pushes the error messages into error to display
+          if (error.response) {
+            this.errorMessage = 'Error: An Error Occurd.'
+            this.errorFlag = true
+            console.log(error.response)
+          } else if (error.request) {
+            this.errorMessage = 'Error: Server Error'
+            this.errorFlag = true
+            console.log(error.request)
+          } else {
+            this.errorMessage = 'An error occured while setting up request.'
+            this.errorFlag = true
+          }
+        })
+    },
+    GetIV: function () {
+      var vm = this
+      console.log('get IV')
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/v1/follows/getinitialvalue',
+        data: {
+          'Username': this.$store.getters.getusername
+        },
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
+          'Content-Type': 'application/json'
+        }
+      })
+        // redirect to Home page
+        .then(response => {
+          console.log(response.data)
+          vm.iv = response.data
+          vm.key = response.data
         }).catch((error) => {
           // Pushes the error messages into error to display
           if (error.response) {
