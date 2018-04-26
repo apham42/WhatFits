@@ -11,6 +11,9 @@
         <option value = 'searchUser'>Search User</option>
       </select>
       <button type="submit" class="register-button" @click.prevent="searchUser">Search</button>
+      <div class="errorResponse">
+            <p v-for="message in messages[0]" :key="message"> {{message}} </p>
+      </div>
     </div>
 </template>
 
@@ -29,7 +32,7 @@ export default {
     searchUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/' + this.$data.searchType,
+        url: 'http://localhost/server/v1/Search/SearchUser',
         data: {
           username: this.$data.userInput
         },
@@ -42,7 +45,10 @@ export default {
         .then((response) => {
           this.$data.messages = []
           this.$data.messages.push(response.data.Messages)
-        }).catch((error) => {
+          // imma push into Vuex
+          this.$router.push('/profile')
+        })
+        .catch((error) => {
           // Pushes the error messages into error to display
           this.$data.messages = []
           this.$data.messages.push(error.response.data.Messages)

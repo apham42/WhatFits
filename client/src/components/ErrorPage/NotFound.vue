@@ -1,17 +1,17 @@
 <template>
-<div class="error-container">
-<h1 is-1>There's been a glitch</h1>
-<P is-small>its a 404 error</P>
-<p>Don't know what happend or how you got here. This will take you <router-link to="/home">home</router-link>.</p>
+<div>
+  <div class="NotFound" id="Title">
+    {{pageTitle}}
+    <h1>There's been a glitch</h1>
+    <p>Don't know what happend or how you got here. This will take you <router-link to="/">home</router-link>.</p>
+  </div>
 </div>
+
 </template>
 <script>
 export default {
-  name: '404NotFound',
+  name: 'NotFound',
   computed: {
-    isAuthenticated: function () {
-      return this.$store.getters.isAuthenticated
-    }
   },
   data () {
     return {
@@ -24,20 +24,22 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
   .NotFound {
-    background-color: lightblue;
-    width: auto;
-    height: auto;
+    padding-top: 20em;
+    color:white;
     text-align: center;
+
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #5e4934;
   }
   .is-small {
     text-align: center;
   }
-  /* Google Docs Dark UI by UGoBoom         */
-/* Version 1.0                            */
-/* Published Oct 26 2015                  */
-/* Aesthetic inspired by Vertex-gtk theme */
-
-@namespace url(http://www.w3.org/1999/xhtml);
 </style>

@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Web.Http;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 
@@ -21,10 +22,10 @@ namespace server.Services
         }
 
         //Returns Review objects to front end, ReviewMessage, Rating, and Datetime
-        public IEnumerable<WorkoutLogDTO> GetUserWorkouts(string Username)
+        public IEnumerable<WorkoutLogDTO> GetUserWorkouts(UsernameDTO obj)
         {
             var gateway = new WorkoutLogGateway();
-            return gateway.GetWorkouts(Username);
+            return gateway.GetWorkouts(obj);
         }
     }
 }

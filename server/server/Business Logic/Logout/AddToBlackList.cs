@@ -20,7 +20,7 @@ namespace server.Business_Logic.Logout
         /// <summary>
         /// add token to blacklist
         /// </summary>
-        /// <returns>if successful</returns>
+        /// <returns>isSuccessful = true is added else false</returns>
         public Outcome Execute()
         {
             var response = new Outcome();

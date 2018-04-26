@@ -12,13 +12,13 @@
     </form>
     <div class="body">
       <ul id="Review_List">
-        <li v-for="value in results" :key="value">
+        <li v-for="review in results" :key="review">
           <section id="specificReviews">
             <div id="messageFormat">
-              User Review: '{{ value.ReviewMessage }}' &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : '{{ value.Rating }}'
+              User Review: '{{ review.ReviewMessage }}' &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : '{{ review.Rating }}'
             </div>
             <div id="dateFormat">
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: '{{ value.DateAndTime }}'
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: '{{ review.DateAndTime }}'
             </div>
           </section>
         </li>

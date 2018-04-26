@@ -11,11 +11,9 @@
         <br />
         <textarea v-model="ReviewMessage" class="form-control" placeholder="Input Review"></textarea>
       </div>
-      <label for="UserID">UserID</label>
-      <input v-model="UserID" placeholder="'1'"/>
       <label for="RevieweeID">RevieweeID</label>
-      <input v-model="RevieweeID" placeholder="'1'" />
-      <button type="submit" @click="input">Submit</button>
+      <input v-model="RevieweeID" placeholder="'1'"/>
+      <button type="submit" @click.prevent="input">Submit</button>
     </form>
   </div>
 </template>
@@ -43,7 +41,6 @@ export default {
       Username: this.$store.getters.getusername,
       Rating: this.Rating,
       ReviewMessage: '',
-      UserID: '',
       RevieweeID: '',
       DateAndTime: new Date().toLocaleDateString()
     }
@@ -61,8 +58,8 @@ export default {
         data: {
           Rating: this.$data.Rating,
           ReviewMessage: this.$data.ReviewMessage,
-          UserID: this.$data.UserID,
           RevieweeID: this.$data.RevieweeID,
+          Username: this.$data.Username,
           DateAndTime: this.$data.DateAndTime
         },
         headers: {
