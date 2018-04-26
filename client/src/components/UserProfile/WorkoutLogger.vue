@@ -18,9 +18,9 @@
                     <select v-model = WorkoutLogger.CardioType>
                       <option v-for="type in CardioOptions" :key="type">{{ type }}</option>
                     </select>
-                    <label for="Distance">Distance</label>
+                    <label for="Distance">Distance in Miles</label>
                     <input v-model="WorkoutLogger.Distance" placeholder="'0.00'" v-on:keypress="isFloat(event)"/>
-                    <label for="Time">Time</label>
+                    <label for="Time">Time in Minutes</label>
                     <input v-model="WorkoutLogger.Time" placeholder="'0:00'" v-on:keypress="isTime(event)"/>
                 </div>
             </div>
@@ -28,16 +28,16 @@
         </form>
         <div id="preview">
           <h3> Preview Log </h3>
-          <p> {{WorkoutLogger.WorkoutType}} </p>
+          <p><strong>Workout Type - {{WorkoutLogger.WorkoutType}} </strong></p>
           <p v-if = "WorkoutLogger.WorkoutType === 'WeightLifting'">
-              {{WorkoutLogger.LiftingType}}
-              {{WorkoutLogger.Sets}}
-              {{WorkoutLogger.Reps}}
+              <strong>Lifting Type</strong> : {{WorkoutLogger.LiftingType}}&emsp;
+              <strong>Sets</strong> : {{WorkoutLogger.Sets}}&emsp;
+              <strong>Reps per set</strong> : {{WorkoutLogger.Reps}}&emsp;
           </p>
           <p v-if = "WorkoutLogger.WorkoutType === 'Cardio'">
-              {{WorkoutLogger.CardioType}}
-              {{WorkoutLogger.Distance}}
-              {{WorkoutLogger.Time}}
+              <strong>Cardio Type</strong> : {{WorkoutLogger.CardioType}}&emsp;
+              <strong>Distance in miles</strong> : {{WorkoutLogger.Distance}} mile(s)&emsp;
+              <strong>Time it took</strong> : {{WorkoutLogger.Time}} minute(s)&emsp;
           </p>
         </div>
     </div>

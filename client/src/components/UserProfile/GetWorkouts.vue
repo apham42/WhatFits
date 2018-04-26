@@ -1,7 +1,7 @@
 <template>
 <div class = "LogContainer">
 <div class = "Column">
-<div v-for="value in results" :key="value">
+<div v-for="(value,index) in results" :key="index">
       <div class="Cards">
         <div id="WorkoutType">
           <strong>Workout Type - {{value.WorkoutType}}</strong>
