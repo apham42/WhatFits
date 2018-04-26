@@ -50,11 +50,6 @@ namespace server.Controllers
             ReviewService service = new ReviewService();
             return service.GetUserReview(obj);
         }
-        //public IHttpActionResult GetUserReview(string UserName)
-        //{
-        //    ReviewDetailDTO response = new ReviewDetailDTO();
-        //    return Ok(response);
-        //}
 
     }
 }

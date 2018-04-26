@@ -62,10 +62,7 @@ export default {
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/login/Login',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        },
+        headers: this.$store.getters.getheader,
         data: {
           Username: this.$data.username,
           Password: this.$data.password
@@ -73,10 +70,12 @@ export default {
       })
         .then((response) => {
           this.$store.dispatch('actusername', {Username: response.data.username})
+          this.$store.dispatch('actviewprofile', {ViewProfile: response.data.username})
           this.$store.dispatch('acttoken', {Token: response.data.token})
           this.$store.dispatch('actviewclaims', {Viewclaims: response.data.viewclaims})
           this.$router.push('/profile')
           this.$store.dispatch('closeAction')
+          this.$store.dispatch('actheadertoken', {TokenHeader: response.data.token})
           console.log(response)
         })
         .catch((error) => {

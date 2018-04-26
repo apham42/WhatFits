@@ -48,31 +48,25 @@ namespace server.Business_Logic.Services
             if (!_chatUser.Contains(this))
                 _chatUser.Add(this);
             // prepare send back string message
-            var friends_info = "";
+            var key_info = "";
 
-            // add friends
-            int length = friends.Count;
-            for (int i = 0; i < length; i++)
-            {
-                if (i > 0)
-                    friends_info += "," + friends[i];
-                else
-                    friends_info += friends[i];
-            }
             // for sending key
             for (int j = 0; j < _key.Length; j++)
             {
-                friends_info += "," + _key[j];
+                if (j == 0)
+                    key_info += _key[j];
+                else
+                    key_info += "," + _key[j];
             }
             // for sending iv
             for (int k = 0; k < _iv.Length; k++)
             {
-                friends_info += "," + _iv[k];
+                key_info += "," + _iv[k];
             }
             // send friends information, key and initial value to connected user via websocket
             try
             {
-                _chatUser.Broadcast(JsonConvert.SerializeObject(friends_info));
+                _chatUser.Broadcast(JsonConvert.SerializeObject(key_info));
                 connectSuccess = true;
             }
             catch (Exception)
@@ -96,6 +90,7 @@ namespace server.Business_Logic.Services
                 try
                 {
                     // if receiver is not online
+                    _chatUser.Broadcast(" ");
                     sendSuccess = false;
                 }
                 catch(Exception)

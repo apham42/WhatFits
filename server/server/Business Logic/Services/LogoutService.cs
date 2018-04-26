@@ -17,16 +17,10 @@ namespace server.Business_Logic.Services
         /// <summary>
         /// add token to login gateway
         /// </summary>
-        /// <param name="loginDTO">username and token</param>
+        /// <param name="userCredential">username and token</param>
         /// <returns>responseDTO with true or false</returns>
         public LogoutResponseDTO logout(UserCredential userCredential)
-        {
-            LoginDTO loginDTO = new LoginDTO()
-            {
-                UserName = userCredential.Username,
-                Token = userCredential.Token
-            };
-            
+        {   
             LoginGateway logoutGateway = new LoginGateway();
 
             var addToBlackList = new AddToBlackList()
