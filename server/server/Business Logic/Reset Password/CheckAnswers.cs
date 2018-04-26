@@ -25,6 +25,13 @@ namespace server.Business_Logic.Reset_Password
             var loginGateway = new LoginGateway();
             var dbanswers = loginGateway.GetSecurityQandAs(username);
 
+            if(dbanswers.isSuccessful == false)
+            {
+                incommingAnswers.isSuccessful = false;
+                response.Result = incommingAnswers;
+                return response;
+            }
+
             // hash answers
             var hashDTO = new HashDTO();
             var hash = new HMAC256();
