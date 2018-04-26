@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Whatfits.Models.Context.Content;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
@@ -11,6 +11,7 @@ using System.Data;
 using Whatfits.DataAccess.Constants;
 using Whatfits.Models.Models;
 using System.Device.Location;
+using Whatfits.DataAccess.DTOs;
 
 namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
@@ -62,29 +63,13 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             try
             {
                 var results = (from x in db.Locations
-                                                    select new { x.Longitude, x.Latitude })
+                                                    select new { x.City, x.Longitude, x.Latitude })
                                                     .AsEnumerable().Select(x => new GeoCoordinate() 
                     { 
                         Longitude = x.Longitude,
                         Latitude = x.Latitude 
                     }).ToList();
 
-
-
-                /**
-                var results = (from x in db.Locations
-                               select x);
-                var geoCoordinates = new List<GeoCoordinates>();
-                foreach (Location result in results)
-                {
-                    geoCoordinates.Add(new GeoCoordinates()
-                    {
-                        ID = result.LocationID,
-                        Longitude = result.Longitude,
-                        Latitude = result.Latitude
-                    });
-                }
-                **/
                 if (results.Any())
                 {
                     response.LocationResults = results;
@@ -106,6 +91,74 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 response.IsSuccessful = false;
                 messages.Add(ServerConstants.SERVER_ERROR);
             }
+
+            response.Messages = messages;
+            return response;
+        }
+
+        public SearchGatewayResponseDTO RetrieveUsers(SearchGatewayDTO dto)
+        {
+            SearchGatewayResponseDTO response = new SearchGatewayResponseDTO();
+            List<string> messages = new List<string>();
+            try
+            {
+                // Retrieving users information based on validated Location
+                /**
+                var results = (from u in db.Users
+                              select new SearchResult
+                              {
+                                User = u.Credential.UserName,
+                                SkillLevel = u.SkillLevel,
+                                Longitude = u.Location.Longitude,
+                                Latitude = u.Location.Latitude
+                              }).AsEnumerable()
+                              .Where(x => validatedLocations.Contains( x.UserCoordinate = new GeoCoordinate(x.Latitude, x.Longitude)) && x.SkillLevel.Contains(dto.SkillCriteria) && !x.User.Equals(dto.RequestedUser))
+                              .ToList();
+                 **/
+                var results = (from u in db.Users
+                               where u.Credential.UserName != dto.RequestedUser
+                               select new UserSearch
+                               {
+                                   User = u.Credential.UserName,
+                                   SkillLevel = u.SkillLevel,
+                                   Longitude = u.Location.Longitude,
+                                   Latitude = u.Location.Latitude
+                               }).ToList();
+                               /**
+                               .Select(x => new UserSearch()
+                               {
+                                   User = x.UserName,
+                                   SkillLevel = x.SkillLevel,
+                                   UserCoordinate = new GeoCoordinate(x.Latitude, x.Longitude),
+                               })
+                                .Where(x => validatedLocations.Contains(x.UserCoordinate) && x.SkillLevel.Contains(dto.SkillCriteria) && !x.User.Equals(dto.RequestedUser))
+                                .AsEnumerable();
+
+                results = results.Select(x => { x.Distance = Math.Round(dto.geoCoordinates[x.UserCoordinate], 2); return x; });
+                results = results.OrderBy(x => x.Distance).ThenBy(x => x.SkillLevel);
+                **/
+                if (results.Any())
+                {
+                    response.Results = results.ToList();
+                    response.IsSuccessful = true;
+                }
+                else
+                {
+                    response.IsSuccessful = false;
+                    messages.Add(SearchGatewayConstants.NO_USERS);
+                }
+            }
+            catch (SqlException)
+            {
+                response.IsSuccessful = false;
+                messages.Add(ServerConstants.SERVER_ERROR);
+            }
+            catch (DataException)
+            {
+                response.IsSuccessful = false;
+                messages.Add(ServerConstants.SERVER_ERROR);
+            }
+
             response.Messages = messages;
             return response;
         }

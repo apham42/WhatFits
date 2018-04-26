@@ -1,18 +1,36 @@
+<template>
+<div>follow</div>
+</template>
 <script>
 import axios from 'axios'
+// import store from '../../store/modules/User'
 
 export default {
   name: 'FollowersList',
-
   data () {
     return {
-      userName: '',
+      userName: 'test',
       errorFlag: '',
       errorMessage: 'Page Failed to load.',
       followers: []
     }
   },
-  beforeCreate () {
+  watch: {
+  },
+  mounted () {
+    console('mounted')
+  },
+  methods: {
+    Follow: function () {
+      console('call follow')
+    },
+    UnFollow: function () {
+    },
+    IsFollow: function () {
+    }
+  },
+  GetFollows: function () {
+    console.log('call follows')
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/follows/getfollows',
@@ -27,6 +45,7 @@ export default {
       // redirect to Home page
       .then(response => {
         console.log(response.data)
+        return response.data
       }).catch((error) => {
       // Pushes the error messages into error to display
         if (error.response) {
@@ -42,17 +61,6 @@ export default {
           this.errorFlag = true
         }
       })
-  },
-  methods: {
-    Follow: function () {
-
-    },
-    UnFollow: function () {
-
-    },
-    IsFollow: function () {
-
-    }
   }
 }
 </script>

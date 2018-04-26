@@ -1,5 +1,6 @@
 <template>
 <div>
+  <br>
     <h1 class="PageTitle">{{pageTitle}}</h1>
     <br>
     <h3 class="SectionTitle">Create User</h3>
@@ -212,7 +213,7 @@ import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators
 const touchMap = new WeakMap()
 
 export default {
-  name: 'UserManagement Console',
+  name: 'UserManagement',
   components: {
     'delete-User': DeleteUser,
     'changeStatus': ChangeStatus,
@@ -225,7 +226,7 @@ export default {
   },
   data () {
     return {
-      pageTitle: 'UserManagement Page',
+      pageTitle: 'UserManagement Console',
       // Create User Data
       userName: 'TestUser',
       password: 'asdfasdf',

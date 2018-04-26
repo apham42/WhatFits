@@ -50,10 +50,13 @@
   <ItemGroup>
     <Compile Include="Constants\AccountGatewayConstants.cs" />
     <Compile Include="Constants\LocationGatewayConstants.cs" />
+    <Compile Include="Constants\SearchGatewayConstants.cs" />
     <Compile Include="Constants\ServerConstants.cs" />
     <Compile Include="DTOs\ContentDTOs\ChatDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\ImageDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\LocationResponseDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ProfileDTO.cs" />
+    <Compile Include="DTOs\ContentDTOs\SearchGatewayResponseDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\WorkoutLogDetailDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewDetailDTO.cs" />
     <Compile Include="DTOs\ContentDTOs\ReviewMessageDTO.cs" />
@@ -73,6 +76,8 @@
     <Compile Include="DTOs\CoreDTOs\UsernameDTO.cs" />
     <Compile Include="DTOs\CoreDTOs\UsernameResponseDTO.cs" />
     <Compile Include="DTOs\ResponseDTO.cs" />
+    <Compile Include="DTOs\Coordinate.cs" />
+    <Compile Include="DTOs\UserSearch.cs" />
     <Compile Include="Gateways\ContentGateways\ChatGateway.cs" />
     <Compile Include="Gateways\ContentGateways\EventGateway.cs" />
     <Compile Include="Gateways\ContentGateways\FollowsGateway.cs" />
