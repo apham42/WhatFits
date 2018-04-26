@@ -32,7 +32,6 @@ namespace Whatfits.Hash
                     hashedString = hashedString.Replace("-", "");
                 }
                 return hashedString;
-
             }
             catch (ArgumentNullException)
             {

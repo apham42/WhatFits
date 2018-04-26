@@ -23,6 +23,7 @@ namespace server.Business_Logic.Services
         /// <returns></returns>
         public bool BadPassword(string password)
         {
+            // Need this to communicate with the service, without it fails
            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             // Hashing Password from Security Layer hashing methods
             SHA1CNG hashingService = new SHA1CNG();

@@ -36,11 +36,11 @@ namespace Unit_Tests.BadPasswordTest
             {
                 Assert.False(service.BadPassword(password));
             }
-            
         }
         [Fact]
         void CheckWeakPasswords()
         {
+            /*
             List<string> weakPasswords = new List<string>();
             weakPasswords.Add("123456");
             weakPasswords.Add("porsche");
@@ -68,6 +68,9 @@ namespace Unit_Tests.BadPasswordTest
             {
                 Assert.True(service.BadPassword(password));
             }
+            */
+            string pass = "password123";
+            Assert.True(service.BadPassword(pass));
         }
     }
 }
