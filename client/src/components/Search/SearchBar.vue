@@ -10,7 +10,7 @@
         <option value = 'searchNearby'>Search Nearby Users</option>
         <option value = 'searchUser'>Search User</option>
       </select>
-      <button type="submit" class="search-button" @click.prevent="search">Search</button>
+      <button type="submit" class="search-button" @click.prevent="searchBar">Search</button>
       <div class="errorResponse">
             <p v-for="message in messages[0]" :key="message"> {{message}} </p>
       </div>
@@ -28,7 +28,7 @@ export default {
     }
   },
   methods: {
-    search () {
+    searchBar () {
       this.$store.dispatch('actRequestedSearch', {requestedSearch: this.$data.userInput})
       this.$store.dispatch('actSearchType', {searchType: this.$data.searchType})
       this.$router.push('/Search')

@@ -19,7 +19,7 @@
       <div v-if ="this.$data.filteredResults.length > 0">
         <div class="card" v-for="searchResult in filteredResults[0].slice(this.$data.nextTen,this.$data.nextTen + 10)" :key="searchResult">
           <div class = "container">
-            <p>{{searchResult.User}}</p>
+            <p class ='view-profile' @click="setViewProfile(searchResult.User)">{{searchResult.User}}</p>
             <p>{{searchResult.FirstName}} {{searchResult.LastName}}</p>
             <p>Skill Level: {{searchResult.Skill}}</p>
             <p>Distance: {{searchResult.Distance}} mile</p>
@@ -50,7 +50,9 @@ export default {
       messages: [],
       nextTen: 0,
       filteredResults: [],
-      searchResults: []
+      searchResults: [],
+      searchType: this.$store.getters.getSearchType,
+      m: this.$store.getters.getRequestedSearch
     }
   },
   methods: {
@@ -118,16 +120,39 @@ export default {
         })
     },
     search () {
-      var searchType = this.$store.getters.getSearchType
-      if (searchType === 'searchNearby') {
+      if (this.$data.searchType === 'searchNearby') {
         this.searchNearbyUsers()
       } else {
         this.searchUser()
       }
+    },
+    setViewProfile (user) {
+      this.$store.dispatch('actviewprofile', {ViewProfile: user})
+      this.$router.push('/profile')
     }
   },
-  beforeMount () {
+  mounted () {
     this.search()
+  },
+  computed: {
+    t: function () {
+      return this.$store.getters.getRequestedSearch
+    },
+    l: function () {
+      return this.$store.getters.getSearchType
+    }
+  },
+  watch: {
+    t: function () {
+      if (this.$data.m !== this.$store.getters.getRequestedSearch) {
+        this.search()
+      }
+    },
+    l: function () {
+      if (this.$data.searchType !== this.$store.getters.getSearchType) {
+        this.search()
+      }
+    }
   }
 }
 </script>
@@ -142,5 +167,14 @@ export default {
 
 .container {
     padding: 14px 16px;
+}
+
+.view-profile {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }
 </style>
