@@ -12,13 +12,11 @@ namespace server.Business_Logic.Services
 {
     public class FollowsService
     {
-        private bool addstatus = false;
 
-        public void Add(FollowsDTO item)
+        public bool Add(string userName, string follouserName)
         {
             var gateway = new FollowsGateway();
-            gateway.AddtoFollow(item);
-            addstatus = true;
+            return gateway.AddtoFollow(userName,follouserName);
         }
 
         public void Clear()
@@ -26,9 +24,10 @@ namespace server.Business_Logic.Services
             throw new NotImplementedException();
         }
 
-        public bool Contains(FollowsDTO item)
+        public bool Contains(string userName, string follouserName)
         {
-            throw new NotImplementedException();
+            var gateway = new FollowsGateway();
+            return gateway.IsFollow(userName, follouserName);
         }
 
 
@@ -37,26 +36,11 @@ namespace server.Business_Logic.Services
             var gateway = new FollowsGateway();
             return gateway.GetFollowers(userName);
         }
-        
 
-        public void Insert(int index, FollowsDTO item)
+        public bool Remove(string userName, string unfolloName)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool Remove(FollowsDTO item)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void RemoveAt(int index)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool GetAddStatus()
-        {
-            return this.addstatus;
+            var gateway = new FollowsGateway();
+            return gateway.DeletefromFollow(userName, unfolloName);
         }
     }
 }
