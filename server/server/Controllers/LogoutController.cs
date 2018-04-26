@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 using Whatfits.DataAccess.DTOs;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.Gateways.CoreGateways;
+using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
@@ -23,7 +24,7 @@ namespace server.Controllers
         /// <returns>success if stored in blacklist fails if not</returns>
         [HttpPost]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        [AllowAnonymous]
+        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "Add")]
         public IHttpActionResult logout([FromBody] UserCredential userCredential)
         {
             LogoutService logoutService = new LogoutService();
@@ -36,9 +37,6 @@ namespace server.Controllers
             }
 
             return Content(HttpStatusCode.NotFound, response.Messages);
-
-
-
         }
     }
 }

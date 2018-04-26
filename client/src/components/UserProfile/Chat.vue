@@ -1,11 +1,11 @@
 <template>
 <div id="Chat">
    <div id="ChatBox">
-      <div id="chathead" v-on:click="chatshow = !chatshow">Friends</div>
+      <div id="chathead" v-on:click="SpanList()">Follows</div>
       <div id="chatbody" v-if="chatshow">
          <div id="username" v-for="(value, index) in chatusers" :key="index" list-style:none>
             <div id="user" v-on:click="SpanBox(index)">
-               {{value}}
+               {{value.UserName}}
             </div>
          </div>
       </div>
@@ -26,8 +26,14 @@
 </template>
 
 <script>
+import Follows from './Follows.vue'
+import axios from 'axios'
+
 export default {
   name: 'Chats',
+  components: {
+    Follows
+  },
   data () {
     return {
       ws: '',
@@ -40,7 +46,8 @@ export default {
       ciphertext: null,
       key: [],
       iv: [],
-      receivestring: ''
+      receivestring: '',
+      messageArray: []
     }
   },
   created () {
@@ -73,60 +80,32 @@ export default {
       this.ws.onmessage = function (event) {
         var newiv = []
         var newkey = []
-        // if not first time connected receive message from other user
-        if (vm.chatusers.length > 0) {
-          console.log('receive')
-          try {
-            vm.Decryption(event.data)
-            // if decryption successed
-            // show decypted messaged on the receiver side
-            window.document.getElementById('receives').prepend(vm.receivestring + '\n')
-          } catch (error) { // server message cannot decrypted, since it is not encypted
-            // send message to offline user
-            if (event.data == null) {
-              window.document.getElementById('receives').prepend('User is offline' + '\n')
-            } else {
-              // if new user connected
-              vm.chatusers = JSON.parse(event.data).split(',')
-              console.log(vm.chatusers)
-              // get iv from first 16 elements
-              for (var p = 0; p < 16; p++) {
-                newiv.push(window.parseInt(vm.chatusers.pop()))
-              }
-              console.log(newiv)
-              vm.iv = newiv
-              // get key from next 16 elements
-              for (var q = 0; q < 16; q++) {
-                newkey.push(window.parseInt(vm.chatusers.pop()))
-              }
-              console.log(newkey)
-              vm.key = newkey
-              // get users
-              if (vm.chatusers.includes(vm.onlineUser)) {
-                var indexy = vm.chatusers.indexOf(vm.onlineUser)
-                vm.chatusers.splice(indexy, 1)
-              }
+        console.log('receive')
+        try {
+          vm.Decryption(event.data)
+          // if decryption successed
+          // show decypted messaged on the receiver side
+          window.document.getElementById('receives').prepend(vm.receivestring + '\n')
+        } catch (error) { // server message cannot decrypted, since it is not encypted
+          // send message to offline user
+          if (event.data === ' ') {
+            window.document.getElementById('receives').prepend('User is offline' + '\n')
+          } else { // first time connected, get initial value and secret key from server
+            // vm.chatusers = JSON.parse(event.data).split(',')
+            // console.log(vm.chatusers)
+            // get iv from first 16 elements
+            var IvKey = JSON.parse(event.data).split(',')
+            for (var i = 0; i < 16; i++) {
+              newiv.push(window.parseInt(IvKey.pop()))
             }
-          }
-        } else { // first time connected, get initial value and secret key from server
-          vm.chatusers = JSON.parse(event.data).split(',')
-          console.log(vm.chatusers)
-          // get iv from first 16 elements
-          for (var i = 0; i < 16; i++) {
-            newiv.push(window.parseInt(vm.chatusers.pop()))
-          }
-          console.log(newiv)
-          vm.iv = newiv
-          // get key from next 16 elements
-          for (var j = 0; j < 16; j++) {
-            newkey.push(window.parseInt(vm.chatusers.pop()))
-          }
-          console.log(newkey)
-          vm.key = newkey
-          // get users
-          if (vm.chatusers.includes(vm.onlineUser)) {
-            var index = vm.chatusers.indexOf(vm.onlineUser)
-            vm.chatusers.splice(index, 1)
+            console.log(newiv)
+            vm.iv = newiv
+            // get key from next 16 elements
+            for (var j = 0; j < 16; j++) {
+              newkey.push(window.parseInt(IvKey.pop()))
+            }
+            console.log(newkey)
+            vm.key = newkey
           }
         }
       }
@@ -148,8 +127,17 @@ export default {
     },
     // set visability of the messagebox
     SpanBox: function (index) {
-      this.clickeduser = this.chatusers[index]
+      this.clickeduser = this.chatusers[index].UserName
       this.msgshow = !this.msgshow
+    },
+    SpanList: function () {
+      var vm = this
+      if (vm.chatshow === false) {
+        vm.GetFollows()
+        vm.chatshow = !vm.chatshow
+      } else {
+        vm.chatshow = !vm.chatshow
+      }
     },
     Disconnection: function (event) {
       if (this.ws.readyState === WebSocket.OPEN) {
@@ -158,6 +146,7 @@ export default {
       }
     },
     Error: function () {
+      console.log('error')
       this.ws.onerror = function (event) {
         window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
       }
@@ -190,6 +179,8 @@ export default {
       var DecryptedBytes = AesCBC.decrypt(EncryptedBytes)
       var Decryptedtext = AesJS.utils.utf8.fromBytes(DecryptedBytes)
       res[2] = Decryptedtext
+      this.messageArray.push([res[0], res[2]])
+      console.log(this.messageArray)
       this.receivestring = res.join(' ')
       console.log(this.receivestring)
     },
@@ -206,6 +197,40 @@ export default {
       }
       console.log(source.length)
       return source
+    },
+    GetFollows: function () {
+      var vm = this
+      console.log('call follows')
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/v1/follows/getfollows',
+        data: {
+          'Username': this.$store.getters.getusername
+        },
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
+          'Content-Type': 'application/json'
+        }
+      })
+        // redirect to Home page
+        .then(response => {
+          console.log(response.data)
+          vm.chatusers = response.data
+        }).catch((error) => {
+          // Pushes the error messages into error to display
+          if (error.response) {
+            this.errorMessage = 'Error: An Error Occurd.'
+            this.errorFlag = true
+            console.log(error.response)
+          } else if (error.request) {
+            this.errorMessage = 'Error: Server Error'
+            this.errorFlag = true
+            console.log(error.request)
+          } else {
+            this.errorMessage = 'An error occured while setting up request.'
+            this.errorFlag = true
+          }
+        })
     }
   }
 }
