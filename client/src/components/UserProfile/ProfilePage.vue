@@ -9,6 +9,7 @@
       <div v-else>
         <user-info id="ProfileInfo" :userData="userData"></user-info>
         <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
+        <workout-log></workout-log>
         <chat-bar></chat-bar>
       </div>
     </div>
@@ -97,6 +98,8 @@ export default {
   padding-left: 10em;
   width:auto;
   max-width:450px;
+  float:left;
+  position: relative;
 }
 @media only screen and (min-width: 300px){
   #ProfileInfo{

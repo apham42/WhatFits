@@ -10,18 +10,18 @@
                       <option v-for="type in LiftingOptions" :key="type">{{ type }}</option>
                     </select>
                     <label for="Reps">Reps</label>
-                    <input v-model="WorkoutLogger.Reps" placeholder="'0'" />
+                    <input v-model="WorkoutLogger.Reps" placeholder="'0'" v-on:keypress="isNumber(event)"/>
                     <label for="Sets">Sets</label>
-                    <input v-model="WorkoutLogger.Sets" placeholder="'0'" />
+                    <input v-model="WorkoutLogger.Sets" placeholder="'0'" v-on:keypress="isNumber(event)"/>
                 </div>
                 <div v-if = "WorkoutLogger.WorkoutType === 'Cardio'">
                     <select v-model = WorkoutLogger.CardioType>
                       <option v-for="type in CardioOptions" :key="type">{{ type }}</option>
                     </select>
                     <label for="Distance">Distance</label>
-                    <input v-model="WorkoutLogger.Distance" placeholder="'0.00'" />
+                    <input v-model="WorkoutLogger.Distance" placeholder="'0.00'" v-on:keypress="isFloat(event)"/>
                     <label for="Time">Time</label>
-                    <input v-model="WorkoutLogger.Time" placeholder="'0:00'" />
+                    <input v-model="WorkoutLogger.Time" placeholder="'0:00'" v-on:keypress="isTime(event)"/>
                 </div>
             </div>
           <button type="submit" @click.prevent="submit">Add Workout</button>
@@ -75,6 +75,33 @@ export default {
     }
   },
   methods: {
+    isNumber: function (evt) {
+      evt = (evt) || window.event
+      var charCode = (evt.which) || evt.keyCode
+      if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
+        evt.preventDefault()
+      } else {
+        return true
+      }
+    },
+    isTime: function (evt) {
+      evt = (evt) || window.event
+      var charCode = (evt.which) || evt.keyCode
+      if ((charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 58)) {
+        evt.preventDefault()
+      } else {
+        return true
+      }
+    },
+    isFloat: function (evt) {
+      evt = (evt) || window.event
+      var charCode = (evt.which) || evt.keyCode
+      if ((charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46)) {
+        evt.preventDefault()
+      } else {
+        return true
+      }
+    },
     submit: function () {
       if (this.WorkoutLogger.WorkoutType === 'Cardio') {
         axios({
