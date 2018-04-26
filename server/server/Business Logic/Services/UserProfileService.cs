@@ -71,7 +71,7 @@ namespace server.Business_Logic.Services
         private bool ValidateUserName(string userName)
         {
             Regex reg = new Regex("^[a-zA-Z0-9_]{2,64}$");
-            if(reg.IsMatch(userName))
+            if(reg.IsMatch(userName)|| userName == null)
             {
                 return true;
             }

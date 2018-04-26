@@ -55,21 +55,18 @@ export default {
         'Content-Type': 'application/json'
       },
       data: {
-        'Username': this.$store.getters.getusername
+        'Username': this.$store.getters.getviewprofile
       }
     })
       // redirect to Home page
       .then(response => {
         console.log(response.data)
-        // NOTE: Is there a better way to store data?
         this.userData.firstName = response.data.FirstName
-        // this.$store.mutations.mutateFirstName = 'Test'
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description
         this.userData.skillLevel = response.data.SkillLevel
         this.userData.gender = response.data.Gender
         this.userData.profileImage = response.data.ProfilePicture
-        console.log(this.$store.getters.getusername)
         this.errorFlag = false
       }).catch((error) => {
       // Pushes the error messages into error to display
