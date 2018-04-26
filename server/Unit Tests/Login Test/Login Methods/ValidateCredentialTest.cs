@@ -48,10 +48,53 @@ namespace Unit_Tests.Login_Test.Login_Methods
 
             var validate = new ValidateCredentials()
             {
-
+                loginDTO = loginDTO,
+                responseDTO = responseDTO
             };
 
+            Assert.False((bool) validate.Execute().Result);
+        }
 
+        [Fact]
+        public void ValidMatch()
+        {
+            string Salt = "asdf";
+            string PassFromDB = "pass";
+            string IncommingPass = "pass";
+
+            var inchashDTO = new HashDTO()
+            {
+                Original = IncommingPass + Salt
+            };
+
+            var dbHashDTO = new HashDTO()
+            {
+                Original = PassFromDB + Salt
+            };
+
+            var incomminghashpass = new HMAC256().Hash(inchashDTO);
+
+            var dbhashpass = new HMAC256().Hash(dbHashDTO);
+
+            var loginDTO = new LoginDTO()
+            {
+                Password = IncommingPass
+            };
+            var responseDTO = new ResponseDTO<LoginDTO>()
+            {
+                Data = new LoginDTO()
+                {
+                    Salt = Salt
+                }
+            };
+
+            var validate = new ValidateCredentials()
+            {
+                loginDTO = loginDTO,
+                responseDTO = responseDTO
+            };
+
+            Assert.False((bool)validate.Execute().Result);
         }
     }
 }
