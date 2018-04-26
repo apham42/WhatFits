@@ -131,6 +131,7 @@
     <Compile Include="Model\Account\UserProfile.cs" />
     <Compile Include="Model\Search\SearchResult.cs" />
     <Compile Include="Business Logic\Search\SearchUser.cs" />
+    <Compile Include="Business Logic\Services\BadPasswordService.cs" />
     <Compile Include="Business Logic\Services\ChatService.cs" />
     <Compile Include="Business Logic\Services\FollowsService.cs" />
     <Compile Include="Business Logic\Services\LoginService.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Business Logic\Validators\Location Validator\WebAPILocationValidator.cs" />
     <Compile Include="Constants\AccountConstants.cs" />
+    <Compile Include="Constants\BadPasswordConstants.cs" />
     <Compile Include="Constants\LocationConstants.cs" />
     <Compile Include="Constants\SearchConstants.cs" />
     <Compile Include="Controllers\ChatController.cs" />

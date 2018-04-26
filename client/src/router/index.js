@@ -96,6 +96,11 @@ export default new Router({
       component: () => import('@/components/UserProfile/EditProfile')
     },
     {
+      path: '/badpassword',
+      name: 'BadPassword',
+      component: () => import('@/components/Experimental/BadPassword')
+    },
+    {
       // Catch All Error Page
       path: '*',
       name: 'NotFound',
