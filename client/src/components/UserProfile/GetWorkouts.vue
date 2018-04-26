@@ -4,16 +4,22 @@
 <div v-for="value in results" :key="value">
       <div class="Cards">
         <div id="WorkoutType">
-          {{value.WorkoutType}}
-        <div class="Cardio">
+          <strong>Workout Type - {{value.WorkoutType}}</strong>
+        <div class="Cardio" v-if="value.WorkoutType === 'Cardio'">
+          <div id="details">
+            <strong>Cardio Type</strong> : {{value.CardioType}}&emsp;
+            <strong>Distance in miles</strong> : {{value.Distance}} mile(s)&emsp;
+            <strong>Time it took</strong> : {{value.Time}} minute(s)&emsp;
+          </div>
+          <strong>Date done</strong> : {{value.Date_Time}}
         </div>
-        <div class="WeightLifting">
-            {{value.LiftingType}}
-            {{value.Sets}}
-            {{value.Reps}}
-        </div>
-        <div id="dateFormat">
-          {{value.Date_Time}}
+        <div class="WeightLifting" v-if="value.WorkoutType === 'WeightLifting'">
+          <div id="details">
+            <strong>Lifting Type</strong> : {{value.LiftingType}}&emsp;
+            <strong>Sets</strong> : {{value.Sets}}&emsp;
+            <strong>Reps per set</strong> : {{value.Reps}}&emsp;
+          </div>
+          <strong>Date done</strong> : {{value.Date_Time}}
         </div>
         </div>
       </div>
