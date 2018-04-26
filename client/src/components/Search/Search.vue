@@ -18,7 +18,7 @@ export default {
     searchUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/User',
+        url: 'http://localhost/server/v1/Search/Test',
         data: {
           username: this.$data.userInput
         },
@@ -29,7 +29,7 @@ export default {
       })
         // redirect to Home page
         .then((response) => {
-          this.$data.errors.push(response.data.Messages)
+          this.$data.errors.push(response.data)
         }).catch((error) => {
           // Pushes the error messages into error to display
           this.$data.errors = []

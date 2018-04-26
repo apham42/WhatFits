@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 
@@ -42,10 +43,10 @@ namespace server.Controllers
 
         [HttpPost]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IEnumerable<WorkoutLogDTO> GetWorkout()
+        public IEnumerable<WorkoutLogDTO> GetWorkout(UsernameDTO obj)
         {
             WorkoutLogGateway service = new WorkoutLogGateway();
-            return service.GetWorkouts("Latmay");
+            return service.GetWorkouts(obj);
             
         }
 
