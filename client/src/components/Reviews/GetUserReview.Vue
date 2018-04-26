@@ -12,12 +12,15 @@
     </form>
     <div class="body">
       <ul id="Review_List">
+        <!--Iterates through results list with review as index key. Grabs all the reviews
+            Items located on the index are DTO objects, seperated by variable name-->
         <li v-for="review in results" :key="review">
           <section id="specificReviews">
             <div id="messageFormat">
               User Review: '{{ review.ReviewMessage }}' &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : '{{ review.Rating }}'
             </div>
             <div id="dateFormat">
+              <!--To be fixed when implemented onto profile page CSS-->
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: '{{ review.DateAndTime }}'
             </div>
           </section>

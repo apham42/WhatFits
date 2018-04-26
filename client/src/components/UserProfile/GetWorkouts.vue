@@ -5,15 +5,21 @@
       <div class="Cards">
         <div id="WorkoutType">
           {{value.WorkoutType}}
-        <div class="Cardio">
+        <div class="Cardio" v-if="value.WorkoutType === 'Cardio'">
+          <div id="details">
+            Cardio Type : {{value.CardioType}}
+            Distance in miles : {{value.Distance}}
+            Time it took : {{value.Time}}
+          </div>
+          Date done : {{value.Date_Time}}
         </div>
-        <div class="WeightLifting">
-            {{value.LiftingType}}
-            {{value.Sets}}
-            {{value.Reps}}
-        </div>
-        <div id="dateFormat">
-          {{value.Date_Time}}
+        <div class="WeightLifting" v-if="value.WorkoutType === 'WeightLifting'">
+          <div id="details">
+            Lifting Type : {{value.LiftingType}}
+            Sets : {{value.Sets}}
+            Reps per set : {{value.Reps}}
+          </div>
+          Date done : {{value.Date_Time}}
         </div>
         </div>
       </div>
