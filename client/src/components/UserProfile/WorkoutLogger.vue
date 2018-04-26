@@ -55,7 +55,7 @@ export default {
   data: function () {
     return {
       WorkoutLogger: {
-        userName: this.$store.getters.getusername,
+        Username: this.$store.getters.getusername,
         WorkoutType: '',
         CardioType: '',
         LiftingType: '',
@@ -81,7 +81,7 @@ export default {
           method: 'POST',
           url: 'http://localhost/server/v1/WorkoutLogger/CreateWorkout',
           data: {
-            userName: this.$data.WorkoutLogger.userName,
+            Username: this.$data.WorkoutLogger.Username,
             WorkoutType: this.$data.WorkoutLogger.WorkoutType,
             Date_Time: this.$data.WorkoutLogger.Date_Time,
             CardioType: this.$data.WorkoutLogger.CardioType,
@@ -104,7 +104,7 @@ export default {
           method: 'POST',
           url: 'http://localhost/server/v1/WorkoutLogger/CreateWorkout',
           data: {
-            userName: this.$data.WorkoutLogger.userName,
+            Username: this.$data.WorkoutLogger.Username,
             WorkoutType: this.$data.WorkoutLogger.WorkoutType,
             Date_Time: this.$data.WorkoutLogger.Date_Time,
             LiftingType: this.$data.WorkoutLogger.LiftingType,

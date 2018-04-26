@@ -24,8 +24,8 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 try
                 {
                     int getUserID = (from cred in db.Credentials
-                                  where w.userName == cred.UserName
-                                  select cred.UserID).FirstOrDefault();
+                                     where w.userName == cred.UserName
+                                     select cred.UserID).FirstOrDefault();
                     WorkoutLog work = new WorkoutLog
                     {
                         UserID = getUserID,
@@ -43,7 +43,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                         };
                         db.Cardios.Add(card);
                     }
-                    else if(w.WorkoutType.Equals("WeightLifting"))
+                    else if (w.WorkoutType.Equals("WeightLifting"))
                     {
                         WeightLifting weight = new WeightLifting
                         {
@@ -70,58 +70,49 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 }
             }
         }
-
+        //need to fix cardio splitters
         public IEnumerable<WorkoutLogDTO> GetWorkouts(UsernameDTO obj)
         {
-            var getType = (from b in db.Workouts
-                           join cred in db.Credentials
-                           on b.UserID equals cred.UserID
-                           where obj.Username == cred.UserName
-                           select b.WorkoutType);
-            if (getType.Equals("Cardio"))
-            {
-                return (from b in db.Workouts
+            int getUserID = (from cred in db.Credentials
+                             where obj.Username == cred.UserName
+                             select cred.UserID).FirstOrDefault();
+                
+                var car = (from b in db.Workouts
                         join cred in db.Credentials
                         on b.UserID equals cred.UserID
                         where obj.Username == cred.UserName
-                        //join weight in db.WeightLiftings
-                        //on b.WorkoutLogID equals weight.WorkoutID
                         join card in db.Cardios
                         on b.WorkoutLogID equals card.WorkoutID
                         select new WorkoutLogDTO()
                         {
                             WorkoutType = b.WorkoutType,
                             Date_Time = b.Date_Time,
+                            LiftingType = null,
+                            Reps = 0,
+                            Sets = 0,
                             CardioType = card.CardioType,
                             Distance = card.Distance,
                             Time = card.Time
-                            //LiftingType = weight.LiftingType,
-                            //Reps = weight.Reps,
-                            //Sets = weight.Sets
                         });
-            }
-            else
-            {
-                return (from b in db.Workouts
-                        join cred in db.Credentials
-                        on b.UserID equals cred.UserID
-                        where obj.Username == cred.UserName
-                        join weight in db.WeightLiftings
-                        on b.WorkoutLogID equals weight.WorkoutID
-                        //join card in db.Cardios
-                        //on b.WorkoutLogID equals card.WorkoutID
-                        select new WorkoutLogDTO()
-                        {
-                            WorkoutType = b.WorkoutType,
-                            Date_Time = b.Date_Time,
-                            //CardioType = card.CardioType,
-                            //Distance = card.Distance,
-                            //Time = card.Time
-                            LiftingType = weight.LiftingType,
-                            Reps = weight.Reps,
-                            Sets = weight.Sets
-                        });
-            }
+            var weigh = (from b in db.Workouts
+                                  join cred in db.Credentials
+                                  on b.UserID equals cred.UserID
+                                  where obj.Username == cred.UserName
+                                  join weight in db.WeightLiftings
+                                  on b.WorkoutLogID equals weight.WorkoutID
+                                  select new WorkoutLogDTO()
+                                  {
+                                      WorkoutType = b.WorkoutType,
+                                      Date_Time = b.Date_Time,
+                                      LiftingType = weight.LiftingType,
+                                      Reps = weight.Reps,
+                                      Sets = weight.Sets,
+                                      CardioType = null,
+                                      Distance = 0,
+                                      Time = null
+                                  });
+            var logs = car.Union(weigh);
+            return logs;
         }
     }
 }
