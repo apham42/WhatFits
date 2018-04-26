@@ -11,24 +11,26 @@ using server.Model.Data_Transfer_Objects.SearchDTO_s;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 using Newtonsoft.Json;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
+using server.Model.Search;
 
 namespace server.Controllers
 {
     [RoutePrefix("v1/Search")]
     public class SearchController : ApiController
     {
+        
         [HttpPost]
         [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult SearchUser([FromBody] UsernameDTO user)
+        public IHttpActionResult SearchUser([FromBody] SearchUserDTO dto)
         {
-            var service = new SearchUser
+            var service = new SearchUserStrategy
             {
-                User = user
+                SearchUserCriteria = dto.SearchUserCriteria
             };
-            var response = (UsernameResponseDTO) (service.Execute().Result);
-            if (response.isSuccessful)
+            var response = (SearchResponseDTO) (service.Execute().Result);
+            if (response.IsSuccessful)
             {
-                return Ok(new { response });
+                return Ok(new { response.SearchResults, response.Messages });
             }
             else
             {
@@ -42,12 +44,12 @@ namespace server.Controllers
         {
             var service = new SearchNearbyUserStrategy
             {
-                Search = dto
+                Search = dto.Criteria
             };
             var response = (SearchResponseDTO) (service.Execute().Result);
             if (response.IsSuccessful)
             {
-                return Ok(new { response });
+                return Ok(new { response.SearchResults, response.Messages });
             }
             else
             {

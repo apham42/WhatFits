@@ -9,10 +9,6 @@ namespace server.Business_Logic.Services
 {
     public class SearchService
     {
-        public UsernameResponseDTO FindUser (UsernameDTO user)
-        {
-            var gateway = new SearchGateway();
-            return gateway.SearchUser(user);
-        }
+
     }
 }

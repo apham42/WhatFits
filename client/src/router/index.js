@@ -74,6 +74,12 @@ export default new Router({
       component: () => import('@/components/Search/SearchBar')
     },
     {
+      // Temporary Search bar page
+      path: '/Search',
+      name: 'Search',
+      component: () => import('@/components/Search/Search')
+    },
+    {
       // Workout Logger component
       path: '/WorkoutLogger',
       name: 'WorkoutLogger',

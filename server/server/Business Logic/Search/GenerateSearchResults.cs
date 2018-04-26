@@ -32,13 +32,9 @@ namespace server.Business_Logic.Search
             var messages = new List<string>();
 
             var gateway = new SearchGateway();
-            var gatewayDTO = new SearchGatewayDTO()
-            {
-                RequestedUser = Criteria.RequestedUser
-            };
 
             // Gets user info
-            var gatewayResponse = gateway.RetrieveUsers(gatewayDTO);
+            var gatewayResponse = gateway.RetrieveUsers();
             if (!gatewayResponse.IsSuccessful)
             {
                 response.IsSuccessful = false;
@@ -54,7 +50,7 @@ namespace server.Business_Logic.Search
                 x.LastName,
                 x.SkillLevel,
                 UserCoordinate = new GeoCoordinate(x.Latitude, x.Longitude),
-            }).Where(x => ValidatedLocations.ContainsKey(x.UserCoordinate) && x.SkillLevel.Contains(Criteria.Skill));
+            }).Where(x => ValidatedLocations.ContainsKey(x.UserCoordinate) && x.SkillLevel.Contains(Criteria.Skill) && x.User != Criteria.RequestedUser);
 
             // Map the filteredResults to a list of SearchResult objects
             var searchResults = filteredResults.Select(x => new SearchResult()
@@ -71,7 +67,7 @@ namespace server.Business_Logic.Search
             if(!searchResults.Any())
             {
                 response.IsSuccessful = false;
-                messages.Add(SearchConstants.NO_USERS_ERROR);
+                messages.Add(SearchConstants.NO_NEARBY_USERS_ERROR);
                 response.Messages = messages;
             }
             else
