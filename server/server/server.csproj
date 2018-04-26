@@ -168,6 +168,7 @@
     <Compile Include="Model\Account\RegInfo.cs" />
     <Compile Include="Model\Account\SecurityQuestion.cs" />
     <Compile Include="Model\Account\UserCredential.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\IncommingAnswersDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\LoginResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
