@@ -9,6 +9,7 @@
       <div v-else>
         <user-info id="ProfileInfo" :userData="userData"></user-info>
         <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
+        <workout-logger></workout-logger>
         <workout-log></workout-log>
         <chat-bar></chat-bar>
       </div>
@@ -22,7 +23,7 @@ import UserInfo from '@/components/UserProfile/UserInfo'
 import ErrorPage from '@/components/ErrorPage/NotFound'
 import HomeButton from '@/components/Common/HomeButton'
 import Chat from '@/components/UserProfile/Chat'
-
+import WorkoutLogger from '@/components/UserProfile/WorkoutLogger'
 export default {
   name: 'ProfilePage',
   components: {
@@ -30,7 +31,8 @@ export default {
     'error-page404': ErrorPage,
     'home-button': HomeButton,
     'chat-bar': Chat,
-    'workout-log': GetWorkouts
+    'workout-log': GetWorkouts,
+    'workout-logger': WorkoutLogger
   },
   data () {
     return {
