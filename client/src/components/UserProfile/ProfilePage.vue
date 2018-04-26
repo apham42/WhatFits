@@ -68,6 +68,11 @@ export default {
         this.userData.gender = response.data.Gender
         this.userData.profileImage = response.data.ProfilePicture
         this.errorFlag = false
+        if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
+          this.myProfile = true
+        } else {
+          this.myProfile = false
+        }
       }).catch((error) => {
       // Pushes the error messages into error to display
         if (error.response) {

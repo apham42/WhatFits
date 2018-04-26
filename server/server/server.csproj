@@ -214,6 +214,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Business Logic\Validators\Search Validator\" />
     <Folder Include="Controllers\Constants\" />
+    <Folder Include="Image\" />
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>

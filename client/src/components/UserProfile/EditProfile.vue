@@ -1,92 +1,96 @@
 <template>
 <div class="Container">
-  <br>
+    <br>
     <h1 class="PageTitle">{{pageTitle}}</h1>
     <br>
-    <!-- -->
-
     <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">Upload Profile Image</label>
+            <label class="label">Upload Profile Image</label>
         </div>
         <div class="field-body">
-          <label>
-
-              <input class="file-input" type="file" @change="onFileSelected" name="iamge">
-              <span class="file-cta">
-                <span class="file-icon"><i class="fa fa-upload"></i></span>
-                <span class="file-label">Choose an Image</span>
-              </span>
-              <span class="file-name">{{userData.profileImage}}</span>
-          </label>
-        </div>
-        <span class="errorMessage">DO NOT USE</span>
-    </div>
-    <br>
-    <div class="field is-horizontal">
-        <div class="field-label is-normal">
-          <label class="label">Full Name</label>
-        </div>
-        <div class="field-body">
-          <div class="field">
-            <p class="control is-expanded">
-              <input class="input" type="text" placeholder="First Name" v-model.trim="userData.firstName" @input="delayTouch($v.userData.firstName)" v-bind:class="{error: $v.userData.firstName.$error, valid: $v.userData.firstName.$dirty && !$v.userData.firstName.$invalid}">
-            </p>
-            <div class="errorMessage">
-                <span v-show="!$v.userData.firstName.required && $v.userData.firstName.$dirty">First name is required</span>
-                <span v-show="!$v.userData.firstName.minLength && $v.userData.firstName.$dirty">First name must have at least {{$v.userData.firstName.$params.minLength.min}} letters</span>
-                <span v-show="!$v.userData.firstName.maxLength && $v.userData.firstName.$dirty">First name can't be this long {{$v.userData.firstName.$params.maxLength.max}} letters</span>
+            <div class="file has-name">
+                <label class="file-label">
+                    <input class="file-input" type="file" @change="onFileSelected" name="image">
+                    <span class="file-cta">
+                      <span class="file-icon">
+                        <i class="fas fa-upload"></i>
+                      </span>
+                      <span class="file-label">
+                      Choose an Image...
+                      </span>
+                    </span>
+                    <span class="file-name">
+                      {{this.profileImageName}}
+                    </span>
+                </label>
             </div>
-            </div>
-          <div class="field">
-            <p class="control is-expanded">
-              <input class="input" type="text" placeholder="Last Name" v-model.trim="userData.lastName" @input="delayTouch($v.userData.lastName)" v-bind:class="{error: $v.userData.lastName.$error, valid: $v.userData.lastName.$dirty && !$v.userData.lastName.$invalid}">
-            </p>
-            <div class="errorMessage">
-                <span v-show="!$v.userData.lastName.required && $v.userData.lastName.$dirty">First name is required</span>
-                <span v-show="!$v.userData.lastName.minLength && $v.userData.lastName.$dirty">Last name must have at least {{$v.userData.lastName.$params.minLength.min}} letters</span>
-                <span v-show="!$v.userData.lastName.maxLength && $v.userData.lastName.$dirty">Last name can't be this long {{$v.userData.lastName.$params.maxLength.max}} letters</span>
-            </div>
-          </div>
         </div>
     </div>
     <br>
     <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">Skill Level</label>
+            <label class="label">Full Name</label>
         </div>
         <div class="field-body">
-          <div class="field is-narrow">
-            <div class="control">
-              <!--NOTE: Create lookup table of skill levels -->
-              <div class="select is-fullwidth">
-
-                <select v-model="userData.skillLevel">
-              <option value="Beginner">Beginner</option>
-              <option value="Intermediate">Intermediate</option>
-              <option value="Advance">Advance</option>
-            </select>
-              </div>
+            <div class="field">
+                <p class="control is-expanded">
+                    <input class="input" type="text" placeholder="First Name" v-model.trim="userData.firstName" @input="delayTouch($v.userData.firstName)" v-bind:class="{error: $v.userData.firstName.$error, valid: $v.userData.firstName.$dirty && !$v.userData.firstName.$invalid}">
+                </p>
+                <div class="errorMessage">
+                    <span v-show="!$v.userData.firstName.required && $v.userData.firstName.$dirty">First name is required</span>
+                    <span v-show="!$v.userData.firstName.minLength && $v.userData.firstName.$dirty">First name must have at least {{$v.userData.firstName.$params.minLength.min}} letters</span>
+                    <span v-show="!$v.userData.firstName.maxLength && $v.userData.firstName.$dirty">First name can't be this long {{$v.userData.firstName.$params.maxLength.max}} letters</span>
+                </div>
             </div>
-          </div>
+            <div class="field">
+                <p class="control is-expanded">
+                    <input class="input" type="text" placeholder="Last Name" v-model.trim="userData.lastName" @input="delayTouch($v.userData.lastName)" v-bind:class="{error: $v.userData.lastName.$error, valid: $v.userData.lastName.$dirty && !$v.userData.lastName.$invalid}">
+                </p>
+                <div class="errorMessage">
+                    <span v-show="!$v.userData.lastName.required && $v.userData.lastName.$dirty">First name is required</span>
+                    <span v-show="!$v.userData.lastName.minLength && $v.userData.lastName.$dirty">Last name must have at least {{$v.userData.lastName.$params.minLength.min}} letters</span>
+                    <span v-show="!$v.userData.lastName.maxLength && $v.userData.lastName.$dirty">Last name can't be this long {{$v.userData.lastName.$params.maxLength.max}} letters</span>
+                </div>
+            </div>
         </div>
     </div>
     <br>
     <div class="field is-horizontal">
         <div class="field-label is-normal">
-          <label class="label">Email</label>
+            <label class="label">Skill Level</label>
         </div>
         <div class="field-body">
-          <div class="field">
-            <div class="control">
-              <input class="input" type="text" placeholder="example@domain.com" v-model.trim="userData.email" @input="delayTouch($v.userData.email)" v-bind:class="{error: $v.userData.email.$error, valid: $v.userData.email.$dirty && !$v.userData.email.$invalid}">
+            <div class="field is-narrow">
+                <div class="control">
+                    <!--NOTE: Create lookup table of skill levels -->
+                    <div class="select is-fullwidth">
+
+                        <select v-model="userData.skillLevel">
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advance">Advance</option>
+                        </select>
+                    </div>
+                </div>
             </div>
-            <div class="errorMessage">
-                <span v-show="!$v.userData.email.required && $v.userData.email.$dirty">Email is required</span>
-                <span v-show="!$v.userData.email.maxLength && $v.userData.email.$dirty">Last name can't be this long {{$v.userData.email.$params.maxLength.max}} letters</span>
-                <span v-show="!$v.userData.email.email && $v.userData.email.$dirty"> This is not a valid email format</span>
+        </div>
+    </div>
+    <br>
+    <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Email</label>
+        </div>
+        <div class="field-body">
+            <div class="field">
+                <div class="control">
+                    <input class="input" type="text" placeholder="example@domain.com" v-model.trim="userData.email" @input="delayTouch($v.userData.email)" v-bind:class="{error: $v.userData.email.$error, valid: $v.userData.email.$dirty && !$v.userData.email.$invalid}">
+                </div>
+                <div class="errorMessage">
+                    <span v-show="!$v.userData.email.required && $v.userData.email.$dirty">Email is required</span>
+                    <span v-show="!$v.userData.email.maxLength && $v.userData.email.$dirty">Last name can't be this long {{$v.userData.email.$params.maxLength.max}} letters</span>
+                    <span v-show="!$v.userData.email.email && $v.userData.email.$dirty"> This is not a valid email format</span>
+                </div>
             </div>
-          </div>
         </div>
     </div>
     <br>
@@ -100,10 +104,10 @@
                     <input class="input" type="text" placeholder="Male/Female/etc." v-model.trim="userData.gender" @input="delayTouch($v.userData.gender)" v-bind:class="{error: $v.userData.gender.$error, valid: $v.userData.gender.$dirty && !$v.userData.gender.$invalid}">
                 </div>
                 <div class="errorMessage">
-                  <span v-show="!$v.userData.gender.required && $v.userData.gender.$dirty">Gender is required</span>
-                  <span v-show="!$v.userData.gender.minLength && $v.userData.gender.$dirty">Gender must have at least {{$v.userData.gender.$params.minLength.min}} letters</span>
-                  <span v-show="!$v.userData.gender.maxLength && $v.userData.gender.$dirty">Gender can't be this long {{$v.userData.gender.$params.maxLength.max}} letters</span>
-            </div>
+                    <span v-show="!$v.userData.gender.required && $v.userData.gender.$dirty">Gender is required</span>
+                    <span v-show="!$v.userData.gender.minLength && $v.userData.gender.$dirty">Gender must have at least {{$v.userData.gender.$params.minLength.min}} letters</span>
+                    <span v-show="!$v.userData.gender.maxLength && $v.userData.gender.$dirty">Gender can't be this long {{$v.userData.gender.$params.maxLength.max}} letters</span>
+                </div>
             </div>
         </div>
     </div>
@@ -118,9 +122,9 @@
                     <textarea class="textarea" placeholder="Explain how we can help you" v-model.trim="userData.description" @input="delayTouch($v.userData.description)" v-bind:class="{error: $v.userData.description.$error, valid: $v.userData.description.$dirty && !$v.userData.description.$invalid}"></textarea>
                 </div>
                 <div class="errorMessage">
-                  <span v-show="!$v.userData.description.required && $v.userData.description.$dirty">Description is required</span>
-                  <span v-show="!$v.userData.description.minLength && $v.userData.description.$dirty">Description must have at least {{$v.userData.description.$params.minLength.min}} letters</span>
-                  <span v-show="!$v.userData.description.maxLength && $v.userData.description.$dirty">Description can't be this long {{$v.userData.description.$params.maxLength.max}} letters</span>
+                    <span v-show="!$v.userData.description.required && $v.userData.description.$dirty">Description is required</span>
+                    <span v-show="!$v.userData.description.minLength && $v.userData.description.$dirty">Description must have at least {{$v.userData.description.$params.minLength.min}} letters</span>
+                    <span v-show="!$v.userData.description.maxLength && $v.userData.description.$dirty">Description can't be this long {{$v.userData.description.$params.maxLength.max}} letters</span>
                 </div>
             </div>
         </div>
@@ -128,20 +132,20 @@
     <br>
 
     <div class="control ">
-      <div class="field-label is-horizontal Buttons-Center">
-        <span class="control">
-          <button class="button  is-primary " :disabled="$v.$invalid"  @click.prevent="pushProfile" >Update My Profile</button>
+        <div class="field-label is-horizontal Buttons-Center">
+            <span class="control">
+          <button class="button  is-primary " :disabled="$v.$invalid || this.isValidImage"  @click.prevent="pushProfile" >Update My Profile</button>
           <button class="button is-secondary " @click="goBackToProfile" >Go to my Profile</button>
         </span>
-      </div>
+        </div>
     </div>
     <br>
     <div v-if="this.errorFlag == true" class="errorMessage">
-            <span class = "help">{{this.statusMessages}}</span>
-        </div>
-        <div v-if="this.errorFlag == false" class="successMessage">
-            <span>{{this.statusMessages}}</span>
-        </div>
+        <span class="help">{{this.statusMessages}}</span>
+    </div>
+    <div v-if="this.errorFlag == false" class="successMessage">
+        <span>{{this.statusMessages}}</span>
+    </div>
 </div>
 </template>
 
@@ -167,7 +171,10 @@ export default {
         email: ''
       },
       errorFlag: true,
-      statusMessages: ''
+      statusMessages: '',
+      profileImageName: 'example.jpg',
+      isValidImage: false,
+      isUpdatingImage: false
     }
   },
   validations: {
@@ -175,12 +182,12 @@ export default {
       firstName: {
         required,
         minLength: minLength(2),
-        maxLength: maxLength(35)
+        maxLength: maxLength(64)
       },
       lastName: {
         required,
         minLength: minLength(2),
-        maxLength: maxLength(35)
+        maxLength: maxLength(64)
       },
       email: {
         email,
@@ -189,7 +196,7 @@ export default {
       },
       gender: {
         required,
-        minLength: minLength(1),
+        minLength: minLength(2),
         maxLength: maxLength(64)
       },
       description: {
@@ -200,7 +207,6 @@ export default {
     }
   },
   beforeCreate () {
-    console.log(this.$store.getters.getviewprofile)
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/UserProfile/ProfileData',
@@ -214,9 +220,6 @@ export default {
     })
       // redirect to Home page
       .then(response => {
-        console.log(response.data)
-
-        // NOTE: Is there a better way to store data?
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description
@@ -244,10 +247,23 @@ export default {
   methods: {
     onFileSelected (event) {
       console.log(event)
-      this.userData.profileImage = event.target.files[0]
-    },
-    onUpload () {
-
+      // Validate Image
+      var fileName = event.target.files[0].name
+      var extension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()
+      if (extension !== 'png' && extension !== 'jpg') {
+        this.isValidImage = false
+        this.profileImageName = 'Invalid Image'
+        return
+      }
+      if (fileName.length > 50) {
+        this.isValidImage = false
+        this.profileimageName = 'Name too long'
+        return
+      }
+      this.profileImage = event.target.files[0]
+      this.profileImageName = event.target.files[0].name
+      this.isValidImage = true
+      this.isUpdatingImage = true
     },
     delayTouch ($v) {
       $v.$reset()
@@ -261,59 +277,22 @@ export default {
       this.$router.push('/profile')
     },
     pushProfile: function () {
-      /*
-      const fd = new FormData()
-      fd.append('image', this.userData.profileImage, this.userData.profileImage.name)
-      axios({
-        method: 'POST',
-        url: 'http://localhost/server/v1/UserProfile/StoreImage',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8081'
-        },
-        data: {
-          fd
-        }
-      })
-      // redirect to Home page
-        .then(response => {
-          console.log(response.data)
-          this.statusMessages = 'ImageUpdated'
-          this.errorFlag = false
-        }).catch((error) => {
-        // Pushes the error messages into error to display
-          if (error.response) {
-            this.statusMessages = 'An error occured while Processing your request.'
-            this.errorFlag = true
-            console.log(error.response)
-          } else if (error.request) {
-            this.statusMessages = 'A'
-            this.errorFlag = true
-            console.log(error.request)
-          } else {
-            this.statusMessages = 'An error occured while setting up request.'
-            this.errorFlag = true
-          }
-        })
-         */
-      axios({
-        method: 'POST',
-        url: 'http://localhost/server/v1/UserProfile/EditProfile',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8081',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          'UserName': this.$store.getters.getusername,
-          'FirstName': this.userData.firstName,
-          'LastName': this.userData.lastName,
-          'Email': this.userData.email,
-          'Description': this.userData.description,
-          'SkillLevel': this.userData.skillLevel,
-          'Gender': this.userData.gender,
-          // 'ProfilePicture': this.userData.profileImage
-          'ProfilePicture': '../../../static/genericProfileImage.jpg'
-        }
-      })
+      const formData = new FormData()
+      formData.append('image', this.profileImage, this.profileImageName)
+      formData.append('UserName', this.$store.getters.getusername)
+      formData.append('FirstName', this.userData.firstName)
+      formData.append('LastName', this.userData.lastName)
+      formData.append('Email', this.userData.email)
+      formData.append('SkillLevel', this.userData.skillLevel)
+      formData.append('Gender', this.userData.gender)
+      formData.append('Description', this.userData.description)
+      formData.append('IsThereImage', this.isUpdatingImage)
+      formData.append('ProfilePicture', '../../../static/genericProfileImage.jpg')
+      var headers = {
+        'Content-type': 'application/x-www-form-urlencoded',
+        'Access-Control-Allow-Origin': 'http://localhost:8081'
+      }
+      axios.post('http://localhost/server/v1/UserProfile/EditProfile', formData, headers)
       // redirect to Home page
         .then(response => {
           console.log(response.data)
