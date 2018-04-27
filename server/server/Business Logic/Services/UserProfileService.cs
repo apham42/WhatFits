@@ -78,7 +78,7 @@ namespace server.Business_Logic.Services
             }
             catch (Exception e)
             {
-
+                throw new NotImplementedException();
             }
             
         }
