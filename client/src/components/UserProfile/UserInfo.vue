@@ -6,7 +6,6 @@
                <div class="card-image" id="imageBackground">
                   <!-- NOTE: This is a temporary image used as a profile picture-->
                    <figure class="image"> <img  id="circle-ProfileImage" v-bind:src=this.userData.profileImage> </figure>
-
                </div>
                <div class="card-content" align="center">
                   <span class="title is-1">{{this.userData.firstName}} {{this.userData.lastName}}</span>
@@ -15,8 +14,8 @@
                       <button class="button is-primary is-rounded" id="buttonGap" @click="goEditProfile">Edit Profile</button>
                   </span>
                   <span v-else>
-                        <button class="button is-info is-rounded " id="buttonGap">Follow</button>
-                        <button class="button is-secondary is-rounded" id="buttonGap" @click="goReview">Review</button>
+                        <folo></folo>
+                        <button class="button is-secondary is-rounded" id="buttonGap">Review</button>
                   </span>
                   <hr>
                </div>
