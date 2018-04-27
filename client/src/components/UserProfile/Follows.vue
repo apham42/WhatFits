@@ -1,10 +1,19 @@
 <template>
-<div>Follow
+<div>
+  <!-- Follow
   <button id = "add" name="add" v-on:click="Follow()"></button>
   UnFollow
   <button id ="delete" name="delete" v-on:click="UnFollow()"></button>
   IsFollow
-  <button id ="isfollow" name="isfollo" v-on:click="IsFollow()"></button>
+  <button id ="isfollow" name="isfollo" v-on:click="IsFollow()"></button> -->
+  <div id="checkcondition">
+    <span v-if="this.isfollow == true">
+      <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
+    </span>
+    <span v-else>
+      <button id="isfollow" placeholder="UnFollow" v-on:click="UnFollow()">UnFollow</button>
+    </span>
+  </div>
 </div>
 </template>
 <script>
@@ -18,7 +27,10 @@ export default {
       userName: 'test',
       errorFlag: '',
       errorMessage: 'Page Failed to load.',
-      followers: []
+      followers: [],
+      isfollow: false,
+      follow: 'Follow',
+      unfollow: 'UnFollow'
     }
   },
   watch: {
@@ -28,13 +40,14 @@ export default {
   },
   methods: {
     Follow: function () {
+      var vm = this
       console.log('call add follow')
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/follows/addfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
-          'Username': 'chattest1' + ' ' + 'chattest5'
+          'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
         headers: {
           'Access-Control-Allow-Origin': 'http://localhost:8080',
@@ -44,6 +57,7 @@ export default {
         // redirect to Home page
         .then(response => {
           console.log(response.data)
+          vm.isfollow = !vm.isfollow
           return response.data
         }).catch((error) => {
           // Pushes the error messages into error to display
@@ -62,13 +76,14 @@ export default {
         })
     },
     UnFollow: function () {
+      var vm = this
       console.log('call delete follow')
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/follows/deletefollows',
         data: {
           // 'Username': this.$store.getters.getusername,
-          'Username': 'chattest1' + ' ' + 'chattest5'
+          'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
         headers: {
           'Access-Control-Allow-Origin': 'http://localhost:8080',
@@ -78,6 +93,7 @@ export default {
         // redirect to Home page
         .then(response => {
           console.log(response.data)
+          vm.isfollow = !vm.isfollow
           return response.data
         }).catch((error) => {
           // Pushes the error messages into error to display
@@ -102,7 +118,7 @@ export default {
         url: 'http://localhost/server/v1/follows/isfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
-          'Username': 'chattest1' + ' ' + 'chattest5'
+          'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
         headers: {
           'Access-Control-Allow-Origin': 'http://localhost:8080',
@@ -165,3 +181,11 @@ export default {
   }
 }
 </script>
+<style>
+#isfollow{
+  width: 80px;
+  height: 30px;
+  background: #3399ff;
+  color:white;
+}
+</style>
