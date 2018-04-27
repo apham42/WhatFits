@@ -90,6 +90,44 @@
           <span v-show="!$v.state.required && $v.state.$dirty">Field is required</span>
         </div>
       </div>
+      <div class="field-body">
+            <div class="field">
+                <p class="control is-expanded">
+                    <input class="input" type="text" placeholder="First Name" v-model.trim="userData.firstName" @input="delayTouch($v.userData.firstName)" v-bind:class="{error: $v.userData.firstName.$error, valid: $v.userData.firstName.$dirty && !$v.userData.firstName.$invalid}">
+                </p>
+                <div class="errorMessage">
+                    <span v-show="!$v.userData.firstName.required && $v.userData.firstName.$dirty">First name is required</span>
+                    <span v-show="!$v.userData.firstName.minLength && $v.userData.firstName.$dirty">First name must have at least {{$v.userData.firstName.$params.minLength.min}} letters</span>
+                    <span v-show="!$v.userData.firstName.maxLength && $v.userData.firstName.$dirty">First name can't be this long {{$v.userData.firstName.$params.maxLength.max}} letters</span>
+                </div>
+            </div>
+            <div class="field">
+                <p class="control is-expanded">
+                    <input class="input" type="text" placeholder="Last Name" v-model.trim="userData.lastName" @input="delayTouch($v.userData.lastName)" v-bind:class="{error: $v.userData.lastName.$error, valid: $v.userData.lastName.$dirty && !$v.userData.lastName.$invalid}">
+                </p>
+                <div class="errorMessage">
+                    <span v-show="!$v.userData.lastName.required && $v.userData.lastName.$dirty">First name is required</span>
+                    <span v-show="!$v.userData.lastName.minLength && $v.userData.lastName.$dirty">Last name must have at least {{$v.userData.lastName.$params.minLength.min}} letters</span>
+                    <span v-show="!$v.userData.lastName.maxLength && $v.userData.lastName.$dirty">Last name can't be this long {{$v.userData.lastName.$params.maxLength.max}} letters</span>
+                </div>
+            </div>
+        </div>
+      <div class="field-body">
+            <div class="field is-narrow">
+                <div class="control">
+                    <!--NOTE: Create lookup table of skill levels -->
+                    <div class="select is-fullwidth">
+
+                        <select v-model="userData.skillLevel">
+                            <option value="Beginner">Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advance">Advance</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
       <div class="field">
         <label class="label">Security Questions</label>
         <label class="label">Question #1</label>

@@ -20,7 +20,7 @@ namespace server.Business_Logic.Search
     /// </summary>
     public class SearchNearbyUserStrategy: ICommand
     {
-        public SearchDTO Search { get; set; }
+        public SearchCriteria Search { get; set; }
 
         /// <summary>
         /// Executes the strategy of searching nearby users based on an address
@@ -32,16 +32,17 @@ namespace server.Business_Logic.Search
             var response = new Outcome();
 
             // Checks if the requested search has a value
-            if (Search.Criteria.RequestedSearch == null || Search.Criteria.RequestedSearch.Equals(""))
+            
+            if (String.IsNullOrEmpty(Search.RequestedSearch))
             {
                 response.Result = Error(LocationConstants.ADDRESS_EMPTY_ERROR);
                 return response;
             }
-
+            
             // Validates the location that the user inputted 
             var validator = new WebAPILocationValidator()
             {
-                RequestedLocation = Search.Criteria.RequestedSearch
+                RequestedLocation = Search.RequestedSearch
             };
             var validatedLocation = (WebAPIGeocode) validator.Execute().Result;
             if (!validatedLocation.IsValid)
@@ -71,24 +72,21 @@ namespace server.Business_Logic.Search
             {
                 UserLocation = new GeoCoordinate(validatedLocation.Latitude, validatedLocation.Longitude),
                 GeoCoordinates = locations,
-                Distance = Search.Criteria.Distance,
+                Distance = Search.Distance,
             };
             var filteredGeocoordinates = (Dictionary<GeoCoordinate, double>) filterLocation.Execute().Result;
             if (!filteredGeocoordinates.Any())
             {
-                response.Result = Error(SearchConstants.NO_USERS_ERROR);
+                response.Result = Error(SearchConstants.NO_NEARBY_USERS_ERROR);
                 return response;
             }
 
-
-
-            var filterSearch = new FilterSearchResults ()
+            // Generates the search results
+            var filterSearch = new GenerateSearchResults()
             {
-                Criteria = Search.Criteria,
-                User = Search.User,
+                Criteria = Search,
                 ValidatedLocations = filteredGeocoordinates
             };
-
             response.Result =  (SearchResponseDTO) filterSearch.Execute().Result;
 
             return response;

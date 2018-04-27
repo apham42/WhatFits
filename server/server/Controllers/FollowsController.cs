@@ -1,4 +1,6 @@
 ﻿using server.Business_Logic.Services;
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web;
@@ -18,15 +20,26 @@ namespace server.Controllers
     public class FollowsController : ApiController
     {
         Credential requestedUser = new Credential();
+        Credential followUser = new Credential();
         FollowsDTO followsDTO = new FollowsDTO();
         FollowsGateway followsGateway = new FollowsGateway();
         FollowsService followService = new FollowsService();
+        private static readonly List<Int16> iv = new List<Int16> {21,2,3,14,65,6,17,8,91,10,11,12,23,14,45,16};
+
+
+        /// <summary>
+        /// Provides local inivial value
+        /// </summary>
+        public List<Int16> Getiv()
+        {
+            return iv;
+        }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="username"></param>
-        /// <returns>Users' followers</returns>
+        /// <returns>Users' follows</returns>
         [HttpPost]
         [Route("getfollows")]
         [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
@@ -57,24 +70,26 @@ namespace server.Controllers
         [HttpPost]
         [Route("addfollows")]
         [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public HttpResponseMessage Addfollows(string username)
+        public IHttpActionResult Addfollows([FromBody]UsernameDTO userDTO)
         {
-            requestedUser.UserName = username;
+            string[] Users = userDTO.Username.Split(' ');
+            requestedUser.UserName = Users[0];
+            var wantoFollo = Users[1];
+
             if (HttpContext.Current.Request.HttpMethod == "POST")
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
-                    followService.Add(followsDTO);
-                    return new HttpResponseMessage(HttpStatusCode.Accepted);
+                    return Ok(followService.Add(requestedUser.UserName, wantoFollo));
                 }
                 else
                 {
-                    return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+                    return Content(HttpStatusCode.NotAcceptable, new { });
                 }
             }
             else
             {
-                return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
+                return Content(HttpStatusCode.MethodNotAllowed,new { });
             }
         }
 
@@ -85,24 +100,26 @@ namespace server.Controllers
         [HttpPost]
         [Route("deletefollows")]
         [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public HttpResponseMessage Deletefollows(string username)
+        public IHttpActionResult Deletefollows([FromBody]UsernameDTO userDTO)
         {
-            requestedUser.UserName = username;
+            string[] Users = userDTO.Username.Split(' ');
+            requestedUser.UserName = Users[0];
+            var wantoDelete = Users[1];
+
             if (HttpContext.Current.Request.HttpMethod == "POST")
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
-                    followService.Remove(followsDTO);
-                    return new HttpResponseMessage(HttpStatusCode.Accepted);
+                    return Ok(followService.Remove(requestedUser.UserName, wantoDelete));
                 }
                 else
                 {
-                    return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+                    return Content(HttpStatusCode.NotAcceptable, new { });
                 }
             }
             else
             {
-                return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
+                return Content(HttpStatusCode.MethodNotAllowed, new { });
             }
         }
 
@@ -111,27 +128,57 @@ namespace server.Controllers
         /// </summary>
         /// <param name="username"></param>
         /// <returns>True of False</returns>
-        [HttpGet]
+        [HttpPost]
         [Route("isfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "GET")]
-        public HttpResponseMessage Isfollows(string username)
+        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        public IHttpActionResult Isfollows([FromBody]UsernameDTO userDTO)
         {
-            requestedUser.UserName = username;
-            if (HttpContext.Current.Request.HttpMethod == "GET")
+            string[] Users = userDTO.Username.Split(' ');
+            requestedUser.UserName = Users[0];
+            var wantoDelete = Users[1];
+
+            if (HttpContext.Current.Request.HttpMethod == "POST")
             {
                 if (followsGateway.DoesUserNameExists(requestedUser))
                 {
-                    followService.Contains(followsDTO);
-                    return new HttpResponseMessage(HttpStatusCode.Accepted);
+                    return Ok(followService.Contains(requestedUser.UserName, wantoDelete));
                 }
                 else
                 {
-                    return new HttpResponseMessage(HttpStatusCode.NotAcceptable);
+                    return Content(HttpStatusCode.NotAcceptable, new { });
                 }
             }
             else
             {
-                return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
+                return Content(HttpStatusCode.MethodNotAllowed, new { });
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>True of False</returns>
+        [HttpPost]
+        [Route("getinitialvalue")]
+        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        public IHttpActionResult GetInitialvalue([FromBody]UsernameDTO userDTO)
+        {
+            requestedUser.UserName = userDTO.Username;
+            if (HttpContext.Current.Request.HttpMethod == "POST")
+            {
+                if (followsGateway.DoesUserNameExists(requestedUser))
+                {
+                    return Ok(Getiv());
+                }
+                else
+                {
+                    return Content(HttpStatusCode.NotAcceptable, new { });
+                }
+            }
+            else
+            {
+                return Content(HttpStatusCode.MethodNotAllowed, new { });
             }
         }
     }

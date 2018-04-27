@@ -11,24 +11,28 @@ using server.Model.Data_Transfer_Objects.SearchDTO_s;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 using Newtonsoft.Json;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
+using server.Model.Search;
+using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
     [RoutePrefix("v1/Search")]
     public class SearchController : ApiController
     {
+        
         [HttpPost]
+        [AuthorizePrincipal(type = "SEARCH", value = "True")]
         [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult SearchUser([FromBody] UsernameDTO user)
+        public IHttpActionResult SearchUser([FromBody] SearchUserDTO dto)
         {
-            var service = new SearchUser
+            var service = new SearchUserStrategy
             {
-                User = user
+                SearchUserCriteria = dto.SearchUserCriteria
             };
-            var response = (UsernameResponseDTO) (service.Execute().Result);
-            if (response.isSuccessful)
+            var response = (SearchResponseDTO) (service.Execute().Result);
+            if (response.IsSuccessful)
             {
-                return Ok(new { response.Messages });
+                return Ok(new { response.SearchResults, response.Messages });
             }
             else
             {
@@ -37,48 +41,23 @@ namespace server.Controllers
         }
 
         [HttpPost]
+        [AuthorizePrincipal(type = "SEARCH", value = "True")]
         [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult SearchNearby([FromBody] SearchDTO dto)
         {
             var service = new SearchNearbyUserStrategy
             {
-                Search = dto
+                Search = dto.Criteria
             };
             var response = (SearchResponseDTO) (service.Execute().Result);
             if (response.IsSuccessful)
             {
-                return Ok(new { response.SearchResults });
+                return Ok(new { response.SearchResults, response.Messages });
             }
             else
             {
                 return Content(HttpStatusCode.BadRequest, new { response.Messages });
             }
-        }
-
-
-        [HttpPost]
-        // [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        public IHttpActionResult Testinb([FromBody] UsernameDTO dto)
-        {
-            var gateway = new SearchGateway();
-            var locations = gateway.RetrieveLocations().LocationResults;
-            var filter = new FilterGeoCoordinates()
-            {
-                Distance = 5,
-                GeoCoordinates = locations,
-                UserLocation = new System.Device.Location.GeoCoordinate(33.7830608, -118.1148909)
-            };
-
-
-            return Ok(filter.Execute().Result);
-
-        }
-
-        public static Dictionary<TKey, double> ToDictionary<TKey>(object obj)
-        {
-            var json = JsonConvert.SerializeObject(obj);
-            var dictionary = JsonConvert.DeserializeObject<Dictionary<TKey, double>>(json);
-            return dictionary;
         }
     }
 }

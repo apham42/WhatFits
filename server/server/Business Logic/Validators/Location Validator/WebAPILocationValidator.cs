@@ -25,6 +25,7 @@ namespace server.Business_Logic.Validators.Location_Validator
             };
 
             // Waits for the request to finish
+            // TODO: I need to fix this Task.Run issue
             var test = Task.Run(async () => { return await network.Request(requestDTO); }).Result;
 
             // Converts the data from the web api
