@@ -16,7 +16,7 @@
                   </span>
                   <span v-else>
                         <button class="button is-info is-rounded " id="buttonGap">Follow</button>
-                        <button class="button is-secondary is-rounded" id="buttonGap">Review</button>
+                        <button class="button is-secondary is-rounded" id="buttonGap" @click="goReview">Review</button>
                   </span>
                   <hr>
                </div>
@@ -49,6 +49,9 @@ export default {
   methods: {
     goEditProfile: function () {
       this.$router.push('/editprofile')
+    },
+    goReview: function () {
+      this.$router.push('/Review')
     }
   }
 }
