@@ -14,6 +14,6 @@ namespace server.Model.Account
         public UserCredential UserCredInfo { get; set; }
         public List<SecurityQuestion> SecurityQandAs { get; set; }
         public Address UserLocation { get; set; }
-        public string UserType { get; set; }
+        public UserProfile UserProfile { get; set; }
     }
 }

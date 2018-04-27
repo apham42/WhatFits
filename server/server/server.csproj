@@ -126,11 +126,12 @@
     <Compile Include="Business Logic\Reset Password\GetQuestions.cs" />
     <Compile Include="Business Logic\Reset Password\SetNewPassword.cs" />
     <Compile Include="Business Logic\Search\FilterGeoCoordinates.cs" />
-    <Compile Include="Business Logic\Search\FilterSearchResults.cs" />
+    <Compile Include="Business Logic\Search\GenerateSearchResults.cs" />
     <Compile Include="Business Logic\Search\SearchNearbyUserStrategy.cs" />
     <Compile Include="Model\Account\UserProfile.cs" />
+    <Compile Include="Model\Data Transfer Objects\SearchDTO%27s\SearchUserDTO.cs" />
     <Compile Include="Model\Search\SearchResult.cs" />
-    <Compile Include="Business Logic\Search\SearchUser.cs" />
+    <Compile Include="Business Logic\Search\SearchUserStrategy.cs" />
     <Compile Include="Business Logic\Services\BadPasswordService.cs" />
     <Compile Include="Business Logic\Services\ChatService.cs" />
     <Compile Include="Business Logic\Services\FollowsService.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Model\Search\SearchCriteria.cs" />
     <Compile Include="Model\Data Transfer Objects\SearchDTO%27s\SearchDTO.cs" />
     <Compile Include="Model\Search\SearchType.cs" />
+    <Compile Include="Model\Search\SearchUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Business Logic\Services\AccountService.cs" />
     <Compile Include="Business Logic\Services\ReviewService.cs" />
@@ -215,6 +217,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Business Logic\Validators\Search Validator\" />
     <Folder Include="Controllers\Constants\" />
+    <Folder Include="Image\" />
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
