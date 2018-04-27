@@ -4,6 +4,7 @@ import CreatePersistedState from 'vuex-persistedstate'
 import loginpopup from './modules/LoginPopup'
 import User from './modules/User'
 import Request from './modules/Request'
+import Search from './modules/Search'
 
 Vue.use(Vuex)
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
   modules: {
     loginpopup,
     User,
-    Request
+    Request,
+    Search
   },
   plugins: [persistedstate]
 })

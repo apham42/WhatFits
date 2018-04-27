@@ -69,9 +69,9 @@ export default new Router({
     },
     {
       // Temporary Search bar page
-      path: '/SearchBar',
-      name: 'SearchBar',
-      component: () => import('@/components/Search/SearchBar')
+      path: '/Search',
+      name: 'Search',
+      component: () => import('@/components/Search/Search')
     },
     {
       // Workout Logger component
@@ -99,6 +99,11 @@ export default new Router({
       path: '/badpassword',
       name: 'BadPassword',
       component: () => import('@/components/Experimental/BadPassword')
+    },
+    {
+      path: '/testImage',
+      name: 'TestImage',
+      component: () => import('@/components/Experimental/imageUpload')
     },
     {
       // Catch All Error Page

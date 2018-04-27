@@ -22,8 +22,22 @@ namespace server.Business_Logic.Reset_Password
 
             incommingAnswers.Messages = new List<string>();
 
+            if(incommingAnswers.Answers == null)
+            {
+                incommingAnswers.isSuccessful = false;
+                response.Result = incommingAnswers;
+                return response;
+            }
+
             var loginGateway = new LoginGateway();
             var dbanswers = loginGateway.GetSecurityQandAs(username);
+
+            if(dbanswers.isSuccessful == false)
+            {
+                incommingAnswers.isSuccessful = false;
+                response.Result = incommingAnswers;
+                return response;
+            }
 
             // hash answers
             var hashDTO = new HashDTO();
