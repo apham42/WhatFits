@@ -453,7 +453,12 @@ export default {
               state: this.state,
               zipCode: this.zipCode
             },
-            UserType: 'General'
+            UserProfile: {
+              firstName: this.$data.firstName,
+              lastName: this.$data.lastName,
+              skill: this.$data.skill,
+              userType: 'Enable'
+            }
           },
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081',
