@@ -515,7 +515,12 @@ export default {
               state: this.state,
               zipCode: this.zipCode
             },
-            UserType: 'Administrator'
+            UserProfile: {
+              firstName: this.firstName,
+              lastName: this.lastName,
+              skill: this.skill,
+              userType: 'Enable'
+            }
           },
           headers: {
             'Access-Control-Allow-Origin': 'http://localhost:8081',
