@@ -134,6 +134,7 @@ export default {
   mounted () {
     this.search()
   },
+  /*
   computed: {
     t: function () {
       return this.$store.getters.getRequestedSearch
@@ -142,13 +143,14 @@ export default {
       return this.$store.getters.getSearchType
     }
   },
+  */
   watch: {
-    t: function () {
+    searchType: function () {
       if (this.$data.m !== this.$store.getters.getRequestedSearch) {
         this.search()
       }
     },
-    l: function () {
+    m: function () {
       if (this.$data.searchType !== this.$store.getters.getSearchType) {
         this.search()
       }
@@ -170,6 +172,7 @@ export default {
 }
 
 .view-profile {
+    color: #1abc9c;
     background-color: Transparent;
     background-repeat:no-repeat;
     border: none;

@@ -32,6 +32,7 @@ export default {
       this.$store.dispatch('actRequestedSearch', {requestedSearch: this.$data.userInput})
       this.$store.dispatch('actSearchType', {searchType: this.$data.searchType})
       this.$router.push('/Search')
+      // TODO: use emit to Search and SearchBar
     }
   }
 }
