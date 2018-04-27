@@ -76,7 +76,7 @@ namespace server.Business_Logic.Services
                 var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + image.FileName);
                 image.SaveAs(filePath);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw new NotImplementedException();
             }
