@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     showNavBar: function () {
-      return this.$route.name === 'Home' || this.$route.name === 'Registration' || this.$route.name === 'ResetPassword'
+      return this.$route.name === 'Home' || this.$route.name === 'Registration' || this.$route.name === 'ResetPassword' || this.$route.name === 'NotFound'
     }
   },
   methods: {

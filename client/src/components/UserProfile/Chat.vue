@@ -22,19 +22,14 @@
       <button id="send" type="submit" @click="SendMessage">Send Message</button><br/>
       </div>
    </div>
-   <div>CHECK<folo><button v-on:click="IsFollow()"></button></folo></div>
 </div>
 </template>
 
 <script>
-import Follows from '@/components/UserProfile/Follows'
 import axios from 'axios'
 
 export default {
   name: 'Chats',
-  components: {
-    'folo': Follows
-  },
   data () {
     return {
       ws: '',
