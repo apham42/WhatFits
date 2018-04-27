@@ -12,6 +12,7 @@ using Whatfits.DataAccess.Gateways.ContentGateways;
 using Newtonsoft.Json;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using server.Model.Search;
+using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
@@ -20,6 +21,7 @@ namespace server.Controllers
     {
         
         [HttpPost]
+        [AuthorizePrincipal(type = "SEARCH", value = "True")]
         [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult SearchUser([FromBody] SearchUserDTO dto)
         {
@@ -39,6 +41,7 @@ namespace server.Controllers
         }
 
         [HttpPost]
+        [AuthorizePrincipal(type = "SEARCH", value = "True")]
         [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult SearchNearby([FromBody] SearchDTO dto)
         {

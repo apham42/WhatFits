@@ -73,10 +73,7 @@ export default {
         data: {
           SearchUserCriteria: this.$data.SearchUser
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheader
       })
         // redirect to Home page
         .then((response) => {
@@ -101,10 +98,7 @@ export default {
         data: {
           Criteria: this.$data.SearchNearby
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheader
       })
         // redirect to Home page
         .then((response) => {
