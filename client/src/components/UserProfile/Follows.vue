@@ -1,11 +1,5 @@
 <template>
 <div>
-  <!-- Follow
-  <button id = "add" name="add" v-on:click="Follow()"></button>
-  UnFollow
-  <button id ="delete" name="delete" v-on:click="UnFollow()"></button>
-  IsFollow
-  <button id ="isfollow" name="isfollo" v-on:click="IsFollow()"></button> -->
   <div id="checkcondition">
     <span v-if="this.isfollow == true">
       <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
@@ -34,9 +28,6 @@ export default {
     }
   },
   watch: {
-  },
-  mounted () {
-    console('mounted')
   },
   methods: {
     Follow: function () {

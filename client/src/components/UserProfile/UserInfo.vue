@@ -14,8 +14,7 @@
                       <button class="button is-primary is-rounded" id="buttonGap" @click="goEditProfile">Edit Profile</button>
                   </span>
                   <span v-else>
-                        <folo></folo>
-                        <button class="button is-secondary is-rounded" id="buttonGap">Review</button>
+                        <folo></folo><button class="button is-secondary is-rounded" id="buttonGap">Review</button>
                   </span>
                   <hr>
                </div>
@@ -38,6 +37,8 @@
 </template>
 
 <script>
+import Follow from '@/components/UserProfile/Follows'
+
 export default {
   name: 'UserInfo',
   props: ['userData'],
@@ -45,6 +46,10 @@ export default {
     return {
     }
   },
+  components: {
+    'folo': Follow
+  },
+
   methods: {
     goEditProfile: function () {
       this.$router.push('/editprofile')
