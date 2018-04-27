@@ -93,6 +93,50 @@
           <span v-show="!$v.state.required && $v.state.$dirty">Field is required</span>
         </div>
       </div>
+      <div class="field-body">
+        <label class="label">Name:</label>
+            <div class="field">
+                <p class="control is-expanded">
+                    <input class="input" type="text" placeholder="First Name" v-model.trim="firstName" @input="delayTouch($v.firstName)">
+                </p>
+            </div>
+            <div class="errorMessage">
+                    <span v-show="!$v.firstName.required && $v.firstName.$dirty">First name is required</span>
+                    <span v-show="!$v.firstName.minLength && $v.firstName.$dirty">First name must have at least {{$v.firstName.$params.minLength.min}} letters</span>
+                    <span v-show="!$v.firstName.maxLength && $v.firstName.$dirty">First name can't be this long {{$v.firstName.$params.maxLength.max}} letters</span>
+                </div>
+            <div class="field">
+                <p class="control is-expanded">
+                    <input class="input" type="text" placeholder="Last Name" v-model.trim="lastName" @input="delayTouch($v.lastName)">
+                </p>
+
+            </div>
+            <div class="errorMessage">
+                    <span v-show="!$v.lastName.required && $v.lastName.$dirty">First name is required</span>
+                    <span v-show="!$v.lastName.minLength && $v.lastName.$dirty">Last name must have at least {{$v.lastName.$params.minLength.min}} letters</span>
+                    <span v-show="!$v.lastName.maxLength && $v.lastName.$dirty">Last name can't be this long {{$v.lastName.$params.maxLength.max}} letters</span>
+                </div>
+        </div>
+         <div class="field is-horizontal">
+        <div class="field-label is-normal">
+            <label class="label">Skill Level</label>
+        </div>
+        <div class="field-body">
+            <div class="field is-narrow">
+                <div class="control">
+                    <!--NOTE: Create lookup table of skill levels -->
+                    <div class="select is-fullwidth">
+
+                        <select v-model="skillLevel">
+                            <option value="Beginner" selected>Beginner</option>
+                            <option value="Intermediate">Intermediate</option>
+                            <option value="Advance">Advance</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
       <div class="field">
         <label class="label">Security Questions</label>
         <label class="label">Question #1</label>
@@ -169,16 +213,6 @@
           </div>
         </div>
       </div>
-      <!--
-      <div class="field">
-        <div class="control">
-          <label class="checkbox">
-          <input type="checkbox" v-model="terms">
-          I agree to the <a href="#">terms and conditions</a>
-          </label>
-        </div>
-      </div>
-      -->
       <div class="field is-grouped">
         <div class="control">
           <button class="button is-primary" :disabled="$v.$invalid || !validateCharacters(this.$data.userName) || !validateCharacters(this.$data.password)" @click.prevent="createNewUser">Create {{userType}}</button>
@@ -238,6 +272,9 @@ export default {
       answerToSecQues1: 'TEST',
       answerToSecQues2: 'TEST',
       answerToSecQues3: 'TEST',
+      firstName: '',
+      lastName: '',
+      skillLevel: '',
       securityQues1: 'Who was the company you first worked for?',
       securityQues2: 'What is your favorite song?',
       securityQues3: 'What was the name of your first crush?',
@@ -283,6 +320,19 @@ export default {
   },
   // validations based on business rules
   validations: {
+    firstName: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(50)
+    },
+    lastName: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(50)
+    },
+    skillLevel: {
+      required
+    },
     userName: {
       required,
       minLength: minLength(2),
