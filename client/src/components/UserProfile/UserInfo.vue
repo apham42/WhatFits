@@ -15,7 +15,7 @@
                       <button class="button is-primary is-rounded" id="buttonGap" @click="goEditProfile">Edit Profile</button>
                   </span>
                   <span v-else>
-                        <button class="button is-info is-rounded " id="buttonGap">Follow</button>
+                        <folo></folo>
                         <button class="button is-secondary is-rounded" id="buttonGap">Review</button>
                   </span>
                   <hr>
