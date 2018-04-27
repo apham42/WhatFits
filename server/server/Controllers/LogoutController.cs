@@ -24,7 +24,7 @@ namespace server.Controllers
         /// <returns>success if stored in blacklist fails if not</returns>
         [HttpPost]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        [AuthorizePrincipal(type = "WORKOUT_ADD", value = "Add")]
+        [AllowAnonymous]
         public IHttpActionResult logout([FromBody] UserCredential userCredential)
         {
             LogoutService logoutService = new LogoutService();

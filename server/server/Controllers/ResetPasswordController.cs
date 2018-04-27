@@ -57,7 +57,7 @@ namespace server.Controllers
 
             if(response.isSuccessful == false)
             {
-                response.Messages.Add("Incorrect Password");
+                response.Messages.Add("Incorrect Answers");
                 return Content(HttpStatusCode.Unauthorized, response);
             }
             
