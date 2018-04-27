@@ -10,7 +10,7 @@
         <user-info id="ProfileInfo" :userData="userData"></user-info>
         <get-reviews></get-reviews>
         <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
-        <div v-if="LoggedinUser === Username">
+        <div v-if="this.userData.myProfile == true">
           <workout-logger></workout-logger>
         </div>
         <workout-log></workout-log>
@@ -18,7 +18,6 @@
       </div>
     </div>
 </template>
-
 <script>
 import axios from 'axios'
 import GetWorkouts from '@/components/UserProfile/GetWorkouts'
@@ -71,7 +70,6 @@ export default {
     })
       // redirect to Home page
       .then(response => {
-        console.log(response.data)
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description
@@ -80,9 +78,9 @@ export default {
         this.userData.profileImage = response.data.ProfilePicture
         this.errorFlag = false
         if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
-          this.myProfile = true
+          this.userData.myProfile = true
         } else {
-          this.myProfile = false
+          this.userData.myProfile = false
         }
       }).catch((error) => {
       // Pushes the error messages into error to display
@@ -100,6 +98,14 @@ export default {
           this.errorFlag = true
         }
       })
+  },
+  created () {
+    console.log('Making Comparision')
+    if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
+      this.myProfile = true
+    } else {
+      this.myProfile = false
+    }
   },
   methods: {
 
