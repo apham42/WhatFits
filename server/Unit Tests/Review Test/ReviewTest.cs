@@ -20,7 +20,7 @@ namespace Gateway.Tester.Tests
             ReviewsDTO rev = new ReviewsDTO()
             {
                 Username = "asdf",
-                RevieweeID = 3,
+                TargetUser = "amay",
                 Rating = 4,
                 ReviewMessage = "Here's the test",
                 DateAndTime = new DateTime(2017, 05, 15),

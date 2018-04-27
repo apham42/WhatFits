@@ -11,8 +11,6 @@
         <br />
         <textarea v-model="ReviewMessage" class="form-control" placeholder="Input Review"></textarea>
       </div>
-      <label for="RevieweeID">RevieweeID</label>
-      <input v-model="RevieweeID" placeholder="'1'" v-on:keypress="isNumber(event)"/>
       <button type="submit" @click.prevent="input">Submit</button>
     </form>
   </div>
@@ -41,7 +39,7 @@ export default {
       Username: this.$store.getters.getusername,
       Rating: this.Rating,
       ReviewMessage: '',
-      RevieweeID: '',
+      TargetUser: this.$store.getters.viewprofile,
       DateAndTime: new Date().toLocaleDateString()
     }
   },
@@ -67,7 +65,7 @@ export default {
         data: {
           Rating: this.$data.Rating,
           ReviewMessage: this.$data.ReviewMessage,
-          RevieweeID: this.$data.RevieweeID,
+          TargetUser: this.$data.TargetUser,
           Username: this.$data.Username,
           DateAndTime: this.$data.DateAndTime
         },
