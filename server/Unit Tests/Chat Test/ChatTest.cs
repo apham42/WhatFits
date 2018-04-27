@@ -29,7 +29,7 @@ namespace ChatTest
             // Arrange
             ChatController chatController = new ChatController();
             WebSocketCollection chatUser = new WebSocketCollection();
-            ChatService chatHandler = new ChatService("amay", chatController.Getkey(), chatController.Getiv());
+            ChatService chatHandler = new ChatService("amay");
             var serialization = new JavaScriptSerializer();
             chatUser.Add(chatHandler);
             var Jmsg = "{\"Username\":\"rblue\",\"MessageContent\":\"this is send test\"}";
@@ -47,7 +47,7 @@ namespace ChatTest
             // Arrange
             ChatController chatController = new ChatController();
             WebSocketCollection chatUser = new WebSocketCollection();
-            ChatService chatHandler = new ChatService("amay", chatController.Getkey(), chatController.Getiv());
+            ChatService chatHandler = new ChatService("amay");
             chatUser.Add(chatHandler);
 
             // Action

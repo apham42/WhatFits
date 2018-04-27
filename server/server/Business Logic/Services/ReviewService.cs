@@ -14,18 +14,7 @@ namespace server.Services
 {
     public class ReviewService
     {
-        //Going to change validation to only front end
-        //public bool ValidateCharacters(string credential)
-        //{
-        //    var rgxCheck = new Regex(AccountConstants.CREDCHARACTERS);
-        //    if (rgxCheck.IsMatch(credential))
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
-
-        //Returns true or false on if review has been created
+        //Returns true or false on if review has been created, will be used with response
         public bool Create(ReviewsDTO rev)
         {
             var gateway = new ReviewsGateway();

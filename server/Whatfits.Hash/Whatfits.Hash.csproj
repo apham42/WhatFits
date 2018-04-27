@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="HMAC256.cs" />
     <Compile Include="HashDTO.cs" />
+    <Compile Include="SHA1CNG.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -10,7 +10,5 @@ namespace server.Model.Search
         public string RequestedSearch { get; set; }
         public string Skill { get; set; }
         public int Distance { get; set; }
-        public string WorkoutType { get; set; }
-        public string Type { get; set; }
     }
 }
