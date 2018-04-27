@@ -1,15 +1,6 @@
 <template>
   <div id="content">
     <h1>{{pageTitle}}</h1>
-    <form>
-      <div>
-        <label for="Username">Username</label>
-        <input v-model="Username" placeholder= "abcd" />
-      </div>
-      <span>
-        <button @click="displayReviews">Search Button</button>
-      </span>
-    </form>
     <div class="body">
       <ul id="Review_List">
         <!--Iterates through results list with review as index key. Grabs all the reviews
@@ -35,10 +26,30 @@ export default {
   name: 'GetUserReview',
   data: function (results) {
     return {
-      pageTitle: 'User Review',
-      Username: '',
+      pageTitle: 'Review List',
+      Username: this.$store.getters.getviewprofile,
       results: []
     }
+  },
+  created () {
+    axios({
+      method: 'POST',
+      url: 'http://localhost/server/v1/review/getuserreview/',
+      headers: {
+        'Access-Control-Allow-Origin': 'http://localhost:8080',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        Username: this.$data.Username
+      }
+    })
+      .then(response => {
+        this.results = response.data
+        console.log(response)
+      })
+      .catch(error => {
+        console.log(error.response)
+      })
   },
   methods: {
     displayReviews: function () {
