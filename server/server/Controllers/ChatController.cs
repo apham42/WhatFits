@@ -19,27 +19,7 @@ namespace server.Controllers
     {
         ChatDTO chatuser = new ChatDTO();
         ChatGateway mychat = new ChatGateway();
-        private byte[] key = new byte[16];
-        private byte[] iv = new byte[16];
-        private Random randomkey = new Random();
-        private Random randomiv = new Random();
-
-        /// <summary>
-        /// Provides local key value
-        /// </summary>
-        public byte[] Getkey()
-        {
-            randomkey.NextBytes(key);
-            return key;
-        }
-        /// <summary>
-        /// Provides local inivial value
-        /// </summary>
-        public byte[] Getiv()
-        {
-            randomiv.NextBytes(iv);
-            return iv;
-        }
+        
         /// <summary>
         /// 
         /// </summary>
@@ -55,7 +35,7 @@ namespace server.Controllers
                 return new HttpResponseMessage(HttpStatusCode.MethodNotAllowed);
             if (mychat.DoesUserNameExists(chatuser))
             {
-                HttpContext.Current.AcceptWebSocketRequest(new ChatService(username, Getkey(), Getiv()));
+                HttpContext.Current.AcceptWebSocketRequest(new ChatService(username));
                 return Request.CreateResponse(HttpStatusCode.SwitchingProtocols);
             }
             return new HttpResponseMessage(HttpStatusCode.BadRequest);

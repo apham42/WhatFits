@@ -8,6 +8,6 @@ namespace Whatfits.DataAccess.DTOs.ContentDTOs
 {
     public class ImageDTO
     {
-
+        
     }
 }

@@ -12,6 +12,9 @@
                <span></span>
                </span>
             </div>
+            <div class ="search">
+              <SearchBar></SearchBar>
+            </div>
             <div id="navbarMenuHero1" class="navbar-menu">
                <div class="navbar-end">
                   <span class="navbar-item">
@@ -31,8 +34,12 @@
 
 <script>
 import axios from 'axios'
+import SearchBar from '@/components/Search/SearchBar'
 export default {
   name: 'MainNavBar',
+  components: {
+    'SearchBar': SearchBar
+  },
   methods: {
     logout: function () {
       axios({

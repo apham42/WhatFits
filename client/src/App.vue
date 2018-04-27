@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <NavBar></NavBar>
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -43,6 +43,5 @@ export default {
 </script>
 
 <style src="./assets/CSS/Globaltheme/bulmaTheme.css">
-#app {
-}
+
 </style>

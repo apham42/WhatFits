@@ -8,7 +8,12 @@
       </div>
       <div v-else>
         <user-info id="ProfileInfo" :userData="userData"></user-info>
+        <get-reviews></get-reviews>
         <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
+        <div v-if="LoggedinUser === Username">
+          <workout-logger></workout-logger>
+        </div>
+        <workout-log></workout-log>
         <chat-bar></chat-bar>
       </div>
     </div>
@@ -21,7 +26,9 @@ import UserInfo from '@/components/UserProfile/UserInfo'
 import ErrorPage from '@/components/ErrorPage/NotFound'
 import HomeButton from '@/components/Common/HomeButton'
 import Chat from '@/components/UserProfile/Chat'
-
+import WorkoutLogger from '@/components/UserProfile/WorkoutLogger'
+import GetUserReview from '@/components/Reviews/GetUserReview'
+import Review from '@/components/Reviews/Review'
 export default {
   name: 'ProfilePage',
   components: {
@@ -29,7 +36,10 @@ export default {
     'error-page404': ErrorPage,
     'home-button': HomeButton,
     'chat-bar': Chat,
-    'workout-log': GetWorkouts
+    'workout-log': GetWorkouts,
+    'workout-logger': WorkoutLogger,
+    'get-reviews': GetUserReview,
+    'review': Review
   },
   data () {
     return {
@@ -55,7 +65,8 @@ export default {
         'Content-Type': 'application/json'
       },
       data: {
-        'Username': this.$store.getters.getviewprofile
+        'Username': this.$store.getters.getviewprofile,
+        'LoggedinUser': this.$store.getters.userName
       }
     })
       // redirect to Home page
@@ -68,6 +79,11 @@ export default {
         this.userData.gender = response.data.Gender
         this.userData.profileImage = response.data.ProfilePicture
         this.errorFlag = false
+        if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
+          this.myProfile = true
+        } else {
+          this.myProfile = false
+        }
       }).catch((error) => {
       // Pushes the error messages into error to display
         if (error.response) {
@@ -97,6 +113,8 @@ export default {
   padding-left: 10em;
   width:auto;
   max-width:450px;
+  float:left;
+  position: relative;
 }
 @media only screen and (min-width: 300px){
   #ProfileInfo{

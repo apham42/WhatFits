@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="BadPasswordTest\BadPasswordTest.cs" />
     <Compile Include="Chat Test\ChatTest.cs" />
+    <Compile Include="Follows Test\FollowsTest.cs" />
     <Compile Include="Gateway Test\LoginTests.cs" />
     <Compile Include="Gateway Test\RegistrationTests.cs" />
     <Compile Include="Gateway Test\UserAccessControlTests.cs" />
