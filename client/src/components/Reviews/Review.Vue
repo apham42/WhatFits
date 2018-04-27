@@ -12,7 +12,7 @@
         <textarea v-model="ReviewMessage" class="form-control" placeholder="Input Review"></textarea>
       </div>
       <label for="RevieweeID">RevieweeID</label>
-      <input v-model="RevieweeID" placeholder="'1'"/>
+      <input v-model="RevieweeID" placeholder="'1'" v-on:keypress="isNumber(event)"/>
       <button type="submit" @click.prevent="input">Submit</button>
     </form>
   </div>
@@ -49,6 +49,15 @@ export default {
     rate (star) {
       if (typeof star === 'number' && star <= this.maxRating && star >= 0) {
         this.Rating = this.Rating === star ? star - 1 : star
+      }
+    },
+    isNumber: function (evt) {
+      evt = (evt) || window.event
+      var charCode = (evt.which) || evt.keyCode
+      if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
+        evt.preventDefault()
+      } else {
+        return true
       }
     },
     input: function () {

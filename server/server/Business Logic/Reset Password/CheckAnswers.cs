@@ -1,16 +1,12 @@
 ﻿using server.Interfaces;
 using server.Model;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.Gateways.CoreGateways;
 using Whatfits.Hash;
 
 namespace server.Business_Logic.Reset_Password
 {
-    // TODO: @AaronPham compare answers and return response
     public class CheckAnswers : ICommand
     {
         public ResetPasswordResponseDTO incommingAnswers = new ResetPasswordResponseDTO();
@@ -24,18 +20,49 @@ namespace server.Business_Logic.Reset_Password
         {
             var response = new Outcome();
 
+            incommingAnswers.Messages = new List<string>();
+
+            if(incommingAnswers.Answers == null)
+            {
+                incommingAnswers.isSuccessful = false;
+                response.Result = incommingAnswers;
+                return response;
+            }
+
             var loginGateway = new LoginGateway();
             var dbanswers = loginGateway.GetSecurityQandAs(username);
+
+            if(dbanswers.isSuccessful == false)
+            {
+                incommingAnswers.isSuccessful = false;
+                response.Result = incommingAnswers;
+                return response;
+            }
 
             // hash answers
             var hashDTO = new HashDTO();
             var hash = new HMAC256();
 
+            var hashedAnswers = new Dictionary<int, string>();
+
             foreach(var keys in incommingAnswers.Answers.Keys)
             {
                 hashDTO.Original = incommingAnswers.Answers[keys];
-                incommingAnswers.Answers[keys] = hash.Hash(hashDTO);
+                hashedAnswers[keys] = hash.Hash(hashDTO);
             }
+
+            foreach(var keys in hashedAnswers.Keys)
+            {
+                if(hashedAnswers[keys] != dbanswers.Answers[keys])
+                {
+                    incommingAnswers.isSuccessful = false;
+                    response.Result = incommingAnswers;
+                    return response;
+                }
+            }
+
+            incommingAnswers.isSuccessful = true;
+            response.Result = incommingAnswers;
 
             return response;
         }

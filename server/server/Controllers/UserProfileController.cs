@@ -13,6 +13,7 @@ using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using System.IO;
+using System.Diagnostics;
 
 namespace server.Controllers
 {
@@ -30,7 +31,7 @@ namespace server.Controllers
         /// </returns>
         [HttpPost]
         [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public IHttpActionResult ProfileData([FromBody]UsernameDTO obj)
+        public IHttpActionResult ProfileData([FromBody] UsernameDTO obj)
         {
             // Creates service to handle request
             UserProfileService temp = new UserProfileService();
@@ -44,99 +45,119 @@ namespace server.Controllers
             // Request was handled, sending success to front end with data
             return Content(HttpStatusCode.OK, response.Data);
         }
+        /*
         [HttpPost]
         [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public IHttpActionResult EditProfile(ProfileDTO obj)
+        public IHttpActionResult EditProfile([FromBody] ProfileDTO obj)
         {
             // Creates service to handle request
-            UserProfileService temp = new UserProfileService();
-            var response = temp.EditProfile(obj);
+            // httpcontex.current.request.parame["your name in axios"]
+            UserProfileService service = new UserProfileService();
+            var incomingImageRequest = HttpContext.Current.Request;
+            if (incomingImageRequest.Files.Count > 1)
+            {
+                Content(HttpStatusCode.BadRequest, "Error: Invalid # of images");
+            }
+            var imageFile = incomingImageRequest.Files[0];
+
+            var response = service.EditProfile(obj, imageFile);
+            if (!response.IsSuccessful)
+            {
+                return Content(HttpStatusCode.BadRequest, "Error: " + response.Messages);
+            }
+            return Content(HttpStatusCode.OK, "Operation was successful? " + response.IsSuccessful);
+        }
+        */
+        [HttpPost]
+        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        public IHttpActionResult EditProfile()
+        {
+            // Creates service to handle request
+            ProfileDTO obj = new ProfileDTO();
+            obj.UserName = HttpContext.Current.Request.Params["UserName"];
+            obj.FirstName = HttpContext.Current.Request.Params["FirstName"];
+            obj.LastName = HttpContext.Current.Request.Params["LastName"];
+            obj.Email = HttpContext.Current.Request.Params["Email"];
+            obj.Description = HttpContext.Current.Request.Params["Description"];
+            obj.SkillLevel = HttpContext.Current.Request.Params["SkillLevel"];
+            obj.Gender = HttpContext.Current.Request.Params["Gender"];
+            obj.ProfilePicture = HttpContext.Current.Request.Params["ProfilePicture"];
+            UserProfileService service = new UserProfileService();
+            obj.IsUpdatingProfileImage = HttpContext.Current.Request.Params["IsThereImage"];
+            HttpPostedFile imageFile = null;
+            if (obj.IsUpdatingProfileImage == "true")
+            {
+                imageFile = HttpContext.Current.Request.Files[0];
+            }
+            var response = service.EditProfile(obj, imageFile);
             if (!response.IsSuccessful)
             {
                 return Content(HttpStatusCode.BadRequest,"Error: " + response.Messages);
             }
-            return Content(HttpStatusCode.OK, "Operation was successful? "+response.IsSuccessful);
+            return Content(HttpStatusCode.OK, "Operation was successful? "+ response.IsSuccessful);
         }
-        [HttpGet]
-        [EnableCors("http://localhost:8080 , http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "GET")]
-        public IHttpActionResult GetProfileData()
-        {
-            ProfileDTO profile = new ProfileDTO()
-            {
-                FirstName = "John",
-                LastName = "Smith",
-                Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent quis nunc ac arcu congue luctus. Nulla ligula sapien, sodales fringilla ligula sit amet, gravida sagittis turpis. Nunc tincidunt est vel risus lobortis laoreet. Suspendisse feugiat metus ac egestas tempor.",
-                SkillLevel = "Beginner",
-                Gender = "Male",
-                ProfilePicture = "../../assets/Images/ProfileDummy/profilePicture.jpg"
-            };
-            return Content(HttpStatusCode.OK, profile);
-        }
+
         [HttpPost]
-        [EnableCors("http://localhost:8080 , http://localhost:8081  , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public async Task<HttpResponseMessage> StoreImage()
-        {
-            /*
-            if (obj.ProfilePicture == null)
-            {
-                return Content(HttpStatusCode.BadRequest, "This is null");
-            }
-            return Content(HttpStatusCode.OK, "This filename was passed through:" + obj.ProfilePicture);
-            */
-            Dictionary<string, object> dict = new Dictionary<string, object>();
+        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        public async Task<HttpResponseMessage> PostFormData()
+        {   
             try
             {
+                // Getting an HttpContext Request
                 var httpRequest = HttpContext.Current.Request;
-
+                // Getting files from request
                 foreach (string file in httpRequest.Files)
                 {
+
                     HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
-
-                    var postedFile = httpRequest.Files[file];
-                    if (postedFile != null && postedFile.ContentLength > 0)
+                    // Receiving files from request
+                    var imageFile = httpRequest.Files[file];
+                    // Checking if there is a valid file to be processed and not emtpy
+                    if (imageFile != null && imageFile.ContentLength > 0)
                     {
-
+                        // Validating max size
                         int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
-
+                        // Checking file extension for actual image
                         IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png" };
-                        var ext = postedFile.FileName.Substring(postedFile.FileName.LastIndexOf('.'));
-                        var extension = ext.ToLower();
-                        if (!AllowedFileExtensions.Contains(extension))
+                        // Extracting file extension for validation
+                        var ImageExtension = imageFile.FileName.Substring(imageFile.FileName.LastIndexOf('.')).ToLower();
+                        // Making comparison for valid file exe
+                        if (!AllowedFileExtensions.Contains(ImageExtension))
                         {
-                            var message = string.Format("Please Upload image of type .jpg,.png.");
-                            dict.Add("error", message);
-                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, "Error: Invalid file extension.");
                         }
-                        else if (postedFile.ContentLength > MaxContentLength)
+                        else if (imageFile.ContentLength > MaxContentLength)
                         {
-                            var message = string.Format("Please Upload a file upto 1 mb.");
-                            dict.Add("error", message);
-                            return Request.CreateResponse(HttpStatusCode.BadRequest, dict);
+                            return Request.CreateResponse(HttpStatusCode.BadRequest, "Error: Invalid image size.");
                         }
                         else
                         {
-                            string path = ConfigurationManager.AppSettings["imagePath"];
-                            //string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\"));
-                            string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\")); 
-                            //var filePath = HttpContext.Current.Server.MapPath(newPath + postedFile.FileName + extension); 
-                            var filePath = HttpContext.Current.Server.MapPath(path + postedFile.FileName);
-                            //var filePath = path + postedFile.FileName;                            
-                            postedFile.SaveAs(filePath);
+                            // This is the new way
+                            /*
+                            string path = ConfigurationManager.AppSettings["imagePath"]; 
+                             */
+                            /*
+                             * //string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\"));
+                           string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\")); 
+                           //var filePath = HttpContext.Current.Server.MapPath(newPath + postedFile.FileName + extension); 
+                           var filePath = HttpContext.Current.Server.MapPath(path + postedFile.FileName);
+                           //var filePath = path + postedFile.FileName;                            
+                           postedFile.SaveAs(filePath);
+                            */
+                            // Default way
+                            var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + imageFile.FileName);
+                            imageFile.SaveAs(filePath);
                         }
                     }
-                    var message1 = string.Format("Image Updated Successfully.");
-                    return Request.CreateErrorResponse(HttpStatusCode.Created, message1); ;
+                    return Request.CreateErrorResponse(HttpStatusCode.Created, "Success: Image Uploaded Successfully."); ;
                 }
-                var res = string.Format("Please Upload a image.");
-                dict.Add("error", res);
-                return Request.CreateResponse(HttpStatusCode.NotFound, dict);
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Error: No image found. Did you upload one?");
             }
             catch (Exception e)
             {
-                var res = string.Format("some Message");
-                dict.Add("error", res);
-                return Request.CreateResponse(HttpStatusCode.NotFound, dict);
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Error: An exception was thrown while processing your request. \n" + e);
             }
+
         }
     }
 }
