@@ -170,7 +170,10 @@ namespace server.Services
             {
                 UserName = user.UserCredInfo.Username,
                 Password = hashPassword,
-                Type = user.UserType,
+                FirstName = user.UserProfile.FirstName,
+                LastName = user.UserProfile.LastName,
+                Type = user.UserProfile.UserType,
+                Skill = user.UserProfile.Skill,
                 Address = geoCoordinates.Street,
                 City = geoCoordinates.City,
                 State = geoCoordinates.State,

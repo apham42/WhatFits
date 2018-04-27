@@ -4,19 +4,19 @@
         <p>Question: {{ Question1 }}</p>
         <div id="Answer1" class="field">
           <p class="control has-icons-left">
-          <input class="input is-small" v-model="A1" type="text" placeholder="Username">
+          <input class="input is-small" v-model="A1" type="text" placeholder="Answer">
           </p>
         </div>
         <p>Question: {{ Question2 }}</p>
         <div id="Answer2" class="field">
             <p class="control has-icons-left">
-            <input class="input is-small" v-model="A2" type="text" placeholder="Username">
+            <input class="input is-small" v-model="A2" type="text" placeholder="Answer">
             </p>
         </div>
         <p>Question: {{ Question3 }}</p>
         <div id="Answer3" class="field">
             <p class="control has-icons-left">
-            <input class="input is-small" v-model="A3" type="text" placeholder="Username">
+            <input class="input is-small" v-model="A3" type="text" placeholder="Answer" @keyup.enter="EnterAnswers">
             </p>
         </div>
         <button class="button is-primary" @click="EnterAnswers">Submit</button>
@@ -92,6 +92,7 @@ export default {
           console.log(response)
           this.$data.nextComponent = true
           this.$data.SentUsername.username = this.Questions.Username
+          this.$data.failanswer = false
         })
         .catch((error) => {
           console.log(error)

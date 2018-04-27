@@ -23,6 +23,22 @@
             <div class="confirmPassValidations">
                 <span v-show="!$v.confirmPassword.sameAsPassword && $v.confirmPassword.$dirty">Passwords must be identical</span>
             </div>
+            <h3>First Name</h3>
+            <input id="firstName" placeholder="Enter First Name" v-model.trim="firstName" @input="delayTouch($v.firstName)">
+            <div class="firstNameValidations">
+                <span v-show="!$v.firstName.required && $v.firstName.$dirty">Field is required</span>
+                <span v-show="!$v.firstName.minLength && $v.firstName.$dirty">First name must have at least {{$v.firstName.$params.minLength.min}} letters</span>
+                <span v-show="!$v.firstName.maxLength && $v.firstName.$dirty">First name must have at most {{$v.firstName.$params.maxLength.max}} letters</span>
+                <span v-show="!validateCharacters(this.$data.firstName) && $v.firstName.$dirty && $v.firstName.maxLength && $v.firstName.minLength">First name has invalid characters</span>
+            </div>
+            <h3>Last Name</h3>
+            <input id="lastName" placeholder="Enter Last Name" v-model.trim="lastName" @input="delayTouch($v.lastName)">
+            <div class="lastNameValidations">
+                <span v-show="!$v.lastName.required && $v.lastName.$dirty">Field is required</span>
+                <span v-show="!$v.lastName.minLength && $v.lastName.$dirty">Last name must have at least {{$v.lastName.$params.minLength.min}} letters</span>
+                <span v-show="!$v.lastName.maxLength && $v.lastName.$dirty">Last name must have at most {{$v.lastName.$params.maxLength.max}} letters</span>
+                <span v-show="!validateCharacters(this.$data.lastName) && $v.lastName.$dirty && $v.lastName.maxLength && $v.lastName.minLength">Last name has invalid characters</span>
+            </div>
         </div>
 
         <div class="Location">
@@ -33,7 +49,7 @@
                 <span v-show="!$v.address.required && $v.address.$dirty">Field is required</span>
             </div>
             <h3>City</h3>
-            <input id="city" placeholder="Enter City" v-model.trim="city" @input="delayTouch($v.city)">
+            <input id="city" placeholder="Must be in LA or Orange County" v-model.trim="city" @input="delayTouch($v.city)">
             <div class="cityValidations">
                 <span v-show="!$v.city.maxLength && $v.city.$dirty">Maximum length is {{$v.city.$params.maxLength.max}}</span>
                 <span v-show="!$v.city.required && $v.city.$dirty">Field is required</span>
@@ -52,6 +68,14 @@
                 <span v-show="!$v.zipCode.required && $v.zipCode.$dirty">Field is required</span>
             </div>
         </div>
+
+        <div class ="userSkill">
+          <h3>Skill Level </h3>
+            <select v-model="skill">
+                  <option v-for="skillLevel in skillLevels" :key="skillLevel"> {{skillLevel}} </option>
+                </select>
+        </div>
+
         <div class="Security Questions">
             <h3>Security Question 1</h3>
             <select v-model="securityQues1">
@@ -117,7 +141,7 @@
         </div>
 
         <div class="registerButton">
-            <button type="submit" class="register-button" :disabled="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.password)" @click.prevent="registerUser">Register</button>
+            <button type="submit" class="register-button" :disabled="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.firstName) || !validateCharacters(this.$data.lastName) || !validateCharacters(this.$data.password)" @click.prevent="registerUser">Register</button>
         </div>
     </form>
 </div>
@@ -141,6 +165,8 @@ export default {
   data: function () {
     return {
       username: '',
+      firstName: '',
+      lastName: '',
       password: '',
       confirmPassword: '',
       address: '',
@@ -153,6 +179,7 @@ export default {
       securityQues1: '',
       securityQues2: '',
       securityQues3: '',
+      skill: '',
       securityQuestionSet1: [
         'Who was the company you first worked for?',
         'Where did you go to highschool or college?',
@@ -170,12 +197,23 @@ export default {
       ],
       termsChecked: false,
       messages: [],
+      skillLevels: ['Beginner', 'Intermediate', 'Advanced'],
       showTerms: false
     }
   }, // data
   // validations based on business rules
   validations: {
     username: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(64)
+    },
+    firstName: {
+      required,
+      minLength: minLength(2),
+      maxLength: maxLength(64)
+    },
+    lastName: {
       required,
       minLength: minLength(2),
       maxLength: maxLength(64)
@@ -226,6 +264,9 @@ export default {
     answerToSecQues3: {
       required,
       maxLength: maxLength(150)
+    },
+    skill: {
+      required
     }
   },
 
@@ -280,7 +321,12 @@ export default {
             state: this.$data.state,
             zipCode: this.$data.zipCode
           },
-          UserType: 'Enable'
+          UserProfile: {
+            firstName: this.$data.firstName,
+            lastName: this.$data.lastName,
+            skill: this.$data.skill,
+            userType: 'Enable'
+          }
         },
         headers: {
           'Access-Control-Allow-Origin': 'http://localhost:8080',

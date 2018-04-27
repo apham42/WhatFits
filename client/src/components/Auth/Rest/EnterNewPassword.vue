@@ -2,7 +2,7 @@
     <div>
         <div id="inputnewpass" class="field">
             <p class="control has-icons-left">
-            <input class="input is-small" v-model="newPassword" type="text" placeholder="Username" @keyup.enter="CreateNewPassword">
+            <input class="input is-small" v-model="newPassword" type="Password" placeholder="New Password" @keyup.enter="CreateNewPassword">
             </p>
         </div>
         <button class="button is-primary" @click="CreateNewPassword">Submit New Password</button>
