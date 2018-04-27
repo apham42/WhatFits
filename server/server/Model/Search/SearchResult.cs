@@ -13,8 +13,9 @@ namespace server.Model.Search
     public class SearchResult
     {
         public string User { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Skill { get; set; }
-        public GeoCoordinate UserCoordinate { get; set; }
         public double Distance { get; set; }
     }
 }

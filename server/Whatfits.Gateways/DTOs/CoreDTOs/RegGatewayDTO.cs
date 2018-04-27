@@ -14,6 +14,11 @@ namespace Whatfits.DataAccess.DataTransferObjects.CoreDTOs
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Type { get; set; }
+        // User Profile
+        public string UserType { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Skill { get; set; }
         // Location
         public string Address { get; set; }
         public string City { get; set; }
