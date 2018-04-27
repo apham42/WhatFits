@@ -19,43 +19,6 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
     {
         private SearchContext db = new SearchContext();
 
-        public UsernameResponseDTO SearchUser(UsernameDTO dto)
-        {
-            UsernameResponseDTO response = new UsernameResponseDTO();
-            List<string> messages = new List<string>();
-            try
-            {
-                string username = (from x in db.Credentials
-                                   where x.UserName == dto.Username
-                                   select x.UserName).FirstOrDefault();
-                if (dto.Username == username)
-                {
-                    response.isSuccessful = true;
-                    messages.Add("User " + dto.Username + " was found");
-
-                }
-                else
-                {
-                    response.isSuccessful = false;
-                    messages.Add(AccountGatewayConstants.USER_DNE_ERROR);
-                }
-                response.Messages = messages;
-            }
-            catch (SqlException)
-            {
-                response.isSuccessful = false;
-                messages.Add(ServerConstants.SERVER_ERROR);
-                response.Messages = messages;
-            }
-            catch (DataException)
-            {
-                response.isSuccessful = false;
-                messages.Add(ServerConstants.SERVER_ERROR);
-                response.Messages = messages;
-            }
-            return response;
-        }
-
         public LocationResponseDTO RetrieveLocations()
         {
             LocationResponseDTO response = new LocationResponseDTO();
@@ -96,50 +59,27 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             return response;
         }
 
-        public SearchGatewayResponseDTO RetrieveUsers(SearchGatewayDTO dto)
+        public SearchGatewayResponseDTO RetrieveUsers()
         {
             SearchGatewayResponseDTO response = new SearchGatewayResponseDTO();
             List<string> messages = new List<string>();
             try
             {
-                // Retrieving users information based on validated Location
-                /**
                 var results = (from u in db.Users
-                              select new SearchResult
-                              {
-                                User = u.Credential.UserName,
-                                SkillLevel = u.SkillLevel,
-                                Longitude = u.Location.Longitude,
-                                Latitude = u.Location.Latitude
-                              }).AsEnumerable()
-                              .Where(x => validatedLocations.Contains( x.UserCoordinate = new GeoCoordinate(x.Latitude, x.Longitude)) && x.SkillLevel.Contains(dto.SkillCriteria) && !x.User.Equals(dto.RequestedUser))
-                              .ToList();
-                 **/
-                var results = (from u in db.Users
-                               where u.Credential.UserName != dto.RequestedUser
                                select new UserSearch
                                {
                                    User = u.Credential.UserName,
+                                   FirstName = u.FirstName,
+                                   LastName = u.LastName,
                                    SkillLevel = u.SkillLevel,
                                    Longitude = u.Location.Longitude,
                                    Latitude = u.Location.Latitude
                                }).ToList();
-                               /**
-                               .Select(x => new UserSearch()
-                               {
-                                   User = x.UserName,
-                                   SkillLevel = x.SkillLevel,
-                                   UserCoordinate = new GeoCoordinate(x.Latitude, x.Longitude),
-                               })
-                                .Where(x => validatedLocations.Contains(x.UserCoordinate) && x.SkillLevel.Contains(dto.SkillCriteria) && !x.User.Equals(dto.RequestedUser))
-                                .AsEnumerable();
 
-                results = results.Select(x => { x.Distance = Math.Round(dto.geoCoordinates[x.UserCoordinate], 2); return x; });
-                results = results.OrderBy(x => x.Distance).ThenBy(x => x.SkillLevel);
-                **/
                 if (results.Any())
                 {
                     response.Results = results.ToList();
+                    messages.Add(SearchGatewayConstants.USERS_FOUND);
                     response.IsSuccessful = true;
                 }
                 else

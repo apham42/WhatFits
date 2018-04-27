@@ -33,12 +33,15 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     int getUserID = (from cred in db.Credentials
                                      where obj.Username == cred.UserName
                                      select cred.UserID).FirstOrDefault();
+                    int getTargetUserID = (from cred in db.Credentials
+                                     where obj.TargetUser == cred.UserName
+                                     select cred.UserID).FirstOrDefault();
                     //ReviewID is a key and will be automatically incremented
                     //creates a new review instance by grabbing object's data from client
                     Review r = new Review
                     {
                         UserID = getUserID,
-                        RevieweeID = obj.RevieweeID,
+                        RevieweeID = getTargetUserID,
                         Rating = obj.Rating,
                         ReviewMessage = obj.ReviewMessage,
                         DateAndTime = obj.DateAndTime,

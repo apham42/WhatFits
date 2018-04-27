@@ -34,7 +34,7 @@ export default {
   name: 'GetWorkouts',
   data: function () {
     return {
-      Username: this.$store.getters.getusername,
+      Username: this.$store.getters.getviewprofile,
       results: []
     }
   },
