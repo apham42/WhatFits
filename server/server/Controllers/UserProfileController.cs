@@ -45,34 +45,15 @@ namespace server.Controllers
             // Request was handled, sending success to front end with data
             return Content(HttpStatusCode.OK, response.Data);
         }
-        /*
-        [HttpPost]
-        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public IHttpActionResult EditProfile([FromBody] ProfileDTO obj)
-        {
-            // Creates service to handle request
-            // httpcontex.current.request.parame["your name in axios"]
-            UserProfileService service = new UserProfileService();
-            var incomingImageRequest = HttpContext.Current.Request;
-            if (incomingImageRequest.Files.Count > 1)
-            {
-                Content(HttpStatusCode.BadRequest, "Error: Invalid # of images");
-            }
-            var imageFile = incomingImageRequest.Files[0];
-
-            var response = service.EditProfile(obj, imageFile);
-            if (!response.IsSuccessful)
-            {
-                return Content(HttpStatusCode.BadRequest, "Error: " + response.Messages);
-            }
-            return Content(HttpStatusCode.OK, "Operation was successful? " + response.IsSuccessful);
-        }
-        */
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult EditProfile()
         {
-            // Creates service to handle request
+            // Passing information from form to DTO
             ProfileDTO obj = new ProfileDTO();
             obj.UserName = HttpContext.Current.Request.Params["UserName"];
             obj.FirstName = HttpContext.Current.Request.Params["FirstName"];
@@ -82,14 +63,20 @@ namespace server.Controllers
             obj.SkillLevel = HttpContext.Current.Request.Params["SkillLevel"];
             obj.Gender = HttpContext.Current.Request.Params["Gender"];
             obj.ProfilePicture = HttpContext.Current.Request.Params["ProfilePicture"];
-            UserProfileService service = new UserProfileService();
+            // Checking if profile image is being updated
             obj.IsUpdatingProfileImage = HttpContext.Current.Request.Params["IsThereImage"];
             HttpPostedFile imageFile = null;
+            // Creates service to handle request
+            UserProfileService service = new UserProfileService();
+            
+            // Get image if being updated
             if (obj.IsUpdatingProfileImage == "true")
             {
                 imageFile = HttpContext.Current.Request.Files[0];
             }
+            // Pressing request
             var response = service.EditProfile(obj, imageFile);
+            // Was it successful?
             if (!response.IsSuccessful)
             {
                 return Content(HttpStatusCode.BadRequest,"Error: " + response.Messages);
@@ -132,20 +119,18 @@ namespace server.Controllers
                         }
                         else
                         {
-                            // This is the new way
                             /*
-                            string path = ConfigurationManager.AppSettings["imagePath"]; 
-                             */
-                            /*
-                             * //string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\"));
-                           string newPath = Path.GetFullPath(Path.Combine(path, @"..\..\Data\")); 
-                           //var filePath = HttpContext.Current.Server.MapPath(newPath + postedFile.FileName + extension); 
-                           var filePath = HttpContext.Current.Server.MapPath(path + postedFile.FileName);
-                           //var filePath = path + postedFile.FileName;                            
-                           postedFile.SaveAs(filePath);
+                            // Default way
+                            string path = ConfigurationManager.AppSettings["imagePath"];
+                            var filePath = HttpContext.Current.Server.MapPath(@""+path + imageFile.FileName);
+                            imageFile.SaveAs(filePath);
                             */
                             // Default way
-                            var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + imageFile.FileName);
+                            string userName = "rsanchez92";
+                            string path = ConfigurationManager.AppSettings["imagePath"];
+                            var imageExtension = imageFile.FileName.Substring(imageFile.FileName.LastIndexOf('.'));
+                            string newFileName = userName + "ProfileImage" + imageExtension;
+                            var filePath = HttpContext.Current.Server.MapPath(@"" + path + newFileName);
                             imageFile.SaveAs(filePath);
                         }
                     }

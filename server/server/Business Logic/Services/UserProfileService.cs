@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Http;
@@ -54,7 +55,7 @@ namespace server.Business_Logic.Services
                     response.Messages.Add("Invalid Data");
                     return response;
                 }
-                SaveImage(image);
+                obj.ProfilePicture = SaveImage(image, obj.UserName);
             }
             if (!ValidateProfileData(obj))
             {
@@ -64,17 +65,21 @@ namespace server.Business_Logic.Services
                 return response;
             }
             // Storing data
-            
             UserProfileGateway userProfileDb = new UserProfileGateway();
             response = userProfileDb.EditProfile(obj);
             return response;
         }
-        private void SaveImage(HttpPostedFile image)
+        private string SaveImage(HttpPostedFile image, string userName)
         {
             try
             {
-                var filePath = HttpContext.Current.Server.MapPath("~/App_Data/" + image.FileName);
+                // Default way
+                string path = ConfigurationManager.AppSettings["imagePath"];
+                var imageExtension = image.FileName.Substring(image.FileName.LastIndexOf('.'));
+                string newFileName = userName + "ProfileImage" + imageExtension;
+                var filePath = HttpContext.Current.Server.MapPath(@"" + path + newFileName);
                 image.SaveAs(filePath);
+                return newFileName;
             }
             catch (Exception)
             {
