@@ -174,9 +174,12 @@ export default {
 </script>
 <style>
 #isfollow{
-  width: 80px;
-  height: 30px;
-  background: #3399ff;
+  border-radius: 10px 10px 10px 10px;
+  border: solid #34495e;
+  width: 120px;
+  height: 35px;
+  position: left;
+  background: #34495e;
   color:white;
 }
 </style>
