@@ -20,7 +20,7 @@
                       </span>
                     </span>
                     <span class="file-name">
-                      {{this.profileImageName}}
+                      {{this.newProfileImageName}}
                     </span>
                 </label>
             </div>
@@ -134,7 +134,7 @@
     <div class="control ">
         <div class="field-label is-horizontal Buttons-Center">
             <span class="control">
-          <button class="button  is-primary " :disabled="$v.$invalid || this.isValidImage"  @click.prevent="pushProfile" >Update My Profile</button>
+          <button class="button  is-primary " :disabled="$v.$invalid && this.isValidImage"  @click.prevent="pushProfile" >Update My Profile</button>
           <button class="button is-secondary " @click="goBackToProfile" >Go to my Profile</button>
         </span>
         </div>
@@ -172,7 +172,8 @@ export default {
       },
       errorFlag: true,
       statusMessages: '',
-      profileImageName: 'example.jpg',
+      newProfileImageName: 'example.jpg',
+      newProfileImage: '',
       isValidImage: false,
       isUpdatingImage: false
     }
@@ -252,16 +253,16 @@ export default {
       var extension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()
       if (extension !== 'png' && extension !== 'jpg') {
         this.isValidImage = false
-        this.profileImageName = 'Invalid Image'
+        this.newProfileImageName = 'Invalid Image'
         return
       }
       if (fileName.length > 50) {
         this.isValidImage = false
-        this.profileimageName = 'Name too long'
+        this.newProfileImageName = 'Name too long'
         return
       }
-      this.profileImage = event.target.files[0]
-      this.profileImageName = event.target.files[0].name
+      this.newProfileImage = event.target.files[0]
+      this.newProfileImageName = event.target.files[0].name
       this.isValidImage = true
       this.isUpdatingImage = true
     },
@@ -278,7 +279,7 @@ export default {
     },
     pushProfile: function () {
       const formData = new FormData()
-      formData.append('image', this.profileImage, this.profileImageName)
+      formData.append('ProfilePicture', this.newProfileImage, this.newProfileImageName)
       formData.append('UserName', this.$store.getters.getusername)
       formData.append('FirstName', this.userData.firstName)
       formData.append('LastName', this.userData.lastName)
@@ -287,7 +288,6 @@ export default {
       formData.append('Gender', this.userData.gender)
       formData.append('Description', this.userData.description)
       formData.append('IsThereImage', this.isUpdatingImage)
-      formData.append('ProfilePicture', '../../../static/genericProfileImage.jpg')
       var headers = {
         'Content-type': 'application/x-www-form-urlencoded',
         'Access-Control-Allow-Origin': 'http://localhost:8081'
@@ -305,7 +305,7 @@ export default {
             this.errorFlag = true
             console.log(error.response)
           } else if (error.request) {
-            this.statusMessages = 'A'
+            this.statusMessages = 'An error occured on our side...'
             this.errorFlag = true
             console.log(error.request)
           } else {

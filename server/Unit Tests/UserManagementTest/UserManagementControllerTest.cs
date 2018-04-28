@@ -95,7 +95,6 @@ namespace UnitTests.UserManagementTest
             {
                 UserCredInfo = credentials,
                 UserLocation = address,
-                // UserType = "Enable",
                 SecurityQandAs = SecurityQandAs
             };
             // Act

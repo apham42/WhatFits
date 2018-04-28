@@ -18,6 +18,8 @@
   </label>
 </div>
   <button class="button"   @click="uploadImage">Upload</button>
+  <img v-bind:src="this.imagePath">
+  <br>
 </div>
 </template>
 
@@ -33,7 +35,9 @@ export default {
     return {
       profileImageName: 'yourProfileImage.jpg',
       profileImage: '',
-      isvalidImage: false
+      isvalidImage: false,
+      imagePath: 'http://localhost/images/profileImages/genericProfileImage.jpg',
+      incomingPath: 'rsanchez92ProfileImage.jpg'
     }
   },
   methods: {
@@ -67,6 +71,7 @@ export default {
         })
         .then(response => {
           console.log('Success')
+          this.imagePath = this.$store.getters.getprofilepicture + this.incomingPath
         })
         .catch((error) => {
           console.log('Error')

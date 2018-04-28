@@ -7,11 +7,11 @@
                 Whatfits Homepage
             </h1>
             <h2 class="subtitle body-text">
-                Clearly under construction
+                Still Under Construction
             </h2>
         </div>
     </div>
-    <div class="hero-foot">
+    <!-- <div class="hero-foot">
         <nav class="tabs">
             <div class="container">
                 <ul>
@@ -36,7 +36,7 @@
                 </ul>
             </div>
         </nav>
-    </div>
+    </div> -->
 </section>
 </template>
 <script>
