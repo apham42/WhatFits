@@ -50,7 +50,7 @@ export default {
         description: '',
         skillLevel: '',
         gender: '',
-        profileImage: '',
+        profileImagePath: '',
         myProfile: true
       }
     }
@@ -70,12 +70,13 @@ export default {
     })
       // redirect to Home page
       .then(response => {
+        console.log(response.data)
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description
         this.userData.skillLevel = response.data.SkillLevel
         this.userData.gender = response.data.Gender
-        this.userData.profileImage = response.data.ProfilePicture
+        this.userData.profileImagePath = this.$store.getters.getprofilepicture + response.data.ProfilePicture
         this.errorFlag = false
         if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
           this.userData.myProfile = true

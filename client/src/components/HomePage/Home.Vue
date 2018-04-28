@@ -6,7 +6,7 @@
 </section>
 <div class="box cta">
       <p class="has-text-centered">
-         <span class="tag is-info">L O L</span> Login FINALLY works
+         <span class="tag is-info">Oh WOW</span> Everything is finally integrated
       </p>
    </div>
    <section class="container">
