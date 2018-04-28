@@ -106,10 +106,10 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                         FirstName = dto.FirstName,
                         LastName = dto.LastName,
                         Email = "",
-                        Description = "",
-                        Gender = "",
+                        Description = "A little about my self and interests.",
+                        Gender = "Empty",
                         SkillLevel = dto.Skill,
-                        ProfilePicture = ""
+                        ProfilePicture = "genericProfileImage.jpg"
                     };
                     db.UserProfiles.Add(userInfo);
                     db.SaveChanges();
