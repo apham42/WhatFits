@@ -86,7 +86,7 @@ export default {
         } catch (error) { // server message cannot decrypted, since it is not encypted
           // send message to offline user
           if (event.data === ' ') {
-            window.document.getElementById('receives').prepend('\n' + 'User is offline' + '\n')
+            window.document.getElementById('receives').prepend('User is offline' + '\n')
           }
         }
       }
@@ -183,7 +183,6 @@ export default {
       console.log(source.length)
       return source
     },
-    // get follows list from server
     GetFollows: function () {
       var vm = this
       console.log('call follows')
@@ -218,7 +217,6 @@ export default {
           }
         })
     },
-    // get initial value from server for encryption and decryption
     GetIV: function () {
       var vm = this
       console.log('get IV')
@@ -260,47 +258,36 @@ export default {
 <style>
 #ChatBox,#MsgBox{
   cursor: pointer;
-  background: #88bdbc;
+  background: grey;
   width: 150px;
   position: fixed;
   bottom: 0px;
   right: 20px;
   border-radius: 5px 5px 0px 0px;
   font-family: sans-serif;
-  transition: 0.5s;
 }
 #send{
   margin-right: 80%;
-  width: 100px;
-  height: 35px;
-  background: #34495e;
-  color:white;
-  border: 1px solid #34495e;
+  background: #16a085;
 }
 #chathead,#msghead{
-  background: #34495e;
+  background: rgb(54, 53, 52);
   padding: 5px;
   color:white;
   border-radius: 5px 5px 0px 0px;
   text-align: center;
-  text-shadow: 0 5px 5px rgba(0,0,0,.2);
-}
-#chathead:hover{
-  background:white;
-  border:solid #34495e;
-  text-shadow: 0 5px 5px rgba(0,0,0,.2);
-  color:grey;
 }
 #chatbody{
-  height: 330px;
-  overflow-y: auto;
+  height: 400px;
 }
 #msghead{
-  background:#34495e;
+  background:#3498db;
   padding:2px;
 }
 #msgbody{
-  height:160px;
+  height:200px;
+  overflow: auto;
+  overflow-y: auto;
 }
 #msgclose{
   float:right;
@@ -308,31 +295,25 @@ export default {
   padding: 3px;
 }
 #msgfoot{
-  width:200px;
+  width:250px;
   color:black;
 }
 #MsgBox{
   width: 250px;
-  height: 300px;
+  height: 350px;
   background: white;
-  border: 2px solid #34495e;
-  padding: 2px;
   bottom: -5px;
 }
 #username{
-  font-family: sans-serif;
+  background: gray;
   padding: 5px 25px;
   position: relative;
   color: black;
 }
 #username:hover{
-  background:white;
-  border:solid #34495e;
-  text-shadow: 0 5px 5px rgba(0,0,0,.2);
-  color:grey;
+  background:white
 }
 #username:before{
-  border-radius: 50%;
   content:'';
   position:absolute;
   background:#2ecc71;
@@ -342,11 +323,10 @@ export default {
   top: 12px;
 }
 #messagesent{
-  width:100%;
+  border: transparent;
+  width:96%;
   border-color: white;
-  border-top: 2px solid #bdc3c7;
-  border-bottom: 2px solid #bdc3c7;
-
+  border-top: 1px solid #bdc3c7;
 }
 #receives{
   border-color: white;
