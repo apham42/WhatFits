@@ -40,8 +40,8 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     //creates a new review instance by grabbing object's data from client
                     Review r = new Review
                     {
-                        UserID = getUserID,
-                        RevieweeID = getTargetUserID,
+                        UserID = getTargetUserID,
+                        RevieweeID = getUserID,
                         Rating = obj.Rating,
                         ReviewMessage = obj.ReviewMessage,
                         DateAndTime = obj.DateAndTime,

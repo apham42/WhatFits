@@ -39,7 +39,7 @@ export default {
       Username: this.$store.getters.getusername,
       Rating: this.Rating,
       ReviewMessage: '',
-      TargetUser: this.$store.getters.viewprofile,
+      TargetUser: this.$store.getters.getviewprofile,
       DateAndTime: new Date().toLocaleDateString()
     }
   },
