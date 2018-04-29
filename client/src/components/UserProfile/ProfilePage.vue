@@ -5,15 +5,15 @@
           <error-page404></error-page404>
           <home-button></home-button>
         </div>
-      </div>
+    </div>
       <div v-else>
         <user-info id="ProfileInfo" :userData="userData"></user-info>
-        <get-reviews></get-reviews>
         <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
         <div v-if="this.userData.myProfile == true">
-          <workout-logger></workout-logger>
+          <workout-logger id="Logger"></workout-logger>
         </div>
-        <workout-log></workout-log>
+        <workout-log id="Workouts"></workout-log>
+        <get-reviews id="Reviews"></get-reviews>
         <chat-bar></chat-bar>
       </div>
     </div>
@@ -117,11 +117,32 @@ export default {
 <style scoped>
 
 #ProfileInfo{
-  padding-left: 10em;
+  padding-left: 3%;
   width:auto;
-  max-width:450px;
+  max-width:30%;
   float:left;
   position: relative;
+}
+#Workouts{
+  padding-left: 1%;
+  padding-right: 1%;
+  max-width: 30%;
+  position: relative;
+  float:left;
+}
+#Logger{
+  padding-top: 1.5%;
+  padding-bottom:2.5%;
+  padding-left: 1%;
+  left:1.8%;
+  position: relative;
+}
+#Reviews{
+  float:left;
+  max-width:30%;
+  overflow:auto;
+  padding-right:3%;
+  padding-top:0.5%;
 }
 @media only screen and (min-width: 300px){
   #ProfileInfo{

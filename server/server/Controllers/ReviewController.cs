@@ -34,7 +34,7 @@ namespace server.Controllers
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest, "Review addition has failed");
+                return Content(HttpStatusCode.BadRequest, "Review addition has failed. Invalid Inputs.");
             }
         }
 

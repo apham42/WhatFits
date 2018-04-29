@@ -5,7 +5,7 @@
       <ul id="Review_List">
         <!--Iterates through results list with review as index key. Grabs all the reviews
             Items located on the index are DTO objects, seperated by variable name-->
-        <li v-for="review in results" :key="review">
+        <li v-for="(review,index) in results" :key="index">
           <section id="specificReviews">
             <div id="messageFormat">
               User Review: '{{ review.ReviewMessage }}' &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : '{{ review.Rating }}'
