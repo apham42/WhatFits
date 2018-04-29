@@ -7,5 +7,6 @@ namespace server.Business_Logic.SSO.SSOService
 {
     public class SSOService
     {
+
     }
 }

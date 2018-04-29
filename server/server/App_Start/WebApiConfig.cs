@@ -22,6 +22,17 @@ namespace server
 
             // Creates routing for the application
             config.Routes.MapHttpRoute(
+                name: "SsoApi",
+                routeTemplate: "v1/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional },
+                constraints: new { controller = "Sso" },
+                handler: HttpClientFactory.CreatePipeline(
+                        new HttpControllerDispatcher(config),
+                        new DelegatingHandler[] { new SsoAuthenticateHandler() })
+            );
+
+            // Creates routing for the application
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "v1/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional },
