@@ -391,10 +391,14 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     {
                         if (foundToken == null) // if not token found
                         {
-                            foundToken.Salt = obj.Salt;
-                            foundToken.UserID = foundUser.UserID;
-                            foundToken.Token = obj.Token;
+                            TokenList newToken = new TokenList()
+                            {
+                                Salt = obj.Salt,
+                                UserID = foundUser.UserID,
+                                Token = obj.Token
+                            };
 
+                            db.TokenLists.Add(newToken);
                             // add and save token
                             db.SaveChanges();
                             dbTransaction.Commit();
