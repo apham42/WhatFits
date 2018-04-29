@@ -3,23 +3,26 @@
       <div v-if="nextComponent == false">
         <p>Question: {{ Question1 }}</p>
         <div id="Answer1" class="field">
-          <p class="control has-icons-left">
-          <input class="input is-small" v-model="A1" type="text" placeholder="Answer">
-          </p>
+          <input class="input is-small" v-model="A1"  @input="delayTouch($v.A1)" v-bind:class="{error: $v.A1.$error, valid: $v.A1.$dirty && !$v.A1.$invalid}" type="text" placeholder="Answer">
+          <div class="errorMessage">
+            <span v-show="!$v.A1.required && $v.A1.$dirty">Answer is required</span>
+          </div>
         </div>
         <p>Question: {{ Question2 }}</p>
         <div id="Answer2" class="field">
-            <p class="control has-icons-left">
-            <input class="input is-small" v-model="A2" type="text" placeholder="Answer">
-            </p>
+            <input class="input is-small" v-model="A2"  @input="delayTouch($v.A2)" v-bind:class="{error: $v.A2.$error, valid: $v.A2.$dirty && !$v.A2.$invalid}" type="text" placeholder="Answer">
+          <div class="errorMessage">
+            <span v-show="!$v.A2.required && $v.A2.$dirty">Answer is required</span>
+          </div>
         </div>
         <p>Question: {{ Question3 }}</p>
         <div id="Answer3" class="field">
-            <p class="control has-icons-left">
-            <input class="input is-small" v-model="A3" type="text" placeholder="Answer" @keyup.enter="EnterAnswers">
-            </p>
+            <input class="input is-small" v-model="A3" @input="delayTouch($v.A3)" v-bind:class="{error: $v.A3.$error, valid: $v.A3.$dirty && !$v.A3.$invalid}" type="text" placeholder="Answer" @keyup.enter="EnterAnswers">
+          <div class="errorMessage">
+            <span v-show="!$v.A3.required && $v.A3.$dirty">Answer is required</span>
+          </div>
         </div>
-        <button class="button is-primary" @click="EnterAnswers">Submit</button>
+        <button class="button is-primary" @click="EnterAnswers" :disabled="$v.$invalid">Submit</button>
       </div>
       <p v-if="failanswer == true" class="help is-danger">Incorrect Answers!</p>
       <div>
@@ -30,6 +33,8 @@
 <script>
 import axios from 'axios'
 import EnterNewPassword from '@/components/Auth/Rest/EnterNewPassword.vue'
+import {required} from 'vuelidate/lib/validators'
+const touchMap = new WeakMap()
 export default {
   name: 'AnswerQuestions',
   components: {
@@ -62,7 +67,25 @@ export default {
       }
     }
   },
+  validations: {
+    A1: {
+      required
+    },
+    A2: {
+      required
+    },
+    A3: {
+      required
+    }
+  },
   methods: {
+    delayTouch ($v) {
+      $v.$reset()
+      if (touchMap.has($v)) {
+        clearTimeout(touchMap.get($v))
+      }
+      touchMap.set($v, setTimeout($v.$touch, 1000))
+    },
     GetAnswersDict: function () {
       var answerlist = [this.$data.A1, this.$data.A2, this.$data.A3]
       var count = 0

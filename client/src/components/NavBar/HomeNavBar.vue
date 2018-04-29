@@ -62,12 +62,14 @@ export default {
   },
   methods: {
     toRegistration: function () {
+      this.$data.showham = false
       this.$router.push('signup')
     },
     toHome: function () {
       this.$router.push('/')
     },
     openModal: function () {
+      this.$data.showham = false
       this.$store.dispatch('openAction')
     }
   }
