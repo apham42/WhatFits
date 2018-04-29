@@ -6,13 +6,16 @@
       <br>
       <div id="inputnewpass" class="field">
           <p class="control has-icons-left">
-          <input class="input is-small" v-model="usernamePassReset" type="text" placeholder="Username" @keyup.enter="GetQuestions">
+          <input class="input is-small" v-model.trim="usernamePassReset" @input="delayTouch($v.usernamePassReset)" type="text" placeholder="Username" @keyup.enter="GetQuestions" v-bind:class="{error: $v.usernamePassReset.$error, valid: $v.usernamePassReset.$dirty && !$v.usernamePassReset.$invalid}">
           <span class="icon is-small is-left">
           <i class="fa fa-user"></i>
           </span>
           </p>
+          <div class="errorMessage">
+            <span v-show="!$v.usernamePassReset.required && $v.usernamePassReset.$dirty">Username is required</span>
+          </div>
       </div>
-      <button class="button is-primary" @click="GetQuestions">Reset Password</button>
+      <button class="button is-primary" @click="GetQuestions" :disabled="$v.$invalid">Reset Password</button>
       <p v-if="noUsers" class="help is-danger">Invalid Credentials</p>
     </div>
     <div>
@@ -23,6 +26,8 @@
 <script>
 import axios from 'axios'
 import AnswerQuestions from '@/components/Auth/Rest/AnswerQuestions'
+import {required} from 'vuelidate/lib/validators'
+const touchMap = new WeakMap()
 export default {
   name: 'EnterUsername',
   components: {
@@ -40,7 +45,19 @@ export default {
       }
     }
   },
+  validations: {
+    usernamePassReset: {
+      required
+    }
+  },
   methods: {
+    delayTouch ($v) {
+      $v.$reset()
+      if (touchMap.has($v)) {
+        clearTimeout(touchMap.get($v))
+      }
+      touchMap.set($v, setTimeout($v.$touch, 1000))
+    },
     GetQuestions: function () {
       axios({
         method: 'POST',

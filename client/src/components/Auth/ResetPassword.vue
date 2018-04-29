@@ -13,12 +13,6 @@ export default {
   name: 'PasswordReset',
   components: {
     'EnterUsername': EnterUsername
-  },
-  data () {
-    return {
-    }
-  },
-  methods: {
   }
 }
 </script>
@@ -28,5 +22,13 @@ export default {
   padding-top: 10em;
   padding-right: 25%;
   padding-left: 25%;
+}
+.errorMessage {
+      color: red;
+      text-align: center;
+  }
+.error {
+border-color: red;
+background: #FDD;
 }
 </style>
