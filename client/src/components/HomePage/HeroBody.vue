@@ -44,7 +44,7 @@ export default {
 .hero-body {
   height: 30em;
   background-color: #34495E;
-  background-image: url("../../../static/ProfileDummy/backgroundImage2.jpg");
+  background-image: url("../../../static/ProfileDummy/backgroundImage2.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -56,7 +56,6 @@ color: white;
 }
 .body-text {
   color:white;
-  font-family:
 }
 .body-text-Title {
   color:white;

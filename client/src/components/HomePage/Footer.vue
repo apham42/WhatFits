@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class="footer-right">
-            <p class="footer-company-about"> <span>About the company</span> This is a fitness social media application. Need something to fill this space in. Heres the <a href="https://github.com/apham42/WhatFits">github</a></p>
+            <p class="footer-company-about"> <span>About the company</span> This is a fitness social media application. Need something to fill this space in. Heres the <a href="https://github.com/apham42/WhatFits">github.</a></p>
             <div class="footer-icons">
               <a href="https://github.com/apham42/WhatFits"><i class="fab fa-github"></i></a>
               <a href="#"><i class="fab fa-twitter-square"></i></a>
