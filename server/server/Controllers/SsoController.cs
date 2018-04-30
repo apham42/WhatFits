@@ -11,7 +11,7 @@ using Whatfits.UserAccessControl.Controller;
 namespace server.Controllers
 {
     [RoutePrefix("v1/Sso")]
-    [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social, https://fannbrian.github.io", headers: "*", methods: "POST")]
+    [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://localhost:8085 http://longnlong.com , http://whatfits.social, https://fannbrian.github.io", headers: "*", methods: "POST")]
     public class SsoController : ApiController
     {
         /// <summary>

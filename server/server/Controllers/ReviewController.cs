@@ -23,7 +23,7 @@ namespace server.Controllers
         /// <param name="review"></param>
         /// <returns></returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult CreateReview([FromBody] ReviewsDTO review)
         {
             ReviewService service = new ReviewService();
@@ -44,7 +44,7 @@ namespace server.Controllers
         /// <param name="UserName"></param>
         /// <returns></returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: "http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IEnumerable<ReviewDetailDTO> GetUserReview(UsernameDTO obj)
         {
             ReviewService service = new ReviewService();
