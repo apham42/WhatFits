@@ -4,7 +4,7 @@
       <div class="control is-expanded">
         <div class="select is-fullwidth">
           <select v-model = WorkoutLogger.WorkoutType>
-            <option  disabled>Type of Workout</option>
+            <option  selected="true" disabled="true">Type of Workout</option>
             <option v-for="type in WorkoutOptions" :key="type">{{ type }}</option>
           </select>
         </div>
@@ -13,29 +13,43 @@
             <div class="card-header">
               <p class="card-header-title"><strong>New WeightLifting Log</strong></p>
             </div>
-            <select v-model = WorkoutLogger.LiftingType>
-              <option v-for="type in LiftingOptions" :key="type">{{ type }}</option>
-            </select>
-            <label for="Reps">Reps</label>
-            <input v-model="WorkoutLogger.Reps" placeholder="'0'" v-on:keypress="isNumber(event)"/>
-            <label for="Sets">Sets</label>
-            <input v-model="WorkoutLogger.Sets" placeholder="'0'" v-on:keypress="isNumber(event)"/>
+            <div class="card-content">
+              <p >WeightLifting Type</p>
+              <div class="select is-fullwidth">
+                <select v-model = WorkoutLogger.LiftingType>
+                  <option v-for="type in LiftingOptions" :key="type">{{ type }}</option>
+                </select>
+              </div>
+              <!-- <label for="Reps">Reps</label>-->
+              <p >Reps</p>
+              <input  class="input" type="text" v-model="WorkoutLogger.Reps" placeholder="'0'" v-on:keypress="isNumber(event)"/>
+              <!-- <label for="Sets">Sets</label>-->
+              <p >Sets</p>
+              <input  class="input" type="text" v-model="WorkoutLogger.Sets" placeholder="'0'" v-on:keypress="isNumber(event)"/>
+            </div>
           </div>
           <div v-if = "WorkoutLogger.WorkoutType === 'Cardio'" class="card">
             <div class="card-header">
               <p class="card-header-title"><strong>New Cardio Log</strong></p>
             </div>
-            <select v-model = WorkoutLogger.CardioType>
-              <option v-for="type in CardioOptions" :key="type">{{ type }}</option>
-            </select>
-            <label for="Distance">Distance in Miles</label>
-            <input v-model="WorkoutLogger.Distance" placeholder="'0.00'" v-on:keypress="isFloat(event)"/>
-            <label for="Time">Time in Minutes</label>
-            <input v-model="WorkoutLogger.Time" placeholder="'0:00'" v-on:keypress="isTime(event)"/>
+            <div class="card-content">
+              <p >Cario Type</p>
+              <div class="select is-fullwidth">
+                <select v-model = WorkoutLogger.CardioType>
+                  <option v-for="type in CardioOptions" :key="type">{{ type }}</option>
+                </select>
+              </div>
+              <!-- <label for="Distance" >Distance in Miles</label> -->
+              <p>Distance (Mi)</p>
+              <input class="input" type="text" v-model="WorkoutLogger.Distance" placeholder="'0.00'" v-on:keypress="isFloat(event)"/>
+              <!-- <label for="Time">Time in Minutes</label> -->
+              <p>Time (Mins)</p>
+              <input class="input" type="text" v-model="WorkoutLogger.Time" placeholder="'0:00'" v-on:keypress="isTime(event)"/>
+            </div>
           </div>
         </div>
         <div id="spacing"></div>
-          <div class="card" v-if = "WorkoutLogger.WorkoutType === 'WeightLifting' ||WorkoutLogger.WorkoutType === 'Cardio' ">
+        <div class="card" v-if = "WorkoutLogger.WorkoutType === 'WeightLifting' ||WorkoutLogger.WorkoutType === 'Cardio' ">
           <div class="card-header">
             <p class="card-header-title"><strong>Preview</strong></p>
           </div>
@@ -54,7 +68,6 @@
           </div>
         </div>
       </div>
-
       <div class="control" id="reduceHeight">
         <button type="submit" class="button is-primary" @click.prevent="submit">Log it</button>
       </div>

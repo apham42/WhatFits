@@ -87,16 +87,6 @@ export default {
 </script>
 
 <style>
-
-div.Cards {
-  max-height: 33.333%;
-  padding: .75rem;
-  margin-bottom: 2rem;
-  border: 0;
-  flex-basis: 33.333%;
-  flex-grow: 0;
-  flex-shrink: 0;
-}
 #workoutCards {
   padding-bottom: 1em;
 }
