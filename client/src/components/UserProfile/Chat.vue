@@ -26,20 +26,17 @@
 </template>
 
 <script>
-import Follows from './Follows.vue'
 import axios from 'axios'
 
 export default {
   name: 'Chats',
-  components: {
-    Follows
-  },
   data () {
     return {
       ws: '',
       messages: '',
       onlineUser: '',
       clickeduser: '',
+      clickedid: 0,
       chatusers: [],
       chatshow: false,
       msgshow: false,
@@ -70,6 +67,8 @@ export default {
   methods: {
     Connection: function () {
       var vm = this
+      // get secret key and initial value from server
+      vm.GetIV()
       this.ws.onopen = function (event) {
         console.log('connected')
         vm.ReceiveMessage()
@@ -78,8 +77,6 @@ export default {
     ReceiveMessage: function () {
       var vm = this
       this.ws.onmessage = function (event) {
-        var newiv = []
-        var newkey = []
         console.log('receive')
         try {
           vm.Decryption(event.data)
@@ -89,23 +86,7 @@ export default {
         } catch (error) { // server message cannot decrypted, since it is not encypted
           // send message to offline user
           if (event.data === ' ') {
-            window.document.getElementById('receives').prepend('User is offline' + '\n')
-          } else { // first time connected, get initial value and secret key from server
-            // vm.chatusers = JSON.parse(event.data).split(',')
-            // console.log(vm.chatusers)
-            // get iv from first 16 elements
-            var IvKey = JSON.parse(event.data).split(',')
-            for (var i = 0; i < 16; i++) {
-              newiv.push(window.parseInt(IvKey.pop()))
-            }
-            console.log(newiv)
-            vm.iv = newiv
-            // get key from next 16 elements
-            for (var j = 0; j < 16; j++) {
-              newkey.push(window.parseInt(IvKey.pop()))
-            }
-            console.log(newkey)
-            vm.key = newkey
+            window.document.getElementById('receives').prepend('\n' + 'User is offline' + '\n')
           }
         }
       }
@@ -128,6 +109,7 @@ export default {
     // set visability of the messagebox
     SpanBox: function (index) {
       this.clickeduser = this.chatusers[index].UserName
+      this.clickedid = this.chatusers[index].PersonFollowing
       this.msgshow = !this.msgshow
     },
     SpanList: function () {
@@ -153,6 +135,7 @@ export default {
     },
     // AES 128 CBC Encryption
     Encryption: function () {
+      // get initial value from server
       console.log('encryption called')
       var AesJS = require('aes-js')
       // padding message to 16 bytes
@@ -179,8 +162,10 @@ export default {
       var DecryptedBytes = AesCBC.decrypt(EncryptedBytes)
       var Decryptedtext = AesJS.utils.utf8.fromBytes(DecryptedBytes)
       res[2] = Decryptedtext
+      // save message in client side when message box closed
       this.messageArray.push([res[0], res[2]])
       console.log(this.messageArray)
+      // prepare message to be show in the message box
       this.receivestring = res.join(' ')
       console.log(this.receivestring)
     },
@@ -198,6 +183,7 @@ export default {
       console.log(source.length)
       return source
     },
+    // get follows list from server
     GetFollows: function () {
       var vm = this
       console.log('call follows')
@@ -231,6 +217,42 @@ export default {
             this.errorFlag = true
           }
         })
+    },
+    // get initial value from server for encryption and decryption
+    GetIV: function () {
+      var vm = this
+      console.log('get IV')
+      axios({
+        method: 'POST',
+        url: 'http://localhost/server/v1/follows/getinitialvalue',
+        data: {
+          'Username': this.$store.getters.getusername
+        },
+        headers: {
+          'Access-Control-Allow-Origin': 'http://localhost:8080',
+          'Content-Type': 'application/json'
+        }
+      })
+        // redirect to Home page
+        .then(response => {
+          console.log(response.data)
+          vm.iv = response.data
+          vm.key = response.data
+        }).catch((error) => {
+          // Pushes the error messages into error to display
+          if (error.response) {
+            this.errorMessage = 'Error: An Error Occurd.'
+            this.errorFlag = true
+            console.log(error.response)
+          } else if (error.request) {
+            this.errorMessage = 'Error: Server Error'
+            this.errorFlag = true
+            console.log(error.request)
+          } else {
+            this.errorMessage = 'An error occured while setting up request.'
+            this.errorFlag = true
+          }
+        })
     }
   }
 }
@@ -238,36 +260,47 @@ export default {
 <style>
 #ChatBox,#MsgBox{
   cursor: pointer;
-  background: grey;
+  background: #abeceb;
   width: 150px;
   position: fixed;
   bottom: 0px;
   right: 20px;
   border-radius: 5px 5px 0px 0px;
   font-family: sans-serif;
+  transition: 0.5s;
 }
 #send{
   margin-right: 80%;
-  background: #16a085;
+  width: 100px;
+  height: 35px;
+  background: #34495e;
+  color:white;
+  border: 1px solid #34495e;
 }
 #chathead,#msghead{
-  background: rgb(54, 53, 52);
+  background: #34495e;
   padding: 5px;
   color:white;
   border-radius: 5px 5px 0px 0px;
   text-align: center;
+  text-shadow: 0 5px 5px rgba(0,0,0,.2);
+}
+#chathead:hover{
+  background:white;
+  border:solid #34495e;
+  text-shadow: 0 5px 5px rgba(0,0,0,.2);
+  color:grey;
 }
 #chatbody{
-  height: 400px;
+  height: 330px;
+  overflow-y: auto;
 }
 #msghead{
-  background:#3498db;
+  background:#34495e;
   padding:2px;
 }
 #msgbody{
-  height:200px;
-  overflow: auto;
-  overflow-y: auto;
+  height:160px;
 }
 #msgclose{
   float:right;
@@ -275,25 +308,31 @@ export default {
   padding: 3px;
 }
 #msgfoot{
-  width:250px;
+  width:200px;
   color:black;
 }
 #MsgBox{
   width: 250px;
-  height: 350px;
+  height: 300px;
   background: white;
+  border: 2px solid #34495e;
+  padding: 2px;
   bottom: -5px;
 }
 #username{
-  background: gray;
+  font-family: sans-serif;
   padding: 5px 25px;
   position: relative;
   color: black;
 }
 #username:hover{
-  background:white
+  background:white;
+  border:solid #34495e;
+  text-shadow: 0 5px 5px rgba(0,0,0,.2);
+  color:grey;
 }
 #username:before{
+  border-radius: 50%;
   content:'';
   position:absolute;
   background:#2ecc71;
@@ -303,10 +342,11 @@ export default {
   top: 12px;
 }
 #messagesent{
-  border: transparent;
-  width:96%;
+  width:100%;
   border-color: white;
-  border-top: 1px solid #bdc3c7;
+  border-top: 2px solid #bdc3c7;
+  border-bottom: 2px solid #bdc3c7;
+
 }
 #receives{
   border-color: white;

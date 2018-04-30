@@ -8,7 +8,7 @@ Vue.use(Vuelidate)
 
 // Defining routes for web application
 export default new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     // {
     //   // HomePage
@@ -94,6 +94,16 @@ export default new Router({
       path: '/editprofile',
       name: 'EditProfile',
       component: () => import('@/components/UserProfile/EditProfile')
+    },
+    {
+      path: '/badpassword',
+      name: 'BadPassword',
+      component: () => import('@/components/Experimental/BadPassword')
+    },
+    {
+      path: '/testImage',
+      name: 'TestImage',
+      component: () => import('@/components/Experimental/imageUpload')
     },
     {
       // Catch All Error Page

@@ -37,7 +37,7 @@ namespace server.Controllers
             }
             else
             {
-                return Content(HttpStatusCode.BadRequest, "Workout addition has failed");
+                return Content(HttpStatusCode.BadRequest, "Workout addition has failed. Invalid Inputs.");
             }
         }
 

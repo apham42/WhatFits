@@ -6,13 +6,13 @@
                <a>
                <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home" @click="toHome">
                </a>
-               <span class="navbar-burger burger" data-target="navbarMenuHero2">
+               <span class="navbar-burger burger" data-target="navbarMenuHero2" @click="showham = !showham">
                <span></span>
                <span></span>
                <span></span>
                </span>
             </div>
-            <!-- <div id="navbarMenuHero2" class="navbar-menu is-active is-radiusless">
+            <div v-if="showham" id="navbarMenuHero2" class="navbar-menu is-active is-radiusless">
             <div class="navbar-end">
               <a class="navbar-item" @click="openModal">
                 Login
@@ -21,32 +21,12 @@
                 Registration
               </a>
             </div>
-          </div> -->
+          </div>
             <div id="navbarMenuHero1" class="navbar-menu">
                <div class="navbar-end">
                   <a class="navbar-item" @click="toRegistration">
                   Registration
                   </a>
-                  <div class="navbar-item has-dropdown is-hoverable">
-                     <div class="navbar-link">
-                        More
-                     </div>
-                     <div id="moreDropdown" class="navbar-dropdown ">
-                        <a class="navbar-item " href="#">
-                           <div class="level is-mobile">
-                              <div class="level-left">
-                                 <div class="level-item">
-                                    <p>
-                                       <strong>Extensions</strong>
-                                       <br>
-                                       <small>Side projects to enhance Bulma</small>
-                                    </p>
-                                 </div>
-                              </div>
-                           </div>
-                        </a>
-                     </div>
-                  </div>
                   <span class="navbar-item">
                   <button id="button" class="button is-primary is-inverted" @click="openModal">
                   <span class="icon">
@@ -77,16 +57,19 @@ export default {
   },
   data () {
     return {
+      showham: false
     }
   },
   methods: {
     toRegistration: function () {
+      this.$data.showham = false
       this.$router.push('signup')
     },
     toHome: function () {
       this.$router.push('/')
     },
     openModal: function () {
+      this.$data.showham = false
       this.$store.dispatch('openAction')
     }
   }

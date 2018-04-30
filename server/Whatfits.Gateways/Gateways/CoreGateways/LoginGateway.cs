@@ -5,6 +5,8 @@ using Whatfits.Models.Context.Core;
 using Whatfits.Models.Models;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.DTOs;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace Whatfits.DataAccess.Gateways.CoreGateways
 {
@@ -62,25 +64,27 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// </returns>
         public ResetPasswordResponseDTO GetSecurityQandAs(LoginDTO loginDTO)
         {
-            var foundanswers = (from credential in db.Credentials
-                                  where credential.UserName == loginDTO.UserName
-                                  join answers in db.SecurityAccounts on credential.UserID equals answers.UserID
-                                  select answers).ToDictionary(answers => answers.SecurityQuestionID,
-                                                                 answers => answers.Answer);
+            var foundcredential = (from credential in db.Credentials
+                                   where credential.UserName == loginDTO.UserName
+                                   select credential).FirstOrDefault();
             ResetPasswordResponseDTO response = new ResetPasswordResponseDTO();
-            response.Messages = new List<string>();
-
-            if (foundanswers == null)
+            
+            if (foundcredential == null)
             {
                 // fail response
-                response.Messages.Add("Could not find Answers");
                 response.isSuccessful = false;
             }
             else
             {
+                var answers = db.SecurityAccounts.Where(a => a.UserID == foundcredential.UserID).ToList();
+                var answersDictionary = new Dictionary<int, string>();
+
+                foreach (var a in answers)
+                {
+                    answersDictionary.Add(a.SecurityQuestionID, a.Answer);
+                }
                 // Creates the response
-                response.Messages.Add("Success!");
-                response.Answers = foundanswers;
+                response.Answers = answersDictionary;
                 response.isSuccessful = true;
             }
             return response;
@@ -93,31 +97,80 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
         /// </returns>
         public ResetPasswordResponseDTO GetSecurityQuestions(LoginDTO loginDTO)
         {
-            var foundquestions = (from credential in db.Credentials
+            var foundcredential = (from credential in db.Credentials
                                   where credential.UserName == loginDTO.UserName
-                                  join answers in db.SecurityAccounts on credential.UserID equals answers.UserID
-                                  join questions in db.SecurityQuestions on answers.SecurityQuestionID equals questions.SecurityQuestionID
-                                  select questions).ToDictionary(questions => questions.SecurityQuestionID,
-                                                                 questions => questions.Question);
+                                  select credential).FirstOrDefault();
 
             ResetPasswordResponseDTO response = new ResetPasswordResponseDTO();
-            response.Messages = new List<string>();
 
-            if (foundquestions == null)
+            
+            if (foundcredential == null)
             {
                 // faile response
-                response.Messages.Add("Fail to find Questions");
                 response.isSuccessful = false;
             }
             else
             {
+                var answers = db.SecurityAccounts.Where(a => a.UserID == foundcredential.UserID).ToList();
+                var questions = new Dictionary<int, string>();
+                foreach (var a in answers)
+                {
+                    var questionid = a.SecurityQuestion.SecurityQuestionID;
+                    var question = a.SecurityQuestion.Question;
+                    questions.Add(questionid, question);
+                }
                 // Creates the response
-                response.Messages.Add("Success!");
-                response.Questions = foundquestions;
+                response.Questions = questions;
                 response.isSuccessful = true;
             }
             return response;
         }
+
+        public ResetPasswordResponseDTO SetNewPass(LoginDTO newCredentials)
+        {
+            var foundcredentials = (from credential in db.Credentials
+                                    where credential.UserName == newCredentials.UserName
+                                    select credential).FirstOrDefault();
+
+            var newSalt = (from salt in db.Salts
+                           where salt.UserID == foundcredentials.UserID
+                           select salt).FirstOrDefault();
+
+            ResetPasswordResponseDTO response = new ResetPasswordResponseDTO();
+
+            if (foundcredentials == null)
+            {
+                // faile response
+                response.isSuccessful = false;
+            }
+            else
+            {
+                using (var dbTransaction = db.Database.BeginTransaction())
+                {
+                    try
+                    {
+                        foundcredentials.Password = newCredentials.Password;
+                        newSalt.SaltValue = newCredentials.SaltValue;
+                        db.SaveChanges();
+                        dbTransaction.Commit();
+                        // Creates the response
+                        response.isSuccessful = true;
+                    }
+                    catch (SqlException)
+                    {
+                        response.isSuccessful = false;
+                        response.Messages.Add("Your request could not be made. Please try again.");
+                    }
+                    catch (DataException)
+                    {
+                        response.isSuccessful = false;
+                        response.Messages.Add("Your request could not be made. Please try again.");
+                    }
+                }
+            }
+            return response;
+        }
+
         /// <summary>
         /// Determines whether token is on blacklist
         /// </summary>
@@ -338,15 +391,15 @@ namespace Whatfits.DataAccess.Gateways.CoreGateways
                     {
                         if (foundToken == null) // if not token found
                         {
-                            TokenList newToken = new TokenList() // new token to be added
+                            TokenList newToken = new TokenList()
                             {
-                                Token = obj.Token,
                                 Salt = obj.Salt,
-                                UserID = foundUser.UserID
+                                UserID = foundUser.UserID,
+                                Token = obj.Token
                             };
 
-                            // add and save token
                             db.TokenLists.Add(newToken);
+                            // add and save token
                             db.SaveChanges();
                             dbTransaction.Commit();
                             response.IsSuccessful = true;

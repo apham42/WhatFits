@@ -1,8 +1,11 @@
+// import { stat } from "fs";
+
 const state = {
   username: '',
   token: '',
   viewclaims: null,
-  viewprofile: ''
+  viewprofile: '',
+  profilepicture: 'http://localhost/images/profileImages/'
 }
 
 const getters = {
@@ -17,6 +20,9 @@ const getters = {
   },
   getviewprofile: function (state) {
     return state.viewprofile
+  },
+  getprofilepicture: function (state) {
+    return state.profilepicture
   }
 }
 
@@ -33,6 +39,7 @@ const actions = {
   actviewprofile (context, payload) {
     context.commit('mutateviewprofile', payload)
   }
+
 }
 
 const mutations = {

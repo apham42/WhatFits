@@ -1,4 +1,5 @@
 ﻿using server.Business_Logic.Reset_Password;
+using server.Model.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,13 @@ namespace server.Business_Logic.Services
         /// </summary>
         /// <param name="loginDTO">user</param>
         /// <returns>user's security questions</returns>
-        public ResetPasswordResponseDTO GetQuestions(LoginDTO loginDTO)
+        public ResetPasswordResponseDTO GetQuestions(UserCredential userCredential)
         {
+            LoginDTO loginDTO = new LoginDTO()
+            {
+                UserName = userCredential.Username
+            };
+
             ResetPasswordResponseDTO response = new ResetPasswordResponseDTO();
 
             GetQuestions getQuestions = new GetQuestions()
@@ -38,20 +44,35 @@ namespace server.Business_Logic.Services
         /// <param name="incommingAnswers">incomming answers </param>
         /// <param name="username">username</param>
         /// <returns>true if answers are correct else false</returns>
-        public ResetPasswordResponseDTO CheckAnswers(ResetPasswordResponseDTO incommingAnswers, LoginDTO username)
+        public ResetPasswordResponseDTO CheckAnswers(ResetPasswordResponseDTO incommingAnswers, UserCredential username)
         {
+            LoginDTO user = new LoginDTO()
+            {
+                UserName = username.Username
+            };  
             CheckAnswers checkAnswers = new CheckAnswers()
             {
                 incommingAnswers = incommingAnswers,
-                username = username
+                username = user
             };
 
             return (ResetPasswordResponseDTO) checkAnswers.Execute().Result;
         }
 
-        public ResetPasswordResponseDTO ReplaceOldPassword()
+        /// <summary>
+        /// Replace old password service
+        /// </summary>
+        /// <param name="newCredentials">new user credentials</param>
+        /// <returns>true if success else false</returns>
+        public ResetPasswordResponseDTO ReplaceOldPassword(UserCredential newCredentials)
         {
-            throw new NotImplementedException();
+
+            SetNewPassword setNewPassword = new SetNewPassword()
+            {
+                incommingCredentials = newCredentials
+            };
+
+            return (ResetPasswordResponseDTO)setNewPassword.Execute().Result;
         }
     }
 }

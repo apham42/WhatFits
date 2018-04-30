@@ -3,39 +3,14 @@
     <!-- Hero content: will be in the middle -->
     <div class="hero-body">
         <div class="container has-text-centered homeBody">
-            <h1 class="title body-text">
-                Whatfits Homepage
-            </h1>
+            <p class="title body-text-Title">
+                Find your fit
+            </p>
+            <br>
             <h2 class="subtitle body-text">
-                Clearly under construction
+                Connecting people with others to better them selves (IMPROVE THIS)
             </h2>
         </div>
-    </div>
-    <div class="hero-foot">
-        <nav class="tabs">
-            <div class="container">
-                <ul>
-                    <li class="is-active">
-                        <router-link to="/signup">Register</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/usermanagement">UserManagement</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/Review">Review</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/profile">Profile</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/SearchBar">Search</router-link>
-                    </li>
-                    <li>
-                        <router-link to="/chat">Chat</router-link>
-                    </li>
-                </ul>
-            </div>
-        </nav>
     </div>
 </section>
 </template>
@@ -68,7 +43,12 @@ export default {
 }
 .hero-body {
   height: 30em;
-  background-image: url("../../../static/ProfileDummy/backgroundImage2.jpg");
+  background-color: #34495E;
+  background-image: url("../../../static/ProfileDummy/backgroundImage2.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 .homeBody {
 padding-top: 9em;
@@ -76,5 +56,10 @@ color: white;
 }
 .body-text {
   color:white;
+}
+.body-text-Title {
+  color:white;
+  size: 21px;
+  text-align: left;
 }
 </style>

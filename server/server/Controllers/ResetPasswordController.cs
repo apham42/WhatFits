@@ -1,4 +1,6 @@
-﻿using server.Model.Account;
+﻿using server.Business_Logic.Services;
+using server.Model.Account;
+using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,42 +17,75 @@ namespace server.Controllers
     [RoutePrefix("v1/ResetPassword")]
     public class ResetPasswordController : ApiController
     {
+        private ResetPasswordService service = new ResetPasswordService();
+
+        /// <summary>
+        /// get questions
+        /// </summary>
+        /// <param name="userCredentials">username</param>
+        /// <returns>dictonary of questions</returns>
         [HttpPost]
         [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         [AllowAnonymous]
         public IHttpActionResult GetQuestions([FromBody] UserCredential userCredentials)
         {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        [AllowAnonymous]
-        public IHttpActionResult GetAnswers([FromBody] UserCredential userCredentials)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
-        [AllowAnonymous]
-        public IHttpActionResult SetPassword([FromBody] UserCredential userCredentials)
-        {
-            throw new NotImplementedException();
-        }
-
-        [HttpGet]
-        public IHttpActionResult Get()
-        {
-            LoginDTO loginDTO = new LoginDTO()
+            ResetPasswordResponseDTO response = service.GetQuestions(userCredentials);
+            response.Messages = new List<string>();
+            if (response.isSuccessful == false)
             {
-                UserName = "ay"
-            };
+                response.Messages.Add("User not found");
+                return Content(HttpStatusCode.NotFound, response.Messages);
+            }
 
-            LoginGateway loginGateway = new LoginGateway();
-            ResetPasswordResponseDTO yo = loginGateway.GetSecurityQandAs(loginDTO);
+            response.Messages.Add("Success!");
+            return Ok(response);
+        }
 
-            return Ok(yo);
+        /// <summary>
+        /// get answers
+        /// </summary>
+        /// <param name="userCredentials">username</param>
+        /// <param name="incommingAnswers">answers from user</param>
+        /// <returns>if user successfully answers questions return OK else unauthorized</returns>
+        [HttpPost]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [AllowAnonymous]
+        public IHttpActionResult GetAnswers([FromBody] IncommingAnswersDTO incommingAnswers)
+        {
+            ResetPasswordResponseDTO response = service.CheckAnswers(incommingAnswers.resetPasswordResponseDTO, incommingAnswers.userCredential);
+            response.Messages = new List<string>();
+
+            if(response.isSuccessful == false)
+            {
+                response.Messages.Add("Incorrect Answers");
+                return Content(HttpStatusCode.Unauthorized, response);
+            }
+            
+            response.Messages.Add("Success!");
+            return Ok(response);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userCredentials"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [AllowAnonymous]
+        public IHttpActionResult SetPassword([FromBody] UserCredential usernewCredentials)
+        {
+            ResetPasswordResponseDTO response = service.ReplaceOldPassword(usernewCredentials);
+            response.Messages = new List<string>();
+
+            if (response.isSuccessful == false)
+            {
+                response.Messages.Add("Failed to replace Password");
+                return Content(HttpStatusCode.NotFound, response);
+            }
+
+            response.Messages.Add("Success!");
+            return Ok(response);
         }
     }
 }

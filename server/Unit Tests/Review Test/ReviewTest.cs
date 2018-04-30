@@ -14,14 +14,13 @@ namespace Gateway.Tester.Tests
     public class ReviewTests
     {
         public ReviewsGateway r = new ReviewsGateway();
-
         [Fact]
         public void TestAddReview()
         {
             ReviewsDTO rev = new ReviewsDTO()
             {
-                UserID = 5,
-                RevieweeID = 3,
+                Username = "asdf",
+                TargetUser = "amay",
                 Rating = 4,
                 ReviewMessage = "Here's the test",
                 DateAndTime = new DateTime(2017, 05, 15),
@@ -32,28 +31,6 @@ namespace Gateway.Tester.Tests
             // Finding UserID by Name that is stored
             Boolean found = r.ReviewExist(rev);
             Assert.True(found);
-        }
-
-        //Not a good test, but just seeing if database works
-        [Fact]
-        public void TestGetReviews()
-        {
-            // NOTE: This is based on order in the database
-            List<int> expectedList = new List<int>
-            {
-                1,4,2,3,5,6
-            };
-            Assert.Equal(expectedList, r.GetReviewList());
-        }
-        [Fact]
-        public void TestGetReviewMessage()
-        {
-            // NOTE: This is based on order in the database
-            List<string> expectedList = new List<string>
-            {
-                "User was great"
-            };
-            Assert.Equal(expectedList, r.GetReview("Amay"));
         }
     }
 }

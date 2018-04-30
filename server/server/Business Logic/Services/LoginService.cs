@@ -27,11 +27,18 @@ namespace server.Business_Logic.Services
                 userCredential = this.userCredential
             };
 
-            var incommingloginDTO = (LoginDTO) userCredential.Execute().Result;
+            var incommingloginDTO = (ResponseDTO<LoginDTO>) userCredential.Execute().Result;
+
+            if(incommingloginDTO.IsSuccessful == false)
+            {
+                response.isSuccessful = false;
+                response.Messages.Add("Incorrect Credentials");
+                return response;
+            }
 
             var getUserCredentials = new GetUsersCredentials()
             {
-                loginDTO = incommingloginDTO
+                loginDTO = incommingloginDTO.Data
             };
 
             var credentials = (ResponseDTO<LoginDTO>) getUserCredentials.Execute().Result;
@@ -45,7 +52,7 @@ namespace server.Business_Logic.Services
 
             var validated = new ValidateCredentials()
             {
-                loginDTO = incommingloginDTO,
+                loginDTO = incommingloginDTO.Data,
                 responseDTO = credentials
             };
 

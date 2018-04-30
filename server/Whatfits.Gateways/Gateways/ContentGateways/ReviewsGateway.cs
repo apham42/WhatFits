@@ -24,24 +24,29 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         //Add Review into the database
         public bool AddReview(ReviewsDTO obj)
         {
+            //begins transaction between linq and sql
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
+                    //Gets userID based off of username based on credentials
                     int getUserID = (from cred in db.Credentials
                                      where obj.Username == cred.UserName
                                      select cred.UserID).FirstOrDefault();
+                    int getTargetUserID = (from cred in db.Credentials
+                                     where obj.TargetUser == cred.UserName
+                                     select cred.UserID).FirstOrDefault();
                     //ReviewID is a key and will be automatically incremented
-                    //creates a new review instance by grabbing object's data
+                    //creates a new review instance by grabbing object's data from client
                     Review r = new Review
                     {
-                        UserID = getUserID,
-                        RevieweeID = obj.RevieweeID,
+                        UserID = getTargetUserID,
+                        RevieweeID = getUserID,
                         Rating = obj.Rating,
                         ReviewMessage = obj.ReviewMessage,
                         DateAndTime = obj.DateAndTime,
                     };
-                    //add into database t he new instance and saves
+                    //add the new instance and saves into database
                     db.Review.Add(r);
                     db.SaveChanges();
                     dbTransaction.Commit();
@@ -60,28 +65,15 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             }
         }
 
-        //Retrieves all reviews based on userID
-        //Refactored to usernames
-        public List<string> GetReviews(ReviewsDTO obj)
-        {
-            int getUserID = (from cred in db.Credentials
-                             where obj.Username == cred.UserName
-                             select cred.UserID).FirstOrDefault();
-            List<string> rmsg = (from rev in db.Review
-                                 where rev.UserID == getUserID
-                                 select rev.ReviewMessage
-                                  ).ToList();
-            return rmsg;
-        }
 
-
-        ////See if the review id exists (only needed if we are editing)
+        ////See if the review id exists (used for testing)
         public Boolean ReviewExist(ReviewsDTO obj)
         {
             int getUserID = (from cred in db.Credentials
                              where obj.Username == cred.UserName
                              select cred.UserID).FirstOrDefault();
             var foundReviewID = getUserID;
+            //gets the reviewID, if null will return false
             if (foundReviewID>0)
                 return true;
             else

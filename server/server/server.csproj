@@ -128,10 +128,16 @@
     <Compile Include="Business Logic\Search\FilterGeoCoordinates.cs" />
     <Compile Include="Business Logic\Search\GenerateSearchResults.cs" />
     <Compile Include="Business Logic\Search\SearchNearbyUserStrategy.cs" />
+    <Compile Include="Business Logic\Services\TokenRefreshService.cs" />
+    <Compile Include="Business Logic\SSO\SSOService\SSOService.cs" />
+    <Compile Include="Controllers\SsoController.cs" />
+    <Compile Include="Controllers\TokenRefreshController.cs" />
     <Compile Include="Model\Account\UserProfile.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\TokenRefreshResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\SearchDTO%27s\SearchUserDTO.cs" />
     <Compile Include="Model\Search\SearchResult.cs" />
     <Compile Include="Business Logic\Search\SearchUserStrategy.cs" />
+    <Compile Include="Business Logic\Services\BadPasswordService.cs" />
     <Compile Include="Business Logic\Services\ChatService.cs" />
     <Compile Include="Business Logic\Services\FollowsService.cs" />
     <Compile Include="Business Logic\Services\LoginService.cs" />
@@ -142,6 +148,7 @@
     <Compile Include="Business Logic\Services\SearchService.cs" />
     <Compile Include="Business Logic\Validators\Location Validator\WebAPILocationValidator.cs" />
     <Compile Include="Constants\AccountConstants.cs" />
+    <Compile Include="Constants\BadPasswordConstants.cs" />
     <Compile Include="Constants\LocationConstants.cs" />
     <Compile Include="Constants\SearchConstants.cs" />
     <Compile Include="Controllers\ChatController.cs" />
@@ -171,6 +178,7 @@
     <Compile Include="Model\Account\RegInfo.cs" />
     <Compile Include="Model\Account\SecurityQuestion.cs" />
     <Compile Include="Model\Account\UserCredential.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\IncommingAnswersDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\LoginResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\RegInfoResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\UserCredentialDTO.cs" />
@@ -212,8 +220,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Business Logic\TokenRefresh\" />
     <Folder Include="Business Logic\Validators\Search Validator\" />
     <Folder Include="Controllers\Constants\" />
+    <Folder Include="Image\" />
     <Folder Include="Security\" />
   </ItemGroup>
   <ItemGroup>
