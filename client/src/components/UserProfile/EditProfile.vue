@@ -207,7 +207,7 @@ export default {
       }
     }
   },
-  beforeCreate () {
+  created: function () {
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/UserProfile/ProfileData',

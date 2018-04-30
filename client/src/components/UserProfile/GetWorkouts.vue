@@ -1,31 +1,34 @@
 <template>
-<div class = "LogContainer">
-<div class = "Column">
-<div v-for="(value,index) in results" :key="index">
-      <div class="Cards">
+  <div class="column" id="workoutlogs">
+    <div v-for="(value,index) in results" :key="index">
+      <div class="card" id="workoutCards">
         <div id="WorkoutType">
-          <strong>Workout Type - {{value.WorkoutType}}</strong>
-        <div class="Cardio" v-if="value.WorkoutType === 'Cardio'">
-          <div id="details">
-            <strong>Cardio Type</strong> : {{value.CardioType}}&emsp;
-            <strong>Distance in miles</strong> : {{value.Distance}} mile(s)&emsp;
-            <strong>Time it took</strong> : {{value.Time}} minute(s)&emsp;
+          <div class="card-header">
+            <p class="card-header-title"><strong>Workout Type - {{value.WorkoutType}}</strong></p>
           </div>
-          <strong>Date done</strong> : {{value.Date_Time}}
-        </div>
-        <div class="WeightLifting" v-if="value.WorkoutType === 'WeightLifting'">
-          <div id="details">
-            <strong>Lifting Type</strong> : {{value.LiftingType}}&emsp;
-            <strong>Sets</strong> : {{value.Sets}}&emsp;
-            <strong>Reps per set</strong> : {{value.Reps}}&emsp;
+          <div class="card-content"  v-if="value.WorkoutType === 'Cardio'">
+            <div class="contentPadding">
+              <strong>Cardio Type</strong> : {{value.CardioType}}&emsp;
+              <strong>Distance in miles</strong> : {{value.Distance}} mile(s)&emsp;
+              <strong>Time it took</strong> : {{value.Time}} minute(s)&emsp;
+              <br>
+              <strong>Date done</strong> : {{value.Date_Time}}
+            </div>
           </div>
-          <strong>Date done</strong> : {{value.Date_Time}}
-        </div>
+          <div class="card-content" v-if="value.WorkoutType === 'WeightLifting'">
+            <div id="contentPadding" >
+              <strong>Lifting Type</strong> : {{value.LiftingType}}&emsp;
+              <strong>Sets</strong> : {{value.Sets}}&emsp;
+              <strong>Reps per set</strong> : {{value.Reps}}&emsp;
+              <br>
+              <strong>Date done</strong> : {{value.Date_Time}}
+            </div>
+          </div>
         </div>
       </div>
+      <div id="spacing"></div>
     </div>
-</div>
-</div>
+  </div>
 </template>
 
 <script>
@@ -84,17 +87,7 @@ export default {
 </script>
 
 <style>
-div.LogContainer {
-overflow: auto;
-}
-div.Column{
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-}
+
 div.Cards {
   max-height: 33.333%;
   padding: .75rem;
@@ -103,5 +96,16 @@ div.Cards {
   flex-basis: 33.333%;
   flex-grow: 0;
   flex-shrink: 0;
+}
+#workoutCards {
+  padding-bottom: 1em;
+}
+#spacing {
+padding-top:1em;
+padding-bottom:1em;
+}
+#title{
+  font-size: 2em;
+  text-align: center;
 }
 </style>

@@ -46,8 +46,9 @@ namespace server.Business_Logic.Services
         public ResponseDTO<Boolean> EditProfile(ProfileDTO obj, HttpPostedFile image)
         {
             ResponseDTO<bool> response = new ResponseDTO<bool>();
+            UserProfileGateway userProfileDb = new UserProfileGateway();
             // Passing Files into the validations
-            if(obj.IsUpdatingProfileImage == "true")
+            if (obj.IsUpdatingProfileImage == "true")
             {
                 if (!ValidateImage(image))
                 {
@@ -56,6 +57,7 @@ namespace server.Business_Logic.Services
                     return response;
                 }
                 obj.ProfilePicture = SaveImage(image, obj.UserName);
+                userProfileDb.EditProfileImage(obj);
             }
             if (!ValidateProfileData(obj))
             {
@@ -65,7 +67,7 @@ namespace server.Business_Logic.Services
                 return response;
             }
             // Storing data
-            UserProfileGateway userProfileDb = new UserProfileGateway();
+            
             response = userProfileDb.EditProfile(obj);
             return response;
         }
