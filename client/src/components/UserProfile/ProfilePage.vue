@@ -9,12 +9,9 @@
     <div class="columns is-desktop">
       <div class="column" >
         <user-info id="ProfileInfo" :userData="userData"></user-info>
-<h1 id="title" >Reviews on Me</h1>
-          <hr>
-          <get-reviews ></get-reviews>
-
       </div>
       <div class="column" id="workoutsColumn">
+
         <h1 id="title">Workout Logs</h1>
         <hr>
         <div v-if="this.userData.myProfile == true">
@@ -23,6 +20,10 @@
         <workout-log ></workout-log>
       </div>
       <div class="column" id="workoutsColumn" >
+        <h1 id="title" >Reviews on Me</h1>
+          <hr>
+          <get-reviews ></get-reviews>
+        <!--
         <h1 id="title">Events</h1>
         <hr>
         <div id="munnyColumn">
@@ -32,6 +33,7 @@
         <div id="munnyColumn">
           <P style="padding-top:5em;padding-bottom:5em " id="title">Potential Ad Space $$$$</P>
         </div>
+        -->
       </div>
     </div>
     <chat-bar></chat-bar>
