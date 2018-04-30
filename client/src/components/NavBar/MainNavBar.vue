@@ -14,9 +14,9 @@
             </div>
             <div id="navbarMenuHero1" class="navbar-menu">
                <div class="navbar-end">
-                 <div class ="search">
-<SearchBar></SearchBar>
-            </div>
+                 <div v-if="this.$route.name !== 'Search'" class ="search">
+                  <SearchBar></SearchBar>
+                </div>
 
                   <span class="navbar-item">
                   <button id="button" class="button is-primary is-inverted" @click="logout">
