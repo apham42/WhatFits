@@ -2,7 +2,7 @@
   <div class="column" id="workoutlogs">
     <div v-for="(value,index) in results" :key="index">
       <div class="card" id="workoutCards">
-        <div id="WorkoutType">
+        <div id="">
           <div class="card-header">
             <p class="card-header-title"><strong>Workout Type - {{value.WorkoutType}}</strong></p>
           </div>
@@ -89,6 +89,8 @@ export default {
 <style>
 #workoutCards {
   padding-bottom: 1em;
+  position:inherit;
+
 }
 #spacing {
 padding-top:1em;

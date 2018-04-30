@@ -17,8 +17,8 @@
         <input class="input" type="text" v-model.trim = "userInput" placeholder="Enter address" key="searchNearby-input">
       </template>
     </p>
-    <p class="control">
-      <a class="button is-link" @click.prevent="searchBar">
+    <p class="control" >
+      <a class="button is-primary" style="background-color: #2F7F82" @click.prevent="searchBar">
     <span class="icon">
      <i class="fas fa-search"></i>
     </span>
