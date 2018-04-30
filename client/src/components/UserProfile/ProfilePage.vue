@@ -1,60 +1,63 @@
 <template>
-   <div class="container">
-     <div v-if="this.errorFlag == true">
-         <div>
-            <error-page404></error-page404>
-            <home-button></home-button>
-         </div>
+  <div class="container">
+    <div v-if="this.errorFlag == true">
+      <div>
+        <error-page404></error-page404>
+        <home-button></home-button>
       </div>
-     <div class="columns is-desktop">
-       <div class="column">
+    </div>
+    <div class="columns is-desktop">
+      <div class="column" >
         <user-info id="ProfileInfo" :userData="userData"></user-info>
-        <get-reviews id="Reviews"></get-reviews>
-       </div>
-       <div class="column" id="workoutsColumn">
-         <h1 id="title">Workout Logs</h1>
-         <hr>
+<h1 id="title" >Reviews on Me</h1>
+          <hr>
+          <get-reviews ></get-reviews>
+
+      </div>
+      <div class="column" id="workoutsColumn">
+        <h1 id="title">Workout Logs</h1>
+        <hr>
         <div v-if="this.userData.myProfile == true">
           <workout-logger id="Logger"></workout-logger>
         </div>
-          <workout-log ></workout-log>
-       </div>
-       <div class="column" id="workoutsColumn" >
-         <h1 id="title">Events</h1>
-         <hr>
-         <div id="munnyColumn">
-            <P style="padding-top:5em;padding-bottom:5em;" id="title">List Events</P>
-         </div>
-         <div style="padding-top:2em;"></div>
-         <div id="munnyColumn">
-            <P style="padding-top:5em;padding-bottom:5em " id="title">Potential Ad Space $$$$</P>
-         </div>
-
-       </div>
-     </div>
-     <!--
-      <div v-if="this.errorFlag == true">
-         <div>
-            <error-page404></error-page404>
-            <home-button></home-button>
-         </div>
+        <workout-log ></workout-log>
       </div>
-      <div v-else>
-
-        <div class="profileColumn">
-<user-info id="ProfileInfo" class="profilColumn" :userData="userData"></user-info>
-<get-reviews id="Reviews" class="profilColumn"></get-reviews>
-            </div>
-            <div class="profilColumn">
-              <div v-if="this.userData.myProfile == true">
-               <workout-logger id="Logger"></workout-logger>
-            </div>
-            <workout-log id="Workouts"></workout-log>
-            </div>
-         <chat-bar></chat-bar>
+      <div class="column" id="workoutsColumn" >
+        <h1 id="title">Events</h1>
+        <hr>
+        <div id="munnyColumn">
+          <P style="padding-top:5em;padding-bottom:5em;" id="title">List of Events</P>
+        </div>
+        <div style="padding-top:2em;"></div>
+        <div id="munnyColumn">
+          <P style="padding-top:5em;padding-bottom:5em " id="title">Potential Ad Space $$$$</P>
+        </div>
       </div>
-      -->
-   </div>
+    </div>
+    <chat-bar></chat-bar>
+  </div>
+  <!--
+    <div v-if="this.errorFlag == true">
+       <div>
+          <error-page404></error-page404>
+          <home-button></home-button>
+       </div>
+    </div>
+    <div v-else>
+
+      <div class="profileColumn">
+    <user-info id="ProfileInfo" class="profilColumn" :userData="userData"></user-info>
+    <get-reviews id="Reviews" class="profilColumn"></get-reviews>
+          </div>
+          <div class="profilColumn">
+            <div v-if="this.userData.myProfile == true">
+             <workout-logger id="Logger"></workout-logger>
+          </div>
+          <workout-log id="Workouts"></workout-log>
+          </div>
+       <chat-bar></chat-bar>
+    </div>
+    -->
 </template>
 <script>
 import axios from 'axios'
