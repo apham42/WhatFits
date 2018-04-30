@@ -39,6 +39,11 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             response.Messages.Add("User Found, retrieving data.");
             return response;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public ResponseDTO<bool> EditProfile(ProfileDTO obj)
         {
             ResponseDTO<bool> response = new ResponseDTO<bool>();
@@ -64,6 +69,47 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     foundProfile.Gender = obj.Gender;
                     foundProfile.Email = obj.Email;
                     foundProfile.SkillLevel = obj.SkillLevel;
+                    // Saves changes
+                    db.SaveChanges();
+                    // Commits if works
+                    dbTransaction.Commit();
+                    // Inform other layer that it succeeded
+                    response.IsSuccessful = true;
+                    return response;
+                }
+                catch (Exception)
+                {
+                    // undo any changes if errors
+                    dbTransaction.Rollback();
+                    // Inform other layer about failure
+                    response.IsSuccessful = false;
+                    return response;
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public ResponseDTO<bool> EditProfileImage(ProfileDTO obj)
+        {
+            ResponseDTO<bool> response = new ResponseDTO<bool>();
+            var foundProfile = (from user in db.Credentials
+                                join profile in db.UserProfiles
+                                   on user.UserID equals profile.UserID
+                                where user.UserName == obj.UserName
+                                select profile).FirstOrDefault();
+            if (foundProfile == null)
+            {
+                // Return failure in responseDTO
+                response.IsSuccessful = false;
+                return response;
+            }
+            using (var dbTransaction = db.Database.BeginTransaction())
+            {
+                try
+                {
                     foundProfile.ProfilePicture = obj.ProfilePicture;
                     // Saves changes
                     db.SaveChanges();

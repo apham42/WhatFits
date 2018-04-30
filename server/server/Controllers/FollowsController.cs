@@ -42,7 +42,7 @@ namespace server.Controllers
         /// <returns>Users' follows</returns>
         [HttpPost]
         [Route("getfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [EnableCors("http://localhost:8080 , http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult Getfollows([FromBody]UsernameDTO userDTO)
         {
             if (HttpContext.Current.Request.HttpMethod == "POST")
@@ -69,7 +69,7 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         [Route("addfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [EnableCors("http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult Addfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
