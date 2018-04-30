@@ -1,10 +1,12 @@
-﻿using System;
+﻿using server.Business_Logic.SSO.SSOService;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
@@ -17,9 +19,19 @@ namespace server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
+        [AuthorizePrincipal(type = "application", value = "WhatFits")]
         public IHttpActionResult Registration()
         {
-            return Ok();
+            SSOService service = new SSOService();
+
+            var response = service.SSORegistrationService();
+
+            if(response.isSuccessful == false)
+            {
+                return Content(HttpStatusCode.BadRequest, response);
+            }
+
+            return Ok(response);
         }
 
         /// <summary>
