@@ -1,27 +1,43 @@
 <template>
     <footer class="footer-distributed">
+      <div class="container">
         <div class="footer-left">
-            <img id="logoFooter" src="../../assets/Images/NavbarLogo/navbarLogo.png">
-            <p class="footer-links"> <a href="#">Home</a> · <a href="#">Blog</a> · <a href="#">Pricing</a> · <a href="#">About</a> · <a href="#">Faq</a> · <a href="#">Contact</a> </p>
-            <p class="footer-company-name">Whatfits &copy; 2018</p>
+          <img id="logoFooter" src="../../assets/Images/NavbarLogo/navbarLogo.png">
+          <p class="footer-company-name">Whatfits &copy; 2018</p>
         </div>
         <div class="footer-center">
-            <div> <i class="fa fa-map-marker"></i>
-                <p><span>321 Fake St.</span> Los Angeles, California</p>
-            </div>
-            <div> <i class="fa fa-phone"></i>
-                <p>+1 123 123456</p>
-            </div>
-            <div> <i class="fa fa-envelope"></i>
-                <p><a href="/cdn-cgi/l/email-protection#65161015150a171125060a0815040b1c4b060a08"><span class="__cf_email__" data-cfemail="a0d3d5d0d0cfd2d4e0c3cfcdd0c1ced98ec3cfcd">contact@whatfits.social</span></a></p>
-            </div>
+          <div>
+            <span class="fa-icon-size">
+              <i class="fa fa-map-marker"></i>
+            </span>
+
+              <span style="padding-left:1em;"></span>
+              <p>321 Fake St.<br> Los Angeles, California</p>
+          </div>
+          <br>
+          <div>
+            <i class="fa fa-phone"></i>
+            <span style="padding-left:1em;"></span>
+            <p>(123) 123-4567</p>
+          </div>
+          <br>
+          <div>
+            <i class="fa fa-envelope"></i>
+            <span style="padding-left:1em;"></span>
+            <p><a href="/cdn-cgi/l/email-protection#65161015150a171125060a0815040b1c4b060a08"><span class="__cf_email__" data-cfemail="a0d3d5d0d0cfd2d4e0c3cfcdd0c1ced98ec3cfcd">contact@whatfits.social</span></a></p>
+          </div>
         </div>
         <div class="footer-right">
-            <p class="footer-company-about"> <span>About the company</span> This is a fitness social media application. Need something to fill this space in. </p>
-            <div class="footer-icons"> <a href="#"><i class="fab fa-facebook"></i></a> <a href="#"><i class="fab fa-twitter-square"></i></a> <a href="#"><i class="fab fa-linkedin"></i></a> <a href="#"><i class="fab fa-github-square"></i></a> </div>
+            <p class="footer-company-about"> <span>About the company</span> This is a fitness social media application. Need something to fill this space in. Heres the <a href="https://github.com/apham42/WhatFits">github</a></p>
+            <div class="footer-icons">
+              <a href="https://github.com/apham42/WhatFits"><i class="fab fa-github"></i></a>
+              <a href="#"><i class="fab fa-twitter-square"></i></a>
+              <a href="#"><i class="fab fa-linkedin"></i></a>
+              <a href="#"><i class="fab fa-github-square"></i></a>
+            </div>
         </div>
+      </div>
     </footer>
-
 </template>
 <script>
 export default {
@@ -36,6 +52,11 @@ export default {
 }
 </script>
 <style >
+.fa-icon-size{
+  height: 2em;
+  width: 2em;
+  padding-top: 2em;
+}
 #logoFooter{
   height: 6em;
   width: 20em;
@@ -118,11 +139,6 @@ export default {
   vertical-align: middle;
 }
 
-.footer-distributed .footer-center i.fa-envelope{
-  font-size: 17px;
-  line-height: 38px;
-}
-
 .footer-distributed .footer-center p{
   display: inline-block;
   color: #ffffff;
@@ -165,24 +181,6 @@ export default {
 .footer-distributed .footer-icons{
   margin-top: 25px;
 }
-
-.footer-distributed .footer-icons a{
-  display: inline-block;
-  width: 35px;
-  height: 35px;
-  cursor: pointer;
-  background-color:  #33383b;
-  border-radius: 2px;
-
-  font-size: 20px;
-  color: #ffffff;
-  text-align: center;
-  line-height: 35px;
-
-  margin-right: 3px;
-  margin-bottom: 5px;
-}
-
 /* If you don't want the footer to be responsive, remove these media queries */
 
 @media (max-width: 880px) {
