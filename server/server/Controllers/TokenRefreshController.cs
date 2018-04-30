@@ -1,4 +1,5 @@
-﻿using server.Model.Data_Transfer_Objects.AccountDTO_s;
+﻿using server.Business_Logic.Services;
+using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,16 @@ namespace server.Controllers
         [AllowAnonymous]
         public IHttpActionResult Refresh([FromBody] TokenRefreshResponseDTO token)
         {
-            return Ok();
+            TokenRefreshService service = new TokenRefreshService(token);
+
+            var response = service.RefreshService();
+
+            if(response.isSuccessful == false)
+            {
+                return Content(HttpStatusCode.BadRequest, response);
+            }
+            
+            return Ok(response);
         }
     }
 }
