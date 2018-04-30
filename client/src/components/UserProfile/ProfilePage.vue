@@ -1,22 +1,43 @@
 <template>
-    <div>
-      <div v-if="this.errorFlag == true">
-        <div>
-          <error-page404></error-page404>
-          <home-button></home-button>
-        </div>
+  <div class="container">
+    <div v-if="this.errorFlag == true">
+      <div>
+        <error-page404></error-page404>
+        <home-button></home-button>
+      </div>
     </div>
-      <div v-else>
+    <div class="columns is-desktop">
+      <div class="column" >
         <user-info id="ProfileInfo" :userData="userData"></user-info>
-        <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
+      </div>
+      <div class="column" id="workoutsColumn">
+
+        <h1 id="title">Workout Logs</h1>
+        <hr>
         <div v-if="this.userData.myProfile == true">
           <workout-logger id="Logger"></workout-logger>
         </div>
-        <workout-log id="Workouts"></workout-log>
-        <get-reviews id="Reviews"></get-reviews>
-        <chat-bar></chat-bar>
+        <workout-log ></workout-log>
+      </div>
+      <div class="column" id="workoutsColumn" >
+        <h1 id="title" >Reviews on Me</h1>
+          <hr>
+          <get-reviews ></get-reviews>
+        <!--
+        <h1 id="title">Events</h1>
+        <hr>
+        <div id="munnyColumn">
+          <P style="padding-top:5em;padding-bottom:5em;" id="title">List of Events</P>
+        </div>
+        <div style="padding-top:2em;"></div>
+        <div id="munnyColumn">
+          <P style="padding-top:5em;padding-bottom:5em " id="title">Potential Ad Space $$$$</P>
+        </div>
+        -->
       </div>
     </div>
+    <chat-bar></chat-bar>
+  </div>
 </template>
 <script>
 import axios from 'axios'
@@ -56,6 +77,7 @@ export default {
     }
   },
   beforeCreate () {
+    console.log(this.counter) // Logs the counter value every second, before the DOM updates.
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/UserProfile/ProfileData',
@@ -108,6 +130,9 @@ export default {
       this.myProfile = false
     }
   },
+  updated () {
+    console.log('This has been updated')
+  },
   methods: {
 
   }
@@ -117,18 +142,15 @@ export default {
 <style scoped>
 
 #ProfileInfo{
-  padding-left: 3%;
-  width:auto;
-  max-width:30%;
+
+  width:30em;
+  max-width:100%;
   float:left;
   position: relative;
 }
-#Workouts{
-  padding-left: 1%;
-  padding-right: 1%;
-  max-width: 30%;
-  position: relative;
-  float:left;
+#workoutsColumn {
+  padding-left:2em;
+  padding-top:2em;
 }
 #Logger{
   padding-top: 1.5%;
@@ -144,10 +166,8 @@ export default {
   padding-right:3%;
   padding-top:0.5%;
 }
-@media only screen and (min-width: 300px){
-  #ProfileInfo{
-    padding-left: 0em;
-    width: auto;
-  }
+#munnyColumn {
+border-style: dotted;
+text-align: center;
 }
 </style>
