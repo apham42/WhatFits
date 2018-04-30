@@ -58,6 +58,10 @@ export default {
         return true
       }
     },
+    goBackToProfile: function () {
+      this.$store.dispatch('actviewprofile', {ViewProfile: this.$store.getters.getusername})
+      this.$router.push('/profile')
+    },
     input: function () {
       axios({
         method: 'POST',
@@ -75,8 +79,11 @@ export default {
         }
       }).then(response => {
         console.log(response)
+        this.goBackToProfile()
       }).catch((error) => {
         console.log(error.response)
+        this.goBackToProfile()
+        alert('Review did not go through. Check console for errors.')
       })
     }
   }
