@@ -128,7 +128,12 @@
     <Compile Include="Business Logic\Search\FilterGeoCoordinates.cs" />
     <Compile Include="Business Logic\Search\GenerateSearchResults.cs" />
     <Compile Include="Business Logic\Search\SearchNearbyUserStrategy.cs" />
+    <Compile Include="Business Logic\Services\TokenRefreshService.cs" />
+    <Compile Include="Business Logic\SSO\SSOService\SSOService.cs" />
+    <Compile Include="Controllers\SsoController.cs" />
+    <Compile Include="Controllers\TokenRefreshController.cs" />
     <Compile Include="Model\Account\UserProfile.cs" />
+    <Compile Include="Model\Data Transfer Objects\AccountDTO%27s\TokenRefreshResponseDTO.cs" />
     <Compile Include="Model\Data Transfer Objects\SearchDTO%27s\SearchUserDTO.cs" />
     <Compile Include="Model\Search\SearchResult.cs" />
     <Compile Include="Business Logic\Search\SearchUserStrategy.cs" />
@@ -215,6 +220,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Business Logic\TokenRefresh\" />
     <Folder Include="Business Logic\Validators\Search Validator\" />
     <Folder Include="Controllers\Constants\" />
     <Folder Include="Image\" />

@@ -4,7 +4,7 @@
          <div class="container">
             <div class="navbar-brand">
                <a>
-               <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home">
+               <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to your Profile" @click="toProfile">
                </a>
                <span class="navbar-burger burger" data-target="navbarMenuHero2">
                <span></span>
@@ -12,11 +12,12 @@
                <span></span>
                </span>
             </div>
-            <div class ="search">
-              <SearchBar></SearchBar>
-            </div>
             <div id="navbarMenuHero1" class="navbar-menu">
                <div class="navbar-end">
+                 <div class ="search">
+<SearchBar></SearchBar>
+            </div>
+
                   <span class="navbar-item">
                   <button id="button" class="button is-primary is-inverted" @click="logout">
                   <span class="icon">
@@ -41,6 +42,9 @@ export default {
     'SearchBar': SearchBar
   },
   methods: {
+    toProfile: function () {
+      this.$router.push('/profile')
+    },
     logout: function () {
       axios({
         method: 'POST',
@@ -71,5 +75,9 @@ export default {
   height: 50px;
   padding-left: 20px;
   padding-top: 5px;
+}
+.search {
+  padding-top:.6em;
+  padding-right: 20em;
 }
 </style>

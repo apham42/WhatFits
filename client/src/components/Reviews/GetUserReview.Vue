@@ -1,10 +1,9 @@
 <template>
-  <div id="content">
-    <h1>{{pageTitle}}</h1>
-    <div class="body">
+  <div>
+    <div>
       <ul id="Review_List">
         <!--Iterates through results list with review as index key. Grabs all the reviews
-            Items located on the index are DTO objects, seperated by variable name-->
+          Items located on the index are DTO objects, seperated by variable name-->
         <li v-for="(review,index) in results" :key="index">
           <section id="specificReviews">
             <div id="messageFormat">
@@ -76,16 +75,7 @@ export default {
 }
 </script>
 <style>
-.content {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  font-size: 22px;
-  color: #a7a8a8;
-}
-section {
-  border: 1px solid gray;
-  padding: 1em;
-  overflow: hidden;
-  border-collapse: seperate;
-  border-spacing: 15px;
+.title{
+  text-align: center;
 }
 </style>
