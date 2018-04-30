@@ -36,28 +36,6 @@
     </div>
     <chat-bar></chat-bar>
   </div>
-  <!--
-    <div v-if="this.errorFlag == true">
-       <div>
-          <error-page404></error-page404>
-          <home-button></home-button>
-       </div>
-    </div>
-    <div v-else>
-
-      <div class="profileColumn">
-    <user-info id="ProfileInfo" class="profilColumn" :userData="userData"></user-info>
-    <get-reviews id="Reviews" class="profilColumn"></get-reviews>
-          </div>
-          <div class="profilColumn">
-            <div v-if="this.userData.myProfile == true">
-             <workout-logger id="Logger"></workout-logger>
-          </div>
-          <workout-log id="Workouts"></workout-log>
-          </div>
-       <chat-bar></chat-bar>
-    </div>
-    -->
 </template>
 <script>
 import axios from 'axios'
