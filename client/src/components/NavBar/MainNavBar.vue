@@ -4,7 +4,7 @@
          <div class="container">
             <div class="navbar-brand">
                <a>
-               <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to Whatfits Home">
+               <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to your Profile" @click="toProfile">
                </a>
                <span class="navbar-burger burger" data-target="navbarMenuHero2">
                <span></span>
@@ -41,6 +41,9 @@ export default {
     'SearchBar': SearchBar
   },
   methods: {
+    toProfile: function () {
+      this.$router.push('/profile')
+    },
     logout: function () {
       axios({
         method: 'POST',
