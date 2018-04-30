@@ -21,7 +21,7 @@ export default {
     }
   },
   mounted: function () {
-    setInterval(this.refreshToken, 840000)// for 14 minutes (tokens will last 15 minutes) 840000)
+    setInterval(this.refreshToken, 900000)// for 14 minutes (tokens will last 15 minutes) 840000)
   },
   methods: {
     refreshToken: function () {
