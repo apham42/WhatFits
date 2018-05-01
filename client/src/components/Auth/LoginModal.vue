@@ -76,7 +76,7 @@ export default {
       this.$data.isLoading = true
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/login/Login',
+        url: this.$store.getters.getURL + 'v1/login/Login',
         headers: this.$store.getters.getheader,
         data: {
           Username: this.$data.username,
@@ -94,7 +94,34 @@ export default {
           console.log(response)
         })
         .catch((error) => {
-          console.log(error)
+          if (error.response.status === 400) {
+            // Your custom messages that appears on the screen
+            this.$data.isLoading = false
+            this.invalid = true
+            this.username = ''
+            this.password = ''
+          } else if (error.response.status === 404) {
+            // Redirects you to the 404 page
+            this.$data.isLoading = false
+            this.invalid = true
+            this.username = ''
+            this.password = ''
+            this.$router.push('/notfound')
+          } else if (error.response.status === 403) {
+            // Redirects you to the Forbidden page
+            this.$data.isLoading = false
+            this.invalid = true
+            this.username = ''
+            this.password = ''
+            this.$router.push('/notAllowed')
+          } else if (error.response.status === 500) {
+            // Redirects you to the server issue page
+            this.$data.isLoading = false
+            this.invalid = true
+            this.username = ''
+            this.password = ''
+            this.$router.push('/serverissue')
+          }
           this.$data.isLoading = false
           this.invalid = true
           this.username = ''

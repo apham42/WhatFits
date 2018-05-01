@@ -59,10 +59,7 @@ export default {
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/WorkoutLogger/GetWorkout',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        'Content-Type': 'application/json'
-      },
+      headers: this.$store.getters.getheader,
       data: {
         Username: this.$data.Username
       }
@@ -84,10 +81,7 @@ export default {
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/WorkoutLogger/GetWorkout',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        },
+        headers: this.$store.getters.getheader,
         data: {
           Username: this.$data.Username
         }
