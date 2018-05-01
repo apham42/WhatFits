@@ -1,47 +1,42 @@
 <template>
-<div>
-    <div class="content-container">
-        <div class="head-line secondary-text-color">
-            503
-        </div>
-        <div class="subheader primary-text-color">
-            Looks like we're having <br> some server issues.
-        </div>
-        <hr>
-        <div class="clearfix"></div>
-        <div class="context primary-text-color">
-
-            <p>
-                Go back to the previous page and try again. If you think something is broken, report a problem.
-            </p>
-        </div>
-        <div class="buttons-container">
-            <a class="border-button" href="mailto:#" target="_blank">Report A Problem</a>
-        </div>
+<div class="container">
+  <div class="centerBox">
+    <span id="notFoundTitle">{{pageTitle}}</span>
+    <div>
+      <span id="secondTitle">Oh...</span>
+      <br>
+      <span id="descriptionDetails">Yeah...thats not suppose to happen. Something bad happend on our side. This should take you <router-link to="/">home</router-link>.</span>
     </div>
+
+  </div>
 </div>
+
 </template>
 <script>
 export default {
   name: 'ServerIssues',
   computed: {
-    isAuthenticated: function () {
-      return this.$store.getters.isAuthenticated
-    }
   },
   data () {
     return {
-      pageTitle: '503 Server Issues',
-      hasErrored: true,
-      container: '',
-      containerHeight: ''
+      pageTitle: 'Error 5XX - Server Error'
     }
   },
   methods: {
   }
 }
 </script>
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.centerBox{
+  padding-top:20%;
+}
+#notFoundTitle{
+font-size: 5em;
+}
+#secondTitle{
+font-size: 2em;
+}
+#descriptionDetails{
+font-size:1.3em;
+}
 </style>

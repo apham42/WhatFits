@@ -10,7 +10,7 @@
       </span>
     </p>
     <p class="control">
-<template v-if="searchType == 'searchUser'">
+      <template v-if="searchType == 'searchUser'">
         <input class="input" type="text" v-model.trim = "userInput" placeholder="Enter username" key="searchUser-input">
       </template>
        <template v-else>
@@ -24,7 +24,6 @@
     </span>
     <span>Search</span>
   </a>
-      <!-- <button type="submit" class="search-button" @click.prevent="searchBar">Search</button>-->
     </p>
       <div class="errorResponse">
             <p v-for="message in messages[0]" :key="message"> {{message}} </p>

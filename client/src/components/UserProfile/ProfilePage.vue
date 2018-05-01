@@ -9,12 +9,9 @@
     <div class="columns is-desktop">
       <div class="column" >
         <user-info id="ProfileInfo" :userData="userData"></user-info>
-<h1 id="title" >Reviews on Me</h1>
-          <hr>
-          <get-reviews ></get-reviews>
-
       </div>
       <div class="column" id="workoutsColumn">
+
         <h1 id="title">Workout Logs</h1>
         <hr>
         <div v-if="this.userData.myProfile == true">
@@ -23,6 +20,10 @@
         <workout-log ></workout-log>
       </div>
       <div class="column" id="workoutsColumn" >
+        <h1 id="title" >Reviews on Me</h1>
+          <hr>
+          <get-reviews ></get-reviews>
+        <!--
         <h1 id="title">Events</h1>
         <hr>
         <div id="munnyColumn">
@@ -32,35 +33,13 @@
         <div id="munnyColumn">
           <P style="padding-top:5em;padding-bottom:5em " id="title">Potential Ad Space $$$$</P>
         </div>
+        -->
       </div>
     </div>
     <chat-bar></chat-bar>
   </div>
-  <!--
-    <div v-if="this.errorFlag == true">
-       <div>
-          <error-page404></error-page404>
-          <home-button></home-button>
-       </div>
-    </div>
-    <div v-else>
-
-      <div class="profileColumn">
-    <user-info id="ProfileInfo" class="profilColumn" :userData="userData"></user-info>
-    <get-reviews id="Reviews" class="profilColumn"></get-reviews>
-          </div>
-          <div class="profilColumn">
-            <div v-if="this.userData.myProfile == true">
-             <workout-logger id="Logger"></workout-logger>
-          </div>
-          <workout-log id="Workouts"></workout-log>
-          </div>
-       <chat-bar></chat-bar>
-    </div>
-    -->
 </template>
 <script>
-import axios from 'axios'
 import GetWorkouts from '@/components/UserProfile/GetWorkouts'
 import UserInfo from '@/components/UserProfile/UserInfo'
 import ErrorPage from '@/components/ErrorPage/NotFound'
@@ -69,6 +48,8 @@ import Chat from '@/components/UserProfile/Chat'
 import WorkoutLogger from '@/components/UserProfile/WorkoutLogger'
 import GetUserReview from '@/components/Reviews/GetUserReview'
 import Review from '@/components/Reviews/Review'
+import axios from 'axios'
+
 export default {
   name: 'ProfilePage',
   components: {
@@ -97,7 +78,9 @@ export default {
     }
   },
   beforeCreate () {
-    console.log(this.counter) // Logs the counter value every second, before the DOM updates.
+    console.log('before create called')
+    console.log('http://localhost/server/v1/UserProfile/ProfileData')
+    console.log(axios)
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/UserProfile/ProfileData',
@@ -110,9 +93,9 @@ export default {
         'LoggedinUser': this.$store.getters.userName
       }
     })
-      // redirect to Home page
+    // redirect to Home page
       .then(response => {
-        console.log(response.data)
+        console.log('response: ' + response.data)
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description
@@ -154,7 +137,6 @@ export default {
     console.log('This has been updated')
   },
   methods: {
-
   }
 }
 </script>

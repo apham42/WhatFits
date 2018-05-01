@@ -1,32 +1,111 @@
 <template>
-    <div>
-      <form class = "filterForm">
-        <h3 class = "skillFilter">Skill</h3>
-          <select v-model="SearchNearby.skill">
-              <option value ="">Any</option>
-              <option v-for="skill in skills" :key="skill"> {{skill}} </option>
-          </select>
-        <h3 class = "distanceFilter">Distance</h3>
-          <select v-model="SearchNearby.distance">
-              <option v-for="distance in distances" :key="distance"> {{distance}} </option>
-          </select>
-      </form>
-      <button @click.prevent="next">Next</button>
-      <button @click.prevent="back">Back</button>
-      <div class="response" v-show="this.$data.messages.length > 0">
-            <p v-for="message in messages[0]" :key="message"> {{message}} </p>
-      </div>
-      <div v-if ="this.$data.filteredResults.length > 0">
-        <div class="card" v-for="searchResult in filteredResults[0].slice(this.$data.nextTen,this.$data.nextTen + 10)" :key="searchResult">
-          <div class = "container">
-            <p class ='view-profile' @click="setViewProfile(searchResult.User)">{{searchResult.User}}</p>
-            <p>{{searchResult.FirstName}} {{searchResult.LastName}}</p>
-            <p>Skill Level: {{searchResult.Skill}}</p>
-            <p>Distance: {{searchResult.Distance}} mile</p>
+  <div class="container">
+    <div class="columns">
+      <div class="column is-one-third">
+        <br>
+        <p  class="secondaryTitleLeft">Search Bar</p>
+        <br>
+        <div id = "searchType">
+          <div class="field has-addons has-addons-centered">
+          <p class="control">
+            <span class="select">
+              <select v-model="searchType">
+              <option value = 'searchNearby'>Search Nearby Users</option>
+              <option value = 'searchUser'>Search User</option>
+            </select>
+            </span>
+          </p>
+
+            <div id = "userInput control" class="control">
+            <template v-if="searchType == 'searchUser'">
+              <input class="input" type="text" v-model.trim ="SearchUser.requestedUser" placeholder="Enter username" key="searchUser-input">
+            </template>
+            <template v-else>
+              <input class="input" type="text" v-model.trim ="SearchNearby.requestedSearch" placeholder="Enter address" key="searchNearby-input">
+            </template>
           </div>
+          <p class="control">
+            <a class="button is-primary" @click.prevent="search" >
+              Search
+            </a>
+          </p>
+        </div>
+
+        </div>
+        <br>
+        <div v-if="searchType !== 'searchUser'" id = "SearchNearbyForm">
+          <div id class="control">
+            <div>
+              <p id="Label">Skill</p>
+            </div>
+            <div class="select">
+              <select v-model="SearchNearby.skill">
+                <option value ="">Any</option>
+                <option v-for="skill in skills" :key="skill"> {{skill}} </option>
+              </select>
+            </div>
+          </div>
+          <br>
+          <div>
+            <p>Distance</p>
+          </div>
+          <div class="control ">
+            <div class="select is-one-third">
+              <select v-model="SearchNearby.distance">
+                <option v-for="distance in distances" :key="distance"> {{distance}} </option>
+              </select>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <div class="column is-two-thirds">
+
+        <span class="title">Search Results</span>
+
+        <hr>
+
+        <div class="response card" v-show="this.$data.messages.length > 0">
+          <p style="text-align:center;" v-for="message in messages[0]" :key="message"> {{message}} </p>
+        </div>
+        <div id="spacing"></div>
+
+        <div id="displayResults" v-if ="this.$data.searchResults.length > 0">
+          <div v-if ="this.$data.searchResults[0].length > 10" class="field is-grouped">
+            <p class="control">
+              <a class="button is-secondary" @click.prevent="back">Back</a>
+            </p>
+            <p class="control">
+              <a class="button is-primary"  @click.prevent="next">Next</a>
+            </p>
+          </div>
+
+          <div v-for="searchResult in searchResults[0].slice(this.$data.nextTen,this.$data.nextTen + 10)" :key="searchResult.User">
+            <div class="card">
+              <div class="card-header cardTitle">
+                <p class ='view-profile' @click="setViewProfile(searchResult.User)">{{searchResult.User}}</p>
+              </div>
+              <div class="card-content cardBody">
+                <p>{{searchResult.FirstName}} {{searchResult.LastName}}</p>
+                <p>Skill Level: {{searchResult.Skill}}</p>
+                <p>Distance: {{searchResult.Distance}} mile</p>
+              </div>
+            </div>
+            <div id="spacing"></div>
+          </div>
+          <div v-if ="this.$data.searchResults[0].length > 10" class="field is-grouped">
+            <p class="control">
+              <a class="button is-secondary" @click.prevent="back">Back</a>
+            </p>
+            <p class="control">
+              <a class="button is-primary"  @click.prevent="next">Next</a>
+            </p>
+          </div>
+
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -49,15 +128,13 @@ export default {
       distances: [5, 10, 15, 20, 25],
       messages: [],
       nextTen: 0,
-      filteredResults: [],
       searchResults: [],
-      searchType: this.$store.getters.getSearchType,
-      m: this.$store.getters.getRequestedSearch
+      searchType: this.$store.getters.getSearchType
     }
   },
   methods: {
     next () {
-      if (this.$data.nextTen + 10 <= this.$data.filteredResults[0].length) {
+      if (this.$data.nextTen + 10 <= this.$data.searchResults[0].length) {
         this.$data.nextTen += 10
       }
     },
@@ -77,17 +154,11 @@ export default {
       })
         // redirect to Home page
         .then((response) => {
-          this.$data.messages = []
-          this.$data.filteredResults = []
           this.$data.messages.push(response.data.Messages)
-          this.$data.filteredResults.push(response.data.SearchResults)
           this.$data.searchResults.push(response.data.SearchResults)
-          // this.$store.dispatch('actviewprofile', {ViewProfile: this.$data.SearchUser.requestedUser})
-          // this.$router.push('/profile')
         })
         .catch((error) => {
           // Pushes the error messages into error to display
-          this.$data.messages = []
           this.$data.messages.push(error.response.data.Messages)
         })
     },
@@ -102,18 +173,17 @@ export default {
       })
         // redirect to Home page
         .then((response) => {
-          this.$data.messages = []
-          this.$data.filteredResults = []
           this.$data.messages.push(response.data.Messages)
-          this.$data.filteredResults.push(response.data.SearchResults)
           this.$data.searchResults.push(response.data.SearchResults)
         }).catch((error) => {
           // Pushes the error messages into error to display
-          this.$data.messages = []
-          this.$data.messages.push(error.response.data.Messages)
+          this.messages.push(error.response.data.Messages)
         })
     },
     search () {
+      this.$data.nextTen = 0
+      this.$data.messages = []
+      this.$data.searchResults = []
       if (this.$data.searchType === 'searchNearby') {
         this.searchNearbyUsers()
       } else {
@@ -121,50 +191,50 @@ export default {
       }
     },
     setViewProfile (user) {
+      this.$store.dispatch('actSearchType', {searchType: this.$data.searchType})
+      if (this.$data.searchType === 'searchNearby') {
+        this.$store.dispatch('actRequestedSearch', {requestedSearch: this.$data.SearchNearby.requestedSearch})
+      } else {
+        this.$store.dispatch('actRequestedSearch', {requestedSearch: this.$data.SearchUser.requestedUser})
+      }
       this.$store.dispatch('actviewprofile', {ViewProfile: user})
       this.$router.push('/profile')
     }
   },
-  mounted () {
+  created () {
+    if (this.$data.searchType === 'searchNearby') {
+      this.$data.SearchUser.requestedUser = ''
+    } else {
+      this.$data.SearchNearby.requestedSearch = ''
+    }
     this.search()
-  },
-  /*
-  computed: {
-    t: function () {
-      return this.$store.getters.getRequestedSearch
-    },
-    l: function () {
-      return this.$store.getters.getSearchType
-    }
-  },
-  */
-  watch: {
-    searchType: function () {
-      if (this.$data.m !== this.$store.getters.getRequestedSearch) {
-        this.search()
-      }
-    },
-    m: function () {
-      if (this.$data.searchType !== this.$store.getters.getSearchType) {
-        this.search()
-      }
-    }
   }
 }
 </script>
 
 <style scoped>
-.card {
-    margin: auto;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 50%;
+.cardTitle{
+  font-size:1.5em;
+  padding-left: 1em;
+}
+.cardBody {
+  font-size:1.2em;
+}
+.titleSearch{
+  font-size:25px;
+}
+
+.secondaryTitleLeft{
+  font-size: 22px;
 }
 
 .container {
-    padding: 14px 16px;
+    padding-top:2em;
 }
-
+#spacing {
+padding-top:1em;
+padding-bottom:1em;
+}
 .view-profile {
     color: #1abc9c;
     background-color: Transparent;

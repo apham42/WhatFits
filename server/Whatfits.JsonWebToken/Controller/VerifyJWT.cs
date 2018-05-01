@@ -56,6 +56,33 @@ namespace Whatfits.JsonWebToken.Controller
             }
         }
 
+        /// <summary>
+        /// Verifies token with verified token
+        /// </summary>
+        /// <param name="token">jwt string</param>
+        /// <returns>principal of jwt</returns>
+        public ClaimsPrincipal SsoVerifyToken(string token)
+        {
+            // create dto with dto
+            LoginDTO loginDTO = new LoginDTO()
+            {
+                Token = token
+            };
+            
+            // create handler to verify token
+            JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
 
+            // convert string to token
+            var jwt = handler.ReadToken(token) as JwtSecurityToken;
+
+            // get username from token
+            var username = jwt.Claims.First(claim => claim.Type == "username").Value;
+
+            // if token is validated will set the securitytoken to this.
+            SecurityToken validatedToken = null;
+
+            // validates users 
+            return handler.ValidateToken(token, new Verify().SsoValidateToken(username), out validatedToken);
+        }
     }
 }
