@@ -7,10 +7,10 @@ using Whatfits.Models.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.ContentDTOs
 {
-    public class WorkoutLogDetailDTO : IWorkoutLog, ICardio, IWeightLifting
+    public class WorkoutLogDetailDTO
     {
         public string WorkoutType { get; set; }
-        public DateTime Date_Time { get; set; }
+        public string Date_Time { get; set; }
 
         public string CardioType { get; set; }
         public double Distance { get; set; }

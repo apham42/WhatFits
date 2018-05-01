@@ -271,7 +271,6 @@
       <div class="control">
         <button type="submit" class="button is-primary" :disabled="!termsChecked || $v.$invalid || this.weakPassword || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.firstName) || !validateCharacters(this.$data.lastName) || !validateCharacters(this.$data.password)" @click.prevent="registerUser">Register</button>
       </div>
-      <span v-if="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.firstName) || !validateCharacters(this.$data.lastName) || !validateCharacters(this.$data.password)" >We good to go!</span>
     </div>
   </div>
 </div>
@@ -296,6 +295,13 @@
     </div>
   </div>
 </div>
+
+<div class="termsAndCondition">
+  <div v-if="this.showSuccess">
+    <reg-success></reg-success>
+  </div>
+</div>
+
 <div class="errorResponse">
     <p v-for="message in messages[0]" :key="message"> {{message}} </p>
 </div>
@@ -309,6 +315,7 @@ import axios from 'axios'
 import Terms from '@/components/Registration/Terms'
 import sha1 from 'sha1'
 import debounce from 'debounce'
+import RegisterSuccess from '@/components/Registration/RegisterSuccess'
 
 const touchMap = new WeakMap()
 
@@ -316,11 +323,13 @@ export default {
   name: 'Registration',
 
   components: {
-    'Terms': Terms
+    'Terms': Terms,
+    'reg-success': RegisterSuccess
   },
 
   data: function () {
     return {
+      showSuccess: false,
       weakPassword: false,
       pageTitle: 'Registration',
       username: '',
@@ -555,9 +564,7 @@ export default {
         // redirect to Home page
         .then((response) => {
           this.$data.messages.push(response.data.Messages)
-          window.setTimeout(() => {
-            this.$router.push('/')
-          }, 3000)
+          this.showSuccess = true
         }).catch((error) => {
           // Pushes the error messages into error to display
           this.$data.messages = []
@@ -567,7 +574,6 @@ export default {
   }
 
 }
-
 </script>
 
 <style scoped>
@@ -575,30 +581,26 @@ export default {
   text-align: left;
   font-size: 18px;
 }
- .error {
+.error {
   border-color: red;
   background: #FDD;
 }
-
 .error:focus {
   outline-color: #F99;
 }
-
 .valid {
   border-color: #5A5;
   background: #EFE;
 }
-
 .valid:focus {
   outline-color: #8E8;
 }
-    .successMessage {
-      color: Green;
-      text-align: center;
-  }
-
-  .errorMessage {
-      color: red;
-      text-align: center;
-  }
+.successMessage {
+  color: Green;
+  text-align: center;
+}
+.errorMessage {
+  color: red;
+  text-align: center;
+}
 </style>

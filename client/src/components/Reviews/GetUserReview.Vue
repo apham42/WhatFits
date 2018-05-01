@@ -11,10 +11,14 @@
             </div>
             <div id="dateFormat">
               <!--To be fixed when implemented onto profile page CSS-->
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: '{{ review.DateAndTime }}'
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: '{{ trimDate(review.DateAndTime) }}'
             </div>
+            <br>
           </section>
         </li>
+        <p v-if="results.length === 0">
+          <strong>No Reviews in this profile :(</strong>
+        </p>
       </ul>
     </div>
   </div>
@@ -51,6 +55,10 @@ export default {
       })
   },
   methods: {
+    trimDate: function (input) {
+      var trim = input.substring(0, 10)
+      return trim
+    },
     displayReviews: function () {
       axios({
         method: 'POST',

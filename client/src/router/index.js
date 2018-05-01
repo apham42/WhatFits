@@ -106,6 +106,11 @@ export default new Router({
       component: () => import('@/components/Experimental/imageUpload')
     },
     {
+      path: '/testModal',
+      name: 'RegisterSuccess',
+      component: () => import('@/components/Registration/RegisterSuccess')
+    },
+    {
       // Catch All Error Page
       path: '*',
       name: 'NotFound',
