@@ -6,25 +6,45 @@
                <a>
                <img id="navImage" src="../../assets/Images/NavbarLogo/navbarLogo.png" alt="Go to your Profile" @click="toProfile">
                </a>
-               <span class="navbar-burger burger" data-target="navbarMenuHero2">
+               <span class="navbar-burger burger" data-target="navbarMenuHero2" @click="showburger = !showburger">
                <span></span>
                <span></span>
                <span></span>
                </span>
             </div>
+            <div v-if="showburger" id="navbarMenuHero2" class="navbar-menu is-active is-radiusless">
+            <div class="navbar-end">
+              <a class="navbar-item" @click="search">
+                Search
+              </a>
+              <a class="navbar-item" @click="logout">
+                Logout
+              </a>
+              <a v-if="checkUserMan" class="navbar-item" @click="userman">
+                User Managment
+              </a>
+            </div>
+          </div>
             <div id="navbarMenuHero1" class="navbar-menu">
                <div class="navbar-end">
                  <div v-if="this.$route.name !== 'Search'" class ="search">
                   <SearchBar></SearchBar>
                 </div>
-
-                  <span class="navbar-item">
-                  <button id="button" class="button is-primary is-inverted" @click="logout">
-                  <span class="icon">
-                  <i class="fa fa-sign-out-alt"></i>
+                  <span v-if="checkUserMan" class="navbar-item">
+                    <button id="button" class="button is-primary is-inverted" @click="userman">
+                    <span class="icon">
+                    <i class="fas fa-cogs"></i>
+                    </span>
+                    <span>User Managment</span>
+                    </button>
                   </span>
-                  <span>Logout</span>
-                  </button>
+                  <span class="navbar-item">
+                    <button id="button" class="button is-primary is-inverted" @click="logout">
+                    <span class="icon">
+                    <i class="fa fa-sign-out-alt"></i>
+                    </span>
+                    <span>Logout</span>
+                    </button>
                   </span>
                </div>
             </div>
@@ -41,9 +61,33 @@ export default {
   components: {
     'SearchBar': SearchBar
   },
+  computed: {
+    checkUserMan: function () {
+      for (var i = 0; i < this.$store.getters.getviewclaims.length; i++) {
+        if (this.$store.getters.getviewclaims[i] === 'View User Managment') {
+          return true
+        }
+      }
+      return false
+    }
+  },
+  data () {
+    return {
+      showburger: false
+    }
+  },
   methods: {
+    userman: function () {
+      this.$router.push('/usermanagement')
+      this.$data.showburger = false
+    },
     toProfile: function () {
       this.$router.push('/profile')
+      this.$data.showburger = false
+    },
+    search: function () {
+      this.$router.push('/Search')
+      this.$data.showburger = false
     },
     logout: function () {
       axios({
@@ -61,6 +105,7 @@ export default {
           this.$store.dispatch('actviewclaims', {Viewclaims: null})
           this.$router.push('/')
           this.$store.dispatch('actheader')
+          this.$data.showburger = false
         })
         .catch((error) => {
           console.log(error)
