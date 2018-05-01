@@ -30,10 +30,11 @@
           <label class="label">Password</label>
         </div>
         <div class="field-body has-icons-left has-icons-right">
-          <input class="input" v-model.trim="password" @input="delayTouch($v.password)" type="password" placeholder="Password" value="" v-bind:class="{error: $v.password.$error, valid: $v.password.$dirty && !$v.password.$invalid}">
+          <input class="input" v-model.trim="password" @input="delayTouch($v.password)"  v-on:keyup="checkPassword" type="password" placeholder="Password" value="" v-bind:class="{error: $v.password.$error || this.weakPassword, valid: $v.password.$dirty && !$v.password.$invalid && !this.weakPassword}">
         </div>
       </div>
       <div class="errorMessage help">
+        <span v-show="this.weakPassword === true">This is a vulnerable password. Try again.</span>
           <span v-show="!$v.password.minLength && $v.password.$dirty">Minimum length is {{$v.password.$params.minLength.min}}</span>
           <span v-show="!$v.password.maxLength && $v.password.$dirty">Maximum length is {{$v.password.$params.maxLength.max}}</span>
           <span v-show="!$v.password.required && $v.password.$dirty">A password is required</span>
@@ -268,9 +269,9 @@
   <div class="field-body">
     <div class="field">
       <div class="control">
-        <button type="submit" class="button is-primary" :disabled="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.firstName) || !validateCharacters(this.$data.lastName) || !validateCharacters(this.$data.password)" @click.prevent="registerUser">Register</button>
+        <button type="submit" class="button is-primary" :disabled="!termsChecked || $v.$invalid || this.weakPassword || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.firstName) || !validateCharacters(this.$data.lastName) || !validateCharacters(this.$data.password)" @click.prevent="registerUser">Register</button>
       </div>
-      <span>We good to go!</span>
+      <span v-if="!termsChecked || $v.$invalid || !validateCharacters(this.$data.username) || !validateCharacters(this.$data.firstName) || !validateCharacters(this.$data.lastName) || !validateCharacters(this.$data.password)" >We good to go!</span>
     </div>
   </div>
 </div>
@@ -306,6 +307,8 @@
 import { required, minLength, maxLength, sameAs } from 'vuelidate/lib/validators'
 import axios from 'axios'
 import Terms from '@/components/Registration/Terms'
+import sha1 from 'sha1'
+import debounce from 'debounce'
 
 const touchMap = new WeakMap()
 
@@ -318,6 +321,7 @@ export default {
 
   data: function () {
     return {
+      weakPassword: false,
       pageTitle: 'Registration',
       username: '',
       firstName: '',
@@ -435,7 +439,67 @@ export default {
       }
       touchMap.set($v, setTimeout($v.$touch, 2000))
     },
-
+    checkPassword: debounce(function (e) {
+      // Hashes the password to SHA1 for webservice consumption
+      if (this.password.length < 8) {
+        return
+      }
+      console.log(this.password)
+      var hashedPassword = sha1(this.password)
+      console.log(hashedPassword)
+      // Parsing the hash into two variables, one to be send and one to be compared
+      var preffix = hashedPassword.substring(0, 5)
+      console.log(preffix)
+      var suffix = hashedPassword.slice(5)
+      console.log(suffix)
+      // Creating GET request to pwnedpassword service
+      axios({
+        method: 'GET',
+        url: 'https://api.pwnedpasswords.com/range/' + preffix
+      })
+        .then(response => {
+          console.log(response.data)
+          var payload = response.data
+          // Process Results
+          var suffixList = payload.split('\n')
+          for (var i = 0; i < suffixList.length; i++) {
+            var row = suffixList[i].split(':')
+            // console.log(row[0])
+            // console.log('This is my suffix: ' + suffix)
+            console.log(row[0])
+            if (suffix === row[0].toLowerCase()) {
+              console.log('Found')
+              if (row[0] < 250) {
+                console.log('Password is safe')
+                this.weakPassword = false
+                return
+              } else {
+                console.log('password is weak')
+                this.weakPassword = true
+                return
+              }
+            }
+          }
+          console.log('Password is not found')
+          this.weakPassword = false
+        })
+        .catch((error) => {
+          // Pushes the error messages into error to display
+          if (error.response) {
+            this.statusMessages = 'Error: An Error Occurd.'
+            console.log('An Error Occured')
+            this.errorFlag = true
+            console.log(error.response)
+          } else if (error.request) {
+            this.statusMessages = 'Error: Server Error'
+            this.errorFlag = true
+            console.log(error.request)
+          } else {
+            this.statusMessages = 'An error occured while setting up request.'
+            this.errorFlag = true
+          }
+        })
+    }, 1000),
     // Checks the characters of userInput
     validateCharacters (userInput) {
       var regexPattern = /[^ 0-9a-zA-Z!@#$%^/&*()-_=+{}[;:"'<,>.?|`~\\]]/i
