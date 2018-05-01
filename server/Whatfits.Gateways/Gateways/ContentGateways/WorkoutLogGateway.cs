@@ -77,40 +77,40 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                              where obj.Username == cred.UserName
                              select cred.UserID).FirstOrDefault();
                 
-                var car = (from b in db.Workouts
-                        join cred in db.Credentials
-                        on b.UserID equals cred.UserID
-                        where obj.Username == cred.UserName
-                        join card in db.Cardios
-                        on b.WorkoutLogID equals card.WorkoutID
-                        select new WorkoutLogDTO()
-                        {
-                            WorkoutType = b.WorkoutType,
-                            Date_Time = b.Date_Time,
-                            LiftingType = null,
-                            Reps = 0,
-                            Sets = 0,
-                            CardioType = card.CardioType,
-                            Distance = card.Distance,
-                            Time = card.Time
-                        });
+            var car = (from b in db.Workouts
+                       join cred in db.Credentials
+                       on b.UserID equals cred.UserID
+                       where obj.Username == cred.UserName
+                       join card in db.Cardios
+                       on b.WorkoutLogID equals card.WorkoutID
+                       select new WorkoutLogDTO()
+                       {
+                           WorkoutType = b.WorkoutType,
+                           Date_Time = b.Date_Time,
+                           LiftingType = null,
+                           Reps = 0,
+                           Sets = 0,
+                           CardioType = card.CardioType,
+                           Distance = card.Distance,
+                           Time = card.Time
+                       });
             var weigh = (from b in db.Workouts
-                                  join cred in db.Credentials
-                                  on b.UserID equals cred.UserID
-                                  where obj.Username == cred.UserName
-                                  join weight in db.WeightLiftings
-                                  on b.WorkoutLogID equals weight.WorkoutID
-                                  select new WorkoutLogDTO()
-                                  {
-                                      WorkoutType = b.WorkoutType,
-                                      Date_Time = b.Date_Time,
-                                      LiftingType = weight.LiftingType,
-                                      Reps = weight.Reps,
-                                      Sets = weight.Sets,
-                                      CardioType = null,
-                                      Distance = 0,
-                                      Time = null
-                                  });
+                         join cred in db.Credentials
+                         on b.UserID equals cred.UserID
+                         where obj.Username == cred.UserName
+                         join weight in db.WeightLiftings
+                         on b.WorkoutLogID equals weight.WorkoutID
+                         select new WorkoutLogDTO()
+                         {
+                             WorkoutType = b.WorkoutType,
+                             Date_Time = b.Date_Time,
+                             LiftingType = weight.LiftingType,
+                             Reps = weight.Reps,
+                             Sets = weight.Sets,
+                             CardioType = null,
+                             Distance = 0,
+                             Time = null
+                         });
             var logs = (car.Union(weigh).OrderByDescending(m =>m.Date_Time));
             return logs;
         }

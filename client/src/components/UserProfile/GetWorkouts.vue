@@ -17,7 +17,7 @@
               <strong>Distance in miles</strong> : {{value.Distance}} mile(s)&emsp;
               <strong>Time it took</strong> : {{value.Time}} minute(s)&emsp;
               <br>
-              <strong>Date done</strong> : {{value.Date_Time}}
+              <strong>Date done</strong> : {{trimDate(value.Date_Time)}}
             </div>
           </div>
           <div class="card-content" v-if="value.WorkoutType === 'WeightLifting'">
@@ -26,7 +26,7 @@
               <strong>Sets</strong> : {{value.Sets}}&emsp;
               <strong>Reps per set</strong> : {{value.Reps}}&emsp;
               <br>
-              <strong>Date done</strong> : {{value.Date_Time}}
+              <strong>Date done</strong> : {{trimDate(value.Date_Time)}}
             </div>
           </div>
         </div>
@@ -76,6 +76,10 @@ export default {
       })
   },
   methods: {
+    trimDate: function (input) {
+      var trim = input.substring(0, 10)
+      return trim
+    },
     displayWorkouts: function () {
       axios({
         method: 'POST',
