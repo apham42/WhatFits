@@ -12,7 +12,7 @@
               <button class="button is-primary is-rounded" id="buttonGap" @click="goEditProfile">Edit Profile</button>
           </span>
           <span v-else>
-                <folo id="buttonGap"></folo><button class="button is-secondary is-rounded" id="buttonGap">Review</button>
+                <folo id="buttonGap"></folo><button class="button is-secondary is-rounded" id="buttonGap" @click="goReview">Review</button>
           </span>
           <hr>
         </div>
