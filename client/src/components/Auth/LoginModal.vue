@@ -36,7 +36,8 @@
               <p v-show="invalid" class="help is-danger">Invalid Credentials</p>
             </div>
             <div class="level-item has-text-centered is-grouped">
-              <button id="loginbutton" class="button is-primary is-inverted is-outlined is-grouped" @click="sendUserCredential" :disabled="$v.$invalid">Login</button>
+              <button v-if="isLoading == false" id="loginbutton" class="button is-primary is-inverted is-outlined is-grouped" @click="sendUserCredential" :disabled="$v.$invalid">Login</button>
+              <button v-if="isLoading == true" id="loginbutton" class="button is-loading">Login</button>
               <button id="cancelbutton" class="button is-danger is-inverted is-grouped" @click="closeModal">Cancel</button>
             </div>
          </div>
@@ -56,7 +57,8 @@ export default {
     return {
       username: '',
       password: '',
-      invalid: false
+      invalid: false,
+      isLoading: false
     }
   },
   methods: {
@@ -71,6 +73,7 @@ export default {
       this.$store.dispatch('closeAction')
     },
     sendUserCredential: function () {
+      this.$data.isLoading = true
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/login/Login',
@@ -92,7 +95,7 @@ export default {
         })
         .catch((error) => {
           console.log(error)
-          // console.log('error')
+          this.$data.isLoading = false
           this.invalid = true
           this.username = ''
           this.password = ''

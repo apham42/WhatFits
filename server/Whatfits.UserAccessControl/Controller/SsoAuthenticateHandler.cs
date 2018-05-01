@@ -4,9 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
+using System.Security.Principal;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
+using Whatfits.JsonWebToken.Controller;
 using Whatfits.UserAccessControl.Service;
 
 namespace Whatfits.UserAccessControl.Controller
@@ -30,19 +34,14 @@ namespace Whatfits.UserAccessControl.Controller
                     return base.SendAsync(request, cancellationToken);
                 }
 
-                var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token) as JwtSecurityToken;
+                var incommingPrincipal = new VerifyJWT().SsoVerifyToken(token);
 
-
-                var username = jwt.Claims.Where(c => c.Type == "username")
-                                            .Select(c => c.Value).SingleOrDefault();
-                var password = jwt.Claims.Where(c => c.Type == "password")
-                                            .Select(c => c.Value).SingleOrDefault();
-
-
-
+                Thread.CurrentPrincipal = incommingPrincipal;
+                HttpContext.Current.User = incommingPrincipal;
+                
                 return base.SendAsync(request, cancellationToken);
             }
-            catch (Exception)
+            catch (NullReferenceException)
             {
                 // send to unauthenticated
                 return UnAuthenticated();

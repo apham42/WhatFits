@@ -77,6 +77,7 @@
     <Compile Include="DTOs\CoreDTOs\UsernameResponseDTO.cs" />
     <Compile Include="DTOs\ResponseDTO.cs" />
     <Compile Include="DTOs\Coordinate.cs" />
+    <Compile Include="DTOs\SSODTOs\SSORegDTO.cs" />
     <Compile Include="DTOs\UserSearch.cs" />
     <Compile Include="Gateways\ContentGateways\ChatGateway.cs" />
     <Compile Include="Gateways\ContentGateways\EventGateway.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Gateways\CoreGateways\RegistrationGateway.cs" />
     <Compile Include="Gateways\CoreGateways\UserAccessControlGateway.cs" />
     <Compile Include="Gateways\CoreGateways\UserManagementGateway.cs" />
+    <Compile Include="Gateways\SSOGateways\SSORegistrationGateway.cs" />
     <Compile Include="Interfaces\IResponseDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
