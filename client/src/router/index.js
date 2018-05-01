@@ -96,14 +96,9 @@ export default new Router({
       component: () => import('@/components/UserProfile/EditProfile')
     },
     {
-      path: '/badpassword',
-      name: 'BadPassword',
-      component: () => import('@/components/Experimental/BadPassword')
-    },
-    {
-      path: '/testImage',
-      name: 'TestImage',
-      component: () => import('@/components/Experimental/imageUpload')
+      path: '/notallowed',
+      name: 'NotAllowed',
+      component: () => import('@/components/ErrorPage/NotAllowed')
     },
     {
       // Catch All Error Page

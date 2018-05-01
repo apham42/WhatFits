@@ -12,6 +12,6 @@ namespace server.Constants
     public class BadPasswordConstants
     {
         public const int MINIMUMRANGE = 50;
-        public const int MAXIMUMRANGE = 99;
+        public const int MAXIMUMRANGE = 250;
     }
 }
