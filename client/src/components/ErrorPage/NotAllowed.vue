@@ -3,7 +3,7 @@
   <div class="centerBox">
     <span id="notFoundTitle">{{pageTitle}}</span>
     <div>
-      <span id="secondTitle">Just us doing some cleanup and patching stuff up</span>
+      <span id="secondTitle">Just us enforcing permissions</span>
       <br>
       <span id="descriptionDetails">This will take you <router-link to="/">home</router-link>.</span>
     </div>
@@ -14,12 +14,12 @@
 </template>
 <script>
 export default {
-  name: 'Maintenance',
+  name: 'NotAllowed',
   computed: {
   },
   data () {
     return {
-      pageTitle: 'Down for Maintainence'
+      pageTitle: 'You do not have permission to do that...'
     }
   },
   methods: {

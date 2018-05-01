@@ -467,23 +467,19 @@ export default {
         })
           // redirect to Home page
           .then(response => {
-            console.log(response.data.Messages)
-            console.log(response)
             this.statusMessages.createUserResponse = 'User ' + this.userName + ' has been created.'
             this.errorFlags.createUserFlag = false
           }).catch((error) => {
-          // Pushes the error messages into error to display
-            if (error.response) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data.Messages
+          // Pushes you to an error page if something happended
+            if (error.response.status === 400) {
+              this.statusMessages.createUserResponse = 'There was an error processing your request'
               this.errorFlags.createUserFlag = true
-              console.log(error.response)
-            } else if (error.request) {
-              this.statusMessages.createUserResponse = 'Error: ' + error.response.data.Messages
-              this.errorFlags.createUserFlag = true
-              console.log(error.request)
-            } else {
-              this.statusMessages.createUserResponse = 'An error occured while setting up request.'
-              this.errorFlags.createUserFlag = true
+            } else if (error.response.status === 404) {
+              this.$router.push('/notfound')
+            } else if (error.response.status === 403) {
+              this.$router.push('/notAllowed')
+            } else if (error.response.status === 500) {
+              this.$router.push('/serverissue')
             }
           })
       } else if (this.userType === 'Administrator') {
@@ -533,17 +529,15 @@ export default {
             this.errorFlags.createUserFlag = false
           }).catch((error) => {
           // Pushes the error messages into error to display
-            if (error.response) {
-              this.statusMessages.createUserResponse = error.response.data.Messages
+            if (error.response.status === 400) {
+              this.statusMessages.createUserResponse = 'There was an error processing your request'
               this.errorFlags.createUserFlag = true
-              console.log(error.response)
-            } else if (error.request) {
-              this.statusMessages.createUserResponse = error.response.data.Messages
-              this.errorFlags.createUserFlag = true
-              console.log(error.request)
-            } else {
-              this.statusMessages.createUserResponse = 'An error occured while setting up request.'
-              this.errorFlags.createUserFlag = true
+            } else if (error.response.status === 404) {
+              this.$router.push('/notfound')
+            } else if (error.response.status === 403) {
+              this.$router.push('/notAllowed')
+            } else if (error.response.status === 500) {
+              this.$router.push('/serverissue')
             }
           })
       } else {

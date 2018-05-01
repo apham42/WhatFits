@@ -24,7 +24,6 @@
     </span>
     <span>Search</span>
   </a>
-      <!-- <button type="submit" class="search-button" @click.prevent="searchBar">Search</button>-->
     </p>
       <div class="errorResponse">
             <p v-for="message in messages[0]" :key="message"> {{message}} </p>
