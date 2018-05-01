@@ -77,7 +77,7 @@
               </p>
             </div>
 
-            <div class="card" v-for="searchResult in searchResults[0].slice(this.$data.nextTen,this.$data.nextTen + 10)" :key="searchResult">
+            <div class="card" v-for="searchResult in searchResults[0].slice(this.$data.nextTen,this.$data.nextTen + 10)" :key="searchResult.User">
               <div class = "container">
                 <p class ='view-profile' @click="setViewProfile(searchResult.User)">{{searchResult.User}}</p>
                 <p>{{searchResult.FirstName}} {{searchResult.LastName}}</p>
@@ -203,7 +203,7 @@ export default {
     if (this.$data.searchType === 'searchNearby') {
       this.$data.SearchUser.requestedUser = ''
     } else {
-      this.$data.SearhNearby.requestedSearch = ''
+      this.$data.SearchNearby.requestedSearch = ''
     }
     this.search()
   }
