@@ -54,6 +54,7 @@ export default {
           this.$router.push('/')
         })
         .catch((error) => {
+          this.$data.incorrectPass = true
           console.log(error)
         })
     }
