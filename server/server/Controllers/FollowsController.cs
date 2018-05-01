@@ -42,7 +42,7 @@ namespace server.Controllers
         /// <returns>Users' follows</returns>
         [HttpPost]
         [Route("getfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [EnableCors("http://localhost:8080 , http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult Getfollows([FromBody]UsernameDTO userDTO)
         {
             if (HttpContext.Current.Request.HttpMethod == "POST")
@@ -69,7 +69,7 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         [Route("addfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [EnableCors("http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult Addfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -99,7 +99,7 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         [Route("deletefollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [EnableCors("http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult Deletefollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -130,7 +130,7 @@ namespace server.Controllers
         /// <returns>True of False</returns>
         [HttpPost]
         [Route("isfollows")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [EnableCors("http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult Isfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -161,7 +161,7 @@ namespace server.Controllers
         /// <returns>True of False</returns>
         [HttpPost]
         [Route("getinitialvalue")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [EnableCors("http://localhost:8080 , http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
         public IHttpActionResult GetInitialvalue([FromBody]UsernameDTO userDTO)
         {
             requestedUser.UserName = userDTO.Username;

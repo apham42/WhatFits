@@ -25,11 +25,36 @@ namespace Whatfits.JsonWebToken.Constant
                 {
                     ValidIssuers = new[] { "https://www.Whatfits.social/" },
                     IssuerSigningKey = new SymmetricSecurityKey(SecurityKey),
-                    ValidateLifetime = false,
+                    ValidateLifetime = true,
                     ValidateAudience = false,
                     ValidateIssuer = true,
                     ValidateIssuerSigningKey = true
                 };
+
+            // return valid parameters
+            return validationParameters;
+        }
+
+        /// <summary>
+        /// Sso Validation
+        /// </summary>
+        /// <param name="username">username</param>
+        /// <returns>valid params for sso</returns>
+        public TokenValidationParameters SsoValidateToken(string username)
+        {
+
+            // SSO Secret
+            byte[] SecurityKey = new Key().ssosecret;
+
+            // validation Parameters
+            TokenValidationParameters validationParameters = new TokenValidationParameters
+            {
+                IssuerSigningKey = new SymmetricSecurityKey(SecurityKey),
+                ValidateLifetime = false,
+                ValidateAudience = false,
+                ValidateIssuer = false,
+                ValidateIssuerSigningKey = true
+            };
 
             // return valid parameters
             return validationParameters;
