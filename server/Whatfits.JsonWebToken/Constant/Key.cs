@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Whatfits.DataAccess.DTOs;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using Whatfits.DataAccess.Gateways.CoreGateways;
@@ -14,7 +15,7 @@ namespace Whatfits.JsonWebToken.Constant
         // getter for secret key in bytes
         public byte[] ssosecret
         {
-            get { return Convert.FromBase64String(SSOsecret); }
+            get { return Encoding.UTF8.GetBytes(SSOsecret); }
         }
         
         public byte[] CreateSecret

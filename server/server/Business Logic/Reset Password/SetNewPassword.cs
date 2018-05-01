@@ -1,4 +1,5 @@
 ﻿using FluentValidation.Results;
+using server.Business_Logic.Services;
 using server.Constants;
 using server.Interfaces;
 using server.Model;
@@ -52,6 +53,15 @@ namespace server.Business_Logic.Reset_Password
                     messages.Add(failure.ErrorMessage);
                 }
                 validResponse.isSuccessful = false;
+                validResponse.Messages = messages;
+                response.Result = validResponse;
+                return response;
+            }
+
+            if (new BadPasswordService().BadPassword(incommingCredentials.Password) == true)
+            {
+                validResponse.isSuccessful = false;
+                messages.Add("Bad Password");
                 validResponse.Messages = messages;
                 response.Result = validResponse;
                 return response;
