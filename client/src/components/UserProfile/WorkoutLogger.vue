@@ -156,7 +156,19 @@ export default {
             console.log(response)
           })
           .catch(error => {
-            console.log(error.response)
+            if (error.response.status === 400) {
+            // Your custom messages that appears on the screen
+              console.log(error.response)
+            } else if (error.response.status === 404) {
+              // Redirects you to the 404 page
+              this.$router.push('/notfound')
+            } else if (error.response.status === 403) {
+              // Redirects you to the Forbidden page
+              this.$router.push('/notAllowed')
+            } else if (error.response.status === 500) {
+              // Redirects you to the server issue page
+              this.$router.push('/serverissue')
+            }
           })
       } else {
         axios({
@@ -179,7 +191,19 @@ export default {
             console.log(response)
           })
           .catch(error => {
-            console.log(error.response)
+            if (error.response.status === 400) {
+              // Your custom messages that appears on the screen
+              console.log(error.response)
+            } else if (error.response.status === 404) {
+              // Redirects you to the 404 page
+              this.$router.push('/notfound')
+            } else if (error.response.status === 403) {
+              // Redirects you to the Forbidden page
+              this.$router.push('/notAllowed')
+            } else if (error.response.status === 500) {
+              // Redirects you to the server issue page
+              this.$router.push('/serverissue')
+            }
           })
       }
     }
