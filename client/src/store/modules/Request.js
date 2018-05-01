@@ -4,12 +4,18 @@ const state = {
     'Content-Type': 'application/json',
     'Authorization': null,
     'X-Requested-With': 'XMLHttpRequest'
-  }
+  },
+  // for dat production life
+  url: 'http://localhost/server/'
+  // url: 'http://longnlong.com/server/'
 }
 
 const getters = {
   getheader: function (state) {
     return state.headers
+  },
+  getURL: function (state) {
+    return state.url
   }
 }
 
