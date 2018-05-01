@@ -181,5 +181,15 @@ export default {
   position: left;
   background: #34495e;
   color:white;
+  transition: 0.5s;
+  text-transform: uppercase;
+  font-family: sans-serif;
+  box-shadow: 0 5px 5px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+#isfollow:hover{
+  background: white;
+  text-shadow: 0 5px 5px rgba(0,0,0,0.2);
+  color: grey;
 }
 </style>

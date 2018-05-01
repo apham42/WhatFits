@@ -264,30 +264,42 @@ export default {
   bottom: 0px;
   right: 20px;
   border-radius: 5px 5px 0px 0px;
+  border: solid #34495e;
   font-family: sans-serif;
 }
 #send{
-  margin-right: 80%;
-  background: #16a085;
+  width: 248px;
+  height: 40px;
+  background: white;
+  border-top: solid grey;
+  border-right: solid #34495e;
 }
 #chathead,#msghead{
-  background: rgb(54, 53, 52);
+  background: #34495E;
   padding: 5px;
   color:white;
   border-radius: 5px 5px 0px 0px;
   text-align: center;
+  border: solid #34495E;
+  transition: 0.5s;
+}
+#chathead:hover{
+  background: white;
+  text-shadow: 0 5px 5px rgba(0,0,0,0.2);
+  color: grey;
 }
 #chatbody{
-  height: 400px;
+  height: 300px;
+  overflow-y: auto;
 }
 #msghead{
-  background:#3498db;
+  background:#34495E;
+  border: solid white;
   padding:2px;
 }
 #msgbody{
-  height:200px;
-  overflow: auto;
-  overflow-y: auto;
+  overflow:auto;
+  height:100px;
 }
 #msgclose{
   float:right;
@@ -295,25 +307,28 @@ export default {
   padding: 3px;
 }
 #msgfoot{
-  width:250px;
-  color:black;
+  width:100%;
+  border-top: solid grey;
 }
 #MsgBox{
   width: 250px;
-  height: 350px;
+  height: 250px;
   background: white;
   bottom: -5px;
 }
 #username{
-  background: gray;
   padding: 5px 25px;
   position: relative;
-  color: black;
+  color: white;
+  transition: 0.5s;
 }
 #username:hover{
-  background:white
+  background:white;
+  text-shadow: 0 5px 5px rgba(0,0,0,0.2);
+  color: grey;
 }
 #username:before{
+  border-radius: 50%;
   content:'';
   position:absolute;
   background:#2ecc71;
@@ -323,13 +338,11 @@ export default {
   top: 12px;
 }
 #messagesent{
-  border: transparent;
-  width:96%;
+  width: 100%;
   border-color: white;
   border-top: 1px solid #bdc3c7;
 }
 #receives{
-  border-color: white;
-  width:96%;
+  width: 100%;
 }
 </style>
