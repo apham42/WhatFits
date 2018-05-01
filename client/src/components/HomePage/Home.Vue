@@ -75,10 +75,6 @@ export default {
 #bodySection {
     background-color:#34495E;
 }
-.hero-body {
-  height: 30em;
-  background-image: url("../../../static/ProfileDummy/backgroundImage2.jpg");
-}
 .homeBody {
 padding-top: 9em;
 color: white;

@@ -5,9 +5,8 @@
     <div>
       <span id="secondTitle">Just us enforcing permissions</span>
       <br>
-      <span id="descriptionDetails">This will take you <router-link to="/">home</router-link>.</span>
+      <span id="descriptionDetails">Are you logged in? This will take you <router-link to="/">home</router-link>.</span>
     </div>
-
   </div>
 </div>
 
