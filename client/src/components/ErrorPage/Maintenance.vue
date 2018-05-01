@@ -1,30 +1,42 @@
 <template>
-<div>
-  <p> Maintenance Page</p>
+<div class="container">
+  <div class="centerBox">
+    <span id="notFoundTitle">{{pageTitle}}</span>
+    <div>
+      <span id="secondTitle">Just us doing some cleanup and patching stuff up</span>
+      <br>
+      <span id="descriptionDetails">This will take you <router-link to="/">home</router-link>.</span>
+    </div>
+
+  </div>
 </div>
+
 </template>
 <script>
 export default {
   name: 'Maintenance',
   computed: {
-    isAuthenticated: function () {
-      return this.$store.getters.isAuthenticated
-    }
   },
   data () {
     return {
-      pageTitle: 'Maintenance',
-      hasErrored: true,
-      container: '',
-      containerHeight: ''
+      pageTitle: 'Down for Maintainence'
     }
   },
   methods: {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.centerBox{
+  padding-top:20%;
+}
+#notFoundTitle{
+font-size: 5em;
+}
+#secondTitle{
+font-size: 2em;
+}
+#descriptionDetails{
+font-size:1.3em;
+}
 </style>
