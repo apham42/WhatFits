@@ -6,6 +6,11 @@
           <div class="card-header">
             <p class="card-header-title"><strong>Workout Type - {{value.WorkoutType}}</strong></p>
           </div>
+          <div class="card-content" v-if="index == null">
+            <div class="contentPadding">
+              <strong>No Workouts in this profile :(</strong>
+            </div>
+           </div>
           <div class="card-content"  v-if="value.WorkoutType === 'Cardio'">
             <div class="contentPadding">
               <strong>Cardio Type</strong> : {{value.CardioType}}&emsp;
@@ -27,6 +32,15 @@
         </div>
       </div>
       <div id="spacing"></div>
+    </div>
+    <div class="card" id="workoutCards" v-if="results.length === 0">
+      <div id="">
+        <div class="card-content">
+          <div class="contentPadding">
+            <strong>No Workouts in this profile :(</strong>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
