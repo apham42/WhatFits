@@ -23,8 +23,8 @@
           <div class="card-content" v-if="value.WorkoutType === 'WeightLifting'">
             <div id="contentPadding" >
               <strong>Lifting Type</strong> : {{value.LiftingType}}&emsp;
-              <strong>Sets</strong> : {{value.Sets}}&emsp;
               <strong>Reps per set</strong> : {{value.Reps}}&emsp;
+              <strong>Sets</strong> : {{value.Sets}}&emsp;
               <br>
               <strong>Date done</strong> : {{trimDate(value.Date_Time)}}
             </div>
