@@ -1,22 +1,43 @@
 <template>
-    <div>
-      <div v-if="this.errorFlag == true">
-        <div>
-          <error-page404></error-page404>
-          <home-button></home-button>
-        </div>
-      </div>
-      <div v-else>
-        <user-info id="ProfileInfo" :userData="userData"></user-info>
-        <get-reviews></get-reviews>
-        <!-- NOTE: Add your components here. If the page does not load it will go to an error page  -->
-        <div v-if="this.userData.myProfile == true">
-          <workout-logger></workout-logger>
-        </div>
-        <workout-log></workout-log>
-        <chat-bar></chat-bar>
+  <div class="container">
+    <div v-if="this.errorFlag == true">
+      <div>
+        <error-page404></error-page404>
+        <home-button></home-button>
       </div>
     </div>
+    <div class="columns is-desktop">
+      <div class="column" >
+        <user-info id="ProfileInfo" :userData="userData"></user-info>
+      </div>
+      <div class="column" id="workoutsColumn">
+
+        <h1 id="title">Workout Logs</h1>
+        <hr>
+        <div v-if="this.userData.myProfile == true">
+          <workout-logger id="Logger"></workout-logger>
+        </div>
+        <workout-log ></workout-log>
+      </div>
+      <div class="column" id="workoutsColumn" >
+        <h1 id="title" >Reviews on Me</h1>
+          <hr>
+          <get-reviews ></get-reviews>
+        <!--
+        <h1 id="title">Events</h1>
+        <hr>
+        <div id="munnyColumn">
+          <P style="padding-top:5em;padding-bottom:5em;" id="title">List of Events</P>
+        </div>
+        <div style="padding-top:2em;"></div>
+        <div id="munnyColumn">
+          <P style="padding-top:5em;padding-bottom:5em " id="title">Potential Ad Space $$$$</P>
+        </div>
+        -->
+      </div>
+    </div>
+    <chat-bar></chat-bar>
+  </div>
 </template>
 <script>
 import axios from 'axios'
@@ -50,12 +71,13 @@ export default {
         description: '',
         skillLevel: '',
         gender: '',
-        profileImage: '',
+        profileImagePath: '',
         myProfile: true
       }
     }
   },
   beforeCreate () {
+    console.log(this.counter) // Logs the counter value every second, before the DOM updates.
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/UserProfile/ProfileData',
@@ -70,12 +92,13 @@ export default {
     })
       // redirect to Home page
       .then(response => {
+        console.log(response.data)
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description
         this.userData.skillLevel = response.data.SkillLevel
         this.userData.gender = response.data.Gender
-        this.userData.profileImage = response.data.ProfilePicture
+        this.userData.profileImagePath = this.$store.getters.getprofilepicture + response.data.ProfilePicture
         this.errorFlag = false
         if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
           this.userData.myProfile = true
@@ -107,6 +130,9 @@ export default {
       this.myProfile = false
     }
   },
+  updated () {
+    console.log('This has been updated')
+  },
   methods: {
 
   }
@@ -116,16 +142,32 @@ export default {
 <style scoped>
 
 #ProfileInfo{
-  padding-left: 10em;
-  width:auto;
-  max-width:450px;
+
+  width:30em;
+  max-width:100%;
   float:left;
   position: relative;
 }
-@media only screen and (min-width: 300px){
-  #ProfileInfo{
-    padding-left: 0em;
-    width: auto;
-  }
+#workoutsColumn {
+  padding-left:2em;
+  padding-top:2em;
+}
+#Logger{
+  padding-top: 1.5%;
+  padding-bottom:2.5%;
+  padding-left: 1%;
+  left:1.8%;
+  position: relative;
+}
+#Reviews{
+  float:left;
+  max-width:30%;
+  overflow:auto;
+  padding-right:3%;
+  padding-top:0.5%;
+}
+#munnyColumn {
+border-style: dotted;
+text-align: center;
 }
 </style>

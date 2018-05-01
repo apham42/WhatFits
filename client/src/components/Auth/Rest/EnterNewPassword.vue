@@ -2,15 +2,20 @@
     <div>
         <div id="inputnewpass" class="field">
             <p class="control has-icons-left">
-            <input class="input is-small" v-model="newPassword" type="Password" placeholder="New Password" @keyup.enter="CreateNewPassword">
+              <input class="input is-small" v-model="newPassword" @input="delayTouch($v.newPassword)" v-bind:class="{error: $v.newPassword.$error, valid: $v.newPassword.$dirty && !$v.newPassword.$invalid}" type="Password" placeholder="New Password" @keyup.enter="CreateNewPassword">
             </p>
+            <div class="errorMessage">
+              <span v-show="!$v.newPassword.required && $v.newPassword.$dirty">Password is required</span>
+            </div>
         </div>
-        <button class="button is-primary" @click="CreateNewPassword">Submit New Password</button>
+        <button class="button is-primary" @click="CreateNewPassword" :disabled="$v.$invalid">Submit New Password</button>
         <p v-if="incorrectPass" class="help is-danger">Invalid Password</p>
     </div>
 </template>
 <script>
 import axios from 'axios'
+import {required} from 'vuelidate/lib/validators'
+const touchMap = new WeakMap()
 export default {
   name: 'EnterNewPassword',
   props: ['IncommingUsername'],
@@ -21,7 +26,19 @@ export default {
       newPassword: ''
     }
   },
+  validations: {
+    newPassword: {
+      required
+    }
+  },
   methods: {
+    delayTouch ($v) {
+      $v.$reset()
+      if (touchMap.has($v)) {
+        clearTimeout(touchMap.get($v))
+      }
+      touchMap.set($v, setTimeout($v.$touch, 1000))
+    },
     CreateNewPassword: function () {
       axios({
         method: 'POST',

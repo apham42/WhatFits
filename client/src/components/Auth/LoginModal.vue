@@ -9,21 +9,25 @@
             <br>
             <div class="field">
                <p class="control has-icons-left">
-                  <input class="input" v-model="username" id="username" type="text" placeholder="Username">
-                  <span v-show="!$v.username.required && $v.username.$dirty">Field is required</span>
+                  <input class="input" v-model.trim="username" @input="delayTouch($v.username)" v-bind:class="{error: $v.username.$error, valid: $v.username.$dirty && !$v.username.$invalid}" id="username" type="text" placeholder="Username">
                   <span class="icon is-small is-left">
                   <i class="fa fa-user"></i>
                   </span>
                </p>
+               <div class="errorMessage">
+                <span v-show="!$v.username.required && $v.username.$dirty">Username is required</span>
+              </div>
             </div>
             <div class="field">
                <p class="control has-icons-left">
-                  <input class="input" v-model="password" id="password" type="password" placeholder="Password" @keyup.enter="sendUserCredential">
-                  <span v-show="!$v.password.required && $v.password.$dirty">Field is required</span>
+                  <input class="input" v-model.trim="password" @input="delayTouch($v.password)" v-bind:class="{error: $v.password.$error, valid: $v.password.$dirty && !$v.password.$invalid}" id="password" type="password" placeholder="Password" @keyup.enter="sendUserCredential">
                   <span class="icon is-small is-left">
                   <i class="fa fa-lock"></i>
                   </span>
                </p>
+               <div class="errorMessage">
+                  <span v-show="!$v.password.required && $v.password.$dirty">Password is required</span>
+               </div>
             </div>
             <div class="level-left">
               <router-link class="md-accent" to="/resetpassword" @click.native="closeModal"> Forgot Password?</router-link>
@@ -32,7 +36,8 @@
               <p v-show="invalid" class="help is-danger">Invalid Credentials</p>
             </div>
             <div class="level-item has-text-centered is-grouped">
-              <button id="loginbutton" class="button is-primary is-inverted is-outlined is-grouped" @click="sendUserCredential">Login</button>
+              <button v-if="isLoading == false" id="loginbutton" class="button is-primary is-inverted is-outlined is-grouped" @click="sendUserCredential" :disabled="$v.$invalid">Login</button>
+              <button v-if="isLoading == true" id="loginbutton" class="button is-loading">Login</button>
               <button id="cancelbutton" class="button is-danger is-inverted is-grouped" @click="closeModal">Cancel</button>
             </div>
          </div>
@@ -41,8 +46,9 @@
 </template>
 
 <script>
-import { required, minLength, maxLength } from 'vuelidate/lib/validators'
 import axios from 'axios'
+import {required} from 'vuelidate/lib/validators'
+const touchMap = new WeakMap()
 export default {
   name: 'LoginModal',
   components: {
@@ -51,14 +57,23 @@ export default {
     return {
       username: '',
       password: '',
-      invalid: false
+      invalid: false,
+      isLoading: false
     }
   },
   methods: {
+    delayTouch ($v) {
+      $v.$reset()
+      if (touchMap.has($v)) {
+        clearTimeout(touchMap.get($v))
+      }
+      touchMap.set($v, setTimeout($v.$touch, 1000))
+    },
     closeModal: function () {
       this.$store.dispatch('closeAction')
     },
     sendUserCredential: function () {
+      this.$data.isLoading = true
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/login/Login',
@@ -80,7 +95,7 @@ export default {
         })
         .catch((error) => {
           console.log(error)
-          // console.log('error')
+          this.$data.isLoading = false
           this.invalid = true
           this.username = ''
           this.password = ''
@@ -92,9 +107,7 @@ export default {
       required
     },
     password: {
-      required,
-      maxLength: maxLength(64),
-      minLength: minLength(8)
+      required
     }
   }
 }
@@ -119,4 +132,12 @@ export default {
 #loginbutton {
   margin-right: 15px;
 }
+.errorMessage {
+      color: red;
+      text-align: center;
+  }
+  .error {
+  border-color: red;
+  background: #FDD;
+  }
 </style>
