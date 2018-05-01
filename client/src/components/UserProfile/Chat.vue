@@ -258,7 +258,7 @@ export default {
 <style>
 #ChatBox,#MsgBox{
   cursor: pointer;
-  background: #abeceb;
+  background: #307F83;
   width: 150px;
   position: fixed;
   bottom: 0px;
