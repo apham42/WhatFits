@@ -13,8 +13,12 @@
               <!--To be fixed when implemented onto profile page CSS-->
               &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: '{{ review.DateAndTime }}'
             </div>
+            <br>
           </section>
         </li>
+        <p v-if="results.length === 0">
+          <strong>No Reviews in this profile :(</strong>
+        </p>
       </ul>
     </div>
   </div>

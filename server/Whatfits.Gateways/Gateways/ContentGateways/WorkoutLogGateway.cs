@@ -111,7 +111,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                                       Distance = 0,
                                       Time = null
                                   });
-            var logs = (car.Union(weigh).OrderBy(m =>m.Date_Time));
+            var logs = (car.Union(weigh).OrderByDescending(m =>m.Date_Time));
             return logs;
         }
     }
