@@ -76,15 +76,17 @@ namespace server.Controllers
         public IHttpActionResult SetPassword([FromBody] UserCredential usernewCredentials)
         {
             ResetPasswordResponseDTO response = service.ReplaceOldPassword(usernewCredentials);
-            response.Messages = new List<string>();
+            //response.Messages = new List<string>();
 
             if (response.isSuccessful == false)
             {
-                response.Messages.Add("Failed to replace Password");
+                if(response.Messages.Contains("Bad Password"))
+                {
+                    return Content(HttpStatusCode.Unauthorized, response);
+                }
                 return Content(HttpStatusCode.NotFound, response);
             }
 
-            response.Messages.Add("Success!");
             return Ok(response);
         }
     }

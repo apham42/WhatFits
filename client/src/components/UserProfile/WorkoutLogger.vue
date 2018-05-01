@@ -147,10 +147,7 @@ export default {
             Distance: this.$data.WorkoutLogger.Distance,
             Time: this.$data.WorkoutLogger.Time
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8080',
-            'Content-Type': 'application/json'
-          }
+          headers: this.$store.getters.getheader
         })
           .then(response => {
             console.log(response)
@@ -183,10 +180,7 @@ export default {
             Reps: this.$data.WorkoutLogger.Reps,
             Sets: this.$data.WorkoutLogger.Sets
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8080',
-            'Content-Type': 'application/json'
-          }
+          headers: this.$store.getters.getheader
         })
           .then(response => {
             console.log(response)
