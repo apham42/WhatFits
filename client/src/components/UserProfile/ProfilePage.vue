@@ -40,7 +40,6 @@
   </div>
 </template>
 <script>
-import axios from 'axios'
 import GetWorkouts from '@/components/UserProfile/GetWorkouts'
 import UserInfo from '@/components/UserProfile/UserInfo'
 import ErrorPage from '@/components/ErrorPage/NotFound'
@@ -49,6 +48,8 @@ import Chat from '@/components/UserProfile/Chat'
 import WorkoutLogger from '@/components/UserProfile/WorkoutLogger'
 import GetUserReview from '@/components/Reviews/GetUserReview'
 import Review from '@/components/Reviews/Review'
+import axios from 'axios'
+
 export default {
   name: 'ProfilePage',
   components: {
@@ -77,7 +78,9 @@ export default {
     }
   },
   beforeCreate () {
-    console.log(this.counter) // Logs the counter value every second, before the DOM updates.
+    console.log('before create called')
+    console.log('http://localhost/server/v1/UserProfile/ProfileData')
+    console.log(axios)
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/UserProfile/ProfileData',
@@ -90,9 +93,9 @@ export default {
         'LoggedinUser': this.$store.getters.userName
       }
     })
-      // redirect to Home page
+    // redirect to Home page
       .then(response => {
-        console.log(response.data)
+        console.log('response: ' + response.data)
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description
@@ -134,7 +137,6 @@ export default {
     console.log('This has been updated')
   },
   methods: {
-
   }
 }
 </script>

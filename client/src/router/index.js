@@ -96,6 +96,11 @@ export default new Router({
       component: () => import('@/components/UserProfile/EditProfile')
     },
     {
+      path: '/notallowed',
+      name: 'NotAllowed',
+      component: () => import('@/components/ErrorPage/NotAllowed')
+    },
+    {
       // Catch All Error Page
       path: '*',
       name: 'NotFound',
