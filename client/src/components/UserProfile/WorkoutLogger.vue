@@ -154,6 +154,7 @@ export default {
         })
           .then(response => {
             console.log(response)
+            location.reload()
           })
           .catch(error => {
             if (error.response.status === 400) {
@@ -189,6 +190,7 @@ export default {
         })
           .then(response => {
             console.log(response)
+            location.reload()
           })
           .catch(error => {
             if (error.response.status === 400) {
