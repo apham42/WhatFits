@@ -1,4 +1,5 @@
 ﻿using server.Business_Logic.Services;
+using server.Controllers.Constants;
 using server.Model.Account;
 using server.Model.Data_Transfer_Objects.AccountDTO_s;
 using System;
@@ -25,7 +26,7 @@ namespace server.Controllers
         /// <param name="userCredentials">username</param>
         /// <returns>dictonary of questions</returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         [AllowAnonymous]
         public IHttpActionResult GetQuestions([FromBody] UserCredential userCredentials)
         {
@@ -48,7 +49,7 @@ namespace server.Controllers
         /// <param name="incommingAnswers">answers from user</param>
         /// <returns>if user successfully answers questions return OK else unauthorized</returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         [AllowAnonymous]
         public IHttpActionResult GetAnswers([FromBody] IncommingAnswersDTO incommingAnswers)
         {
@@ -71,7 +72,7 @@ namespace server.Controllers
         /// <param name="userCredentials"></param>
         /// <returns></returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         [AllowAnonymous]
         public IHttpActionResult SetPassword([FromBody] UserCredential usernewCredentials)
         {
