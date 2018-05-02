@@ -1,6 +1,7 @@
 ﻿//using server.Services;
 //using System;
 //using System.Collections.Generic;
+using server.Controllers.Constants;
 using server.Services;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ using System.Web.Http.Cors;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
+using Whatfits.UserAccessControl.Constants;
+using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
@@ -20,13 +23,14 @@ namespace server.Controllers
     [RoutePrefix("v1/WorkoutLogger")]
     public class WorkoutLoggerController : ApiController
     {
-        //        /// <summary>
-        //        /// Creates Review
-        //        /// </summary>
-        //        /// <param name="review"></param>
-        //        /// <returns></returns>
+        /// <summary>
+        /// Creates Review
+        /// </summary>
+        /// <param name="review"></param>
+        /// <returns></returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [AuthorizePrincipal(type = TypeConstant.WORKOUTLOG_CLAIM_TYPE_ADD, value = ValueConstant.WORKOUTLOG_CLAIM_VALUE_ADD)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         public IHttpActionResult CreateWorkout(WorkoutLogDTO workout)
         {
             WorkoutLoggerService service = new WorkoutLoggerService();
@@ -42,7 +46,8 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [AuthorizePrincipal(type = TypeConstant.VIEW_PAGE, value = ValueConstant.WORKOUTLOG_CLAIM_VALUE_VIEW)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         public IEnumerable<WorkoutLogDTO> GetWorkout(UsernameDTO obj)
         {
             WorkoutLogGateway service = new WorkoutLogGateway();
