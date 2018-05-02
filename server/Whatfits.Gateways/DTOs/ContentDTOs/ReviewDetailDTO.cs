@@ -7,11 +7,10 @@ using Whatfits.DataAccess.Interfaces;
 
 namespace Whatfits.DataAccess.DTOs.ContentDTOs
 {
-    public class ReviewDetailDTO : IResponseDTO
+    public class ReviewDetailDTO
     {
-        public List<string> Messages { get; set; }
-        public bool isSuccessful { get; set; }
-
+      
+        public string Reviewee { get; set; }
         public string ReviewMessage { get; set; }
         public int Rating { get; set; }
         public DateTime DateAndTime { get; set; }

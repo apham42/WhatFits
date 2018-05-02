@@ -23,8 +23,8 @@
           <div class="card-content" v-if="value.WorkoutType === 'WeightLifting'">
             <div id="contentPadding" >
               <strong>Lifting Type</strong> : {{value.LiftingType}}&emsp;
-              <strong>Sets</strong> : {{value.Sets}}&emsp;
               <strong>Reps per set</strong> : {{value.Reps}}&emsp;
+              <strong>Sets</strong> : {{value.Sets}}&emsp;
               <br>
               <strong>Date done</strong> : {{trimDate(value.Date_Time)}}
             </div>
@@ -55,51 +55,56 @@ export default {
       results: []
     }
   },
+  // function to display workouts on creation of the url
   created () {
     axios({
       method: 'POST',
-      url: 'http://localhost/server/v1/WorkoutLogger/GetWorkout',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        'Content-Type': 'application/json'
-      },
+      url: this.$store.getters.getURL + 'v1/WorkoutLogger/GetWorkout',
+      headers: this.$store.getters.getheader,
       data: {
         Username: this.$data.Username
       }
     })
       .then(response => {
         this.results = response.data
-        console.log(response)
       })
       .catch(error => {
-        console.log(error.response)
+        if (error.response.status === 400) {
+          // Your custom messages that appears on the screen
+        } else if (error.response.status === 404) {
+          // Redirects you to the 404 page
+          this.$router.push('/notfound')
+        } else if (error.response.status === 403) {
+          // Redirects you to the Forbidden page
+          this.$router.push('/notAllowed')
+        } else if (error.response.status === 500) {
+          // Redirects you to the server issue page
+          this.$router.push('/serverissue')
+        }
       })
   },
   methods: {
+    // method used to trim the datetime from backend
     trimDate: function (input) {
       var trim = input.substring(0, 10)
       return trim
     },
+    // function to display workouts if a button is incoporated
     displayWorkouts: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/WorkoutLogger/GetWorkout',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        },
+        url: this.$store.getters.getURL + 'v1/WorkoutLogger/GetWorkout',
+        headers: this.$store.getters.getheader,
         data: {
           Username: this.$data.Username
         }
       })
         .then(response => {
           this.results = response.data
-          console.log(response)
         })
         .catch(error => {
           if (error.response.status === 400) {
             // Your custom messages that appears on the screen
-            console.log(error.response)
           } else if (error.response.status === 404) {
             // Redirects you to the 404 page
             this.$router.push('/notfound')
