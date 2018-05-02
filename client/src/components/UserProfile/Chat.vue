@@ -169,7 +169,7 @@ export default {
       var DecryptedBytes = AesCBC.decrypt(EncryptedBytes)
       var Decryptedtext = AesJS.utils.utf8.fromBytes(DecryptedBytes)
       res[2] = Decryptedtext
-      // save message in client side when message box closed
+      // save message in client side when message box closed injection HTML
       this.messageArray.push([res[0], res[2]])
       // prepare message to be show in the message box
       this.receivestring = res.join(' ')
@@ -186,19 +186,16 @@ export default {
       return source
     },
     GetFollows: function () {
-      console.log('call follows')
-      console.log(this.$store.getters.getheaders)
       var vm = this
-      console.log(vm.$store.getters.getheaders)
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/Getfollows',
+        url: this.$store.getters.getURL + 'v1/Follows/Getfollows',
         data: {
           'Username': this.$store.getters.getusername
         },
-        headers: this.$store.getters.getheaders
+        headers: this.$store.getters.getheader
       })
-        // redirect to Home page
+        // get follows list from response
         .then(response => {
           vm.chatusers = response.data
         }).catch((error) => {
@@ -219,13 +216,14 @@ export default {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/GetInitialvalue',
+        url: this.$store.getters.getURL + 'v1/Follows/GetInitialvalue',
         data: {
           'Username': this.$store.getters.getusername
         },
-        headers: this.$store.getters.getheaders
+        headers: this.$store.getters.getheader
       })
-        // redirect to Home page
+        // get iv from server
+        // apply to encryption key
         .then(response => {
           vm.iv = response.data
           vm.key = response.data
