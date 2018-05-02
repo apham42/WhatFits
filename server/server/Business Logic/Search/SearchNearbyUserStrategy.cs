@@ -31,20 +31,27 @@ namespace server.Business_Logic.Search
             var searchResponse = new SearchResponseDTO();
             var response = new Outcome();
 
-            // Checks if the requested search has a value
-            
-            if (String.IsNullOrEmpty(Search.RequestedSearch))
+            // Validates the Criteria that the user has entered
+            var criteriaValidator = new ValidateSearchNearbyCriteria()
             {
-                response.Result = Error(LocationConstants.ADDRESS_EMPTY_ERROR);
+                SearchNearbyCriteria = Search
+            };
+
+            var validatedCriteria = (SearchResponseDTO) criteriaValidator.Execute().Result;
+
+            // if validator fails, return the result
+            if (!validatedCriteria.IsSuccessful)
+            {
+                response.Result = validatedCriteria;
                 return response;
             }
-            
+
             // Validates the location that the user inputted 
-            var validator = new WebAPILocationValidator()
+            var locationValidator = new WebAPILocationValidator()
             {
                 RequestedLocation = Search.RequestedSearch
             };
-            var validatedLocation = (WebAPIGeocode) validator.Execute().Result;
+            var validatedLocation = (WebAPIGeocode)locationValidator.Execute().Result;
             if (!validatedLocation.IsValid)
             {
                 response.Result = Error(LocationConstants.ADDRESS_NOT_VALID_ERROR);
@@ -72,7 +79,7 @@ namespace server.Business_Logic.Search
             {
                 UserLocation = new GeoCoordinate(validatedLocation.Latitude, validatedLocation.Longitude),
                 GeoCoordinates = locations,
-                Distance = Search.Distance,
+                Distance = Search.Distance.Value,
             };
             var filteredGeocoordinates = (Dictionary<GeoCoordinate, double>) filterLocation.Execute().Result;
             if (!filteredGeocoordinates.Any())

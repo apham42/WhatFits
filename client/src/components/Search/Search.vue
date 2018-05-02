@@ -146,7 +146,7 @@ export default {
     searchUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/SearchUser',
+        url: this.$store.getters.getURL + 'v1/Search/SearchUser',
         data: {
           SearchUserCriteria: this.$data.SearchUser
         },
@@ -165,7 +165,7 @@ export default {
     searchNearbyUsers () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/SearchNearby',
+        url: this.$store.getters.getURL + 'v1/Search/SearchNearby',
         data: {
           Criteria: this.$data.SearchNearby
         },
@@ -186,8 +186,11 @@ export default {
       this.$data.searchResults = []
       if (this.$data.searchType === 'searchNearby') {
         this.searchNearbyUsers()
-      } else {
+      } else if (this.$data.searchType === 'searchUser') {
         this.searchUser()
+      } else {
+        this.$data.messages = []
+        this.$data.messages.push(['Please enter a search criteria'])
       }
     },
     setViewProfile (user) {
@@ -207,7 +210,9 @@ export default {
     } else {
       this.$data.SearchNearby.requestedSearch = ''
     }
-    this.search()
+    if (this.$data.searchType !== '') {
+      this.search()
+    }
   }
 }
 </script>

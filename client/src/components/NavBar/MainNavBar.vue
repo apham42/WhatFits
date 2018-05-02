@@ -106,6 +106,8 @@ export default {
           this.$store.dispatch('acttoken', {Token: ''})
           this.$store.dispatch('actviewclaims', {Viewclaims: null})
           this.$store.dispatch('actisLogin', {islogin: false})
+          this.$store.dispatch('actRequestedSearch', {requestedSearch: ''})
+          this.$store.dispatch('actSearchType', {searchType: ''})
           this.$router.push('/')
           this.$store.dispatch('actheader')
           this.$data.showburger = false

@@ -24,16 +24,18 @@ namespace server.Controllers
     public class WorkoutLoggerController : ApiController
     {
         /// <summary>
-        /// Creates Review
+        /// Creates a workout
         /// </summary>
-        /// <param name="review"></param>
-        /// <returns></returns>
+        /// <param name="workout"></param>
+        /// <returns>a response</returns>
         [HttpPost]
         [AuthorizePrincipal(type = TypeConstant.WORKOUTLOG_CLAIM_TYPE_ADD, value = ValueConstant.WORKOUTLOG_CLAIM_VALUE_ADD)]
         [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         public IHttpActionResult CreateWorkout(WorkoutLogDTO workout)
         {
+            //ModelState.IsValid then the try catch
             WorkoutLoggerService service = new WorkoutLoggerService();
+            //change success
             bool response = service.Create(workout);
             if (response)
             {
@@ -44,7 +46,12 @@ namespace server.Controllers
                 return Content(HttpStatusCode.BadRequest, "Workout addition has failed. Invalid Inputs.");
             }
         }
-
+        /// <summary>
+        /// gets workout enumerable
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns>workout objects</returns>
+        // need to change to response vulnerable to JSON hijacking
         [HttpPost]
         [AuthorizePrincipal(type = TypeConstant.VIEW_PAGE, value = ValueConstant.WORKOUTLOG_CLAIM_VALUE_VIEW)]
         [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]

@@ -22,7 +22,7 @@ namespace server.Controllers
     /// <summary>
     /// Provides APIs for Followers list for Clientside
     /// </summary>
-    [RoutePrefix("v1/follows")]
+    [RoutePrefix("v1/Follows")]
     public class FollowsController : ApiController
     {
         Credential requestedUser = new Credential();
