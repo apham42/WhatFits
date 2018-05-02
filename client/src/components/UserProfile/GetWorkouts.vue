@@ -56,13 +56,13 @@ export default {
     }
   },
   // function to display workouts on creation of the url
-  created () {
+  beforeCreate () {
     axios({
       method: 'POST',
       url: this.$store.getters.getURL + 'v1/WorkoutLogger/GetWorkout',
       headers: this.$store.getters.getheader,
       data: {
-        Username: this.$data.Username
+        Username: this.$store.getters.getviewprofile
       }
     })
       .then(response => {
