@@ -57,8 +57,8 @@
             <p><strong>Workout Type - {{WorkoutLogger.WorkoutType}} </strong></p>
             <p v-if = "WorkoutLogger.WorkoutType === 'WeightLifting'">
               <strong>Lifting Type</strong> : {{WorkoutLogger.LiftingType}}&emsp;
-              <strong>Sets</strong> : {{WorkoutLogger.Sets}}&emsp;
               <strong>Reps per set</strong> : {{WorkoutLogger.Reps}}&emsp;
+              <strong>Sets</strong> : {{WorkoutLogger.Sets}}&emsp;
             </p>
             <p v-if = "WorkoutLogger.WorkoutType === 'Cardio'">
               <strong>Cardio Type</strong> : {{WorkoutLogger.CardioType}}&emsp;
@@ -96,7 +96,7 @@ export default {
         Sets: '',
         Time: '',
         Distance: '',
-        Date_Time: new Date().toLocaleDateString()
+        Date_Time: new Date().toLocaleTimeString('en-US')
       },
       pageTitle: 'Workout Logger',
       hasErrored: false,

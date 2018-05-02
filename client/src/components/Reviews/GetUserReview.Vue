@@ -1,22 +1,19 @@
 <template>
-<div class="column" id="workoutlogs">
+<div class="column" id="reviews">
     <div v-for="(review,index) in results" :key="index">
-      <div class="card" id="workoutCards">
+      <div class="card" id="reviewCards">
         <div id="">
-          <div class="card-header">
-            <p class="card-header-title"><strong>{{ review.Reviewee }} Says: </strong></p>
-          </div>
           <div class="card-content">
             <div id="contentPadding" >
               <div id="messageFormat">
-                "{{ review.ReviewMessage }}"
+                Description : "{{ review.ReviewMessage }}"
               </div>
               <div id="ratingFormat">
-                Received Rating : '{{ review.Rating }}'
+                Received Rating : {{ review.Rating }}
               </div>
               <div id="dateFormat">
                 <!--To be fixed when implemented onto profile page CSS-->
-                Date Reviewed: '{{ trimDate(review.DateAndTime) }}'
+                Date Reviewed: {{ trimDate(review.DateAndTime) }}
               </div>
             </div>
           </div>
@@ -24,6 +21,16 @@
       </div>
     <div id="spacing"></div>
   </div>
+  <div class="card" id="reviewCards" v-if="results.length === 0">
+      <div id="">
+        <div class="card-content">
+          <div class="contentPadding">
+            <strong>No Reviews in this profile :(</strong>
+            <strong>Be the first!</strong>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 </template>
 
@@ -103,7 +110,7 @@ export default {
 }
 </script>
 <style>
-#workoutCards {
+#reviewCards {
   padding-bottom: 1em;
   position:inherit;
 }
