@@ -128,11 +128,15 @@
     <Compile Include="Business Logic\Search\FilterGeoCoordinates.cs" />
     <Compile Include="Business Logic\Search\GenerateSearchResults.cs" />
     <Compile Include="Business Logic\Search\SearchNearbyUserStrategy.cs" />
+    <Compile Include="Business Logic\Search\ValidateSearchNearbyCriteria.cs" />
+    <Compile Include="Business Logic\Search\ValidateSearchUserCriteria.cs" />
     <Compile Include="Business Logic\Services\TokenRefreshService.cs" />
     <Compile Include="Business Logic\SSO\SSOGetCredentials.cs" />
     <Compile Include="Business Logic\SSO\SSOService\SSOService.cs" />
     <Compile Include="Business Logic\SSO\SSOStoreCredentials.cs" />
     <Compile Include="Controllers\Constants\CORS.cs" />
+    <Compile Include="Business Logic\Validators\Search Validator\SearchNearbyCriteriaValidator.cs" />
+    <Compile Include="Business Logic\Validators\Search Validator\SearchUserValidator.cs" />
     <Compile Include="Controllers\SsoController.cs" />
     <Compile Include="Controllers\TokenRefreshController.cs" />
     <Compile Include="Model\Account\UserProfile.cs" />
@@ -225,6 +229,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Business Logic\TokenRefresh\" />
     <Folder Include="Business Logic\Validators\Search Validator\" />
+    <Folder Include="Controllers\Constants\" />
     <Folder Include="Image\" />
     <Folder Include="Security\" />
   </ItemGroup>
