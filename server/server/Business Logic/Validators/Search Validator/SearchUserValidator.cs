@@ -20,7 +20,7 @@ namespace server.Business_Logic.Validators.Search_Validator
             When(x => x.RequestedBy != null && x.RequestedUser != null, () =>
             {
                 RuleFor(x => x.RequestedBy).MinimumLength(2).WithMessage(SearchConstants.NO_REQUESTEDBY_ERROR);
-                RuleFor(x => x.RequestedUser).MinimumLength(2).WithMessage(SearchConstants.NO_USER_ERROR);
+                RuleFor(x => x.RequestedUser).MinimumLength(2).WithMessage(SearchConstants.NO_REQUESTED_USER_ERROR);
             });
         }
     }

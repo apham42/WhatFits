@@ -186,8 +186,11 @@ export default {
       this.$data.searchResults = []
       if (this.$data.searchType === 'searchNearby') {
         this.searchNearbyUsers()
-      } else {
+      } else if (this.$data.searchType === 'searchUser') {
         this.searchUser()
+      } else {
+        this.$data.messages = []
+        this.$data.messages.push(['Please enter a search criteria'])
       }
     },
     setViewProfile (user) {
@@ -207,7 +210,9 @@ export default {
     } else {
       this.$data.SearchNearby.requestedSearch = ''
     }
-    this.search()
+    if (this.$data.searchType !== '') {
+      this.search()
+    }
   }
 }
 </script>
