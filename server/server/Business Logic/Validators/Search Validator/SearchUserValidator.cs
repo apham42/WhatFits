@@ -8,6 +8,9 @@ using server.Constants;
 
 namespace server.Business_Logic.Validators.Search_Validator
 {
+    /// <summary>
+    /// Validates SearchUser criteria using FluentValidation
+    /// </summary>
     public class SearchUserValidator : AbstractValidator<SearchUser>
     {
         public SearchUserValidator ()
