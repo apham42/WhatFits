@@ -56,12 +56,13 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 {
                     dbTransaction.Rollback();
                     return false;
-                }
+                }/*
                 catch (DataException)
                 {
                     dbTransaction.Rollback();
                     return false;
                 }
+                */
             }
         }
 

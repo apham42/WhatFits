@@ -81,7 +81,7 @@ export default {
       if (this.status === 'enable') {
         axios({
           method: 'PUT',
-          url: 'http://localhost/server/v1/UserManagement/EnableUser',
+          url: this.$store.getters.getURL + 'v1/UserManagement/EnableUser',
           data: {'UserName': this.userName},
           headers: this.$store.getters.getheader
         })
@@ -111,7 +111,7 @@ export default {
       } else if (this.status === 'disable') {
         axios({
           method: 'PUT',
-          url: 'http://localhost/server/v1/UserManagement/DisableUser',
+          url: this.$store.getters.getURL + 'v1/UserManagement/DisableUser',
           data: {
             'UserName': this.userName
           },

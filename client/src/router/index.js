@@ -33,8 +33,7 @@ export default new Router({
       // UserManagement Page
       path: '/usermanagement',
       name: 'UserManagement',
-      component: () => import('@/components/UserManagement/UserManagement')
-      /*
+      component: () => import('@/components/UserManagement/UserManagement'),
       beforeEnter: (to, from, next) => {
         var claims = store.getters.getviewclaims
         var ClaimsLength = claims.length
@@ -49,7 +48,6 @@ export default new Router({
         }
         next()
       }
-       */
     },
     {
       // UserProfile Page

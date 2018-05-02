@@ -207,7 +207,7 @@ export default {
   created: function () {
     axios({
       method: 'POST',
-      url: 'http://localhost/server/v1/UserProfile/ProfileData',
+      url: this.$store.getters.getURL + 'v1/UserProfile/ProfileData',
       headers: this.$store.getters.getheader,
       data: {
         'Username': this.$store.getters.getusername
@@ -282,12 +282,14 @@ export default {
       formData.append('Gender', this.userData.gender)
       formData.append('Description', this.userData.description)
       formData.append('IsThereImage', this.isUpdatingImage)
+      // Manual Change
       var headers = {
         'Content-type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': 'http://localhost:8081',
+        // 'Access-Control-Allow-Origin': 'http://localhost:8081',
+        'Access-Control-Allow-Origin': this.$store.getters.getURL,
         'Authorization': 'Bearer ' + this.$store.getters.gettoken
       }
-      axios.post('http://localhost/server/v1/UserProfile/EditProfile', formData, headers)
+      axios.post(this.$store.getters.getURL + 'v1/UserProfile/EditProfile', formData, headers)
       // redirect to Home page
         .then(response => {
           this.statusMessages = 'Your profile has been updated.'
