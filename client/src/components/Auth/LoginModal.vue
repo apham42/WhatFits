@@ -84,15 +84,14 @@ export default {
         }
       })
         .then((response) => {
+          this.$store.dispatch('actheadertoken', {TokenHeader: response.data.token})
+          this.$store.dispatch('acttoken', {Token: response.data.token})
           this.$store.dispatch('actusername', {Username: response.data.username})
           this.$store.dispatch('actviewprofile', {ViewProfile: response.data.username})
           this.$store.dispatch('actisLogin', {islogin: true})
-          this.$store.dispatch('acttoken', {Token: response.data.token})
           this.$store.dispatch('actviewclaims', {Viewclaims: response.data.viewclaims})
-          this.$router.push('/profile')
           this.$store.dispatch('closeAction')
-          this.$store.dispatch('actheadertoken', {TokenHeader: response.data.token})
-          console.log(response)
+          this.$router.push('/profile')
         })
         .catch((error) => {
           if (error.response.status === 400) {

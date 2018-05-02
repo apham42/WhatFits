@@ -54,7 +54,7 @@ namespace server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [AuthorizePrincipal(type = TypeConstant.WORKOUTLOG_CLAIM_TYPE_ADD, value = ValueConstant.WORKOUTLOG_CLAIM_VALUE_ADD)]
+        //[AuthorizePrincipal(type = TypeConstant.WORKOUTLOG_CLAIM_TYPE_ADD, value = ValueConstant.WORKOUTLOG_CLAIM_VALUE_ADD)]
         [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult EditProfile()
         {

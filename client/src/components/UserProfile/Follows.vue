@@ -37,10 +37,7 @@ export default {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
@@ -69,10 +66,7 @@ export default {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
@@ -94,6 +88,7 @@ export default {
     },
     IsFollow: function () {
       console.log('call isfollow')
+      console.log(this.$store.getters.getheaders)
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/follows/Isfollows',
@@ -101,10 +96,7 @@ export default {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
@@ -127,16 +119,15 @@ export default {
     }
   },
   GetFollows: function () {
+    console.log('call follows')
+    console.log(this.$store.getters.getheaders)
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/follows/getfollows',
       data: {
         'Username': this.$store.getters.getusername
       },
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        'Content-Type': 'application/json'
-      }
+      headers: this.$store.getters.getheaders
     })
       // redirect to Home page
       .then(response => {

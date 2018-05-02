@@ -72,13 +72,11 @@ export default {
       // Valide userName at this point
       axios({
         method: 'PUT',
-        url: 'http://localhost/server/v1/management/delete',
+        url: 'http://localhost/server/v1/UserManagement/DeleteUser',
         data: {
           'UserName': this.userName
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8081'
-        }
+        headers: this.$store.getters.getheader
       })
         .then(response => {
           // Got a 2xx response from the server

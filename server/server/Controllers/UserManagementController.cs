@@ -14,7 +14,7 @@ namespace server.Controllers
     /// <summary>
     /// Provides APIs for UserManagement for Clientside
     /// </summary> 
-    [RoutePrefix("v1/management")]
+    [RoutePrefix("v1/UserManagement")]
     public class UserManagementController : ApiController
     {
   
@@ -84,7 +84,6 @@ namespace server.Controllers
         /// <param name="obj">A username to be disabled.</param>
         /// <returns>A success or failure message.</returns>
         [HttpPut]
-        [Route("disable")]
         [AuthorizePrincipal(type = TypeConstant.USER_MANAGMENT_CLAIM_TYPE_UPDATE, value = ValueConstant.USER_MANAGMENT_CLAIM_VALUE_UPDATE)]
         [EnableCors(origins: CORS.origins, headers: CORS.headers, "PUT")]
         public IHttpActionResult DisableUser([FromBody] UserManagementDTO obj)
@@ -116,7 +115,6 @@ namespace server.Controllers
         /// <param name="obj">A username to be deleted.</param>
         /// <returns>A success or failure message.</returns>
         [HttpPut]
-        [Route("delete")]
         [AuthorizePrincipal(type = TypeConstant.USER_MANAGMENT_CLAIM_TYPE_DELETE, value = ValueConstant.USER_MANAGMENT_CLAIM_VALUE_DELETE)]
         [EnableCors(origins: CORS.origins, headers: CORS.headers, "PUT")]
         public IHttpActionResult DeleteUser ([FromBody] UserManagementDTO obj)
