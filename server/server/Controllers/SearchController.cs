@@ -22,7 +22,7 @@ namespace server.Controllers
         
         [HttpPost]
         [AuthorizePrincipal(type = "SEARCH", value = "True")]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081, http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081,  http://localhost:8085, http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult SearchUser([FromBody] SearchUserDTO dto)
         {
             var service = new SearchUserStrategy
@@ -42,7 +42,7 @@ namespace server.Controllers
 
         [HttpPost]
         [AuthorizePrincipal(type = "SEARCH", value = "True")]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://localhost:8085, http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult SearchNearby([FromBody] SearchDTO dto)
         {
             var service = new SearchNearbyUserStrategy

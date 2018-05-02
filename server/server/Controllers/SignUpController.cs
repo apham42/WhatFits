@@ -22,7 +22,7 @@ namespace server.Controllers
         /// <returns> Status of the request with a list of messages </returns>
         [HttpPost]
         [AllowAnonymous]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 ,  http://localhost:8085, http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
         public IHttpActionResult Register([FromBody] RegInfo userCred)
         {
             AccountService service = new AccountService();
