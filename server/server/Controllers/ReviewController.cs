@@ -1,4 +1,5 @@
-﻿using server.Services;
+﻿using server.Controllers.Constants;
+using server.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,8 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
+using Whatfits.UserAccessControl.Constants;
+using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
@@ -23,7 +26,8 @@ namespace server.Controllers
         /// <param name="review"></param>
         /// <returns></returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [AuthorizePrincipal(type = TypeConstant.REVIEW_CLAIM_TYPE, value = ValueConstant.REVIEW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         public IHttpActionResult CreateReview([FromBody] ReviewsDTO review)
         {
             ReviewService service = new ReviewService();
@@ -44,7 +48,8 @@ namespace server.Controllers
         /// <param name="UserName"></param>
         /// <returns></returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [AuthorizePrincipal(type = TypeConstant.REVIEW_CLAIM_TYPE, value = ValueConstant.REVIEW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         public IEnumerable<ReviewDetailDTO> GetUserReview(UsernameDTO obj)
         {
             ReviewService service = new ReviewService();

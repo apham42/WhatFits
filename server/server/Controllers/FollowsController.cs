@@ -1,4 +1,5 @@
 ﻿using server.Business_Logic.Services;
+using server.Controllers.Constants;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +14,8 @@ using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 using Whatfits.Models.Models;
+using Whatfits.UserAccessControl.Constants;
+using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
@@ -56,7 +59,8 @@ namespace server.Controllers
         /// <returns>Users' follows</returns>
         [HttpPost]
         [Route("getfollows")]
-        [EnableCors("http://localhost:8080 , http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Getfollows([FromBody]UsernameDTO userDTO)
         {
             if (HttpContext.Current.Request.HttpMethod == "POST")
@@ -83,7 +87,8 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         [Route("addfollows")]
-        [EnableCors("http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Addfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -113,7 +118,8 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         [Route("deletefollows")]
-        [EnableCors("http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Deletefollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -144,7 +150,8 @@ namespace server.Controllers
         /// <returns>True of False</returns>
         [HttpPost]
         [Route("isfollows")]
-        [EnableCors("http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Isfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -175,7 +182,8 @@ namespace server.Controllers
         /// <returns>True of False</returns>
         [HttpPost]
         [Route("getinitialvalue")]
-        [EnableCors("http://localhost:8080 , http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult GetInitialvalue([FromBody]UsernameDTO userDTO)
         {
             requestedUser.UserName = userDTO.Username;
