@@ -1,11 +1,11 @@
 <template>
 <div>
   <div id="checkcondition">
-    <span v-if="this.IsFollow() == false">
-      <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
+    <span v-if="this.isfollow === true">
+      <button id="isfollow" placeholder="UnFollow" v-on:click="UnFollow()">UnFollow</button>
     </span>
     <span v-else>
-      <button id="isfollow" placeholder="UnFollow" v-on:click="UnFollow()">UnFollow</button>
+      <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
     </span>
   </div>
 </div>
@@ -22,12 +22,10 @@ export default {
       errorFlag: '',
       errorMessage: 'Page Failed to load.',
       followers: [],
-      isfollow: false,
+      isfollow: this.IsFollow(),
       follow: 'Follow',
       unfollow: 'UnFollow'
     }
-  },
-  watch: {
   },
   methods: {
     Follow: function () {
@@ -95,6 +93,7 @@ export default {
         })
     },
     IsFollow: function () {
+      console.log('call isfollow')
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/follows/isfollows',
@@ -109,6 +108,8 @@ export default {
       })
         // redirect to Home page
         .then(response => {
+          console.log(response.data)
+          this.$data.isfollow = response.data
           return response.data
         }).catch((error) => {
           // Pushes the error messages into error to display
