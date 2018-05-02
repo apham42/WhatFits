@@ -5,6 +5,9 @@ using server.Services;
 using System.Web.Http.Cors;
 using server.Model.Validators.Account_Validator;
 using server.Model.Account;
+using Whatfits.UserAccessControl.Controller;
+using Whatfits.UserAccessControl.Constants;
+using server.Controllers.Constants;
 
 namespace server.Controllers
 {
@@ -22,7 +25,8 @@ namespace server.Controllers
         /// <returns>A success or failure message</returns>
         [HttpPost]
         [Route("create")]
-        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.USER_MANAGMENT_CLAIM_TYPE_CREATE, value = ValueConstant.USER_MANAGMENT_CLAIM_VALUE_CREATE)]
+        [EnableCors( origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult CreateAdmin([FromBody] RegInfo obj)
         {
             // Verify if object is not null or invalid
@@ -50,7 +54,8 @@ namespace server.Controllers
         /// <returns>A success or failure message.</returns>
         [HttpPut]
         [Route("enable")]
-        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "PUT")]
+        [AuthorizePrincipal(type = TypeConstant.USER_MANAGMENT_CLAIM_TYPE_UPDATE, value = ValueConstant.USER_MANAGMENT_CLAIM_VALUE_UPDATE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "PUT")]
         public IHttpActionResult EnableUser ([FromBody] UserManagementDTO obj)
         {
             // Filter if no username was passed
@@ -82,7 +87,8 @@ namespace server.Controllers
         /// <returns>A success or failure message.</returns>
         [HttpPut]
         [Route("disable")]
-        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "PUT")]
+        [AuthorizePrincipal(type = TypeConstant.USER_MANAGMENT_CLAIM_TYPE_UPDATE, value = ValueConstant.USER_MANAGMENT_CLAIM_VALUE_UPDATE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "PUT")]
         public IHttpActionResult DisableUser([FromBody] UserManagementDTO obj)
         {
             // Filter if no username was passed
@@ -113,7 +119,8 @@ namespace server.Controllers
         /// <returns>A success or failure message.</returns>
         [HttpPut]
         [Route("delete")]
-        [EnableCors("http://localhost:8081 , http://localhost:8080, http://longnlong.com , http://whatfits.social", "*", "PUT")]
+        [AuthorizePrincipal(type = TypeConstant.USER_MANAGMENT_CLAIM_TYPE_DELETE, value = ValueConstant.USER_MANAGMENT_CLAIM_VALUE_DELETE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "PUT")]
         public IHttpActionResult DeleteUser ([FromBody] UserManagementDTO obj)
         {
             if(obj.UserName == null || !ModelState.IsValid)
