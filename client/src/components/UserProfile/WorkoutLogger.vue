@@ -84,6 +84,7 @@ export default {
       return this.$store.getters.isAuthenticated
     }
   },
+  props: { event },
   data: function () {
     return {
       WorkoutLogger: {
@@ -107,29 +108,29 @@ export default {
     }
   },
   methods: {
-    isNumber: function (evt) {
-      evt = (evt) || window.event
-      var charCode = (evt.which) || evt.keyCode
+    isNumber: function (event) {
+      event = (event) || window.event
+      var charCode = (event.which) || event.keyCode
       if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
-        evt.preventDefault()
+        event.preventDefault()
       } else {
         return true
       }
     },
-    isTime: function (evt) {
-      evt = (evt) || window.event
-      var charCode = (evt.which) || evt.keyCode
+    isTime: function (event) {
+      event = (event) || window.event
+      var charCode = (event.which) || event.keyCode
       if ((charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 58)) {
-        evt.preventDefault()
+        event.preventDefault()
       } else {
         return true
       }
     },
-    isFloat: function (evt) {
-      evt = (evt) || window.event
-      var charCode = (evt.which) || evt.keyCode
+    isFloat: function (event) {
+      event = (event) || window.event
+      var charCode = (event.which) || event.keyCode
       if ((charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46)) {
-        evt.preventDefault()
+        event.preventDefault()
       } else {
         return true
       }
@@ -138,7 +139,7 @@ export default {
       if (this.WorkoutLogger.WorkoutType === 'Cardio') {
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/WorkoutLogger/CreateWorkout',
+          url: this.$store.getters.getURL + 'v1/WorkoutLogger/CreateWorkout',
           data: {
             Username: this.$data.WorkoutLogger.Username,
             WorkoutType: this.$data.WorkoutLogger.WorkoutType,
@@ -150,7 +151,6 @@ export default {
           headers: this.$store.getters.getheader
         })
           .then(response => {
-            console.log(response)
             location.reload()
           })
           .catch(error => {
@@ -171,7 +171,7 @@ export default {
       } else {
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/WorkoutLogger/CreateWorkout',
+          url: this.$store.getters.getURL + 'v1/WorkoutLogger/CreateWorkout',
           data: {
             Username: this.$data.WorkoutLogger.Username,
             WorkoutType: this.$data.WorkoutLogger.WorkoutType,
@@ -183,7 +183,6 @@ export default {
           headers: this.$store.getters.getheader
         })
           .then(response => {
-            console.log(response)
             location.reload()
           })
           .catch(error => {

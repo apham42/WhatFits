@@ -24,6 +24,7 @@ import Icon from 'vue-awesome/components/Icon'
 export default {
   name: 'Review',
   components: { Icon },
+  // props used to help determine number of stars counted
   props: {
     maxRating: {
       type: Number,
@@ -32,7 +33,8 @@ export default {
     hasCounter: {
       type: Boolean,
       default: true
-    }
+    },
+    event
   },
   data: function () {
     return {
@@ -44,11 +46,13 @@ export default {
     }
   },
   methods: {
+    // takes in which star is highlighted in list and return a rating
     rate (star) {
       if (typeof star === 'number' && star <= this.maxRating && star >= 0) {
         this.Rating = this.Rating === star ? star - 1 : star
       }
     },
+    // method used to validate inputs to be only integers
     isNumber: function (evt) {
       evt = (evt) || window.event
       var charCode = (evt.which) || evt.keyCode
@@ -58,14 +62,16 @@ export default {
         return true
       }
     },
+    // method to go back to profiler of user just revied
     goBackToProfile: function () {
       this.$store.dispatch('actviewprofile', {ViewProfile: this.$store.getters.getusername})
       this.$router.push('/profile')
     },
+    // sending data via axios after submit button is clicked
     input: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Review/CreateReview',
+        url: this.$store.getters.getURL + 'v1/Review/CreateReview',
         data: {
           Rating: this.$data.Rating,
           ReviewMessage: this.$data.ReviewMessage,
@@ -73,27 +79,18 @@ export default {
           Username: this.$data.Username,
           DateAndTime: this.$data.DateAndTime
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheader
       }).then(response => {
-        console.log(response)
         this.goBackToProfile()
       }).catch((error) => {
         if (error.response.status === 400) {
-        // Your custom messages that appears on the screen
-          console.log(error.response)
           this.goBackToProfile()
-          alert('Review did not go through. Check console for errors.')
+          alert('Review did not go through')
         } else if (error.response.status === 404) {
-          // Redirects you to the 404 page
           this.$router.push('/notfound')
         } else if (error.response.status === 403) {
-          // Redirects you to the Forbidden page
           this.$router.push('/notAllowed')
         } else if (error.response.status === 500) {
-          // Redirects you to the server issue page
           this.$router.push('/serverissue')
         }
       })
