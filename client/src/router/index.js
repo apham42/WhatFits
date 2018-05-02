@@ -35,12 +35,18 @@ export default new Router({
       name: 'UserManagement',
       component: () => import('@/components/UserManagement/UserManagement'),
       beforeEnter: (to, from, next) => {
-        for (var i = 0; i < store.getters.getviewclaims.length; i++) {
-          if (store.getters.getviewclaims[i] === 'View User Managment') {
-            next()
+        var claims = store.getters.getviewclaims
+        var ClaimsLength = claims.length
+        var found = false
+        for (var i = 0; i < ClaimsLength; i++) {
+          if (claims[i] === 'View User Managment') {
+            found = true
           }
         }
-        next({path: '/notallowed'})
+        if (!found) {
+          next({path: '/notallowed'})
+        }
+        next()
       }
     },
     {

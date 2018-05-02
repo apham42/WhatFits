@@ -15,9 +15,7 @@
                       <span class="file-icon">
                         <i class="fas fa-upload"></i>
                       </span>
-                      <span class="file-label">
-                      Choose an Image...
-                      </span>
+                      <span class="file-label">Choose an Image...</span>
                     </span>
                     <span class="file-name">
                       {{this.newProfileImageName}}
