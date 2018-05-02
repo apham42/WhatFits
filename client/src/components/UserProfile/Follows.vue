@@ -32,15 +32,12 @@ export default {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/addfollows',
+        url: 'http://localhost/server/v1/follows/Addfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
@@ -64,15 +61,12 @@ export default {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/deletefollows',
+        url: 'http://localhost/server/v1/follows/Deletefollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
@@ -94,17 +88,15 @@ export default {
     },
     IsFollow: function () {
       console.log('call isfollow')
+      console.log(this.$store.getters.getheaders)
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/isfollows',
+        url: 'http://localhost/server/v1/follows/Isfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
@@ -127,16 +119,15 @@ export default {
     }
   },
   GetFollows: function () {
+    console.log('call follows')
+    console.log(this.$store.getters.getheaders)
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/follows/getfollows',
       data: {
         'Username': this.$store.getters.getusername
       },
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        'Content-Type': 'application/json'
-      }
+      headers: this.$store.getters.getheaders
     })
       // redirect to Home page
       .then(response => {

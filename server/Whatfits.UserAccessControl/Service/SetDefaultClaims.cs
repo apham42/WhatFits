@@ -37,7 +37,10 @@ namespace Whatfits.UserAccessControl.Service
                 new Claim(TypeConstant.EVENT_CLAIM_TYPE_ADD, ValueConstant.EVENT_CLAIM_VALUE_ADD),
                 new Claim(TypeConstant.EVENT_CLAIM_TYPE_DELETE, ValueConstant.EVENT_CLAIM_VALUE_DELETE),
                 new Claim(TypeConstant.EVENT_CLAIM_TYPE_EDIT, ValueConstant.EVENT_CLAIM_VALUE_EDIT),
-                new Claim(TypeConstant.VIEW_PAGE, ValueConstant.EVENT_CLAIM_VALUE_VIEW)
+                new Claim(TypeConstant.VIEW_PAGE, ValueConstant.EVENT_CLAIM_VALUE_VIEW),
+
+                // PROFILE CLAIMS
+                new Claim(TypeConstant.VIEW_PAGE, ValueConstant.VIEW_PAGE_CLAIM_VALUE_PROFILE)
                 };
         }
 

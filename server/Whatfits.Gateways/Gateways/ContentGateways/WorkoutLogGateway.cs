@@ -15,41 +15,42 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
 {
     public class WorkoutLogGateway
     {
+        //database context 
         private WorkoutLogContext db = new WorkoutLogContext();
-
-        public bool CreateWorkoutLog(WorkoutLogDTO w)
+        //is workout null
+        public bool CreateWorkoutLog(WorkoutLogDTO workout)
         {
             using (var dbTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
                     int getUserID = (from cred in db.Credentials
-                                     where w.userName == cred.UserName
+                                     where workout.userName == cred.UserName
                                      select cred.UserID).FirstOrDefault();
                     WorkoutLog work = new WorkoutLog
                     {
                         UserID = getUserID,
-                        WorkoutType = w.WorkoutType,
-                        Date_Time = w.Date_Time,
+                        WorkoutType = workout.WorkoutType,
+                        Date_Time = workout.Date_Time,
                     };
                     db.Workouts.Add(work);
-                    if (w.WorkoutType.Equals("Cardio"))
+                    if (workout.WorkoutType.Equals("Cardio"))
                     {
                         Cardio card = new Cardio
                         {
-                            CardioType = w.CardioType,
-                            Distance = w.Distance,
-                            Time = w.Time
+                            CardioType = workout.CardioType,
+                            Distance = workout.Distance,
+                            Time = workout.Time
                         };
                         db.Cardios.Add(card);
                     }
-                    else if (w.WorkoutType.Equals("WeightLifting"))
+                    else if (workout.WorkoutType.Equals("WeightLifting"))
                     {
                         WeightLifting weight = new WeightLifting
                         {
-                            LiftingType = w.LiftingType,
-                            Reps = w.Reps,
-                            Sets = w.Sets
+                            LiftingType = workout.LiftingType,
+                            Reps = workout.Reps,
+                            Sets = workout.Sets
                         };
                         db.WeightLiftings.Add(weight);
                     }
@@ -70,23 +71,23 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                 }
             }
         }
-        //need to fix cardio splitters
+        //Enumerable returns workotu objects
         public IEnumerable<WorkoutLogDTO> GetWorkouts(UsernameDTO obj)
         {
             int getUserID = (from cred in db.Credentials
                              where obj.Username == cred.UserName
                              select cred.UserID).FirstOrDefault();
-                
-            var car = (from b in db.Workouts
+            //get workout DTO from cardio table
+            var car = (from work in db.Workouts
                        join cred in db.Credentials
-                       on b.UserID equals cred.UserID
+                       on work.UserID equals cred.UserID
                        where obj.Username == cred.UserName
                        join card in db.Cardios
-                       on b.WorkoutLogID equals card.WorkoutID
+                       on work.WorkoutLogID equals card.WorkoutID
                        select new WorkoutLogDTO()
                        {
-                           WorkoutType = b.WorkoutType,
-                           Date_Time = b.Date_Time,
+                           WorkoutType = work.WorkoutType,
+                           Date_Time = work.Date_Time,
                            LiftingType = null,
                            Reps = 0,
                            Sets = 0,
@@ -94,16 +95,17 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                            Distance = card.Distance,
                            Time = card.Time
                        });
-            var weigh = (from b in db.Workouts
+            //get workout DTO from weightlifting table
+            var weigh = (from work in db.Workouts
                          join cred in db.Credentials
-                         on b.UserID equals cred.UserID
+                         on work.UserID equals cred.UserID
                          where obj.Username == cred.UserName
                          join weight in db.WeightLiftings
-                         on b.WorkoutLogID equals weight.WorkoutID
+                         on work.WorkoutLogID equals weight.WorkoutID
                          select new WorkoutLogDTO()
                          {
-                             WorkoutType = b.WorkoutType,
-                             Date_Time = b.Date_Time,
+                             WorkoutType = work.WorkoutType,
+                             Date_Time = work.Date_Time,
                              LiftingType = weight.LiftingType,
                              Reps = weight.Reps,
                              Sets = weight.Sets,
@@ -111,6 +113,7 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                              Distance = 0,
                              Time = null
                          });
+            //union two workoutDTO and returns by date descending
             var logs = (car.Union(weigh).OrderByDescending(m =>m.Date_Time));
             return logs;
         }

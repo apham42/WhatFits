@@ -14,7 +14,6 @@
       </ul>
       </span>
     </div>
-
       <div class="message card-content">
         <br />
         <div class="content">
@@ -57,7 +56,7 @@ export default {
       Rating: this.Rating,
       ReviewMessage: '',
       TargetUser: this.$store.getters.getviewprofile,
-      DateAndTime: new Date().toLocaleDateString()
+      Date_Time: new Date().toLocaleTimeString('en-US')
     }
   },
   methods: {
