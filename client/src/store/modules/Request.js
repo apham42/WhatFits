@@ -12,6 +12,7 @@ const state = {
 
 const getters = {
   getheader: function (state) {
+    console.log('header called')
     return state.headers
   },
   getURL: function (state) {
@@ -33,6 +34,7 @@ const mutations = {
     state.headers.Authorization = 'Bearer ' + payload.TokenHeader
   },
   mutateheader: function (state) {
+    console.log('mutate header called')
     state.headers.Authorization = null
   }
 }

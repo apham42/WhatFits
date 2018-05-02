@@ -208,10 +208,7 @@ export default {
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/UserProfile/ProfileData',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8081',
-        'Content-Type': 'application/json'
-      },
+      headers: this.$store.getters.getheader,
       data: {
         'Username': this.$store.getters.getusername
       }
@@ -287,7 +284,8 @@ export default {
       formData.append('IsThereImage', this.isUpdatingImage)
       var headers = {
         'Content-type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': 'http://localhost:8081'
+        'Access-Control-Allow-Origin': 'http://localhost:8081',
+        'Authorization': 'Bearer ' + this.$store.getters.gettoken
       }
       axios.post('http://localhost/server/v1/UserProfile/EditProfile', formData, headers)
       // redirect to Home page

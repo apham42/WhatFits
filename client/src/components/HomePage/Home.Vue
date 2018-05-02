@@ -4,7 +4,7 @@
   <hero-body></hero-body>
 </section>
   <div class="box cta">
-    <p class="has-text-centered"><span class="tag is-info">Whats new?</span> We are finally online!</p>
+    <p class="has-text-centered"><span class="tag is-info">Whats new?</span> We have launched!</p>
   </div>
    <section class="container">
      <quick-info></quick-info>

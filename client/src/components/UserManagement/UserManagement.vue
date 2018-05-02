@@ -452,10 +452,7 @@ export default {
               userType: 'Enable'
             }
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8081',
-            'Content-Type': 'application/json'
-          }
+          headers: this.$store.getters.getheader
         })
           // redirect to Home page
           .then(response => {
@@ -468,7 +465,7 @@ export default {
               this.errorFlags.createUserFlag = true
             } else if (error.response.status === 404) {
               this.$router.push('/notfound')
-            } else if (error.response.status === 403) {
+            } else if (error.response.status === 401) {
               this.$router.push('/notAllowed')
             } else if (error.response.status === 500) {
               this.$router.push('/serverissue')
@@ -477,7 +474,7 @@ export default {
       } else if (this.userType === 'Administrator') {
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/management/create',
+          url: 'http://localhost/server/v1/UserManagement/CreateAdmin',
           data: {
             UserCredInfo: {
               username: this.userName,
@@ -510,18 +507,15 @@ export default {
               userType: 'Enable'
             }
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8081',
-            'Content-Type': 'application/json'
-          }
+          headers: this.$store.getters.getheader
         })
           .then(response => {
             this.statusMessages.createUserResponse = 'User ' + this.userName + ' has been created.'
             this.errorFlags.createUserFlag = false
           }).catch((error) => {
           // Pushes the error messages into error to display
-            if (error.response.status === 400) {
-              this.statusMessages.createUserResponse = 'There was an error processing your request'
+            if (error.response.status === 404) {
+              console.log('adsfads')
               this.errorFlags.createUserFlag = true
             } else if (error.response.status === 404) {
               this.$router.push('/notfound')

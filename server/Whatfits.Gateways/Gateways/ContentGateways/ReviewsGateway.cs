@@ -84,15 +84,17 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
         //Return ReviewDetailDTO 
         public IEnumerable<ReviewDetailDTO> GetUserReviewDetails(UsernameDTO obj)
         {
-            //gets user ID from userprofile
+            //gets user's ID from userprofile
             int getUserID = (from cred in db.Credentials
                              where obj.Username == cred.UserName
                              select cred.UserID).FirstOrDefault();
 
+            //get the sequence of reviewees that reviewed user
             var revieweeID = (from rev in db.Review
                               where getUserID == rev.UserID
                               select rev.RevieweeID).FirstOrDefault();
 
+            //gets username based off of the revie
             var revieweeUsername = (from cred in db.Credentials
                                     where revieweeID == cred.UserID
                                     select cred.UserName).FirstOrDefault();
@@ -103,7 +105,6 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
                     where obj.Username == cred.UserName
                     select new ReviewDetailDTO()
                     {
-                        Reviewee = revieweeUsername,
                         ReviewMessage = b.ReviewMessage,
                         Rating = b.Rating,
                         DateAndTime = b.DateAndTime

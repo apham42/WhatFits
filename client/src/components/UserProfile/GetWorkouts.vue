@@ -56,13 +56,13 @@ export default {
     }
   },
   // function to display workouts on creation of the url
-  created () {
+  beforeCreate () {
     axios({
       method: 'POST',
       url: this.$store.getters.getURL + 'v1/WorkoutLogger/GetWorkout',
       headers: this.$store.getters.getheader,
       data: {
-        Username: this.$data.Username
+        Username: this.$store.getters.getviewprofile
       }
     })
       .then(response => {
@@ -88,34 +88,6 @@ export default {
     trimDate: function (input) {
       var trim = input.substring(0, 10)
       return trim
-    },
-    // function to display workouts if a button is incoporated
-    displayWorkouts: function () {
-      axios({
-        method: 'POST',
-        url: this.$store.getters.getURL + 'v1/WorkoutLogger/GetWorkout',
-        headers: this.$store.getters.getheader,
-        data: {
-          Username: this.$data.Username
-        }
-      })
-        .then(response => {
-          this.results = response.data
-        })
-        .catch(error => {
-          if (error.response.status === 400) {
-            // Your custom messages that appears on the screen
-          } else if (error.response.status === 404) {
-            // Redirects you to the 404 page
-            this.$router.push('/notfound')
-          } else if (error.response.status === 403) {
-            // Redirects you to the Forbidden page
-            this.$router.push('/notAllowed')
-          } else if (error.response.status === 500) {
-            // Redirects you to the server issue page
-            this.$router.push('/serverissue')
-          }
-        })
     }
   }
 }

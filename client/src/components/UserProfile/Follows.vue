@@ -1,11 +1,11 @@
 <template>
 <div>
   <div id="checkcondition">
-    <span v-if="this.IsFollow() == false">
-      <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
+    <span v-if="this.isfollow === true">
+      <button id="isfollow" placeholder="UnFollow" v-on:click="UnFollow()">UnFollow</button>
     </span>
     <span v-else>
-      <button id="isfollow" placeholder="UnFollow" v-on:click="UnFollow()">UnFollow</button>
+      <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
     </span>
   </div>
 </div>
@@ -22,27 +22,22 @@ export default {
       errorFlag: '',
       errorMessage: 'Page Failed to load.',
       followers: [],
-      isfollow: false,
+      isfollow: this.IsFollow(),
       follow: 'Follow',
       unfollow: 'UnFollow'
     }
-  },
-  watch: {
   },
   methods: {
     Follow: function () {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/addfollows',
+        url: 'http://localhost/server/v1/follows/Addfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
@@ -66,15 +61,12 @@ export default {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/deletefollows',
+        url: 'http://localhost/server/v1/follows/Deletefollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
@@ -95,20 +87,21 @@ export default {
         })
     },
     IsFollow: function () {
+      console.log('call isfollow')
+      console.log(this.$store.getters.getheaders)
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/isfollows',
+        url: 'http://localhost/server/v1/follows/Isfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheaders
       })
         // redirect to Home page
         .then(response => {
+          console.log(response.data)
+          this.$data.isfollow = response.data
           return response.data
         }).catch((error) => {
           // Pushes the error messages into error to display
@@ -126,16 +119,15 @@ export default {
     }
   },
   GetFollows: function () {
+    console.log('call follows')
+    console.log(this.$store.getters.getheaders)
     axios({
       method: 'POST',
       url: 'http://localhost/server/v1/follows/getfollows',
       data: {
         'Username': this.$store.getters.getusername
       },
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        'Content-Type': 'application/json'
-      }
+      headers: this.$store.getters.getheaders
     })
       // redirect to Home page
       .then(response => {
