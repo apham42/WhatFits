@@ -117,34 +117,6 @@ export default {
           }
         })
     }
-  },
-  GetFollows: function () {
-    console.log('call follows')
-    console.log(this.$store.getters.getheader)
-    axios({
-      method: 'POST',
-      url: 'http://localhost/server/v1/follows/getfollows',
-      data: {
-        'Username': this.$store.getters.getusername
-      },
-      headers: this.$store.getters.getheader
-    })
-      // redirect to Home page
-      .then(response => {
-        return response.data
-      }).catch((error) => {
-      // Pushes the error messages into error to display
-        if (error.response) {
-          this.errorMessage = 'Error: An Error Occurd.'
-          this.errorFlag = true
-        } else if (error.request) {
-          this.errorMessage = 'Error: Server Error'
-          this.errorFlag = true
-        } else {
-          this.errorMessage = 'An error occured while setting up request.'
-          this.errorFlag = true
-        }
-      })
   }
 }
 </script>

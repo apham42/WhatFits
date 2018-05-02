@@ -59,7 +59,7 @@ namespace server.Controllers
         /// <returns>Users' follows</returns>
         [HttpPost]
         //[AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
-        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult Getfollows([FromBody]UsernameDTO userDTO)
         {
             if (HttpContext.Current.Request.HttpMethod == "POST")
@@ -86,7 +86,7 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         //[AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
-        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult Addfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -116,7 +116,7 @@ namespace server.Controllers
         /// <param name="username"></param>
         [HttpPost]
         //[AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
-        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult Deletefollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -147,7 +147,7 @@ namespace server.Controllers
         /// <returns>True of False</returns>
         [HttpPost]
         //[AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
-        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult Isfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');

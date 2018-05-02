@@ -56,7 +56,7 @@ export default {
       Rating: this.Rating,
       ReviewMessage: '',
       TargetUser: this.$store.getters.getviewprofile,
-      Date_Time: new Date().toLocaleTimeString('en-US')
+      DateAndTime: new Date().toLocaleTimeString('en-US')
     }
   },
   methods: {
