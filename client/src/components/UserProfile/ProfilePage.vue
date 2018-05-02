@@ -73,21 +73,21 @@ export default {
   },
   watch: {
     userName: function () {
-      console.log('changed')
-      console.log(this.$store.getters.getheader)
+      // console.log('changed')
+      // console.log(this.$store.getters.getheader)
     }
   },
   created () {
-    console.log('inside function')
+    // console.log('inside function')
     if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
       this.myProfile = true
     } else {
       this.myProfile = false
     }
-    console.log(this.$store.getters.getheader)
+    // console.log(this.$store.getters.getheader)
     axios({
       method: 'POST',
-      url: 'http://localhost/server/v1/UserProfile/ProfileData',
+      url: this.$store.getters.getURL + 'v1/UserProfile/ProfileData',
       headers: this.$store.getters.getheader,
       data: {
         'Username': this.$store.getters.getviewprofile,

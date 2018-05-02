@@ -72,7 +72,7 @@ export default {
       // Valide userName at this point
       axios({
         method: 'PUT',
-        url: 'http://localhost/server/v1/UserManagement/DeleteUser',
+        url: this.$store.getters.getURL + 'v1/UserManagement/DeleteUser',
         data: {
           'UserName': this.userName
         },

@@ -187,16 +187,16 @@ export default {
     },
     GetFollows: function () {
       console.log('call follows')
-      console.log(this.$store.getters.getheaders)
+      console.log(this.$store.getters.getheader)
       var vm = this
-      console.log(vm.$store.getters.getheaders)
+      console.log(vm.$store.getters.getheader)
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/follows/Getfollows',
         data: {
           'Username': this.$store.getters.getusername
         },
-        headers: this.$store.getters.getheaders
+        headers: this.$store.getters.getheader
       })
         // redirect to Home page
         .then(response => {
@@ -223,7 +223,7 @@ export default {
         data: {
           'Username': this.$store.getters.getusername
         },
-        headers: this.$store.getters.getheaders
+        headers: this.$store.getters.getheader
       })
         // redirect to Home page
         .then(response => {

@@ -523,7 +523,7 @@ export default {
     registerUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/SignUp/Register',
+        url: this.$store.getters.getURL + 'v1/SignUp/Register',
         data: {
           UserCredInfo: {
             username: this.$data.username,

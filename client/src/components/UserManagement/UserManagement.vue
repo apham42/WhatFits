@@ -419,7 +419,7 @@ export default {
       if (this.userType === 'General') {
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/SignUp/Register',
+          url: this.$store.getters.getURL + 'v1/SignUp/Register',
           data: {
             UserCredInfo: {
               username: this.userName,
@@ -474,7 +474,7 @@ export default {
       } else if (this.userType === 'Administrator') {
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/UserManagement/CreateAdmin',
+          url: this.$store.getters.getURL + 'v1/UserManagement/CreateAdmin',
           data: {
             UserCredInfo: {
               username: this.userName,
@@ -503,7 +503,7 @@ export default {
             UserProfile: {
               firstName: this.firstName,
               lastName: this.lastName,
-              skill: this.skill,
+              skill: this.skillLevel,
               userType: 'Enable'
             }
           },
