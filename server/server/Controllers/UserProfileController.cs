@@ -14,6 +14,9 @@ using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.DTOs.CoreDTOs;
 using System.IO;
 using System.Diagnostics;
+using Whatfits.UserAccessControl.Controller;
+using Whatfits.UserAccessControl.Constants;
+using server.Controllers.Constants;
 
 namespace server.Controllers
 {
@@ -30,7 +33,8 @@ namespace server.Controllers
         /// A Profile
         /// </returns>
         [HttpPost]
-        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.VIEW_PAGE, value = ValueConstant.VIEW_PAGE_CLAIM_VALUE_PROFILE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult ProfileData([FromBody] UsernameDTO obj)
         {
             // Creates service to handle request
@@ -50,7 +54,8 @@ namespace server.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.WORKOUTLOG_CLAIM_TYPE_ADD, value = ValueConstant.WORKOUTLOG_CLAIM_VALUE_ADD)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult EditProfile()
         {
             // Passing information from form to DTO
@@ -82,67 +87,6 @@ namespace server.Controllers
                 return Content(HttpStatusCode.BadRequest,"Error: " + response.Messages);
             }
             return Content(HttpStatusCode.OK, "Operation was successful? "+ response.IsSuccessful);
-        }
-
-        [HttpPost]
-        [EnableCors("http://localhost:8081 , http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "POST")]
-        public async Task<HttpResponseMessage> PostFormData()
-        {   
-            try
-            {
-                // Getting an HttpContext Request
-                var httpRequest = HttpContext.Current.Request;
-                // Getting files from request
-                foreach (string file in httpRequest.Files)
-                {
-
-                    HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.Created);
-                    // Receiving files from request
-                    var imageFile = httpRequest.Files[file];
-                    // Checking if there is a valid file to be processed and not emtpy
-                    if (imageFile != null && imageFile.ContentLength > 0)
-                    {
-                        // Validating max size
-                        int MaxContentLength = 1024 * 1024 * 1; //Size = 1 MB  
-                        // Checking file extension for actual image
-                        IList<string> AllowedFileExtensions = new List<string> { ".jpg", ".png" };
-                        // Extracting file extension for validation
-                        var ImageExtension = imageFile.FileName.Substring(imageFile.FileName.LastIndexOf('.')).ToLower();
-                        // Making comparison for valid file exe
-                        if (!AllowedFileExtensions.Contains(ImageExtension))
-                        {
-                            return Request.CreateResponse(HttpStatusCode.BadRequest, "Error: Invalid file extension.");
-                        }
-                        else if (imageFile.ContentLength > MaxContentLength)
-                        {
-                            return Request.CreateResponse(HttpStatusCode.BadRequest, "Error: Invalid image size.");
-                        }
-                        else
-                        {
-                            /*
-                            // Default way
-                            string path = ConfigurationManager.AppSettings["imagePath"];
-                            var filePath = HttpContext.Current.Server.MapPath(@""+path + imageFile.FileName);
-                            imageFile.SaveAs(filePath);
-                            */
-                            // Default way
-                            string userName = "rsanchez92";
-                            string path = ConfigurationManager.AppSettings["imagePath"];
-                            var imageExtension = imageFile.FileName.Substring(imageFile.FileName.LastIndexOf('.'));
-                            string newFileName = userName + "ProfileImage" + imageExtension;
-                            var filePath = HttpContext.Current.Server.MapPath(@"" + path + newFileName);
-                            imageFile.SaveAs(filePath);
-                        }
-                    }
-                    return Request.CreateErrorResponse(HttpStatusCode.Created, "Success: Image Uploaded Successfully."); ;
-                }
-                return Request.CreateResponse(HttpStatusCode.NotFound, "Error: No image found. Did you upload one?");
-            }
-            catch (Exception e)
-            {
-                return Request.CreateResponse(HttpStatusCode.InternalServerError, "Error: An exception was thrown while processing your request. \n" + e);
-            }
-
         }
     }
 }

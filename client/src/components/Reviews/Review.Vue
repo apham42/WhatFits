@@ -1,19 +1,34 @@
 <template>
-  <div class="review">
-    <form>
-      <ul class="list">
-        <li v-for="star in maxRating" :key="star" :class="{ 'active': star <= Rating }" @click="rate(star)" class="star">
-          <icon scale="2" :name="star <= Rating ? 'star' : 'star-o'" />
-        </li>
-        <span v-if="hasCounter">{{ Rating }} of {{ maxRating }}</span>
+<div class="container">
+
+  <br>
+  <div class="card">
+    <div class="card-header">
+      <span class="title center">Review
+        <br>
+        <ul class="list">
+          <li v-for="star in maxRating" :key="star" :class="{ 'active': star <= Rating }" @click="rate(star)" class="star">
+            <icon scale="2" :name="star <= Rating ? 'star' : 'star-o'" />
+          </li>
+        <span style="padding-left:1em; font-size:1.2em;" v-if="hasCounter">{{ Rating }} of {{ maxRating }}</span>
       </ul>
-      <div class="message">
+      </span>
+    </div>
+
+      <div class="message card-content">
         <br />
-        <textarea v-model="ReviewMessage" class="form-control" placeholder="Input Review"></textarea>
+        <div class="content">
+          <textarea class="textarea" v-model="ReviewMessage" placeholder="Input Review"></textarea>
+        </div>
       </div>
-      <button type="submit" @click.prevent="input">Submit</button>
-    </form>
   </div>
+  <br>
+<div style="padding-left:45%">
+<button class="button is-primary" type="submit" @click.prevent="input">Submit</button>
+</div>
+
+</div>
+
 </template>
 
 <script>
@@ -100,6 +115,11 @@ export default {
 </script>
 
 <style>
+.center {
+  margin: auto;
+    font-size:2em;
+    text-align: center;
+}
   .review {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
     font-size: 22px;
@@ -115,10 +135,10 @@ export default {
     cursor: pointer;
   }
   .active {
-    color: #FAFF5C;
+    color: #34495E;
   }
   textarea {
-    width: 500px;
-    height: 300px;
+    width: 50%;
+    height: 50%;
   }
 </style>

@@ -27,6 +27,7 @@
 
 <script>
 import axios from 'axios'
+import { setTimeout } from 'timers'
 
 export default {
   name: 'Chats',
@@ -58,26 +59,18 @@ export default {
     this.ws = new WebSocket('ws://localhost/server/v1/chat/connect' + '?username=' + this.onlineUser)
     this.Connection()
   },
-  watch: {
-    // detects online users changes
-    chatusers: function () {
-      console.log('chatusers changed')
-    }
-  },
   methods: {
     Connection: function () {
       var vm = this
       // get secret key and initial value from server
       vm.GetIV()
       this.ws.onopen = function (event) {
-        console.log('connected')
         vm.ReceiveMessage()
       }
     },
     ReceiveMessage: function () {
       var vm = this
       this.ws.onmessage = function (event) {
-        console.log('receive')
         try {
           vm.Decryption(event.data)
           // if decryption successed
@@ -101,16 +94,37 @@ export default {
         }
         this.ws.send(JSON.stringify(jmsg))
         window.document.getElementById('receives').prepend('You said: ' + this.messages)
-        console.log('sent')
         // clear the message input area
         this.messages = ''
       }
     },
     // set visability of the messagebox
     SpanBox: function (index) {
+      var vm = this
       this.clickeduser = this.chatusers[index].UserName
       this.clickedid = this.chatusers[index].PersonFollowing
+      setTimeout(function () {
+        vm.CallHistory()
+      }, 1000)
       this.msgshow = !this.msgshow
+    },
+    // show the messages are sent by other users when open the message box
+    CallHistory: function () {
+      if (this.messageArray != null) {
+        // checking username
+        var usernamecheck = '"' + this.clickeduser
+        for (var x = 0; x < this.messageArray.length; x++) {
+          if (usernamecheck === this.messageArray[x][0]) {
+            console.log(this.messageArray[x][1])
+            window.document.getElementById('receives').prepend(this.messageArray[x][0] + ':said ' + this.messageArray[x][1])
+            // try {
+            //   window.document.getElementById('receives').prepend(' ' + this.messageArray[x][1])
+            // } catch (error) {
+            //   console.log(error.data)
+            // }
+          }
+        }
+      }
     },
     SpanList: function () {
       var vm = this
@@ -123,12 +137,10 @@ export default {
     },
     Disconnection: function (event) {
       if (this.ws.readyState === WebSocket.OPEN) {
-        console.log(event)
         this.ws.onclose()
       }
     },
     Error: function () {
-      console.log('error')
       this.ws.onerror = function (event) {
         window.document.getElementById('receives').prepend(JSON.parse(event.data) + '\n')
       }
@@ -136,7 +148,6 @@ export default {
     // AES 128 CBC Encryption
     Encryption: function () {
       // get initial value from server
-      console.log('encryption called')
       var AesJS = require('aes-js')
       // padding message to 16 bytes
       var StringtoBytes = AesJS.utils.utf8.toBytes(this.Padding(this.messages))
@@ -146,16 +157,12 @@ export default {
       // convert to hex for eaiser transfer
       var EncryptedHex = AesJS.utils.hex.fromBytes(EncryptedBytes)
       this.ciphertext = EncryptedHex
-      console.log(this.ciphertext)
     },
     // AES 128 CBC Decryption
     Decryption: function (data) {
       var AesJS = require('aes-js')
-      console.log('decryption called')
-      console.log(data)
       var res = data.split(' ')
       var hexmessage = res[2]
-      console.log(hexmessage)
       var EncryptedBytes = AesJS.utils.hex.toBytes(hexmessage)
       // eslint-disable-next-line
       var AesCBC = new AesJS.ModeOfOperation.cbc(this.key, this.iv)
@@ -164,31 +171,25 @@ export default {
       res[2] = Decryptedtext
       // save message in client side when message box closed
       this.messageArray.push([res[0], res[2]])
-      console.log(this.messageArray)
       // prepare message to be show in the message box
       this.receivestring = res.join(' ')
-      console.log(this.receivestring)
     },
     // padding user's sending message to 16 bytes base
     Padding: function (source) {
       var paddchar = ' '
-      console.log(source.length)
       var extra = source.length % 16
-      console.log(extra)
       if (extra > 0) {
         for (var i = 0; i < 16 - extra; i++) {
           source += paddchar
         }
       }
-      console.log(source.length)
       return source
     },
     GetFollows: function () {
       var vm = this
-      console.log('call follows')
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/getfollows',
+        url: 'http://localhost/server/v1/follows/Getfollows',
         data: {
           'Username': this.$store.getters.getusername
         },
@@ -199,18 +200,15 @@ export default {
       })
         // redirect to Home page
         .then(response => {
-          console.log(response.data)
           vm.chatusers = response.data
         }).catch((error) => {
           // Pushes the error messages into error to display
           if (error.response) {
             this.errorMessage = 'Error: An Error Occurd.'
             this.errorFlag = true
-            console.log(error.response)
           } else if (error.request) {
             this.errorMessage = 'Error: Server Error'
             this.errorFlag = true
-            console.log(error.request)
           } else {
             this.errorMessage = 'An error occured while setting up request.'
             this.errorFlag = true
@@ -219,10 +217,9 @@ export default {
     },
     GetIV: function () {
       var vm = this
-      console.log('get IV')
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/getinitialvalue',
+        url: 'http://localhost/server/v1/follows/GetInitialvalue',
         data: {
           'Username': this.$store.getters.getusername
         },
@@ -233,7 +230,6 @@ export default {
       })
         // redirect to Home page
         .then(response => {
-          console.log(response.data)
           vm.iv = response.data
           vm.key = response.data
         }).catch((error) => {
@@ -241,11 +237,9 @@ export default {
           if (error.response) {
             this.errorMessage = 'Error: An Error Occurd.'
             this.errorFlag = true
-            console.log(error.response)
           } else if (error.request) {
             this.errorMessage = 'Error: Server Error'
             this.errorFlag = true
-            console.log(error.request)
           } else {
             this.errorMessage = 'An error occured while setting up request.'
             this.errorFlag = true

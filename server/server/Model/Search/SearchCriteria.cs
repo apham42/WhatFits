@@ -9,7 +9,7 @@ namespace server.Model.Search
     {
         public string RequestedUser { get; set; }
         public string RequestedSearch { get; set; }
-        public int Distance { get; set; }
+        public int? Distance { get; set; }
         public string Skill { get; set; }
     }
 }

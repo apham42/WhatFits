@@ -41,7 +41,7 @@ export default {
 .hero-body {
   height: 30em;
   background-color: #34495E;
-  background-image: url("../../../static/ProfileDummy/backgroundImage2.jpg");
+  background-image: url("../../assets/Images/stockImages/backgroundImage2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

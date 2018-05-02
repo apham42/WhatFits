@@ -63,6 +63,8 @@ export default {
   },
   computed: {
     checkUserMan: function () {
+      console.log(this.$store.getters.getviewclaims)
+
       for (var i = 0; i < this.$store.getters.getviewclaims.length; i++) {
         if (this.$store.getters.getviewclaims[i] === 'View User Managment') {
           return true
@@ -103,6 +105,7 @@ export default {
           this.$store.dispatch('actusername', {Username: ''})
           this.$store.dispatch('acttoken', {Token: ''})
           this.$store.dispatch('actviewclaims', {Viewclaims: null})
+          this.$store.dispatch('actisLogin', {islogin: false})
           this.$router.push('/')
           this.$store.dispatch('actheader')
           this.$data.showburger = false

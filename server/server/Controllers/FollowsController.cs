@@ -1,15 +1,21 @@
 ﻿using server.Business_Logic.Services;
+using server.Controllers.Constants;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 using Whatfits.Models.Models;
+using Whatfits.UserAccessControl.Constants;
+using Whatfits.UserAccessControl.Controller;
 
 namespace server.Controllers
 {
@@ -24,15 +30,26 @@ namespace server.Controllers
         FollowsDTO followsDTO = new FollowsDTO();
         FollowsGateway followsGateway = new FollowsGateway();
         FollowsService followService = new FollowsService();
-        private static readonly List<Int16> iv = new List<Int16> {21,2,3,14,65,6,17,8,91,10,11,12,23,14,45,16};
-
 
         /// <summary>
         /// Provides local inivial value
         /// </summary>
         public List<Int16> Getiv()
         {
-            return iv;
+            // Read initial value from file
+            try
+            {
+                var dir = HostingEnvironment.MapPath("~\\lifeisgood.txt");
+                var filecontent = File.ReadAllText(dir);
+                var iv = filecontent.Split(',').Select(Int16.Parse).ToList();
+                return iv;
+            } catch(Exception)
+            {
+                // if Read file fail
+                List<Int16> iv = new List<Int16> { 21, 2, 3, 14, 65, 6, 17, 8, 91, 10, 11, 12, 23, 14, 45, 16 };
+                return iv;
+            }
+            
         }
 
         /// <summary>
@@ -41,8 +58,8 @@ namespace server.Controllers
         /// <param name="username"></param>
         /// <returns>Users' follows</returns>
         [HttpPost]
-        [Route("getfollows")]
-        [EnableCors("http://localhost:8080 , http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Getfollows([FromBody]UsernameDTO userDTO)
         {
             if (HttpContext.Current.Request.HttpMethod == "POST")
@@ -68,8 +85,8 @@ namespace server.Controllers
         /// </summary>
         /// <param name="username"></param>
         [HttpPost]
-        [Route("addfollows")]
-        [EnableCors("http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Addfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -98,8 +115,8 @@ namespace server.Controllers
         /// </summary>
         /// <param name="username"></param>
         [HttpPost]
-        [Route("deletefollows")]
-        [EnableCors("http://localhost:8080 ,http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Deletefollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -129,8 +146,8 @@ namespace server.Controllers
         /// <param name="username"></param>
         /// <returns>True of False</returns>
         [HttpPost]
-        [Route("isfollows")]
-        [EnableCors("http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Isfollows([FromBody]UsernameDTO userDTO)
         {
             string[] Users = userDTO.Username.Split(' ');
@@ -160,8 +177,8 @@ namespace server.Controllers
         /// <param name="username"></param>
         /// <returns>True of False</returns>
         [HttpPost]
-        [Route("getinitialvalue")]
-        [EnableCors("http://localhost:8080 , http://localhost:8081, http://longnlong.com , http://whatfits.social", "*", "POST")]
+        [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult GetInitialvalue([FromBody]UsernameDTO userDTO)
         {
             requestedUser.UserName = userDTO.Username;

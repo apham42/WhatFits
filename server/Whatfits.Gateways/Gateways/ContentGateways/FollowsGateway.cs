@@ -108,17 +108,30 @@ namespace Whatfits.DataAccess.Gateways.ContentGateways
             {
                 try
                 {
-                    var newFolo = (from c in fdb.Following
+                    var folo = (from c in fdb.Following
                                    where c.UserID == requiredID
                                    select c).FirstOrDefault();
-                    newFolo.PersonFollowing = wantedfolloID;
-
-                    Following folo = new Following();
-                    
-                    fdb.Following.Add(newFolo);
-                    fdb.SaveChanges();
-                    dbTransaction.Commit();
-                    return true;
+                    // if required user not in the following table
+                    if (folo == null)
+                    {
+                        Following newfolo = new Following()
+                        {
+                            UserID = requiredID,
+                            PersonFollowing = wantedfolloID
+                        };
+                        fdb.Following.Add(newfolo);
+                        fdb.SaveChanges();
+                        dbTransaction.Commit();
+                        return true;
+                    }
+                    else // if required user already in the following table
+                    {
+                        folo.PersonFollowing = wantedfolloID;
+                        fdb.Following.Add(folo);
+                        fdb.SaveChanges();
+                        dbTransaction.Commit();
+                        return true;
+                    }
                 }
                 catch (Exception)
                 {

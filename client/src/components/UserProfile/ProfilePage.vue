@@ -1,11 +1,5 @@
 <template>
   <div class="container">
-    <div v-if="this.errorFlag == true">
-      <div>
-        <error-page404></error-page404>
-        <home-button></home-button>
-      </div>
-    </div>
     <div class="columns is-desktop">
       <div class="column" >
         <user-info id="ProfileInfo" :userData="userData"></user-info>

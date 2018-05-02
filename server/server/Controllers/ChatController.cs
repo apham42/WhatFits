@@ -8,6 +8,7 @@ using Whatfits.DataAccess.DTOs.ContentDTOs;
 using Whatfits.DataAccess.Gateways.ContentGateways;
 using System.Web.Http.Cors;
 using server.Business_Logic.Services;
+using server.Controllers.Constants;
 
 namespace server.Controllers
 {
@@ -26,8 +27,7 @@ namespace server.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("connect")]
-        [EnableCors("http://localhost:8080 , http://longnlong.com , http://whatfits.social", "*", "Get")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, "Get")]
         public HttpResponseMessage Connect(string username)
         {
             chatuser.UserName = username;

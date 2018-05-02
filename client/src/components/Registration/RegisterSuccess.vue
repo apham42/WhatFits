@@ -8,7 +8,7 @@
         <section class="modal-card-body">
   <div class="termModal">
     <div class="terms">
-        <img id="imageStyle" class="center" src="../../../static/ProfileDummy/RegSuccessGif.gif" alt="HighFive Gif">
+        <img id="imageStyle" class="center" src="../../assets/Images/stockImages/RegSuccessGif.gif" alt="HighFive Gif">
         <br>
         <p class="center" style="font-size: 2em">Thanks for giving us a try 🤝</p>
         <p class="center" style="font-size: 1.2em">Please head to your profile and edit your information! Upload a picture for others to see and maybe include a little description of yourself. Other than that, we encourage you to look at other users based on your location and connect with others to begin your workouts.</p>
