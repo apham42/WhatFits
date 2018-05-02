@@ -1,4 +1,5 @@
 ﻿using server.Business_Logic.Services;
+using server.Controllers.Constants;
 using server.Model.Account;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace server.Controllers
         /// <param name="userCredential">userCredential=Username/Token</param>
         /// <returns>success if stored in blacklist fails if not</returns>
         [HttpPost]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         [AllowAnonymous]
         public IHttpActionResult logout([FromBody] UserCredential userCredential)
         {

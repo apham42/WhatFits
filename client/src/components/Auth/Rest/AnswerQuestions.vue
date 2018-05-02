@@ -99,7 +99,7 @@ export default {
     EnterAnswers: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/ResetPassword/GetAnswers',
+        url: this.$store.getters.getURL + 'v1/ResetPassword/GetAnswers',
         headers: this.$store.getters.getheader,
         data: {
           userCredential: {
@@ -118,9 +118,23 @@ export default {
           this.$data.failanswer = false
         })
         .catch((error) => {
-          console.log(error)
+          if (error.response.status === 400) {
+            // Your custom messages that appears on the screen
+            this.$data.incorrectPass = true
+          } else if (error.response.status === 404) {
+            // Redirects you to the 404 page
+            this.$data.incorrectPass = true
+            this.$router.push('/notfound')
+          } else if (error.response.status === 403) {
+            // Redirects you to the Forbidden page
+            this.$data.incorrectPass = true
+            this.$router.push('/notAllowed')
+          } else if (error.response.status === 500) {
+            // Redirects you to the server issue page
+            this.$data.incorrectPass = true
+            this.$router.push('/serverissue')
+          }
           this.$data.failanswer = true
-          console.log(this.GetAnswersDict())
         })
     }
   }

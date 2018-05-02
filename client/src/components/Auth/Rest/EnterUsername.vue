@@ -16,7 +16,7 @@
           </div>
       </div>
       <button class="button is-primary" @click="GetQuestions" :disabled="$v.$invalid">Reset Password</button>
-      <p v-if="noUsers" class="help is-danger">Invalid Credentials</p>
+      <p v-if="noUsers" class="help is-danger">Invalid Username</p>
     </div>
     <div>
       <AnswerQuestions v-if="nextComp == true" :Questions="sentQuestions"></AnswerQuestions>
@@ -61,7 +61,7 @@ export default {
     GetQuestions: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/ResetPassword/GetQuestions',
+        url: this.$store.getters.getURL + 'v1/ResetPassword/GetQuestions',
         headers: this.$store.getters.getheader,
         data: {
           Username: this.$data.usernamePassReset
@@ -75,8 +75,24 @@ export default {
           this.$data.nextComp = true
         })
         .catch((error) => {
+          if (error.response.status === 400) {
+            // Your custom messages that appears on the screen
+            this.$data.noUsers = true
+          } else if (error.response.status === 404) {
+            // Redirects you to the 404 page
+            this.$data.noUsers = true
+            // this.$router.push('/notfound')
+          } else if (error.response.status === 403) {
+            // Redirects you to the Forbidden page
+            this.$data.noUsers = true
+            this.$router.push('/notAllowed')
+          } else if (error.response.status === 500) {
+            // Redirects you to the server issue page
+            this.$data.noUsers = true
+            this.$router.push('/serverissue')
+          }
+          this.$data.usernamePassReset = ''
           this.$data.noUsers = true
-          console.log(error)
         })
     }
   }

@@ -1,7 +1,7 @@
 <template>
 <div>
   <div id="checkcondition">
-    <span v-if="this.isfollow == false">
+    <span v-if="this.IsFollow() == false">
       <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
     </span>
     <span v-else>

@@ -5,7 +5,8 @@ const state = {
   token: '',
   viewclaims: null,
   viewprofile: '',
-  profilepicture: 'http://localhost/images/profileImages/'
+  profilepicture: 'http://localhost/images/profileImages/',
+  isLogin: false
 }
 
 const getters = {
@@ -23,6 +24,9 @@ const getters = {
   },
   getprofilepicture: function (state) {
     return state.profilepicture
+  },
+  getisLogin: function (state) {
+    return state.isLogin
   }
 }
 
@@ -38,8 +42,10 @@ const actions = {
   },
   actviewprofile (context, payload) {
     context.commit('mutateviewprofile', payload)
+  },
+  actisLogin (context, payload) {
+    context.commit('mutateisLogin', payload)
   }
-
 }
 
 const mutations = {
@@ -54,6 +60,9 @@ const mutations = {
   },
   mutateviewprofile (state, payload) {
     state.viewprofile = payload.ViewProfile
+  },
+  mutateisLogin (state, payload) {
+    state.isLogin = payload.islogin
   }
 }
 

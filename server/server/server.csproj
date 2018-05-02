@@ -132,6 +132,7 @@
     <Compile Include="Business Logic\SSO\SSOGetCredentials.cs" />
     <Compile Include="Business Logic\SSO\SSOService\SSOService.cs" />
     <Compile Include="Business Logic\SSO\SSOStoreCredentials.cs" />
+    <Compile Include="Controllers\Constants\CORS.cs" />
     <Compile Include="Controllers\SsoController.cs" />
     <Compile Include="Controllers\TokenRefreshController.cs" />
     <Compile Include="Model\Account\UserProfile.cs" />
@@ -162,7 +163,6 @@
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SignUpController.cs" />
-    <Compile Include="Controllers\UACTESTController.cs" />
     <Compile Include="Controllers\UserManagementController.cs" />
     <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\WorkoutLoggerController.cs" />
@@ -225,7 +225,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Business Logic\TokenRefresh\" />
     <Folder Include="Business Logic\Validators\Search Validator\" />
-    <Folder Include="Controllers\Constants\" />
     <Folder Include="Image\" />
     <Folder Include="Security\" />
   </ItemGroup>

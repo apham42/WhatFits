@@ -1,9 +1,13 @@
 <template>
-<div>
-  <div class="NotFound" id="Title">
-    {{pageTitle}}
-    <h1>There's been a glitch</h1>
-    <p>Don't know what happend or how you got here. This will take you <router-link to="/">home</router-link>.</p>
+<div class="container">
+  <div class="centerBox">
+    <span id="notFoundTitle">{{pageTitle}}</span>
+    <div>
+      <span id="secondTitle">There's been a glitch</span>
+      <br>
+      <span id="descriptionDetails">Don't know what happend or how you got here. This will take you <router-link to="/">home</router-link>.</span>
+    </div>
+
   </div>
 </div>
 
@@ -15,31 +19,24 @@ export default {
   },
   data () {
     return {
-      pageTitle: '404 Page Not Found'
+      pageTitle: 'Error 404 - Page Not Found'
     }
   },
   methods: {
   }
 }
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style>
-  .NotFound {
-    padding-top: 20em;
-    color:white;
-    text-align: center;
-
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: #5e4934;
-  }
-  .is-small {
-    text-align: center;
-  }
+<style scoped>
+.centerBox{
+  padding-top:20%;
+}
+#notFoundTitle{
+font-size: 5em;
+}
+#secondTitle{
+font-size: 2em;
+}
+#descriptionDetails{
+font-size:1.3em;
+}
 </style>
