@@ -1,9 +1,12 @@
 ﻿using server.Business_Logic.Services;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Whatfits.DataAccess.DataTransferObjects.CoreDTOs;
@@ -24,15 +27,26 @@ namespace server.Controllers
         FollowsDTO followsDTO = new FollowsDTO();
         FollowsGateway followsGateway = new FollowsGateway();
         FollowsService followService = new FollowsService();
-        private static readonly List<Int16> iv = new List<Int16> {21,2,3,14,65,6,17,8,91,10,11,12,23,14,45,16};
-
 
         /// <summary>
         /// Provides local inivial value
         /// </summary>
         public List<Int16> Getiv()
         {
-            return iv;
+            // Read initial value from file
+            try
+            {
+                var dir = HostingEnvironment.MapPath("~\\lifeisgood.txt");
+                var filecontent = File.ReadAllText(dir);
+                var iv = filecontent.Split(',').Select(Int16.Parse).ToList();
+                return iv;
+            } catch(Exception)
+            {
+                // if Read file fail
+                List<Int16> iv = new List<Int16> { 21, 2, 3, 14, 65, 6, 17, 8, 91, 10, 11, 12, 23, 14, 45, 16 };
+                return iv;
+            }
+            
         }
 
         /// <summary>
