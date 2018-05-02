@@ -14,7 +14,6 @@
       </ul>
       </span>
     </div>
-
       <div class="message card-content">
         <br />
         <div class="content">
