@@ -146,7 +146,7 @@ export default {
     searchUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/SearchUser',
+        url: this.$store.getters.getURL + 'v1/Search/SearchUser',
         data: {
           SearchUserCriteria: this.$data.SearchUser
         },
@@ -165,7 +165,7 @@ export default {
     searchNearbyUsers () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/Search/SearchNearby',
+        url: this.$store.getters.getURL + 'v1/Search/SearchNearby',
         data: {
           Criteria: this.$data.SearchNearby
         },
