@@ -73,7 +73,7 @@ export default {
   margin-right: auto;
 }
 #imageBackground {
-  background-image: url("../../../static/ProfileDummy/backgroundImage.jpg");
+  background-image: url("../../assets/Images/stockImages/backgroundImage.jpg");
 }
 #NoUpperBorders {
   margin-top: -12%;

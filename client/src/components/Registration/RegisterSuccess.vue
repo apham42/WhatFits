@@ -8,7 +8,7 @@
         <section class="modal-card-body">
   <div class="termModal">
     <div class="terms">
-        <img id="imageStyle" class="center" src="../../../static/ProfileDummy/RegSuccessGif.gif" alt="HighFive Gif">
+        <img id="imageStyle" class="center" src="../../assets/Images/stockImages/RegSuccessGif.gif" alt="HighFive Gif">
         <br>
         <p class="center" style="font-size: 2em">Thanks for giving us a try 🤝</p>
         <p class="center" style="font-size: 1.2em">EXPLAINATION</p>
