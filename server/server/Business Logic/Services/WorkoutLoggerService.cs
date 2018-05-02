@@ -33,6 +33,8 @@ namespace server.Services
                 return false;
             }
             var gateway = new WorkoutLogGateway();
+            //no transitive property
+            //data structure must be considered when transferring to gateway
             return gateway.CreateWorkoutLog(w);
         }
 
