@@ -18,8 +18,8 @@ namespace server.Services
         public bool Create(ReviewsDTO rev)
         {
             //Description length based on business requirements
-            //Length must be greater than 2 characters and less than 160
-            if(rev.ReviewMessage.Length < 2 || rev.ReviewMessage.Length > 160)
+            //Length must be greater than 2 characters and less than 256
+            if(rev.ReviewMessage.Length < 2 || rev.ReviewMessage.Length > 256)
             {
                 return false;
             }

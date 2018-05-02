@@ -1,28 +1,32 @@
 <template>
-  <div>
-    <div>
-      <ul id="Review_List">
-        <!--Iterates through results list with review as index key. Grabs all the reviews
-          Items located on the index are DTO objects, seperated by variable name-->
-        <li v-for="(review,index) in results" :key="index">
-          <section id="specificReviews">
-            <div id="messageFormat">
-              User Review: '{{ review.ReviewMessage }}' &nbsp;&nbsp;&nbsp;&nbsp; Recevied Rating : '{{ review.Rating }}'
+<div class="column" id="workoutlogs">
+    <div v-for="(review,index) in results" :key="index">
+      <div class="card" id="workoutCards">
+        <div id="">
+          <div class="card-header">
+            <p class="card-header-title"><strong>{{ review.Reviewee }} Says: </strong></p>
+          </div>
+          <div class="card-content">
+            <div id="contentPadding" >
+              <div id="messageFormat">
+                "{{ review.ReviewMessage }}"
+              </div>
+              <div id="ratingFormat">
+                Received Rating : '{{ review.Rating }}'
+              </div>
+              <div id="dateFormat">
+                <!--To be fixed when implemented onto profile page CSS-->
+                Date Reviewed: '{{ trimDate(review.DateAndTime) }}'
+              </div>
             </div>
-            <div id="dateFormat">
-              <!--To be fixed when implemented onto profile page CSS-->
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date Reviewed: '{{ trimDate(review.DateAndTime) }}'
-            </div>
-            <br>
-          </section>
-        </li>
-        <p v-if="results.length === 0">
-          <strong>No Reviews in this profile :(</strong>
-        </p>
-      </ul>
-    </div>
+          </div>
+        </div>
+      </div>
+    <div id="spacing"></div>
   </div>
+</div>
 </template>
+
 <script>
 import axios from 'axios'
 export default {
@@ -37,21 +41,28 @@ export default {
   created () {
     axios({
       method: 'POST',
-      url: 'http://localhost/server/v1/review/getuserreview/',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        'Content-Type': 'application/json'
-      },
+      url: this.$store.getters.getURL + 'v1/review/getuserreview/',
+      headers: this.$store.getters.getheader,
       data: {
         Username: this.$data.Username
       }
     })
       .then(response => {
         this.results = response.data
-        console.log(response)
       })
       .catch(error => {
-        console.log(error.response)
+        if (error.response.status === 400) {
+          // Your custom messages that appears on the screen
+        } else if (error.response.status === 404) {
+          // Redirects you to the 404 page
+          this.$router.push('/notfound')
+        } else if (error.response.status === 403) {
+          // Redirects you to the Forbidden page
+          this.$router.push('/notAllowed')
+        } else if (error.response.status === 500) {
+          // Redirects you to the server issue page
+          this.$router.push('/serverissue')
+        }
       })
   },
   methods: {
@@ -62,11 +73,8 @@ export default {
     displayReviews: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/review/getuserreview/',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        },
+        url: this.$store.getters.getURL + 'v1/review/getuserreview/',
+        headers: this.$store.getters.getheader,
         data: {
           Username: this.$data.Username
         }
@@ -95,7 +103,16 @@ export default {
 }
 </script>
 <style>
-.title{
+#workoutCards {
+  padding-bottom: 1em;
+  position:inherit;
+}
+#spacing {
+padding-top:1em;
+padding-bottom:1em;
+}
+#title{
+  font-size: 2em;
   text-align: center;
 }
 </style>

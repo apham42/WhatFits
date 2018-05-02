@@ -94,7 +94,7 @@ export default {
     logout: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/logout/logout',
+        url: this.$store.getters.getURL + 'v1/logout/logout',
         headers: this.$store.getters.getheader,
         data: {
           Username: this.$store.getters.getusername,
