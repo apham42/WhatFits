@@ -17,6 +17,12 @@ namespace server.Services
         //Returns true or false on if review has been created, will be used with response
         public bool Create(ReviewsDTO rev)
         {
+            //Description length based on business requirements
+            //Length must be greater than 2 characters and less than 256
+            if(rev.ReviewMessage.Length < 2 || rev.ReviewMessage.Length > 256)
+            {
+                return false;
+            }
             var gateway = new ReviewsGateway();
             return gateway.AddReview(rev);
         }

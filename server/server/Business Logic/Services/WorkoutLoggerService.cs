@@ -17,6 +17,21 @@ namespace server.Services
 
         public bool Create(WorkoutLogDTO w)
         {
+            //IF NOT EQUAL CARDIO AND WEIGHTLIFTING return false
+            if (!(w.WorkoutType.Equals("Cardio")) && !(w.WorkoutType.Equals("WeightLifting")))
+            {
+                return false;
+            }
+            //check if inputs are ints, if string it will return false
+            //Cardio types have an initialized 0 for reps/sets
+            if (!(w.Reps % 1 == 0))
+            {
+                return false;
+            }
+            if (!(w.Sets % 1 == 0))
+            {
+                return false;
+            }
             var gateway = new WorkoutLogGateway();
             return gateway.CreateWorkoutLog(w);
         }

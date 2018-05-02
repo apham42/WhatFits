@@ -12,7 +12,7 @@
               <button class="button is-primary is-rounded" id="buttonGap" @click="goEditProfile">Edit Profile</button>
           </span>
           <span v-else>
-                <folo id="buttonGap"></folo><button class="button is-secondary is-rounded" id="buttonGap">Review</button>
+                <folo id="buttonGap"></folo><button class="button is-secondary is-rounded" id="buttonGap" @click="goReview">Review</button>
           </span>
           <hr>
         </div>
@@ -73,7 +73,7 @@ export default {
   margin-right: auto;
 }
 #imageBackground {
-  background-image: url("../../../static/ProfileDummy/backgroundImage.jpg");
+  background-image: url("../../assets/Images/stockImages/backgroundImage.jpg");
 }
 #NoUpperBorders {
   margin-top: -12%;

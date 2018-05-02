@@ -12,15 +12,15 @@ using System.Net.Http;
 namespace server.Business_Logic.Services
 {
     /// <summary>
-    /// 
+    /// Checks whether the password sent in is vulnerable or not
     /// </summary>
     public class BadPasswordService
     {
         /// <summary>
-        /// 
+        /// Takes in a password(string) and checks against the pwndpassword service if its vulnerable or not
         /// </summary>
-        /// <param name="password"></param>
-        /// <returns></returns>
+        /// <param name="password">A password</param>
+        /// <returns>True if its a vulnerable password, false if its not</returns>
         public bool BadPassword(string password)
         {
             // Need this to communicate with the service, without it fails
@@ -30,7 +30,7 @@ namespace server.Business_Logic.Services
             string hashedPassword = hashingService.Hash(password);
             // Checking if the hashed password length is greater than 5 so we
             // don't run into errors when getting the prefix and suffix.
-            if(hashedPassword.Length < 6)
+            if(hashedPassword.Length < 8)
             {
                 // This hashed password length is too short to separate.
                 // Returning false
