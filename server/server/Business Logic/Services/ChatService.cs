@@ -113,6 +113,7 @@ namespace server.Business_Logic.Services
             }
             
         }
+        // enumerate status list to return all status
         /// <summary>
         /// return connection status
         /// </summary>
