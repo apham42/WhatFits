@@ -41,21 +41,28 @@ export default {
   created () {
     axios({
       method: 'POST',
-      url: 'http://localhost/server/v1/review/getuserreview/',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        'Content-Type': 'application/json'
-      },
+      url: this.$store.getters.getURL + 'v1/review/getuserreview/',
+      headers: this.$store.getters.getheader,
       data: {
         Username: this.$data.Username
       }
     })
       .then(response => {
         this.results = response.data
-        console.log(response)
       })
       .catch(error => {
-        console.log(error.response)
+        if (error.response.status === 400) {
+          // Your custom messages that appears on the screen
+        } else if (error.response.status === 404) {
+          // Redirects you to the 404 page
+          this.$router.push('/notfound')
+        } else if (error.response.status === 403) {
+          // Redirects you to the Forbidden page
+          this.$router.push('/notAllowed')
+        } else if (error.response.status === 500) {
+          // Redirects you to the server issue page
+          this.$router.push('/serverissue')
+        }
       })
   },
   methods: {
@@ -66,11 +73,8 @@ export default {
     displayReviews: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/review/getuserreview/',
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        },
+        url: this.$store.getters.getURL + 'v1/review/getuserreview/',
+        headers: this.$store.getters.getheader,
         data: {
           Username: this.$data.Username
         }
