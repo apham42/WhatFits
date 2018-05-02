@@ -24,7 +24,6 @@ namespace server.Controllers
         /// <param name="obj"> A userName(string), password(string), address(string), city(string), zipcode(string), state(string), and security questions and anwsers.(string)</param>
         /// <returns>A success or failure message</returns>
         [HttpPost]
-        [Route("create")]
         [AuthorizePrincipal(type = TypeConstant.USER_MANAGMENT_CLAIM_TYPE_CREATE, value = ValueConstant.USER_MANAGMENT_CLAIM_VALUE_CREATE)]
         [EnableCors( origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult CreateAdmin([FromBody] RegInfo obj)
@@ -53,7 +52,6 @@ namespace server.Controllers
         /// <param name="obj">A username to chaneg status.</param>
         /// <returns>A success or failure message.</returns>
         [HttpPut]
-        [Route("enable")]
         [AuthorizePrincipal(type = TypeConstant.USER_MANAGMENT_CLAIM_TYPE_UPDATE, value = ValueConstant.USER_MANAGMENT_CLAIM_VALUE_UPDATE)]
         [EnableCors(origins: CORS.origins, headers: CORS.headers, "PUT")]
         public IHttpActionResult EnableUser ([FromBody] UserManagementDTO obj)

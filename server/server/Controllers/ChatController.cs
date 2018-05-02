@@ -27,7 +27,6 @@ namespace server.Controllers
         /// <param name="username"></param>
         /// <returns></returns>
         [HttpGet]
-        [Route("connect")]
         [EnableCors(origins: CORS.origins, headers: CORS.headers, "Get")]
         public HttpResponseMessage Connect(string username)
         {

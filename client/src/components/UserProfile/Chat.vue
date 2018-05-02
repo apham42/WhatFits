@@ -189,7 +189,7 @@ export default {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/getfollows',
+        url: 'http://localhost/server/v1/follows/Getfollows',
         data: {
           'Username': this.$store.getters.getusername
         },
@@ -219,7 +219,7 @@ export default {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/getinitialvalue',
+        url: 'http://localhost/server/v1/follows/GetInitialvalue',
         data: {
           'Username': this.$store.getters.getusername
         },

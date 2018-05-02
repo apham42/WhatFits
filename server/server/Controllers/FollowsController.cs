@@ -58,7 +58,6 @@ namespace server.Controllers
         /// <param name="username"></param>
         /// <returns>Users' follows</returns>
         [HttpPost]
-        [Route("getfollows")]
         [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
         [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Getfollows([FromBody]UsernameDTO userDTO)
@@ -86,7 +85,6 @@ namespace server.Controllers
         /// </summary>
         /// <param name="username"></param>
         [HttpPost]
-        [Route("addfollows")]
         [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
         [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Addfollows([FromBody]UsernameDTO userDTO)
@@ -117,7 +115,6 @@ namespace server.Controllers
         /// </summary>
         /// <param name="username"></param>
         [HttpPost]
-        [Route("deletefollows")]
         [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
         [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Deletefollows([FromBody]UsernameDTO userDTO)
@@ -149,7 +146,6 @@ namespace server.Controllers
         /// <param name="username"></param>
         /// <returns>True of False</returns>
         [HttpPost]
-        [Route("isfollows")]
         [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
         [EnableCors(origins: CORS.headers, CORS.origins, "POST")]
         public IHttpActionResult Isfollows([FromBody]UsernameDTO userDTO)
@@ -181,7 +177,6 @@ namespace server.Controllers
         /// <param name="username"></param>
         /// <returns>True of False</returns>
         [HttpPost]
-        [Route("getinitialvalue")]
         [AuthorizePrincipal(type = TypeConstant.FOLLOW_CLAIM_TYPE, value = ValueConstant.FOLLOW_CLAIM_VALUE)]
         [EnableCors(origins: CORS.origins, headers: CORS.headers, "POST")]
         public IHttpActionResult GetInitialvalue([FromBody]UsernameDTO userDTO)
