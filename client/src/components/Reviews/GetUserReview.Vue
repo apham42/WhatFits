@@ -3,20 +3,17 @@
     <div v-for="(review,index) in results" :key="index">
       <div class="card" id="workoutCards">
         <div id="">
-          <div class="card-header">
-            <p class="card-header-title"><strong>{{ review.Reviewee }} Says: </strong></p>
-          </div>
           <div class="card-content">
             <div id="contentPadding" >
               <div id="messageFormat">
-                "{{ review.ReviewMessage }}"
+                Description : "{{ review.ReviewMessage }}"
               </div>
               <div id="ratingFormat">
-                Received Rating : '{{ review.Rating }}'
+                Received Rating : {{ review.Rating }}
               </div>
               <div id="dateFormat">
                 <!--To be fixed when implemented onto profile page CSS-->
-                Date Reviewed: '{{ trimDate(review.DateAndTime) }}'
+                Date Reviewed: {{ trimDate(review.DateAndTime) }}
               </div>
             </div>
           </div>
