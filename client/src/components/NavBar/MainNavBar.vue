@@ -63,8 +63,6 @@ export default {
   },
   computed: {
     checkUserMan: function () {
-      console.log(this.$store.getters.getviewclaims)
-
       for (var i = 0; i < this.$store.getters.getviewclaims.length; i++) {
         if (this.$store.getters.getviewclaims[i] === 'View User Managment') {
           return true

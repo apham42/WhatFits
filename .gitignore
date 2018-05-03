@@ -38,3 +38,5 @@ server/server/obj/
 server/\.vs/server/v15/Server/sqlite3/storage\.ide
 
 Data/
+
+server/server/dist/

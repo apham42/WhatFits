@@ -5,8 +5,17 @@ const state = {
     'Authorization': null,
     'X-Requested-With': 'XMLHttpRequest'
   },
+  /*
+  headers: {
+    'Access-Control-Allow-Origin': 'http://whatfits.social/',
+    'Content-Type': 'application/json',
+    'Authorization': null,
+    'X-Requested-With': 'XMLHttpRequest'
+  },
+   */
   // for dat production life
   url: 'http://localhost/server/'
+  // url: 'http://whatfits.social/server/'
   // url: 'http://longnlong.com/server/'
 }
 
