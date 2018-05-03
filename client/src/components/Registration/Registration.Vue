@@ -92,7 +92,7 @@
     <div class="field is-expanded">
       <div class="field has-addons">
         <p class="control is-expanded">
-          <input class="input" type="address" placeholder="Address" v-model.trim="address" @input="delayTouch($v.address)" v-bind:class="{error: $v.address.$error, valid: $v.address.$dirty && !$v.address.$invalid}">
+          <input class="input" type="address" placeholder="Address must be in LA or Orange County" v-model.trim="address" @input="delayTouch($v.address)" v-bind:class="{error: $v.address.$error, valid: $v.address.$dirty && !$v.address.$invalid}">
         </p>
         <div class="errorMessage help">
                 <span v-show="!$v.address.maxLength && $v.address.$dirty">Maximum length is {{$v.address.$params.maxLength.max}}</span>
@@ -523,7 +523,7 @@ export default {
     registerUser () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/SignUp/Register',
+        url: this.$store.getters.getURL + 'v1/SignUp/Register',
         data: {
           UserCredInfo: {
             username: this.$data.username,

@@ -4,12 +4,9 @@
     <div class="hero-body">
         <div class="container has-text-centered homeBody">
             <p class="title body-text-Title">
-                Find your fit
+                Find What Fits For You
             </p>
             <br>
-            <h2 class="subtitle body-text">
-                Connecting people with others to better them selves (IMPROVE THIS)
-            </h2>
         </div>
     </div>
 </section>
@@ -44,7 +41,7 @@ export default {
 .hero-body {
   height: 30em;
   background-color: #34495E;
-  background-image: url("../../../static/ProfileDummy/backgroundImage2.jpg");
+  background-image: url("../../assets/Images/stockImages/backgroundImage2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

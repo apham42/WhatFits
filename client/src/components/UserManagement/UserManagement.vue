@@ -96,26 +96,25 @@
       <div class="field-body">
         <label class="label">Name:</label>
             <div class="field">
-                <p class="control is-expanded">
-                    <input class="input" type="text" placeholder="First Name" v-model.trim="firstName" @input="delayTouch($v.firstName)">
-                </p>
+              <p class="control is-expanded">
+                <input class="input" type="text" placeholder="First Name" v-model.trim="firstName" @input="delayTouch($v.firstName)">
+              </p>
             </div>
             <div class="errorMessage">
-                    <span v-show="!$v.firstName.required && $v.firstName.$dirty">First name is required</span>
-                    <span v-show="!$v.firstName.minLength && $v.firstName.$dirty">First name must have at least {{$v.firstName.$params.minLength.min}} letters</span>
-                    <span v-show="!$v.firstName.maxLength && $v.firstName.$dirty">First name can't be this long {{$v.firstName.$params.maxLength.max}} letters</span>
-                </div>
+              <span v-show="!$v.firstName.required && $v.firstName.$dirty">First name is required</span>
+              <span v-show="!$v.firstName.minLength && $v.firstName.$dirty">First name must have at least {{$v.firstName.$params.minLength.min}} letters</span>
+              <span v-show="!$v.firstName.maxLength && $v.firstName.$dirty">First name can't be this long {{$v.firstName.$params.maxLength.max}} letters</span>
+            </div>
             <div class="field">
-                <p class="control is-expanded">
-                    <input class="input" type="text" placeholder="Last Name" v-model.trim="lastName" @input="delayTouch($v.lastName)">
-                </p>
-
+              <p class="control is-expanded">
+                <input class="input" type="text" placeholder="Last Name" v-model.trim="lastName" @input="delayTouch($v.lastName)">
+              </p>
             </div>
             <div class="errorMessage">
-                    <span v-show="!$v.lastName.required && $v.lastName.$dirty">First name is required</span>
-                    <span v-show="!$v.lastName.minLength && $v.lastName.$dirty">Last name must have at least {{$v.lastName.$params.minLength.min}} letters</span>
-                    <span v-show="!$v.lastName.maxLength && $v.lastName.$dirty">Last name can't be this long {{$v.lastName.$params.maxLength.max}} letters</span>
-                </div>
+              <span v-show="!$v.lastName.required && $v.lastName.$dirty">First name is required</span>
+              <span v-show="!$v.lastName.minLength && $v.lastName.$dirty">Last name must have at least {{$v.lastName.$params.minLength.min}} letters</span>
+              <span v-show="!$v.lastName.maxLength && $v.lastName.$dirty">Last name can't be this long {{$v.lastName.$params.maxLength.max}} letters</span>
+            </div>
         </div>
          <div class="field is-horizontal">
         <div class="field-label is-normal">
@@ -252,11 +251,6 @@ export default {
     'delete-User': DeleteUser,
     'changeStatus': ChangeStatus,
     'back-button': BackButton
-  },
-  computed: {
-    isAuthenticated: function () {
-      return this.$store.getters.isAuthenticated
-    }
   },
   data () {
     return {
@@ -396,7 +390,6 @@ export default {
       }
       touchMap.set($v, setTimeout($v.$touch, 1000))
     },
-
     // Checks the characters of userInput
     validateCharacters (userInput) {
       var regexPattern = /[^ 0-9a-zA-Z!@#$%^&*()-_=+{}[;:"'<,>.?|`~]/i
@@ -424,10 +417,9 @@ export default {
     createNewUser: function () {
       // Validate incoming data
       if (this.userType === 'General') {
-        console.log('Inside createUser Method')
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/SignUp/Register',
+          url: this.$store.getters.getURL + 'v1/SignUp/Register',
           data: {
             UserCredInfo: {
               username: this.userName,
@@ -456,14 +448,11 @@ export default {
             UserProfile: {
               firstName: this.$data.firstName,
               lastName: this.$data.lastName,
-              skill: this.$data.skill,
+              skill: this.$data.skillLevel,
               userType: 'Enable'
             }
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8081',
-            'Content-Type': 'application/json'
-          }
+          headers: this.$store.getters.getheader
         })
           // redirect to Home page
           .then(response => {
@@ -476,7 +465,7 @@ export default {
               this.errorFlags.createUserFlag = true
             } else if (error.response.status === 404) {
               this.$router.push('/notfound')
-            } else if (error.response.status === 403) {
+            } else if (error.response.status === 401) {
               this.$router.push('/notAllowed')
             } else if (error.response.status === 500) {
               this.$router.push('/serverissue')
@@ -485,7 +474,7 @@ export default {
       } else if (this.userType === 'Administrator') {
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/management/create',
+          url: this.$store.getters.getURL + 'v1/UserManagement/CreateAdmin',
           data: {
             UserCredInfo: {
               username: this.userName,
@@ -514,23 +503,19 @@ export default {
             UserProfile: {
               firstName: this.firstName,
               lastName: this.lastName,
-              skill: this.skill,
+              skill: this.skillLevel,
               userType: 'Enable'
             }
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8081',
-            'Content-Type': 'application/json'
-          }
+          headers: this.$store.getters.getheader
         })
           .then(response => {
-            console.log(response)
             this.statusMessages.createUserResponse = 'User ' + this.userName + ' has been created.'
             this.errorFlags.createUserFlag = false
           }).catch((error) => {
           // Pushes the error messages into error to display
-            if (error.response.status === 400) {
-              this.statusMessages.createUserResponse = 'There was an error processing your request'
+            if (error.response.status === 404) {
+              console.log('adsfads')
               this.errorFlags.createUserFlag = true
             } else if (error.response.status === 404) {
               this.$router.push('/notfound')

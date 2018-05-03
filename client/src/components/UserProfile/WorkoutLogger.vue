@@ -57,8 +57,8 @@
             <p><strong>Workout Type - {{WorkoutLogger.WorkoutType}} </strong></p>
             <p v-if = "WorkoutLogger.WorkoutType === 'WeightLifting'">
               <strong>Lifting Type</strong> : {{WorkoutLogger.LiftingType}}&emsp;
-              <strong>Sets</strong> : {{WorkoutLogger.Sets}}&emsp;
               <strong>Reps per set</strong> : {{WorkoutLogger.Reps}}&emsp;
+              <strong>Sets</strong> : {{WorkoutLogger.Sets}}&emsp;
             </p>
             <p v-if = "WorkoutLogger.WorkoutType === 'Cardio'">
               <strong>Cardio Type</strong> : {{WorkoutLogger.CardioType}}&emsp;
@@ -84,6 +84,7 @@ export default {
       return this.$store.getters.isAuthenticated
     }
   },
+  props: { event },
   data: function () {
     return {
       WorkoutLogger: {
@@ -95,7 +96,7 @@ export default {
         Sets: '',
         Time: '',
         Distance: '',
-        Date_Time: new Date().toLocaleDateString()
+        Date_Time: new Date().toLocaleTimeString('en-US')
       },
       pageTitle: 'Workout Logger',
       hasErrored: false,
@@ -107,29 +108,29 @@ export default {
     }
   },
   methods: {
-    isNumber: function (evt) {
-      evt = (evt) || window.event
-      var charCode = (evt.which) || evt.keyCode
+    isNumber: function (event) {
+      event = (event) || window.event
+      var charCode = (event.which) || event.keyCode
       if ((charCode > 31 && (charCode < 48 || charCode > 57))) {
-        evt.preventDefault()
+        event.preventDefault()
       } else {
         return true
       }
     },
-    isTime: function (evt) {
-      evt = (evt) || window.event
-      var charCode = (evt.which) || evt.keyCode
+    isTime: function (event) {
+      event = (event) || window.event
+      var charCode = (event.which) || event.keyCode
       if ((charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 58)) {
-        evt.preventDefault()
+        event.preventDefault()
       } else {
         return true
       }
     },
-    isFloat: function (evt) {
-      evt = (evt) || window.event
-      var charCode = (evt.which) || evt.keyCode
+    isFloat: function (event) {
+      event = (event) || window.event
+      var charCode = (event.which) || event.keyCode
       if ((charCode > 31 && (charCode < 48 || charCode > 57) && charCode !== 46)) {
-        evt.preventDefault()
+        event.preventDefault()
       } else {
         return true
       }
@@ -138,7 +139,7 @@ export default {
       if (this.WorkoutLogger.WorkoutType === 'Cardio') {
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/WorkoutLogger/CreateWorkout',
+          url: this.$store.getters.getURL + 'v1/WorkoutLogger/CreateWorkout',
           data: {
             Username: this.$data.WorkoutLogger.Username,
             WorkoutType: this.$data.WorkoutLogger.WorkoutType,
@@ -147,13 +148,9 @@ export default {
             Distance: this.$data.WorkoutLogger.Distance,
             Time: this.$data.WorkoutLogger.Time
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8080',
-            'Content-Type': 'application/json'
-          }
+          headers: this.$store.getters.getheader
         })
           .then(response => {
-            console.log(response)
             location.reload()
           })
           .catch(error => {
@@ -174,7 +171,7 @@ export default {
       } else {
         axios({
           method: 'POST',
-          url: 'http://localhost/server/v1/WorkoutLogger/CreateWorkout',
+          url: this.$store.getters.getURL + 'v1/WorkoutLogger/CreateWorkout',
           data: {
             Username: this.$data.WorkoutLogger.Username,
             WorkoutType: this.$data.WorkoutLogger.WorkoutType,
@@ -183,13 +180,9 @@ export default {
             Reps: this.$data.WorkoutLogger.Reps,
             Sets: this.$data.WorkoutLogger.Sets
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8080',
-            'Content-Type': 'application/json'
-          }
+          headers: this.$store.getters.getheader
         })
           .then(response => {
-            console.log(response)
             location.reload()
           })
           .catch(error => {

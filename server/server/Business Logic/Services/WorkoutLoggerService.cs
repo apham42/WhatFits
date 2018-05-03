@@ -22,7 +22,7 @@ namespace server.Services
             {
                 return false;
             }
-            //check if inputs are 1, if string it will return false
+            //check if inputs are ints, if string it will return false
             //Cardio types have an initialized 0 for reps/sets
             if (!(w.Reps % 1 == 0))
             {
@@ -32,14 +32,9 @@ namespace server.Services
             {
                 return false;
             }
-            //need regex
-            //Regex testReg = new Regex("^[0-9]+$");
-            //// Testing first name and last name
-            //if (!testReg.IsMatch(obj.FirstName) || !testReg.IsMatch(obj.LastName))
-            //{
-            //    return false;
-            //}
             var gateway = new WorkoutLogGateway();
+            //no transitive property
+            //data structure must be considered when transferring to gateway
             return gateway.CreateWorkoutLog(w);
         }
 

@@ -15,9 +15,7 @@
                       <span class="file-icon">
                         <i class="fas fa-upload"></i>
                       </span>
-                      <span class="file-label">
-                      Choose an Image...
-                      </span>
+                      <span class="file-label">Choose an Image...</span>
                     </span>
                     <span class="file-name">
                       {{this.newProfileImageName}}
@@ -64,7 +62,6 @@
                 <div class="control">
                     <!--NOTE: Create lookup table of skill levels -->
                     <div class="select is-fullwidth">
-
                         <select v-model="userData.skillLevel">
                             <option value="Beginner">Beginner</option>
                             <option value="Intermediate">Intermediate</option>
@@ -210,11 +207,8 @@ export default {
   created: function () {
     axios({
       method: 'POST',
-      url: 'http://localhost/server/v1/UserProfile/ProfileData',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8081',
-        'Content-Type': 'application/json'
-      },
+      url: this.$store.getters.getURL + 'v1/UserProfile/ProfileData',
+      headers: this.$store.getters.getheader,
       data: {
         'Username': this.$store.getters.getusername
       }
@@ -288,29 +282,29 @@ export default {
       formData.append('Gender', this.userData.gender)
       formData.append('Description', this.userData.description)
       formData.append('IsThereImage', this.isUpdatingImage)
+      // Manual Change
       var headers = {
         'Content-type': 'application/x-www-form-urlencoded',
-        'Access-Control-Allow-Origin': 'http://localhost:8081'
+        // 'Access-Control-Allow-Origin': 'http://localhost:8081',
+        'Access-Control-Allow-Origin': this.$store.getters.getURL,
+        'Authorization': 'Bearer ' + this.$store.getters.gettoken
       }
-      axios.post('http://localhost/server/v1/UserProfile/EditProfile', formData, headers)
+      axios.post(this.$store.getters.getURL + 'v1/UserProfile/EditProfile', formData, headers)
       // redirect to Home page
         .then(response => {
-          console.log(response.data)
           this.statusMessages = 'Your profile has been updated.'
           this.errorFlag = false
         }).catch((error) => {
         // Pushes the error messages into error to display
-          if (error.response) {
-            this.statusMessages = 'An error occured while Processing your request.'
-            this.errorFlag = true
-            console.log(error.response)
-          } else if (error.request) {
-            this.statusMessages = 'An error occured on our side...'
-            this.errorFlag = true
-            console.log(error.request)
-          } else {
-            this.statusMessages = 'An error occured while setting up request.'
-            this.errorFlag = true
+          if (error.response.status === 400) {
+            this.statusMessages.createUserResponse = 'There was an error processing your request'
+            this.errorFlags.createUserFlag = true
+          } else if (error.response.status === 404) {
+            this.$router.push('/notfound')
+          } else if (error.response.status === 403) {
+            this.$router.push('/notAllowed')
+          } else if (error.response.status === 500) {
+            this.$router.push('/serverissue')
           }
         })
     }

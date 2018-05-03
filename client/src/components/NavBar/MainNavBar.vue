@@ -63,6 +63,8 @@ export default {
   },
   computed: {
     checkUserMan: function () {
+      console.log(this.$store.getters.getviewclaims)
+
       for (var i = 0; i < this.$store.getters.getviewclaims.length; i++) {
         if (this.$store.getters.getviewclaims[i] === 'View User Managment') {
           return true
@@ -92,7 +94,7 @@ export default {
     logout: function () {
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/logout/logout',
+        url: this.$store.getters.getURL + 'v1/logout/logout',
         headers: this.$store.getters.getheader,
         data: {
           Username: this.$store.getters.getusername,
@@ -103,12 +105,26 @@ export default {
           this.$store.dispatch('actusername', {Username: ''})
           this.$store.dispatch('acttoken', {Token: ''})
           this.$store.dispatch('actviewclaims', {Viewclaims: null})
+          this.$store.dispatch('actisLogin', {islogin: false})
+          this.$store.dispatch('actRequestedSearch', {requestedSearch: ''})
+          this.$store.dispatch('actSearchType', {searchType: ''})
           this.$router.push('/')
           this.$store.dispatch('actheader')
           this.$data.showburger = false
         })
         .catch((error) => {
-          console.log(error)
+          if (error.response.status === 400) {
+            // Your custom messages that appears on the screen
+          } else if (error.response.status === 404) {
+            // Redirects you to the 404 page
+            this.$router.push('/notfound')
+          } else if (error.response.status === 403) {
+            // Redirects you to the Forbidden page
+            this.$router.push('/notAllowed')
+          } else if (error.response.status === 500) {
+            // Redirects you to the server issue page
+            this.$router.push('/serverissue')
+          }
         })
     }
   }

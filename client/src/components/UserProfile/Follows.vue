@@ -1,11 +1,11 @@
 <template>
 <div>
   <div id="checkcondition">
-    <span v-if="this.isfollow == false">
-      <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
+    <span v-if="this.isfollow === true">
+      <button id="isfollow" placeholder="UnFollow" v-on:click="UnFollow()">UnFollow</button>
     </span>
     <span v-else>
-      <button id="isfollow" placeholder="UnFollow" v-on:click="UnFollow()">UnFollow</button>
+      <button id="isfollow" placeholder="Follow" v-on:click="Follow()">Follow</button>
     </span>
   </div>
 </div>
@@ -22,32 +22,25 @@ export default {
       errorFlag: '',
       errorMessage: 'Page Failed to load.',
       followers: [],
-      isfollow: false,
+      isfollow: this.IsFollow(),
       follow: 'Follow',
       unfollow: 'UnFollow'
     }
   },
-  watch: {
-  },
   methods: {
     Follow: function () {
       var vm = this
-      console.log('call add follow')
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/addfollows',
+        url: 'http://localhost/server/v1/follows/Addfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheader
       })
         // redirect to Home page
         .then(response => {
-          console.log(response.data)
           vm.isfollow = !vm.isfollow
           return response.data
         }).catch((error) => {
@@ -55,11 +48,9 @@ export default {
           if (error.response) {
             this.errorMessage = 'Error: An Error Occurd.'
             this.errorFlag = true
-            console.log(error.response)
           } else if (error.request) {
             this.errorMessage = 'Error: Server Error'
             this.errorFlag = true
-            console.log(error.request)
           } else {
             this.errorMessage = 'An error occured while setting up request.'
             this.errorFlag = true
@@ -68,22 +59,17 @@ export default {
     },
     UnFollow: function () {
       var vm = this
-      console.log('call delete follow')
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/deletefollows',
+        url: 'http://localhost/server/v1/follows/Deletefollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheader
       })
         // redirect to Home page
         .then(response => {
-          console.log(response.data)
           vm.isfollow = !vm.isfollow
           return response.data
         }).catch((error) => {
@@ -91,11 +77,9 @@ export default {
           if (error.response) {
             this.errorMessage = 'Error: An Error Occurd.'
             this.errorFlag = true
-            console.log(error.response)
           } else if (error.request) {
             this.errorMessage = 'Error: Server Error'
             this.errorFlag = true
-            console.log(error.request)
           } else {
             this.errorMessage = 'An error occured while setting up request.'
             this.errorFlag = true
@@ -103,72 +87,36 @@ export default {
         })
     },
     IsFollow: function () {
-      console.log('call is follow')
+      console.log('call isfollow')
+      console.log(this.$store.getters.getheader)
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/isfollows',
+        url: 'http://localhost/server/v1/follows/Isfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
         },
-        headers: {
-          'Access-Control-Allow-Origin': 'http://localhost:8080',
-          'Content-Type': 'application/json'
-        }
+        headers: this.$store.getters.getheader
       })
         // redirect to Home page
         .then(response => {
           console.log(response.data)
+          this.$data.isfollow = response.data
           return response.data
         }).catch((error) => {
           // Pushes the error messages into error to display
           if (error.response) {
             this.errorMessage = 'Error: An Error Occurd.'
             this.errorFlag = true
-            console.log(error.response)
           } else if (error.request) {
             this.errorMessage = 'Error: Server Error'
             this.errorFlag = true
-            console.log(error.request)
           } else {
             this.errorMessage = 'An error occured while setting up request.'
             this.errorFlag = true
           }
         })
     }
-  },
-  GetFollows: function () {
-    console.log('call follows')
-    axios({
-      method: 'POST',
-      url: 'http://localhost/server/v1/follows/getfollows',
-      data: {
-        'Username': this.$store.getters.getusername
-      },
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8080',
-        'Content-Type': 'application/json'
-      }
-    })
-      // redirect to Home page
-      .then(response => {
-        console.log(response.data)
-        return response.data
-      }).catch((error) => {
-      // Pushes the error messages into error to display
-        if (error.response) {
-          this.errorMessage = 'Error: An Error Occurd.'
-          this.errorFlag = true
-          console.log(error.response)
-        } else if (error.request) {
-          this.errorMessage = 'Error: Server Error'
-          this.errorFlag = true
-          console.log(error.request)
-        } else {
-          this.errorMessage = 'An error occured while setting up request.'
-          this.errorFlag = true
-        }
-      })
   }
 }
 </script>

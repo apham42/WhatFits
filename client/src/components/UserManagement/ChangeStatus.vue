@@ -81,11 +81,9 @@ export default {
       if (this.status === 'enable') {
         axios({
           method: 'PUT',
-          url: 'http://localhost/server/v1/management/enable',
+          url: this.$store.getters.getURL + 'v1/UserManagement/EnableUser',
           data: {'UserName': this.userName},
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8081'
-          }
+          headers: this.$store.getters.getheader
         })
           .then(response => {
             console.log(response.data)
@@ -113,13 +111,11 @@ export default {
       } else if (this.status === 'disable') {
         axios({
           method: 'PUT',
-          url: 'http://localhost/server/v1/management/disable',
+          url: this.$store.getters.getURL + 'v1/UserManagement/DisableUser',
           data: {
             'UserName': this.userName
           },
-          headers: {
-            'Access-Control-Allow-Origin': 'http://localhost:8081'
-          }
+          headers: this.$store.getters.getheader
         })
           .then(response => {
             console.log(response.data)

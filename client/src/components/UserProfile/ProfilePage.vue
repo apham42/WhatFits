@@ -1,11 +1,5 @@
 <template>
   <div class="container">
-    <div v-if="this.errorFlag == true">
-      <div>
-        <error-page404></error-page404>
-        <home-button></home-button>
-      </div>
-    </div>
     <div class="columns is-desktop">
       <div class="column" >
         <user-info id="ProfileInfo" :userData="userData"></user-info>
@@ -77,17 +71,24 @@ export default {
       }
     }
   },
-  beforeCreate () {
-    console.log('before create called')
-    console.log('http://localhost/server/v1/UserProfile/ProfileData')
-    console.log(axios)
+  watch: {
+    userName: function () {
+      // console.log('changed')
+      // console.log(this.$store.getters.getheader)
+    }
+  },
+  created () {
+    // console.log('inside function')
+    if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
+      this.myProfile = true
+    } else {
+      this.myProfile = false
+    }
+    // console.log(this.$store.getters.getheader)
     axios({
       method: 'POST',
-      url: 'http://localhost/server/v1/UserProfile/ProfileData',
-      headers: {
-        'Access-Control-Allow-Origin': 'http://localhost:8081',
-        'Content-Type': 'application/json'
-      },
+      url: this.$store.getters.getURL + 'v1/UserProfile/ProfileData',
+      headers: this.$store.getters.getheader,
       data: {
         'Username': this.$store.getters.getviewprofile,
         'LoggedinUser': this.$store.getters.userName
@@ -95,6 +96,7 @@ export default {
     })
     // redirect to Home page
       .then(response => {
+        console.log('Sucecss')
         console.log('response: ' + response.data)
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
@@ -110,31 +112,17 @@ export default {
         }
       }).catch((error) => {
       // Pushes the error messages into error to display
-        if (error.response) {
-          this.errorMessage = 'Error: An Error Occurd.'
-          console.log('An Error Occured')
-          this.errorFlag = true
-          console.log(error.response)
-        } else if (error.request) {
-          this.errorMessage = 'Error: Server Error'
-          this.errorFlag = true
-          console.log(error.request)
-        } else {
-          this.errorMessage = 'An error occured while setting up request.'
-          this.errorFlag = true
+        if (error.response.status === 400) {
+          this.statusMessages.createUserResponse = 'There was an error processing your request'
+          this.errorFlags.createUserFlag = true
+        } else if (error.response.status === 404) {
+          this.$router.push('/notfound')
+        } else if (error.response.status === 401) {
+          this.$router.push('/notAllowed')
+        } else if (error.response.status === 500) {
+          this.$router.push('/serverissue')
         }
       })
-  },
-  created () {
-    console.log('Making Comparision')
-    if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
-      this.myProfile = true
-    } else {
-      this.myProfile = false
-    }
-  },
-  updated () {
-    console.log('This has been updated')
   },
   methods: {
   }

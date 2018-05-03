@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using Whatfits.DataAccess.DTOs.ContentDTOs;
 using server.Model.Search;
 using Whatfits.UserAccessControl.Controller;
+using Whatfits.UserAccessControl.Constants;
+using server.Controllers.Constants;
 
 namespace server.Controllers
 {
@@ -21,8 +23,8 @@ namespace server.Controllers
     {
         
         [HttpPost]
-        [AuthorizePrincipal(type = "SEARCH", value = "True")]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081,  http://localhost:8085, http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [AuthorizePrincipal(type = TypeConstant.SEARCH_CLAIM_TYPE, value = ValueConstant.SEARCH_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         public IHttpActionResult SearchUser([FromBody] SearchUserDTO dto)
         {
             var service = new SearchUserStrategy
@@ -41,8 +43,8 @@ namespace server.Controllers
         }
 
         [HttpPost]
-        [AuthorizePrincipal(type = "SEARCH", value = "True")]
-        [EnableCors(origins: "http://localhost:8080 , http://localhost:8081 , http://localhost:8085, http://longnlong.com , http://whatfits.social", headers: "*", methods: "POST")]
+        [AuthorizePrincipal(type = TypeConstant.SEARCH_CLAIM_TYPE, value = ValueConstant.SEARCH_CLAIM_VALUE)]
+        [EnableCors(origins: CORS.origins, headers: CORS.headers, methods: "POST")]
         public IHttpActionResult SearchNearby([FromBody] SearchDTO dto)
         {
             var service = new SearchNearbyUserStrategy
