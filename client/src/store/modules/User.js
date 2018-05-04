@@ -5,7 +5,8 @@ const state = {
   token: '',
   viewclaims: null,
   viewprofile: '',
-  profilepicture: 'http://localhost/images/profileImages/',
+  // profilepicture: 'http://localhost/images/profileImages/',
+  profilepicture: 'http://whatfits.social/images/profileImages/',
   isLogin: false
 }
 

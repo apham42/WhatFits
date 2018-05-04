@@ -56,7 +56,7 @@ export default {
     // ask for username when chat webapi gets called and request websocket connection to server
     // this.onlineUser = prompt('Enter your name')
     this.onlineUser = this.$store.getters.getusername
-    this.ws = new WebSocket('ws://localhost/server/v1/chat/connect' + '?username=' + this.onlineUser)
+    this.ws = new WebSocket('ws://whatfits.social/server/v1/chat/connect' + '?username=' + this.onlineUser)
     this.Connection()
   },
   methods: {

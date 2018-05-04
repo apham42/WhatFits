@@ -32,7 +32,7 @@ export default {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/Addfollows',
+        url: this.$store.getters.getURL + 'v1/follows/Addfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
@@ -61,7 +61,7 @@ export default {
       var vm = this
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/Deletefollows',
+        url: this.$store.getters.getURL + 'v1/follows/Deletefollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
@@ -87,11 +87,9 @@ export default {
         })
     },
     IsFollow: function () {
-      console.log('call isfollow')
-      console.log(this.$store.getters.getheader)
       axios({
         method: 'POST',
-        url: 'http://localhost/server/v1/follows/Isfollows',
+        url: this.$store.getters.getURL + 'v1/follows/Isfollows',
         data: {
           // 'Username': this.$store.getters.getusername,
           'Username': this.$store.getters.getusername + ' ' + this.$store.getters.getviewprofile
@@ -100,7 +98,6 @@ export default {
       })
         // redirect to Home page
         .then(response => {
-          console.log(response.data)
           this.$data.isfollow = response.data
           return response.data
         }).catch((error) => {

@@ -111,13 +111,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="dist\index.html" />
-    <Content Include="dist\static\css\app.478804ac472853c42260f0554fc75176.css" />
+    <Content Include="dist\static\css\app.0836ae599c3cd44eaeb45b776ee622b6.css" />
     <Content Include="dist\static\img\backgroundImage.df35596.jpg" />
     <Content Include="dist\static\img\backgroundImage2.576ec19.jpg" />
     <Content Include="dist\static\img\navbarLogo.b583f42.png" />
     <Content Include="dist\static\img\RegSuccessGif.0748510.gif" />
-    <Content Include="dist\static\js\0.c0d2ddd3bcf6c82caa5b.js" />
-    <Content Include="dist\static\js\1.a39cf541e4eeffe85ab5.js" />
+    <Content Include="dist\static\js\0.f5d82e7553508dceae7f.js" />
+    <Content Include="dist\static\js\1.a7ef45f2f50d01ede954.js" />
     <Content Include="dist\static\js\10.5b16af5a9b987ba1b917.js" />
     <Content Include="dist\static\js\2.d0a2dfbfc5b76956aab8.js" />
     <Content Include="dist\static\js\3.f3ea0851995b027bb84d.js" />
@@ -127,8 +127,8 @@
     <Content Include="dist\static\js\7.60e3dd8a7c1220b0412d.js" />
     <Content Include="dist\static\js\8.9f38d83fd10f67cb271b.js" />
     <Content Include="dist\static\js\9.ac2fa99089614a17add7.js" />
-    <Content Include="dist\static\js\app.723d2fcc2c7ba25e520c.js" />
-    <Content Include="dist\static\js\manifest.d2ca766a5510a065dfe3.js" />
+    <Content Include="dist\static\js\app.2efd701fd211ecad0510.js" />
+    <Content Include="dist\static\js\manifest.e99ad708742a3c04d68a.js" />
     <Content Include="dist\static\js\vendor.ccd67e048e6bd519893f.js" />
     <Content Include="Global.asax" />
     <Content Include="Web.config">
@@ -236,9 +236,9 @@
     <Compile Include="Business Logic\Services\UserManagementService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dist\static\css\app.478804ac472853c42260f0554fc75176.css.map" />
-    <Content Include="dist\static\js\0.c0d2ddd3bcf6c82caa5b.js.map" />
-    <Content Include="dist\static\js\1.a39cf541e4eeffe85ab5.js.map" />
+    <Content Include="dist\static\css\app.0836ae599c3cd44eaeb45b776ee622b6.css.map" />
+    <Content Include="dist\static\js\0.f5d82e7553508dceae7f.js.map" />
+    <Content Include="dist\static\js\1.a7ef45f2f50d01ede954.js.map" />
     <Content Include="dist\static\js\10.5b16af5a9b987ba1b917.js.map" />
     <Content Include="dist\static\js\2.d0a2dfbfc5b76956aab8.js.map" />
     <Content Include="dist\static\js\3.f3ea0851995b027bb84d.js.map" />
@@ -248,8 +248,8 @@
     <Content Include="dist\static\js\7.60e3dd8a7c1220b0412d.js.map" />
     <Content Include="dist\static\js\8.9f38d83fd10f67cb271b.js.map" />
     <Content Include="dist\static\js\9.ac2fa99089614a17add7.js.map" />
-    <Content Include="dist\static\js\app.723d2fcc2c7ba25e520c.js.map" />
-    <Content Include="dist\static\js\manifest.d2ca766a5510a065dfe3.js.map" />
+    <Content Include="dist\static\js\app.2efd701fd211ecad0510.js.map" />
+    <Content Include="dist\static\js\manifest.e99ad708742a3c04d68a.js.map" />
     <Content Include="dist\static\js\vendor.ccd67e048e6bd519893f.js.map" />
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
