@@ -18,6 +18,8 @@ Follow the README.md on the server and client folder for instructions for each.
 
 * 0.0.1
     * Base deployment of Homepage, Registration, Login, and UserProfile
+* 1.0.0
+    * All features are deployed.
 
 ## Built With
 
