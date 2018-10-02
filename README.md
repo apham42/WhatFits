@@ -16,10 +16,16 @@ Follow the README.md on the server and client folder for instructions for each.
 
 ## Release History
 
-* 0.0.1
+* 0.0.1 - March 2018
     * Base deployment of Homepage, Registration, Login, and UserProfile
-* 1.0.0
-    * All features are deployed.
+* 0.3.0 - April 2018
+    * Deployment of Search, Ratings, and Image upload
+* 0.6.0 - May 2018
+    * Deployment of Password Reset, Password Checker, Workout logger, and Chat.
+* 1.0.0 - May 2018
+    * All features are deployed. URLs have been updated to represent new domain.
+* 1.0.1 - August 2018
+    * Discontinued (Offline)
 
 ## Built With
 
@@ -51,5 +57,5 @@ See also the list of [contributors](https://github.com/apham42/WhatFits/graphs/c
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
-* To be included by first deployment
+* [Bulma Watch](https://jenil.github.io/bulmaswatch/) for the CSS theme
 
