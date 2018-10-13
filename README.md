@@ -1,8 +1,8 @@
 # WhatFits Web Application
 
-A fitness social media web application. It helps like minded individuals to connect based on interest concerning physical activities.
+> A fitness social media web application. It helps like minded individuals to connect based on interest concerning physical activities.
 
-![](header.PNG)
+![](https://i.imgur.com/nNMr3eI.png)
 
 ## Get Started
 
