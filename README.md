@@ -6,7 +6,7 @@
 
 ## Get Started
 
-Follow the README.md on the server and client folder for instructions for each.
+Follow the README.md on the server and client folder for instructions for each. Also refer to our wiki on [General App](https://github.com/apham42/WhatFits/wiki) and [Features](https://github.com/apham42/WhatFits/wiki/Features-and-Demos).
 
 * client
   * This directory contains a Vue project for the client side of the project.
