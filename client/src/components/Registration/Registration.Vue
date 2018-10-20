@@ -453,56 +453,42 @@ export default {
       if (this.password.length < 8) {
         return
       }
-      console.log(this.password)
       var hashedPassword = sha1(this.password)
-      console.log(hashedPassword)
       // Parsing the hash into two variables, one to be send and one to be compared
       var preffix = hashedPassword.substring(0, 5)
-      console.log(preffix)
       var suffix = hashedPassword.slice(5)
-      console.log(suffix)
       // Creating GET request to pwnedpassword service
       axios({
         method: 'GET',
         url: 'https://api.pwnedpasswords.com/range/' + preffix
       })
         .then(response => {
-          console.log(response.data)
           var payload = response.data
           // Process Results
           var suffixList = payload.split('\n')
           for (var i = 0; i < suffixList.length; i++) {
             var row = suffixList[i].split(':')
-            // console.log(row[0])
-            // console.log('This is my suffix: ' + suffix)
-            console.log(row[0])
             if (suffix === row[0].toLowerCase()) {
-              console.log('Found')
               if (row[0] < 250) {
-                console.log('Password is safe')
                 this.weakPassword = false
                 return
               } else {
-                console.log('password is weak')
                 this.weakPassword = true
                 return
               }
             }
           }
-          console.log('Password is not found')
           this.weakPassword = false
         })
         .catch((error) => {
           // Pushes the error messages into error to display
           if (error.response) {
             this.statusMessages = 'Error: An Error Occurd.'
-            console.log('An Error Occured')
             this.errorFlag = true
-            console.log(error.response)
+            console.log('Error connecting with API')
           } else if (error.request) {
             this.statusMessages = 'Error: Server Error'
             this.errorFlag = true
-            console.log(error.request)
           } else {
             this.statusMessages = 'An error occured while setting up request.'
             this.errorFlag = true

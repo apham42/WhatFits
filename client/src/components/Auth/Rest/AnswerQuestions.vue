@@ -112,7 +112,6 @@ export default {
         }
       })
         .then((response) => {
-          console.log(response)
           this.$data.nextComponent = true
           this.$data.SentUsername.username = this.Questions.Username
           this.$data.failanswer = false

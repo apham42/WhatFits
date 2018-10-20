@@ -87,8 +87,6 @@ export default {
         })
     },
     IsFollow: function () {
-      console.log('call isfollow')
-      console.log(this.$store.getters.getheader)
       axios({
         method: 'POST',
         url: 'http://localhost/server/v1/follows/Isfollows',
@@ -100,7 +98,6 @@ export default {
       })
         // redirect to Home page
         .then(response => {
-          console.log(response.data)
           this.$data.isfollow = response.data
           return response.data
         }).catch((error) => {

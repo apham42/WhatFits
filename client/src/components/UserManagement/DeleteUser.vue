@@ -81,7 +81,6 @@ export default {
         .then(response => {
           // Got a 2xx response from the server
           // Printing response.data
-          console.log(response.data)
           // Set up success message
           this.responseMessage = response.data
           this.errorFlag = false
@@ -91,11 +90,9 @@ export default {
           if (error.response) {
             this.responseMessage = 'Error: ' + error.response.data
             this.errorFlag = true
-            console.log(error.response)
           } else if (error.request) {
             this.responseMessage = 'Error: ' + error.response.data
             this.errorFlag = true
-            console.log(error.request)
           } else {
             this.responseMessage = 'An error occured while setting up request.'
             this.errorFlag = true

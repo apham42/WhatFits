@@ -515,7 +515,6 @@ export default {
           }).catch((error) => {
           // Pushes the error messages into error to display
             if (error.response.status === 404) {
-              console.log('adsfads')
               this.errorFlags.createUserFlag = true
             } else if (error.response.status === 404) {
               this.$router.push('/notfound')

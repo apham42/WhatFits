@@ -73,18 +73,14 @@ export default {
   },
   watch: {
     userName: function () {
-      // console.log('changed')
-      // console.log(this.$store.getters.getheader)
     }
   },
   created () {
-    // console.log('inside function')
     if (this.$store.getters.getviewprofile === this.$store.getters.getusername) {
       this.myProfile = true
     } else {
       this.myProfile = false
     }
-    // console.log(this.$store.getters.getheader)
     axios({
       method: 'POST',
       url: this.$store.getters.getURL + 'v1/UserProfile/ProfileData',
@@ -94,10 +90,7 @@ export default {
         'LoggedinUser': this.$store.getters.userName
       }
     })
-    // redirect to Home page
       .then(response => {
-        console.log('Sucecss')
-        console.log('response: ' + response.data)
         this.userData.firstName = response.data.FirstName
         this.userData.lastName = response.data.LastName
         this.userData.description = response.data.Description

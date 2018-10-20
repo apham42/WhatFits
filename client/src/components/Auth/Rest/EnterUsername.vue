@@ -68,7 +68,6 @@ export default {
         }
       })
         .then((response) => {
-          console.log(response)
           this.$data.questions = response.data
           this.$data.sentQuestions.Username = this.$data.usernamePassReset
           this.$data.sentQuestions.incommingQs = response.data.Questions

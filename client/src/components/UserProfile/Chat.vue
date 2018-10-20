@@ -115,13 +115,7 @@ export default {
         var usernamecheck = '"' + this.clickeduser
         for (var x = 0; x < this.messageArray.length; x++) {
           if (usernamecheck === this.messageArray[x][0]) {
-            console.log(this.messageArray[x][1])
             window.document.getElementById('receives').prepend(this.messageArray[x][0] + ':said ' + this.messageArray[x][1])
-            // try {
-            //   window.document.getElementById('receives').prepend(' ' + this.messageArray[x][1])
-            // } catch (error) {
-            //   console.log(error.data)
-            // }
           }
         }
       }

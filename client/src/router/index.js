@@ -80,8 +80,6 @@ export default new Router({
       name: 'ServerIssues',
       component: () => import('@/components/ErrorPage/ServerIssues'),
       beforeEnter: (to, from, next) => {
-        console.log('Chechking before route')
-        console.log(store.getters.getisLogin)
         if (store.getters.getisLogin === false) {
           next({path: '/notallowed'})
         } else {

@@ -36,12 +36,10 @@ export default {
           }
         })
           .then((response) => {
-            console.log(response)
             this.$store.dispatch('acttoken', {Token: response.data.token})
             this.$store.dispatch('actheadertoken', {TokenHeader: response.data.token})
           })
           .catch((error) => {
-            console.log(error)
           })
       }
     }

@@ -226,13 +226,10 @@ export default {
       // Pushes the error messages into error to display
         if (error.response) {
           this.statusMessages = 'Error: An Error Occurd.'
-          console.log('An Error Occured')
           this.errorFlag = true
-          console.log(error.response)
         } else if (error.request) {
           this.statusMessages = 'Error: Server Error'
           this.errorFlag = true
-          console.log(error.request)
         } else {
           this.statusMessages = 'An error occured while setting up request.'
           this.errorFlag = true
@@ -241,7 +238,6 @@ export default {
   },
   methods: {
     onFileSelected (event) {
-      console.log(event)
       // Validate Image
       var fileName = event.target.files[0].name
       var extension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase()

@@ -86,7 +86,6 @@ export default {
           headers: this.$store.getters.getheader
         })
           .then(response => {
-            console.log(response.data)
             this.responseMessage = response.data
             this.errorFlag = false
           })
@@ -95,17 +94,14 @@ export default {
               // Server responded with a status code outside of 2xx
               this.responseMessage = 'Error: ' + error.response.data
               this.errorFlag = true
-              console.log(error.response)
             } else if (error.request) {
               // Request was made but no response
               this.responseMessage = 'Error: ' + error.response.data
               this.errorFlag = true
-              console.log(error.request)
             } else {
               // Something happened when setting up request
               this.responseMessage = 'An error occured while setting up request.'
               this.errorFlag = true
-              console.log('Error: ', error.message)
             }
           })
       } else if (this.status === 'disable') {
@@ -118,7 +114,6 @@ export default {
           headers: this.$store.getters.getheader
         })
           .then(response => {
-            console.log(response.data)
             this.responseMessage = response.data
             this.errorFlag = false
           })
@@ -126,19 +121,15 @@ export default {
             if (error.response) {
               this.responseMessage = 'Error: ' + error.response.data
               this.errorFlag = true
-              console.log(error.response)
             } else if (error.request) {
               this.responseMessage = 'Error: ' + error.response.data
               this.errorFlag = true
-              console.log(error.request)
             } else {
               this.responseMessage = 'An error occured while setting up request.'
               this.errorFlag = true
-              console.log('Error: ', error.message)
             }
           })
       } else {
-        console.log('Error: Invalid Status')
       }
     }
   }
