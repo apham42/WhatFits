@@ -9,7 +9,6 @@ Vue.use(Vuelidate)
 
 // Defining routes for web application
 export default new Router({
-  mode: 'history',
   routes: [
     // Reset
     {

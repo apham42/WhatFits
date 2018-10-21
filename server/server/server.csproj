@@ -44,6 +44,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
+    <ExcludeGeneratedDebugSymbol>true</ExcludeGeneratedDebugSymbol>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -218,6 +219,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -228,8 +230,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Business Logic\TokenRefresh\" />
-    <Folder Include="Business Logic\Validators\Search Validator\" />
-    <Folder Include="Controllers\Constants\" />
     <Folder Include="Image\" />
     <Folder Include="Security\" />
   </ItemGroup>

@@ -1,12 +1,12 @@
 const state = {
   headers: {
-    'Access-Control-Allow-Origin': 'http://localhost:8080',
+    'Access-Control-Allow-Origin': 'https://www.whatfits.xyz',
     'Content-Type': 'application/json',
     'Authorization': null,
     'X-Requested-With': 'XMLHttpRequest'
   },
   // for dat production life
-  url: 'http://localhost/server/'
+  url: 'https://www.whatfits.xyz/server/'
   // url: 'http://longnlong.com/server/'
 }
 

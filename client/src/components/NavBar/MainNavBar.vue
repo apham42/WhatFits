@@ -82,6 +82,8 @@ export default {
       this.$data.showburger = false
     },
     toProfile: function () {
+      this.$store.dispatch('activiewprofile', {ViewProfile: this.$store.getters.getusername})
+      location.reload()
       this.$router.push('/profile')
       this.$data.showburger = false
     },

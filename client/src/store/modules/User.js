@@ -5,7 +5,7 @@ const state = {
   token: '',
   viewclaims: null,
   viewprofile: '',
-  profilepicture: 'http://localhost/images/profileImages/',
+  profilepicture: 'https://whatfits.xyz/images/profileImages/',
   isLogin: false
 }
 

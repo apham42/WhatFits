@@ -40,6 +40,7 @@ export default {
             this.$store.dispatch('actheadertoken', {TokenHeader: response.data.token})
           })
           .catch((error) => {
+            console.log('An error occured.' + error)
           })
       }
     }
